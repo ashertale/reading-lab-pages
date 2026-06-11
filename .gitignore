@@ -1,0 +1,4 @@
+.superpowers/
+.vscode/
+__pycache__/
+*.pyc

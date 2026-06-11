@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>概念閱讀庫 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="./knowledge-page.css">
+  <link rel="stylesheet" href="./index-page.css">
+</head>
+<body class="knowledge-page lab-home">
+  <nav class="topbar" aria-label="Concept Reading Lab 導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="./index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="./index.html" aria-current="page">首頁</a>
+        <a href="./backlog.html">待生成</a>
+        <a href="./knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-head">
+    <div class="page-head-inner">
+      <section>
+        <p class="kicker">Library Desk</p>
+        <h1>概念閱讀庫</h1>
+        <p class="page-thesis">把悖論、心理偏誤、系統思考與工程判斷整理成可搜尋、可比較、可繼續生成的閱讀頁。</p>
+        <div class="page-head-actions">
+          <button class="control-button primary" type="button" id="random-topic-link">隨機讀一頁</button>
+        </div>
+      </section>
+
+      <section class="stats-grid stats-grid--single" aria-label="概念閱讀庫統計">
+        <article class="stat-item">
+          <span>已完成概念頁</span>
+          <strong id="total-topics">0</strong>
+        </article>
+      </section>
+    </div>
+  </header>
+
+  <main class="library-shell">
+    <section class="section-block search-panel" id="library" aria-labelledby="search-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Search</p>
+          <h2 id="search-title">搜尋概念頁</h2>
+        </div>
+      </div>
+
+      <div class="search-line">
+        <label class="search-field" for="topic-search">
+          <span>關鍵字</span>
+          <input id="topic-search" type="search" autocomplete="off" aria-describedby="search-help" aria-controls="topic-results">
+        </label>
+        <label class="search-field compact-field" for="sort-topics">
+          <span>排序</span>
+          <select id="sort-topics">
+            <option value="order">閱讀順序</option>
+            <option value="title">主題名稱</option>
+            <option value="type">主題類型</option>
+            <option value="domain">知識領域</option>
+          </select>
+        </label>
+        <button class="control-button compact-button" type="button" id="clear-search" disabled>清除</button>
+      </div>
+      <p class="field-help" id="search-help">搜尋概念、英文名稱、類型、核心問題或標籤。</p>
+
+      <div class="result-list" id="topic-results" role="listbox"></div>
+    </section>
+
+  </main>
+
+  <script src="./topic-index.js"></script>
+  <script src="./index-page.js"></script>
+</body>
+</html>

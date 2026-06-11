@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>古德哈特定律 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-goodharts-law">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / metrics / incentives / systems</p>
+        <h1>古德哈特定律</h1>
+        <p class="topic-subtitle">Goodhart's Law</p>
+        <p class="thesis">當一個指標被拿來當目標，它就會開始失去衡量原本現象的能力。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁要幫你分清楚：指標何時是觀察世界的儀表，何時變成驅動行為的控制桿；一旦它變成控制桿，人和系統就會開始繞著它變形。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>指標悖論 / 系統思考</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Proxy vs. true goal</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>代理品質、誘因壓力、可操弄性、回饋速度</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能判斷一個 KPI 何時開始污染它原本想衡量的東西</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>指標</span>
+          <span>誘因</span>
+          <span>失真</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>先抓住這題真正的壓力點</h2>
+          <p class="section-lede">古德哈特定律不反對量化。它提醒我們：當量化結果開始決定獎懲、資源與評價，指標就不再只是被動測量。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>好的指標原本能讓我們看見複雜現象；但一旦它被宣布為目標，系統就會學會優化指標本身，而不一定優化指標背後真正重要的事。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先問它代理什麼</strong>
+            <p>每個 KPI 都只是 proxy。先說清楚它想靠近哪個真目標。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再看誘因壓力</strong>
+            <p>越是和升遷、預算、績效綁在一起，越容易被人優化到失真。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後檢查副作用</strong>
+            <p>如果指標變好但現場變差，通常不是人突然變壞，而是設計在邀請繞路。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>把問題縮到最小</h2>
+          <p class="section-lede">所有版本的古德哈特定律都可以縮成一個簡單故事：你想改善 A，但只能量到 B，於是你獎勵 B。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>團隊想提高品質，於是把「每週關閉 bug 數」當 KPI。幾週後，關閉數上升了，但真正難修、最影響使用者的 bug 被拆小、延後或避開。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>指標不是謊言，它可能曾經有用。難點在於：當人知道它會被拿來控制結果，行為就會改變，原本的相關性也會被破壞。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">用指標追蹤真目標</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">把指標綁上獎懲</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">系統開始優化指標而非目標</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>古德哈特定律不是「數字都沒用」，而是「數字一旦被賦予控制權，就會改變它正在測量的世界」。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四種看指標失真的透鏡</h2>
+          <p class="section-lede">同一個 KPI 可能因為代理不良、誘因太強、樣本被挑選或現場刻意操弄而壞掉。把失真來源分開，修法才會不同。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>代理落差</strong>
+            <p>指標只是目標的替身。測試覆蓋率可以靠近品質，但它不等於品質；覆蓋到大量低風險分支，也不代表關鍵路徑更可靠。</p>
+          </article>
+          <article class="lens-card">
+            <strong>誘因壓力</strong>
+            <p>當指標決定獎懲，人會自然避開指標不鼓勵的工作。這不是道德故事，而是系統設計對行為的塑形。</p>
+          </article>
+          <article class="lens-card">
+            <strong>選擇效應</strong>
+            <p>被拿來排名或篩選後，留下來的樣本會改變。例如只看平均修復時間，團隊可能傾向先處理容易關掉的 issue。</p>
+          </article>
+          <article class="lens-card">
+            <strong>操弄與遊戲化</strong>
+            <p>當指標的計算方式透明且單一，現場就有機會直接優化計分方式，而不是改善原本想改善的現象。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>失真來源</th>
+                <th>看起來像進步</th>
+                <th>實際風險</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>代理落差</td>
+                <td>覆蓋率、分數或件數提升</td>
+                <td>真目標沒有同步提升，甚至被錯誤指標遮住。</td>
+              </tr>
+              <tr>
+                <td>誘因壓力</td>
+                <td>團隊快速靠近 KPI</td>
+                <td>沒被計分的必要工作被冷落，例如可維護性、長期風險與知識傳承。</td>
+              </tr>
+              <tr>
+                <td>操弄</td>
+                <td>報表更漂亮、趨勢更平滑</td>
+                <td>指標開始描述填表策略，而不是描述現場狀態。</td>
+              </tr>
+              <tr>
+                <td>多指標制衡</td>
+                <td>短期不如單一 KPI 乾淨</td>
+                <td>比較難管理，但較能避免把複雜目標壓扁成單一數字。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼我們那麼容易相信指標</h2>
+          <p class="section-lede">指標的吸引力在於它讓混亂的東西變得可比較；危險也在這裡，因為可比較不等於完整。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>數字帶來控制感</strong>
+            <p>當問題模糊時，一個清楚數字會讓人感到可管理。於是我們容易把「可量」誤認成「重要」。</p>
+          </div>
+          <div class="example">
+            <strong>排名會改變注意力</strong>
+            <p>被排名後，人會自然追問「怎樣讓分數更好」，而不是「這個分數還能不能代表真實狀態」。</p>
+          </div>
+          <div class="example">
+            <strong>代理會被當成本體</strong>
+            <p>久了之後，報表本身會變成目標。團隊討論的是讓曲線漂亮，而不是讓使用者、系統或產品真的更好。</p>
+          </div>
+        </div>
+        <p class="micro-note">這裡的心理連結是教學性整理：重點是說明人與組織如何在壓力下把 proxy 當成 true goal。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把它帶回工程現場</h2>
+          <p class="section-lede">Firmware 或產品團隊通常非常依賴指標：測試通過率、coverage、bug count、field return、release velocity。古德哈特定律能幫你檢查這些數字何時開始反咬。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>測試覆蓋率</strong>
+            <p>coverage 是好的儀表，但若被當成唯一目標，團隊可能補大量容易覆蓋的測試，卻不碰 race condition、power state 或 exception path。</p>
+          </div>
+          <div class="example">
+            <strong>Bug 數與關閉速度</strong>
+            <p>若只追求 bug 數下降，常見副作用是重新分類、降低嚴重度、拆分或延後真正複雜的問題。</p>
+          </div>
+          <div class="example">
+            <strong>交付速度</strong>
+            <p>velocity 被當成目標後，設計債、文件、review 深度與長期可靠性可能被壓低，因為它們短期不容易出現在分數裡。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>評估 KPI 時，先問：「它想代理哪個真目標？哪些重要部分沒有被量到？」</li>
+          <li>如果指標開始影響獎懲，就要同步設計反操弄機制、質性 review 與副作用監控。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三個常見誤讀</h2>
+          <p class="section-lede">這個概念很容易被拿來當反 KPI 的口號，但那會錯過它真正有用的地方。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以不要量化</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。它提醒你量化要保留脈絡，並避免把單一 proxy 當成完整目標。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要換一個更好的指標就好</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>有時需要換指標，但更常見的是要降低單一指標權重，並加入質性判斷與多重檢查。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>這代表員工在作弊</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不一定。很多時候人只是理性回應制度。若制度只獎勵數字，數字就會成為真正的產品。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>把它變成你的指標檢查工具</h2>
+          <p class="section-lede">下面兩個問題可以拿來檢查任何 dashboard、OKR 或專案 KPI。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果這個指標明天開始影響獎金</strong>
+            <p>團隊會怎麼改變行為？哪些重要工作會被忽略？有沒有簡單方法能讓分數變好但真實結果變差？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果這個指標突然變漂亮</strong>
+            <p>你會如何分辨是系統真的改善，還是測量方式、樣本組成、分類規則或回報策略改變了？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>接著可以順讀 Campbell's Law、cobra effect、reward hacking、surrogation，或回到工程管理裡的 metric design。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">本頁把經濟學、社會指標與 AI/ML 裡的 proxy overoptimization 合在一起整理，工程應用段落是依這些框架做的教學性 synthesis。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>概念背景</strong>
+            <p>Goodhart's Law 條目整理了 Goodhart 1975 年的原始脈絡，以及後來被 Strathern 普及的「measure becomes a target」版本。</p>
+            <a href="https://en.wikipedia.org/wiki/Goodhart%27s_law" target="_blank" rel="noreferrer">Goodhart's law</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰法則</strong>
+            <p>Campbell's Law 補上社會指標被用於決策後，會受到腐化壓力並扭曲原本社會過程的觀點。</p>
+            <a href="https://en.wikipedia.org/wiki/Campbell%27s_law" target="_blank" rel="noreferrer">Campbell's law</a>
+          </article>
+          <article class="source-card">
+            <strong>現代分類</strong>
+            <p>Manheim 與 Garrabrant 將 Goodhart effect 拆成多種機制，對公共政策、機器學習與 AI alignment 都有幫助。</p>
+            <a href="https://arxiv.org/abs/1803.04585" target="_blank" rel="noreferrer">Categorizing Variants of Goodhart's Law</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>讀完後可以回頭看模板：這種偏系統思考的概念，是否需要比悖論頁更多「失真機制」與「工程映射」欄位。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

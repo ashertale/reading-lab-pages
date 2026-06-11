@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>公地悲劇 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-tragedy-of-the-commons">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class='hero-inner'>
+      <div>
+        <p class='kicker'>Knowledge Study / commons</p>
+        <h1>公地悲劇</h1>
+        <p class='topic-subtitle'>Tragedy of the Commons</p>
+        <p class='thesis'>當每個人都能從共享資源多拿一點，成本卻由所有人分攤，理性的個體行動可能耗盡整個系統。</p>
+        <div class='hero-prompt'>
+          <strong>Read For</strong>
+          <p>這頁要幫你把公地悲劇從牧場故事帶回工程現場：測試環境、維護時間、review bandwidth 和 shared ownership 都可能是公地。</p>
+        </div>
+      </div>
+      <aside class='hero-note' aria-label='主題資訊'>
+        <dl class='lexical-meta lexical-meta--knowledge' aria-label='主題摘要'>
+          <div>
+            <dt>主題類型</dt>
+            <dd>集體行動 / 資源治理</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Individual gain vs. shared depletion</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>資源邊界、使用規則、監測、制裁與回饋</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能分辨共享資源何時需要治理，而不是只靠個人自律</dd>
+          </div>
+        </dl>
+        <div class='knowledge-map' aria-label='閱讀結構示意'>
+          <span>共享</span>
+          <span>耗損</span>
+          <span>治理</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class='compass' aria-label='頁內導覽'>
+      <span>Reading Path</span>
+      <a href='#core'>讀法總覽</a>
+      <a href='#setup'>問題設定</a>
+      <a href='#lenses'>判準透鏡</a>
+      <a href='#psychology'>心理連結</a>
+      <a href='#applications'>現實映射</a>
+      <a href='#misreadings'>誤讀校正</a>
+      <a href='#questions'>延伸提問</a>
+      <a href='#sources'>來源</a>
+    </aside>
+
+    <article class='article'>
+      <section class='chapter' id='core'>
+        <div class='section-heading'>
+          <p class='section-label'>Orientation</p>
+          <h2>先抓住這題真正的壓力點</h2>
+          <p class='section-lede'>公地悲劇的重點不是人壞，而是制度讓每個人拿資源時得到完整好處，付成本時只承擔一小部分。</p>
+        </div>
+        <div class='core-card'>
+          <p class='section-label'>Core Tension</p>
+          <p>個體多用一點看起來合理，因為額外收益落在自己身上；但當每個人都這樣做，共享資源就被耗損到大家都不能好好使用。</p>
+        </div>
+        <div class='principle-strip' aria-label='本頁讀法'>
+          <div>
+            <span>01</span>
+            <strong>先定義公地</strong>
+            <p>找出哪些資源是多人共用、可被耗損、又缺乏清楚邊界。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再看誘因</strong>
+            <p>誰獲得使用收益？誰承擔維護成本？這兩者是否分離？</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後設治理</strong>
+            <p>用邊界、配額、監測、共同決策和衝突處理來替代模糊自律。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class='chapter' id='setup'>
+        <div class='section-heading'>
+          <p class='section-label'>Setup</p>
+          <h2>把問題縮到最小</h2>
+          <p class='section-lede'>最小故事可以是一個共享測試平台：每個團隊都想多占一點時間，最後大家都排不到穩定窗口。</p>
+        </div>
+        <div class='definition-grid'>
+          <div class='tile'>
+            <strong>最小劇情</strong>
+            <p>測試設備有限，每個 team 都把自己的 job 排滿，還常常不釋放環境。單一 team 這樣做很合理，因為能提高自己的交付機率。</p>
+          </div>
+          <div class='tile'>
+            <strong>真正難點</strong>
+            <p>環境被占滿、資料被污染、維護沒人負責後，所有 team 的交付速度都下降，但沒有單一 team 覺得自己是主因。</p>
+          </div>
+        </div>
+        <div class='concept-flow' aria-label='問題展開'>
+          <div class='flow-step'>個體多拿一點共享資源</div>
+          <div class='flow-arrow'>→</div>
+          <div class='flow-step'>成本被所有使用者分攤</div>
+          <div class='flow-arrow'>→</div>
+          <div class='flow-step'>資源品質或可用性下降</div>
+        </div>
+        <div class='paradox-frame'>
+          <strong>Key Point</strong>
+          <p>公地悲劇不是靠呼籲大家善良解決，而是靠把使用權、維護責任、監測和制裁設計清楚。</p>
+        </div>
+      </section>
+
+      <section class='chapter' id='lenses'>
+        <div class='section-heading'>
+          <p class='section-label'>Lenses</p>
+          <h2>四個治理公地的判準</h2>
+          <p class='section-lede'>不是所有共享資源都會悲劇化；關鍵在於有沒有能讓使用與維護重新對齊的制度。</p>
+        </div>
+        <div class='lens-grid'>
+          <article class='lens-card'>
+            <strong>邊界清楚</strong>
+            <p>誰可以使用資源、何時使用、使用多少，需要被明確定義。</p>
+          </article>
+          <article class='lens-card'>
+            <strong>成本回饋</strong>
+            <p>過度使用的人要看到成本，不然每個人都會把維護當成別人的問題。</p>
+          </article>
+          <article class='lens-card'>
+            <strong>可觀測性</strong>
+            <p>若使用狀態不可見，團隊無法分辨正常需求與資源濫用。</p>
+          </article>
+          <article class='lens-card'>
+            <strong>共同修規則</strong>
+            <p>被規則影響的人需要能參與調整，否則制度容易不符合現場條件。</p>
+          </article>
+        </div>
+        <div class='table-wrap'>
+          <table>
+            <thead>
+              <tr>
+                <th>共享資源</th>
+                <th>悲劇化訊號</th>
+                <th>可能治理方式</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>測試設備</td>
+                <td>長期排滿、環境常髒</td>
+                <td>配額、預約、使用後清理檢查</td>
+              </tr>
+              <tr>
+                <td>code review 時間</td>
+                <td>少數人長期被塞爆</td>
+                <td>review rotation、owner 分流、PR 大小限制</td>
+              </tr>
+              <tr>
+                <td>共用模組</td>
+                <td>人人改、沒人維護</td>
+                <td>清楚 owner、變更規則、相容性測試</td>
+              </tr>
+              <tr>
+                <td>technical debt budget</td>
+                <td>每個 feature 都借一點</td>
+                <td>債務上限、還款 milestone、公開 debt register</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class='chapter' id='psychology'>
+        <div class='section-heading'>
+          <p class='section-label'>Psychology</p>
+          <h2>為什麼大家會一起把公地用壞</h2>
+          <p class='section-lede'>在公地裡，個人的局部理性很容易和集體長期利益分離。</p>
+        </div>
+        <div class='example-grid'>
+          <div class='example'>
+            <strong>成本被稀釋</strong>
+            <p>我多用一點造成的損害很小，但收益很明確，所以很容易合理化。</p>
+          </div>
+          <div class='example'>
+            <strong>責任被稀釋</strong>
+            <p>資源壞掉時，每個人都只覺得自己只是眾多使用者之一。</p>
+          </div>
+          <div class='example'>
+            <strong>短期壓力壓過長期維護</strong>
+            <p>交付 deadline 很明確，資源退化則比較慢、比較難歸因。</p>
+          </div>
+        </div>
+        <p class='micro-note'>這裡的心理連結是教學性整理：重點是說明制度如何塑造行為，不是把共享資源問題歸咎於個人品格。</p>
+      </section>
+
+      <section class='chapter' id='applications'>
+        <div class='section-heading'>
+          <p class='section-label'>Applications</p>
+          <h2>把它帶回工程現場</h2>
+          <p class='section-lede'>工程團隊裡的公地常不是草地，而是測試環境、shared code、平台團隊注意力與 release 穩定性。</p>
+        </div>
+        <div class='example-grid'>
+          <div class='example'>
+            <strong>Shared test lab</strong>
+            <p>若沒有預約、清理與責任回報，測試平台會變成每個人都想用、但越用越不可靠的資源。</p>
+          </div>
+          <div class='example'>
+            <strong>Shared ownership code</strong>
+            <p>共用底層模組若沒有 owner 和 contract，feature team 會各自做局部修改，長期破壞整體一致性。</p>
+          </div>
+          <div class='example'>
+            <strong>Release risk budget</strong>
+            <p>每個 team 都想塞一個小風險進 release，總體風險最後超過整個系統能承受的範圍。</p>
+          </div>
+        </div>
+        <ul class='bullet-list'>
+          <li>治理共享資源時，先讓使用量、排隊時間、失敗率與維護成本可見。</li>
+          <li>不要只設禁令；要讓受影響的人能參與規則調整，規則才會貼近現場。</li>
+        </ul>
+      </section>
+
+      <section class='chapter' id='misreadings'>
+        <div class='section-heading'>
+          <p class='section-label'>Misreadings</p>
+          <h2>三個常見誤讀</h2>
+          <p class='section-lede'>公地悲劇常被講成「共享一定失敗」，但這會錯過後續治理研究的重要修正。</p>
+        </div>
+        <div class='collocation-list' aria-label='常見誤讀'>
+          <article class='collocation-card'>
+            <div>
+              <strong>所以共享資源一定要私有化</strong>
+              <span class='register-tag'>校正</span>
+            </div>
+            <p>不是。Ostrom 的研究顯示，許多社群能用清楚規則和共同治理長期管理共享資源。</p>
+          </article>
+          <article class='collocation-card'>
+            <div>
+              <strong>只要大家自律就好</strong>
+              <span class='register-tag'>校正</span>
+            </div>
+            <p>自律有用，但高壓和誘因不對齊時，仍需要邊界、監測與可執行規則。</p>
+          </article>
+          <article class='collocation-card'>
+            <div>
+              <strong>這只適用自然資源</strong>
+              <span class='register-tag'>校正</span>
+            </div>
+            <p>工程裡的測試環境、review 能量、共用模組和穩定性 budget 也有公地特徵。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class='chapter' id='questions'>
+        <div class='section-heading'>
+          <p class='section-label'>Questions</p>
+          <h2>把它變成你的治理檢查</h2>
+          <p class='section-lede'>下面兩個問題適合用在 shared resource、platform ownership 或 release governance。</p>
+        </div>
+        <div class='prompt-grid'>
+          <article class='prompt-card'>
+            <strong>這個資源的使用者和維護者是不是同一群人</strong>
+            <p>如果不是，誰在替過度使用付成本？誰有權調整規則？</p>
+          </article>
+          <article class='prompt-card'>
+            <strong>資源耗損是否被看見</strong>
+            <p>如果使用量、失敗率、清理時間和 queue time 不可見，團隊很難自我校正。</p>
+          </article>
+        </div>
+        <div class='template-note'>
+          <strong>延伸路線</strong>
+          <p>接著可以順讀 common-pool resources、Ostrom design principles、collective action，或回到平台團隊的 shared ownership 設計。</p>
+        </div>
+      </section>
+
+      <section class='chapter' id='sources'>
+        <div class='section-heading'>
+          <p class='section-label'>Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class='section-lede'>本頁以 Hardin 的公地悲劇和 Ostrom 的共同資源治理修正為主，工程映射段落是教學性 synthesis。</p>
+        </div>
+        <div class='source-grid'>
+          <article class='source-card'>
+            <strong>經典起點</strong>
+            <p>Hardin 1968 年文章提供公地悲劇作為共享資源過度使用的經典表述。</p>
+            <a href='https://www.science.org/doi/10.1126/science.162.3859.1243' target='_blank' rel='noreferrer'>Science DOI</a>
+          </article>
+          <article class='source-card'>
+            <strong>治理修正</strong>
+            <p>NobelPrize.org 對 Ostrom 的介紹說明她如何研究社群治理共享自然資源。</p>
+            <a href='https://www.nobelprize.org/prizes/economic-sciences/2009/ostrom/facts/' target='_blank' rel='noreferrer'>NobelPrize.org</a>
+          </article>
+          <article class='source-card'>
+            <strong>概念整理</strong>
+            <p>Common-pool resource 條目補上共享資源、排他性與耗損性的分析語言。</p>
+            <a href='https://en.wikipedia.org/wiki/Common-pool_resource' target='_blank' rel='noreferrer'>Common-pool resource</a>
+          </article>
+        </div>
+      </section>
+
+      <section class='chapter'>
+        <div class='reference-box'>
+          <div>
+            <p class='section-label'>Reference</p>
+            <h2>下一步</h2>
+            <p>讀完後可以挑一個團隊共享資源，畫出使用者、維護者、規則、監測與衝突處理方式。</p>
+          </div>
+          <a class='reference-link' href='../knowledge-topic-template.html'>打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

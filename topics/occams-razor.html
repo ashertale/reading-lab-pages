@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>奧卡姆剃刀 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-occams-razor">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class='hero-inner'>
+      <div>
+        <p class='kicker'>Knowledge Study / simplicity / parsimony / debugging</p>
+        <h1>奧卡姆剃刀</h1>
+        <p class='topic-subtitle'>Occam's Razor</p>
+        <p class='thesis'>當幾個解釋同樣能承擔證據時，先偏好需要較少額外假設的那一個。</p>
+        <div class='hero-prompt'>
+          <strong>Read For</strong>
+          <p>這頁要幫你把「簡單」從口號變成判斷工具：不是永遠相信最簡單的說法，而是在證據同等時，先減少不必要的假設與不可驗證的補丁。</p>
+        </div>
+      </div>
+      <aside class='hero-note' aria-label='主題資訊'>
+        <dl class='lexical-meta lexical-meta--knowledge' aria-label='主題摘要'>
+          <div>
+            <dt>主題類型</dt>
+            <dd>判斷原則 / 模型選擇</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Fewer necessary assumptions</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>解釋力、假設數、可測性、失敗代價</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在 debug 與設計討論中分辨簡潔、偷懶與過度擬合</dd>
+          </div>
+        </dl>
+        <div class='knowledge-map' aria-label='閱讀結構示意'>
+          <span>證據</span>
+          <span>假設</span>
+          <span>測試</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class='compass' aria-label='頁內導覽'>
+      <span>Reading Path</span>
+      <a href='#core'>讀法總覽</a>
+      <a href='#setup'>問題設定</a>
+      <a href='#lenses'>判準透鏡</a>
+      <a href='#psychology'>心理連結</a>
+      <a href='#applications'>現實映射</a>
+      <a href='#misreadings'>誤讀校正</a>
+      <a href='#questions'>延伸提問</a>
+      <a href='#sources'>來源</a>
+    </aside>
+
+    <article class='article'>
+      <section class='chapter' id="core">
+        <div class='section-heading'>
+          <p class='section-label'>Orientation</p>
+          <h2>先抓住這題真正的壓力點</h2>
+          <p class='section-lede'>奧卡姆剃刀不是「最簡單的一定對」。它只在幾個解釋都能承擔目前證據時，要求你不要額外增加沒有必要的東西。</p>
+        </div>
+        <div class='core-card'>
+          <p class='section-label'>Core Tension</p>
+          <p>人想要完整解釋，很容易補上看似聰明的假設；但每多一個假設，就多一個可能錯、難測、難維護的負擔。剃刀的作用是把證據還沒要求的複雜度先削掉。</p>
+        </div>
+        <div class='principle-strip' aria-label='本頁讀法'>
+          <div>
+            <span>01</span>
+            <strong>先確認解釋力相近</strong>
+            <p>只有在幾個候選解釋都能說明證據時，簡潔才開始有判準價值。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再數必要假設</strong>
+            <p>少假設不是少細節，而是少那些沒有被證據要求的實體、例外與補丁。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後設計測試</strong>
+            <p>好的簡化會讓下一個測試更清楚，而不是把未知藏起來。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class='chapter' id="setup">
+        <div class='section-heading'>
+          <p class='section-label'>Setup</p>
+          <h2>把問題縮到最小</h2>
+          <p class='section-lede'>你面前有兩個解釋：一個需要單一失效點，另一個需要三個剛好同時發生的條件。兩者目前都說得通，你先追哪一個？</p>
+        </div>
+        <div class='definition-grid'>
+          <div class='tile'>
+            <strong>最小劇情</strong>
+            <p>一台板子偶發重啟。A 假設是某條 power rail 在高負載下 droop；B 假設是 compiler bug、sensor noise 與排程競態剛好疊在一起。</p>
+          </div>
+          <div class='tile'>
+            <strong>真正難點</strong>
+            <p>A 不一定對，B 也不一定錯。奧卡姆剃刀只說：在證據還沒逼你接受複合故事前，先驗證較少假設、較容易推翻的模型。</p>
+          </div>
+        </div>
+        <div class='concept-flow' aria-label='問題展開'>
+          <div class='flow-step'>多個解釋都能涵蓋現象</div>
+          <div class='flow-arrow'>→</div>
+          <div class='flow-step'>比較各自新增的假設</div>
+          <div class='flow-arrow'>→</div>
+          <div class='flow-step'>先測較簡潔且可推翻者</div>
+        </div>
+        <div class='paradox-frame'>
+          <strong>Key Point</strong>
+          <p>剃刀不是替你下判決，而是替你排序下一步調查：先處理不需要額外假設的路徑，再讓資料決定是否需要更複雜的模型。</p>
+        </div>
+      </section>
+
+      <section class='chapter' id="lenses">
+        <div class='section-heading'>
+          <p class='section-label'>Lenses</p>
+          <h2>四種判斷簡潔是否有用的透鏡</h2>
+          <p class='section-lede'>真正的簡潔不是短句子，而是用較少的未驗證承諾解釋同樣多的現象。</p>
+        </div>
+        <div class='lens-grid'>
+          <article class='lens-card'>
+            <strong>解釋力</strong>
+            <p>如果簡單模型漏掉關鍵現象，它不是剃刀，而是忽略證據。先確認候選模型都能承擔已知資料。</p>
+          </article>
+          <article class='lens-card'>
+            <strong>假設負債</strong>
+            <p>每個額外假設都是一筆未驗證負債。負債越多，模型越容易變成為了保住結論而臨時加補丁。</p>
+          </article>
+          <article class='lens-card'>
+            <strong>可測性</strong>
+            <p>好的簡化通常會讓測試更直接。若一個說法簡單但不可測，它比較像故事，不像工程假設。</p>
+          </article>
+          <article class='lens-card'>
+            <strong>錯誤代價</strong>
+            <p>在安全、醫療或高風險系統中，較簡單的假設也要配合失敗代價。剃刀不能取代風險控制。</p>
+          </article>
+        </div>
+        <div class='table-wrap'>
+          <table>
+            <thead>
+              <tr>
+                <th>情境</th>
+                <th>剃刀建議</th>
+                <th>避免誤用</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>兩個模型都能解釋資料</td>
+                <td>先測假設較少者</td>
+                <td>不要把它當成最終真理。</td>
+              </tr>
+              <tr>
+                <td>簡單模型漏掉關鍵例外</td>
+                <td>保留例外並重新建模</td>
+                <td>不要為了漂亮而刪證據。</td>
+              </tr>
+              <tr>
+                <td>複雜模型不可避免</td>
+                <td>把每個新增假設拆成可測項</td>
+                <td>不要讓複雜變成不可審查。</td>
+              </tr>
+              <tr>
+                <td>高風險決策</td>
+                <td>用剃刀排序調查</td>
+                <td>仍要保留安全邊界與 fallback。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class='chapter' id="psychology">
+        <div class='section-heading'>
+          <p class='section-label'>Psychology</p>
+          <h2>為什麼人常常不想用剃刀</h2>
+          <p class='section-lede'>複雜解釋有時比較像專業，尤其在壓力下，人會用更大的故事替不確定感找出口。</p>
+        </div>
+        <div class='example-grid'>
+          <div class='example'>
+            <strong>複雜感帶來掌控感</strong>
+            <p>一個有很多細節的故事聽起來比較像深入分析，但細節不等於證據，可能只是更多未測假設。</p>
+          </div>
+          <div class='example'>
+            <strong>不想承認普通錯誤</strong>
+            <p>真正原因常是接線、版本、時序或配置錯誤。人會偏好稀有原因，因為它比較不像自己的基本檢查失敗。</p>
+          </div>
+          <div class='example'>
+            <strong>討論被漂亮架構吸走</strong>
+            <p>設計評審中，複雜架構常比較有舞台感。剃刀提醒你問：這些抽象層真的由需求逼出來嗎？</p>
+          </div>
+        </div>
+        <p class='micro-note'>這裡的心理連結是教學性整理：重點是說明人為什麼會把多假設誤認成深度，而不是把簡潔當成品味問題。</p>
+      </section>
+
+      <section class='chapter' id="applications">
+        <div class='section-heading'>
+          <p class='section-label'>Applications</p>
+          <h2>把它帶回工程現場</h2>
+          <p class='section-lede'>對 firmware debug、系統設計與 root cause analysis 來說，奧卡姆剃刀是排序工具：先追最少假設、最容易驗證的路徑。</p>
+        </div>
+        <div class='example-grid'>
+          <div class='example'>
+            <strong>Debug 假設排序</strong>
+            <p>先檢查版本、配置、電源、時鐘、reset reason、邊界條件。這些原因不酷，但常比罕見 compiler bug 更少假設。</p>
+          </div>
+          <div class='example'>
+            <strong>架構設計</strong>
+            <p>抽象層、plugin system、通用框架都可能有價值；但如果需求還沒要求，先用較少 moving parts 的設計保留學習速度。</p>
+          </div>
+          <div class='example'>
+            <strong>Root cause 報告</strong>
+            <p>避免把多個未驗證原因堆成一個看似完整的故事。每個原因都要能被證據支持，或被列為待驗證假設。</p>
+          </div>
+        </div>
+        <ul class='bullet-list'>
+          <li>把「目前證據支持什麼」和「我想像可能發生什麼」分成兩欄。</li>
+          <li>當複雜模型真的必要，將它拆成可逐一推翻的小假設。</li>
+        </ul>
+      </section>
+
+      <section class='chapter' id="misreadings">
+        <div class='section-heading'>
+          <p class='section-label'>Misreadings</p>
+          <h2>三個常見誤讀</h2>
+          <p class='section-lede'>奧卡姆剃刀很常被講成一句漂亮話，真正使用時反而需要很多條件。</p>
+        </div>
+        <div class='collocation-list' aria-label='常見誤讀'>
+          <article class='collocation-card'>
+            <div>
+              <strong>最簡單的答案一定對</strong>
+              <span class='register-tag'>校正</span>
+            </div>
+            <p>不是。它只在證據同等時給偏好；新資料出現後，較複雜的模型可能才是正確模型。</p>
+          </article>
+          <article class='collocation-card'>
+            <div>
+              <strong>越少程式碼越好</strong>
+              <span class='register-tag'>校正</span>
+            </div>
+            <p>不一定。少程式碼若靠隱含前提、魔術常數或不可見耦合達成，假設負債反而更高。</p>
+          </article>
+          <article class='collocation-card'>
+            <div>
+              <strong>複雜就是錯</strong>
+              <span class='register-tag'>校正</span>
+            </div>
+            <p>複雜有時是現實要求。問題不是複雜，而是沒有證據要求的複雜。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class='chapter' id="questions">
+        <div class='section-heading'>
+          <p class='section-label'>Questions</p>
+          <h2>把它變成你的假設檢查工具</h2>
+          <p class='section-lede'>下面兩個問題可以直接放進 debug note 或 design review。</p>
+        </div>
+        <div class='prompt-grid'>
+          <article class='prompt-card'>
+            <strong>這個解釋新增了哪些假設</strong>
+            <p>哪些假設是證據要求的？哪些只是為了讓故事聽起來完整？每個假設有沒有對應測試？</p>
+          </article>
+          <article class='prompt-card'>
+            <strong>如果較簡單模型錯了</strong>
+            <p>下一個會逼你接受複雜模型的觀察是什麼？你能不能先設計一個低成本測試把它分出來？</p>
+          </article>
+        </div>
+        <div class='template-note'>
+          <strong>延伸路線</strong>
+          <p>接著可以順讀 model selection、minimum description length、Bayesian inference，或回到工程裡的 fault tree analysis。</p>
+        </div>
+      </section>
+
+      <section class='chapter' id="sources">
+        <div class='section-heading'>
+          <p class='section-label'>Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class='section-lede'>本頁將奧卡姆剃刀整理為工程判斷與 debug 排序工具；工程應用段落是依哲學與科學方法脈絡做的教學性 synthesis。</p>
+        </div>
+        <div class='source-grid'>
+          <article class='source-card'>
+            <strong>概念背景</strong>
+            <p>Britannica 條目整理了奧卡姆剃刀與「plurality should not be posited without necessity」的常見表述及來源背景。</p>
+            <a href='https://www.britannica.com/topic/Occams-razor' target='_blank' rel='noreferrer'>Occam's razor</a>
+          </article>
+          <article class='source-card'>
+            <strong>哲學框架</strong>
+            <p>Stanford Encyclopedia of Philosophy 的 Simplicity 條目區分 elegance 與 parsimony，也討論簡潔原則的合理化問題。</p>
+            <a href='https://plato.stanford.edu/entries/simplicity/' target='_blank' rel='noreferrer'>Simplicity</a>
+          </article>
+          <article class='source-card'>
+            <strong>人物脈絡</strong>
+            <p>William of Ockham 條目補上這個原則和中世紀經院哲學、nominalism 與 parsimony 之間的歷史連結。</p>
+            <a href='https://en.wikipedia.org/wiki/William_of_Ockham' target='_blank' rel='noreferrer'>William of Ockham</a>
+          </article>
+        </div>
+      </section>
+
+      <section class='chapter'>
+        <div class='reference-box'>
+          <div>
+            <p class='section-label'>Reference</p>
+            <h2>下一步</h2>
+            <p>讀完後可以在 debug 模板裡新增一欄「新增假設」，讓每個 root cause 候選都先接受剃刀檢查。</p>
+          </div>
+          <a class='reference-link' href='../knowledge-topic-template.html'>打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>待生成主題 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="./knowledge-page.css">
+  <link rel="stylesheet" href="./index-page.css">
+</head>
+<body class="knowledge-page backlog-page">
+  <nav class="topbar" aria-label="Concept Reading Lab 導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="./index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="./index.html">首頁</a>
+        <a href="./backlog.html" aria-current="page">待生成</a>
+        <a href="./knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-head">
+    <div class="page-head-inner">
+      <section>
+        <p class="kicker">Backlog Desk</p>
+        <h1>待生成主題</h1>
+        <p class="page-thesis">這裡只放還沒生成為完整概念頁的候選題，避免首頁同時承擔搜尋與規劃兩種工作。</p>
+      </section>
+
+      <section class="stats-grid" aria-label="待生成主題統計">
+        <article class="stat-item">
+          <span>候選主題</span>
+          <strong id="backlog-count">0</strong>
+        </article>
+        <article class="stat-item">
+          <span>生成方式</span>
+          <strong>2</strong>
+        </article>
+      </section>
+    </div>
+  </header>
+
+  <main class="library-shell">
+    <section class="section-block" aria-labelledby="backlog-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Backlog</p>
+          <h2 id="backlog-title">接下來適合生成的主題</h2>
+        </div>
+      </div>
+      <div class="suggestion-grid" id="suggested-topics"></div>
+    </section>
+
+    <section class="section-block" aria-labelledby="workflow-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Workflow</p>
+          <h2 id="workflow-title">建議生成流程</h2>
+        </div>
+      </div>
+      <div class="workflow-grid">
+        <article class="workflow-card">
+          <span>Step 1</span>
+          <strong>先產生 payload JSON</strong>
+          <p>把主題、metadata、各 section 文案與來源整理成可審核資料，不直接寫 HTML。</p>
+        </article>
+        <article class="workflow-card">
+          <span>Step 2</span>
+          <strong>再 render 成 HTML</strong>
+          <p>用固定模板輸出 `topics/&lt;slug&gt;.html`，並同步 `topic-index.js`。</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="./topic-index.js"></script>
+  <script src="./backlog-page.js"></script>
+</body>
+</html>

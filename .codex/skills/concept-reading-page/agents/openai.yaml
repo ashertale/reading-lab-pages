@@ -1,0 +1,4 @@
+interface:
+  display_name: "Concept Reading Page"
+  short_description: "Create concept reading topic pages"
+  default_prompt: "Use $concept-reading-page to create or refine a Concept Reading Lab topic page."

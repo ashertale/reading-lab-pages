@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>康威定律 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-conways-law">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class='hero-inner'>
+      <div>
+        <p class='kicker'>Knowledge Study / architecture</p>
+        <h1>康威定律</h1>
+        <p class='topic-subtitle'>Conway's Law</p>
+        <p class='thesis'>系統架構常會長得像設計它的組織溝通結構；你很難用架構圖完全戰勝組織邊界。</p>
+        <div class='hero-prompt'>
+          <strong>Read For</strong>
+          <p>這頁要幫你看見：架構問題不一定只在程式碼或模組圖裡，也可能在誰能和誰快速對齊、誰負責哪個邊界。</p>
+        </div>
+      </div>
+      <aside class='hero-note' aria-label='主題資訊'>
+        <dl class='lexical-meta lexical-meta--knowledge' aria-label='主題摘要'>
+          <div>
+            <dt>主題類型</dt>
+            <dd>組織設計 / 系統架構</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Communication structure shapes system design</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>溝通路徑、模組邊界、ownership、交付節奏</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在設計系統架構時，同時檢查團隊邊界是否會把架構拉歪</dd>
+          </div>
+        </dl>
+        <div class='knowledge-map' aria-label='閱讀結構示意'>
+          <span>組織</span>
+          <span>溝通</span>
+          <span>架構</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class='compass' aria-label='頁內導覽'>
+      <span>Reading Path</span>
+      <a href='#core'>讀法總覽</a>
+      <a href='#setup'>問題設定</a>
+      <a href='#lenses'>判準透鏡</a>
+      <a href='#psychology'>心理連結</a>
+      <a href='#applications'>現實映射</a>
+      <a href='#misreadings'>誤讀校正</a>
+      <a href='#questions'>延伸提問</a>
+      <a href='#sources'>來源</a>
+    </aside>
+
+    <article class='article'>
+      <section class='chapter' id='core'>
+        <div class='section-heading'>
+          <p class='section-label'>Orientation</p>
+          <h2>先抓住這題真正的壓力點</h2>
+          <p class='section-lede'>康威定律指出，系統不是只由技術理想塑形，也會被組織溝通成本塑形。</p>
+        </div>
+        <div class='core-card'>
+          <p class='section-label'>Core Tension</p>
+          <p>你可以畫出理想模組邊界，但如果團隊邊界、會議節奏、ownership 和資訊流不支持它，實作最後往往會回到組織最容易溝通的形狀。</p>
+        </div>
+        <div class='principle-strip' aria-label='本頁讀法'>
+          <div>
+            <span>01</span>
+            <strong>先看溝通圖</strong>
+            <p>不要只看架構圖，也畫出哪些 team 需要頻繁同步、哪些同步成本最高。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再對齊 ownership</strong>
+            <p>讓模組邊界與長期負責邊界盡量一致，減少跨 team handoff 成為日常。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後設計反向調整</strong>
+            <p>若想要某種架構，可能要調整團隊結構，這就是 inverse Conway maneuver 的精神。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class='chapter' id='setup'>
+        <div class='section-heading'>
+          <p class='section-label'>Setup</p>
+          <h2>把問題縮到最小</h2>
+          <p class='section-lede'>最小情境是：你想做清楚的模組化系統，但團隊被切成前端、後端、測試、平台，每個 feature 都要跨很多 handoff。</p>
+        </div>
+        <div class='definition-grid'>
+          <div class='tile'>
+            <strong>最小劇情</strong>
+            <p>系統架構圖上功能 A 應該是一條完整 vertical slice，但組織上它被拆給三個 team。結果每次改動都要排同步、等對方、補文件。</p>
+          </div>
+          <div class='tile'>
+            <strong>真正難點</strong>
+            <p>技術上你想要低耦合，組織上卻製造了高溝通成本。最後 code 會長出 bridge、adapter、workaround 和模糊 ownership。</p>
+          </div>
+        </div>
+        <div class='concept-flow' aria-label='問題展開'>
+          <div class='flow-step'>團隊邊界決定日常溝通</div>
+          <div class='flow-arrow'>→</div>
+          <div class='flow-step'>溝通成本影響接口設計</div>
+          <div class='flow-arrow'>→</div>
+          <div class='flow-step'>系統邊界映出組織邊界</div>
+        </div>
+        <div class='paradox-frame'>
+          <strong>Key Point</strong>
+          <p>康威定律不是宿命論，而是提醒你：若架構和組織長期互相打架，通常需要一起改。</p>
+        </div>
+      </section>
+
+      <section class='chapter' id='lenses'>
+        <div class='section-heading'>
+          <p class='section-label'>Lenses</p>
+          <h2>四種看康威定律的透鏡</h2>
+          <p class='section-lede'>它可以被當成診斷工具，也可以被當成設計工具；重點是不要只在技術層面看架構。</p>
+        </div>
+        <div class='lens-grid'>
+          <article class='lens-card'>
+            <strong>溝通成本</strong>
+            <p>需要頻繁協調的東西若分散在高摩擦邊界上，系統會長出額外耦合或等待。</p>
+          </article>
+          <article class='lens-card'>
+            <strong>模組 ownership</strong>
+            <p>沒有清楚 owner 的模組容易變成公地；太多 owner 的模組則容易變成政治邊界。</p>
+          </article>
+          <article class='lens-card'>
+            <strong>接口形狀</strong>
+            <p>跨 team 邊界通常會被做成更正式的接口，這可能是好事，也可能造成過早抽象。</p>
+          </article>
+          <article class='lens-card'>
+            <strong>反向康威</strong>
+            <p>如果你想要服務自治或產品能力導向架構，可能要先建立相對自治的長期團隊。</p>
+          </article>
+        </div>
+        <div class='table-wrap'>
+          <table>
+            <thead>
+              <tr>
+                <th>組織形狀</th>
+                <th>常見系統形狀</th>
+                <th>可能調整</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>按技術層分 team</td>
+                <td>UI/API/DB 分層很厚，feature 交付需多次 handoff</td>
+                <td>改成 capability team 或明確 feature owner</td>
+              </tr>
+              <tr>
+                <td>平台 team 過度集中</td>
+                <td>所有變更都卡在平台 queue</td>
+                <td>下放安全擴充點與 clear contract</td>
+              </tr>
+              <tr>
+                <td>多地時區分散</td>
+                <td>模組被切成低頻同步的邊界</td>
+                <td>把高頻耦合工作放在同時區或建立強接口</td>
+              </tr>
+              <tr>
+                <td>責任邊界模糊</td>
+                <td>共用 code 反覆被局部修改</td>
+                <td>建立 owner、contract test 與變更流程</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class='chapter' id='psychology'>
+        <div class='section-heading'>
+          <p class='section-label'>Psychology</p>
+          <h2>為什麼組織邊界會滲進架構</h2>
+          <p class='section-lede'>人會降低溝通成本，系統也會沿著最低摩擦的協作路徑成長。</p>
+        </div>
+        <div class='example-grid'>
+          <div class='example'>
+            <strong>就近溝通</strong>
+            <p>能直接問到的人，會影響你怎麼切接口、怎麼做假設、怎麼處理例外。</p>
+          </div>
+          <div class='example'>
+            <strong>避免等待</strong>
+            <p>若跨 team 等待成本高，工程師會傾向複製邏輯、繞路或做 local workaround。</p>
+          </div>
+          <div class='example'>
+            <strong>責任安全感</strong>
+            <p>清楚 ownership 讓人敢改；模糊 ownership 讓人傾向加 layer 保護自己。</p>
+          </div>
+        </div>
+        <p class='micro-note'>這裡的心理與組織連結是教學性整理：重點是把架構討論放回真實協作成本，而不是把所有問題都歸咎於 team structure。</p>
+      </section>
+
+      <section class='chapter' id='applications'>
+        <div class='section-heading'>
+          <p class='section-label'>Applications</p>
+          <h2>把它帶回 firmware 與產品架構</h2>
+          <p class='section-lede'>硬體、firmware、cloud、app、QA、製造常跨很多邊界；康威定律能幫你提前看見邊界成本。</p>
+        </div>
+        <div class='example-grid'>
+          <div class='example'>
+            <strong>Firmware / hardware 邊界</strong>
+            <p>如果硬體與韌體 team 只在 milestone 才同步，接口假設會晚爆，最後用 workaround 補時序與行為差異。</p>
+          </div>
+          <div class='example'>
+            <strong>平台與產品線</strong>
+            <p>平台 team 若不理解產品線變化，平台 API 會偏向內部方便，而不是支援產品快速交付。</p>
+          </div>
+          <div class='example'>
+            <strong>測試與開發分離</strong>
+            <p>若 QA 只在最後接手，系統會缺少可測性設計；測試工具也會像外掛，而不是架構的一部分。</p>
+          </div>
+        </div>
+        <ul class='bullet-list'>
+          <li>架構 review 時同時畫 team interaction map，找出高頻溝通是否跨越高摩擦邊界。</li>
+          <li>若某接口一直不穩，先問它是不是剛好位在組織權責不清的位置。</li>
+        </ul>
+      </section>
+
+      <section class='chapter' id='misreadings'>
+        <div class='section-heading'>
+          <p class='section-label'>Misreadings</p>
+          <h2>三個常見誤讀</h2>
+          <p class='section-lede'>康威定律常被當成嘲諷組織的口號，但它更有用的地方是幫你設計 team 與 architecture 的共同演化。</p>
+        </div>
+        <div class='collocation-list' aria-label='常見誤讀'>
+          <article class='collocation-card'>
+            <div>
+              <strong>所以組織結構決定一切</strong>
+              <span class='register-tag'>校正</span>
+            </div>
+            <p>不是。技術選擇仍重要；康威定律只是提醒溝通結構會施加長期壓力。</p>
+          </article>
+          <article class='collocation-card'>
+            <div>
+              <strong>只要改組就會有好架構</strong>
+              <span class='register-tag'>校正</span>
+            </div>
+            <p>不一定。改組需要搭配接口、ownership、工具與交付節奏，不然只是換名字。</p>
+          </article>
+          <article class='collocation-card'>
+            <div>
+              <strong>這只適用軟體</strong>
+              <span class='register-tag'>校正</span>
+            </div>
+            <p>Conway 原本談的是廣義系統設計；firmware、硬體、流程與文件系統也會受到溝通結構影響。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class='chapter' id='questions'>
+        <div class='section-heading'>
+          <p class='section-label'>Questions</p>
+          <h2>把它變成你的架構檢查</h2>
+          <p class='section-lede'>下面兩個問題適合用在 module boundary、平台化或跨 team 專案啟動前。</p>
+        </div>
+        <div class='prompt-grid'>
+          <article class='prompt-card'>
+            <strong>這個模組邊界和 team 邊界一致嗎</strong>
+            <p>若不一致，跨邊界溝通是偶爾發生，還是每天都會發生？</p>
+          </article>
+          <article class='prompt-card'>
+            <strong>我們想要的架構，需要什麼團隊形狀支撐</strong>
+            <p>如果想要自治服務、快速 feature delivery 或高可測性，現有 ownership 是否支持？</p>
+          </article>
+        </div>
+        <div class='template-note'>
+          <strong>延伸路線</strong>
+          <p>接著可以順讀 inverse Conway maneuver、team topologies、mirroring hypothesis，或回到平台組織的 ownership 設計。</p>
+        </div>
+      </section>
+
+      <section class='chapter' id='sources'>
+        <div class='section-heading'>
+          <p class='section-label'>Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class='section-lede'>本頁以 Conway 原始文章與軟體架構實務整理為主，firmware 和組織設計段落是教學性 synthesis。</p>
+        </div>
+        <div class='source-grid'>
+          <article class='source-card'>
+            <strong>原始文章</strong>
+            <p>Melvin Conway 的 How Do Committees Invent? 是康威定律的原始來源。</p>
+            <a href='https://www.melconway.com/Home/pdf/committees.pdf' target='_blank' rel='noreferrer'>How Do Committees Invent?</a>
+          </article>
+          <article class='source-card'>
+            <strong>實務解讀</strong>
+            <p>Martin Fowler 的文章整理康威定律在軟體架構和 inverse Conway maneuver 中的實務意義。</p>
+            <a href='https://www.martinfowler.com/bliki/ConwaysLaw.html' target='_blank' rel='noreferrer'>Martin Fowler</a>
+          </article>
+          <article class='source-card'>
+            <strong>背景整理</strong>
+            <p>Conway's law 條目提供歷史、常見解釋與 mirroring hypothesis 的延伸背景。</p>
+            <a href='https://en.wikipedia.org/wiki/Conway%27s_law' target='_blank' rel='noreferrer'>Conway's law</a>
+          </article>
+        </div>
+      </section>
+
+      <section class='chapter'>
+        <div class='reference-box'>
+          <div>
+            <p class='section-label'>Reference</p>
+            <h2>下一步</h2>
+            <p>讀完後可以拿目前一張架構圖，旁邊畫一張 team interaction map，比較兩張圖哪裡互相拉扯。</p>
+          </div>
+          <a class='reference-link' href='../knowledge-topic-template.html'>打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>
