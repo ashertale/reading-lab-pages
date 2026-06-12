@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>委託代理問題 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-principal-agent-problem">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / incentives / governance / agency</p>
+        <h1>委託代理問題</h1>
+        <p class="topic-subtitle">Principal-Agent Problem</p>
+        <p class="thesis">當一方替另一方做決策，但兩者目標、風險承擔與資訊都不一致時，制度就會開始漏出代理成本。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁要幫你把很多表面上的執行摩擦，看成一個更底層的問題：當行動者替別人承擔任務時，目標真的有對齊嗎？</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>制度問題 / 誘因設計</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Delegated action under misaligned incentives</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>代理人目標、委託人可見度、資訊不對稱、監督成本</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能把『人不配合』改寫成可分析的代理結構問題</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>委託</span>
+          <span>偏移</span>
+          <span>治理</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>目標一分開，合作就開始出現視差</h2>
+          <p class="section-lede">委託代理問題不是對人性悲觀，而是提醒你：只要決策權與後果承擔分開，系統就需要處理目標偏移與資訊不對稱。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>委託人希望代理人替自己最大化結果，但代理人同時也在最大化自己的方便、風險控制與回報。兩者不會自動重合。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先找誰替誰做事</strong>
+            <p>只要存在代行關係，就要假設兩邊的成本函數可能不同。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再看誰知道得更多</strong>
+            <p>資訊不對稱讓委託人很難直接驗證代理人是否真的朝共同目標前進。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後設計對齊機制</strong>
+            <p>激勵、監督、透明度與退出權，都是降低代理成本的工具。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>把問題縮到最小</h2>
+          <p class="section-lede">這個問題之所以普遍，是因為現代組織幾乎處處需要授權；而一旦授權，偏移就不是例外，而是預設情況。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>公司希望供應商替自己壓低維修成本並確保品質，但供應商最在意的是交期、利潤與風險暴露，於是雙方開始在看不見的地方調整行為。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>只要委託人看不到代理人的實際努力與局部權衡，就很容易把偏移誤解成態度問題，而不是結構問題。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">把目標委託出去</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">資訊與後果分離</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">代理成本開始累積</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>委託代理問題的重點不是抓壞人，而是承認：只靠口頭共識，通常不足以讓多方在長期裡持續對齊。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>三個看代理成本的角度</h2>
+          <p class="section-lede">當合作開始變形時，可以從激勵、可觀測性與退出機制三面一起拆。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>激勵不對齊</strong>
+            <p>代理人被獎勵的東西，可能和委託人真正想要的結果不同。</p>
+          </article>
+          <article class="lens-card">
+            <strong>可觀測性不足</strong>
+            <p>委託人看得到產出，卻看不到過程與被犧牲的隱性品質。</p>
+          </article>
+          <article class="lens-card">
+            <strong>更換成本過高</strong>
+            <p>當退出或替換困難時，代理人更容易累積談判優勢與行為空間。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>看法</th>
+                <th>看起來像</th>
+                <th>真正風險</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>只看表面產出</td>
+                <td>合作似乎正常</td>
+                <td>隱性品質、長期風險與替代成本被藏起來。</td>
+              </tr>
+              <tr>
+                <td>增加透明度</td>
+                <td>管理變繁瑣</td>
+                <td>成本變高，但能讓偏移更早被看見。</td>
+              </tr>
+              <tr>
+                <td>調整激勵與退出權</td>
+                <td>制度比較硬</td>
+                <td>前期設計辛苦，但能持續壓低代理成本。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼資訊落差會慢慢改寫彼此的選擇</h2>
+          <p class="section-lede">人很容易把代理偏移讀成人格問題，因為那比承認制度本身沒有設計好來得直覺。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>委託人會高估口頭對齊</strong>
+            <p>只要大家都說目標一致，就容易以為實際行為也會自然一致。</p>
+          </div>
+          <div class="example">
+            <strong>代理人會優先優化可見目標</strong>
+            <p>在壓力下，人通常先顧自己的評價與風險，而不是抽象的共同利益。</p>
+          </div>
+        </div>
+        <p class="micro-note">重點在於把合作失真從道德敘事拉回制度設計。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把代理失真帶回 vendor 與內部治理</h2>
+          <p class="section-lede">工程 outsourcing、內部平台、管理匯報與供應鏈合作，都能用這個框架看見隱性成本如何產生。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>委外開發</strong>
+            <p>若供應商的 KPI 偏重交付件數，而你真正要的是可維護性與風險透明，偏移幾乎一定會發生。</p>
+          </div>
+          <div class="example">
+            <strong>內部平台團隊</strong>
+            <p>平台團隊替產品團隊做基礎建設時，若成功指標只看 adoption，穩定性與例外支援可能被低估。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>遇到協作摩擦時，先畫出誰替誰做決策、誰承擔後果、誰握有關鍵資訊。</li>
+          <li>若想降低代理成本，不只要對齊獎勵，也要降低替換成本與資訊不透明。 </li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>別把委託代理問題講成誰比較壞</h2>
+          <p class="section-lede">這個框架最常被誤解成『大家都不可信』，那會錯過它真正有用的部分。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以只能完全不授權</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。授權是必要的，關鍵在於承認授權需要制度支撐。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要多監督就行</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>監督重要，但若激勵與退出機制不動，監督很容易變成高成本的補丁。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>看合作設計時，先問哪兩個對齊條件</h2>
+          <p class="section-lede">如果你正在設計合作制度，下面兩個問題特別值得先問。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>代理人真正被獎勵什麼</strong>
+            <p>現在的制度是否在鼓勵代理人優化委託人的目標，還是只優化可見但不完整的替代指標？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>委託人看不到什麼</strong>
+            <p>有哪些重要風險、品質或努力成本，正因資訊不對稱而無法被日常追蹤？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可看 agency theory、moral hazard 與 asymmetric information；也可以把這頁帶回 vendor management 與內部治理。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁主要根據代理理論與資訊不對稱；文中的工程與組織映射則沿著這些框架展開。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Principal–agent problem 條目整理了代理成本、利益偏移與資訊不對稱的核心結構。</p>
+            <a href="https://en.wikipedia.org/wiki/Principal%E2%80%93agent_problem" target="_blank" rel="noreferrer">Principal–agent problem</a>
+          </article>
+          <article class="source-card">
+            <strong>理論框架</strong>
+            <p>Agency theory 提供了委託、代理與激勵設計的更一般化視角。</p>
+            <a href="https://en.wikipedia.org/wiki/Agency_theory" target="_blank" rel="noreferrer">Agency theory</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰條件</strong>
+            <p>Asymmetric information 補上為何委託人無法輕易驗證代理人行為的背景。</p>
+            <a href="https://en.wikipedia.org/wiki/Asymmetric_information" target="_blank" rel="noreferrer">Asymmetric information</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>如果這個主題接近你現在的工作，下一步很適合補 moral hazard 與 contract design 的頁面來把治理工具講得更具體。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

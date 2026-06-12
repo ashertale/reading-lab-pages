@@ -29,6 +29,20 @@ PLACEHOLDER_TEXT_PATTERNS = (
     re.compile(r"待補"),
     re.compile(r"TBD", re.I),
 )
+STOCK_TEMPLATE_TEXT_PATTERNS = (
+    re.compile(r"^先抓住這題真正的壓力點$"),
+    re.compile(r"^為什麼人會被這題拉走$"),
+    re.compile(r"^把它帶回現實場景$"),
+    re.compile(r"^把它帶回工程現場$"),
+    re.compile(r"^兩個容易走偏的讀法$"),
+    re.compile(r"^把它變成你的判斷工具$"),
+    re.compile(r"^這裡的心理連結是教學性整理"),
+    re.compile(r"^接著可以順讀"),
+    re.compile(r"^本頁主軸來自"),
+    re.compile(r"工程映射則是依"),
+    re.compile(r"^如果想把這頁"),
+    re.compile(r"^如果要把這頁"),
+)
 ALLOWED_REPEATED_TEXT = {
     "Reading Path",
     "Read For",
@@ -259,9 +273,21 @@ def payload_text_segments(payload: dict) -> list[str]:
     return cleaned
 
 
+def dedupe_keep_order(items: list[str]) -> list[str]:
+    seen: set[str] = set()
+    ordered: list[str] = []
+    for item in items:
+        if item in seen:
+            continue
+        seen.add(item)
+        ordered.append(item)
+    return ordered
+
+
 def check_payload_content_quality(errors: list[str]) -> None:
     repeated: dict[str, set[str]] = {}
     placeholder_hits: list[str] = []
+    stock_phrase_hits: list[str] = []
 
     for path in sorted(PAYLOAD_DIR.glob("*.json")):
         try:
@@ -275,9 +301,16 @@ def check_payload_content_quality(errors: list[str]) -> None:
                     placeholder_hits.append(f"{rel(path)}: {segment}")
                     break
 
+            for pattern in STOCK_TEMPLATE_TEXT_PATTERNS:
+                if pattern.search(segment):
+                    stock_phrase_hits.append(f"{rel(path)}: {segment}")
+                    break
+
             if len(segment) >= 36 and segment not in ALLOWED_REPEATED_TEXT:
                 repeated.setdefault(segment, set()).add(rel(path))
 
+    placeholder_hits = dedupe_keep_order(placeholder_hits)
+    stock_phrase_hits = dedupe_keep_order(stock_phrase_hits)
     duplicate_hits = [
         f"{text} ({', '.join(sorted(paths))})"
         for text, paths in repeated.items()
@@ -286,9 +319,17 @@ def check_payload_content_quality(errors: list[str]) -> None:
 
     if placeholder_hits:
         errors.append("Placeholder or empty-template text found:\n" + "\n".join(placeholder_hits))
+    if stock_phrase_hits:
+        preview = "\n".join(stock_phrase_hits[:40])
+        if len(stock_phrase_hits) > 40:
+            preview += "\n..."
+        errors.append(
+            "Stock template phrasing found. Rewrite these into topic-specific language instead of repeating house formulas:\n"
+            + preview
+        )
     if duplicate_hits:
         errors.append("Repeated long payload text found:\n" + "\n".join(duplicate_hits[:20]))
-    if not placeholder_hits and not duplicate_hits:
+    if not placeholder_hits and not stock_phrase_hits and not duplicate_hits:
         print("payload content quality: ok")
 
 

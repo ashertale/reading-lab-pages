@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>回歸平均數 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-regression-to-the-mean">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / statistics / experiments / noise</p>
+        <h1>回歸平均數</h1>
+        <p class="topic-subtitle">Regression to the Mean</p>
+        <p class="thesis">當你刻意挑最極端的樣本來看，下一次觀察常會自然變得沒那麼極端，這不一定代表介入有效或無效。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁要幫你避免一種很常見的誤判：看到最好或最差的樣本在下一輪變普通，就立刻把原因歸到剛做過的措施上。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>統計概念 / 成效解讀</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Extremes drifting toward average</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>是否挑了極端值、噪音比例、重測條件、對照組有沒有在</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能分辨成效變化有多少只是極端值自然回落</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>極端</span>
+          <span>重測</span>
+          <span>回落</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>極端表現之後，為什麼常會自己往中間掉回來</h2>
+          <p class="section-lede">回歸平均數不是神祕力量，而是當結果同時混有真實能力與隨機波動時，極端值下次通常沒那麼極端。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>人很容易把『極端之後變普通』讀成政策有效、主管有眼光或處罰有用，但有時那只是統計上的自然回落。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先辨認極端樣本</strong>
+            <p>若樣本是因為特別好或特別差才被挑出，下一次回到中間本來就更可能發生。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再分離噪音</strong>
+            <p>單次觀測常混合能力、情境與偶然波動，不宜把全部變化都歸因於介入。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後比對對照</strong>
+            <p>沒有對照組或長期基線，就很難知道改善到底來自措施還是自然回歸。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>把問題縮到最小</h2>
+          <p class="section-lede">這個概念特別容易誤導管理與實驗判讀，因為人天生喜歡在極端事件後找故事。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>某條產線本週良率特別低，主管立刻要求加嚴點檢；下週良率回升後，大家便把功勞全部記在新措施上。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>只要你因為結果極端才注意到它，就已經把『下一次可能回中間』這個統計事實埋進樣本選擇裡了。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">因極端表現而被挑出</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">再次量測時噪音重排</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">結果自然靠近平均</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>回歸平均數最有用的地方，不是教你懷疑所有改善，而是教你別把每一次回落都急著歸因。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>三個看成效變化的角度</h2>
+          <p class="section-lede">要讀懂這種現象，可以從樣本選取、波動來源與評估設計三面一起看。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>選取機制</strong>
+            <p>你是否因為最差、最痛或最亮眼才開始追蹤這批樣本。</p>
+          </article>
+          <article class="lens-card">
+            <strong>波動結構</strong>
+            <p>結果裡有多少是穩定能力，有多少是當次情境與量測噪音。</p>
+          </article>
+          <article class="lens-card">
+            <strong>驗證設計</strong>
+            <p>有沒有對照組、重複量測與足夠觀察窗，來避免把自然回落誤當干預效果。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>看法</th>
+                <th>看起來像</th>
+                <th>真正風險</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>只盯極端值</td>
+                <td>改善或惡化都很戲劇化</td>
+                <td>後續回中間會被錯當政策成果或失敗。</td>
+              </tr>
+              <tr>
+                <td>看長期分布</td>
+                <td>故事性降低</td>
+                <td>較不刺激，但比較能看出真變化。</td>
+              </tr>
+              <tr>
+                <td>加入對照組</td>
+                <td>設計更麻煩</td>
+                <td>成本更高，但能切開自然回歸與真介入。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼人總想替自然回落編一個原因</h2>
+          <p class="section-lede">極端事件很容易啟動因果直覺。人不喜歡承認有些回落只是噪音重排，因此會急著尋找英雄或犯人。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>極端值會喚起故事本能</strong>
+            <p>只要結果很差或很好，團隊就會自然開始尋找可敘述的原因與補救者。</p>
+          </div>
+          <div class="example">
+            <strong>介入後更容易誤認關聯</strong>
+            <p>因為管理動作常發生在極端之後，所以接下來的回落很容易被自動歸功給那個動作。</p>
+          </div>
+        </div>
+        <p class="micro-note">重點在於提醒你，強烈的因果感常出現在最需要防守統計錯覺的時候。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把波動與噪音放回績效與試驗解讀</h2>
+          <p class="section-lede">在 A/B 測試、品質追蹤、績效管理與故障復盤裡，回歸平均數都會改寫你對改進措施的解讀。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>品質異常追蹤</strong>
+            <p>挑最差批次加嚴檢查後，下一批自然回升並不自動代表檢查本身有效。</p>
+          </div>
+          <div class="example">
+            <strong>個人績效管理</strong>
+            <p>對最差一週的人重罵，隔週成績好轉，不能直接推出責罵是正確管理工具。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>看到極端表現回到中間時，先把『自然回歸』列入假設集合。</li>
+          <li>若想驗證措施效果，優先設計對照與重複觀測，而不是只看一次前後差。 </li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>回歸平均不是什麼都不用解釋</h2>
+          <p class="section-lede">這個概念常被誤用成『所有改善都是假的』，那也是另一種偷懶。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以前後比較都不能信</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。前後比較有用，只是必須搭配對照與樣本設計來判斷。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只有統計研究才需要在意</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>任何在極端事件後做處置並評估成效的管理場景，都應該在意它。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>評估成效前，先問波動占了多少</h2>
+          <p class="section-lede">若你剛好在一個極端事件之後做了介入，這兩個問題能幫你避免過早下結論。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>這批樣本為何被選中</strong>
+            <p>它們是否因為特別極端才被注意？若是，後續回中間本來就更可能發生。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>沒有介入的話會怎樣</strong>
+            <p>若缺乏對照與基線，你如何知道現在的變化不是單純回歸平均數？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可看 regression fallacy、control group 與 measurement noise；也可以把這頁帶回試驗設計與績效 review。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">本頁的概念主軸來自 Galton 之後的統計解釋；管理與文中的工程例子則沿著這些框架展開。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Regression toward the mean 條目整理了極端值自然回落的標準說明。</p>
+            <a href="https://en.wikipedia.org/wiki/Regression_toward_the_mean" target="_blank" rel="noreferrer">Regression toward the mean</a>
+          </article>
+          <article class="source-card">
+            <strong>歷史背景</strong>
+            <p>Francis Galton 的條目補上這個概念如何從遺傳與身高研究中被提出。</p>
+            <a href="https://en.wikipedia.org/wiki/Francis_Galton" target="_blank" rel="noreferrer">Francis Galton</a>
+          </article>
+          <article class="source-card">
+            <strong>常見誤推</strong>
+            <p>Regression fallacy 指向最常見的錯誤：把自然回落直接解釋成外在處置效果。</p>
+            <a href="https://en.wikipedia.org/wiki/Regression_fallacy" target="_blank" rel="noreferrer">Regression fallacy</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>若往後續實作走，下一步很適合補對照組、AB test 與 noise-aware evaluation 的頁面。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

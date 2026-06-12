@@ -33,6 +33,8 @@ Every topic page should keep this reading path:
 - Let `Core Tension` summarize the unresolved conflict after Orientation sets it up.
 - Prefer specific situations over abstract nouns.
 - Keep repeated cards parallel in function, not identical in phrasing.
+- Keep only the page anatomy shared. The visible copy should not converge on one house formula for section titles, section ledes, micro-notes, source disclosures, or "next step" lines.
+- Treat stock stems as template leakage. Avoid recurring phrasing such as "先抓住這題真正的壓力點", "把它帶回現實場景", "把它變成你的判斷工具", "這裡的心理連結是教學性整理：", or "接著可以順讀...".
 - Use English technical terms where they are the real term of art, but explain them in Traditional Chinese.
 - Keep page copy original. Do not paste long source text.
 
@@ -42,6 +44,7 @@ When creating multiple pages in one request:
 
 - Write each topic from its own pressure point. Do not start from one generic template and swap nouns.
 - Keep only the structural anatomy shared. The examples, verbs, card titles, questions, and source notes must be topic-specific.
+- Keep the section ids stable, but rewrite section headings and section-lede voice for each topic. Matching layout does not justify matching wording.
 - Avoid repeated phrases such as "這頁要幫你看見" across every hero. Vary the sentence shape according to the topic's actual learning goal.
 - Prefer fewer strong pages over many shallow pages. If time or context pressure would force generic prose, reduce scope or pause with a clear status.
 - Review new payloads side by side before rendering. Look for identical long sentences, identical section leads, generic "工程整理" source cards, and applications that could fit any topic.

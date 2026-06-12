@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>地圖不等於疆域 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-map-territory-relation">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / models / reality / judgment</p>
+        <h1>地圖不等於疆域</h1>
+        <p class="topic-subtitle">Map-Territory Relation</p>
+        <p class="thesis">模型、指標、文件與語言都只是現實的表示法；它們有用，卻永遠不該被誤當成本體本身。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁要幫你建立一種很重要的清醒：圖表、架構圖、規格與模型能幫你思考，但一旦你忘了它們只是地圖，就會開始替地圖服務而不是替現實服務。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>認識論 / 模型與現實</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Representation vs. reality</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>表示法保留了什麼、忽略了什麼、使用情境、回到現場的能力</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在依賴模型時保持對現實偏差的敏感度</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>表示</span>
+          <span>偏差</span>
+          <span>現場</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>模型一旦順手，人就會把圖誤認成地</h2>
+          <p class="section-lede">地圖不等於疆域不是反模型，而是提醒你：所有表示法都靠刪除細節換來可用性，因此必然帶著偏差。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>沒有地圖，你很難理解複雜世界；但太相信地圖，你就會開始忽略它沒畫出來的地形、邊界與例外。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先問地圖保留了什麼</strong>
+            <p>每個模型都在放大某些特徵，同時犧牲另一些細節。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再問它漏掉了什麼</strong>
+            <p>真正危險的常不是模型錯，而是使用者忘了它原本就有盲區。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後回到疆域</strong>
+            <p>當情境改變、指標異常或系統失真時，要能重新接回現場驗證。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>把問題縮到最小</h2>
+          <p class="section-lede">這個關係之所以值得反覆讀，是因為現代工作幾乎都在使用地圖：指標、規格、資料表、模擬與架構圖全都是。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>團隊的 dashboard 顯示系統延遲穩定，但使用者仍抱怨卡頓；原來地圖畫的是平均延遲，疆域裡真正痛的是 tail latency 與偶發阻塞。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>地圖越好用，越容易讓人忘記它是刪減版的世界，於是開始把可表示的東西錯當成全部重要的東西。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">建立表示法</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">依賴表示法行動</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">忘記它不是完整現實</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>地圖不等於疆域的核心不是懷疑一切，而是把表示與本體之間的距離持續放在意識裡。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>三個看模型與現實落差的角度</h2>
+          <p class="section-lede">要避免把地圖當疆域，可以從抽象層次、用途邊界與回場驗證三面一起做。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>抽象層次</strong>
+            <p>模型一定會壓平、聚合或命名現實，這些動作本身就會帶來取捨。</p>
+          </article>
+          <article class="lens-card">
+            <strong>用途邊界</strong>
+            <p>一張好地圖通常只對特定任務有效，超出用途就可能開始誤導。</p>
+          </article>
+          <article class="lens-card">
+            <strong>回場驗證</strong>
+            <p>當指標與現場感受衝突時，應優先檢查地圖哪裡失真，而不是先否定現場。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>看法</th>
+                <th>看起來像</th>
+                <th>真正風險</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>把模型當本體</td>
+                <td>管理很俐落</td>
+                <td>重要但沒被表示的現象會被系統性忽略。</td>
+              </tr>
+              <tr>
+                <td>清楚標示用途</td>
+                <td>模型不那麼萬能</td>
+                <td>更誠實，也較能避免誤用。</td>
+              </tr>
+              <tr>
+                <td>定期回到現場</td>
+                <td>流程較慢</td>
+                <td>能及早發現地圖與疆域開始偏離。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼表示法的便利會長出權威感</h2>
+          <p class="section-lede">人偏好可命名、可視覺化、可追蹤的東西，因此特別容易把表示法誤認成現實本身。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>可見的東西比較像真相</strong>
+            <p>圖表、分類與文件給人穩定感，容易讓人忘了它們只是某種視角。</p>
+          </div>
+          <div class="example">
+            <strong>命名會製造實體感</strong>
+            <p>一旦替現象取了名、畫了圖，就很容易把那個表示物當成實體本身。</p>
+          </div>
+        </div>
+        <p class="micro-note">不是要人拒絕抽象，而是提醒表示法的便利會自然放大它的權威感。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把表示與現實的距離帶回監控與建模</h2>
+          <p class="section-lede">在儀表板、架構圖、風險矩陣、模擬器與需求文件裡，地圖與疆域的落差都會直接影響判斷品質。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>監控指標</strong>
+            <p>儀表板顯示健康，不代表使用者體驗健康；地圖畫的指標可能沒有畫到最痛的地方。</p>
+          </div>
+          <div class="example">
+            <strong>設計文件與實際系統</strong>
+            <p>架構圖能幫助協調，但實際 runtime 行為常會因負載、錯誤與補丁而偏離圖面。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>每次依賴模型做重大決策時，先問一句：這張地圖沒畫什麼？</li>
+          <li>當現場回饋與模型衝突，不要急著消音現場，先檢查表示法的盲區。 </li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>哪些說法把「地圖不等於疆域」講扁了</h2>
+          <p class="section-lede">這個概念常被誤解成反數據或反模型，其實它要的是更成熟地使用表示法。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以模型都不可靠</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。模型非常有用，只是它們必須被放回用途與假設脈絡裡理解。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只相信現場感受就好</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>也不是。現場與模型都可能偏，需要靠反覆對照來修正兩邊。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>怎麼檢查自己在看圖還是在看地</h2>
+          <p class="section-lede">當你準備用某張圖或某套指標做判斷時，下面兩個問題很值得先問。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>這張地圖為了什麼任務而畫</strong>
+            <p>它是否被拿去處理原本沒設計要處理的問題，因此開始誤導你？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果地圖與現場衝突</strong>
+            <p>你會優先否定哪一邊，還是先去找兩者偏離的具體位置？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可看 model risk、Goodhart's Law 與 general semantics；也可以把這頁帶回監控與建模討論。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁主要根據 Korzybski 的 general semantics 與後續對表示與現實關係的整理；文中的工程例子則沿著這個框架做的教學轉譯。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Map–territory relation 條目整理了『地圖不是疆域』這個核心命題與常見延伸。</p>
+            <a href="https://en.wikipedia.org/wiki/Map%E2%80%93territory_relation" target="_blank" rel="noreferrer">Map–territory relation</a>
+          </article>
+          <article class="source-card">
+            <strong>提出者</strong>
+            <p>Alfred Korzybski 的條目補上這個想法在 general semantics 裡的更大脈絡。</p>
+            <a href="https://en.wikipedia.org/wiki/Alfred_Korzybski" target="_blank" rel="noreferrer">Alfred Korzybski</a>
+          </article>
+          <article class="source-card">
+            <strong>背景框架</strong>
+            <p>General semantics 可幫助理解表示法如何塑造人對世界的理解與誤判。</p>
+            <a href="https://en.wikipedia.org/wiki/General_semantics" target="_blank" rel="noreferrer">General semantics</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>若你想把這頁接到工程決策，下一步很適合補 model risk、telemetry design 與 metric review 的頁面。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

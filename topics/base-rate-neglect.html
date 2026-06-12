@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>基準率忽略 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-base-rate-neglect">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / probability / bias / evidence</p>
+        <h1>基準率忽略</h1>
+        <p class="topic-subtitle">Base Rate Neglect</p>
+        <p class="thesis">當個案敘事很鮮明時，人會把整體分布忘掉，讓判斷看起來像在讀證據，其實是在追故事。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁要幫你建立一個習慣：每當某個案例看起來非常像答案時，先退一步問它在母體裡到底多常見。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>認知偏誤 / 機率判斷</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Prior probability vs. vivid evidence</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>先驗分布、條件證據、樣本母體、更新規則</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能把直覺判斷拆成 prior 與 case evidence</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>先驗</span>
+          <span>個案</span>
+          <span>更新</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>當鮮明線索壓過母體分布</h2>
+          <p class="section-lede">基準率忽略不是不會算數，而是大腦太容易被具體故事吸走，導致分布資訊在關鍵時刻被邊緣化。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>個案細節讓你覺得自己抓到了真相，但沒有 base rate 的故事，只是在沒有底圖的情況下放大局部線索。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先問母體</strong>
+            <p>在討論個案前，先說清楚事件在整體母體中的稀有程度。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再看證據力度</strong>
+            <p>不是每一條線索都足以推翻先驗分布，很多線索只是讓故事更像。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後才更新</strong>
+            <p>判斷應該是 prior 被 evidence 修正，而不是被單一案例直接取代。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>把問題縮到最小</h2>
+          <p class="section-lede">這個偏誤最常出現在你覺得自己很重視證據的時候，因為個案線索往往比抽象比率更有存在感。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>某人看到一個看起來很像資安入侵的異常封包，於是立刻判斷系統已被攻破，卻沒先問該型態在正常流量裡本來就有多常見。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>只要案例描述夠具體，人的直覺就會覺得它比冷冰冰的母體比例更可靠，哪怕兩者其實應該一起看。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">個案細節很鮮明</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">整體分布被忘掉</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">低機率事件被誤判成高機率</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>基準率忽略最危險的地方，不是算錯，而是把代表性的感覺誤當成真正的機率更新。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>三個拆解這個偏誤的角度</h2>
+          <p class="section-lede">如果你想避免被個案帶著走，可以把判斷拆成三層：母體、證據、更新幅度。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>母體分布</strong>
+            <p>先問事件本來有多常見。罕見事件需要更強的證據才值得大幅改判。</p>
+          </article>
+          <article class="lens-card">
+            <strong>證據品質</strong>
+            <p>線索到底是真正區分度高，還是只是語意上看起來很像答案。</p>
+          </article>
+          <article class="lens-card">
+            <strong>更新幅度</strong>
+            <p>好的判斷不是全有全無，而是根據證據強弱逐步調整信心。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>看法</th>
+                <th>看起來像</th>
+                <th>真正風險</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>只看個案像不像</td>
+                <td>直覺很有把握</td>
+                <td>稀有但吸睛的解釋被過度高估。</td>
+              </tr>
+              <tr>
+                <td>先看基準率</td>
+                <td>判斷沒那麼戲劇化</td>
+                <td>若證據真的很強，仍要允許大幅更新。</td>
+              </tr>
+              <tr>
+                <td>把兩者一起算</td>
+                <td>思路比較慢</td>
+                <td>需要紀律，但能避免把故事錯當分布。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼個案故事總比基準率更有說服力</h2>
+          <p class="section-lede">人比較容易記住臉、事件與情節，不容易記住抽象的分母，所以 base rate 常在心理上先輸一半。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>故事比比例更抓人</strong>
+            <p>一個具體案例會讓人感到自己正在接觸真相，分布資料則常被誤認成抽象背景噪音。</p>
+          </div>
+          <div class="example">
+            <strong>代表性會冒充機率</strong>
+            <p>只要某個案例很像你心中的典型，大腦就會把像不像直接轉譯成多不多。</p>
+          </div>
+        </div>
+        <p class="micro-note">重點不是要求每次都手算 Bayes，而是提醒你不要讓 vivid cue 直接霸占判斷。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把先驗機率放回告警與診斷</h2>
+          <p class="section-lede">在工程與產品現場，這個偏誤常出現在 debug、告警解讀、異常分流與風險評估。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>異常告警判讀</strong>
+            <p>某個指標長得像攻擊、不代表最可能是攻擊；若誤報本來很多，就不能直接把單次命中當定案。</p>
+          </div>
+          <div class="example">
+            <strong>Field issue 分流</strong>
+            <p>看到兩台機器同時出現同一症狀，直覺會想成 systemic bug，但也要先看該症狀在正常使用裡本來就多不多。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>遇到強烈個案時，先補一句：這件事在母體裡有多常見？</li>
+          <li>把判斷寫成「先驗 + 證據 + 更新」，比直接喊結論更不容易失真。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>別把它縮成一句「學 Bayes 就好」</h2>
+          <p class="section-lede">很多人知道要看證據，卻忘了沒有 base rate 的證據其實缺了一半脈絡。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以只要看基準率</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。基準率提供底圖，但強證據仍然能大幅修正判斷。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只有統計人才會遇到</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>任何需要分辨常見噪音與罕見真因的工作，都在跟這個偏誤打交道。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>用兩個提問把分布請回桌上</h2>
+          <p class="section-lede">下面兩個問題，適合在看到非常像答案的案例時先拿來踩煞車。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果這類事件其實很罕見</strong>
+            <p>你現在手上的證據，真的強到足以推翻低基準率，還是只是敘事上很有代表性？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果把分母補回來</strong>
+            <p>你是否還會做同樣判斷，還是信心其實應該比直覺低很多？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可看 Bayes、representativeness heuristic、false positive paradox；也可以把這一頁帶回告警系統與診斷流程設計。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">核心概念來自認知偏誤與機率更新的討論；文中的工程例子則沿著這些框架做的教學性轉譯。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Base rate fallacy 條目整理了基準率忽略的標準定義與常見例子。</p>
+            <a href="https://en.wikipedia.org/wiki/Base_rate_fallacy" target="_blank" rel="noreferrer">Base rate fallacy</a>
+          </article>
+          <article class="source-card">
+            <strong>更新框架</strong>
+            <p>Bayes' theorem 提供了把先驗分布與新證據結合的最基本形式。</p>
+            <a href="https://en.wikipedia.org/wiki/Bayes%27_theorem" target="_blank" rel="noreferrer">Bayes' theorem</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰偏誤</strong>
+            <p>Representativeness heuristic 說明人為何容易把像不像當成機率高低。</p>
+            <a href="https://en.wikipedia.org/wiki/Representativeness_heuristic" target="_blank" rel="noreferrer">Representativeness heuristic</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>如果這個主題讀起來有用，下一步很適合補一頁談 false positive 與 decision threshold，讓 debug 與檢測流程更完整。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

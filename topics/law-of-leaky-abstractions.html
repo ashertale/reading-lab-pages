@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>抽象洩漏定律 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-law-of-leaky-abstractions">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / abstractions / software / debugging</p>
+        <h1>抽象洩漏定律</h1>
+        <p class="topic-subtitle">Law of Leaky Abstractions</p>
+        <p class="thesis">再好的抽象也無法永遠把底層複雜性完全封住；當情境一變，底層細節就會從裂縫裡滲回來。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁要幫你建立一種工程清醒：高階工具的價值很大，但一旦它開始漏，你就得知道漏的是哪一層、為什麼漏、怎麼回到底層處理。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>工程原則 / 抽象設計</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Abstractions hiding complexity imperfectly</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>抽象遮蔽了什麼、在哪些情況會漏、使用者是否理解底層、退場手段是什麼</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在享受高階抽象時，仍保留對底層行為的基本敏感度</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>抽象</span>
+          <span>裂縫</span>
+          <span>底層</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>抽象替你省力，也替你藏起麻煩</h2>
+          <p class="section-lede">抽象洩漏定律不是反抽象，而是反對把抽象當成永不失效的魔法罩。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>抽象讓開發快很多，但也會讓人暫時忘記底層還在運作；一旦效能、錯誤或邊界條件出現，底層現實就會重新要求你付款。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先享受抽象</strong>
+            <p>抽象存在就是為了讓多數工作不必從底層開始思考。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再預期它會漏</strong>
+            <p>漏不是意外，而是所有非平凡抽象的常態，只差在何時發生。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後保留降階能力</strong>
+            <p>真正可靠的工程實踐，是知道何時該回到底層觀察與修正。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>把問題縮到最小</h2>
+          <p class="section-lede">這條定律之所以重要，是因為很多高階工具失敗時，不是完全壞掉，而是開始局部漏出底層限制。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>團隊用高階資料庫 ORM 很順利，但某個查詢在量大後突然極慢；這時你不能只相信抽象，而得理解它實際產生了什麼 query plan。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>抽象平常越方便，出問題時越容易讓人措手不及，因為你以為自己不需要知道那些底層知識。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">抽象隱藏複雜性</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">邊界條件出現</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">底層行為重新浮上桌面</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>抽象真正省下的是日常操作成本，不是終身免學底層的權利。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>三個看抽象是否正在洩漏的角度</h2>
+          <p class="section-lede">當系統怪異、效能暴跌或行為違反直覺時，可以從模型假設、底層機制與 fallback 能力三面檢查。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>模型假設</strong>
+            <p>抽象總是預設某些世界是正常的，當環境偏離假設，漏就開始出現。</p>
+          </article>
+          <article class="lens-card">
+            <strong>底層機制</strong>
+            <p>網路、記憶體、排程、檔案系統與硬體時序，常是最終漏回來的那一層。</p>
+          </article>
+          <article class="lens-card">
+            <strong>回到底層的能力</strong>
+            <p>若團隊完全不懂抽象底下在做什麼，一旦漏出來就只能被動碰運氣。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>看法</th>
+                <th>看起來像</th>
+                <th>真正風險</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>只會高階 API</td>
+                <td>開發很快</td>
+                <td>一旦出現漏點，定位與修復都會卡住。</td>
+              </tr>
+              <tr>
+                <td>理解常見漏點</td>
+                <td>學習成本較高</td>
+                <td>前期較慢，但系統更可 debug。</td>
+              </tr>
+              <tr>
+                <td>保留觀測與 fallback</td>
+                <td>設計略顯保守</td>
+                <td>能在抽象失效時快速降階處理。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼便利層越好用，越容易讓人忘記底層</h2>
+          <p class="section-lede">人很容易把『平常不用碰底層』誤解成『永遠不需要懂底層』，這就是抽象洩漏時最痛的地方。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>便利會製造遺忘</strong>
+            <p>工具越順手，越容易讓人低估自己對底層模型的依賴。</p>
+          </div>
+          <div class="example">
+            <strong>漏點常被當成偶發怪事</strong>
+            <p>其實很多『怪 bug』不是偶發，而是抽象碰到它沒辦法完整屏蔽的現實。</p>
+          </div>
+        </div>
+        <p class="micro-note">不是要回到原始手工，而是提醒你對高階便利保持一點結構性懷疑。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>什麼時候該拆回抽象底下看一眼</h2>
+          <p class="section-lede">從 HAL、RTOS、網路協定、雲端服務到 ORM，幾乎所有工程抽象都可能在特定條件下漏回底層。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>Firmware HAL</strong>
+            <p>硬體抽象層能統一 API，但真正的 interrupt latency、DMA 行為與電源時序仍會在特定平台上漏出來。</p>
+          </div>
+          <div class="example">
+            <strong>雲端與網路服務</strong>
+            <p>把遠端資源當成本地資源很方便，但延遲、斷線與重試行為終究會回來要求你面對。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>設計抽象時，主動列出最可能漏出的邊界條件，比假設它永遠完整更實際。</li>
+          <li>使用高階工具時，至少保留一條能回到底層觀測與驗證的路徑。 </li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>別把抽象洩漏讀成反抽象宣言</h2>
+          <p class="section-lede">這條定律很容易被誤解成『抽象沒用』，那會錯過它真正提醒的設計態度。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以不要用高階抽象</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。抽象仍然極有價值，只是要預期它在邊界情況下會漏。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要工具夠成熟就不會漏</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>成熟工具可以減少漏點，但無法消除所有與現實世界接觸的裂縫。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>遇到漏水時，先問哪兩個層次</h2>
+          <p class="section-lede">當某個高階工具開始出現反直覺行為時，下面兩個問題很有幫助。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>這個抽象假設了什麼世界</strong>
+            <p>現在的環境是否已經偏離它預設的前提，例如延遲、容量、時序或平台一致性？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果抽象暫時失效</strong>
+            <p>你有沒有觀測與 fallback 手段，能回到底層確認真正發生了什麼？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可看 Joel Spolsky 的原文、observability 與 abstraction in computer science；也可以把這頁帶回架構 review。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁主要根據 Joel Spolsky 對抽象限制的經典說明；文中的硬體與軟體案例則沿著同一框架展開。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>原始表述</strong>
+            <p>Joel Spolsky 的文章用大量例子說明：非平凡抽象都會在某些時刻漏出底層現實。</p>
+            <a href="https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/" target="_blank" rel="noreferrer">The Law of Leaky Abstractions</a>
+          </article>
+          <article class="source-card">
+            <strong>概念條目</strong>
+            <p>Leaky abstraction 條目整理了這個概念在軟體設計裡的常見理解與例子。</p>
+            <a href="https://en.wikipedia.org/wiki/Leaky_abstraction" target="_blank" rel="noreferrer">Leaky abstraction</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰背景</strong>
+            <p>Abstraction in computer science 補上抽象為何必要，以及它原本試圖隱藏什麼。</p>
+            <a href="https://en.wikipedia.org/wiki/Abstraction_(computer_science)" target="_blank" rel="noreferrer">Abstraction in computer science</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>若往後續實作走，下一步很適合補 observability、fallback design 與 failure mode review。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

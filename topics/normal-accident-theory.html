@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>正常事故理論 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-normal-accident-theory">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / safety / complexity / incidents</p>
+        <h1>正常事故理論</h1>
+        <p class="topic-subtitle">Normal Accident Theory</p>
+        <p class="thesis">在高度複雜且緊密耦合的系統裡，有些事故不是因為誰特別粗心，而是系統本身就讓多重小故障容易連成無法預先想完的連鎖。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁要幫你重新看待某些事故：不是每個 disaster 都能被還原成一個清楚的人為失誤，有些災難是結構把小問題串成大事故。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>安全理論 / 複雜系統</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Complexity plus tight coupling</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>互動複雜度、耦合緊密度、故障可隔離性、緩衝是否存在</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能把事故分析從找單一犯錯者，拉回系統結構與耦合機制</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>複雜</span>
+          <span>耦合</span>
+          <span>連鎖</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>有些事故，不是把人抓出來就能解釋完</h2>
+          <p class="section-lede">正常事故理論最刺痛人的地方，在於它要求你接受某些高風險系統的事故不是例外，而是系統屬性之一。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>當系統又複雜又緊耦合時，局部故障很難被隔離，多個平凡失誤就可能在你還來不及理解前已經串成災難。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先看複雜度</strong>
+            <p>互動路徑越多、越難被完整理解，意外組合就越容易出現。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再看耦合度</strong>
+            <p>步驟間若缺乏緩衝與可中斷性，小錯誤就更容易被直接放大。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後談可替代性</strong>
+            <p>若系統難以暫停、降級或局部隔離，事故就更接近不可避免的連鎖結果。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>把問題縮到最小</h2>
+          <p class="section-lede">這個理論的重要處，不在於悲觀，而在於它迫使人把安全設計看成系統架構問題，而非單點責任教育。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>一個流程中每一步單看都可接受，但時間壓力、介面誤解、感測器延遲與回復路徑耦合後，事故突然跨層發生。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>真正危險的不只是單一故障，而是多個看似平凡的故障在高度耦合環境裡相互放大。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">多個小故障同時存在</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">系統缺乏緩衝與隔離</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">連鎖反應迅速放大</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>正常事故理論最有價值的提醒是：如果你只在事後找一個最明顯的人或元件背鍋，就會錯過下次仍會重演的結構條件。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>三個看事故結構的角度</h2>
+          <p class="section-lede">判斷一個系統是否容易產生『正常事故』，可以從互動、耦合與降級能力三面一起看。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>互動複雜性</strong>
+            <p>子系統之間的相依與回饋越難被直觀掌握，意外組合就越多。</p>
+          </article>
+          <article class="lens-card">
+            <strong>緊密耦合</strong>
+            <p>若步驟不能等待、不能緩衝、不能局部停下，小延遲就可能快速外溢。</p>
+          </article>
+          <article class="lens-card">
+            <strong>降級與隔離</strong>
+            <p>是否存在安全模式、手動接管、局部熔斷或其它讓故障不連鎖的選項。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>看法</th>
+                <th>看起來像</th>
+                <th>真正風險</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>高複雜高耦合</td>
+                <td>平常效率很高</td>
+                <td>一旦出錯，事故會跨層級快速放大。</td>
+              </tr>
+              <tr>
+                <td>增加緩衝與隔離</td>
+                <td>流程不那麼緊</td>
+                <td>效率可能降低，但能顯著減少連鎖災難。</td>
+              </tr>
+              <tr>
+                <td>只強調人員注意</td>
+                <td>教育做很多</td>
+                <td>若結構不變，事故型態依然會回來。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼人總想把複合事故縮成單一肇因</h2>
+          <p class="section-lede">人偏好在事後找可責備的單點，因為那比承認系統本身容易連鎖更容易消化。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>單一原因敘事更舒服</strong>
+            <p>找一個出錯的人或壞掉的零件，比面對複雜耦合的結構問題更符合直覺。</p>
+          </div>
+          <div class="example">
+            <strong>平常順利會掩蓋脆弱性</strong>
+            <p>系統長期沒出大事時，人會低估它其實只是暫時沒有踩到那組危險交互作用。</p>
+          </div>
+        </div>
+        <p class="micro-note">重點是提醒事故檢討不能只停在最近的明顯原因。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把複雜耦合帶回安全設計 review</h2>
+          <p class="section-lede">在安全關鍵 firmware、供電序列、CI/CD 自動化鏈與大型服務依賴圖裡，正常事故理論都很有解釋力。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>安全關鍵控制鏈</strong>
+            <p>感測器、控制器、通訊與執行器一旦緊密耦合，局部誤差就可能快速穿透整條鏈。</p>
+          </div>
+          <div class="example">
+            <strong>高度自動化發布流程</strong>
+            <p>如果 build、deploy、feature flag 與回滾高度相依，某個小判斷失誤就可能一路放大到全面事故。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>做事故檢討時，至少同時問兩題：哪裡互動太複雜？哪裡耦合太緊？</li>
+          <li>若系統不能輕易暫停、隔離或降級，就要預設小故障有機會長成連鎖事故。 </li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>別把正常事故理解成「事故很正常」</h2>
+          <p class="section-lede">這個理論很容易被誤讀成宿命論，但它真正要求的是更有結構感的安全設計。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以事故根本無法改善</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。重點是改善方向要放在結構與耦合，而不只是個人警覺。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要多加冗餘就好</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>冗餘若增加複雜性而沒有良好隔離，反而可能引入新的事故路徑。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>事故後，除了找原因還該問什麼</h2>
+          <p class="section-lede">當你檢討一場複雜事故時，下面兩個問題很值得優先放上白板。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>哪些小故障原本被視為可忽略</strong>
+            <p>它們是如何在緊密耦合下互相接上，最後形成超過單點想像的後果？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>系統哪裡沒有緩衝</strong>
+            <p>若當時能暫停、隔離、降級或手動接管，事故是否就不會一路放大？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可看 system accident、Swiss cheese model 與 high reliability organizations；也可以把這頁帶回安全設計 review。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁先以 Charles Perrow 對高風險技術系統的分析為主線；文中的工程映射則沿著複雜性與耦合框架展開。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Normal Accidents 條目整理了 Perrow 的核心主張：複雜且緊耦合的系統容易產生不可避免的事故。</p>
+            <a href="https://en.wikipedia.org/wiki/Normal_Accidents" target="_blank" rel="noreferrer">Normal Accidents</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰概念</strong>
+            <p>System accident 補上『多重小故障意外交互』這個更聚焦的說法。</p>
+            <a href="https://en.wikipedia.org/wiki/System_accident" target="_blank" rel="noreferrer">System accident</a>
+          </article>
+          <article class="source-card">
+            <strong>作者背景</strong>
+            <p>Charles Perrow 的條目可回看這個理論在組織社會學與技術風險中的更大位置。</p>
+            <a href="https://en.wikipedia.org/wiki/Charles_Perrow" target="_blank" rel="noreferrer">Charles Perrow</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>若往後續實作走，下一步很適合補 fault tree、safe mode 與 graceful degradation 的頁面。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

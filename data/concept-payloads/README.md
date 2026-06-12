@@ -43,6 +43,7 @@ data/concept-payloads/<slug>.json
 - render 後的 HTML 放在 `topics/`，不要放在 repo root。
 - `indexEntry.href` 一律使用 `./topics/<slug>.html`。
 - `target.slug`、`indexEntry.id`、`target.outputPath` 與 `indexEntry.href` 必須指向同一個 slug。
+- 外框結構可以固定，但 `h2`、`section-lede`、`micro-note`、`sources` 說明、`Reference` 收尾都必須是 topic-specific，不要跨頁複用 `先抓住這題真正的壓力點`、`把它帶回現實場景`、`接著可以順讀...` 這類句型。
 - 若來源或應用段落是教學性 synthesis，要在 `sources` 裡明說。
 
 常用指令：

@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>路燈效應 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-streetlight-effect">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / search / measurement / debugging</p>
+        <h1>路燈效應</h1>
+        <p class="topic-subtitle">Streetlight Effect</p>
+        <p class="thesis">人會傾向在最好找、最好量、最好觀察的地方努力，即使真正的問題根本不在那裡。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁要幫你練一個判斷：當分析工作進展很順時，先懷疑自己是不是只在有光的地方搜尋，而不是在問題真正發生的地方搜尋。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>方法偏誤 / 問題搜尋</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Ease of search vs. location of truth</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>問題真正發生在哪、資料從哪裡來、量測成本、觀測盲區</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能分辨自己是在找真因，還是在找最容易被找到的東西</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>亮處</span>
+          <span>盲區</span>
+          <span>誤解</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>會發光的地方，不一定就是答案所在</h2>
+          <p class="section-lede">路燈效應的危險不在於偷懶，而在於努力方向被量測便利性悄悄接管，讓錯誤看起來像進度。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>你可以非常勤奮地分析資料、調整儀表板、寫更多腳本，但如果搜尋空間從一開始就選錯，勤奮只會更快地遠離答案。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先問問題在哪</strong>
+            <p>不要因為某處容易記錄就假設問題也最可能出現在那裡。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再問光從哪來</strong>
+            <p>量測方便、工具成熟、日誌完整，這些都可能只是路燈，不是真因所在。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後補黑暗區</strong>
+            <p>真正有價值的下一步，常是設法照亮盲區，而不是在亮處再多找一次。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>把問題縮到最小</h2>
+          <p class="section-lede">這個偏誤很常混進專業工作，因為它常偽裝成『先從有資料的地方開始』這種很合理的流程。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>某次系統延遲異常，團隊持續檢查應用層 log 與 dashboard，因為那些資料最好拿；結果真正瓶頸其實在底層 I/O 與網路抖動。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>有光的地方通常代表工具、資料與熟悉度都在那裡，所以人很容易把可觀測性誤當成因果優先順序。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">只在好量的地方找</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">盲區沒有被照亮</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">錯把可見性當成真相</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>路燈效應不是叫你別從容易處下手，而是提醒你不要把『容易找』直接升格成『最值得找』。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>三個檢查搜尋方向的角度</h2>
+          <p class="section-lede">遇到難題時，可以從問題位置、資料生成方式與工具偏好三面看自己的搜尋是否被路燈綁架。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>問題位置</strong>
+            <p>真實故障點可能在你沒 log、沒感測器、沒權限，或跨團隊邊界的地方。</p>
+          </article>
+          <article class="lens-card">
+            <strong>資料生成方式</strong>
+            <p>現在手上的資料反映的是被記錄的世界，不一定是完整發生的世界。</p>
+          </article>
+          <article class="lens-card">
+            <strong>工具舒適區</strong>
+            <p>人會自然偏向自己最熟的觀測面，例如只看 code、只看報表、或只看 UI。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>看法</th>
+                <th>看起來像</th>
+                <th>真正風險</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>只看現成資料</td>
+                <td>分析很快開始</td>
+                <td>真因留在沒有儀表板的地方。</td>
+              </tr>
+              <tr>
+                <td>建立新觀測點</td>
+                <td>前期變慢</td>
+                <td>需要成本，但能把黑暗區變成可驗證空間。</td>
+              </tr>
+              <tr>
+                <td>跨層確認</td>
+                <td>溝通更麻煩</td>
+                <td>多一點摩擦，但能防止局部觀測冒充全貌。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼可見性這件事會偷換成重要性</h2>
+          <p class="section-lede">這個偏誤之所以黏人，是因為它會把舒適感、熟悉度與進度感打包成看似專業的忙碌。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>有資料就像有掌控感</strong>
+            <p>可視化與 log 讓人覺得自己正在接近答案，即使那些資料只照亮了局部。</p>
+          </div>
+          <div class="example">
+            <strong>陌生區域會被自然迴避</strong>
+            <p>跨 layer、跨裝置或跨團隊的調查成本高，因此人會不自覺把搜尋停在熟悉地帶。</p>
+          </div>
+        </div>
+        <p class="micro-note">偏差常不是因為懶，而是因為可觀測性會偽裝成合理的工作順序。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把搜尋成本偏差帶回 debug 與分析</h2>
+          <p class="section-lede">在 debug、研究設計、KPI 制定與測試覆蓋策略裡，路燈效應都很常把有限注意力導到錯地方。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>Firmware debug</strong>
+            <p>如果你只看 MCU log，卻從不量電源、時序或匯流排實際波形，就可能一直在亮處打轉。</p>
+          </div>
+          <div class="example">
+            <strong>產品指標設計</strong>
+            <p>若團隊只追蹤容易上報的互動指標，卻沒有能力看到真正重要但難量的失敗體驗，KPI 就會偏向路燈。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>每次分析卡住時，先列一張『我們看不到什麼』清單，比再看一次 dashboard 更有價值。</li>
+          <li>若某個問題總是在熟悉資料裡找不到答案，下一步通常是補觀測，而不是加碼同一種分析。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>路燈效應不是叫你別用方便資料</h2>
+          <p class="section-lede">知道有路燈效應後，也不要把所有現成資料都當成可疑；問題在於把它們當成唯一入口。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以現成資料沒價值</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。它們常是起點，但不應該自動升格成完整世界。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要多收資料就能解決</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>若收集方向仍受路燈支配，你只是在更大規模地記錄同一塊亮區。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>查問題時，先問哪裡只是比較好找</h2>
+          <p class="section-lede">當你覺得分析很努力卻沒進展時，下面兩個問題特別值得先問。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>我們是在找真因，還是在找可量到的因</strong>
+            <p>目前所有證據是否都來自同一個容易觀測的面向，以致真正的故障空間根本沒有被碰到？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果真問題在黑暗區</strong>
+            <p>你需要新增什麼感測、權限、實驗或跨團隊資訊，才能讓盲區真正可檢查？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可看 measurement bias、selection bias 與 observability；也可以把這頁帶回 incident review 與 debug SOP。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁先以觀測偏誤與方法論隱喻為主線；工程應用段落則沿著這些框架展開。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Streetlight effect 條目整理了這個隱喻如何被用來描述只在容易觀察之處搜尋的偏誤。</p>
+            <a href="https://en.wikipedia.org/wiki/Streetlight_effect" target="_blank" rel="noreferrer">Streetlight effect</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰偏差</strong>
+            <p>Selection bias 能補上更一般的提醒：資料如何因取得方式而系統性歪斜。</p>
+            <a href="https://en.wikipedia.org/wiki/Selection_bias" target="_blank" rel="noreferrer">Selection bias</a>
+          </article>
+          <article class="source-card">
+            <strong>工程對照</strong>
+            <p>Observability 的實務討論有助於把『照亮盲區』轉成可操作的系統設計問題。</p>
+            <a href="https://en.wikipedia.org/wiki/Observability" target="_blank" rel="noreferrer">Observability</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>如果要把這一頁接到工程流程，下一步很適合補一頁談 observability 與 instrumentation design。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

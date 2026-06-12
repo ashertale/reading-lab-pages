@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>規劃謬誤 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-planning-fallacy">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / planning / forecasting / execution</p>
+        <h1>規劃謬誤</h1>
+        <p class="topic-subtitle">Planning Fallacy</p>
+        <p class="thesis">人即使知道過去常拖延，仍會在下一次估時時相信這次例外地會順利，於是時間、成本與風險被系統性低估。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁要幫你辨認一個很熟悉的幻覺：明明知道上次也拖了，這次排期時卻還是覺得自己終於算準了。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>決策偏誤 / 估時</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Inside view vs. actual completion time</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>inside view、參考類別、隱性依賴、緩衝配置</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在估時時主動補上外部參考與風險緩衝</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>想像</span>
+          <span>對照</span>
+          <span>落差</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>計畫之所以樂觀，是因為腦中只排了順路版本</h2>
+          <p class="section-lede">規劃謬誤抓到的是一種很頑固的樂觀：人會把未來計畫看成一條乾淨路徑，而不是一個會被中斷、返工與依賴纏住的系統。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>你越熟悉任務內容，越容易陷入 inside view，只看這次要做的步驟，卻忽略過去類似任務實際怎麼收場。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先看參考類別</strong>
+            <p>估時前先找相似任務的實際完工分布，而不是只看理想步驟表。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再列隱性依賴</strong>
+            <p>跨團隊等待、硬體回板、bug 返修與 review 往往比核心實作更拖時間。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後留風險緩衝</strong>
+            <p>沒有緩衝的排程通常不是高效率，而是把不確定性偷偷轉成延誤。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>把問題縮到最小</h2>
+          <p class="section-lede">這個偏誤可怕的地方在於，它常發生在很有經驗的人身上，因為經驗會讓人更相信自己對流程的內部模擬。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>團隊預估新板 bring-up 兩週完成，因為主流程很清楚；但實際上驅動整合、量測治具、供應商回覆與例外修補把時程拉到五週。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>計畫中的步驟會被想得比現實更連續，沒有發生的阻礙則幾乎不會自動進入你的估時模型。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">腦中模擬順利路徑</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">忽略類似任務分布</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">時程與風險被低估</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>規劃謬誤不是沒有經驗，而是經驗沒有被轉成外部參考資料，仍然只存在於『這次應該會順』的感覺裡。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>三個修正估時的方法</h2>
+          <p class="section-lede">把 inside view 拉回現實，通常要靠參考類別、阻塞清單與機率式預估，而不是靠更努力想像一次。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>參考類別</strong>
+            <p>找相似任務過去實際花多久，而不是只問這次理想流程要做哪些事。</p>
+          </article>
+          <article class="lens-card">
+            <strong>阻塞清單</strong>
+            <p>把等待、返工、同步、依賴與外部回應列成估時一等公民。</p>
+          </article>
+          <article class="lens-card">
+            <strong>機率估時</strong>
+            <p>不要只給單一日期，改給範圍與信心，才比較接近真實不確定性。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>看法</th>
+                <th>看起來像</th>
+                <th>真正風險</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>只看實作步驟</td>
+                <td>排程很漂亮</td>
+                <td>等待與返工在表上消失，最後都變延誤。</td>
+              </tr>
+              <tr>
+                <td>看相似任務分布</td>
+                <td>估時變保守</td>
+                <td>較不討喜，但能防止一再重演同樣錯誤。</td>
+              </tr>
+              <tr>
+                <td>給機率區間</td>
+                <td>承諾不夠俐落</td>
+                <td>對管理比較難受，但對真實風險更誠實。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼 inside view 總讓時程看起來太乾淨</h2>
+          <p class="section-lede">人會自然偏愛自己可以控制的那一段流程，因此把其他干擾視為例外，而不是計畫的一部分。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>想像中的未來會被美化</strong>
+            <p>當下的自己容易在腦中跑一條乾淨的順利路徑，低估雜訊、等待與反覆修補。</p>
+          </div>
+          <div class="example">
+            <strong>過去失敗很少真正入模</strong>
+            <p>我們記得上次拖延，卻不會在這次估時時把那個分布嚴格算進來。</p>
+          </div>
+        </div>
+        <p class="micro-note">重點在於把『知道過去會拖』轉成可操作的估時流程，而不是停留在自我提醒。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把參考類別帶回估時與整合排程</h2>
+          <p class="section-lede">Firmware、硬體整合、跨團隊專案與 migration 工作都特別容易出現這個偏誤，因為等待與返工常比主流程更重。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>Bring-up 與整合排程</strong>
+            <p>板子、治具、驅動與量測彼此卡住時，inside view 會嚴重低估交互依賴成本。</p>
+          </div>
+          <div class="example">
+            <strong>版本發布</strong>
+            <p>最後一哩常被認為只是打包與驗證，實際上容易被回歸問題、風險評估與協作延遲吃掉。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>估時時先拿過去三個類似任務的實際耗時做底線，比再想一次理想流程更有效。</li>
+          <li>若不能給機率區間，至少明確分出『理想值』『較可能值』『保守值』三種日期。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>別把修正方法簡化成「全部乘二」</h2>
+          <p class="section-lede">修正規劃謬誤，不代表永遠用最悲觀排程；重點是讓樂觀不再沒有成本。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以只要把時間全部乘二</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>有時能救急，但那只是粗暴緩衝，不能取代參考類別與依賴分析。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>有經驗的人就不會犯</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>經驗若沒被結構化成外部分布，一樣可能在每次新計畫裡重新樂觀一次。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>排期前，先補哪兩個外部參照</h2>
+          <p class="section-lede">下面兩個問題，很適合在排期會議裡當成抗偏差裝置。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>哪個相似任務真的這麼快做完過</strong>
+            <p>你現在的排程是根據歷史分布，還是根據一次理想化的腦內模擬？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果發生最常見的阻塞</strong>
+            <p>等待、返工、review、跨部門同步一旦來了，時程是否仍然站得住？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可看 reference class forecasting、outside view 與 Hofstadter's Law；也可以把這頁直接帶回估時模板。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁主要根據 Kahneman 與 Tversky 的估時偏誤研究；文中的工程例子則沿著 reference class 與 outside view 的框架展開。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Planning fallacy 條目整理了低估時間、成本與風險的標準定義與實驗證據。</p>
+            <a href="https://en.wikipedia.org/wiki/Planning_fallacy" target="_blank" rel="noreferrer">Planning fallacy</a>
+          </article>
+          <article class="source-card">
+            <strong>修正方法</strong>
+            <p>Reference class forecasting 提供了把外部實際分布帶回估時的具體路線。</p>
+            <a href="https://en.wikipedia.org/wiki/Reference_class_forecasting" target="_blank" rel="noreferrer">Reference class forecasting</a>
+          </article>
+          <article class="source-card">
+            <strong>管理對照</strong>
+            <p>Delusions of Success 把這種樂觀偏差帶到管理決策與大型專案的語境裡。</p>
+            <a href="https://hbr.org/2003/07/delusions-of-success-how-optimism-undermines-executives-decisions" target="_blank" rel="noreferrer">Delusions of Success</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>若要直接變成團隊工具，下一步很適合把估時模板加入 reference class 與 risk buffer 欄位。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>
