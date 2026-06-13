@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>隊首阻塞 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-head-of-line-blocking">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / Engineering</p>
+        <h1>隊首阻塞</h1>
+        <p class="topic-subtitle">Head-of-Line Blocking</p>
+        <p class="thesis">只要佇列最前面的工作卡住，後面明明能先做的工作也可能被整批一起拖住。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁會把 佇列順序、前端阻塞 這些常藏在規格外的壓力，拉回 網路交換 與 HTTP 請求 的設計檢查裡。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>效能瓶頸 / 排隊耦合</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>The first item stalls everything behind it</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>佇列順序、前端阻塞、資源利用率、耦合</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能用 The first item stalls everything behind it 重新檢查 佇列與傳輸 裡的判斷失真</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>排隊</span>
+          <span>卡住</span>
+          <span>拖累</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>如果後面的工作其實有路可走，為什麼只因為前面那個卡住，整條隊伍都得跟著停</h2>
+          <p class="section-lede">隊首阻塞 的價值，在於它把平常藏在接口、時序或權限邊界外的壓力，提前搬到設計與驗證桌面上。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>只要佇列最前面的工作卡住，後面明明能先做的工作也可能被整批一起拖住。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先圈出 佇列順序 會在哪裡破</strong>
+            <p>佇列順序 常不是抽象風險，而是會穿過具體接口、排程或權限邊界。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再追 前端阻塞 怎麼穿過邊界</strong>
+            <p>前端阻塞 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後查 資源利用率 何時從小事變事故</strong>
+            <p>資源利用率 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>把壓力壓回 佇列順序 最先失守的地方</h2>
+          <p class="section-lede">把問題壓回一個最小接口或一次時序交會，佇列順序 何時變成風險、資源利用率 何時開始放大，就不容易再被模糊帶過。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>單一 FIFO 佇列裡，最前面的封包、請求或工作一旦遇到繁忙目標，後面能處理的項目也得一起等。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>如果後面的工作其實有路可走，為什麼只因為前面那個卡住，整條隊伍都得跟著停</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">局部先對付 佇列順序</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">前端阻塞 穿過接口或時序邊界</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">資源利用率 把小問題放大成現場風險</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>隊首阻塞 的價值，在於它把平常埋在規格外的 佇列順序、前端阻塞 與 資源利用率，提前拉回 design review 能談清楚的位置。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>先把 順序綁死、局部阻塞外溢 與 可做工作被延後 分開看</h2>
+          <p class="section-lede">表面像同一個故障，底下往往是 順序綁死、局部阻塞外溢 和 可做工作被延後 在不同邊界各自出力。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>順序綁死</strong>
+            <p>順序綁死 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 佇列順序 轉成真正的穩定性壓力。</p>
+          </article>
+          <article class="lens-card">
+            <strong>局部阻塞外溢</strong>
+            <p>局部阻塞外溢 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 前端阻塞 轉成真正的穩定性壓力。</p>
+          </article>
+          <article class="lens-card">
+            <strong>可做工作被延後</strong>
+            <p>可做工作被延後 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 資源利用率 轉成真正的穩定性壓力。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>團隊通常在哪一步把 隊首阻塞 當成暫時小事</h2>
+          <p class="section-lede">工程現場最危險的，不是沒人提風險，而是大家太容易把 佇列順序 當成晚點再補也行的小瑕疵。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>先來先做看起來最公平</strong>
+            <p>先來先做看起來最公平 會讓人把『目前沒爆』誤讀成『設計沒問題』，於是風險一路被推往更後面。</p>
+          </article>
+          <article class="example">
+            <strong>排隊秩序被誤當效率</strong>
+            <p>排隊秩序被誤當效率 最危險的地方，在於它常把局部成功包裝成全局安全。</p>
+          </article>
+          <article class="example">
+            <strong>可平行性被忽略</strong>
+            <p>只要 可平行性被忽略 一進場，團隊就容易先相信現況撐得住，而不是先問代價正在往哪裡堆。</p>
+          </article>
+        </div>
+        <p class="micro-note">越早把 佇列順序、前端阻塞 這些心理近路說出來，越不容易在 postmortem 才第一次承認它們存在。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>回到 網路交換、HTTP 請求 與 工作佇列設計</h2>
+          <p class="section-lede">這裡重點不是補幾個抽象案例，而是把 隊首阻塞 直接落到 網路交換、HTTP 請求 這些真的會出事的邊界上。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>網路交換</strong>
+            <p>把 隊首阻塞 帶回 網路交換 時，最該先畫出來的是 佇列順序 穿過接口、時序或權限邊界的那條路。</p>
+          </article>
+          <article class="example">
+            <strong>HTTP 請求</strong>
+            <p>把 隊首阻塞 帶回 HTTP 請求 時，最該先畫出來的是 前端阻塞 穿過接口、時序或權限邊界的那條路。</p>
+          </article>
+          <article class="example">
+            <strong>工作佇列設計</strong>
+            <p>把 隊首阻塞 帶回 工作佇列設計 時，最該先畫出來的是 資源利用率 穿過接口、時序或權限邊界的那條路。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三個常見誤讀</h2>
+          <p class="section-lede">這些誤讀常把 隊首阻塞 降成實作瑣事，結果真正的邊界壓力根本沒被談到。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>隊首阻塞 只是實作細節</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>它常是 佇列順序 最先破掉的邊界，所以不是『之後再補』就沒事。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要再加更多防呆，隊首阻塞 就會消失</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>如果 前端阻塞 的壓力來源沒處理，防呆最後只會變成更昂貴的補丁。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>隊首阻塞 只和大型分散式系統有關</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>很多單機、韌體或流程系統，一樣會以更小規模的 資源利用率 形式重演。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>把 佇列順序、前端阻塞 追到真正會破的邊界</h2>
+          <p class="section-lede">下面兩個問題很適合在 網路交換、HTTP 請求 這類設計或驗證場合直接拿來過一遍。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果第一個異常出現在 網路交換</strong>
+            <p>你最先會去畫哪條邊界，確認 佇列順序 和 前端阻塞 到底在哪一步被放大？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果 HTTP 請求 團隊只回你一句『現在看起來沒事』</strong>
+            <p>你要用什麼觀測或驗證證明：資源利用率 不是只是還沒在現場結帳？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>把 Queueing Theory 接著讀，通常會更看得出 隊首阻塞 不是單點 bug，而是整體設計習慣。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">本頁先用 Head-of-Line Blocking 條目交代故障模式與邊界壓力，再用 Queueing Theory 補回更大的系統背景。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>核心概念</strong>
+            <p>這張卡說明 隊首阻塞 在接口、時序或權限邊界上最常怎麼冒出來。</p>
+            <a href="https://en.wikipedia.org/wiki/Head-of-line_blocking" target="_blank" rel="noreferrer">Head-of-Line Blocking</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰概念</strong>
+            <p>這張卡補回 Queueing Theory 所在的更大可靠性或系統脈絡，避免把 隊首阻塞 只看成局部實作瑕疵。</p>
+            <a href="https://en.wikipedia.org/wiki/Queueing_theory" target="_blank" rel="noreferrer">Queueing Theory</a>
+          </article>
+          <article class="source-card">
+            <strong>教學整理</strong>
+            <p>工程映射與事故語境是本頁的教學整理，目的是把 隊首阻塞 直接落到 網路交換、HTTP 請求 與 工作佇列設計 這些邊界上。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>下次在 網路交換 或 HTTP 請求 做設計決定時，先把 佇列順序 穿過哪個邊界、何時變成 資源利用率 寫進 review。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

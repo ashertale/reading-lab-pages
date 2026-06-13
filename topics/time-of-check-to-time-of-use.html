@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>檢查到使用時間差 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-time-of-check-to-time-of-use">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / Engineering</p>
+        <h1>檢查到使用時間差</h1>
+        <p class="topic-subtitle">Time-of-Check to Time-of-Use</p>
+        <p class="thesis">你在檢查當下看到的世界，到了真正使用資源那一刻，可能已經不是同一個世界了。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁會把 檢查時間點、使用時間點 這些常藏在規格外的壓力，拉回 檔案權限 與 硬體狀態切換 的設計檢查裡。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>安全問題 / 時間競態</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Validation can expire before use</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>檢查時間點、使用時間點、狀態變動、競態條件</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能用 Validation can expire before use 重新檢查 檢查與執行邊界 裡的判斷失真</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>檢查</span>
+          <span>延遲</span>
+          <span>失效</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>如果前面明明檢查過沒問題，為什麼到真的使用時還是可能被繞過或出錯</h2>
+          <p class="section-lede">檢查到使用時間差 的價值，在於它把平常藏在接口、時序或權限邊界外的壓力，提前搬到設計與驗證桌面上。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>你在檢查當下看到的世界，到了真正使用資源那一刻，可能已經不是同一個世界了。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先圈出 檢查時間點 會在哪裡破</strong>
+            <p>檢查時間點 常不是抽象風險，而是會穿過具體接口、排程或權限邊界。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再追 使用時間點 怎麼穿過邊界</strong>
+            <p>使用時間點 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後查 狀態變動 何時從小事變事故</strong>
+            <p>狀態變動 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>哪個邊界先把 檢查時間點 變成事故</h2>
+          <p class="section-lede">把問題壓回一個最小接口或一次時序交會，檢查時間點 何時變成風險、狀態變動 何時開始放大，就不容易再被模糊帶過。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>程式先檢查檔案權限或裝置狀態，接著才執行操作；但中間那一小段時間若狀態已被別的動作改掉，保證就會失效。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>如果前面明明檢查過沒問題，為什麼到真的使用時還是可能被繞過或出錯</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">局部先對付 檢查時間點</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">使用時間點 穿過接口或時序邊界</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">狀態變動 把小問題放大成現場風險</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>檢查到使用時間差 的價值，在於它把平常埋在規格外的 檢查時間點、使用時間點 與 狀態變動，提前拉回 design review 能談清楚的位置。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>先把 時間差漏洞、檢查非承諾 與 狀態瞬時性 分開看</h2>
+          <p class="section-lede">表面像同一個故障，底下往往是 時間差漏洞、檢查非承諾 和 狀態瞬時性 在不同邊界各自出力。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>時間差漏洞</strong>
+            <p>時間差漏洞 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 檢查時間點 轉成真正的穩定性壓力。</p>
+          </article>
+          <article class="lens-card">
+            <strong>檢查非承諾</strong>
+            <p>檢查非承諾 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 使用時間點 轉成真正的穩定性壓力。</p>
+          </article>
+          <article class="lens-card">
+            <strong>狀態瞬時性</strong>
+            <p>狀態瞬時性 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 狀態變動 轉成真正的穩定性壓力。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>團隊通常在哪一步把 檢查到使用時間差 當成暫時小事</h2>
+          <p class="section-lede">工程現場最危險的，不是沒人提風險，而是大家太容易把 檢查時間點 當成晚點再補也行的小瑕疵。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>檢查過就等於安全</strong>
+            <p>檢查過就等於安全 會讓人把『目前沒爆』誤讀成『設計沒問題』，於是風險一路被推往更後面。</p>
+          </article>
+          <article class="example">
+            <strong>時間窗太小就可忽略</strong>
+            <p>時間窗太小就可忽略 最危險的地方，在於它常把局部成功包裝成全局安全。</p>
+          </article>
+          <article class="example">
+            <strong>狀態改變被背景化</strong>
+            <p>只要 狀態改變被背景化 一進場，團隊就容易先相信現況撐得住，而不是先問代價正在往哪裡堆。</p>
+          </article>
+        </div>
+        <p class="micro-note">越早把 檢查時間點、使用時間點 這些心理近路說出來，越不容易在 postmortem 才第一次承認它們存在。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>回到 檔案權限、硬體狀態切換 與 共享資源存取</h2>
+          <p class="section-lede">這裡重點不是補幾個抽象案例，而是把 檢查到使用時間差 直接落到 檔案權限、硬體狀態切換 這些真的會出事的邊界上。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>檔案權限</strong>
+            <p>把 檢查到使用時間差 帶回 檔案權限 時，最該先畫出來的是 檢查時間點 穿過接口、時序或權限邊界的那條路。</p>
+          </article>
+          <article class="example">
+            <strong>硬體狀態切換</strong>
+            <p>把 檢查到使用時間差 帶回 硬體狀態切換 時，最該先畫出來的是 使用時間點 穿過接口、時序或權限邊界的那條路。</p>
+          </article>
+          <article class="example">
+            <strong>共享資源存取</strong>
+            <p>把 檢查到使用時間差 帶回 共享資源存取 時，最該先畫出來的是 狀態變動 穿過接口、時序或權限邊界的那條路。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三個常見誤讀</h2>
+          <p class="section-lede">這些誤讀常把 檢查到使用時間差 降成實作瑣事，結果真正的邊界壓力根本沒被談到。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>檢查到使用時間差 只是實作細節</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>它常是 檢查時間點 最先破掉的邊界，所以不是『之後再補』就沒事。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要再加更多防呆，檢查到使用時間差 就會消失</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>如果 使用時間點 的壓力來源沒處理，防呆最後只會變成更昂貴的補丁。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>檢查到使用時間差 只和大型分散式系統有關</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>很多單機、韌體或流程系統，一樣會以更小規模的 狀態變動 形式重演。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>把 檢查時間點、使用時間點 追到真正會破的邊界</h2>
+          <p class="section-lede">下面兩個問題很適合在 檔案權限、硬體狀態切換 這類設計或驗證場合直接拿來過一遍。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果第一個異常出現在 檔案權限</strong>
+            <p>你最先會去畫哪條邊界，確認 檢查時間點 和 使用時間點 到底在哪一步被放大？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果 硬體狀態切換 團隊只回你一句『現在看起來沒事』</strong>
+            <p>你要用什麼觀測或驗證證明：狀態變動 不是只是還沒在現場結帳？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可以接到 Race Condition，把這頁的邊界壓力放回更大的可靠性脈絡。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">本頁先用 Time-of-Check to Time-of-Use 條目交代故障模式與邊界壓力，再用 Race Condition 補回更大的系統背景。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>核心概念</strong>
+            <p>這張卡說明 檢查到使用時間差 在接口、時序或權限邊界上最常怎麼冒出來。</p>
+            <a href="https://en.wikipedia.org/wiki/Time-of-check_to_time-of-use" target="_blank" rel="noreferrer">Time-of-Check to Time-of-Use</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰概念</strong>
+            <p>這張卡補回 Race Condition 所在的更大可靠性或系統脈絡，避免把 檢查到使用時間差 只看成局部實作瑕疵。</p>
+            <a href="https://en.wikipedia.org/wiki/Race_condition" target="_blank" rel="noreferrer">Race Condition</a>
+          </article>
+          <article class="source-card">
+            <strong>教學整理</strong>
+            <p>工程映射與事故語境是本頁的教學整理，目的是把 檢查到使用時間差 直接落到 檔案權限、硬體狀態切換 與 共享資源存取 這些邊界上。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>下次在 檔案權限 或 硬體狀態切換 做設計決定時，先把 檢查時間點 穿過哪個邊界、何時變成 狀態變動 寫進 review。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>最終一致性 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-eventual-consistency">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / Engineering</p>
+        <h1>最終一致性</h1>
+        <p class="topic-subtitle">Eventual Consistency</p>
+        <p class="thesis">在多副本系統裡，若你想保住可用性與擴展性，就常得接受不同節點在某段時間內看到的世界並不完全一致。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁會把 副本延遲、可用性 這些常藏在規格外的壓力，拉回 跨區資料同步 與 離線功能設計 的設計檢查裡。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>分散式資料 / 一致性策略</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Consistency that arrives with time</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>副本延遲、可用性、同步收斂、暫時不一致</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能用 Consistency that arrives with time 重新檢查 同步與可用性 裡的判斷失真</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>副本</span>
+          <span>延遲</span>
+          <span>收斂</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>如果資料最後都會一致，為什麼『中間那段不一致』仍然是系統設計裡的大事</h2>
+          <p class="section-lede">最終一致性 的價值，在於它把平常藏在接口、時序或權限邊界外的壓力，提前搬到設計與驗證桌面上。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>在多副本系統裡，若你想保住可用性與擴展性，就常得接受不同節點在某段時間內看到的世界並不完全一致。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先圈出 副本延遲 會在哪裡破</strong>
+            <p>副本延遲 常不是抽象風險，而是會穿過具體接口、排程或權限邊界。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再追 可用性 怎麼穿過邊界</strong>
+            <p>可用性 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後查 同步收斂 何時從小事變事故</strong>
+            <p>同步收斂 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>哪個邊界先把 副本延遲 變成事故</h2>
+          <p class="section-lede">把問題壓回一個最小接口或一次時序交會，副本延遲 何時變成風險、同步收斂 何時開始放大，就不容易再被模糊帶過。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>多節點寫入與跨區同步下，某些使用者先看到新資料、某些人還看到舊資料；系統承諾的不是立刻相同，而是最終會對齊。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>如果資料最後都會一致，為什麼『中間那段不一致』仍然是系統設計裡的大事</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">局部先對付 副本延遲</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">可用性 穿過接口或時序邊界</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">同步收斂 把小問題放大成現場風險</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>最終一致性 的價值，在於它把平常埋在規格外的 副本延遲、可用性 與 同步收斂，提前拉回 design review 能談清楚的位置。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>先把 暫時不一致、收斂保證 與 讀寫體驗取捨 分開看</h2>
+          <p class="section-lede">表面像同一個故障，底下往往是 暫時不一致、收斂保證 和 讀寫體驗取捨 在不同邊界各自出力。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>暫時不一致</strong>
+            <p>暫時不一致 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 副本延遲 轉成真正的穩定性壓力。</p>
+          </article>
+          <article class="lens-card">
+            <strong>收斂保證</strong>
+            <p>收斂保證 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 可用性 轉成真正的穩定性壓力。</p>
+          </article>
+          <article class="lens-card">
+            <strong>讀寫體驗取捨</strong>
+            <p>讀寫體驗取捨 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 同步收斂 轉成真正的穩定性壓力。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>團隊通常在哪一步把 最終一致性 當成暫時小事</h2>
+          <p class="section-lede">工程現場最危險的，不是沒人提風險，而是大家太容易把 副本延遲 當成晚點再補也行的小瑕疵。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>最後一樣就等於沒問題</strong>
+            <p>最後一樣就等於沒問題 會讓人把『目前沒爆』誤讀成『設計沒問題』，於是風險一路被推往更後面。</p>
+          </article>
+          <article class="example">
+            <strong>同步延遲太抽象</strong>
+            <p>同步延遲太抽象 最危險的地方，在於它常把局部成功包裝成全局安全。</p>
+          </article>
+          <article class="example">
+            <strong>副本像免費備份</strong>
+            <p>只要 副本像免費備份 一進場，團隊就容易先相信現況撐得住，而不是先問代價正在往哪裡堆。</p>
+          </article>
+        </div>
+        <p class="micro-note">越早把 副本延遲、可用性 這些心理近路說出來，越不容易在 postmortem 才第一次承認它們存在。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>回到 跨區資料同步、離線功能設計 與 設定分發</h2>
+          <p class="section-lede">這裡重點不是補幾個抽象案例，而是把 最終一致性 直接落到 跨區資料同步、離線功能設計 這些真的會出事的邊界上。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>跨區資料同步</strong>
+            <p>把 最終一致性 帶回 跨區資料同步 時，最該先畫出來的是 副本延遲 穿過接口、時序或權限邊界的那條路。</p>
+          </article>
+          <article class="example">
+            <strong>離線功能設計</strong>
+            <p>把 最終一致性 帶回 離線功能設計 時，最該先畫出來的是 可用性 穿過接口、時序或權限邊界的那條路。</p>
+          </article>
+          <article class="example">
+            <strong>設定分發</strong>
+            <p>把 最終一致性 帶回 設定分發 時，最該先畫出來的是 同步收斂 穿過接口、時序或權限邊界的那條路。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三個常見誤讀</h2>
+          <p class="section-lede">這些誤讀常把 最終一致性 降成實作瑣事，結果真正的邊界壓力根本沒被談到。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>最終一致性 只是實作細節</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>它常是 副本延遲 最先破掉的邊界，所以不是『之後再補』就沒事。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要再加更多防呆，最終一致性 就會消失</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>如果 可用性 的壓力來源沒處理，防呆最後只會變成更昂貴的補丁。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>最終一致性 只和大型分散式系統有關</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>很多單機、韌體或流程系統，一樣會以更小規模的 同步收斂 形式重演。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>把 副本延遲、可用性 追到真正會破的邊界</h2>
+          <p class="section-lede">下面兩個問題很適合在 跨區資料同步、離線功能設計 這類設計或驗證場合直接拿來過一遍。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果第一個異常出現在 跨區資料同步</strong>
+            <p>你最先會去畫哪條邊界，確認 副本延遲 和 可用性 到底在哪一步被放大？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果 離線功能設計 團隊只回你一句『現在看起來沒事』</strong>
+            <p>你要用什麼觀測或驗證證明：同步收斂 不是只是還沒在現場結帳？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可以接到 Consistency Model，把這頁的邊界壓力放回更大的可靠性脈絡。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">本頁先用 Eventual Consistency 條目交代故障模式與邊界壓力，再用 Consistency Model 補回更大的系統背景。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>核心概念</strong>
+            <p>這張卡說明 最終一致性 在接口、時序或權限邊界上最常怎麼冒出來。</p>
+            <a href="https://en.wikipedia.org/wiki/Eventual_consistency" target="_blank" rel="noreferrer">Eventual Consistency</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰概念</strong>
+            <p>這張卡補回 Consistency Model 所在的更大可靠性或系統脈絡，避免把 最終一致性 只看成局部實作瑕疵。</p>
+            <a href="https://en.wikipedia.org/wiki/Consistency_model" target="_blank" rel="noreferrer">Consistency Model</a>
+          </article>
+          <article class="source-card">
+            <strong>教學整理</strong>
+            <p>工程映射與事故語境是本頁的教學整理，目的是把 最終一致性 直接落到 跨區資料同步、離線功能設計 與 設定分發 這些邊界上。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>下次在 跨區資料同步 或 離線功能設計 做設計決定時，先把 副本延遲 穿過哪個邊界、何時變成 同步收斂 寫進 review。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

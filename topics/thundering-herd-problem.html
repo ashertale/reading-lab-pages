@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>驚群問題 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-thundering-herd-problem">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / Engineering</p>
+        <h1>驚群問題</h1>
+        <p class="topic-subtitle">Thundering Herd Problem</p>
+        <p class="thesis">當大量等待中的程序、執行緒或客戶端同時被喚醒去搶同一個資源時，成功者也許只有一個，但系統成本卻被所有失敗嘗試一起拉高。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁會把 同步喚醒、競爭 這些常藏在規格外的壓力，拉回 快取設計 與 併發排程 的設計檢查裡。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>效能問題 / 競爭喚醒</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Too many waiters waking at once</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>同步喚醒、競爭、重試、資源放大浪費</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能用 Too many waiters waking at once 重新檢查 併發與資源競爭 裡的判斷失真</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>等待</span>
+          <span>喚醒</span>
+          <span>擁塞</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>如果只是同時醒來一下，為什麼整個系統卻可能像被踩踏一樣瞬間變慢</h2>
+          <p class="section-lede">驚群問題 的價值，在於它把平常藏在接口、時序或權限邊界外的壓力，提前搬到設計與驗證桌面上。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>當大量等待中的程序、執行緒或客戶端同時被喚醒去搶同一個資源時，成功者也許只有一個，但系統成本卻被所有失敗嘗試一起拉高。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先圈出 同步喚醒 會在哪裡破</strong>
+            <p>同步喚醒 常不是抽象風險，而是會穿過具體接口、排程或權限邊界。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再追 競爭 怎麼穿過邊界</strong>
+            <p>競爭 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後查 重試 何時從小事變事故</strong>
+            <p>重試 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>把壓力壓回 同步喚醒 最先失守的地方</h2>
+          <p class="section-lede">把問題壓回一個最小接口或一次時序交會，同步喚醒 何時變成風險、重試 何時開始放大，就不容易再被模糊帶過。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>快取失效、單一事件到達或同一把鎖釋放時，大量等待者一起衝上來，最後多數人只是在白白耗 CPU、IO 與排程時間。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>如果只是同時醒來一下，為什麼整個系統卻可能像被踩踏一樣瞬間變慢</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">局部先對付 同步喚醒</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">競爭 穿過接口或時序邊界</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">重試 把小問題放大成現場風險</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>驚群問題 的價值，在於它把平常埋在規格外的 同步喚醒、競爭 與 重試，提前拉回 design review 能談清楚的位置。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>先把 同步喚醒、重試風暴 與 資源踩踏 分開看</h2>
+          <p class="section-lede">表面像同一個故障，底下往往是 同步喚醒、重試風暴 和 資源踩踏 在不同邊界各自出力。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>同步喚醒</strong>
+            <p>同步喚醒 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 同步喚醒 轉成真正的穩定性壓力。</p>
+          </article>
+          <article class="lens-card">
+            <strong>重試風暴</strong>
+            <p>重試風暴 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 競爭 轉成真正的穩定性壓力。</p>
+          </article>
+          <article class="lens-card">
+            <strong>資源踩踏</strong>
+            <p>資源踩踏 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 重試 轉成真正的穩定性壓力。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>團隊通常在哪一步把 驚群問題 當成暫時小事</h2>
+          <p class="section-lede">工程現場最危險的，不是沒人提風險，而是大家太容易把 同步喚醒 當成晚點再補也行的小瑕疵。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>大家同時醒比較有效錯覺</strong>
+            <p>大家同時醒比較有效錯覺 會讓人把『目前沒爆』誤讀成『設計沒問題』，於是風險一路被推往更後面。</p>
+          </article>
+          <article class="example">
+            <strong>失敗嘗試成本被忽略</strong>
+            <p>失敗嘗試成本被忽略 最危險的地方，在於它常把局部成功包裝成全局安全。</p>
+          </article>
+          <article class="example">
+            <strong>重試像免費</strong>
+            <p>只要 重試像免費 一進場，團隊就容易先相信現況撐得住，而不是先問代價正在往哪裡堆。</p>
+          </article>
+        </div>
+        <p class="micro-note">越早把 同步喚醒、競爭 這些心理近路說出來，越不容易在 postmortem 才第一次承認它們存在。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>回到 快取設計、併發排程 與 重試與退避策略</h2>
+          <p class="section-lede">這裡重點不是補幾個抽象案例，而是把 驚群問題 直接落到 快取設計、併發排程 這些真的會出事的邊界上。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>快取設計</strong>
+            <p>把 驚群問題 帶回 快取設計 時，最該先畫出來的是 同步喚醒 穿過接口、時序或權限邊界的那條路。</p>
+          </article>
+          <article class="example">
+            <strong>併發排程</strong>
+            <p>把 驚群問題 帶回 併發排程 時，最該先畫出來的是 競爭 穿過接口、時序或權限邊界的那條路。</p>
+          </article>
+          <article class="example">
+            <strong>重試與退避策略</strong>
+            <p>把 驚群問題 帶回 重試與退避策略 時，最該先畫出來的是 重試 穿過接口、時序或權限邊界的那條路。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三個常見誤讀</h2>
+          <p class="section-lede">這些誤讀常把 驚群問題 降成實作瑣事，結果真正的邊界壓力根本沒被談到。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>驚群問題 只是實作細節</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>它常是 同步喚醒 最先破掉的邊界，所以不是『之後再補』就沒事。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要再加更多防呆，驚群問題 就會消失</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>如果 競爭 的壓力來源沒處理，防呆最後只會變成更昂貴的補丁。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>驚群問題 只和大型分散式系統有關</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>很多單機、韌體或流程系統，一樣會以更小規模的 重試 形式重演。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>把 同步喚醒、競爭 追到真正會破的邊界</h2>
+          <p class="section-lede">下面兩個問題很適合在 快取設計、併發排程 這類設計或驗證場合直接拿來過一遍。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果第一個異常出現在 快取設計</strong>
+            <p>你最先會去畫哪條邊界，確認 同步喚醒 和 競爭 到底在哪一步被放大？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果 併發排程 團隊只回你一句『現在看起來沒事』</strong>
+            <p>你要用什麼觀測或驗證證明：重試 不是只是還沒在現場結帳？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>把 Cache Stampede 接著讀，通常會更看得出 驚群問題 不是單點 bug，而是整體設計習慣。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">本頁先用 Thundering Herd Problem 條目交代故障模式與邊界壓力，再用 Cache Stampede 補回更大的系統背景。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>核心概念</strong>
+            <p>這張卡說明 驚群問題 在接口、時序或權限邊界上最常怎麼冒出來。</p>
+            <a href="https://en.wikipedia.org/wiki/Thundering_herd_problem" target="_blank" rel="noreferrer">Thundering Herd Problem</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰概念</strong>
+            <p>這張卡補回 Cache Stampede 所在的更大可靠性或系統脈絡，避免把 驚群問題 只看成局部實作瑕疵。</p>
+            <a href="https://en.wikipedia.org/wiki/Cache_stampede" target="_blank" rel="noreferrer">Cache Stampede</a>
+          </article>
+          <article class="source-card">
+            <strong>教學整理</strong>
+            <p>工程映射與事故語境是本頁的教學整理，目的是把 驚群問題 直接落到 快取設計、併發排程 與 重試與退避策略 這些邊界上。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>下次在 快取設計 或 併發排程 做設計決定時，先把 同步喚醒 穿過哪個邊界、何時變成 重試 寫進 review。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

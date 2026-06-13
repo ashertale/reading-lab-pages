@@ -4,8 +4,8 @@
 
 ## 目前狀態
 
-- `topics/`：100 個已發布概念頁。
-- `data/concept-payloads/`：100 份可審核 payload，和已發布頁面一一對齊。
+- `topics/`：目前已發布 200 個概念頁；實際數量應持續和 `data/concept-payloads/` 一一對齊。
+- `data/concept-payloads/`：目前 200 份可審核 payload，對應 200 個已發布頁面。
 - `data/concept-suggestions.json`：目前為空，可作為下一批 backlog 入口。
 
 ## 架構總覽
@@ -34,6 +34,7 @@ data/concept-suggestions.json
 
 ## Scripts 分層
 
+- `scripts/generate_concept_batch.py`：批次產生新概念的 payload，先建立可 review 的內容輸入，再交給 render/validate 流程處理。
 - `scripts/render_concept_page.py`：從 payload render `topics/*.html`，並可同步更新 `topic-index.js`。
 - `scripts/validate_concept_lab.py`：檢查 HTML、index、payload 對齊、JS parse 與禁用樣式模式。
 - `scripts/bootstrap_existing_concept_payloads.py`：從既有 `topic-index.js` 與 `topics/*.html` 反推 payload。
@@ -42,6 +43,7 @@ data/concept-suggestions.json
 ## 新增概念頁流程
 
 1. 先建立 `data/concept-payloads/<topic-slug>.json`，讓主題內容可先被 review。
+   若要批次新增，可先用 `scripts/generate_concept_batch.py` 產出 payload，再逐份審查。
 2. 依 payload render 出 `topics/<topic-slug>.html`，並保留 `core`、`setup`、`lenses`、`psychology`、`applications`、`misreadings`、`questions`、`sources` section id。
 3. 在 payload 的 `indexEntry` 新增概念 metadata，`href` 指向 `./topics/<topic-slug>.html`，並保持 `order` 連續。
 4. 若候選題已生成，從 `data/concept-suggestions.json` 移除或改寫為下一批候選題。
@@ -52,6 +54,12 @@ Render 既有 payload：
 
 ```powershell
 & 'C:\Users\CHEN\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' scripts\render_concept_page.py data\concept-payloads --sync-index
+```
+
+批次建立新 payload：
+
+```powershell
+& 'C:\Users\CHEN\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' scripts\generate_concept_batch.py
 ```
 
 ## 驗證

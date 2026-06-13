@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>安全邊際 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-margin-of-safety">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / Principles</p>
+        <h1>安全邊際</h1>
+        <p class="topic-subtitle">Margin of Safety</p>
+        <p class="thesis">因為世界永遠比模型多一點噪音、誤差與意外，所以好的設計與判斷通常不把自己壓在剛剛好的極限上。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁要幫你把 緩衝、誤差容忍 與 未知風險 重新排好順序，讓 安全邊際 不再只是一句會議口號。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>判斷原則 / 緩衝設計</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Leave room for error, noise, and surprise</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>緩衝、誤差容忍、未知風險、極限操作</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能用 Leave room for error, noise, and surprise 重新檢查 風險與冗餘 裡的判斷失真</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>緩衝</span>
+          <span>誤差</span>
+          <span>餘地</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>如果模型算起來剛剛好可行，為什麼成熟設計者反而常覺得這還遠遠不夠</h2>
+          <p class="section-lede">這頁真正要處理的，不是你喜不喜歡 安全邊際，而是遇到 硬體設計 或 排程估算 時，哪些前提若沒先寫出來，討論就會失焦。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>因為世界永遠比模型多一點噪音、誤差與意外，所以好的設計與判斷通常不把自己壓在剛剛好的極限上。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先確認 緩衝 沒被偷渡進來</strong>
+            <p>如果 緩衝 沒先寫出來，後面看起來像分歧，實際上只是各自補腦。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>接著看 誤差容忍 被誰省略</strong>
+            <p>把 誤差容忍 講清楚後，你才看得出這條原則是在保護判準，還是在轉移代價。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後把 未知風險 變成驗收</strong>
+            <p>少了 未知風險，安全邊際 很容易停在口頭正確，卻不知道怎麼在 硬體設計 或 排程估算 裡執行。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>把 安全邊際 放進一次真實判斷，看誰先該交代</h2>
+          <p class="section-lede">先把場景壓回 硬體設計 或 排程估算 這種真的要決定責任的時刻，你會更清楚 緩衝、誤差容忍 和 未知風險 哪一個不能事後才補。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>功耗、熱、時序、排程與人力估算只要剛好卡線，一點小誤差就足以把整個計畫推翻。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>如果模型算起來剛剛好可行，為什麼成熟設計者反而常覺得這還遠遠不夠</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">討論一開始就直接跳到 緩衝</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">直到追問時才發現 誤差容忍 沒人接</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">等到落地才問 未知風險 怎麼驗收</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>這類原則一旦失手，通常不是理論錯，而是 緩衝 沒先寫、誤差容忍 沒算進去、未知風險 也沒被翻成行動。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>先把 不要壓線運作、未知要有位置放 與 餘地本身是設計的一部分 分開看</h2>
+          <p class="section-lede">同一個原則落到現場後，往往會分裂成 不要壓線運作、未知要有位置放 和 餘地本身是設計的一部分 三種完全不同的操作方式。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>不要壓線運作</strong>
+            <p>把焦點放在 不要壓線運作 時，你其實是在說：緩衝 應該先被寫清楚，否則後面的結論都站不穩。</p>
+          </article>
+          <article class="lens-card">
+            <strong>未知要有位置放</strong>
+            <p>未知要有位置放 這條線在乎的，不是誰比較有氣勢，而是 誤差容忍 一旦沒被交代，現場會怎麼開始失真。</p>
+          </article>
+          <article class="lens-card">
+            <strong>餘地本身是設計的一部分</strong>
+            <p>順著 餘地本身是設計的一部分 讀，你會發現爭點不在口號，而在 未知風險 是否真的被變成判準。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>哪種省事直覺最常讓 安全邊際 失焦</h2>
+          <p class="section-lede">一到現場，人最容易先抓住能讓自己省事的那一段，於是 安全邊際 很快就從判準退化成表態。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>極限成功很有成就感</strong>
+            <p>極限成功很有成就感 會讓人覺得只要把話說得夠完整，就不必再補 緩衝 的證據或代價。</p>
+          </article>
+          <article class="example">
+            <strong>模型誤差被低估</strong>
+            <p>模型誤差被低估 常不是純粹錯誤，而是一種討論捷徑：先把自己放在合理的一邊，再晚點處理 誤差容忍。</p>
+          </article>
+          <article class="example">
+            <strong>緩衝看起來像浪費</strong>
+            <p>碰到 緩衝看起來像浪費 時，最危險的是大家以為原則已經被引用，實際上 未知風險 還沒被具體說明。</p>
+          </article>
+        </div>
+        <p class="micro-note">只要討論還停在『誰比較像站在對的一邊』，安全邊際 就還沒真正開始工作。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>回到 硬體設計、排程估算 與 資本與風險管理</h2>
+          <p class="section-lede">把 安全邊際 放回 硬體設計、排程估算 這些場景時，它的作用不是增加說服力，而是強迫大家先把責任、代價和驗收順序排好。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>硬體設計</strong>
+            <p>硬體設計 最需要 安全邊際 的時候，通常就是大家都急著往前走，卻還沒把 緩衝 寫成共識。</p>
+          </article>
+          <article class="example">
+            <strong>排程估算</strong>
+            <p>只要到了 排程估算，你就能看出 誤差容忍 究竟是被真的承擔，還是只是被口頭提過。</p>
+          </article>
+          <article class="example">
+            <strong>資本與風險管理</strong>
+            <p>在 資本與風險管理 這種場景，安全邊際 幫你的不是贏辯論，而是把 未知風險 先釘在桌面上，避免事後才補。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三個常見誤讀</h2>
+          <p class="section-lede">原則類概念一旦變得順耳，就很容易失手；安全邊際 最常就是在 硬體設計 或 排程估算 這些情境裡，被縮成一句不用交代代價的口號。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>安全邊際 只是好聽口號</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>真正難的是把 安全邊際 翻成一組可檢查的判準，而不是把它當成結論本身。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要背了 安全邊際 就能直接套用</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>原則若不落回 緩衝、誤差容忍 和代價分配，通常會在現場變成誤用。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>安全邊際 只適合高層決策</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>其實從 code review 到 風險與冗餘 的日常判斷，都會碰到同樣的壓力。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>把 安全邊際 翻成現場要回答的句子</h2>
+          <p class="section-lede">如果這條原則真的有用，它應該能在 硬體設計 或 排程估算 這種場合立刻變成追問，不是只留在會後共識。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果這題今天出現在 硬體設計</strong>
+            <p>哪一段該先被補齊：緩衝 的前提、誤差容忍 的代價，還是 未知風險 的驗收方式？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果你準備用 安全邊際 說服別人</strong>
+            <p>若對方一句話都沒提到 誤差容忍 或 未知風險，你會怎麼判斷這條原則其實還沒被真正落地？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可以直接接 Safety Factor，看它如何把本頁沒展開完的責任或驗收問題補齊。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">來源安排先處理 安全邊際 本身，再借 Safety Factor 看它一進到 風險與冗餘 為什麼常被拿去替立場背書。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>核心概念</strong>
+            <p>先靠這張卡把 緩衝 與 誤差容忍 的原始要求釘住，避免後面整頁滑回抽象表態。</p>
+            <a href="https://en.wikipedia.org/wiki/Margin_of_safety" target="_blank" rel="noreferrer">Margin of Safety</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰概念</strong>
+            <p>這張卡把主題放回更大的判準背景，避免把 安全邊際 誤認成單一立場的裝飾語。</p>
+            <a href="https://en.wikipedia.org/wiki/Safety_factor" target="_blank" rel="noreferrer">Safety Factor</a>
+          </article>
+          <article class="source-card">
+            <strong>教學整理</strong>
+            <p>本頁最主要的教學性補充，是把 安全邊際 從概念說明推進到 硬體設計、排程估算 與 資本與風險管理 裡的責任分配與行動判準。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>真正要帶走的不是一句格言，而是下次遇到 硬體設計 時，你知道該先追 緩衝、誤差容忍 還是 未知風險。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>
