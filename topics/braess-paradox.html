@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>布雷斯悖論 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-braess-paradox">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / networks / routing / equilibrium</p>
+        <h1>布雷斯悖論</h1>
+        <p class="topic-subtitle">Braess&#x27;s Paradox</p>
+        <p class="thesis">在會彼此影響的網路裡，新增一條看似更快的路徑，不一定改善整體效率，反而可能讓所有人一起更慢。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這一頁要幫你把『多一條資源路徑』和『整體系統因此更好』拆開，避免被局部直覺帶著走。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>網路悖論 / 系統最佳化</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>More capacity can worsen equilibrium</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>個體選擇、全域均衡、耦合成本、系統邊界</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在 routing、排程與資源配置問題上先問全域互動，而不是只加一條看似更快的路</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>捷徑</span>
+          <span>均衡</span>
+          <span>壅塞</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>捷徑不只是一條路，它會改寫所有人的選擇</h2>
+          <p class="section-lede">布雷斯悖論之所以反直覺，是因為它把『局部更順』和『全域更好』清楚分開。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>每個個體都選自己當下看起來最好的路徑，最後形成的均衡卻可能比原本更壞，因為所有人都在互相製造成本。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先看互相影響</strong>
+            <p>一條新路不是孤立資源，它會改變整張網路的流量分布。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再分個體最優與系統最優</strong>
+            <p>對單一使用者有利的切換，不一定對整體吞吐有利。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後問能否管制</strong>
+            <p>有時真正的改善不是加路，而是限制某條太誘人的路。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>從一條人人都想走的新路開始</h2>
+          <p class="section-lede">這個悖論的趣味在於：你新增的東西看起來完全合理，卻可能讓全體選擇一起跑歪。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>原本兩條中等擁擠的路線之間，你再加一條超快捷徑，結果大家都搶著切過去，讓整個系統的等待時間一起升高。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>問題不在於新路本身有錯，而在於每個人都理性使用它時，網路的負載被重排到更差的均衡。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">新增局部捷徑</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">個體理性大量改道</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">全域均衡惡化</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>布雷斯悖論最值錢的地方，是提醒你容量與自由度增加，不保證整體效率自動上升。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個看網路互咬的角度</h2>
+          <p class="section-lede">想判斷是否可能出現這類悖論，至少要看互相耦合的成本是怎麼長的。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>自利 routing</strong>
+            <p>每個人都在局部最佳化時，容易把共享成本推給整體。</p>
+          </article>
+          <article class="lens-card">
+            <strong>延遲函數</strong>
+            <p>某些路徑的成本會隨流量快速上升，因此微小改道也可能放大壅塞。</p>
+          </article>
+          <article class="lens-card">
+            <strong>缺少協調</strong>
+            <p>若沒有中央排程或價格機制，系統容易落在次佳均衡。</p>
+          </article>
+          <article class="lens-card">
+            <strong>假象容量</strong>
+            <p>新增路線看起來像多了選擇，實際上可能只是多了誘發擁塞的入口。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>操作</th>
+                <th>局部看起來像</th>
+                <th>全域可能發生什麼</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>新增捷徑</td>
+                <td>個人通過更快</td>
+                <td>所有人改道後主路與支路一起塞爆</td>
+              </tr>
+              <tr>
+                <td>開更多共享 queue</td>
+                <td>可分流更多工作</td>
+                <td>搶占與切換成本把總吞吐拉低</td>
+              </tr>
+              <tr>
+                <td>加一條 cache bypass</td>
+                <td>極端情況更快</td>
+                <td>熱門流量改道後造成後端新瓶頸</td>
+              </tr>
+              <tr>
+                <td>多一個自由切換點</td>
+                <td>路徑更彈性</td>
+                <td>系統因頻繁重選而震盪</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼新增資源很容易被自動當成好消息</h2>
+          <p class="section-lede">因為『更多』和『更自由』的直覺非常強，遠比均衡分析來得順手。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>容量想像很具體</strong>
+            <p>多一條路、多一個 queue、多一個 bypass，聽起來都像直接擴容。</p>
+          </div>
+          <div class="example">
+            <strong>均衡後果不在眼前</strong>
+            <p>個體只看到自己切過去那一刻變快，看不到所有人跟著切時的整體變形。</p>
+          </div>
+          <div class="example">
+            <strong>我們高估局部視角</strong>
+            <p>系統互動越複雜，人越容易以為『每個人都更好』會自動等於『整體更好』。</p>
+          </div>
+        </div>
+        <p class="micro-note">這個悖論提醒你：系統流量問題要看互動後的平衡，而不是看靜態資源數量。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把均衡視角帶回排程與架構設計</h2>
+          <p class="section-lede">它不只適用交通；任何共享資源路由、動態選路與負載分配都可能長出相似結構。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>多佇列排程</strong>
+            <p>新增一個看似低延遲的 fast lane，可能讓大量工作追著切，結果高優先與一般佇列一起抖動。</p>
+          </div>
+          <div class="example">
+            <strong>服務路由</strong>
+            <p>多一條 bypass 或 fallback path 很方便，但若流量策略沒控好，容易把後端推進更差平衡。</p>
+          </div>
+          <div class="example">
+            <strong>組織流程</strong>
+            <p>多一個快速溝通通道看似減少阻塞，卻可能讓所有決策都繞開原本的同步機制。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>遇到 shared routing 問題時，先模擬使用者會怎麼一起改道，再決定要不要新增路徑。</li>
+          <li>有時改善不是開更多路，而是用價格、配額或排程把系統拉回比較好的均衡。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三個容易簡化過頭的讀法</h2>
+          <p class="section-lede">布雷斯悖論不是說擴容永遠沒用，而是說擴容效果取決於互動結構。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以永遠不要加資源</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。重點是先看新增資源會如何重排使用者行為。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只有交通網路才會發生</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>任何共享路由與自利選擇的系統，都可能出現相似現象。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要加更多資源就會解決</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>若問題在於均衡被誘導到壞位置，再多資源也可能繼續被吃掉。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>你加的是容量，還是新的擁塞入口</h2>
+          <p class="section-lede">這兩個問題很適合放進 routing 與 queue 設計 review。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果每個人都理性選最快路，系統會被帶去哪裡</strong>
+            <p>你看到的是單一使用者的改善，還是全體一起切換後的均衡？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>有沒有某條路看似方便，卻正在吸走過多流量</strong>
+            <p>若適度限制或移除它，整體表現會不會反而更好？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可看 Wardrop principles、price of anarchy 與 induced demand；也可以把這頁帶回資源排程設計。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁以 Braess&#x27;s paradox 的經典網路案例為核心，再補上 routing 均衡與整體效率之間的張力。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Braess&#x27;s paradox 條目整理了新增邊反而惡化網路的經典圖像。</p>
+            <a href="https://en.wikipedia.org/wiki/Braess%27s_paradox" target="_blank" rel="noreferrer">Braess&#x27;s Paradox</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰理論</strong>
+            <p>Wardrop&#x27;s principles 提供了個體路由與系統最優如何區分的背景。</p>
+            <a href="https://en.wikipedia.org/wiki/Wardrop%27s_principles" target="_blank" rel="noreferrer">Wardrop&#x27;s Principles</a>
+          </article>
+          <article class="source-card">
+            <strong>更一般化框架</strong>
+            <p>Price of anarchy 補上自利選擇與全域效率落差的更廣義語言。</p>
+            <a href="https://en.wikipedia.org/wiki/Price_of_anarchy" target="_blank" rel="noreferrer">Price of Anarchy</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>讀完後可以回頭看一個你的共享資源瓶頸，試著問：如果多一條快路，大家會不會一起把它踩壞？</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

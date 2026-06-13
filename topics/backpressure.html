@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>背壓 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-backpressure">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / queues / throughput / flow-control</p>
+        <h1>背壓</h1>
+        <p class="topic-subtitle">Backpressure</p>
+        <p class="thesis">當上游產生資料的速度快過下游消化能力時，真正成熟的系統不會假裝一切都沒事，而會讓壓力往回傳，逼整條鏈路一起面對容量現實。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這一頁要把『先收下再說』和『系統有能力誠實告訴上游我吃不下了』拆開，因為沒有背壓的高吞吐常只是延後爆炸。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>流量控制 / 系統穩定</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Slow consumers need a way to signal producers to slow down</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>生產速率、消費能力、緩衝容量、降載策略</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能看懂 queue、buffer 與服務鏈路在哪裡需要讓壓力回傳，而不是一直堆暫存</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>上游</span>
+          <span>下游</span>
+          <span>回傳</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>吞得下不代表消化得了，真正的穩定要會把壓力往回傳</h2>
+          <p class="section-lede">背壓的價值在於承認容量是系統共同事實，不是靠某一層偷偷堆 buffer 就能永遠遮住。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>上游想追 throughput，下游受限於 CPU、IO、網路或人力；若沒有壓力回傳，瓶頸只會從一個 queue 移到另一個 queue，最後以更壞方式爆出來。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先找真正瓶頸</strong>
+            <p>不是每次都要怪 producer 太快，有時是 consumer 設計、批次策略或外部依賴太慢。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再決定壓力如何回傳</strong>
+            <p>可以減速、丟棄、拒絕、批次化，重點是不要假裝容量無限。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後把隊列當緩衝而不是垃圾桶</strong>
+            <p>buffer 能吸收突波，但若被拿來長期掩蓋失衡，遲早會把延遲和記憶體一起吃爆。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>從一條上游很順、下游一直喘的處理鏈開始</h2>
+          <p class="section-lede">背壓常在你以為系統只是『偶爾慢一下』時默默形成，直到某天 queue 長到所有人都看得見。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>感測資料每秒進來 1,000 筆，但下游只處理得掉 600 筆；短期靠 buffer 撐住，長期延遲、記憶體與超時一起上升。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>如果上游永遠不知道下游已經滿了，整條鏈路就會靠最脆弱的一段默默承受全部壓力。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">上游輸出快於下游消化</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">中間緩衝越堆越高</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">若無背壓終將以延遲或崩潰顯形</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>背壓不是讓系統變慢，而是避免它靠自欺的速度把自己推向更難收拾的失控。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個看容量現實的角度</h2>
+          <p class="section-lede">不是每條資料流都需要同樣策略，但每條資料流都需要知道滿了以後怎麼辦。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>突波還是常態</strong>
+            <p>buffer 是拿來吸短暫尖峰，還是正在掩蓋長期失衡？</p>
+          </article>
+          <article class="lens-card">
+            <strong>可丟棄性</strong>
+            <p>資料是否允許採樣、降精度或淘汰較舊項目？</p>
+          </article>
+          <article class="lens-card">
+            <strong>回傳機制</strong>
+            <p>producer 能否知道 consumer 已滿，並主動放慢或暫停？</p>
+          </article>
+          <article class="lens-card">
+            <strong>觀測能力</strong>
+            <p>隊列深度、處理延遲與丟棄率是否被看見，而不是只看入口吞吐？</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>策略</th>
+                <th>好處</th>
+                <th>代價或前提</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>加 buffer</td>
+                <td>短期能吸收尖峰</td>
+                <td>長期失衡時只是在延後爆炸</td>
+              </tr>
+              <tr>
+                <td>回傳減速</td>
+                <td>讓整條鏈路一起面對容量</td>
+                <td>需要協定或介面支援</td>
+              </tr>
+              <tr>
+                <td>丟棄或採樣</td>
+                <td>保住系統整體穩定</td>
+                <td>必須接受不是每筆資料都能完整保留</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼大家容易先堆 queue 再說</h2>
+          <p class="section-lede">因為 buffer 讓問題暫時從畫面上消失，看起來比當場拒絕或降速更像『系統還有在扛』。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>吞吐數字很好看</strong>
+            <p>入口還能吃進資料時，團隊容易誤以為整體都健康。</p>
+          </div>
+          <div class="example">
+            <strong>延遲比錯誤更隱形</strong>
+            <p>慢慢堆積的問題不如立即拒絕那麼刺眼。</p>
+          </div>
+          <div class="example">
+            <strong>拒絕聽起來像退步</strong>
+            <p>其實很多時候可預期地拒絕，比假裝接住最後全部爆掉更成熟。</p>
+          </div>
+        </div>
+        <p class="micro-note">背壓的價值不在優雅術語，而在於它迫使系統對容量誠實。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把容量誠實帶回服務、裝置與資料流</h2>
+          <p class="section-lede">對串流處理、事件系統與裝置上報來說，背壓常是穩定性與吞吐討論中最容易被晚點才看見的那層。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>日誌與遙測</strong>
+            <p>若上報永不節流，下游儲存或解析跟不上時，最後常在最不想丟資料的時刻一起炸。</p>
+          </div>
+          <div class="example">
+            <strong>事件工作流</strong>
+            <p>worker 數量有限卻沒有節流時，佇列會把故障訊號藏成延遲。</p>
+          </div>
+          <div class="example">
+            <strong>UI 串流</strong>
+            <p>畫面更新頻率若不考慮使用者裝置承受度，再即時也會把互動卡死。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>看到 queue 增長時，不只要擴容，也要問上游為何有能力一直不知道下游已滿。</li>
+          <li>背壓策略本身也是產品決策：要慢、要拒、要丟，哪個傷害比較可接受？</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三個常見誤讀</h2>
+          <p class="section-lede">背壓不是讓系統保守，而是讓系統不靠幻覺維持表面吞吐。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>多開 queue 就能解決</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>queue 只能搬移壓力，不能消除長期產消失衡。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>背壓代表系統變慢</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>沒有背壓時，系統常只是先看起來快，後面整體更慢更亂。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只有 reactive framework 才談背壓</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>任何 producer-consumer 鏈路都會遇到這個容量問題。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>這條鏈路真正滿了時，壓力會去哪裡</h2>
+          <p class="section-lede">下面兩個問題很適合放在佇列與串流設計 review。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果下游今天只吃得下一半，上游要怎麼知道</strong>
+            <p>沒有答案就代表壓力只會先躲進緩衝。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>資料滿出來時，我寧可慢、拒、還是丟</strong>
+            <p>先講清楚比等到事故當天才選要健康得多。</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可接 flow control、Reactive Streams 與 queueing theory。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁以 backpressure 的 producer-consumer 問題為主，再把它帶回佇列、事件流與容量治理。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Backpressure 條目整理了當消費端較慢時，壓力如何回傳到生產端的基本想法。</p>
+            <a href="https://en.wikipedia.org/wiki/Backpressure_(telecommunications)" target="_blank" rel="noreferrer">Backpressure</a>
+          </article>
+          <article class="source-card">
+            <strong>近鄰概念</strong>
+            <p>Flow control 條目可作為更一般的背景，看容量協調如何在通訊與系統中運作。</p>
+            <a href="https://en.wikipedia.org/wiki/Flow_control_(data)" target="_blank" rel="noreferrer">Flow Control</a>
+          </article>
+          <article class="source-card">
+            <strong>實務規格</strong>
+            <p>Reactive Streams 規格是現代軟體實作背壓時常引用的參考之一。</p>
+            <a href="https://www.reactive-streams.org/" target="_blank" rel="noreferrer">Reactive Streams</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>讀完後可以找一條你們最常堆 queue 的資料流，直接問：如果下游今天慢一半，上游會知道嗎？</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

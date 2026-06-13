@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>選樣偏差 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-selection-bias">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / sampling / data / inference</p>
+        <h1>選樣偏差</h1>
+        <p class="topic-subtitle">Selection Bias</p>
+        <p class="thesis">如果你拿來看的樣本不是從整體中公平地進來，那看起來再漂亮的統計也可能只是在描述篩選機制，而不是描述世界。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這一頁要把『我手上有資料』和『這份資料能代表我要推論的整體』拆開，因為很多自信結論只是忘了樣本怎麼進場。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>推論偏誤 / 樣本失真</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Biased sampling distorts what conclusions seem justified</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>抽樣機制、可見樣本、遺漏樣本、推論範圍</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在分析與研究裡更敏感地追問樣本來源，而不是只看結果本身</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>樣本</span>
+          <span>篩選</span>
+          <span>失真</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>樣本不是中立入口，它怎麼被選進來，會直接決定你能看見什麼世界</h2>
+          <p class="section-lede">選樣偏差比倖存者偏差更廣，它關心的是任何讓樣本進場機制歪掉的過程。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>資料讓人有掌握感，但若樣本只代表某種容易被看見、願意回覆或被制度留住的子集，你的結論就可能被入口條件綁住。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先問資料怎麼來</strong>
+            <p>比起先看表格，更該先看哪些人、事、事件有機會被放進表格。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再找缺席者</strong>
+            <p>沒出現的樣本有時比出現的樣本更影響結論。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後限制推論範圍</strong>
+            <p>若樣本不代表整體，就別把結論說得像在講整體。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>從一份看起來很完整、其實只覆蓋特定入口的資料開始</h2>
+          <p class="section-lede">選樣偏差在使用者研究、問卷、指標、醫療資料與產品分析裡都很常見。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>你只分析有主動回報問題的用戶，於是很容易高估某些痛點、低估那些默默流失卻不會回報的人。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>資料不是沒有價值，而是它描述的可能只是『會被你看見的人』。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">樣本進場條件不均</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">可見資料偏向特定子群</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">整體推論被入口機制扭曲</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>選樣偏差最有力的提醒是：你常不是在看世界，而是在看世界加上一層篩網。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個看樣本入口的角度</h2>
+          <p class="section-lede">想知道結論能不能外推，第一步不是跑更多圖，而是把入口畫出來。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>誰會進來</strong>
+            <p>哪些對象較容易被觀察、被記錄或願意回應？</p>
+          </article>
+          <article class="lens-card">
+            <strong>誰被漏掉</strong>
+            <p>哪些人或情況幾乎沒有出現在資料裡？</p>
+          </article>
+          <article class="lens-card">
+            <strong>篩選是否與結果相關</strong>
+            <p>如果進場機制本身和你要測的現象有關，偏差通常更嚴重。</p>
+          </article>
+          <article class="lens-card">
+            <strong>結論外推範圍</strong>
+            <p>這份資料最多只能代表哪個群體？</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>資料來源</th>
+                <th>可能的選樣偏差</th>
+                <th>會導致什麼誤讀</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>自填問卷</td>
+                <td>願意填的人特別有感</td>
+                <td>把高情緒者誤當整體</td>
+              </tr>
+              <tr>
+                <td>回報系統</td>
+                <td>只看會回報問題的人</td>
+                <td>忽略沉默流失與無聲痛點</td>
+              </tr>
+              <tr>
+                <td>臨床資料</td>
+                <td>只看到院者</td>
+                <td>把就醫樣本特性誤當整體健康狀態</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼看到有資料，我們就容易放心</h2>
+          <p class="section-lede">因為資料的存在本身會給人一種完整感，讓入口偏差變得不那麼顯眼。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>可視樣本太有存在感</strong>
+            <p>眼前有數字時，缺席者很容易被忘掉。</p>
+          </div>
+          <div class="example">
+            <strong>表格掩蓋入口條件</strong>
+            <p>分析畫面常乾淨得像樣本自然存在。</p>
+          </div>
+          <div class="example">
+            <strong>人愛把手上資料當全貌</strong>
+            <p>當下有什麼，思考就容易只繞著那些內容轉。</p>
+          </div>
+        </div>
+        <p class="micro-note">選樣偏差不是分析細節，它決定你到底有沒有資格說那個結論。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把抽樣自覺帶回產品分析與研究</h2>
+          <p class="section-lede">對產品與工程團隊來說，很多誤判不是算錯，而是看錯誰有機會被算進來。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>使用者訪談</strong>
+            <p>只找活躍用戶，通常會低估上手失敗與流失者的問題。</p>
+          </div>
+          <div class="example">
+            <strong>品質指標</strong>
+            <p>只看成功跑完的測試樣本，可能忽略根本啟不起來的那批。</p>
+          </div>
+          <div class="example">
+            <strong>客訴數據</strong>
+            <p>會抱怨的不等於全部受影響的人，更不等於最重要的人。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>每次看到資料結論前，先問一句：誰有機會進這份資料，誰沒有。</li>
+          <li>如果無法改善抽樣，至少要縮小結論口氣，不要把子樣本講成整體真相。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三個常見誤讀</h2>
+          <p class="section-lede">選樣偏差不是只有學術研究才要在意，任何資料決策都在碰它。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>樣本夠大就沒事</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>樣本很大但入口偏，還是會穩定地偏。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要有數據就比較客觀</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>客觀不只看量，還看進樣機制。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>這跟倖存者偏差一樣</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>倖存者偏差是其中一種，選樣偏差範圍更廣。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>這份資料是在描述世界，還是在描述誰比較容易被放進資料裡</h2>
+          <p class="section-lede">下面兩個問題很適合放在分析開頭。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>哪些重要群體幾乎沒有機會出現在這份資料中</strong>
+            <p>這往往是最該先寫在結論旁邊的限制。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>進場條件本身是否和我要測的結果有關</strong>
+            <p>若有，偏差通常不是小修能補。</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可接 sampling, survivorship bias 與 external validity。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁以 selection bias 為主，再把概念帶回產品研究、資料分析與推論範圍。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Selection bias 條目整理了樣本進場機制如何扭曲結論。</p>
+            <a href="https://en.wikipedia.org/wiki/Selection_bias" target="_blank" rel="noreferrer">Selection Bias</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰概念</strong>
+            <p>Sampling 條目可作為背景，理解抽樣為何是推論品質的起點。</p>
+            <a href="https://en.wikipedia.org/wiki/Sampling_(statistics)" target="_blank" rel="noreferrer">Sampling</a>
+          </article>
+          <article class="source-card">
+            <strong>近鄰偏誤</strong>
+            <p>Survivorship bias 可作為對照，看某一種特定選樣偏差如何發生。</p>
+            <a href="https://en.wikipedia.org/wiki/Survivorship_bias" target="_blank" rel="noreferrer">Survivorship Bias</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>讀完後可以挑一份你最近最常引用的報表，問自己：它沒看到的那些人，可能正好最重要嗎？</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

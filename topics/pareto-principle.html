@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>帕累托原則 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-pareto-principle">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / focus / distribution / leverage</p>
+        <h1>帕累托原則</h1>
+        <p class="topic-subtitle">Pareto Principle</p>
+        <p class="thesis">很多系統裡，少數關鍵原因、客戶、模組或缺陷，常會造成大多數結果；真正難的是別把這個觀察偷換成懶惰公式。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這一頁要把『找高槓桿少數』和『把 80/20 當萬用神話』拆開，因為真正有用的不是數字本身，而是你有沒有先確認分布真的偏斜。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>優先順序 / 分布觀察</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>A small share of causes often drives a large share of effects</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>分布偏斜、關鍵少數、成本曲線、誤用風險</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能把帕累托原則當成優先順序工具，而不是偷懶的口號</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>少數</span>
+          <span>關鍵</span>
+          <span>影響</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>不是每件事都一樣重要，問題是你能不能找對那批真的在拖動結果的少數因素</h2>
+          <p class="section-lede">帕累托原則最有價值的地方，不是 80/20 這個比例，而是提醒你很多效果分布本來就不平均。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>如果分布真的偏斜，抓住關鍵少數能大幅提升效率；但若你在分布沒驗證前就直接套 80/20，可能會錯砍重要長尾。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先驗證分布</strong>
+            <p>不是所有系統都自然符合 80/20，先看資料是否真的高度集中。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再找可動的少數</strong>
+            <p>高影響來源若不可控，知道它重要也不一定能轉成行動。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後避免忽略長尾</strong>
+            <p>有些長尾項目單一影響小，累積起來卻可能成為下一波風險。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>從一張問題分布圖開始</h2>
+          <p class="section-lede">帕累托原則最適合用在資源有限、需要決定先救哪裡的時候。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>某產品 70% 的客訴集中在三個場景，團隊若先解這三個，就能在有限時間內吃下最大幅度的體驗改善。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>關鍵少數不是永遠固定；當你把最痛的幾個點解掉，下一層分布就會浮出來。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">觀察結果分布不平均</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">先抓高影響少數原因</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">再動態調整下一輪優先順序</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>帕累托原則是幫你找槓桿，不是幫你跳過理解。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個看高槓桿優先順序的角度</h2>
+          <p class="section-lede">真正有用的不是背比例，而是知道何時該集中火力、何時該補長尾。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>分布偏斜度</strong>
+            <p>結果是否真的集中在少數原因，還是其實很平均？</p>
+          </article>
+          <article class="lens-card">
+            <strong>可處置性</strong>
+            <p>高影響來源是否真的能在現有資源下被改動？</p>
+          </article>
+          <article class="lens-card">
+            <strong>時間窗口</strong>
+            <p>有些關鍵少數適合先打，有些長尾風險則不能一直延後。</p>
+          </article>
+          <article class="lens-card">
+            <strong>次級效應</strong>
+            <p>先解頭部項目後，是否會暴露出新的瓶頸或新的不平衡？</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>場景</th>
+                <th>可能的關鍵少數</th>
+                <th>要小心的誤用</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>產品問題</td>
+                <td>少數高頻高痛點流程</td>
+                <td>忽略低頻但高嚴重度事故</td>
+              </tr>
+              <tr>
+                <td>程式缺陷</td>
+                <td>少數脆弱模組或熱點路徑</td>
+                <td>把所有非熱點技術債都無限延後</td>
+              </tr>
+              <tr>
+                <td>客戶服務</td>
+                <td>少數大客戶或大宗問題型態</td>
+                <td>把長尾使用者的真實痛點當成不重要</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼 80/20 這句話這麼迷人</h2>
+          <p class="section-lede">因為它提供了一種很強的聚焦感，讓人覺得只要抓到少數關鍵，就能把複雜世界大幅簡化。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>簡單比例很有行動感</strong>
+            <p>比起全面盤點，『先抓那 20%』聽起來更像立刻能做。</p>
+          </div>
+          <div class="example">
+            <strong>聚焦會帶來掌控感</strong>
+            <p>當資源很少時，找到高槓桿點會讓人感到不再被複雜度淹沒。</p>
+          </div>
+          <div class="example">
+            <strong>口號容易掩蓋驗證</strong>
+            <p>一旦大家都熟悉 80/20，很容易忘記先確認資料是不是支持這種分布。</p>
+          </div>
+        </div>
+        <p class="micro-note">帕累托原則最怕的不是不用，而是把它從觀察工具誤用成偷省分析的理由。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把高槓桿思維帶回產品、除錯與維運</h2>
+          <p class="section-lede">對工程與產品團隊來說，帕累托原則最適合拿來做第一輪聚焦，而不是最後的世界觀。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>Bug triage</strong>
+            <p>先抓造成大多數 crash 的少數 root cause，通常比平均分散修更能快速降低痛感。</p>
+          </div>
+          <div class="example">
+            <strong>效能優化</strong>
+            <p>先找真正吃掉大部分時間的熱點，比全面微調所有函式更有效。</p>
+          </div>
+          <div class="example">
+            <strong>文件補強</strong>
+            <p>常見 onboarding 卡點往往集中在少數幾個環境或概念，先補那裡最划算。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>拿 80/20 當優先順序前，先用資料或現場觀察證明『關鍵少數』真的存在。</li>
+          <li>先解頭部問題很有效，但別忘了定期回頭檢查被你擱置的長尾是否正在變質。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三個常見誤讀</h2>
+          <p class="section-lede">帕累托原則常被講成普世比例，其實真正重要的是偏斜分布與資源聚焦。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>永遠都是 80/20</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。實際比例會變，重點是集中度而不是神奇常數。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>長尾都不重要</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>有些長尾低頻事件單次很痛，不能只因不在頭部就忽略。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要先做少數就夠了</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>解掉第一批關鍵項後，下一輪優先順序往往需要重算。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>我現在是在找高槓桿，還是在偷懶地跳過分布分析</h2>
+          <p class="section-lede">下面兩個問題很適合放在排程與 triage 會議裡。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>目前結果是否真的高度集中在少數原因上</strong>
+            <p>若沒有，硬套 80/20 只會讓你看漏真正平均散布的問題。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>這批高影響來源是最值得先處理，還是只是最容易被看見</strong>
+            <p>兩者常常不是同一件事。</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可接 long tail、priority triage 與 bottleneck analysis。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁以 Pareto principle 的分布觀察為主，再把它接到工程與產品的優先順序判斷。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Pareto principle 條目整理了 80/20 這個觀察在不同領域中的常見用法。</p>
+            <a href="https://en.wikipedia.org/wiki/Pareto_principle" target="_blank" rel="noreferrer">Pareto Principle</a>
+          </article>
+          <article class="source-card">
+            <strong>長尾對照</strong>
+            <p>Long tail 條目有助於理解為什麼不是所有重要性都集中在頭部。</p>
+            <a href="https://en.wikipedia.org/wiki/Long_tail" target="_blank" rel="noreferrer">Long Tail</a>
+          </article>
+          <article class="source-card">
+            <strong>瓶頸視角</strong>
+            <p>Bottleneck 條目可作為實務對照，看高槓桿少數如何轉成系統改善順序。</p>
+            <a href="https://en.wikipedia.org/wiki/Bottleneck" target="_blank" rel="noreferrer">Bottleneck</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>讀完後可以拿最近一批 bug、客訴或效能數據做一次排序，看真正的關鍵少數是不是跟你直覺一致。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

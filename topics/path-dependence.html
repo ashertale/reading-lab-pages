@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>路徑依賴 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-path-dependence">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / systems / history / lock-in</p>
+        <h1>路徑依賴</h1>
+        <p class="topic-subtitle">Path Dependence</p>
+        <p class="thesis">很多現在看起來理所當然的系統配置，不一定是當下最優，只是過去某些選擇、投資與相容性要求把未來路徑鎖出來了。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這一頁要把『現在這樣一定最合理』和『只是已經很難改』拆開，因為很多架構、制度與標準其實都活在歷史慣性裡。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>系統演化 / 歷史鎖定</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Past choices constrain present options</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>早期選擇、切換成本、相容壓力、歷史慣性</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能看見技術與制度選擇背後的鎖定成本，而不把現狀誤讀成自然最優</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>早期</span>
+          <span>鎖定</span>
+          <span>代價</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>今天的現狀，常不只是今天的理性結果，也是昨天的腳印累積</h2>
+          <p class="section-lede">路徑依賴提醒你：系統演化不是每一刻都重新最佳化，很多時候它是在背著過去一路走來。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>早期選擇讓系統能快速前進，但投入越多、相容越廣，之後即使出現更好的方案，切換也未必划算或甚至不可行。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先找歷史負重</strong>
+            <p>這個決策有多少是為了相容舊資料、舊流程或既有心智模型而保留？</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再估切換成本</strong>
+            <p>不只看重寫成本，也要看教育、風險、信任與生態重整成本。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後分辨慣性與價值</strong>
+            <p>有些保留是必要穩定，有些只是因為改動太痛而被合理化。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>從一個大家都知道不完美、卻一直沿用的設計開始</h2>
+          <p class="section-lede">路徑依賴最常出現在那些『我們也知道有更好方法，但現在很難動』的地方。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>某個內部資料格式一開始為了快速導入做了妥協，後來工具、腳本、測試與客戶流程都長在上面，於是它從暫時方案變成長期現實。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>真正鎖住你的常不是技術本身，而是圍繞技術長出來的相容與習慣生態。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">早期選擇帶來初期優勢</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">更多流程與依賴長在其上</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">切換成本升高形成鎖定</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>路徑依賴最有用的地方，是讓你別把『改不動』誤聽成『這就是最好的』。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個看歷史鎖定的角度</h2>
+          <p class="section-lede">不是所有慣性都壞，但你至少要知道自己現在遵守的是技術必要，還是歷史包袱。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>初始條件</strong>
+            <p>系統早期面對的是哪些當時合理、現在卻不再相同的限制？</p>
+          </article>
+          <article class="lens-card">
+            <strong>網路效應</strong>
+            <p>是否已有太多人、太多工具或太多流程依賴現狀？</p>
+          </article>
+          <article class="lens-card">
+            <strong>切換半徑</strong>
+            <p>一旦更換方案，哪些看似周邊的系統也會被一起拖動？</p>
+          </article>
+          <article class="lens-card">
+            <strong>暫時方案固化</strong>
+            <p>有哪些原本只是 expedient choice，現在卻被當成永恆規格？</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>現象</th>
+                <th>看起來像</th>
+                <th>其實常在說</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>老格式持續沿用</td>
+                <td>它真的最好</td>
+                <td>切換成本高於目前痛點</td>
+              </tr>
+              <tr>
+                <td>流程明知繞卻不改</td>
+                <td>大家都習慣了</td>
+                <td>歷史慣性與跨團隊協調成本在撐住現狀</td>
+              </tr>
+              <tr>
+                <td>更好方案推不動</td>
+                <td>新方案還不夠成熟</td>
+                <td>既有依賴生態太重也可能是主因</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼人很容易把歷史結果看成自然結果</h2>
+          <p class="section-lede">因為現狀存在得越久，就越像本來就該如此，讓人忘記它其實是一路被選出來的。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>存活久了像合理</strong>
+            <p>人會把已存在多年的做法誤認成已被充分證明最優。</p>
+          </div>
+          <div class="example">
+            <strong>切換成本被情緒放大</strong>
+            <p>只要改動牽涉多人，團隊就更容易用『先別動』保護現狀。</p>
+          </div>
+          <div class="example">
+            <strong>歷史選擇被去歷史化</strong>
+            <p>大家看到的是今天的樣子，卻看不到當初為何這樣選。</p>
+          </div>
+        </div>
+        <p class="micro-note">路徑依賴不是說現狀一定錯，而是提醒你現狀常不是中立起點。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把歷史重量帶回架構與制度調整</h2>
+          <p class="section-lede">對 firmware 平台、協定、資料格式與組織流程來說，很多難改之處都不是單點問題，而是依賴網一路長起來的結果。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>通訊協定</strong>
+            <p>早期為了低成本做的欄位設計，後來可能綁死多代裝置與後台解析流程。</p>
+          </div>
+          <div class="example">
+            <strong>Build 工具鏈</strong>
+            <p>某套工具不是最舒服，但只要整個 release、測試與供應鏈都依賴它，就很難輕換。</p>
+          </div>
+          <div class="example">
+            <strong>組織流程</strong>
+            <p>一些看似繁瑣的簽核與驗證可能早已不合時宜，卻因為責任分配與風險記憶而持續存在。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>要改歷史鎖定，不只要提更好方案，還要設計過渡、相容與搬遷成本的吸收方式。</li>
+          <li>評估現狀時，請分開問『它現在好不好』和『它為什麼還在』，兩者不一定同答案。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三個常見誤讀</h2>
+          <p class="section-lede">路徑依賴不是宿命論，而是讓你正視歷史成本如何塑形。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>既然被鎖定就改不了</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。只是代表改動要處理的不只技術，還有依賴生態。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>現狀不好就代表當初一定錯</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>很多早期選擇在當時可能非常合理，只是環境變了。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>這只發生在大制度</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>小到檔名格式、大到平台架構，都可能有路徑依賴。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>我現在是在守價值，還是在守歷史慣性</h2>
+          <p class="section-lede">下面兩個問題很適合放在架構與流程檢討時。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果今天從零開始，我還會做出同樣選擇嗎</strong>
+            <p>若不會，就表示現狀很可能帶有歷史鎖定。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>要讓這件事改得動，最大的阻力是技術難度還是依賴生態</strong>
+            <p>答案決定了你該先動哪一層。</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可接 lock-in、QWERTY debate 與 switching cost。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁以 path dependence 為主，再把概念帶回技術選型、協定演化與流程治理。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Path dependence 條目整理了這個概念如何描述歷史選擇對後續選項的限制。</p>
+            <a href="https://en.wikipedia.org/wiki/Path_dependence" target="_blank" rel="noreferrer">Path Dependence</a>
+          </article>
+          <article class="source-card">
+            <strong>近鄰概念</strong>
+            <p>Lock-in 條目可作為對照，看市場與技術如何被既有選擇綁住。</p>
+            <a href="https://en.wikipedia.org/wiki/Vendor_lock-in" target="_blank" rel="noreferrer">Lock-in</a>
+          </article>
+          <article class="source-card">
+            <strong>切換成本</strong>
+            <p>Switching barriers 的一般討論有助於理解為何更好方案也未必立刻能上位。</p>
+            <a href="https://en.wikipedia.org/wiki/Switching_barriers" target="_blank" rel="noreferrer">Switching Barriers</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>讀完後可以挑一個你們明知不完美卻改不動的設計，分開寫下『技術原因』與『歷史原因』各是什麼。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

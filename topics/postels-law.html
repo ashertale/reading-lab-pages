@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>波斯托爾定律 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-postels-law">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / protocols / compatibility / robustness</p>
+        <h1>波斯托爾定律</h1>
+        <p class="topic-subtitle">Postel&#x27;s Law / Robustness Principle</p>
+        <p class="thesis">對外送出的東西要保守清楚，對外接收的東西要寬容穩健，但這種寬容若失控，也可能把錯誤與歧義養成永久相容性包袱。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這一頁要把『寬容地收』的短期好處和長期風險拆開，因為很多協定穩定性與相容性債都從這裡長出來。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>工程原則 / 介面相容</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Be conservative in what you send, liberal in what you accept</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>明確契約、相容收益、錯誤放大、長期演化</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能判斷何時該容錯、何時該嚴格拒收，並看見兩者對生態演化的影響</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>輸出</span>
+          <span>輸入</span>
+          <span>寬容</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>寬容能救相容，但也可能悄悄把歧義升格成事實標準</h2>
+          <p class="section-lede">波斯托爾定律在網路協定時代非常有用，但到了大型 API 生態，它也常被拿來合理化過度容忍錯誤輸入。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>如果接收端太嚴，互通性會下降；如果接收端太寬，錯誤行為會被默默吸收，久了反而變成大家都得相容的隱性規格。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>輸出端先守契約</strong>
+            <p>你送出去的東西越模糊，下游越難知道什麼才是正確用法。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>接收端要分清容錯與縱容</strong>
+            <p>短期容忍能提升兼容，但也可能讓錯誤格式被永久保留下來。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>演化時要設計收斂路線</strong>
+            <p>若現場已經養出歧義輸入，要用 deprecation、telemetry 與明確錯誤訊息把生態拉回來。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>從一個看似善意的 parser 開始</h2>
+          <p class="section-lede">很多工程團隊一開始只是想讓東西更能互通，最後卻變成每個人都在猜系統到底真正接受什麼。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>某個裝置通訊欄位明明要求固定格式，但接收端為了容錯接受多種變體；多年後，各家工具都依賴不同變體，誰也不敢收緊。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>寬容輸入在短期看起來像穩健，長期卻可能把錯誤資料流與怪異依賴一起養大。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">為了互通而放寬接收</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">錯誤輸入也被默默接受</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">歧義行為變成隱性契約</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>波斯托爾定律最值得學的，不是機械地寬容，而是知道寬容會把什麼樣的未來一起買進來。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個看容錯邊界的透鏡</h2>
+          <p class="section-lede">不是所有寬容都壞；真正要問的是，它在解決短期互通，還是在製造長期語意混亂。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>契約清晰度</strong>
+            <p>協定文件是否已足夠明確，還是大家其實在靠實作猜測真規則？</p>
+          </article>
+          <article class="lens-card">
+            <strong>錯誤可見性</strong>
+            <p>接收端若默默吞掉異常，發送端就永遠不會被迫修正。</p>
+          </article>
+          <article class="lens-card">
+            <strong>生態規模</strong>
+            <p>使用者越多，任何被接受的怪異行為越容易變成大家依賴的現實。</p>
+          </article>
+          <article class="lens-card">
+            <strong>演化成本</strong>
+            <p>現在的寬容是可回收的暫時橋接，還是未來每個版本都要背的相容性包袱？</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>做法</th>
+                <th>短期收益</th>
+                <th>長期代價</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>嚴格拒收非法格式</td>
+                <td>錯誤更早暴露</td>
+                <td>短期互通性與導入摩擦較高</td>
+              </tr>
+              <tr>
+                <td>默默接受多種變體</td>
+                <td>比較不會當場壞掉</td>
+                <td>錯誤輸入被養成隱性規格</td>
+              </tr>
+              <tr>
+                <td>接受但回警告</td>
+                <td>兼容與可見性可兼得</td>
+                <td>需要團隊真的追警告與安排收斂</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼寬容輸入看起來總是比較善良</h2>
+          <p class="section-lede">因為立即不壞掉比長期語意乾淨更能被感受到，團隊自然傾向買短期平順。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>當下成功會壓過未來成本</strong>
+            <p>資料一進來能跑通，會讓人低估之後維護每種怪異變體的代價。</p>
+          </div>
+          <div class="example">
+            <strong>錯誤被吞掉就不再被看見</strong>
+            <p>一旦接收端代為修正，真正製造錯誤的人反而感受不到問題。</p>
+          </div>
+          <div class="example">
+            <strong>相容常被當成仁慈</strong>
+            <p>團隊容易把『能跑』當成『設計合理』，忽略語意正在慢慢腐壞。</p>
+          </div>
+        </div>
+        <p class="micro-note">這個原則最難的地方不是背口訣，而是知道哪種寬容在幫系統，哪種寬容在養債。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把容錯邊界帶回韌體與 API 設計</h2>
+          <p class="section-lede">對 firmware、協定解析器與 SDK 來說，波斯托爾定律幾乎每天都在出現，只是常被包裝成『先讓它 work』。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>封包解析</strong>
+            <p>容忍欄位順序或空白差異能提升互通，但若連非法值都靜默接受，錯誤設備會永遠留在生態裡。</p>
+          </div>
+          <div class="example">
+            <strong>CLI 與設定檔</strong>
+            <p>過度自動修正雖然方便，卻會讓使用者更難知道自己到底寫對了沒有。</p>
+          </div>
+          <div class="example">
+            <strong>SDK 演化</strong>
+            <p>若函式對模糊輸入過度寬容，下游程式會把那些偶然行為當成正式契約。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>若決定容忍異常輸入，最好同步留下 telemetry、warning 或 deprecation 路徑。</li>
+          <li>對外輸出的格式越清楚穩定，接收端就越不需要靠寬容去補上前端的鬆散。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三個常見誤讀</h2>
+          <p class="section-lede">波斯托爾定律常被簡化成『永遠寬容』，但那其實只學到一半。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>接收端越寬越好</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。過度寬容會把錯誤輸入固定成新的相容性負債。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要能互通就是成功</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>互通若建立在語意模糊上，之後的修復成本可能更高。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>這只是網路協定老觀念</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>今天的 JSON API、裝置設定與資料交換格式同樣會遇到這題。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>我是在做穩健設計，還是在替未來養更多例外</h2>
+          <p class="section-lede">下面兩個問題很適合放進 parser 與 API 設計 review。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果今天接受這個模糊輸入，兩年後我還能輕易撤回嗎</strong>
+            <p>若不能，它就不是小容錯，而是正在擴張契約面。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>發送端是否能清楚知道自己送錯了</strong>
+            <p>如果接收端把錯誤全部吞掉，整個生態就失去自我校正能力。</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可接 Hyrum&#x27;s Law、robustness principle critique 與 API contract design。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁以 robustness principle 為主，再補上現代 API 與協定生態裡對過度寬容的反思。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Robustness principle 條目整理了波斯托爾定律最常被引用的版本與背景。</p>
+            <a href="https://en.wikipedia.org/wiki/Robustness_principle" target="_blank" rel="noreferrer">Robustness Principle</a>
+          </article>
+          <article class="source-card">
+            <strong>原始脈絡</strong>
+            <p>RFC 761 中的相關段落提供了這句設計原則在早期網路協定中的著名表述。</p>
+            <a href="https://datatracker.ietf.org/doc/html/rfc761#section-2.10" target="_blank" rel="noreferrer">RFC 761</a>
+          </article>
+          <article class="source-card">
+            <strong>近鄰法則</strong>
+            <p>Hyrum&#x27;s Law 有助於理解為什麼被接受的任何行為最後都可能被下游依賴。</p>
+            <a href="https://en.wikipedia.org/wiki/Hyrum%27s_Law" target="_blank" rel="noreferrer">Hyrum&#x27;s Law</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>讀完後可以回頭看一個你熟悉的 parser，列出它現在默默接受的三種異常輸入，再評估哪些應該開始收斂。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>兩將軍問題 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-two-generals-problem">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / communication / acks / uncertainty</p>
+        <h1>兩將軍問題</h1>
+        <p class="topic-subtitle">Two Generals&#x27; Problem</p>
+        <p class="thesis">只要通訊管道本身不可靠，你可以一直接近『我知道你知道』，卻很難在有限步驟內把共同確定性真正鎖死。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這一頁要把『訊息送達』和『彼此都確定訊息送達』拆開，因為很多協定設計難題都卡在第二層。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>通訊難題 / 確認無限回圈</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Impossible certainty over unreliable channels</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>通道可靠度、確認層級、行動門檻、失敗代價</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能看懂 acknowledgement 為什麼不是多回一次就能徹底結案</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>送達</span>
+          <span>確認</span>
+          <span>無限</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>確認能降低不確定，但不能在不可靠通道上免費換來絕對把握</h2>
+          <p class="section-lede">兩將軍問題之所以重要，是因為它把很多工程師天天在做的 retry、ack、timeout，背後的極限講得很清楚。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>你想同步行動，就需要相信對方也收到了；但只要最後一封確認可能遺失，雙方總有人得在某個不完美把握下做決定。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先分清送達與共同知曉</strong>
+            <p>一方知道不代表雙方都知道，更不代表雙方都知道彼此知道。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再接受有限確認的極限</strong>
+            <p>多一層 ack 只是在往前推不確定，不是把它消滅。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後設計可承受的不完美</strong>
+            <p>實務系統常靠重試、冪等與超時策略，把不確定變成可管理，而不是妄想完全消失。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>從一條可能丟包的訊息路徑開始</h2>
+          <p class="section-lede">兩將軍問題不是文字遊戲，而是任何需要雙方在不可靠通道上同步行動的系統都會碰到的邊界。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>兩位將軍必須同時進攻，但 messenger 可能被截斷；只靠一來一回的訊息，雙方都無法百分之百知道對方是否也會動。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>每多一封確認，只是把最後的不確定交到另一方手上，並沒有讓它真正消失。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">送出關鍵訊息</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">回傳確認也可能遺失</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">共同確定性始終有最後一層缺口</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>兩將軍問題最有用的提醒是：在不可靠通道上，你能設計高機率成功，卻不能在有限步驟內保證共同確定。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個看確認極限的角度</h2>
+          <p class="section-lede">這個問題不是要你絕望，而是要你在協定與流程設計上誠實面對剩下的不確定。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>通道不可靠</strong>
+            <p>只要最後一封可能丟，絕對同步就永遠差最後一步。</p>
+          </article>
+          <article class="lens-card">
+            <strong>確認層級</strong>
+            <p>我收到、我知道你收到、我知道你知道我收到，是不同層次的需求。</p>
+          </article>
+          <article class="lens-card">
+            <strong>行動門檻</strong>
+            <p>系統到底需要高機率就夠，還是非得共同確定才敢動？</p>
+          </article>
+          <article class="lens-card">
+            <strong>補救能力</strong>
+            <p>若同步失敗時有 rollback、重試與冪等，對絕對確定的依賴就能降低。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>設計選項</th>
+                <th>能解什麼</th>
+                <th>解不了什麼</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>加 ack</td>
+                <td>降低一方未知的機率</td>
+                <td>不能消除最後一層共同知曉的不確定</td>
+              </tr>
+              <tr>
+                <td>重試與 timeout</td>
+                <td>提高整體成功率</td>
+                <td>仍無法把不可靠通道變成絕對可靠</td>
+              </tr>
+              <tr>
+                <td>冪等與補償</td>
+                <td>讓失敗成本可承受</td>
+                <td>不是保證同步，而是保證不同步也不致命</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼我們直覺上覺得再確認一次就夠了</h2>
+          <p class="section-lede">因為大腦很容易把『對方大概收到了』誤認成『雙方已經有共同把握』。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>確認帶來安全感</strong>
+            <p>只要看到 ack，就容易覺得整件事已經穩了。</p>
+          </div>
+          <div class="example">
+            <strong>最後一層不確定不顯眼</strong>
+            <p>我們對無限後退的知曉層級直覺不敏感。</p>
+          </div>
+          <div class="example">
+            <strong>正常情況會掩蓋極限</strong>
+            <p>因為大多數時候訊息都送得到，所以邊界條件看起來像哲學而不是工程。</p>
+          </div>
+        </div>
+        <p class="micro-note">這個問題不是教你放棄確認，而是教你別把確認當成魔法。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把不完美確認帶回協定與服務設計</h2>
+          <p class="section-lede">對分散式服務、裝置更新與外部系統整合來說，兩將軍視角能幫你避免把流程建立在不存在的絕對保證上。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>OTA 更新</strong>
+            <p>裝置回 ACK 不代表更新一定成功，因為 ACK 之後仍可能在 reboot 或 flash 階段失敗。</p>
+          </div>
+          <div class="example">
+            <strong>支付與訂單</strong>
+            <p>收到提交結果不代表雙方資料庫狀態已完全一致，所以才需要冪等鍵與 reconciliation。</p>
+          </div>
+          <div class="example">
+            <strong>跨服務呼叫</strong>
+            <p>RPC 回應逾時時，你真正不知道的是『對方沒做』還是『做了但你沒收到回覆』。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>與其追求不存在的絕對確認，不如先設計重試、安全重入與事後對帳路徑。</li>
+          <li>如果失敗代價極高，就應該讓單次確認不足以觸發不可逆操作。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三個常見誤讀</h2>
+          <p class="section-lede">兩將軍問題最常被誤聽成『所以確認都沒用』，其實不是。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>那就不要做 ack</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。ack 很有價值，只是它提供的是機率改善，不是絕對保證。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>這只是理論上挑語病</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>今天任何不可靠網路上的交易、更新與同步都會撞到同一個邊界。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>多一層協定就能根治</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>協定可以把失敗成本變小，但不能憑空消除不可靠通道的基本限制。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>我的流程真正需要的是高成功率，還是共同確定性</h2>
+          <p class="section-lede">下面兩個問題很適合放進通訊協定評審。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果最後一封確認遺失，系統會怎麼解讀與收斂</strong>
+            <p>這通常最能看出設計是否誠實面對不確定。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>我有沒有把不可逆操作建立在『應該沒問題吧』的單次確認上</strong>
+            <p>若有，就需要補冪等、補償或對帳機制。</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可接 Byzantine Generals Problem、idempotency 與 distributed transactions。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁以 Two Generals&#x27; Problem 為主，再把問題帶回實務系統裡常見的 ACK、timeout 與冪等設計。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Two Generals&#x27; Problem 條目整理了這個經典不可能性問題的基本結構。</p>
+            <a href="https://en.wikipedia.org/wiki/Two_Generals%27_Problem" target="_blank" rel="noreferrer">Two Generals&#x27; Problem</a>
+          </article>
+          <article class="source-card">
+            <strong>近鄰概念</strong>
+            <p>Coordinated attack problem 可作為對照，幫助理解它在分散式理論中的更一般版本。</p>
+            <a href="https://en.wikipedia.org/wiki/Coordinated_attack_problem" target="_blank" rel="noreferrer">Coordinated Attack Problem</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰難題</strong>
+            <p>Distributed transaction 條目有助於把這個極限帶回現代系統設計。</p>
+            <a href="https://en.wikipedia.org/wiki/Distributed_transaction" target="_blank" rel="noreferrer">Distributed Transaction</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>讀完後可以挑一條跨系統流程，畫出它的最後一層 ACK 風險，再看現在是否已經有補償或對帳。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

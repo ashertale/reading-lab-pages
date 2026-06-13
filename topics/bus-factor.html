@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>巴士因子 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-bus-factor">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / teams / knowledge / resilience</p>
+        <h1>巴士因子</h1>
+        <p class="topic-subtitle">Bus Factor / Truck Factor</p>
+        <p class="thesis">一個系統若只有極少數人真正知道怎麼維護、部署或修它，那它的最大風險常不是技術本身，而是知識過度集中。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這一頁要把『有高手扛住』和『系統真的可持續』拆開，因為很多團隊的穩定感，其實只是建立在少數人還沒離開。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>團隊風險 / 知識集中</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>How many people can disappear before the project stalls</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>知識集中度、可替代性、文件可用性、恢復時間</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能把知識風險當成系統風險管理，而不只是人力安排問題</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>集中</span>
+          <span>脆弱</span>
+          <span>傳承</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>專案能不能繼續，不只看 code 在不在，也看知道怎麼動它的人還在不在</h2>
+          <p class="section-lede">巴士因子把一個常被情感化的問題變得可談：當關鍵知識只存在少數人腦中，整個系統的續航力就會被綁在他們身上。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>專家集中能讓短期效率很高，但一旦維運、排錯與決策脈絡無法被他人接手，系統表面穩定其實只是在借人撐住。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先盤點真正不可替代的知識</strong>
+            <p>不是每段 code 都一樣危險，最危險的是只有一兩個人知道的 build、bring-up、排錯與 release 路徑。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再看替代是否真的可用</strong>
+            <p>文件存在不代表能接手；要看別人能否靠它完成真實任務。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後把傳承做成日常機制</strong>
+            <p>知識分享若只在出事後補救，通常已經太晚。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>從一個大家都不想打擾的人開始</h2>
+          <p class="section-lede">巴士因子低的團隊常有一種熟悉畫面：某幾個人永遠被問同一批問題，也永遠是最後的故障出口。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>某位資深工程師最懂 boot sequence、燒錄流程與 field diagnostic；只要他休假，release 節奏就顯著變慢。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>真正集中的是脈絡，不只是知識點；別人也許看得懂 code，卻不知道為什麼當初要這樣設計。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">關鍵知識集中在少數人</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">他們成為所有高風險路徑的瓶頸</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">人一離開或不可用就暴露系統脆弱</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>巴士因子不是在問『誰最重要』，而是在問『系統有多少部分其實只靠個人記憶在維持』。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個看知識集中風險的角度</h2>
+          <p class="section-lede">不必把所有知識平均化，但你至少要知道哪些區域一旦失人就會讓專案停擺。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>路徑唯一性</strong>
+            <p>某個關鍵流程是否只有一種做法，而且只有一個人知道？</p>
+          </article>
+          <article class="lens-card">
+            <strong>脈絡可轉移性</strong>
+            <p>別人能否不靠口耳相傳就理解設計理由、風險邊界與例外處理？</p>
+          </article>
+          <article class="lens-card">
+            <strong>值班壓力</strong>
+            <p>是否總是同樣幾個人被拉去解 incident、帶新人、做最後 release 判斷？</p>
+          </article>
+          <article class="lens-card">
+            <strong>替代演練</strong>
+            <p>團隊有沒有真的練過讓第二人、第三人完成整條關鍵鏈路？</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>徵兆</th>
+                <th>表面看起來像</th>
+                <th>其實在透露什麼</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>同一人永遠被 @</td>
+                <td>他效率最高</td>
+                <td>知識分布失衡，系統在向單點故障靠攏</td>
+              </tr>
+              <tr>
+                <td>文件存在但沒人敢照做</td>
+                <td>大家比較謹慎</td>
+                <td>文件不是可執行知識，只是存放知識殘影</td>
+              </tr>
+              <tr>
+                <td>某人請假就延後 release</td>
+                <td>時程剛好不巧</td>
+                <td>關鍵判準與操作路徑沒有被團隊化</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼知識集中常被誤當成效率</h2>
+          <p class="section-lede">因為讓最懂的人一直做，短期最省時間；知識傳承看起來反而像在拖慢進度。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>專家捷徑很誘人</strong>
+            <p>讓高手直接處理問題，總比培養第二人當下更快。</p>
+          </div>
+          <div class="example">
+            <strong>教別人有顯性成本</strong>
+            <p>pair、文件與演練會占掉可見工時，所以常被往後排。</p>
+          </div>
+          <div class="example">
+            <strong>穩定假象會麻痺風險感</strong>
+            <p>只要關鍵人還在，團隊就容易低估自己其實站在很細的支柱上。</p>
+          </div>
+        </div>
+        <p class="micro-note">巴士因子不是責怪專家，而是提醒團隊不要把系統可靠性偷偷綁在人類記憶上。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把知識分散當成工程韌性設計</h2>
+          <p class="section-lede">對 firmware、製造測試與平台維運來說，低巴士因子往往不是抽象風險，而是下一次 release 卡住的直接原因。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>Bring-up 與燒錄流程</strong>
+            <p>若只有少數人知道板子異常時該怎麼救，生產與 debug 都會被放大成排隊事件。</p>
+          </div>
+          <div class="example">
+            <strong>CI/CD 與 toolchain</strong>
+            <p>看似自動化的系統若只有一人知道怎麼修 pipeline，仍是隱性單點。</p>
+          </div>
+          <div class="example">
+            <strong>模組 ownership</strong>
+            <p>如果 component owner 只有名字，沒有可替代的操作與判準，ownership 就只是排程上的標籤。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>真正的去風險不是叫專家多寫文件，而是讓第二人能獨立走完高風險任務。</li>
+          <li>每次 incident 與 release 都是檢查巴士因子的好時機：誰是最後必須出現的人？為什麼？</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三個常見誤讀</h2>
+          <p class="section-lede">巴士因子不是要求人人都知道一切，而是避免關鍵知識變成單點故障。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>只要文件齊全就沒事</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>文件若沒被他人實際用過，通常還不能算真正可接手。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>專家多就是好事</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>專家重要，但若只有專家能動，系統就還是脆弱。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>這是人資問題不是工程問題</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>知識分布直接決定維運韌性、排錯速度與變更風險。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>如果這個人明天不在線，系統還能穩定往前嗎</h2>
+          <p class="section-lede">下面兩個問題很適合放在 ownership 與 release 盤點裡。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>哪三條關鍵路徑目前只有一人真正能獨立完成</strong>
+            <p>那通常就是最先該做 shadowing 與演練的地方。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>我說的『可替代』是看過、做過，還是真的能獨立交付</strong>
+            <p>很多團隊高估的是知道流程，不是能執行流程。</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可接 single point of failure、onboarding design 與 knowledge management。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁以 bus factor 為主，再把它拉回軟體與韌體團隊常見的知識集中風險。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Bus factor 條目整理了這個比喻如何描述專案對少數關鍵成員的依賴。</p>
+            <a href="https://en.wikipedia.org/wiki/Bus_factor" target="_blank" rel="noreferrer">Bus Factor</a>
+          </article>
+          <article class="source-card">
+            <strong>近鄰概念</strong>
+            <p>Single point of failure 有助於把知識集中理解成系統可靠性問題，而不只是人員問題。</p>
+            <a href="https://en.wikipedia.org/wiki/Single_point_of_failure" target="_blank" rel="noreferrer">Single Point of Failure</a>
+          </article>
+          <article class="source-card">
+            <strong>團隊實務</strong>
+            <p>Knowledge management 條目可作為對照，看組織如何把關鍵判準從個人記憶轉成可共享資產。</p>
+            <a href="https://en.wikipedia.org/wiki/Knowledge_management" target="_blank" rel="noreferrer">Knowledge Management</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>讀完後可以找一條你們最怕某人不在時卡住的流程，安排一次由第二人獨立完成的演練。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>帕斯卡勒索 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-pascals-mugging">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / probability / extremes / reasoning</p>
+        <h1>帕斯卡勒索</h1>
+        <p class="topic-subtitle">Pascal&#x27;s Mugging</p>
+        <p class="thesis">如果你對極小機率的巨大報酬照單全收，理性計算就可能被任何誇張承諾綁架；真正難的是在不確定與極端值之間守住判斷。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這一頁要把『數學上可能很大』和『因此實務上就該全信』拆開，因為很多極端承諾問題都卡在機率可信度與報酬尺度失衡。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>決策悖論 / 極小機率極大報酬</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Tiny probabilities with enormous payoffs can dominate naive expected value reasoning</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>機率可信度、報酬尺度、可驗證性、決策邊界</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在面對誇張但低概率的說法時，更穩定地處理 expected value 與可信度問題</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>微機率</span>
+          <span>巨報酬</span>
+          <span>綁架</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>不是所有看起來 EV 很高的故事，都值得你照單全收</h2>
+          <p class="section-lede">帕斯卡勒索逼問的是：當報酬可以被說得無限大時，單純乘法還夠不夠當決策工具？</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>若完全忽略極小機率的大後果，可能過度保守；但若對任何聲稱巨大報酬的低概率故事都採信，判斷又會被胡亂敘事綁走。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先審可信度而非只看乘積</strong>
+            <p>機率不是隨便填一個極小值就能進場。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再看模型是否可校準</strong>
+            <p>如果沒有辦法對極端聲稱做驗證與比較，數值化本身就可能是假精確。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後設決策邊界</strong>
+            <p>理性不代表對所有極端可能都無限開放。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>從一個很誇張、卻自稱只要你付出小成本就可能換來無限回報的說法開始</h2>
+          <p class="section-lede">帕斯卡勒索最常用來測試 expected value 推理在極端尾部時的穩定度。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>有人說只要你現在給他一點資源，他有極小機率能替無數生命帶來巨大好處；如果你純看乘法，任何超大報酬都可能壓過現實可疑度。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>問題不只是機率小，而是機率和報酬都可能缺乏可校準的基礎。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">提出極小機率極大報酬</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">單純 EV 看起來驚人</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">判斷面臨可信度與尺度失衡</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>帕斯卡勒索最有價值的提醒是：極端報酬不能自動替代證據品質。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個看極端主張的角度</h2>
+          <p class="section-lede">不是要否定尾端風險，而是要避免被任何無法校準的巨大聲稱牽走。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>機率來源</strong>
+            <p>這個機率是推估、想像還是可經驗校準？</p>
+          </article>
+          <article class="lens-card">
+            <strong>報酬邊界</strong>
+            <p>巨大效益的敘述是否可以被任意膨脹到沒有上限？</p>
+          </article>
+          <article class="lens-card">
+            <strong>比較基準</strong>
+            <p>若同類極端主張很多，你憑什麼只信這一個？</p>
+          </article>
+          <article class="lens-card">
+            <strong>現實約束</strong>
+            <p>你是否有資源、驗證與可逆機制處理這類高不確定下注？</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>情境</th>
+                <th>單純 EV 直覺</th>
+                <th>還需要補看什麼</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>極端公益承諾</td>
+                <td>萬一成了收益超大</td>
+                <td>主張可信度與比較對象</td>
+              </tr>
+              <tr>
+                <td>高風險創新</td>
+                <td>只要成功就顛覆一切</td>
+                <td>失敗頻率、學習回收與證據品質</td>
+              </tr>
+              <tr>
+                <td>安全警報</td>
+                <td>萬一是真的代價太高</td>
+                <td>訊號真偽、基準率與反應成本</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼巨大數字很容易綁架直覺</h2>
+          <p class="section-lede">因為當報酬尺度被拉到很大時，人很難不被它的道德重量或想像力吸走。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>大數字會壓過小機率</strong>
+            <p>巨大的可能收益很容易蓋掉對機率可信度的懷疑。</p>
+          </div>
+          <div class="example">
+            <strong>理性外觀有說服力</strong>
+            <p>只要套上 EV 語言，很多極端主張就看起來像很數學。</p>
+          </div>
+          <div class="example">
+            <strong>拒絕會帶來道德壓力</strong>
+            <p>一旦報酬被描述得足夠偉大，不下注的人反而像不夠理性或不夠善。</p>
+          </div>
+        </div>
+        <p class="micro-note">帕斯卡勒索不是反 expected value，而是提醒 EV 需要可信的輸入與現實邊界。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把可信度檢查帶回高不確定決策</h2>
+          <p class="section-lede">對策略、公益與技術投資來說，這個概念能幫你分辨是真正值得的極端機會，還是被數字包裝的幻想。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>高風險投資</strong>
+            <p>若只看 potential upside，團隊很容易忽略成功機率與驗證機制的空洞。</p>
+          </div>
+          <div class="example">
+            <strong>安全治理</strong>
+            <p>對極低頻高代價事件，既不能完全忽略，也不能對所有誇張警報無限買單。</p>
+          </div>
+          <div class="example">
+            <strong>研究優先序</strong>
+            <p>某些宏大敘事可能在道德上很誘人，但若無法校準，其實很難合理比較。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>碰到極端報酬主張時，先把『多大』放一邊，先問『憑什麼相信』。</li>
+          <li>真正穩健的理性不是對所有巨大可能敞開，而是知道哪些極端值值得被納入。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三個常見誤讀</h2>
+          <p class="section-lede">帕斯卡勒索不是說尾端風險都不重要，而是說重要不代表可以跳過可信度。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以別做高風險高報酬選擇</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。重點是高報酬不能獨占全部判斷權。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>這只在哲學題才有</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>投資、公益、AI 安全與政策論證都常遇到。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要數學會算就夠了</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>數學不能替你憑空產生可靠的輸入。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>這個極大回報，真的是可信可能，還是只是把數字吹到很大</h2>
+          <p class="section-lede">下面兩個問題很適合放在極端提案前。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>若把報酬縮回保守尺度，這個提案還站得住嗎</strong>
+            <p>這能測出它是不是只靠巨大數字撐場。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>我拿什麼把這個極端聲稱和其他極端聲稱做公平比較</strong>
+            <p>沒有比較基準時，EV 常只是假精確。</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可接 expected value、tail risk 與 Pascal&#x27;s wager。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁以 Pascal&#x27;s Mugging 為主，再把概念帶回極端風險與高不確定決策。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Pascal&#x27;s mugging 條目整理了這個針對極小機率極大報酬推理的經典難題。</p>
+            <a href="https://en.wikipedia.org/wiki/Pascal%27s_mugging" target="_blank" rel="noreferrer">Pascal&#x27;s Mugging</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰概念</strong>
+            <p>Expected value 條目可作為背景，理解這類難題為何直接衝撞乘法直覺。</p>
+            <a href="https://en.wikipedia.org/wiki/Expected_value" target="_blank" rel="noreferrer">Expected Value</a>
+          </article>
+          <article class="source-card">
+            <strong>思想來源</strong>
+            <p>Pascal&#x27;s wager 是更早的極端回報決策框架，可作為對照。</p>
+            <a href="https://en.wikipedia.org/wiki/Pascal%27s_wager" target="_blank" rel="noreferrer">Pascal&#x27;s Wager</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>讀完後可以拿一個最近聽過很誇張的高報酬提案，先只問兩件事：機率憑什麼、比較基準在哪。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

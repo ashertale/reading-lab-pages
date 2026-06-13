@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>責任分散 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-diffusion-of-responsibility">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / ownership / group / inaction</p>
+        <h1>責任分散</h1>
+        <p class="topic-subtitle">Diffusion of Responsibility</p>
+        <p class="thesis">當一件事同時屬於很多人時，它很容易變成實際上誰都沒真的擁有；參與者越多，個人越可能把第一步想成『應該會有人處理』。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這一頁要把『大家都有責任』和『因此誰都不會先動』拆開，因為很多空窗不是缺能力，而是缺明確的第一責任人。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>群體心理 / 行動稀釋</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>When many people are present, each may feel less personally responsible to act</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>角色清晰度、旁觀者數量、行動門檻、可見性</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在團隊、值班與會議裡更快辨認責任被平均到失真的時刻</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>很多人</span>
+          <span>沒人</span>
+          <span>空窗</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>責任一旦被攤太薄，主動性常不是平均分配，而是一起蒸發</h2>
+          <p class="section-lede">責任分散提醒你：共享責任若沒有結構化 ownership，很容易退化成集體旁觀。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>多人參與本來能帶來支援與備援，但若誰該先動、誰該收尾不清楚，群體反而更可能出現行動空窗。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先把第一步綁到人</strong>
+            <p>越重要的事，越不能只說『大家留意』。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再讓行動可見</strong>
+            <p>若沒人知道別人是否已接手，觀望就會自然蔓延。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後分清共享與模糊</strong>
+            <p>共享責任需要清楚交接，不是把責任平均稀釋。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>從一個所有人都在現場、事情卻還是拖著沒動的時刻開始</h2>
+          <p class="section-lede">責任分散在 incident、值班、群組協作與大型會議裡尤其常見。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>bug 通知發到大群組，大家都看到了，但因為沒指名 owner，最初十分鐘反而沒人真正接住。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>人不是故意懶，而是群體情境改寫了每個人對『是不是我該先動』的感受。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">多人同時知道一件事</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">個人責任感被稀釋</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">行動空窗出現或拖延放大</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>責任分散最常偽裝成『大家都在關心』，但真正缺的是誰在負責。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個看 ownership 稀釋的角度</h2>
+          <p class="section-lede">只要你看到一件事人人有份、人人模糊，就值得懷疑責任分散正在發生。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>指派明確度</strong>
+            <p>是否有清楚 owner，而不是一個模糊的『各位請處理』？</p>
+          </article>
+          <article class="lens-card">
+            <strong>狀態可見性</strong>
+            <p>大家看得出來誰已接手、處理到哪裡嗎？</p>
+          </article>
+          <article class="lens-card">
+            <strong>行動門檻</strong>
+            <p>要開始處理是否需要太多請示或確認？</p>
+          </article>
+          <article class="lens-card">
+            <strong>群體規模</strong>
+            <p>參與者越多、角色越重疊，責任越容易被平均到看不見。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>場景</th>
+                <th>責任分散看起來像</th>
+                <th>後果</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>大群組通知</td>
+                <td>大家都看到了</td>
+                <td>最初無人真正接手</td>
+              </tr>
+              <tr>
+                <td>會議待辦</td>
+                <td>共識是要做</td>
+                <td>會後沒有明確 owner 便自然蒸發</td>
+              </tr>
+              <tr>
+                <td>值班升級</td>
+                <td>有很多人在線</td>
+                <td>每個人都以為別人已經在處理</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼人一多，主動性反而可能下降</h2>
+          <p class="section-lede">因為當責任不再明確落在自己身上時，觀望就會被合理化成正常等待。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>他人存在會降低緊迫感</strong>
+            <p>只要還有很多人也知道，個人就更容易先等等看。</p>
+          </div>
+          <div class="example">
+            <strong>不確定誰該動</strong>
+            <p>角色模糊時，出手本身反而像冒進。</p>
+          </div>
+          <div class="example">
+            <strong>共享關注會被誤讀成共享處理</strong>
+            <p>大家都 aware，不代表大家都在 act。</p>
+          </div>
+        </div>
+        <p class="micro-note">責任分散不是人變冷漠，而是群體結構改變了責任感的落點。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把 ownership 補回事件處理與協作流程</h2>
+          <p class="section-lede">對工程團隊來說，責任分散最常讓 incident、待辦和跨團隊依賴在『大家都知道』中悄悄失速。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>Incident command</strong>
+            <p>重大事件若沒有明確指揮與分工，很容易一堆人在線卻沒有有效推進。</p>
+          </div>
+          <div class="example">
+            <strong>PR review</strong>
+            <p>指派 reviewers 很多不代表 review 會更快，反而可能人人等別人先看。</p>
+          </div>
+          <div class="example">
+            <strong>跨部門跟進</strong>
+            <p>只把議題留在共同 Slack 頻道，常比指定 owner 更容易掉。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>『大家留意』幾乎等於沒指派；關鍵事項最好永遠落到名字而不是群體。</li>
+          <li>越多人參與的流程，越需要狀態可見與 ownership 轉移規則。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三個常見誤讀</h2>
+          <p class="section-lede">責任分散不是說團隊合作不好，而是說合作需要結構化責任。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>人多就一定沒效率</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。問題在於責任有沒有被清楚配置。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>這和偷懶一樣</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>很多時候是 ownership 設計失敗，不是動機低。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只在旁觀者效應才有</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>現代團隊協作與線上溝通一樣常見。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>這件事現在是真的有人接住，還是只是很多人都知道</h2>
+          <p class="section-lede">下面兩個問題很適合放在會後與 incident 中。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果現在要追進度，我能直接說出負責的名字嗎</strong>
+            <p>答不出來時，多半就是責任已被稀釋。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>參與者增加時，ownership 有沒有變得更清楚，還是更模糊</strong>
+            <p>答案會直接影響行動速度。</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可接 bystander effect、social loafing 與 ownership design。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁以 diffusion of responsibility 為主，再把概念帶回群組協作、incident 與 ownership 設計。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Diffusion of responsibility 條目整理了多人在場時個人責任感如何被稀釋。</p>
+            <a href="https://en.wikipedia.org/wiki/Diffusion_of_responsibility" target="_blank" rel="noreferrer">Diffusion of Responsibility</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰概念</strong>
+            <p>Bystander effect 可作為對照，理解群體旁觀如何出現。</p>
+            <a href="https://en.wikipedia.org/wiki/Bystander_effect" target="_blank" rel="noreferrer">Bystander Effect</a>
+          </article>
+          <article class="source-card">
+            <strong>近鄰效應</strong>
+            <p>Social loafing 有助於理解群體情境如何改變投入與主動性。</p>
+            <a href="https://en.wikipedia.org/wiki/Social_loafing" target="_blank" rel="noreferrer">Social Loafing</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>讀完後可以看一條你們最常靠群組追的流程，檢查它是否真的有明確第一責任人。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

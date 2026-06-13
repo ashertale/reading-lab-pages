@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>辛普森悖論 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-simpson-paradox">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / statistics / aggregation / causality</p>
+        <h1>辛普森悖論</h1>
+        <p class="topic-subtitle">Simpson&#x27;s Paradox</p>
+        <p class="thesis">同一組資料在各子群裡都指向一個方向，合併後卻可能反過來，因為你把不同結構的樣本壓成了一個總數。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這一頁要幫你把『總表趨勢』和『分層後趨勢』拆開，避免匯總數字把結論直接帶翻。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>統計悖論 / 匯總反轉</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Aggregates can reverse subgroup trends</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>分組結構、樣本權重、混雜變項、因果問題</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在 A/B test、品質報表與績效比較裡主動檢查分層反轉風險</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>分組</span>
+          <span>匯總</span>
+          <span>反轉</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>總表不是上帝視角，它也可能是在說反話</h2>
+          <p class="section-lede">辛普森悖論讓人不安，是因為它告訴你：同一份資料，光是換個聚合方式，方向都可能變掉。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>每個子群看都像 A 比 B 好，總表卻可能顯示 B 贏；真正關鍵不在數學花招，而在你是不是把不同結構的樣本硬塞進同一桶。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先問有沒有分層</strong>
+            <p>資料來自哪些不同群體、版本、難度或時間段，常比平均值更重要。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再看權重怎麼分配</strong>
+            <p>若樣本量與難度分布不均，匯總結果很容易被大群體拖走。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後回到因果問題</strong>
+            <p>不是每個反轉都表示矛盾，很多時候只是你缺少關鍵條件。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>從一張看似很正常的報表開始</h2>
+          <p class="section-lede">辛普森悖論常出現在你最相信總表的時刻，因為總表看起來最乾淨、最像結論。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>兩條產線各自看來新製程的不良率都比較低，但把兩條線的資料合併後，總不良率卻顯示新製程比較差。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>不是算錯，而是高難度批次大多落在新製程那邊，匯總時把難度差一起混進去了。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">子群各自有趨勢</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">樣本權重與結構不同</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">總表方向被翻轉</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>辛普森悖論提醒你：任何漂亮的總表，都值得被問一句『分開看還一樣嗎』。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個看反轉的角度</h2>
+          <p class="section-lede">不是每次分組都會翻轉，但這四個點最常是關鍵。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>混雜變項</strong>
+            <p>有個沒被拉出來的條件，同時影響了分組與結果。</p>
+          </article>
+          <article class="lens-card">
+            <strong>權重失衡</strong>
+            <p>大群體的數量優勢，可能蓋過每個子群內真正的方向。</p>
+          </article>
+          <article class="lens-card">
+            <strong>難度分配</strong>
+            <p>不同方法若接到不同難度的樣本，總表就容易誤導。</p>
+          </article>
+          <article class="lens-card">
+            <strong>因果偷換</strong>
+            <p>聚合後的相關性，未必還能回答你原本想問的因果問題。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>你看的層級</th>
+                <th>看起來像</th>
+                <th>可能漏掉什麼</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>總表</td>
+                <td>A 比 B 好</td>
+                <td>樣本難度與群體大小是否嚴重不均</td>
+              </tr>
+              <tr>
+                <td>依版本分組</td>
+                <td>每個版本都說 A 較好</td>
+                <td>某個版本是否承接最多高風險案例</td>
+              </tr>
+              <tr>
+                <td>依客群分組</td>
+                <td>高低端客群趨勢不同</td>
+                <td>市場分布是否讓總表被單一客群主導</td>
+              </tr>
+              <tr>
+                <td>依時間分組</td>
+                <td>某段時間特別差</td>
+                <td>是否剛好碰到外部條件改變</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼總表特別容易被誤當真相</h2>
+          <p class="section-lede">因為總表最簡潔、最像結論，也最適合進簡報和會議首頁。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>平均值有權威感</strong>
+            <p>人很容易把匯總數字誤認成『把雜訊洗掉後的真相』。</p>
+          </div>
+          <div class="example">
+            <strong>分層看起來比較麻煩</strong>
+            <p>一旦要拆群體、拆難度、拆時間，故事就不再那麼俐落。</p>
+          </div>
+          <div class="example">
+            <strong>我們偏好單一答案</strong>
+            <p>當報表能只給一個排名時，團隊通常比較安心，即使那個排名很脆弱。</p>
+          </div>
+        </div>
+        <p class="micro-note">這個悖論不是要你永遠拒絕匯總，而是要求你在匯總前先把結構問清楚。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把分層意識帶回實驗與品質報表</h2>
+          <p class="section-lede">對工程團隊來說，辛普森悖論最危險的地方，是它會把錯的結論包裝成很會管理的 dashboard。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>A/B test</strong>
+            <p>不同流量來源與客群結構若不平衡，總體 conversion 可能說出和分群分析相反的話。</p>
+          </div>
+          <div class="example">
+            <strong>不良率分析</strong>
+            <p>新舊治具、批次與型號混在一起看時，總表很容易把責任錯丟給製程或韌體。</p>
+          </div>
+          <div class="example">
+            <strong>支援績效</strong>
+            <p>若艱難 ticket 多半分給資深工程師，單看平均處理時間會誤判誰效率低。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>看到總表方向明顯時，至少用版本、客群、難度或時間切一次，確認方向沒有翻。</li>
+          <li>若你真正想回答的是因果問題，就不要只停在聚合相關性。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三個會把它用歪的地方</h2>
+          <p class="section-lede">辛普森悖論不是叫你永遠不要合併資料，而是不要把合併視為無害。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以任何總表都不能看</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。總表可以看，但要知道它回答的是哪個層級的問題。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要分組就一定更真實</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>分組也可能過度切碎；關鍵是分組是否對應真正重要的結構差異。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>這只是統計冷知識</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>實驗設計、品質監控與績效評估裡，這種反轉會直接改變決策方向。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>這個總表結論，有沒有可能一拆就翻</h2>
+          <p class="section-lede">下面兩個問題很適合放在任何報表解讀前。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果按真正重要的條件分層，方向還一樣嗎</strong>
+            <p>型號、客群、版本、難度或時間拆開後，原本的結論是否仍穩定？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>這個匯總在回答哪個問題</strong>
+            <p>你是在問整體表現，還是在問方法本身的好壞？這兩者不一定能用同一張表回答。</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可看 confounding、causal inference 與 stratification；也可以把這頁帶回實驗報表 review。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁以 Simpson&#x27;s paradox 的經典反轉案例為主，再補上混雜變項與因果判讀的背景。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Simpson&#x27;s paradox 條目整理了匯總後方向翻轉的代表性例子。</p>
+            <a href="https://en.wikipedia.org/wiki/Simpson%27s_paradox" target="_blank" rel="noreferrer">Simpson&#x27;s Paradox</a>
+          </article>
+          <article class="source-card">
+            <strong>哲學與統計背景</strong>
+            <p>SEP 條目補上為什麼這不只是算術趣味，而牽涉到因果與解釋。</p>
+            <a href="https://plato.stanford.edu/entries/paradox-simpson/" target="_blank" rel="noreferrer">Simpson&#x27;s Paradox (SEP)</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰概念</strong>
+            <p>Confounding 的整理能幫你看見為什麼某些關鍵條件一旦沒拆出來，就會把結果整體拖偏。</p>
+            <a href="https://en.wikipedia.org/wiki/Confounding" target="_blank" rel="noreferrer">Confounding</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>讀完後可以抓一張你很信任的 KPI 圖，至少再用兩個可能的結構變項切一次，看看故事會不會翻面。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

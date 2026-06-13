@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>知識詛咒 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-curse-of-knowledge">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / communication / teaching / expertise</p>
+        <h1>知識詛咒</h1>
+        <p class="topic-subtitle">Curse of Knowledge</p>
+        <p class="thesis">一旦你已經知道某件事，就很難真實地想像不知道它的人會卡在哪裡，於是說明、教學與介面都容易高估對方的起點。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這一頁會把『我已經講清楚了』和『對方真的能跟上』拆開，因為專家最常漏掉的是自己以為太基本而沒說的那一步。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>認知偏誤 / 專家盲區</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Knowing something makes it hard to imagine not knowing it</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>背景差距、隱含前提、說明跳步、理解落差</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在文件、介面與 mentoring 裡主動補齊被專家視為理所當然的前提</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>專家</span>
+          <span>盲區</span>
+          <span>表達</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>知道太多的人，最難感覺到哪一步其實沒被說出來</h2>
+          <p class="section-lede">知識詛咒的難點不在惡意，而在於一旦你看見了全圖，就很難再用初學者視角重新走一次。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>專家越熟，越容易壓縮解釋、跳過背景與默認關鍵前提；對新手來說，最痛的往往正是那些被省略掉的理所當然。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先盤點前提</strong>
+            <p>你覺得不需要說的背景，往往正是別人進不去的門檻。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再測真正理解</strong>
+            <p>點頭、安靜或照抄，不代表對方已經建立同樣的模型。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後用例子補橋</strong>
+            <p>抽象說明若沒有具體例子與反例，知識落差很難被跨過。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>從一份你覺得很清楚的文件開始</h2>
+          <p class="section-lede">知識詛咒最常出現在你真心覺得自己已經說得夠明白的時候。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>你寫了一份 setup 指南，覺得步驟都列齊了；新人卻卡在第三步，因為你默認他知道哪個 toolchain 已安裝、哪個 env var 要先設。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>不是你故意講太快，而是你已經無法自然感受到哪些前提對新人其實完全不可見。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">專家腦中前提變自動化</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">說明時把關鍵步驟壓縮</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">新手在看不見的缺口卡住</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>知識詛咒最有價值的提醒是：清楚不等於完整，尤其當聽的人和你不在同一個地板高度上。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個看專家盲區的角度</h2>
+          <p class="section-lede">若你懷疑溝通失敗不是對方不用心，而是你跳步了，可以先看這四件事。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>隱含前提</strong>
+            <p>有些背景知識你已經內化到忘記它其實不是常識。</p>
+          </article>
+          <article class="lens-card">
+            <strong>語彙密度</strong>
+            <p>術語堆疊太快時，新手常在第一個沒懂的詞就整段掉隊。</p>
+          </article>
+          <article class="lens-card">
+            <strong>步驟壓縮</strong>
+            <p>專家會把多步驟動作自動合併成一句話，聽者卻需要逐段展開。</p>
+          </article>
+          <article class="lens-card">
+            <strong>驗證錯覺</strong>
+            <p>對方說『好』，有時只是社交上的回應，不代表理解模型一致。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>溝通情境</th>
+                <th>專家看起來像</th>
+                <th>新手實際可能卡在哪</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>安裝說明</td>
+                <td>步驟已經很清楚</td>
+                <td>隱含前提與環境差異完全沒說出來</td>
+              </tr>
+              <tr>
+                <td>Code review 建議</td>
+                <td>這很基本吧</td>
+                <td>其實對方還沒建立你在用的風險模型</td>
+              </tr>
+              <tr>
+                <td>UI 文案</td>
+                <td>字已經夠短</td>
+                <td>短到把必要解釋一起切掉</td>
+              </tr>
+              <tr>
+                <td>教學演示</td>
+                <td>我都一步一步講了</td>
+                <td>中間很多推理在你腦中是自動完成的</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼一旦你懂了，就很難回到還不懂的世界</h2>
+          <p class="section-lede">因為知識會改寫你看問題的方式，讓很多中間步驟直接消失在意識裡。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>自動化遮蔽了細節</strong>
+            <p>熟練者會把多個判斷壓成一個直覺，於是忘記自己曾經也需要那些階梯。</p>
+          </div>
+          <div class="example">
+            <strong>我們高估共同背景</strong>
+            <p>只要對方和自己在同一團隊、同一專業，就容易誤以為起點差不多。</p>
+          </div>
+          <div class="example">
+            <strong>社交回饋會騙人</strong>
+            <p>新手常不想一直打斷，所以表面配合會讓專家更以為自己講清楚了。</p>
+          </div>
+        </div>
+        <p class="micro-note">這個偏誤最適合拿來校正教學、文件與產品設計，不是拿來批評誰不會講話。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把前提可見化帶回文件與介面</h2>
+          <p class="section-lede">對工程團隊來說，知識詛咒最昂貴的地方，是它會把原本可以被設計掉的 onboarding 與 UX 摩擦偽裝成『對方程度不夠』。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>文件與 SOP</strong>
+            <p>真正好用的文件會把前提、常見錯誤與驗證方式一起寫出來，而不是只寫操作名詞。</p>
+          </div>
+          <div class="example">
+            <strong>CLI 與工具 UX</strong>
+            <p>專家覺得理所當然的參數組合，對新手可能像沒有地圖的黑盒。</p>
+          </div>
+          <div class="example">
+            <strong>Mentoring</strong>
+            <p>帶人不是重複答案，而是幫對方看到你心裡那些自動化的判準。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>做說明時，先列出三個你本來不打算寫、但其實是前提的資訊。</li>
+          <li>驗證理解時，請對方自己走一遍或用自己的話重述，通常比問『有沒有問題』更有效。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三個很容易掉進去的誤解</h2>
+          <p class="section-lede">知識詛咒不是說專家不該簡潔，而是說簡潔不該建立在偷省前提。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以所有說明都要寫超長</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。重點是把必要前提補齊，而不是把所有東西都灌進去。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>對方沒懂就是他程度差</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>有時真正缺的是橋接，不是智力。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>這只發生在教學</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>產品設計、文件、指令列與跨團隊溝通都常被這個偏誤影響。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>我省掉的哪一步，正是對方最需要的那一步嗎</h2>
+          <p class="section-lede">下面兩個問題很適合在寫文件、做 demo 或 review 後回頭檢查。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>若我完全不知道這套東西，我會在哪一步第一次失去方向</strong>
+            <p>把那一步補出來，通常比再精煉高層摘要更有幫助。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>我現在依賴了哪些沒明說的共同背景</strong>
+            <p>工具、術語、假設與慣例是否真的被共享了？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可看 expert blind spot、documentation design 與 false consensus effect；也可以把這頁接到 onboarding 與 UX review。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁以 curse of knowledge 的經典概念為主，再用專家盲區與溝通設計補上它在工程現場的版本。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Curse of knowledge 條目整理了知道某事後難以想像無知視角的核心想法。</p>
+            <a href="https://en.wikipedia.org/wiki/Curse_of_knowledge" target="_blank" rel="noreferrer">Curse of Knowledge</a>
+          </article>
+          <article class="source-card">
+            <strong>學術來源</strong>
+            <p>Camerer、Loewenstein 與 Weber 的文章補上這個概念在經濟與決策研究中的提出背景。</p>
+            <a href="https://www.journals.uchicago.edu/doi/10.1086/261163" target="_blank" rel="noreferrer">Original Paper</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰偏誤</strong>
+            <p>False consensus effect 可作為對照，補上我們如何高估他人和自己想得差不多。</p>
+            <a href="https://en.wikipedia.org/wiki/False_consensus_effect" target="_blank" rel="noreferrer">False Consensus Effect</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>讀完後可以拿一份你最熟悉的內部文件給新人試走，記下他第一次卡住的地方；那往往就是你知識詛咒最重的位置。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

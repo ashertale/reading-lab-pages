@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>遲滯現象 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-hysteresis">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / systems / state / memory</p>
+        <h1>遲滯現象</h1>
+        <p class="topic-subtitle">Hysteresis</p>
+        <p class="thesis">有些系統的現在，不只取決於你此刻給它什麼輸入，也取決於它剛才經過了哪條路；這種歷史殘影就是遲滯。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這一頁要把『現在的輸入』和『系統記得它剛剛怎麼走來』拆開，因為很多抖動、切換與判讀問題都卡在這層歷史效應。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>系統行為 / 路徑記憶</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Current state depends on past path, not just present input</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>狀態記憶、切換門檻、回復路徑、抖動風險</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能辨認哪些系統需要用不同進出門檻或狀態記憶來避免抖動與誤判</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>歷史</span>
+          <span>門檻</span>
+          <span>殘影</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>不是所有系統都會立刻忘記過去，很多切換其實都帶著路徑記憶</h2>
+          <p class="section-lede">遲滯最常被拿來形容磁性或物理系統，但它在控制邏輯、產品行為與組織決策裡同樣常見。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>若系統只看當下輸入，可能在邊界值附近來回抖動；若系統記住先前狀態，又會讓『回來的路』和『去時的路』不是同一條。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先找邊界抖動</strong>
+            <p>如果系統在門檻附近容易頻繁切換，通常就值得懷疑是否需要遲滯設計。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再把進出條件分開</strong>
+            <p>上升時一個門檻、下降時另一個門檻，常能避免來回翻轉。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後管理歷史成本</strong>
+            <p>保留狀態記憶能提升穩定，但也要小心讓回復路徑變得過慢或難以預期。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>從一個在臨界點附近跳來跳去的系統開始</h2>
+          <p class="section-lede">遲滯最直觀的價值，常出現在你受不了系統不停反覆切換的時候。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>風扇控制若只在 50°C 這條線開關，溫度在附近微幅波動時，風扇就會反覆啟停；若設定開啟 52°C、關閉 48°C，就能穩很多。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>你不是在找唯一正確門檻，而是在找一個能吸收雜訊、避免抖動的狀態切換帶。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">輸入在門檻附近波動</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">系統若無記憶就反覆切換</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">加入遲滯後用不同回程門檻穩住狀態</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>遲滯不是誤差，而是刻意保留歷史感，讓系統不要對每個微小波動都過度反應。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個看遲滯設計的角度</h2>
+          <p class="section-lede">不是每個狀態機都需要遲滯，但在有噪聲、有門檻、有成本的切換問題裡，它特別常用。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>噪聲幅度</strong>
+            <p>輸入本身是否會在臨界區域自然抖動？</p>
+          </article>
+          <article class="lens-card">
+            <strong>切換代價</strong>
+            <p>每次切換是否會帶來磨耗、耗能、干擾或使用者困惑？</p>
+          </article>
+          <article class="lens-card">
+            <strong>回復速度</strong>
+            <p>加入歷史記憶後，系統是否仍能在真正需要時足夠快地回應？</p>
+          </article>
+          <article class="lens-card">
+            <strong>可理解性</strong>
+            <p>門檻與狀態規則是否清楚到團隊能預測系統何時進出某模式？</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>情境</th>
+                <th>沒有遲滯時常見現象</th>
+                <th>加入遲滯後改善什麼</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>溫控</td>
+                <td>風扇或加熱器頻繁啟停</td>
+                <td>避免邊界波動造成反覆切換</td>
+              </tr>
+              <tr>
+                <td>UI 狀態</td>
+                <td>提示訊息忽隱忽現</td>
+                <td>讓介面在臨界條件附近更穩定</td>
+              </tr>
+              <tr>
+                <td>告警系統</td>
+                <td>警報不停開開關關</td>
+                <td>把真正異常和短暫抖動分開</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼我們直覺上常忘記系統也需要『不要太敏感』</h2>
+          <p class="section-lede">因為對人來說，立刻反應看起來比較聰明，但對系統來說，過度敏感常等於不穩定。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>即時感看起來像精準</strong>
+            <p>我們容易以為門檻越單一越客觀，卻忽略真實輸入本來就帶雜訊。</p>
+          </div>
+          <div class="example">
+            <strong>抖動成本不會先寫在規格上</strong>
+            <p>反覆切換造成的耗損、干擾與使用體驗問題，常到很後面才被感覺到。</p>
+          </div>
+          <div class="example">
+            <strong>歷史記憶聽起來不直觀</strong>
+            <p>很多人直覺會問『現在都回來了為什麼還不切？』，忘記穩定本來就需要回程緩衝。</p>
+          </div>
+        </div>
+        <p class="micro-note">遲滯的價值常不是讓系統更快，而是讓它不會被小波動牽著一直來回翻面。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把門檻記憶帶回控制邏輯與產品行為</h2>
+          <p class="section-lede">對 firmware、告警與互動設計來說，遲滯能幫你把真事件和邊界噪聲切開。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>電源與熱管理</strong>
+            <p>臨界值附近若沒有遲滯，系統可能在限流、降頻與恢復之間來回抖動。</p>
+          </div>
+          <div class="example">
+            <strong>感測器判斷</strong>
+            <p>光線、接近與觸發訊號若只用單一門檻，雜訊很容易造成誤觸或閃爍。</p>
+          </div>
+          <div class="example">
+            <strong>營運決策</strong>
+            <p>有些制度若一達標就切換策略、一下跌就立刻反轉，團隊也會被搞得像控制器抖動。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>看到來回翻轉時，先別急著怪訊號爛，先問是不是缺少適當的進出門檻差。</li>
+          <li>遲滯不是越大越好；太大會讓系統鈍化，所以要和回應速度一起看。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三個常見誤讀</h2>
+          <p class="section-lede">遲滯不是系統反應慢的藉口，而是穩定性設計的一部分。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>只要把門檻拉大就行</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>若不知道噪聲範圍與切換代價，亂拉門檻只會把反應搞遲鈍。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>遲滯只屬於物理系統</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>任何有狀態、門檻與切換成本的邏輯都可能需要它。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>有抖動就是感測器不好</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>很多時候問題其實在判斷層缺少歷史記憶。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>我現在需要更敏感，還是更穩定</h2>
+          <p class="section-lede">下面兩個問題很適合放進狀態機與告警設計 review。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果輸入在邊界附近抖三秒，系統會做出什麼行為</strong>
+            <p>這通常最能看出你是否需要遲滯。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>切進與切出這個狀態，真的應該用同一條線嗎</strong>
+            <p>若不該，代表你其實已經在想遲滯，只是還沒說出來。</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可接 Schmitt trigger、control systems 與 state machine design。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁以 hysteresis 的狀態記憶為主，再把它拉回控制器、狀態機與產品行為設計。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Hysteresis 條目整理了這個概念如何描述系統對歷史路徑的依賴。</p>
+            <a href="https://en.wikipedia.org/wiki/Hysteresis" target="_blank" rel="noreferrer">Hysteresis</a>
+          </article>
+          <article class="source-card">
+            <strong>電路對照</strong>
+            <p>Schmitt trigger 是工程上最直觀的遲滯實作例子之一。</p>
+            <a href="https://en.wikipedia.org/wiki/Schmitt_trigger" target="_blank" rel="noreferrer">Schmitt Trigger</a>
+          </article>
+          <article class="source-card">
+            <strong>控制背景</strong>
+            <p>Control theory 條目可作為更一般的背景，理解穩定與回應之間的取捨。</p>
+            <a href="https://en.wikipedia.org/wiki/Control_theory" target="_blank" rel="noreferrer">Control Theory</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>讀完後可以找一個你們常在臨界值附近抖動的控制邏輯，先畫出它的進出門檻是否需要分開。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

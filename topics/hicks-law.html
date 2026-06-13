@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>希克定律 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-hicks-law">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / UX / choices / decision</p>
+        <h1>希克定律</h1>
+        <p class="topic-subtitle">Hick&#x27;s Law</p>
+        <p class="thesis">當可選項越多、越難比較時，人做出決定所需的時間通常也會增加，因為真正負擔的是判斷，不是點擊。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這一頁要幫你把『功能更多』和『決策更容易』拆開，避免用選項堆積代替真正的可用性。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>互動設計 / 決策延遲</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>More choices increase decision time</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>選項數量、區分難度、預設值、任務壓力</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在介面、設定與指令面設計裡主動管理選項密度與決策成本</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>選項</span>
+          <span>延遲</span>
+          <span>決策</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>人卡住的常不是點哪個，而是先得判斷哪個值得點</h2>
+          <p class="section-lede">希克定律之所以對產品設計有穿透力，是因為它把『資訊多』翻譯成『決策成本高』。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>更多選項可以提高彈性與覆蓋度，但也會拉高辨識、比較與猶豫成本；真正好的設計不是一味刪，而是安排決策節點。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先數選項，再看可比性</strong>
+            <p>十個高度相似的選項，比十個功能分明的選項更容易讓人停住。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再利用預設</strong>
+            <p>好的預設值能把高頻決策從每次都重選，變成少數需要偏離時再處理。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後分層揭露</strong>
+            <p>把低頻複雜選項藏到下一層，通常比一開始全展開更有用。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>從一個塞滿設定的畫面開始</h2>
+          <p class="section-lede">這個定律最常出現在設計者覺得『都放給使用者選很自由』的時候。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>韌體工具頁面一次塞了十多個 mode、logging 等級與 retry 策略，結果新使用者在真正要操作時反而不敢下手。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>問題不一定是選項太多本身，而是使用者沒有足夠線索知道哪些差異真的重要。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">選項暴露過多</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">比較成本升高</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">行動被延遲或隨便選</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>希克定律最有價值的地方，是提醒你決策不是免費的，尤其在高壓與不熟悉情境裡。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個看選項負擔的角度</h2>
+          <p class="section-lede">不只是選項數量，下面這幾件事也會大幅改變決策成本。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>相似度</strong>
+            <p>越像的選項越難比較，因為每個都需要額外解碼。</p>
+          </article>
+          <article class="lens-card">
+            <strong>任務緊迫度</strong>
+            <p>時間越緊、風險越高，額外決策越容易讓人停滯。</p>
+          </article>
+          <article class="lens-card">
+            <strong>預設品質</strong>
+            <p>好的預設能把常見路徑變成低摩擦，不好的預設則會放大猶豫。</p>
+          </article>
+          <article class="lens-card">
+            <strong>揭露節奏</strong>
+            <p>把所有選項一次攤開，與按情境逐步揭露，對認知負荷差很多。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>設計做法</th>
+                <th>看起來像</th>
+                <th>實際決策成本</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>一次展開所有選項</td>
+                <td>很完整很自由</td>
+                <td>新手要先理解一堆差異才敢動</td>
+              </tr>
+              <tr>
+                <td>提供強預設</td>
+                <td>限制比較多</td>
+                <td>多數高頻情境的決策成本大幅下降</td>
+              </tr>
+              <tr>
+                <td>分層進階設定</td>
+                <td>需要多點一步</td>
+                <td>把低頻複雜度留給真的需要的人</td>
+              </tr>
+              <tr>
+                <td>相似命名堆滿</td>
+                <td>專業感很強</td>
+                <td>使用者在名詞差異上耗掉大量心力</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼更多自由有時反而讓人不動</h2>
+          <p class="section-lede">因為選擇不是免費禮物，它同時帶來判斷負擔與做錯的焦慮。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>選項多會放大出錯感</strong>
+            <p>人越覺得後果重要，越怕自己在一堆相似選項裡選錯。</p>
+          </div>
+          <div class="example">
+            <strong>沒有明確預設時，大腦要自建排序</strong>
+            <p>這會讓本來簡單的操作變成小型分析任務。</p>
+          </div>
+          <div class="example">
+            <strong>過多選擇會拖慢起手</strong>
+            <p>很多人不是沒能力完成，而是卡在開始前的判斷。</p>
+          </div>
+        </div>
+        <p class="micro-note">希克定律不是反選擇，而是反對把決策成本隱藏在看似完整的選單裡。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把決策成本帶回介面與工具設計</h2>
+          <p class="section-lede">從設定頁、安裝流程到 CLI 參數面，這個概念都在提醒你：易用性不只看功能有沒有，而要看人能不能順利做出選擇。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>安裝流程</strong>
+            <p>先給推薦路徑，再讓進階使用者展開細節，通常比一開始全開更少流失。</p>
+          </div>
+          <div class="example">
+            <strong>CLI 參數</strong>
+            <p>若常用情境需要記一長串 flag，很多使用者會寧願跳回手動甚至放棄。</p>
+          </div>
+          <div class="example">
+            <strong>裝置設定</strong>
+            <p>把高頻與低頻設定分層，能讓現場操作在壓力下更不容易出錯。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>減少決策成本的核心不是盲刪功能，而是把高頻路徑做成明確預設與清楚階層。</li>
+          <li>每增加一個選項，都問一次：它替誰創造價值，又替多少人增加了判斷負擔？</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三種容易把它用太死的方式</h2>
+          <p class="section-lede">希克定律不是叫你把世界壓成單一按鈕，而是叫你設計決策節奏。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以選項越少越好</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。太少可能會犧牲必要控制，重點是選項是否在對的地方出現。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>這只是 UI 規則</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>任何需要做選擇的介面、流程與命令列，都有同樣的決策成本。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要做得漂亮就沒問題</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>視覺乾淨有幫助，但若資訊結構沒整理，猶豫仍然存在。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>這裡在賣自由，還是在賣猶豫</h2>
+          <p class="section-lede">下面兩個問題很適合放進產品可用性 review。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>使用者現在真的需要做這個決策嗎</strong>
+            <p>還是其實可以先提供安全預設，等真的偏離時再要求判斷？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>這些選項彼此的差異，是否對目標使用者一眼可懂</strong>
+            <p>如果不行，複雜度就還沒被真正設計掉。</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可看 Fitts&#x27;s law、progressive disclosure 與 choice architecture；也可以把這頁帶回產品 onboarding 設計。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁以 Hick&#x27;s law 的經典『選項越多決策越慢』為主，再補上預設值與分層揭露的現代設計語言。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Hick&#x27;s law 條目整理了選項數與反應時間之間的經典關聯。</p>
+            <a href="https://en.wikipedia.org/wiki/Hick%27s_law" target="_blank" rel="noreferrer">Hick&#x27;s Law</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰法則</strong>
+            <p>Fitts&#x27;s law 能作為對照：一個談移動成本，一個談決策成本。</p>
+            <a href="https://en.wikipedia.org/wiki/Fitts%27s_law" target="_blank" rel="noreferrer">Fitts&#x27;s Law</a>
+          </article>
+          <article class="source-card">
+            <strong>UX 實務</strong>
+            <p>Laws of UX 的整理提供了這條定律在產品介面中的實務轉譯。</p>
+            <a href="https://lawsofux.com/hicks-law/" target="_blank" rel="noreferrer">Laws of UX</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>讀完後可以回頭看一個新手最常卡住的畫面，數一數真正需要他當下判斷的選項到底有幾個。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

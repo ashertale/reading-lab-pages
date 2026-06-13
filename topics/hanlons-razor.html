@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>韓隆剃刀 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-hanlons-razor">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / judgment / attribution / teams</p>
+        <h1>韓隆剃刀</h1>
+        <p class="topic-subtitle">Hanlon&#x27;s Razor</p>
+        <p class="thesis">當一個糟糕結果同時可以被疏忽、誤解或能力邊界解釋時，先不要急著把它讀成惡意。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這一頁會把「有人故意搞事」和「系統讓人容易搞砸」拆開，讓你在 review、incident 與跨團隊衝突裡少做錯誤歸因。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>判斷原則 / 歸因校正</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Malice vs. mistake</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>證據密度、替代解釋、能力邊界、制度摩擦</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能先檢查資訊缺口與流程摩擦，再決定是否需要往惡意方向追查</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>歸因</span>
+          <span>摩擦</span>
+          <span>惡意</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>先別把難看的結果直接翻譯成壞心</h2>
+          <p class="section-lede">韓隆剃刀不是要你天真，而是先把無能、忙亂、誤解與設計缺陷放進解釋清單。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>把錯誤立刻讀成惡意很省力，但它會讓你跳過真正可修的能力與制度問題；反過來，若永遠拒絕承認惡意，風險也會失焦。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先拆機制</strong>
+            <p>先看資訊是怎麼遺失、交接怎麼斷掉、介面怎麼誤導，再討論人品。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再看能力邊界</strong>
+            <p>很多看似荒謬的行為，其實是人在錯誤心智模型下做出的正常反應。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後才談敵意</strong>
+            <p>如果要判斷是惡意，就應補上更直接的反覆模式、利益關係或掩飾行為。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>先把衝突縮成一個小場景</h2>
+          <p class="section-lede">這個原則最適合用在你很想生氣、很想問責、很想立刻貼標籤的時刻。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>release note 沒寫清楚某個 register 預設值已改，整合端沿用舊假設，結果把整片裝置刷成錯誤配置。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>出事之後每個人都覺得對方一定很不負責，但真正造成損害的，也許是文件、命名與 review 邊界一起失手。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">看到明顯失敗</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">過早歸因成壞意圖</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">錯過真正可修的機制</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>韓隆剃刀要你先把最便宜且最可驗證的解釋排一遍，而不是讓情緒直接決定故事版本。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個把歸因拉回地面的透鏡</h2>
+          <p class="section-lede">同樣一個糟糕結果，可能來自完全不同的來源；把來源分清，修法才不會只剩指責。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>資訊落差</strong>
+            <p>對方拿到的需求、版本、時序或限制，可能和你以為的一直不一樣。</p>
+          </article>
+          <article class="lens-card">
+            <strong>能力邊界</strong>
+            <p>有些錯不是態度差，而是對複雜系統只理解到一半時，很自然會做出的錯判。</p>
+          </article>
+          <article class="lens-card">
+            <strong>制度摩擦</strong>
+            <p>如果流程鼓勵趕進度、弱化回饋或把責任切碎，錯誤就會被系統性放大。</p>
+          </article>
+          <article class="lens-card">
+            <strong>直接證據</strong>
+            <p>若你懷疑惡意，就要找重複模式、掩飾、利益衝突或故意迴避澄清的痕跡。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>現象</th>
+                <th>韓隆剃刀先問</th>
+                <th>若要判成惡意還缺什麼</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>需求被做反</td>
+                <td>規格是否本來就含混、命名是否誤導</td>
+                <td>是否存在明知故犯與刻意迴避確認</td>
+              </tr>
+              <tr>
+                <td>對方一直沒回信</td>
+                <td>是否卡在權限、時區、資訊來源或優先序</td>
+                <td>是否有證據顯示故意拖延來交換利益</td>
+              </tr>
+              <tr>
+                <td>同樣 bug 又出現</td>
+                <td>修法是否只堵表面、知識是否沒有傳遞</td>
+                <td>是否有人反覆隱匿已知風險</td>
+              </tr>
+              <tr>
+                <td>會議語氣很差</td>
+                <td>是壓力與誤會在升高，還是有意羞辱與操控</td>
+                <td>需補更多上下文與歷史互動模式</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼大腦會偏好把人讀成壞人</h2>
+          <p class="section-lede">惡意敘事有一種特別強的情緒完成感，因為它讓混亂立刻變得有臉孔。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>責怪比診斷省力</strong>
+            <p>把複雜事故縮成一個壞人，比追一整串脆弱機制容易得多。</p>
+          </div>
+          <div class="example">
+            <strong>自我保護會推高歸因</strong>
+            <p>當結果讓你受損時，大腦傾向找一個帶責任的人來承接情緒。</p>
+          </div>
+          <div class="example">
+            <strong>道德判決有敘事快感</strong>
+            <p>一旦故事能用善惡切開，很多灰色條件就會被你自動忽略。</p>
+          </div>
+        </div>
+        <p class="micro-note">這個原則不是替糟糕行為開脫，而是避免在證據不足時把診斷偷換成宣判。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把歸因校正帶回工程現場</h2>
+          <p class="section-lede">對 firmware 與跨團隊整合來說，最昂貴的不是單一失誤，而是失誤後還沿著錯的故事修三輪。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>Incident review</strong>
+            <p>先分開 proximate cause、contributing factors 與責任判斷，避免第一版情緒敘事綁死後續調查。</p>
+          </div>
+          <div class="example">
+            <strong>Code review</strong>
+            <p>看到奇怪寫法時，先問是需求壓力、歷史相容性還是作者真的漏掉基本原則。</p>
+          </div>
+          <div class="example">
+            <strong>跨部門協作</strong>
+            <p>若測試、韌體與硬體各自只看本地上下文，很容易把彼此的盲點誤讀成故意擺爛。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>每次想說「他們就是故意不配合」之前，先列三個非惡意但可驗證的替代解釋。</li>
+          <li>如果最後真的要談責任，也要先把可修的流程與介面缺陷寫清楚，避免下次重演。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三個常見走偏點</h2>
+          <p class="section-lede">韓隆剃刀常被誤聽成善意口號，但它真正要求的是更好的證據排序。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以不要究責</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。它只是要求你把究責建立在更扎實的證據上。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>惡意幾乎不存在</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>也不是。惡意存在，只是不能因為結果很糟就直接跳到那個結論。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要出於善意就沒問題</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>善意不會自動讓系統安全；可修的能力與流程問題仍然要修。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>什麼時候該先收情緒，什麼時候該提高警覺</h2>
+          <p class="section-lede">這兩個問題很適合放進衝突升高前的自我檢查。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>我現在手上的證據，是在說明機制，還是在滿足情緒</strong>
+            <p>如果把所有描述人品的字刪掉，剩下的事實還支不支撐我的判斷？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>若要把這件事判成惡意，我還需要看到什麼</strong>
+            <p>是重複模式、掩飾行為、利益衝突，還是明知後果仍持續推進的記錄？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可看 attribution theory、fundamental attribution error 與 blame culture；也可以把這頁帶回 postmortem 的責任分層設計。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁先以 Hanlon&#x27;s Razor 作為歸因順序原則，再用歸因心理學補上它在協作與事故分析裡的實用邊界。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Hanlon&#x27;s Razor 條目整理了這句原則的常見表述與使用脈絡。</p>
+            <a href="https://en.wikipedia.org/wiki/Hanlon%27s_razor" target="_blank" rel="noreferrer">Hanlon&#x27;s Razor</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰理論</strong>
+            <p>Attribution 在心理學中的整理能補上人如何解釋他人行為與結果的背景。</p>
+            <a href="https://en.wikipedia.org/wiki/Attribution_(psychology)" target="_blank" rel="noreferrer">Attribution (psychology)</a>
+          </article>
+          <article class="source-card">
+            <strong>常見偏差</strong>
+            <p>Fundamental attribution error 提醒我們，人很容易高估人格因素、低估情境因素。</p>
+            <a href="https://en.wikipedia.org/wiki/Fundamental_attribution_error" target="_blank" rel="noreferrer">Fundamental Attribution Error</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>讀完後很適合回頭看最近一次跨團隊事故，把原本的人格判決改寫成機制假說，再看哪些真的有證據。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

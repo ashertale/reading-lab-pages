@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>傑文斯悖論 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-jevons-paradox">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / efficiency / systems / resources</p>
+        <h1>傑文斯悖論</h1>
+        <p class="topic-subtitle">Jevons Paradox</p>
+        <p class="thesis">當某種資源使用變得更有效率、更便宜時，總消耗不一定下降，反而可能因為需求擴張而上升。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這一頁要幫你把『單位更省』和『總量變少』拆開，避免把局部優化直接誤認成整體節省。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>效率悖論 / 資源反彈</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Efficiency vs. total consumption</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>單位成本、需求彈性、反彈幅度、系統邊界</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能用需求彈性與系統邊界檢查效率提升到底省了多少、又反彈回來多少</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>效率</span>
+          <span>需求</span>
+          <span>總量</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>效率提高，不保證世界真的因此少用一點</h2>
+          <p class="section-lede">傑文斯悖論不否認效率有價值，它提醒你效率會改變價格、可得性與使用行為。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>同一項技術改善可以同時讓單位成本下降與總需求上升；如果只盯局部效率，最後可能誤讀整體資源軌跡。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先看省在哪裡</strong>
+            <p>效率改善常發生在單位成本、速度或可得性，不一定直接反映在總量。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再看需求怎麼回應</strong>
+            <p>如果使用門檻下降，新的場景、新的使用者與更高頻率都可能被打開。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後定清邊界</strong>
+            <p>你是只看單台裝置、整個產品線，還是更大的市場與系統？答案會差很多。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>從一個看起來很正面的優化開始</h2>
+          <p class="section-lede">這個悖論之所以容易被忽略，是因為效率提升通常在局部上真的像好消息。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>你把一條資料傳輸路徑優化到功耗更低、速度更快，結果上層產品因此敢多開更多 telemetry，整體能耗反而上去。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>效率確實讓單次行為更便宜，但也同時讓那個行為更值得被大量重複。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">單位使用更便宜</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">需求與場景被打開</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">總消耗可能不降反升</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>傑文斯悖論最有用的提醒是：任何效率專案都應同時追蹤 unit saving 與 induced demand。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個看反彈效應的角度</h2>
+          <p class="section-lede">不是每次效率提升都會演成悖論，但至少要把可能的需求回補算進來。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>直接反彈</strong>
+            <p>同一個使用者因為更便宜、更快，於是同類行為做得更頻繁。</p>
+          </article>
+          <article class="lens-card">
+            <strong>間接反彈</strong>
+            <p>省下來的時間、預算或功耗，轉頭被拿去做其他也會吃資源的事情。</p>
+          </article>
+          <article class="lens-card">
+            <strong>市場擴張</strong>
+            <p>門檻下降後，新客群與新應用場景被打開，總量因此放大。</p>
+          </article>
+          <article class="lens-card">
+            <strong>邊界錯置</strong>
+            <p>如果只看單一模組的節省，很容易漏掉上游與下游的放大量。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>你優化了什麼</th>
+                <th>局部看起來像</th>
+                <th>整體可能冒出的反彈</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>功耗效率</td>
+                <td>單次操作更省電</td>
+                <td>更多背景任務被打開，總耗電回升</td>
+              </tr>
+              <tr>
+                <td>運算成本</td>
+                <td>每筆推論更便宜</td>
+                <td>更多請求與更高取樣頻率被視為可接受</td>
+              </tr>
+              <tr>
+                <td>流程速度</td>
+                <td>等待時間縮短</td>
+                <td>工作項目被塞滿，整體負載更高</td>
+              </tr>
+              <tr>
+                <td>資料壓縮</td>
+                <td>每次傳輸更省</td>
+                <td>因此團隊敢傳更多、更細的資料</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼人很容易把效率等同節省</h2>
+          <p class="section-lede">因為效率提升的好處具體、立即、可展示，需求擴張卻常慢慢滲進系統。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>局部指標最容易被慶祝</strong>
+            <p>單位功耗下降、吞吐提升這種數字很好看，也最容易進報表。</p>
+          </div>
+          <div class="example">
+            <strong>新增需求常被當成自然成長</strong>
+            <p>一旦成本下降，團隊會很自然地打開本來不敢做的使用方式。</p>
+          </div>
+          <div class="example">
+            <strong>節省想像容易忽略替代效應</strong>
+            <p>人傾向假設省下來的資源就會留在那裡，而不是流向別處。</p>
+          </div>
+        </div>
+        <p class="micro-note">這個悖論不是反效率，而是反對把效率成績單直接偷換成總量結論。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把反彈視角帶回效能與成本優化</h2>
+          <p class="section-lede">對產品、infra 與嵌入式系統來說，效率專案真正的價值，要看它是否連同行為變化一起被管理。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>雲端成本優化</strong>
+            <p>如果每次請求便宜很多，產品端可能會馬上提高取樣、保留更多歷史與更頻繁刷新。</p>
+          </div>
+          <div class="example">
+            <strong>電池與裝置策略</strong>
+            <p>續航改善可能讓裝置被用在更長時間、更高亮度或更多感測情境。</p>
+          </div>
+          <div class="example">
+            <strong>資料管線</strong>
+            <p>壓縮與快取讓 throughput 看起來更健康，但也可能把整體資料胃口養大。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>做效率專案時，同步定義「允許釋放哪些新需求、哪些不能自動膨脹」的邊界。</li>
+          <li>除了 unit cost，也追 total cost、traffic growth 與 usage expansion，才能看見真實效果。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>三種典型誤讀</h2>
+          <p class="section-lede">傑文斯悖論常被拿來當反科技口號，但那樣會把它真正有用的地方用掉。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以效率沒有意義</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。效率很重要，只是它不保證總量自然下降。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要出現反彈就叫傑文斯悖論</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>反彈有程度差異；真正要看的是需求擴張是否大到抵消甚至超過節省。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>這只適用能源政策</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>任何會因成本下降而打開更多需求的技術系統，都可能出現相似結構。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>一個優化上線前，先把反彈算進去</h2>
+          <p class="section-lede">下面兩個問題很適合放在成本優化與效能專案的設計審查。</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果這件事變得更便宜，誰會因此做得更多</strong>
+            <p>是同一批使用者提高頻率，還是整個新場景會被打開？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>我現在看的節省邊界，會不會太窄</strong>
+            <p>若把上游、下游與產品策略一起算進來，總量結論還一樣嗎？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸閱讀可看 rebound effect、induced demand 與 resource governance；也可以把這頁帶回效能優化 KPI 的設計。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這一頁以 Jevons 對效率與煤耗的經典觀察為主，再用反彈效應與需求擴張補上現代系統版本的讀法。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Jevons paradox 條目整理了效率提升與總消耗上升之間的經典張力。</p>
+            <a href="https://en.wikipedia.org/wiki/Jevons_paradox" target="_blank" rel="noreferrer">Jevons Paradox</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰概念</strong>
+            <p>Rebound effect 補上效率節省如何因行為與市場回應被部分吃回去。</p>
+            <a href="https://en.wikipedia.org/wiki/Rebound_effect_(conservation)" target="_blank" rel="noreferrer">Rebound Effect</a>
+          </article>
+          <article class="source-card">
+            <strong>歷史背景</strong>
+            <p>The Coal Question 提供了 Jevons 原始論點的歷史脈絡。</p>
+            <a href="https://en.wikipedia.org/wiki/The_Coal_Question" target="_blank" rel="noreferrer">The Coal Question</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>讀完後可以挑一個你手上的效能優化案，同步畫出 unit saving 與 possible demand expansion，看它到底是在省，還是在把胃口養大。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>
