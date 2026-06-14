@@ -21,13 +21,13 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
-        <p class="kicker">Knowledge Study / Engineering</p>
+        <p class="kicker">Knowledge Study / Systems</p>
         <h1>活結</h1>
         <p class="topic-subtitle">Livelock</p>
-        <p class="thesis">和死結不同，活結裡的成員一直在動、一直在重試、一直在讓路，但整體仍然沒有真正前進。</p>
+        <p class="thesis">活結看起來很忙：每一方都在回應、退讓、重試，卻沒有任何一方真正完成工作。</p>
         <div class="hero-prompt">
           <strong>Read For</strong>
-          <p>這頁會把 重試互撞、彼此讓路 這些常藏在規格外的壓力，拉回 退避策略 與 鎖競爭治理 的設計檢查裡。</p>
+          <p>分辨忙碌活動和有效進展，並用退避、隨機化與協調規則打破互相讓路。</p>
         </div>
       </div>
       <aside class="hero-note" aria-label="主題資訊">
@@ -42,17 +42,17 @@
           </div>
           <div>
             <dt>主要判準</dt>
-            <dd>重試互撞、彼此讓路、進度為零、活著卻沒完成</dd>
+            <dd>持續活動、無進展、互相回應、破同步</dd>
           </div>
           <div>
             <dt>讀完產出</dt>
-            <dd>能用 Everyone keeps moving, nothing finishes 重新檢查 同步與退避 裡的判斷失真</dd>
+            <dd>能在併發 retry、協定協商與人工作業流程中辨認忙而不前</dd>
           </div>
         </dl>
         <div class="knowledge-map" aria-label="閱讀結構示意">
           <span>忙碌</span>
-          <span>讓路</span>
-          <span>空轉</span>
+          <span>無進展</span>
+          <span>退避</span>
         </div>
       </aside>
     </div>
@@ -75,28 +75,28 @@
       <section class="chapter" id="core">
         <div class="section-heading">
           <p class="section-label">Orientation</p>
-          <h2>如果系統看起來很活躍，為什麼最後卻可能一件真正完成的事情都沒有</h2>
-          <p class="section-lede">活結 的價值，在於它把平常藏在接口、時序或權限邊界外的壓力，提前搬到設計與驗證桌面上。</p>
+          <h2>系統一直動，不代表狀態正在前進</h2>
+          <p class="section-lede">活結和死結相反：參與者沒有靜止等待，而是不斷改變狀態來避開彼此，結果仍無法完成。</p>
         </div>
         <div class="core-card">
           <p class="section-label">Core Tension</p>
-          <p>和死結不同，活結裡的成員一直在動、一直在重試、一直在讓路，但整體仍然沒有真正前進。</p>
+          <p>自動重試和禮讓規則能提高恢復能力，但如果多方用同樣節奏互相反應，就會形成永遠同步的閃避舞步。</p>
         </div>
         <div class="principle-strip" aria-label="本頁讀法">
           <div>
             <span>01</span>
-            <strong>先圈出 重試互撞 會在哪裡破</strong>
-            <p>重試互撞 常不是抽象風險，而是會穿過具體接口、排程或權限邊界。</p>
+            <strong>定義進展指標</strong>
+            <p>不要只看 request rate 或 task activity，要看完成數、commit 數和狀態推進。</p>
           </div>
           <div>
             <span>02</span>
-            <strong>再追 彼此讓路 怎麼穿過邊界</strong>
-            <p>彼此讓路 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現。</p>
+            <strong>打破同步</strong>
+            <p>使用隨機退避、jitter、leader 或 token，避免多方同時做同一反應。</p>
           </div>
           <div>
             <span>03</span>
-            <strong>最後查 進度為零 何時從小事變事故</strong>
-            <p>進度為零 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力。</p>
+            <strong>限制無效重試</strong>
+            <p>重試要有 backoff、budget 和觀測，否則活動量會掩蓋沒進展。</p>
           </div>
         </div>
       </section>
@@ -104,50 +104,50 @@
       <section class="chapter" id="setup">
         <div class="section-heading">
           <p class="section-label">Setup</p>
-          <h2>把壓力壓回 重試互撞 最先失守的地方</h2>
-          <p class="section-lede">把問題壓回一個最小接口或一次時序交會，重試互撞 何時變成風險、進度為零 何時開始放大，就不容易再被模糊帶過。</p>
+          <h2>兩個服務都很有禮貌地退讓，結果誰也沒完成交易</h2>
+          <p class="section-lede">最小場景是每一方都在回應對方，但回應規則讓雙方同步重複。</p>
         </div>
         <div class="definition-grid">
           <div class="tile">
             <strong>最小劇情</strong>
-            <p>兩邊都很有禮貌地退讓、重試、再退讓，或多個客戶端同時做同樣的退避節奏，最後誰也進不去臨界區。</p>
+            <p>兩個 worker 搶同一筆工作，偵測到衝突後都釋放並立刻重試。它們總是在相同時間重新取得、再次衝突、再次釋放，log 顯示非常活躍卻沒有 commit。</p>
           </div>
           <div class="tile">
             <strong>真正難點</strong>
-            <p>如果系統看起來很活躍，為什麼最後卻可能一件真正完成的事情都沒有</p>
+            <p>每個單次反應都合理，問題是反應規則在群體中形成週期。</p>
           </div>
         </div>
         <div class="concept-flow" aria-label="問題展開">
-          <div class="flow-step">局部先對付 重試互撞</div>
+          <div class="flow-step">偵測衝突</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">彼此讓路 穿過接口或時序邊界</div>
+          <div class="flow-step">雙方同時退讓</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">進度為零 把小問題放大成現場風險</div>
+          <div class="flow-step">同節奏重試再次衝突</div>
         </div>
         <div class="paradox-frame">
           <strong>Key Point</strong>
-          <p>活結 的價值，在於它把平常埋在規格外的 重試互撞、彼此讓路 與 進度為零，提前拉回 design review 能談清楚的位置。</p>
+          <p>活結的修正不是讓系統更忙，而是讓某一方能在規則內真正完成。</p>
         </div>
       </section>
 
       <section class="chapter" id="lenses">
         <div class="section-heading">
           <p class="section-label">Lenses</p>
-          <h2>先把 空轉式協調、動作不等於進度 與 退避也會共振 分開看</h2>
-          <p class="section-lede">表面像同一個故障，底下往往是 空轉式協調、動作不等於進度 和 退避也會共振 在不同邊界各自出力。</p>
+          <h2>把活動量和完成量分開看</h2>
+          <p class="section-lede">活結最會騙過監控，因為它產生大量事件、重試和狀態變更。</p>
         </div>
         <div class="lens-grid">
           <article class="lens-card">
-            <strong>空轉式協調</strong>
-            <p>空轉式協調 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 重試互撞 轉成真正的穩定性壓力。</p>
+            <strong>完成指標</strong>
+            <p>Request、retry 或 context switch 很高時，commit、dequeue 或狀態推進是否也增加？</p>
           </article>
           <article class="lens-card">
-            <strong>動作不等於進度</strong>
-            <p>動作不等於進度 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 彼此讓路 轉成真正的穩定性壓力。</p>
+            <strong>同步來源</strong>
+            <p>多方是否用相同 timeout、同樣 backoff 或同一觸發條件重試？</p>
           </article>
           <article class="lens-card">
-            <strong>退避也會共振</strong>
-            <p>退避也會共振 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 進度為零 轉成真正的穩定性壓力。</p>
+            <strong>破局角色</strong>
+            <p>是否有 leader、優先權、token 或隨機化讓其中一方能先完成？</p>
           </article>
         </div>
       </section>
@@ -155,44 +155,44 @@
       <section class="chapter" id="psychology">
         <div class="section-heading">
           <p class="section-label">Psychology</p>
-          <h2>團隊通常在哪一步把 活結 當成暫時小事</h2>
-          <p class="section-lede">工程現場最危險的，不是沒人提風險，而是大家太容易把 重試互撞 當成晚點再補也行的小瑕疵。</p>
+          <h2>忙碌會讓人誤以為系統正在自我修復</h2>
+          <p class="section-lede">看到大量 retry 和協商 log 時，團隊可能以為機制正在運作，卻沒有檢查是否真的完成工作。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>有在跑就代表沒卡住</strong>
-            <p>有在跑就代表沒卡住 會讓人把『目前沒爆』誤讀成『設計沒問題』，於是風險一路被推往更後面。</p>
+            <strong>活動感掩蓋停滯</strong>
+            <p>人容易把有 log、有流量、有狀態變化當成有進展。</p>
           </article>
           <article class="example">
-            <strong>重試被當成免費進步</strong>
-            <p>重試被當成免費進步 最危險的地方，在於它常把局部成功包裝成全局安全。</p>
+            <strong>對稱規則看起來公平</strong>
+            <p>所有人同樣退讓很合理，但對稱性正是週期重複的原因。</p>
           </article>
           <article class="example">
-            <strong>忙碌掩蓋零進度</strong>
-            <p>只要 忙碌掩蓋零進度 一進場，團隊就容易先相信現況撐得住，而不是先問代價正在往哪裡堆。</p>
+            <strong>重試被當成韌性</strong>
+            <p>重試沒有 backoff 和 budget 時，可能只是把無進展放大成噪音。</p>
           </article>
         </div>
-        <p class="micro-note">越早把 重試互撞、彼此讓路 這些心理近路說出來，越不容易在 postmortem 才第一次承認它們存在。</p>
+        <p class="micro-note">排查活結時，請先問完成率，而不是先問系統有沒有在動。</p>
       </section>
 
       <section class="chapter" id="applications">
         <div class="section-heading">
           <p class="section-label">Applications</p>
-          <h2>回到 退避策略、鎖競爭治理 與 重試節奏設計</h2>
-          <p class="section-lede">這裡重點不是補幾個抽象案例，而是把 活結 直接落到 退避策略、鎖競爭治理 這些真的會出事的邊界上。</p>
+          <h2>讓衝突後的下一步不再完全對稱</h2>
+          <p class="section-lede">活結常出現在 retry protocol、分散式協商與人工作業互相等待中。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>退避策略</strong>
-            <p>把 活結 帶回 退避策略 時，最該先畫出來的是 重試互撞 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>Retry protocol</strong>
+            <p>加入 exponential backoff 和 jitter，避免所有 client 同時重試。</p>
           </article>
           <article class="example">
-            <strong>鎖競爭治理</strong>
-            <p>把 活結 帶回 鎖競爭治理 時，最該先畫出來的是 彼此讓路 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>工作佇列</strong>
+            <p>衝突後由單一 owner 或 lease 決定誰繼續，避免 worker 互相釋放。</p>
           </article>
           <article class="example">
-            <strong>重試節奏設計</strong>
-            <p>把 活結 帶回 重試節奏設計 時，最該先畫出來的是 進度為零 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>人工作業</strong>
+            <p>兩個團隊互相退回需求時，指定決策者和截止條件，避免反覆請對方先確認。</p>
           </article>
         </div>
       </section>
@@ -200,30 +200,30 @@
       <section class="chapter" id="misreadings">
         <div class="section-heading">
           <p class="section-label">Misreadings</p>
-          <h2>三個常見誤讀</h2>
-          <p class="section-lede">這些誤讀常把 活結 降成實作瑣事，結果真正的邊界壓力根本沒被談到。</p>
+          <h2>活結不是死結的另一個名字</h2>
+          <p class="section-lede">死結是等待不動，活結是一直動但不前進；監控和修法都不同。</p>
         </div>
         <div class="collocation-list" aria-label="常見誤讀">
           <article class="collocation-card">
             <div>
-              <strong>活結 只是實作細節</strong>
+              <strong>看到活動就排除卡住</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>它常是 重試互撞 最先破掉的邊界，所以不是『之後再補』就沒事。</p>
+            <p>活動量高可能正是活結徵兆，要看完成量。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>只要再加更多防呆，活結 就會消失</strong>
+              <strong>只增加重試次數</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>如果 彼此讓路 的壓力來源沒處理，防呆最後只會變成更昂貴的補丁。</p>
+            <p>更多重試可能讓同步衝突更嚴重。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>活結 只和大型分散式系統有關</strong>
+              <strong>忽略對稱性</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>很多單機、韌體或流程系統，一樣會以更小規模的 進度為零 形式重演。</p>
+            <p>雙方規則完全一樣時，合理反應可能形成穩定循環。</p>
           </article>
         </div>
       </section>
@@ -231,22 +231,22 @@
       <section class="chapter" id="questions">
         <div class="section-heading">
           <p class="section-label">Questions</p>
-          <h2>把 重試互撞、彼此讓路 追到真正會破的邊界</h2>
-          <p class="section-lede">下面兩個問題很適合在 退避策略、鎖競爭治理 這類設計或驗證場合直接拿來過一遍。</p>
+          <h2>問忙碌有沒有換成完成</h2>
+          <p class="section-lede">下面兩問適合用在 retry storm 和流程卡住時。</p>
         </div>
         <div class="prompt-grid">
           <article class="prompt-card">
-            <strong>如果第一個異常出現在 退避策略</strong>
-            <p>你最先會去畫哪條邊界，確認 重試互撞 和 彼此讓路 到底在哪一步被放大？</p>
+            <strong>哪些指標證明狀態真的前進？</strong>
+            <p>用 commit、完成、移出佇列或狀態轉移，不要只看事件數。</p>
           </article>
           <article class="prompt-card">
-            <strong>如果 鎖競爭治理 團隊只回你一句『現在看起來沒事』</strong>
-            <p>你要用什麼觀測或驗證證明：進度為零 不是只是還沒在現場結帳？</p>
+            <strong>多方是否在同一節奏退讓與重試？</strong>
+            <p>若是，加入 jitter、leader、token 或明確優先權。</p>
           </article>
         </div>
         <div class="template-note">
           <strong>延伸路線</strong>
-          <p>把 Deadlock 接著讀，通常會更看得出 活結 不是單點 bug，而是整體設計習慣。</p>
+          <p>可接著讀 deadlock，對照等待不動和忙而不前的不同失敗型態。</p>
         </div>
       </section>
 
@@ -254,22 +254,22 @@
         <div class="section-heading">
           <p class="section-label">Sources</p>
           <h2>來源與整理方式</h2>
-          <p class="section-lede">本頁先用 Livelock 條目交代故障模式與邊界壓力，再用 Deadlock 補回更大的系統背景。</p>
+          <p class="section-lede">本頁以 livelock 的持續活動但無進展為核心，並用 deadlock 作為相鄰對照。</p>
         </div>
         <div class="source-grid">
           <article class="source-card">
             <strong>核心概念</strong>
-            <p>這張卡說明 活結 在接口、時序或權限邊界上最常怎麼冒出來。</p>
+            <p>支撐參與者持續反應卻沒有完成進展的主線。</p>
             <a href="https://en.wikipedia.org/wiki/Livelock" target="_blank" rel="noreferrer">Livelock</a>
           </article>
           <article class="source-card">
-            <strong>相鄰概念</strong>
-            <p>這張卡補回 Deadlock 所在的更大可靠性或系統脈絡，避免把 活結 只看成局部實作瑕疵。</p>
+            <strong>相鄰脈絡</strong>
+            <p>提供等待型進展阻斷作為對照脈絡。</p>
             <a href="https://en.wikipedia.org/wiki/Deadlock" target="_blank" rel="noreferrer">Deadlock</a>
           </article>
           <article class="source-card">
             <strong>教學整理</strong>
-            <p>工程映射與事故語境是本頁的教學整理，目的是把 活結 直接落到 退避策略、鎖競爭治理 與 重試節奏設計 這些邊界上。</p>
+            <p>Retry protocol、工作佇列與人工作業案例是本頁依系統實務整理的應用。</p>
           </article>
         </div>
       </section>
@@ -279,7 +279,7 @@
           <div>
             <p class="section-label">Reference</p>
             <h2>下一步</h2>
-            <p>下次在 退避策略 或 鎖競爭治理 做設計決定時，先把 重試互撞 穿過哪個邊界、何時變成 進度為零 寫進 review。</p>
+            <p>下次 log 很熱鬧但工單沒少，請先懷疑活結。</p>
           </div>
           <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
         </div>

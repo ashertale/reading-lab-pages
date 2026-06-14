@@ -21,13 +21,13 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
-        <p class="kicker">Knowledge Study / Engineering</p>
+        <p class="kicker">Knowledge Study / Systems</p>
         <h1>死結</h1>
         <p class="topic-subtitle">Deadlock</p>
-        <p class="thesis">多個執行單位彼此握著對方需要的資源，誰也不肯先放，結果整個系統就停在沒有前進的僵局。</p>
+        <p class="thesis">死結不是系統安靜無事，而是每個參與者都握著別人需要的資源，然後等待別人先放手。</p>
         <div class="hero-prompt">
           <strong>Read For</strong>
-          <p>這頁會把 資源互鎖、相互等待 這些常藏在規格外的壓力，拉回 多鎖設計 與 硬體資源管理 的設計檢查裡。</p>
+          <p>掌握相互等待、鎖順序、資源持有與超時策略如何決定系統是否能繼續前進。</p>
         </div>
       </div>
       <aside class="hero-note" aria-label="主題資訊">
@@ -42,17 +42,17 @@
           </div>
           <div>
             <dt>主要判準</dt>
-            <dd>資源互鎖、相互等待、不可搶奪、循環依賴</dd>
+            <dd>互斥、持有等待、循環等待、破局策略</dd>
           </div>
           <div>
             <dt>讀完產出</dt>
-            <dd>能用 Everyone waits, no one can move 重新檢查 同步與資源管理 裡的判斷失真</dd>
+            <dd>能在併發程式、資料庫交易與跨服務流程中辨認死結條件</dd>
           </div>
         </dl>
         <div class="knowledge-map" aria-label="閱讀結構示意">
-          <span>互鎖</span>
+          <span>鎖</span>
           <span>等待</span>
-          <span>僵局</span>
+          <span>破局</span>
         </div>
       </aside>
     </div>
@@ -75,28 +75,28 @@
       <section class="chapter" id="core">
         <div class="section-heading">
           <p class="section-label">Orientation</p>
-          <h2>如果每個人都只是照規則拿資源，為什麼最後卻可能誰都做不下去</h2>
-          <p class="section-lede">死結 的價值，在於它把平常藏在接口、時序或權限邊界外的壓力，提前搬到設計與驗證桌面上。</p>
+          <h2>每個人都在等，代表問題已經從速度變成進展性</h2>
+          <p class="section-lede">死結的核心不是慢，而是沒有任何一方能在現有條件下完成並釋放資源。</p>
         </div>
         <div class="core-card">
           <p class="section-label">Core Tension</p>
-          <p>多個執行單位彼此握著對方需要的資源，誰也不肯先放，結果整個系統就停在沒有前進的僵局。</p>
+          <p>鎖和交易保護一致性，但資源取得順序若沒有規則，保護機制本身會讓所有參與者停在原地。</p>
         </div>
         <div class="principle-strip" aria-label="本頁讀法">
           <div>
             <span>01</span>
-            <strong>先圈出 資源互鎖 會在哪裡破</strong>
-            <p>資源互鎖 常不是抽象風險，而是會穿過具體接口、排程或權限邊界。</p>
+            <strong>固定取得順序</strong>
+            <p>多把鎖或多個資源必須有全域順序，避免 A 等 B、B 等 A。</p>
           </div>
           <div>
             <span>02</span>
-            <strong>再追 相互等待 怎麼穿過邊界</strong>
-            <p>相互等待 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現。</p>
+            <strong>縮短持有時間</strong>
+            <p>不要在持有鎖時做 I/O、等待使用者或呼叫未知延遲的外部服務。</p>
           </div>
           <div>
             <span>03</span>
-            <strong>最後查 不可搶奪 何時從小事變事故</strong>
-            <p>不可搶奪 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力。</p>
+            <strong>提供破局機制</strong>
+            <p>timeout、deadlock detection、交易重試與可回滾操作要預先設計。</p>
           </div>
         </div>
       </section>
@@ -104,50 +104,50 @@
       <section class="chapter" id="setup">
         <div class="section-heading">
           <p class="section-label">Setup</p>
-          <h2>風險不是突然出現，而是 相互等待 一路堆出來的</h2>
-          <p class="section-lede">把問題壓回一個最小接口或一次時序交會，資源互鎖 何時變成風險、不可搶奪 何時開始放大，就不容易再被模糊帶過。</p>
+          <h2>兩個交易各自拿到一半資源，然後都在等另一半</h2>
+          <p class="section-lede">最小場景是每個參與者都持有資源，同時等待對方持有的資源。</p>
         </div>
         <div class="definition-grid">
           <div class="tile">
             <strong>最小劇情</strong>
-            <p>任務 A 拿著資源 1 等資源 2，任務 B 拿著資源 2 等資源 1；彼此都沒有錯，但整體已經動不了了。</p>
+            <p>交易 A 先鎖住帳戶 X，再等帳戶 Y；交易 B 先鎖住帳戶 Y，再等帳戶 X。兩邊都不會自然完成，也不會自動釋放。</p>
           </div>
           <div class="tile">
             <strong>真正難點</strong>
-            <p>如果每個人都只是照規則拿資源，為什麼最後卻可能誰都做不下去</p>
+            <p>單看任一交易都合理；問題出在多個交易交錯後形成循環等待。</p>
           </div>
         </div>
         <div class="concept-flow" aria-label="問題展開">
-          <div class="flow-step">局部先對付 資源互鎖</div>
+          <div class="flow-step">各自取得部分資源</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">相互等待 穿過接口或時序邊界</div>
+          <div class="flow-step">等待另一方釋放</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">不可搶奪 把小問題放大成現場風險</div>
+          <div class="flow-step">循環等待阻斷進展</div>
         </div>
         <div class="paradox-frame">
           <strong>Key Point</strong>
-          <p>死結 的價值，在於它把平常埋在規格外的 資源互鎖、相互等待 與 不可搶奪，提前拉回 design review 能談清楚的位置。</p>
+          <p>死結要靠設計破壞必要條件，而不是期待執行緒自己想通。</p>
         </div>
       </section>
 
       <section class="chapter" id="lenses">
         <div class="section-heading">
           <p class="section-label">Lenses</p>
-          <h2>先把 循環等待、局部正確整體停滯 與 資源順序關鍵 分開看</h2>
-          <p class="section-lede">表面像同一個故障，底下往往是 循環等待、局部正確整體停滯 和 資源順序關鍵 在不同邊界各自出力。</p>
+          <h2>檢查死結四條件是否同時成立</h2>
+          <p class="section-lede">死結通常需要互斥、持有等待、不可搶占與循環等待一起出現。</p>
         </div>
         <div class="lens-grid">
           <article class="lens-card">
-            <strong>循環等待</strong>
-            <p>循環等待 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 資源互鎖 轉成真正的穩定性壓力。</p>
+            <strong>資源圖</strong>
+            <p>把執行緒、交易、鎖和資源畫成等待圖，循環通常比 log 更誠實。</p>
           </article>
           <article class="lens-card">
-            <strong>局部正確整體停滯</strong>
-            <p>局部正確整體停滯 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 相互等待 轉成真正的穩定性壓力。</p>
+            <strong>取得順序</strong>
+            <p>確認所有路徑是否以同樣順序拿鎖或開交易。</p>
           </article>
           <article class="lens-card">
-            <strong>資源順序關鍵</strong>
-            <p>資源順序關鍵 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 不可搶奪 轉成真正的穩定性壓力。</p>
+            <strong>釋放策略</strong>
+            <p>等待時是否能超時、回滾、釋放部分資源或讓 scheduler 介入？</p>
           </article>
         </div>
       </section>
@@ -155,44 +155,44 @@
       <section class="chapter" id="psychology">
         <div class="section-heading">
           <p class="section-label">Psychology</p>
-          <h2>團隊通常在哪一步把 死結 當成暫時小事</h2>
-          <p class="section-lede">工程現場最危險的，不是沒人提風險，而是大家太容易把 資源互鎖 當成晚點再補也行的小瑕疵。</p>
+          <h2>人容易審查單一路徑，卻漏掉路徑之間的交錯</h2>
+          <p class="section-lede">併發錯誤常藏在組合狀態裡；單看每段 code 都有道理，合在一起才卡死。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>先鎖再說比較安全</strong>
-            <p>先鎖再說比較安全 會讓人把『目前沒爆』誤讀成『設計沒問題』，於是風險一路被推往更後面。</p>
+            <strong>局部正確感很強</strong>
+            <p>每段程式都有保護資料的理由，讓人低估鎖之間的全域關係。</p>
           </article>
           <article class="example">
-            <strong>只看單一執行緒</strong>
-            <p>只看單一執行緒 最危險的地方，在於它常把局部成功包裝成全局安全。</p>
+            <strong>重現困難降低警覺</strong>
+            <p>死結可能只在特定時序出現，無法重現時容易被當成偶發。</p>
           </article>
           <article class="example">
-            <strong>等待看起來像暫時</strong>
-            <p>只要 等待看起來像暫時 一進場，團隊就容易先相信現況撐得住，而不是先問代價正在往哪裡堆。</p>
+            <strong>timeout 被當成補丁</strong>
+            <p>只加 timeout 可能讓系統恢復，但沒有移除循環等待的設計原因。</p>
           </article>
         </div>
-        <p class="micro-note">越早把 資源互鎖、相互等待 這些心理近路說出來，越不容易在 postmortem 才第一次承認它們存在。</p>
+        <p class="micro-note">debug 死結時，先畫等待圖；修死結時，先定取得順序和釋放規則。</p>
       </section>
 
       <section class="chapter" id="applications">
         <div class="section-heading">
           <p class="section-label">Applications</p>
-          <h2>回到 多鎖設計、硬體資源管理 與 跨模組同步</h2>
-          <p class="section-lede">這裡重點不是補幾個抽象案例，而是把 死結 直接落到 多鎖設計、硬體資源管理 這些真的會出事的邊界上。</p>
+          <h2>把資源順序寫成接口契約</h2>
+          <p class="section-lede">併發程式、資料庫交易和跨服務 workflow 都可能在不同層形成死結。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>多鎖設計</strong>
-            <p>把 死結 帶回 多鎖設計 時，最該先畫出來的是 資源互鎖 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>Mutex 設計</strong>
+            <p>對多鎖路徑定義全域 lock ordering，並用 assert 或 wrapper 防止反序取得。</p>
           </article>
           <article class="example">
-            <strong>硬體資源管理</strong>
-            <p>把 死結 帶回 硬體資源管理 時，最該先畫出來的是 相互等待 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>資料庫交易</strong>
+            <p>讓交易以穩定順序更新 rows，並對 deadlock retry 設計 idempotent 操作。</p>
           </article>
           <article class="example">
-            <strong>跨模組同步</strong>
-            <p>把 死結 帶回 跨模組同步 時，最該先畫出來的是 不可搶奪 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>跨服務流程</strong>
+            <p>避免服務在等待遠端回覆時持有本地不可釋放資源。</p>
           </article>
         </div>
       </section>
@@ -200,30 +200,30 @@
       <section class="chapter" id="misreadings">
         <div class="section-heading">
           <p class="section-label">Misreadings</p>
-          <h2>三個常見誤讀</h2>
-          <p class="section-lede">這些誤讀常把 死結 降成實作瑣事，結果真正的邊界壓力根本沒被談到。</p>
+          <h2>死結不是普通慢查詢</h2>
+          <p class="section-lede">慢查詢終究會完成；死結在沒有破局機制時不會自然前進。</p>
         </div>
         <div class="collocation-list" aria-label="常見誤讀">
           <article class="collocation-card">
             <div>
-              <strong>死結 只是實作細節</strong>
+              <strong>只加 timeout 就算修好</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>它常是 資源互鎖 最先破掉的邊界，所以不是『之後再補』就沒事。</p>
+            <p>Timeout 是破局，不一定是修設計；仍要找循環等待來源。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>只要再加更多防呆，死結 就會消失</strong>
+              <strong>只看 CPU 使用率</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>如果 相互等待 的壓力來源沒處理，防呆最後只會變成更昂貴的補丁。</p>
+            <p>死結時 CPU 可能很低，低使用率不代表系統健康。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>死結 只和大型分散式系統有關</strong>
+              <strong>把責任推給資料庫</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>很多單機、韌體或流程系統，一樣會以更小規模的 不可搶奪 形式重演。</p>
+            <p>資料庫能偵測交易死結，但應用層仍要設計重試和資源順序。</p>
           </article>
         </div>
       </section>
@@ -231,22 +231,22 @@
       <section class="chapter" id="questions">
         <div class="section-heading">
           <p class="section-label">Questions</p>
-          <h2>把 資源互鎖、相互等待 追到真正會破的邊界</h2>
-          <p class="section-lede">下面兩個問題很適合在 多鎖設計、硬體資源管理 這類設計或驗證場合直接拿來過一遍。</p>
+          <h2>畫出誰握著誰需要的東西</h2>
+          <p class="section-lede">下面兩問適合用在 deadlock debug 和併發設計 review。</p>
         </div>
         <div class="prompt-grid">
           <article class="prompt-card">
-            <strong>如果第一個異常出現在 多鎖設計</strong>
-            <p>你最先會去畫哪條邊界，確認 資源互鎖 和 相互等待 到底在哪一步被放大？</p>
+            <strong>是否存在等待循環？</strong>
+            <p>把執行緒和資源畫成圖，確認是不是 A 等 B、B 又等 A。</p>
           </article>
           <article class="prompt-card">
-            <strong>如果 硬體資源管理 團隊只回你一句『現在看起來沒事』</strong>
-            <p>你要用什麼觀測或驗證證明：不可搶奪 不是只是還沒在現場結帳？</p>
+            <strong>哪個死結條件可以被破壞？</strong>
+            <p>從鎖順序、持有時間、搶占或 timeout 中選一個真正落地的破局策略。</p>
           </article>
         </div>
         <div class="template-note">
           <strong>延伸路線</strong>
-          <p>若想把這題從局部故障拉回系統設計，下一步最值得對照的是 Concurrency。</p>
+          <p>可接著讀 concurrency，理解多執行單元共享狀態時的基本風險。</p>
         </div>
       </section>
 
@@ -254,22 +254,22 @@
         <div class="section-heading">
           <p class="section-label">Sources</p>
           <h2>來源與整理方式</h2>
-          <p class="section-lede">本頁先用 Deadlock 條目交代故障模式與邊界壓力，再用 Concurrency 補回更大的系統背景。</p>
+          <p class="section-lede">本頁以 deadlock 的循環等待為核心，並用 concurrency 補足多工作共享資源背景。</p>
         </div>
         <div class="source-grid">
           <article class="source-card">
             <strong>核心概念</strong>
-            <p>這張卡說明 死結 在接口、時序或權限邊界上最常怎麼冒出來。</p>
+            <p>支撐死結必要條件與相互等待問題的核心概念。</p>
             <a href="https://en.wikipedia.org/wiki/Deadlock" target="_blank" rel="noreferrer">Deadlock</a>
           </article>
           <article class="source-card">
-            <strong>相鄰概念</strong>
-            <p>這張卡補回 Concurrency 所在的更大可靠性或系統脈絡，避免把 死結 只看成局部實作瑕疵。</p>
+            <strong>相鄰脈絡</strong>
+            <p>補充併發系統中多工作交錯與共享資源的基礎脈絡。</p>
             <a href="https://en.wikipedia.org/wiki/Concurrency_(computer_science)" target="_blank" rel="noreferrer">Concurrency</a>
           </article>
           <article class="source-card">
             <strong>教學整理</strong>
-            <p>工程映射與事故語境是本頁的教學整理，目的是把 死結 直接落到 多鎖設計、硬體資源管理 與 跨模組同步 這些邊界上。</p>
+            <p>Mutex、資料庫交易與跨服務流程案例是本頁依工程實務整理的應用。</p>
           </article>
         </div>
       </section>
@@ -279,7 +279,7 @@
           <div>
             <p class="section-label">Reference</p>
             <h2>下一步</h2>
-            <p>下次在 多鎖設計 或 硬體資源管理 做設計決定時，先把 資源互鎖 穿過哪個邊界、何時變成 不可搶奪 寫進 review。</p>
+            <p>下次系統卡住但 CPU 很低時，先畫等待圖，不要只追慢函式。</p>
           </div>
           <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
         </div>

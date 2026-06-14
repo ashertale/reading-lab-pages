@@ -34,21 +34,24 @@ data/concept-suggestions.json
 
 ## Scripts 分層
 
-- `scripts/generate_concept_batch.py`：批次產生新概念的 payload，先建立可 review 的內容輸入，再交給 render/validate 流程處理。
+- `scripts/generate_concept_batch.py`：舊批次文案產生器，預設已禁止寫 payload；只可用 `--list-topics` 看候選題，避免模板句型再次進入可發布內容。
 - `scripts/render_concept_page.py`：從 payload render `topics/*.html`，並可同步更新 `topic-index.js`。
 - `scripts/validate_concept_lab.py`：檢查 HTML、index、payload 對齊、JS parse 與禁用樣式模式。
+- `scripts/audit_concept_content.py`：輸出既有 payload 的制式句型、跨頁相似度與 section 句架盤點報告；報告寫入已忽略的 `.superpowers/concept-audits/`。
 - `scripts/bootstrap_existing_concept_payloads.py`：從既有 `topic-index.js` 與 `topics/*.html` 反推 payload。
 - `scripts/archive/`：存放一次性或歷史性的批次生成輔助腳本，不是日常維護主流程。
 
 ## 新增概念頁流程
 
-1. 先建立 `data/concept-payloads/<topic-slug>.json`，讓主題內容可先被 review。
-   若要批次新增，可先用 `scripts/generate_concept_batch.py` 產出 payload，再逐份審查。
-2. 依 payload render 出 `topics/<topic-slug>.html`，並保留 `core`、`setup`、`lenses`、`psychology`、`applications`、`misreadings`、`questions`、`sources` section id。
-3. 在 payload 的 `indexEntry` 新增概念 metadata，`href` 指向 `./topics/<topic-slug>.html`，並保持 `order` 連續。
-4. 若候選題已生成，從 `data/concept-suggestions.json` 移除或改寫為下一批候選題。
-5. Topbar 只放全站入口：`首頁`、`待生成`、`模板`。不要把每個概念頁放進 topbar。
-6. 檢查首頁、backlog 與新增頁面的桌面、窄版截圖。
+1. 先為每個主題寫一行不可互換的 pressure point；如果兩個主題只換名詞也成立，先重寫 framing，不要進 payload。
+2. 為每頁列出來源計畫、工程/產品映射、常見誤讀與兩個讀者問題，確認內容不是從同一個句型工廠展開。
+3. 在 payload 裡先寫 `contentBrief`，包含 pressure point、最小情境、來源計畫、轉移場景、常見誤讀、讀者問題與每個 section 的意圖。
+4. 建立 `data/concept-payloads/<topic-slug>.json` 的 `page.heroHtml` / `page.mainHtml`，讓主題內容可先被 review；批次新增時也要逐頁寫 payload，不使用腳本填充可發布文案。
+5. 依 payload render 出 `topics/<topic-slug>.html`，並保留 `core`、`setup`、`lenses`、`psychology`、`applications`、`misreadings`、`questions`、`sources` section id。
+6. 在 payload 的 `indexEntry` 新增概念 metadata，`href` 指向 `./topics/<topic-slug>.html`，並保持 `order` 連續。
+7. 若候選題已生成，從 `data/concept-suggestions.json` 移除或改寫為下一批候選題。
+8. Topbar 只放全站入口：`首頁`、`待生成`、`模板`。不要把每個概念頁放進 topbar。
+9. 檢查首頁、backlog 與新增頁面的桌面、窄版截圖。
 
 Render 既有 payload：
 
@@ -56,10 +59,10 @@ Render 既有 payload：
 & 'C:\Users\CHEN\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' scripts\render_concept_page.py data\concept-payloads --sync-index
 ```
 
-批次建立新 payload：
+列出舊候選題資料，只供批次規劃，不會寫 payload：
 
 ```powershell
-& 'C:\Users\CHEN\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' scripts\generate_concept_batch.py
+& 'C:\Users\CHEN\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' scripts\generate_concept_batch.py --list-topics --limit 20
 ```
 
 ## 驗證
@@ -76,3 +79,12 @@ Render 既有 payload：
 - HTML section 開關數、頁內 anchor target、概念頁必要 section 是否完整。
 - CSS/HTML 是否出現禁用的 viewport type pattern：`font-size: *vw`、`clamp(`、負 `letter-spacing`。
 - `data/concept-payloads/*.json` 與 `topics/*.html` 是否一一對齊。
+- 新增或修改的 payload 是否具備合格 `contentBrief`。
+- 新增或修改的 payload 是否帶有批次模板句型，例如「常不是抽象風險」、「如果沒被提前畫出來」、「把情境縮到一次普通判斷後」這類可替換句架。
+- 新增或修改的 payload 是否和既有頁面整體過度相似，或在同一 section 重複既有句架。
+
+若要盤點既有 200 頁的內容舊債，可加上嚴格模式：
+
+```powershell
+& 'C:\Users\CHEN\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' scripts\validate_concept_lab.py --strict-content
+```

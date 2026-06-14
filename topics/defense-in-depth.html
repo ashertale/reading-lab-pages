@@ -21,13 +21,13 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
-        <p class="kicker">Knowledge Study / Engineering</p>
+        <p class="kicker">Knowledge Study / Systems</p>
         <h1>縱深防禦</h1>
         <p class="topic-subtitle">Defense in Depth</p>
-        <p class="thesis">如果你知道任何單一防線都可能被繞過，那安全設計就不該押寶在一關守住，而應該讓多層保護彼此承接。</p>
+        <p class="thesis">縱深防禦不是把同一把鎖裝很多次，而是讓不同層各自承擔不同失敗假設。</p>
         <div class="hero-prompt">
           <strong>Read For</strong>
-          <p>這頁會把 多層保護、單點失守 這些常藏在規格外的壓力，拉回 資安設計 與 資料保護 的設計檢查裡。</p>
+          <p>分辨邊界防護、身份、最小權限、偵測、隔離和恢復如何形成互補層。</p>
         </div>
       </div>
       <aside class="hero-note" aria-label="主題資訊">
@@ -42,17 +42,17 @@
           </div>
           <div>
             <dt>主要判準</dt>
-            <dd>多層保護、單點失守、承接、疊代阻擋</dd>
+            <dd>防線層次、失敗假設、偵測能力、隔離範圍</dd>
           </div>
           <div>
             <dt>讀完產出</dt>
-            <dd>能用 Multiple layers to absorb failure 重新檢查 安全與風險控制 裡的判斷失真</dd>
+            <dd>能在安全設計中檢查每一層被繞過後下一層如何限制傷害</dd>
           </div>
         </dl>
         <div class="knowledge-map" aria-label="閱讀結構示意">
-          <span>多層</span>
-          <span>承接</span>
-          <span>緩衝</span>
+          <span>防線</span>
+          <span>失效</span>
+          <span>限制</span>
         </div>
       </aside>
     </div>
@@ -75,28 +75,28 @@
       <section class="chapter" id="core">
         <div class="section-heading">
           <p class="section-label">Orientation</p>
-          <h2>既然每一層都可能被攻破，為什麼多堆幾層仍然值得</h2>
-          <p class="section-lede">縱深防禦 的價值，在於它把平常藏在接口、時序或權限邊界外的壓力，提前搬到設計與驗證桌面上。</p>
+          <h2>每一層都要假設上一層可能失手</h2>
+          <p class="section-lede">縱深防禦把安全看成多層限制：外層擋不住時，內層仍能降低權限、暴露面、橫向移動和恢復成本。</p>
         </div>
         <div class="core-card">
           <p class="section-label">Core Tension</p>
-          <p>如果你知道任何單一防線都可能被繞過，那安全設計就不該押寶在一關守住，而應該讓多層保護彼此承接。</p>
+          <p>多層防線能吸收錯誤，但層數增加也會提高複雜度；有效縱深要看層與層是否真的獨立且互補。</p>
         </div>
         <div class="principle-strip" aria-label="本頁讀法">
           <div>
             <span>01</span>
-            <strong>先圈出 多層保護 會在哪裡破</strong>
-            <p>多層保護 常不是抽象風險，而是會穿過具體接口、排程或權限邊界。</p>
+            <strong>給每層不同任務</strong>
+            <p>防止、偵測、限制、記錄和恢復不是同一件事。</p>
           </div>
           <div>
             <span>02</span>
-            <strong>再追 單點失守 怎麼穿過邊界</strong>
-            <p>單點失守 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現。</p>
+            <strong>檢查共同失效</strong>
+            <p>如果多層依賴同一秘密、同一身份或同一配置，攻破一處可能全破。</p>
           </div>
           <div>
             <span>03</span>
-            <strong>最後查 承接 何時從小事變事故</strong>
-            <p>承接 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力。</p>
+            <strong>讓內層最小化傷害</strong>
+            <p>即使入口被攻破，權限、網段、資料和操作也要被分區限制。</p>
           </div>
         </div>
       </section>
@@ -104,50 +104,50 @@
       <section class="chapter" id="setup">
         <div class="section-heading">
           <p class="section-label">Setup</p>
-          <h2>把壓力壓回 多層保護 最先失守的地方</h2>
-          <p class="section-lede">把問題壓回一個最小接口或一次時序交會，多層保護 何時變成風險、承接 何時開始放大，就不容易再被模糊帶過。</p>
+          <h2>API gateway 驗證失效時，內部服務不能假設所有請求都可信</h2>
+          <p class="section-lede">最小場景是外層防線失手，內層若完全信任外層就一起失守。</p>
         </div>
         <div class="definition-grid">
           <div class="tile">
             <strong>最小劇情</strong>
-            <p>認證、授權、隔離、監控與回復策略若各自都只守住一部分，單一失手就不至於立刻變成全面失守。</p>
+            <p>Gateway 原本負責 JWT 驗證；某次配置錯誤讓未驗證請求進入內網。內部服務沒有再檢查 scope，也用高權限 service account 存取資料庫。</p>
           </div>
           <div class="tile">
             <strong>真正難點</strong>
-            <p>既然每一層都可能被攻破，為什麼多堆幾層仍然值得</p>
+            <p>外層驗證存在不代表內層可以放棄身份、授權和操作限制。</p>
           </div>
         </div>
         <div class="concept-flow" aria-label="問題展開">
-          <div class="flow-step">局部先對付 多層保護</div>
+          <div class="flow-step">外層防線被繞過</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">單點失守 穿過接口或時序邊界</div>
+          <div class="flow-step">內層仍假設請求可信</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">承接 把小問題放大成現場風險</div>
+          <div class="flow-step">單一失誤擴大成資料暴露</div>
         </div>
         <div class="paradox-frame">
           <strong>Key Point</strong>
-          <p>縱深防禦 的價值，在於它把平常埋在規格外的 多層保護、單點失守 與 承接，提前拉回 design review 能談清楚的位置。</p>
+          <p>縱深防禦要求每層都能在上一層失效時限制爆炸半徑。</p>
         </div>
       </section>
 
       <section class="chapter" id="lenses">
         <div class="section-heading">
           <p class="section-label">Lenses</p>
-          <h2>先把 單層不可靠、多層承接 與 突破成本累積 分開看</h2>
-          <p class="section-lede">表面像同一個故障，底下往往是 單層不可靠、多層承接 和 突破成本累積 在不同邊界各自出力。</p>
+          <h2>看每層限制的是哪一種失敗</h2>
+          <p class="section-lede">有效防線不是重複檢查同一條件，而是覆蓋不同攻擊階段。</p>
         </div>
         <div class="lens-grid">
           <article class="lens-card">
-            <strong>單層不可靠</strong>
-            <p>單層不可靠 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 多層保護 轉成真正的穩定性壓力。</p>
+            <strong>入口層</strong>
+            <p>身份、輸入驗證、rate limit 和基本邊界是否存在？</p>
           </article>
           <article class="lens-card">
-            <strong>多層承接</strong>
-            <p>多層承接 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 單點失守 轉成真正的穩定性壓力。</p>
+            <strong>內部層</strong>
+            <p>服務間授權、最小權限、網路分段和資料範圍是否能限制橫向移動？</p>
           </article>
           <article class="lens-card">
-            <strong>突破成本累積</strong>
-            <p>突破成本累積 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 承接 轉成真正的穩定性壓力。</p>
+            <strong>偵測恢復層</strong>
+            <p>異常是否被記錄、告警，且能快速撤銷 token、隔離服務或回復狀態？</p>
           </article>
         </div>
       </section>
@@ -155,44 +155,44 @@
       <section class="chapter" id="psychology">
         <div class="section-heading">
           <p class="section-label">Psychology</p>
-          <h2>團隊通常在哪一步把 縱深防禦 當成暫時小事</h2>
-          <p class="section-lede">工程現場最危險的，不是沒人提風險，而是大家太容易把 多層保護 當成晚點再補也行的小瑕疵。</p>
+          <h2>人容易把第一層設計得很厚，然後讓內層過度信任</h2>
+          <p class="section-lede">強邊界帶來安全感，但真正事故常來自邊界配置錯誤、憑證外洩或內部假設過度寬鬆。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>有一道牆就夠了</strong>
-            <p>有一道牆就夠了 會讓人把『目前沒爆』誤讀成『設計沒問題』，於是風險一路被推往更後面。</p>
+            <strong>邊界思維太舒服</strong>
+            <p>把世界分成內外很直覺，卻會讓內部服務預設安全。</p>
           </article>
           <article class="example">
-            <strong>成功防線會讓人鬆懈</strong>
-            <p>成功防線會讓人鬆懈 最危險的地方，在於它常把局部成功包裝成全局安全。</p>
+            <strong>重複控制被誤當縱深</strong>
+            <p>多個相同密碼或相同 ACL 不是多層防線，因為它們可能同時失效。</p>
           </article>
           <article class="example">
-            <strong>多層被誤讀成重複浪費</strong>
-            <p>只要 多層被誤讀成重複浪費 一進場，團隊就容易先相信現況撐得住，而不是先問代價正在往哪裡堆。</p>
+            <strong>偵測被晚放</strong>
+            <p>團隊重視阻擋，卻低估阻擋失敗後需要快速看見和收斂。</p>
           </article>
         </div>
-        <p class="micro-note">越早把 多層保護、單點失守 這些心理近路說出來，越不容易在 postmortem 才第一次承認它們存在。</p>
+        <p class="micro-note">設計縱深時，逐層問：如果前一層壞了，這一層能限制什麼。</p>
       </section>
 
       <section class="chapter" id="applications">
         <div class="section-heading">
           <p class="section-label">Applications</p>
-          <h2>回到 資安設計、資料保護 與 高風險流程控管</h2>
-          <p class="section-lede">這裡重點不是補幾個抽象案例，而是把 縱深防禦 直接落到 資安設計、資料保護 這些真的會出事的邊界上。</p>
+          <h2>讓安全控制分散在入口、內部與恢復路徑</h2>
+          <p class="section-lede">API、韌體更新和雲端資料存取都需要互補防線。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>資安設計</strong>
-            <p>把 縱深防禦 帶回 資安設計 時，最該先畫出來的是 多層保護 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>API 安全</strong>
+            <p>Gateway 驗證之外，服務內仍檢查 scope、租戶和操作權限。</p>
           </article>
           <article class="example">
-            <strong>資料保護</strong>
-            <p>把 縱深防禦 帶回 資料保護 時，最該先畫出來的是 單點失守 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>韌體更新</strong>
+            <p>下載通道安全之外，裝置端仍驗簽、版本檢查和 rollback protection。</p>
           </article>
           <article class="example">
-            <strong>高風險流程控管</strong>
-            <p>把 縱深防禦 帶回 高風險流程控管 時，最該先畫出來的是 承接 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>資料存取</strong>
+            <p>即使 app server 被攻破，資料庫帳號也只能存取必要表與必要操作。</p>
           </article>
         </div>
       </section>
@@ -200,30 +200,30 @@
       <section class="chapter" id="misreadings">
         <div class="section-heading">
           <p class="section-label">Misreadings</p>
-          <h2>三個常見誤讀</h2>
-          <p class="section-lede">這些誤讀常把 縱深防禦 降成實作瑣事，結果真正的邊界壓力根本沒被談到。</p>
+          <h2>縱深防禦不是安全控制越多越好</h2>
+          <p class="section-lede">沒有不同失敗假設的層數只是複雜度，甚至會讓人誤以為安全。</p>
         </div>
         <div class="collocation-list" aria-label="常見誤讀">
           <article class="collocation-card">
             <div>
-              <strong>縱深防禦 只是實作細節</strong>
+              <strong>把重複當縱深</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>它常是 多層保護 最先破掉的邊界，所以不是『之後再補』就沒事。</p>
+            <p>同一種檢查複製三次，不代表能抵抗不同失效模式。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>只要再加更多防呆，縱深防禦 就會消失</strong>
+              <strong>忽略可用性成本</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>如果 單點失守 的壓力來源沒處理，防呆最後只會變成更昂貴的補丁。</p>
+            <p>過度層層阻擋會讓維運繞路，反而製造陰影流程。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>縱深防禦 只和大型分散式系統有關</strong>
+              <strong>只看預防</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>很多單機、韌體或流程系統，一樣會以更小規模的 承接 形式重演。</p>
+            <p>偵測、記錄、隔離和恢復也是縱深的一部分。</p>
           </article>
         </div>
       </section>
@@ -231,22 +231,22 @@
       <section class="chapter" id="questions">
         <div class="section-heading">
           <p class="section-label">Questions</p>
-          <h2>把 多層保護、單點失守 追到真正會破的邊界</h2>
-          <p class="section-lede">下面兩個問題很適合在 資安設計、資料保護 這類設計或驗證場合直接拿來過一遍。</p>
+          <h2>逐層假設上一層已失手</h2>
+          <p class="section-lede">下面兩問適合用在 threat modeling 和安全架構 review。</p>
         </div>
         <div class="prompt-grid">
           <article class="prompt-card">
-            <strong>如果第一個異常出現在 資安設計</strong>
-            <p>你最先會去畫哪條邊界，確認 多層保護 和 單點失守 到底在哪一步被放大？</p>
+            <strong>如果入口驗證失效，內層還能限制什麼？</strong>
+            <p>檢查服務授權、資料範圍、網段和操作權限。</p>
           </article>
           <article class="prompt-card">
-            <strong>如果 資料保護 團隊只回你一句『現在看起來沒事』</strong>
-            <p>你要用什麼觀測或驗證證明：承接 不是只是還沒在現場結帳？</p>
+            <strong>哪些防線會被同一個秘密或設定同時打穿？</strong>
+            <p>找出共享憑證、共享角色和共同配置來源。</p>
           </article>
         </div>
         <div class="template-note">
           <strong>延伸路線</strong>
-          <p>把 Security 接著讀，通常會更看得出 縱深防禦 不是單點 bug，而是整體設計習慣。</p>
+          <p>可接著讀 security 與 least privilege，理解權限限制如何成為內層防線。</p>
         </div>
       </section>
 
@@ -254,22 +254,22 @@
         <div class="section-heading">
           <p class="section-label">Sources</p>
           <h2>來源與整理方式</h2>
-          <p class="section-lede">本頁先用 Defense in Depth 條目交代故障模式與邊界壓力，再用 Security 補回更大的系統背景。</p>
+          <p class="section-lede">本頁以 defense in depth 的多層安全控制為核心，並用 security 補足資訊安全背景。</p>
         </div>
         <div class="source-grid">
           <article class="source-card">
             <strong>核心概念</strong>
-            <p>這張卡說明 縱深防禦 在接口、時序或權限邊界上最常怎麼冒出來。</p>
+            <p>支撐以多層互補防線限制攻擊或故障影響的主線。</p>
             <a href="https://en.wikipedia.org/wiki/Defense_in_depth_(computing)" target="_blank" rel="noreferrer">Defense in Depth</a>
           </article>
           <article class="source-card">
-            <strong>相鄰概念</strong>
-            <p>這張卡補回 Security 所在的更大可靠性或系統脈絡，避免把 縱深防禦 只看成局部實作瑕疵。</p>
+            <strong>相鄰脈絡</strong>
+            <p>補充安全設計中身份、授權、偵測與恢復的基本脈絡。</p>
             <a href="https://en.wikipedia.org/wiki/Security" target="_blank" rel="noreferrer">Security</a>
           </article>
           <article class="source-card">
             <strong>教學整理</strong>
-            <p>工程映射與事故語境是本頁的教學整理，目的是把 縱深防禦 直接落到 資安設計、資料保護 與 高風險流程控管 這些邊界上。</p>
+            <p>本頁用 gateway 失手、裝置端驗簽與資料庫低權限帳號說明各層如何限制下一層傷害。</p>
           </article>
         </div>
       </section>
@@ -279,7 +279,7 @@
           <div>
             <p class="section-label">Reference</p>
             <h2>下一步</h2>
-            <p>下次在 資安設計 或 資料保護 做設計決定時，先把 多層保護 穿過哪個邊界、何時變成 承接 寫進 review。</p>
+            <p>下次你畫安全邊界時，請假設第一條邊界明天會被配置錯。</p>
           </div>
           <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
         </div>

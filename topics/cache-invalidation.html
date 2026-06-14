@@ -21,13 +21,13 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
-        <p class="kicker">Knowledge Study / Engineering</p>
+        <p class="kicker">Knowledge Study / Systems</p>
         <h1>快取失效</h1>
         <p class="topic-subtitle">Cache Invalidation</p>
-        <p class="thesis">快取好用，是因為你暫時接受複本；快取難做，是因為每一份複本都會立刻把『哪一份才最新』變成一個活問題。</p>
+        <p class="thesis">快取失效真正難的不是把資料存快，而是判斷哪一刻舊資料已經不能再代表真實狀態。</p>
         <div class="hero-prompt">
           <strong>Read For</strong>
-          <p>這頁會把 複本、新鮮度 這些常藏在規格外的壓力，拉回 設定分發 與 邊緣快取 的設計檢查裡。</p>
+          <p>看懂 fresh、stale、TTL、事件通知與回寫路徑如何一起決定資料可信度。</p>
         </div>
       </div>
       <aside class="hero-note" aria-label="主題資訊">
@@ -42,17 +42,17 @@
           </div>
           <div>
             <dt>主要判準</dt>
-            <dd>複本、新鮮度、失效策略、一致性</dd>
+            <dd>新鮮度、失效來源、讀寫路徑、容忍陳舊</dd>
           </div>
           <div>
             <dt>讀完產出</dt>
-            <dd>能用 Keeping cached data fresh 重新檢查 快取與資料一致性 裡的判斷失真</dd>
+            <dd>能在設計 cache policy 時說清楚可接受的陳舊窗口與失效責任</dd>
           </div>
         </dl>
         <div class="knowledge-map" aria-label="閱讀結構示意">
           <span>快取</span>
-          <span>複本</span>
-          <span>新鮮</span>
+          <span>新鮮度</span>
+          <span>失效</span>
         </div>
       </aside>
     </div>
@@ -75,28 +75,28 @@
       <section class="chapter" id="core">
         <div class="section-heading">
           <p class="section-label">Orientation</p>
-          <h2>如果快取能讓一切更快，為什麼它也同時是最容易把系統搞成半對半錯的地方</h2>
-          <p class="section-lede">快取失效 的價值，在於它把平常藏在接口、時序或權限邊界外的壓力，提前搬到設計與驗證桌面上。</p>
+          <h2>快不是唯一目標；舊資料何時變成錯資料才是問題</h2>
+          <p class="section-lede">快取讓讀取變快，也讓資料多出一份副本；副本越有用，何時同步、何時丟棄、誰負責通知就越重要。</p>
         </div>
         <div class="core-card">
           <p class="section-label">Core Tension</p>
-          <p>快取好用，是因為你暫時接受複本；快取難做，是因為每一份複本都會立刻把『哪一份才最新』變成一個活問題。</p>
+          <p>系統想降低延遲與後端負載，但只要快取留住過期狀態，使用者看到的就可能是已不存在的權限、庫存或設定。</p>
         </div>
         <div class="principle-strip" aria-label="本頁讀法">
           <div>
             <span>01</span>
-            <strong>先圈出 複本 會在哪裡破</strong>
-            <p>複本 常不是抽象風險，而是會穿過具體接口、排程或權限邊界。</p>
+            <strong>定義陳舊窗口</strong>
+            <p>先說明資料可以舊多久，而不是先選 TTL 數字。</p>
           </div>
           <div>
             <span>02</span>
-            <strong>再追 新鮮度 怎麼穿過邊界</strong>
-            <p>新鮮度 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現。</p>
+            <strong>標出寫入來源</strong>
+            <p>任何能改變真實狀態的路徑，都要能觸發或等待相應失效。</p>
           </div>
           <div>
             <span>03</span>
-            <strong>最後查 失效策略 何時從小事變事故</strong>
-            <p>失效策略 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力。</p>
+            <strong>讓錯誤可觀測</strong>
+            <p>命中率漂亮不代表安全，還要能看 stale read、miss storm 與失效延遲。</p>
           </div>
         </div>
       </section>
@@ -104,50 +104,50 @@
       <section class="chapter" id="setup">
         <div class="section-heading">
           <p class="section-label">Setup</p>
-          <h2>哪個邊界先把 複本 變成事故</h2>
-          <p class="section-lede">把問題壓回一個最小接口或一次時序交會，複本 何時變成風險、失效策略 何時開始放大，就不容易再被模糊帶過。</p>
+          <h2>一筆權限更新完成了，快取卻還在批准舊身份</h2>
+          <p class="section-lede">最小場景是一份副本繼續提供答案，但原始資料已經改變。</p>
         </div>
         <div class="definition-grid">
           <div class="tile">
             <strong>最小劇情</strong>
-            <p>資料被複製到記憶體、邊緣節點或本地快取後，讀取變快了，但任何更新都需要回答：哪些副本要立刻改、哪些能晚點改。</p>
+            <p>管理員移除某帳號的存取權，database 已更新成功；API gateway 仍使用五分鐘前的 permission cache，讓舊 token 繼續通過敏感操作。</p>
           </div>
           <div class="tile">
             <strong>真正難點</strong>
-            <p>如果快取能讓一切更快，為什麼它也同時是最容易把系統搞成半對半錯的地方</p>
+            <p>TTL、手動 purge、事件通知和 read-through cache 都可能合理；錯誤在於沒先定義安全資料能容忍多少陳舊。</p>
           </div>
         </div>
         <div class="concept-flow" aria-label="問題展開">
-          <div class="flow-step">局部先對付 複本</div>
+          <div class="flow-step">讀取走快路徑</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">新鮮度 穿過接口或時序邊界</div>
+          <div class="flow-step">寫入改變真實狀態</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">失效策略 把小問題放大成現場風險</div>
+          <div class="flow-step">副本沒有同步失效</div>
         </div>
         <div class="paradox-frame">
           <strong>Key Point</strong>
-          <p>快取失效 的價值，在於它把平常埋在規格外的 複本、新鮮度 與 失效策略，提前拉回 design review 能談清楚的位置。</p>
+          <p>快取失效的設計要從資料語意出發：有些資料可舊一分鐘，有些資料一秒也不能舊。</p>
         </div>
       </section>
 
       <section class="chapter" id="lenses">
         <div class="section-heading">
           <p class="section-label">Lenses</p>
-          <h2>先把 複本好處、新鮮代價 與 失效路徑 分開看</h2>
-          <p class="section-lede">表面像同一個故障，底下往往是 複本好處、新鮮代價 和 失效路徑 在不同邊界各自出力。</p>
+          <h2>把失效責任放回資料生命週期</h2>
+          <p class="section-lede">快取不是單一元件，而是一條從寫入、通知、重建到讀取的生命週期。</p>
         </div>
         <div class="lens-grid">
           <article class="lens-card">
-            <strong>複本好處</strong>
-            <p>複本好處 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 複本 轉成真正的穩定性壓力。</p>
+            <strong>資料語意</strong>
+            <p>設定、權限、價格、庫存和報表可以容忍的陳舊程度不同。</p>
           </article>
           <article class="lens-card">
-            <strong>新鮮代價</strong>
-            <p>新鮮代價 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 新鮮度 轉成真正的穩定性壓力。</p>
+            <strong>失效觸發</strong>
+            <p>寫入後是同步刪除、事件廣播、版本號比對，還是等待 TTL 自然過期？</p>
           </article>
           <article class="lens-card">
-            <strong>失效路徑</strong>
-            <p>失效路徑 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 失效策略 轉成真正的穩定性壓力。</p>
+            <strong>重建行為</strong>
+            <p>大量鍵同時過期時，是否會把後端打爆，或讓使用者看到不一致結果？</p>
           </article>
         </div>
       </section>
@@ -155,44 +155,44 @@
       <section class="chapter" id="psychology">
         <div class="section-heading">
           <p class="section-label">Psychology</p>
-          <h2>團隊通常在哪一步把 快取失效 當成暫時小事</h2>
-          <p class="section-lede">工程現場最危險的，不是沒人提風險，而是大家太容易把 複本 當成晚點再補也行的小瑕疵。</p>
+          <h2>團隊容易被命中率吸引，卻少問命中的是不是還能信</h2>
+          <p class="section-lede">快取指標常讓人先看到速度收益，資料語意和失效責任反而被留到事故後補。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>快就是好</strong>
-            <p>快就是好 會讓人把『目前沒爆』誤讀成『設計沒問題』，於是風險一路被推往更後面。</p>
+            <strong>局部優化很誘人</strong>
+            <p>降低 latency 和 DB load 很容易被展示，stale read 風險卻常要等到業務語意破掉才可見。</p>
           </article>
           <article class="example">
-            <strong>更新頻率被低估</strong>
-            <p>更新頻率被低估 最危險的地方，在於它常把局部成功包裝成全局安全。</p>
+            <strong>責任跨過邊界</strong>
+            <p>寫入服務、讀取服務、消息系統和 CDN 都可能各自覺得失效不是自己完整責任。</p>
           </article>
           <article class="example">
-            <strong>讀寫分離後遺症失憶</strong>
-            <p>只要 讀寫分離後遺症失憶 一進場，團隊就容易先相信現況撐得住，而不是先問代價正在往哪裡堆。</p>
+            <strong>測試樣本太乾淨</strong>
+            <p>單元測試常只看命中與未命中，很少模擬寫入後讀取、事件延遲與重建尖峰。</p>
           </article>
         </div>
-        <p class="micro-note">越早把 複本、新鮮度 這些心理近路說出來，越不容易在 postmortem 才第一次承認它們存在。</p>
+        <p class="micro-note">快取策略要把速度收益和語意風險一起寫進設計，而不是讓 TTL 成為默認答案。</p>
       </section>
 
       <section class="chapter" id="applications">
         <div class="section-heading">
           <p class="section-label">Applications</p>
-          <h2>回到 設定分發、邊緣快取 與 狀態同步</h2>
-          <p class="section-lede">這裡重點不是補幾個抽象案例，而是把 快取失效 直接落到 設定分發、邊緣快取 這些真的會出事的邊界上。</p>
+          <h2>把 cache policy 寫成資料契約</h2>
+          <p class="section-lede">權限、商品、設定和韌體發佈資料的快取策略不應該共用同一個答案。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>設定分發</strong>
-            <p>把 快取失效 帶回 設定分發 時，最該先畫出來的是 複本 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>權限檢查</strong>
+            <p>使用短 TTL 之外還要加入版本號或撤銷清單，避免已撤權身份繼續通過。</p>
           </article>
           <article class="example">
-            <strong>邊緣快取</strong>
-            <p>把 快取失效 帶回 邊緣快取 時，最該先畫出來的是 新鮮度 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>商品與庫存</strong>
+            <p>允許短暫陳舊時，要在下單前重新確認可售量，讓展示快和交易準分開。</p>
           </article>
           <article class="example">
-            <strong>狀態同步</strong>
-            <p>把 快取失效 帶回 狀態同步 時，最該先畫出來的是 失效策略 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>韌體 rollout</strong>
+            <p>裝置查詢更新資訊可快取，但撤回版本或封鎖批次需要可立即失效的通道。</p>
           </article>
         </div>
       </section>
@@ -200,30 +200,30 @@
       <section class="chapter" id="misreadings">
         <div class="section-heading">
           <p class="section-label">Misreadings</p>
-          <h2>三個常見誤讀</h2>
-          <p class="section-lede">這些誤讀常把 快取失效 降成實作瑣事，結果真正的邊界壓力根本沒被談到。</p>
+          <h2>快取失效不是只把 TTL 調短</h2>
+          <p class="section-lede">TTL 只是其中一種近似方法；資料語意、寫入頻率和失效成本才決定策略。</p>
         </div>
         <div class="collocation-list" aria-label="常見誤讀">
           <article class="collocation-card">
             <div>
-              <strong>快取失效 只是實作細節</strong>
+              <strong>以為短 TTL 就安全</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>它常是 複本 最先破掉的邊界，所以不是『之後再補』就沒事。</p>
+            <p>短 TTL 降低平均陳舊時間，但關鍵撤銷仍可能在窗口內出錯。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>只要再加更多防呆，快取失效 就會消失</strong>
+              <strong>把快取當純效能層</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>如果 新鮮度 的壓力來源沒處理，防呆最後只會變成更昂貴的補丁。</p>
+            <p>只要快取內容影響決策，它就是資料一致性設計的一部分。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>快取失效 只和大型分散式系統有關</strong>
+              <strong>忽略重建尖峰</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>很多單機、韌體或流程系統，一樣會以更小規模的 失效策略 形式重演。</p>
+            <p>同時過期可能造成 cache stampede，讓修失效變成新的可用性問題。</p>
           </article>
         </div>
       </section>
@@ -231,22 +231,22 @@
       <section class="chapter" id="questions">
         <div class="section-heading">
           <p class="section-label">Questions</p>
-          <h2>把 複本、新鮮度 追到真正會破的邊界</h2>
-          <p class="section-lede">下面兩個問題很適合在 設定分發、邊緣快取 這類設計或驗證場合直接拿來過一遍。</p>
+          <h2>先問資料可以舊多久</h2>
+          <p class="section-lede">下面兩問適合放在 cache design review 和上線前檢查。</p>
         </div>
         <div class="prompt-grid">
           <article class="prompt-card">
-            <strong>如果第一個異常出現在 設定分發</strong>
-            <p>你最先會去畫哪條邊界，確認 複本 和 新鮮度 到底在哪一步被放大？</p>
+            <strong>這份資料的最大可接受陳舊時間是多少？</strong>
+            <p>請依資料語意回答，而不是先拿系統預設 TTL。</p>
           </article>
           <article class="prompt-card">
-            <strong>如果 邊緣快取 團隊只回你一句『現在看起來沒事』</strong>
-            <p>你要用什麼觀測或驗證證明：失效策略 不是只是還沒在現場結帳？</p>
+            <strong>哪條寫入路徑會讓快取答案立刻不能用？</strong>
+            <p>列出所有改變真實狀態的入口，確認它們能觸發失效或版本檢查。</p>
           </article>
         </div>
         <div class="template-note">
           <strong>延伸路線</strong>
-          <p>延伸閱讀可以接到 Caching，把這頁的邊界壓力放回更大的可靠性脈絡。</p>
+          <p>可接著讀 caching 與 cache stampede，理解副本帶來的效能收益和重建風險。</p>
         </div>
       </section>
 
@@ -254,22 +254,22 @@
         <div class="section-heading">
           <p class="section-label">Sources</p>
           <h2>來源與整理方式</h2>
-          <p class="section-lede">本頁先用 Cache Invalidation 條目交代故障模式與邊界壓力，再用 Caching 補回更大的系統背景。</p>
+          <p class="section-lede">本頁以 cache invalidation 的副本新鮮度問題為核心，並用 caching 補足常見策略背景。</p>
         </div>
         <div class="source-grid">
           <article class="source-card">
             <strong>核心概念</strong>
-            <p>這張卡說明 快取失效 在接口、時序或權限邊界上最常怎麼冒出來。</p>
+            <p>支撐快取資料何時過期、刪除或更新的核心問題。</p>
             <a href="https://en.wikipedia.org/wiki/Cache_invalidation" target="_blank" rel="noreferrer">Cache Invalidation</a>
           </article>
           <article class="source-card">
-            <strong>相鄰概念</strong>
-            <p>這張卡補回 Caching 所在的更大可靠性或系統脈絡，避免把 快取失效 只看成局部實作瑕疵。</p>
+            <strong>相鄰脈絡</strong>
+            <p>補充快取作為效能與副本策略的基本脈絡。</p>
             <a href="https://en.wikipedia.org/wiki/Caching" target="_blank" rel="noreferrer">Caching</a>
           </article>
           <article class="source-card">
             <strong>教學整理</strong>
-            <p>工程映射與事故語境是本頁的教學整理，目的是把 快取失效 直接落到 設定分發、邊緣快取 與 狀態同步 這些邊界上。</p>
+            <p>權限、商品與韌體 rollout 案例是本頁依系統設計經驗整理的應用映射。</p>
           </article>
         </div>
       </section>
@@ -279,7 +279,7 @@
           <div>
             <p class="section-label">Reference</p>
             <h2>下一步</h2>
-            <p>下次在 設定分發 或 邊緣快取 做設計決定時，先把 複本 穿過哪個邊界、何時變成 失效策略 寫進 review。</p>
+            <p>下次有人提議加 cache 時，先要求他寫出 stale data 的最大可接受窗口。</p>
           </div>
           <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
         </div>

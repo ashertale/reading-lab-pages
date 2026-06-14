@@ -21,13 +21,13 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
-        <p class="kicker">Knowledge Study / Engineering</p>
+        <p class="kicker">Knowledge Study / Systems</p>
         <h1>向後相容</h1>
         <p class="topic-subtitle">Backward Compatibility</p>
-        <p class="thesis">一個系統若每次演化都讓舊客戶、舊資料或舊設備立刻失效，升級就會變成破壞；向後相容是在新功能與既有生態之間找承接方式。</p>
+        <p class="thesis">向後相容不是永遠不改，而是讓新版本在舊客戶端、舊資料與舊操作節奏仍存在時能安全演進。</p>
         <div class="hero-prompt">
           <strong>Read For</strong>
-          <p>這頁會把 演化承接、舊客戶 這些常藏在規格外的壓力，拉回 API 演進 與 韌體更新 的設計檢查裡。</p>
+          <p>理解相容層、版本協商、資料遷移和 deprecation 如何讓系統改變不斷線。</p>
         </div>
       </div>
       <aside class="hero-note" aria-label="主題資訊">
@@ -42,17 +42,17 @@
           </div>
           <div>
             <dt>主要判準</dt>
-            <dd>演化承接、舊客戶、破壞風險、版本策略</dd>
+            <dd>舊客戶端、契約演化、遷移窗口、移除條件</dd>
           </div>
           <div>
             <dt>讀完產出</dt>
-            <dd>能用 New versions keep older clients alive 重新檢查 版本與生態維護 裡的判斷失真</dd>
+            <dd>能在 API、韌體協定與資料格式變更中設計可落地的相容策略</dd>
           </div>
         </dl>
         <div class="knowledge-map" aria-label="閱讀結構示意">
-          <span>新舊</span>
-          <span>承接</span>
-          <span>演化</span>
+          <span>舊版</span>
+          <span>契約</span>
+          <span>演進</span>
         </div>
       </aside>
     </div>
@@ -75,28 +75,28 @@
       <section class="chapter" id="core">
         <div class="section-heading">
           <p class="section-label">Orientation</p>
-          <h2>如果新版本真的更好，為什麼還得花這麼多力氣顧舊東西不要一起爆掉</h2>
-          <p class="section-lede">向後相容 的價值，在於它把平常藏在接口、時序或權限邊界外的壓力，提前搬到設計與驗證桌面上。</p>
+          <h2>新版本上線時，舊世界通常還沒下線</h2>
+          <p class="section-lede">向後相容要求新系統仍能服務既有使用者、資料和整合方；它讓改變可逐步發生，而不是一次切斷。</p>
         </div>
         <div class="core-card">
           <p class="section-label">Core Tension</p>
-          <p>一個系統若每次演化都讓舊客戶、舊資料或舊設備立刻失效，升級就會變成破壞；向後相容是在新功能與既有生態之間找承接方式。</p>
+          <p>相容保護使用者和生態系，也會留下舊分支、舊欄位和舊行為；沒有退出條件時，相容會變成永久負擔。</p>
         </div>
         <div class="principle-strip" aria-label="本頁讀法">
           <div>
             <span>01</span>
-            <strong>先圈出 演化承接 會在哪裡破</strong>
-            <p>演化承接 常不是抽象風險，而是會穿過具體接口、排程或權限邊界。</p>
+            <strong>定義外部契約</strong>
+            <p>先分清哪些行為被使用者或裝置依賴，哪些只是內部實作。</p>
           </div>
           <div>
             <span>02</span>
-            <strong>再追 舊客戶 怎麼穿過邊界</strong>
-            <p>舊客戶 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現。</p>
+            <strong>做可展開變更</strong>
+            <p>新增欄位、雙讀雙寫、feature flag 和版本協商比直接替換安全。</p>
           </div>
           <div>
             <span>03</span>
-            <strong>最後查 破壞風險 何時從小事變事故</strong>
-            <p>破壞風險 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力。</p>
+            <strong>寫清移除條件</strong>
+            <p>Deprecation 要有觀測資料、通知節奏和最後移除日期。</p>
           </div>
         </div>
       </section>
@@ -104,50 +104,50 @@
       <section class="chapter" id="setup">
         <div class="section-heading">
           <p class="section-label">Setup</p>
-          <h2>風險不是突然出現，而是 舊客戶 一路堆出來的</h2>
-          <p class="section-lede">把問題壓回一個最小接口或一次時序交會，演化承接 何時變成風險、破壞風險 何時開始放大，就不容易再被模糊帶過。</p>
+          <h2>新 API 改了欄位語意，舊 app 還在用昨天的假設</h2>
+          <p class="section-lede">最小場景是服務端已升級，但客戶端、資料或文件仍停在舊契約。</p>
         </div>
         <div class="definition-grid">
           <div class="tile">
             <strong>最小劇情</strong>
-            <p>協定、檔案格式、韌體與 API 只要在現場還有舊版本存活，就得思考升級不是只改新端，而是整個生態怎麼平穩過渡。</p>
+            <p>後端把 status 從字串改成物件以支援更多狀態。最新版 app 正常解析，倉庫裡大量舊版裝置卻把回應視為格式錯誤而停止同步。</p>
           </div>
           <div class="tile">
             <strong>真正難點</strong>
-            <p>如果新版本真的更好，為什麼還得花這麼多力氣顧舊東西不要一起爆掉</p>
+            <p>開發團隊看見的是新 schema 比較好，現場看見的是舊客戶端不能同時升級。</p>
           </div>
         </div>
         <div class="concept-flow" aria-label="問題展開">
-          <div class="flow-step">局部先對付 演化承接</div>
+          <div class="flow-step">契約被新版本改變</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">舊客戶 穿過接口或時序邊界</div>
+          <div class="flow-step">舊使用者仍按舊假設呼叫</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">破壞風險 把小問題放大成現場風險</div>
+          <div class="flow-step">相容缺口變成現場故障</div>
         </div>
         <div class="paradox-frame">
           <strong>Key Point</strong>
-          <p>向後相容 的價值，在於它把平常埋在規格外的 演化承接、舊客戶 與 破壞風險，提前拉回 design review 能談清楚的位置。</p>
+          <p>向後相容的核心是承認部署不是瞬間事件，而是一段新舊共存期。</p>
         </div>
       </section>
 
       <section class="chapter" id="lenses">
         <div class="section-heading">
           <p class="section-label">Lenses</p>
-          <h2>先把 升級不是重開局、舊端存活壓力 與 承接成本 分開看</h2>
-          <p class="section-lede">表面像同一個故障，底下往往是 升級不是重開局、舊端存活壓力 和 承接成本 在不同邊界各自出力。</p>
+          <h2>把版本演進視為時間線</h2>
+          <p class="section-lede">相容策略要回答新增、共存、觀測、通知和移除各階段的責任。</p>
         </div>
         <div class="lens-grid">
           <article class="lens-card">
-            <strong>升級不是重開局</strong>
-            <p>升級不是重開局 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 演化承接 轉成真正的穩定性壓力。</p>
+            <strong>契約面</strong>
+            <p>欄位、錯誤碼、時序、預設值和 side effect 是否被外部依賴？</p>
           </article>
           <article class="lens-card">
-            <strong>舊端存活壓力</strong>
-            <p>舊端存活壓力 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 舊客戶 轉成真正的穩定性壓力。</p>
+            <strong>共存面</strong>
+            <p>新舊版本是否會同時讀寫同一資料或連到同一服務？</p>
           </article>
           <article class="lens-card">
-            <strong>承接成本</strong>
-            <p>承接成本 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 破壞風險 轉成真正的穩定性壓力。</p>
+            <strong>退出面</strong>
+            <p>如何知道舊版本已少到可移除，誰負責通知和處理例外？</p>
           </article>
         </div>
       </section>
@@ -155,44 +155,44 @@
       <section class="chapter" id="psychology">
         <div class="section-heading">
           <p class="section-label">Psychology</p>
-          <h2>團隊通常在哪一步把 向後相容 當成暫時小事</h2>
-          <p class="section-lede">工程現場最危險的，不是沒人提風險，而是大家太容易把 演化承接 當成晚點再補也行的小瑕疵。</p>
+          <h2>做新功能的人容易高估升級同步性</h2>
+          <p class="section-lede">開發環境常全是最新版；現場卻有舊 app、離線裝置、第三方整合和手動操作流程。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>新功能值得一切錯覺</strong>
-            <p>新功能值得一切錯覺 會讓人把『目前沒爆』誤讀成『設計沒問題』，於是風險一路被推往更後面。</p>
+            <strong>新版視角太乾淨</strong>
+            <p>測試矩陣若只包含最新版，就會看不見舊客戶端的長尾。</p>
           </article>
           <article class="example">
-            <strong>舊包袱被浪漫化或被忽略</strong>
-            <p>舊包袱被浪漫化或被忽略 最危險的地方，在於它常把局部成功包裝成全局安全。</p>
+            <strong>內部重構被誤當外部透明</strong>
+            <p>團隊知道語意不變，但外部可能依賴了原本的格式和錯誤行為。</p>
           </article>
           <article class="example">
-            <strong>測試只看最新版</strong>
-            <p>只要 測試只看最新版 一進場，團隊就容易先相信現況撐得住，而不是先問代價正在往哪裡堆。</p>
+            <strong>舊版負擔讓人想快切</strong>
+            <p>維護相容很煩，因此容易把 deprecation 寫成願望而不是計畫。</p>
           </article>
         </div>
-        <p class="micro-note">越早把 演化承接、舊客戶 這些心理近路說出來，越不容易在 postmortem 才第一次承認它們存在。</p>
+        <p class="micro-note">相容設計要用部署現實寫，而不是用 release note 的理想時間寫。</p>
       </section>
 
       <section class="chapter" id="applications">
         <div class="section-heading">
           <p class="section-label">Applications</p>
-          <h2>回到 API 演進、韌體更新 與 資料格式設計</h2>
-          <p class="section-lede">這裡重點不是補幾個抽象案例，而是把 向後相容 直接落到 API 演進、韌體更新 這些真的會出事的邊界上。</p>
+          <h2>讓新舊版本能共存一段時間</h2>
+          <p class="section-lede">API、韌體協定和資料格式都需要相容窗口與可觀測退出條件。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>API 演進</strong>
-            <p>把 向後相容 帶回 API 演進 時，最該先畫出來的是 演化承接 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>API 演化</strong>
+            <p>新增欄位保持 optional，避免改變既有欄位型別和語意，必要時用版本協商。</p>
           </article>
           <article class="example">
-            <strong>韌體更新</strong>
-            <p>把 向後相容 帶回 韌體更新 時，最該先畫出來的是 舊客戶 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>韌體協定</strong>
+            <p>裝置端不能即時更新時，server 要支援舊 command set 到實際裝置存量下降。</p>
           </article>
           <article class="example">
-            <strong>資料格式設計</strong>
-            <p>把 向後相容 帶回 資料格式設計 時，最該先畫出來的是 破壞風險 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>資料遷移</strong>
+            <p>用 expand-migrate-contract 流程先讓新舊程式都能讀，再逐步移除舊欄位。</p>
           </article>
         </div>
       </section>
@@ -200,30 +200,30 @@
       <section class="chapter" id="misreadings">
         <div class="section-heading">
           <p class="section-label">Misreadings</p>
-          <h2>三個常見誤讀</h2>
-          <p class="section-lede">這些誤讀常把 向後相容 降成實作瑣事，結果真正的邊界壓力根本沒被談到。</p>
+          <h2>向後相容不是永遠背著舊包袱</h2>
+          <p class="section-lede">相容需要退出計畫；沒有 deprecation，系統會被舊假設綁死。</p>
         </div>
         <div class="collocation-list" aria-label="常見誤讀">
           <article class="collocation-card">
             <div>
-              <strong>向後相容 只是實作細節</strong>
+              <strong>把相容當不能改</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>它常是 演化承接 最先破掉的邊界，所以不是『之後再補』就沒事。</p>
+            <p>可以改，但要讓舊使用者在遷移窗口內不被切斷。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>只要再加更多防呆，向後相容 就會消失</strong>
+              <strong>只看語法相容</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>如果 舊客戶 的壓力來源沒處理，防呆最後只會變成更昂貴的補丁。</p>
+            <p>格式沒變不代表語意沒變；預設值、錯誤碼和排序也可能是契約。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>向後相容 只和大型分散式系統有關</strong>
+              <strong>用公告取代觀測</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>很多單機、韌體或流程系統，一樣會以更小規模的 破壞風險 形式重演。</p>
+            <p>發信通知不代表舊版本已消失，移除前要看真實流量和裝置存量。</p>
           </article>
         </div>
       </section>
@@ -231,22 +231,22 @@
       <section class="chapter" id="questions">
         <div class="section-heading">
           <p class="section-label">Questions</p>
-          <h2>把 演化承接、舊客戶 追到真正會破的邊界</h2>
-          <p class="section-lede">下面兩個問題很適合在 API 演進、韌體更新 這類設計或驗證場合直接拿來過一遍。</p>
+          <h2>找出還活著的舊世界</h2>
+          <p class="section-lede">下面兩問適合用在 API review、migration plan 和韌體 rollout。</p>
         </div>
         <div class="prompt-grid">
           <article class="prompt-card">
-            <strong>如果第一個異常出現在 API 演進</strong>
-            <p>你最先會去畫哪條邊界，確認 演化承接 和 舊客戶 到底在哪一步被放大？</p>
+            <strong>哪些舊客戶端會和新版本共存？</strong>
+            <p>列出 app、裝置、第三方整合、批次 job 和離線資料。</p>
           </article>
           <article class="prompt-card">
-            <strong>如果 韌體更新 團隊只回你一句『現在看起來沒事』</strong>
-            <p>你要用什麼觀測或驗證證明：破壞風險 不是只是還沒在現場結帳？</p>
+            <strong>移除舊契約的觀測條件是什麼？</strong>
+            <p>以流量、錯誤率、版本分布或裝置回報作為退出依據。</p>
           </article>
         </div>
         <div class="template-note">
           <strong>延伸路線</strong>
-          <p>若想把這題從局部故障拉回系統設計，下一步最值得對照的是 Versioning。</p>
+          <p>可接著讀 versioning，理解版本標記、契約變更和遷移策略。</p>
         </div>
       </section>
 
@@ -254,22 +254,22 @@
         <div class="section-heading">
           <p class="section-label">Sources</p>
           <h2>來源與整理方式</h2>
-          <p class="section-lede">本頁先用 Backward Compatibility 條目交代故障模式與邊界壓力，再用 Versioning 補回更大的系統背景。</p>
+          <p class="section-lede">本頁以 backward compatibility 的新舊共存為核心，並用 versioning 補足版本演進背景。</p>
         </div>
         <div class="source-grid">
           <article class="source-card">
             <strong>核心概念</strong>
-            <p>這張卡說明 向後相容 在接口、時序或權限邊界上最常怎麼冒出來。</p>
+            <p>支撐新系統維持舊版客戶端或資料可用性的主線。</p>
             <a href="https://en.wikipedia.org/wiki/Backward_compatibility" target="_blank" rel="noreferrer">Backward Compatibility</a>
           </article>
           <article class="source-card">
-            <strong>相鄰概念</strong>
-            <p>這張卡補回 Versioning 所在的更大可靠性或系統脈絡，避免把 向後相容 只看成局部實作瑕疵。</p>
+            <strong>相鄰脈絡</strong>
+            <p>補充以版本標記管理介面和資料演化的背景。</p>
             <a href="https://en.wikipedia.org/wiki/Versioning" target="_blank" rel="noreferrer">Versioning</a>
           </article>
           <article class="source-card">
             <strong>教學整理</strong>
-            <p>工程映射與事故語境是本頁的教學整理，目的是把 向後相容 直接落到 API 演進、韌體更新 與 資料格式設計 這些邊界上。</p>
+            <p>本頁把相容性落到 API schema、裝置協定存量與 expand-migrate-contract 遷移節奏。</p>
           </article>
         </div>
       </section>
@@ -279,7 +279,7 @@
           <div>
             <p class="section-label">Reference</p>
             <h2>下一步</h2>
-            <p>下次在 API 演進 或 韌體更新 做設計決定時，先把 演化承接 穿過哪個邊界、何時變成 破壞風險 寫進 review。</p>
+            <p>下次你說這只是小改，請先列出還沒有跟著升級的人和裝置。</p>
           </div>
           <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
         </div>

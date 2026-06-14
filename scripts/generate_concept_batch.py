@@ -11,6 +11,11 @@ from urllib.parse import quote
 ROOT = Path(__file__).resolve().parents[1]
 PAYLOAD_DIR = ROOT / "data" / "concept-payloads"
 STOPWORDS = {"and", "of", "the", "to", "vs", "problem", "effect", "law", "theory"}
+LEGACY_TEMPLATE_PROSE_WARNING = (
+    "This legacy batch generator contains template prose and is blocked by default. "
+    "Use --list-topics for planning only, then write topic-specific payloads manually. "
+    "If you are intentionally reproducing the old generated payloads for archival work, pass --legacy-template-prose."
+)
 
 
 def T(
@@ -3228,7 +3233,21 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Generate a batch of new concept payloads.")
     parser.add_argument("--limit", type=int, help="Generate only the first N topics for testing.")
     parser.add_argument("--overwrite", action="store_true", help="Overwrite payloads if they already exist.")
+    parser.add_argument("--list-topics", action="store_true", help="List candidate topic metadata without writing payloads.")
+    parser.add_argument(
+        "--legacy-template-prose",
+        action="store_true",
+        help="Allow the old template-prose payload writer. Do not use for publishable concept pages.",
+    )
     args = parser.parse_args()
+
+    if args.list_topics:
+        for topic in select_topics(args.limit):
+            print(f"{topic['slug']}\t{topic['title']}\t{topic['family']}\t{topic['tension']}")
+        return 0
+
+    if not args.legacy_template_prose:
+        parser.error(LEGACY_TEMPLATE_PROSE_WARNING)
 
     current_slugs = existing_slugs()
     topics = select_topics(args.limit)

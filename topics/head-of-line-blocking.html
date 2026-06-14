@@ -21,13 +21,13 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
-        <p class="kicker">Knowledge Study / Engineering</p>
+        <p class="kicker">Knowledge Study / Systems</p>
         <h1>隊首阻塞</h1>
         <p class="topic-subtitle">Head-of-Line Blocking</p>
-        <p class="thesis">只要佇列最前面的工作卡住，後面明明能先做的工作也可能被整批一起拖住。</p>
+        <p class="thesis">隊首阻塞讓第一個卡住的項目阻擋後面本來可以前進的項目；瓶頸來自排序耦合，而不一定是容量不足。</p>
         <div class="hero-prompt">
           <strong>Read For</strong>
-          <p>這頁會把 佇列順序、前端阻塞 這些常藏在規格外的壓力，拉回 網路交換 與 HTTP 請求 的設計檢查裡。</p>
+          <p>理解佇列、封包、請求和批次處理如何因保持順序而犧牲後續工作進展。</p>
         </div>
       </div>
       <aside class="hero-note" aria-label="主題資訊">
@@ -42,17 +42,17 @@
           </div>
           <div>
             <dt>主要判準</dt>
-            <dd>佇列順序、前端阻塞、資源利用率、耦合</dd>
+            <dd>隊首項目、順序要求、後續工作、分流能力</dd>
           </div>
           <div>
             <dt>讀完產出</dt>
-            <dd>能用 The first item stalls everything behind it 重新檢查 佇列與傳輸 裡的判斷失真</dd>
+            <dd>能在網路協定、任務佇列和服務批次中辨認不必要的順序耦合</dd>
           </div>
         </dl>
         <div class="knowledge-map" aria-label="閱讀結構示意">
-          <span>排隊</span>
-          <span>卡住</span>
-          <span>拖累</span>
+          <span>隊首</span>
+          <span>順序</span>
+          <span>分流</span>
         </div>
       </aside>
     </div>
@@ -75,28 +75,28 @@
       <section class="chapter" id="core">
         <div class="section-heading">
           <p class="section-label">Orientation</p>
-          <h2>如果後面的工作其實有路可走，為什麼只因為前面那個卡住，整條隊伍都得跟著停</h2>
-          <p class="section-lede">隊首阻塞 的價值，在於它把平常藏在接口、時序或權限邊界外的壓力，提前搬到設計與驗證桌面上。</p>
+          <h2>後面的工作明明可以完成，卻被前面的卡住一起等待</h2>
+          <p class="section-lede">隊首阻塞發生在一條共享順序中，前方項目停住，後方即使獨立可完成也不能越過。</p>
         </div>
         <div class="core-card">
           <p class="section-label">Core Tension</p>
-          <p>只要佇列最前面的工作卡住，後面明明能先做的工作也可能被整批一起拖住。</p>
+          <p>維持順序能簡化語意，但如果所有工作被綁在同一條順序上，一個慢項目會把無關項目一起拖住。</p>
         </div>
         <div class="principle-strip" aria-label="本頁讀法">
           <div>
             <span>01</span>
-            <strong>先圈出 佇列順序 會在哪裡破</strong>
-            <p>佇列順序 常不是抽象風險，而是會穿過具體接口、排程或權限邊界。</p>
+            <strong>區分必要順序</strong>
+            <p>只有語意上必須排序的工作才應共用同一隊列。</p>
           </div>
           <div>
             <span>02</span>
-            <strong>再追 前端阻塞 怎麼穿過邊界</strong>
-            <p>前端阻塞 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現。</p>
+            <strong>分流獨立工作</strong>
+            <p>不同 key、stream、priority 或資源類型可以拆開處理。</p>
           </div>
           <div>
             <span>03</span>
-            <strong>最後查 資源利用率 何時從小事變事故</strong>
-            <p>資源利用率 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力。</p>
+            <strong>限制隊首持有時間</strong>
+            <p>隊首若可能等待外部依賴，要能超時、跳過、重排或隔離。</p>
           </div>
         </div>
       </section>
@@ -104,50 +104,50 @@
       <section class="chapter" id="setup">
         <div class="section-heading">
           <p class="section-label">Setup</p>
-          <h2>把壓力壓回 佇列順序 最先失守的地方</h2>
-          <p class="section-lede">把問題壓回一個最小接口或一次時序交會，佇列順序 何時變成風險、資源利用率 何時開始放大，就不容易再被模糊帶過。</p>
+          <h2>第一個封包遺失，後面已到的資料也不能交給應用層</h2>
+          <p class="section-lede">最小場景是一條有序通道中，後續資料到齊卻必須等待前方缺口。</p>
         </div>
         <div class="definition-grid">
           <div class="tile">
             <strong>最小劇情</strong>
-            <p>單一 FIFO 佇列裡，最前面的封包、請求或工作一旦遇到繁忙目標，後面能處理的項目也得一起等。</p>
+            <p>同一連線承載多個邏輯請求。第一個大型回應等待慢速依賴，後面幾個小回應已完成，卻因共用有序輸出而不能先送出。</p>
           </div>
           <div class="tile">
             <strong>真正難點</strong>
-            <p>如果後面的工作其實有路可走，為什麼只因為前面那個卡住，整條隊伍都得跟著停</p>
+            <p>阻塞不是因為後面工作不能做，而是因為系統要求它們不能越過隊首。</p>
           </div>
         </div>
         <div class="concept-flow" aria-label="問題展開">
-          <div class="flow-step">局部先對付 佇列順序</div>
+          <div class="flow-step">工作共享有序隊列</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">前端阻塞 穿過接口或時序邊界</div>
+          <div class="flow-step">隊首等待或失敗</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">資源利用率 把小問題放大成現場風險</div>
+          <div class="flow-step">後續獨立工作被迫停住</div>
         </div>
         <div class="paradox-frame">
           <strong>Key Point</strong>
-          <p>隊首阻塞 的價值，在於它把平常埋在規格外的 佇列順序、前端阻塞 與 資源利用率，提前拉回 design review 能談清楚的位置。</p>
+          <p>隊首阻塞的修正，是找出哪些順序是語意必要，哪些只是實作方便。</p>
         </div>
       </section>
 
       <section class="chapter" id="lenses">
         <div class="section-heading">
           <p class="section-label">Lenses</p>
-          <h2>先把 順序綁死、局部阻塞外溢 與 可做工作被延後 分開看</h2>
-          <p class="section-lede">表面像同一個故障，底下往往是 順序綁死、局部阻塞外溢 和 可做工作被延後 在不同邊界各自出力。</p>
+          <h2>檢查順序要求是否過度共享</h2>
+          <p class="section-lede">同一 queue、connection、lock 或 batch 會把不同工作命運綁在一起。</p>
         </div>
         <div class="lens-grid">
           <article class="lens-card">
-            <strong>順序綁死</strong>
-            <p>順序綁死 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 佇列順序 轉成真正的穩定性壓力。</p>
+            <strong>順序語意</strong>
+            <p>後續工作真的依賴前一項結果，還是只是使用同一通道？</p>
           </article>
           <article class="lens-card">
-            <strong>局部阻塞外溢</strong>
-            <p>局部阻塞外溢 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 前端阻塞 轉成真正的穩定性壓力。</p>
+            <strong>分流鍵</strong>
+            <p>能否按 user、topic、stream、priority 或資源類型拆隊列？</p>
           </article>
           <article class="lens-card">
-            <strong>可做工作被延後</strong>
-            <p>可做工作被延後 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 資源利用率 轉成真正的穩定性壓力。</p>
+            <strong>隊首處置</strong>
+            <p>隊首卡住時是否能 timeout、跳過、重排或隔離到慢路徑？</p>
           </article>
         </div>
       </section>
@@ -155,44 +155,44 @@
       <section class="chapter" id="psychology">
         <div class="section-heading">
           <p class="section-label">Psychology</p>
-          <h2>團隊通常在哪一步把 隊首阻塞 當成暫時小事</h2>
-          <p class="section-lede">工程現場最危險的，不是沒人提風險，而是大家太容易把 佇列順序 當成晚點再補也行的小瑕疵。</p>
+          <h2>單一佇列很容易理解，也很容易把無關工作綁在一起</h2>
+          <p class="section-lede">人喜歡單一順序，因為它容易推理；但系統中的工作常不需要共享同一個前後關係。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>先來先做看起來最公平</strong>
-            <p>先來先做看起來最公平 會讓人把『目前沒爆』誤讀成『設計沒問題』，於是風險一路被推往更後面。</p>
+            <strong>簡單排序有吸引力</strong>
+            <p>FIFO 給人公平和可預測感，卻可能犧牲獨立工作的完成速度。</p>
           </article>
           <article class="example">
-            <strong>排隊秩序被誤當效率</strong>
-            <p>排隊秩序被誤當效率 最危險的地方，在於它常把局部成功包裝成全局安全。</p>
+            <strong>局部慢被誤判成全局慢</strong>
+            <p>只有隊首慢，監控卻呈現整條隊列都慢。</p>
           </article>
           <article class="example">
-            <strong>可平行性被忽略</strong>
-            <p>只要 可平行性被忽略 一進場，團隊就容易先相信現況撐得住，而不是先問代價正在往哪裡堆。</p>
+            <strong>分流怕破壞語意</strong>
+            <p>團隊可能過度保守，不敢拆隊列，因而保留不必要耦合。</p>
           </article>
         </div>
-        <p class="micro-note">越早把 佇列順序、前端阻塞 這些心理近路說出來，越不容易在 postmortem 才第一次承認它們存在。</p>
+        <p class="micro-note">處理隊首阻塞時，先證明後方工作是否真的需要等待前方工作。</p>
       </section>
 
       <section class="chapter" id="applications">
         <div class="section-heading">
           <p class="section-label">Applications</p>
-          <h2>回到 網路交換、HTTP 請求 與 工作佇列設計</h2>
-          <p class="section-lede">這裡重點不是補幾個抽象案例，而是把 隊首阻塞 直接落到 網路交換、HTTP 請求 這些真的會出事的邊界上。</p>
+          <h2>把獨立工作拆出同一條等待線</h2>
+          <p class="section-lede">網路協定、任務佇列和批次處理都需要避免無關工作共享隊首。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>網路交換</strong>
-            <p>把 隊首阻塞 帶回 網路交換 時，最該先畫出來的是 佇列順序 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>網路傳輸</strong>
+            <p>用多路復用 stream 或獨立連線降低單一封包或回應拖住全部資料的機率。</p>
           </article>
           <article class="example">
-            <strong>HTTP 請求</strong>
-            <p>把 隊首阻塞 帶回 HTTP 請求 時，最該先畫出來的是 前端阻塞 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>任務佇列</strong>
+            <p>按 tenant、priority 或任務類型分 shard，避免大任務擋住小任務。</p>
           </article>
           <article class="example">
-            <strong>工作佇列設計</strong>
-            <p>把 隊首阻塞 帶回 工作佇列設計 時，最該先畫出來的是 資源利用率 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>批次處理</strong>
+            <p>批次中單筆失敗可隔離到重試隊列，讓其他項目先完成。</p>
           </article>
         </div>
       </section>
@@ -200,30 +200,30 @@
       <section class="chapter" id="misreadings">
         <div class="section-heading">
           <p class="section-label">Misreadings</p>
-          <h2>三個常見誤讀</h2>
-          <p class="section-lede">這些誤讀常把 隊首阻塞 降成實作瑣事，結果真正的邊界壓力根本沒被談到。</p>
+          <h2>隊首阻塞不是所有排隊延遲</h2>
+          <p class="section-lede">它特別關心隊首項目是否不必要地阻止後續獨立項目。</p>
         </div>
         <div class="collocation-list" aria-label="常見誤讀">
           <article class="collocation-card">
             <div>
-              <strong>隊首阻塞 只是實作細節</strong>
+              <strong>只看佇列長度</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>它常是 佇列順序 最先破掉的邊界，所以不是『之後再補』就沒事。</p>
+            <p>隊列短也可能因第一項卡住而停住。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>只要再加更多防呆，隊首阻塞 就會消失</strong>
+              <strong>把分流當破壞公平</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>如果 前端阻塞 的壓力來源沒處理，防呆最後只會變成更昂貴的補丁。</p>
+            <p>合理分流可以保留各自公平，並減少不相關工作互相拖累。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>隊首阻塞 只和大型分散式系統有關</strong>
+              <strong>忽略語意必要性</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>很多單機、韌體或流程系統，一樣會以更小規模的 資源利用率 形式重演。</p>
+            <p>有些順序是必須的；修法不是亂序，而是縮小必須排序的範圍。</p>
           </article>
         </div>
       </section>
@@ -231,22 +231,22 @@
       <section class="chapter" id="questions">
         <div class="section-heading">
           <p class="section-label">Questions</p>
-          <h2>把 佇列順序、前端阻塞 追到真正會破的邊界</h2>
-          <p class="section-lede">下面兩個問題很適合在 網路交換、HTTP 請求 這類設計或驗證場合直接拿來過一遍。</p>
+          <h2>問後面能不能先走</h2>
+          <p class="section-lede">下面兩問適合用在 queue、protocol 和 batch design review。</p>
         </div>
         <div class="prompt-grid">
           <article class="prompt-card">
-            <strong>如果第一個異常出現在 網路交換</strong>
-            <p>你最先會去畫哪條邊界，確認 佇列順序 和 前端阻塞 到底在哪一步被放大？</p>
+            <strong>後續工作真的依賴隊首嗎？</strong>
+            <p>若只是共用實作通道，就考慮分流或多路復用。</p>
           </article>
           <article class="prompt-card">
-            <strong>如果 HTTP 請求 團隊只回你一句『現在看起來沒事』</strong>
-            <p>你要用什麼觀測或驗證證明：資源利用率 不是只是還沒在現場結帳？</p>
+            <strong>隊首卡住時有哪些出口？</strong>
+            <p>定義 timeout、skip、retry queue、slow lane 或 priority lane。</p>
           </article>
         </div>
         <div class="template-note">
           <strong>延伸路線</strong>
-          <p>把 Queueing Theory 接著讀，通常會更看得出 隊首阻塞 不是單點 bug，而是整體設計習慣。</p>
+          <p>可接著讀 queueing theory，理解排隊順序、服務時間和等待成本。</p>
         </div>
       </section>
 
@@ -254,22 +254,22 @@
         <div class="section-heading">
           <p class="section-label">Sources</p>
           <h2>來源與整理方式</h2>
-          <p class="section-lede">本頁先用 Head-of-Line Blocking 條目交代故障模式與邊界壓力，再用 Queueing Theory 補回更大的系統背景。</p>
+          <p class="section-lede">本頁以 head-of-line blocking 的隊首拖累後續為核心，並用 queueing theory 補足排隊背景。</p>
         </div>
         <div class="source-grid">
           <article class="source-card">
             <strong>核心概念</strong>
-            <p>這張卡說明 隊首阻塞 在接口、時序或權限邊界上最常怎麼冒出來。</p>
-            <a href="https://en.wikipedia.org/wiki/Head-of-line_blocking" target="_blank" rel="noreferrer">Head-of-Line Blocking</a>
+            <p>支撐隊首項目阻擋後續可完成項目的主線。</p>
+            <a href="https://en.wikipedia.org/wiki/Head-of-line_blocking" target="_blank" rel="noreferrer">Head-of-line Blocking</a>
           </article>
           <article class="source-card">
-            <strong>相鄰概念</strong>
-            <p>這張卡補回 Queueing Theory 所在的更大可靠性或系統脈絡，避免把 隊首阻塞 只看成局部實作瑕疵。</p>
+            <strong>相鄰脈絡</strong>
+            <p>補充排隊、服務時間與等待成本的分析背景。</p>
             <a href="https://en.wikipedia.org/wiki/Queueing_theory" target="_blank" rel="noreferrer">Queueing Theory</a>
           </article>
           <article class="source-card">
             <strong>教學整理</strong>
-            <p>工程映射與事故語境是本頁的教學整理，目的是把 隊首阻塞 直接落到 網路交換、HTTP 請求 與 工作佇列設計 這些邊界上。</p>
+            <p>網路傳輸、任務佇列與批次處理案例是本頁依系統實務整理的應用。</p>
           </article>
         </div>
       </section>
@@ -279,7 +279,7 @@
           <div>
             <p class="section-label">Reference</p>
             <h2>下一步</h2>
-            <p>下次在 網路交換 或 HTTP 請求 做設計決定時，先把 佇列順序 穿過哪個邊界、何時變成 資源利用率 寫進 review。</p>
+            <p>下次一條隊列變慢，請先問後面的工作是否真的不能越過第一個。</p>
           </div>
           <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
         </div>

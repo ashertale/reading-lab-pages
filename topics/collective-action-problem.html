@@ -21,13 +21,13 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
-        <p class="kicker">Knowledge Study / Systems</p>
+        <p class="kicker">Knowledge Study / Concepts</p>
         <h1>集體行動困境</h1>
         <p class="topic-subtitle">Collective Action Problem</p>
-        <p class="thesis">當一件事只有大家一起做才有好結果，但個人單獨承擔成本卻很真實時，為什麼合作常比想像中難得多？</p>
+        <p class="thesis">集體行動困境出現於大家都受益於某個共同結果，卻各自有理由少出力、慢出力或等別人先出力。</p>
         <div class="hero-prompt">
           <strong>Read For</strong>
-          <p>這頁會帶你追 公共利益 怎麼透過回饋改寫 文件維護 與 公共工具建設 裡的行為。</p>
+          <p>理解公共利益、個人誘因、搭便車和協調成本如何讓明明值得的事做不起來。</p>
         </div>
       </div>
       <aside class="hero-note" aria-label="主題資訊">
@@ -42,17 +42,17 @@
           </div>
           <div>
             <dt>主要判準</dt>
-            <dd>公共利益、個人成本、搭便車、執行門檻</dd>
+            <dd>共同利益、個人成本、搭便車、執行機制</dd>
           </div>
           <div>
             <dt>讀完產出</dt>
-            <dd>能用 Shared benefit, individual hesitation 重新檢查 協作與公共財 裡的判斷失真</dd>
+            <dd>能在團隊流程、平台治理和安全維護中設計讓貢獻可持續的制度</dd>
           </div>
         </dl>
         <div class="knowledge-map" aria-label="閱讀結構示意">
-          <span>集體</span>
-          <span>成本</span>
-          <span>猶豫</span>
+          <span>共同</span>
+          <span>個人</span>
+          <span>執行</span>
         </div>
       </aside>
     </div>
@@ -75,28 +75,28 @@
       <section class="chapter" id="core">
         <div class="section-heading">
           <p class="section-label">Orientation</p>
-          <h2>如果大家都知道合作有好處，為什麼真正要付出成本時卻常常動不起來</h2>
-          <p class="section-lede">集體行動困境 值得盯的不是單一事故，而是 公共利益 一旦被寫進制度，個人成本 和 搭便車 會怎麼一路反咬。</p>
+          <h2>每個人都希望結果存在，但不一定希望自己付出成本</h2>
+          <p class="section-lede">集體行動困境不是大家不懂共同利益，而是個人理性和群體理性之間出現落差。</p>
         </div>
         <div class="core-card">
           <p class="section-label">Core Tension</p>
-          <p>當一件事只有大家一起做才有好結果，但個人單獨承擔成本卻很真實時，為什麼合作常比想像中難得多？</p>
+          <p>共同成果需要多人投入；但若每個人都能享受成果而不必貢獻，貢獻者就會被懲罰，成果也可能不足。</p>
         </div>
         <div class="principle-strip" aria-label="本頁讀法">
           <div>
             <span>01</span>
-            <strong>先看 公共利益 被怎麼設計</strong>
-            <p>公共利益 決定系統一開始在獎勵什麼，也決定誰最早會改變行為。</p>
+            <strong>找出受益和付費者</strong>
+            <p>誰享受結果，誰承擔成本，兩者是否分離？</p>
           </div>
           <div>
             <span>02</span>
-            <strong>再追 個人成本 怎麼累積</strong>
-            <p>個人成本 很少一次爆開，常是被制度慢慢推到後面才集中結帳。</p>
+            <strong>降低貢獻摩擦</strong>
+            <p>讓貢獻更小、更明確、更可見，搭便車就比較不會成為默認。</p>
           </div>
           <div>
             <span>03</span>
-            <strong>最後查 搭便車 誰在付帳</strong>
-            <p>如果 搭便車 沒被看見，表面優化常只是把代價換人承擔。</p>
+            <strong>設計執行和回饋</strong>
+            <p>只有道德呼籲通常不夠，需要規則、互惠、聲譽或強制機制。</p>
           </div>
         </div>
       </section>
@@ -104,50 +104,50 @@
       <section class="chapter" id="setup">
         <div class="section-heading">
           <p class="section-label">Setup</p>
-          <h2>問題不是壞人，而是 公共利益 如何扭動 個人成本</h2>
-          <p class="section-lede">先別把 集體行動困境 想成大型事故；只看一個最小迴路，你就能看到 公共利益 怎麼牽動 個人成本 和 搭便車。</p>
+          <h2>大家都想要乾淨的 CI，卻都把 flaky test 留給下一個人</h2>
+          <p class="section-lede">最小場景是共同品質由多人共享，但修復成本落在當下某一個人身上。</p>
         </div>
         <div class="definition-grid">
           <div class="tile">
             <strong>最小劇情</strong>
-            <p>改善共同文件、維護共享測試環境、參與標準制定，都屬於每個人都受益、但個人付出常先被看見的工作。</p>
+            <p>團隊都抱怨 CI 不可靠，因為 flaky test 讓每次 merge 都變慢。可是每個人手上的 feature 都很急，於是看到偶發失敗就 rerun，沒人停下來修。</p>
           </div>
           <div class="tile">
             <strong>真正難點</strong>
-            <p>如果大家都知道合作有好處，為什麼真正要付出成本時卻常常動不起來</p>
+            <p>修好 flaky test 的收益由全隊共享，成本卻由某個人立即承擔。</p>
           </div>
         </div>
         <div class="concept-flow" aria-label="問題展開">
-          <div class="flow-step">用 公共利益 去推結果</div>
+          <div class="flow-step">共同利益清楚</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">人開始回應這套規則</div>
+          <div class="flow-step">個人成本立即</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">個人成本 和 搭便車 反過來改寫現場</div>
+          <div class="flow-step">每個人等待別人先做</div>
         </div>
         <div class="paradox-frame">
           <strong>Key Point</strong>
-          <p>集體行動困境 最值錢的地方，不是提供一個壞制度標籤，而是讓你看見 公共利益 一旦被綁進制度，個人成本 會怎麼一路改寫現場。</p>
+          <p>集體行動問題要靠制度把共同利益轉回個人可承擔、可回收的行動。</p>
         </div>
       </section>
 
       <section class="chapter" id="lenses">
         <div class="section-heading">
           <p class="section-label">Lenses</p>
-          <h2>先把 共同收益、個人成本 與 執行門檻 分開看</h2>
-          <p class="section-lede">同樣叫做 集體行動困境，有時是 共同收益 在作怪，有時是 個人成本 或 執行門檻 把副作用越滾越大。</p>
+          <h2>把共同成果拆成貢獻單位</h2>
+          <p class="section-lede">只說大家應該投入太模糊；需要讓貢獻變得具體、可分配、可追蹤。</p>
         </div>
         <div class="lens-grid">
           <article class="lens-card">
-            <strong>共同收益</strong>
-            <p>共同收益 這條線關心的，不是單點錯誤，而是人一旦回應制度，公共利益 會怎麼一路扭動現場行為。</p>
+            <strong>貢獻粒度</strong>
+            <p>是否能把大公共問題拆成小任務、輪值或明確 owner？</p>
           </article>
           <article class="lens-card">
-            <strong>個人成本</strong>
-            <p>個人成本 這條線關心的，不是單點錯誤，而是人一旦回應制度，個人成本 會怎麼一路扭動現場行為。</p>
+            <strong>搭便車成本</strong>
+            <p>不貢獻者是否仍享受同樣收益，且沒有任何可見成本？</p>
           </article>
           <article class="lens-card">
-            <strong>執行門檻</strong>
-            <p>執行門檻 這條線關心的，不是單點錯誤，而是人一旦回應制度，搭便車 會怎麼一路扭動現場行為。</p>
+            <strong>執行機制</strong>
+            <p>靠自願、互惠、聲譽、預算、排班還是正式規則來維持？</p>
           </article>
         </div>
       </section>
@@ -155,44 +155,44 @@
       <section class="chapter" id="psychology">
         <div class="section-heading">
           <p class="section-label">Psychology</p>
-          <h2>為什麼團隊會順著 集體行動困境 的機制一路滑下去</h2>
-          <p class="section-lede">系統會滑向 集體行動困境，往往不是因為大家不知道風險，而是因為短期看得見的好處比被延後的代價更容易抓住注意力。</p>
+          <h2>人會等別人先證明這件事值得付出</h2>
+          <p class="section-lede">當貢獻成本立即而收益分散，人很容易把延後行動合理化。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>別人會做吧</strong>
-            <p>別人會做吧 會讓團隊只看到眼前改善，卻忘了制度一旦跑起來，副作用也會跟著長大。</p>
+            <strong>責任被稀釋</strong>
+            <p>受益者越多，每個人越容易覺得自己不是關鍵。</p>
           </article>
           <article class="example">
-            <strong>短期算盤壓過長期公共利益</strong>
-            <p>短期算盤壓過長期公共利益 很容易把短期順利誤認成長期健康，於是回饋扭曲整段被漏看。</p>
+            <strong>公平感影響投入</strong>
+            <p>如果只有少數人一直貢獻，他們很快會降低投入。</p>
           </article>
           <article class="example">
-            <strong>責任稀釋</strong>
-            <p>碰到 責任稀釋 時，人常先抓可見的好處，但系統真正要付的帳通常在後面才出現。</p>
+            <strong>短期壓力打敗公共品</strong>
+            <p>公共維護的收益長期才顯現，feature deadline 卻在眼前。</p>
           </article>
         </div>
-        <p class="micro-note">要看的不是個人善惡，而是 公共利益 和 個人成本 怎麼把短期順手慢慢推成集體偏航。</p>
+        <p class="micro-note">公共品要能活下來，必須把『對大家好』翻譯成『這週誰做哪一步』。</p>
       </section>
 
       <section class="chapter" id="applications">
         <div class="section-heading">
           <p class="section-label">Applications</p>
-          <h2>回到 文件維護、公共工具建設 與 社群治理</h2>
-          <p class="section-lede">別把它只當成大系統事故；文件維護、公共工具建設 這些場景，本來就在重演同一條回饋鏈。</p>
+          <h2>把公共維護變成可分配工作</h2>
+          <p class="section-lede">團隊品質、平台治理和安全維護都容易卡在集體行動問題。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>文件維護</strong>
-            <p>在 文件維護 裡最容易忽略的，是一旦用 公共利益 去推結果，個人成本 往往會反過來改寫現場行為。</p>
+            <strong>工程衛生</strong>
+            <p>把 flaky test、dependency update 和文件維護排進輪值或容量預算。</p>
           </article>
           <article class="example">
-            <strong>公共工具建設</strong>
-            <p>在 公共工具建設 裡最容易忽略的，是一旦用 個人成本 去推結果，搭便車 往往會反過來改寫現場行為。</p>
+            <strong>平台治理</strong>
+            <p>讓受益方承擔審核、回報或 moderation 成本，而不是只享受平台流量。</p>
           </article>
           <article class="example">
-            <strong>社群治理</strong>
-            <p>在 社群治理 裡最容易忽略的，是一旦用 搭便車 去推結果，執行門檻 往往會反過來改寫現場行為。</p>
+            <strong>安全維護</strong>
+            <p>共用元件漏洞修復要有明確 owner 和期限，避免每個產品線等別人先升級。</p>
           </article>
         </div>
       </section>
@@ -200,30 +200,30 @@
       <section class="chapter" id="misreadings">
         <div class="section-heading">
           <p class="section-label">Misreadings</p>
-          <h2>三個常見誤讀</h2>
-          <p class="section-lede">最容易誤讀的，是把 集體行動困境 當成單點事故，而不是一段會自己增強的回饋鏈。</p>
+          <h2>不是大家自私就完了</h2>
+          <p class="section-lede">即使每個人都善意，誘因和成本分配仍可能讓共同成果不足。</p>
         </div>
         <div class="collocation-list" aria-label="常見誤讀">
           <article class="collocation-card">
             <div>
-              <strong>集體行動困境 只是在怪人性</strong>
+              <strong>只靠道德呼籲</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>多數時候問題不在個人道德，而在 公共利益 如何透過制度塑形行為。</p>
+            <p>喊大家重視公共品通常不如改變成本和回饋。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>只要換一個指標或流程，集體行動困境 就會自己消失</strong>
+              <strong>把搭便車者妖魔化</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>若 個人成本 的回饋結構沒重寫，換名字常常只是把同一個問題搬家。</p>
+            <p>很多人只是被眼前任務壓住，制度要讓貢獻可行。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>集體行動困境 只會發生在大組織</strong>
+              <strong>忽略規模變化</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>小團隊一樣會遇到，只是 搭便車 的代價回得更快。</p>
+            <p>小團隊靠默契可行，大團隊需要更明確機制。</p>
           </article>
         </div>
       </section>
@@ -231,22 +231,22 @@
       <section class="chapter" id="questions">
         <div class="section-heading">
           <p class="section-label">Questions</p>
-          <h2>把 公共利益、個人成本 與 搭便車 變成追問順序</h2>
-          <p class="section-lede">下面兩個問題適合拿去拆 文件維護、公共工具建設 這些場景裡的回饋鏈，看代價究竟被推到哪裡。</p>
+          <h2>問公共利益如何回到個人行動</h2>
+          <p class="section-lede">下面兩問適合用在團隊流程和平台治理設計。</p>
         </div>
         <div class="prompt-grid">
           <article class="prompt-card">
-            <strong>如果這個機制現在就出現在 文件維護</strong>
-            <p>你最先會追哪一段：公共利益、個人成本，還是 搭便車？哪一段最可能先把行為推偏？</p>
+            <strong>誰享受成果，誰付出成本？</strong>
+            <p>如果兩者分離，就需要補償、輪值或規則。</p>
           </article>
           <article class="prompt-card">
-            <strong>如果數字突然變好看了</strong>
-            <p>你要在哪個回饋點驗證：那是真改善，還是 公共利益 正在把代價往別處推？</p>
+            <strong>下一個最小貢獻單位是什麼？</strong>
+            <p>把公共問題拆成本週可完成、可追蹤的一步。</p>
           </article>
         </div>
         <div class="template-note">
           <strong>延伸路線</strong>
-          <p>延伸閱讀建議接到 Public Good，看同一條回饋鏈在更大的制度背景裡怎麼被放大。</p>
+          <p>可接著讀 free-rider problem，理解搭便車如何削弱公共品供給。</p>
         </div>
       </section>
 
@@ -254,22 +254,22 @@
         <div class="section-heading">
           <p class="section-label">Sources</p>
           <h2>來源與整理方式</h2>
-          <p class="section-lede">本頁先用 Collective Action Problem 條目抓住 公共利益 與 個人成本 怎麼互相推動，再用 Public Good 補回制度與系統背景。</p>
+          <p class="section-lede">本頁以 collective action problem 的個人誘因與共同利益落差為核心，並用 free-rider problem 補足搭便車背景。</p>
         </div>
         <div class="source-grid">
           <article class="source-card">
             <strong>核心概念</strong>
-            <p>這張卡交代制度如何把 公共利益、個人成本 推成可重複的失真模式。</p>
+            <p>支撐共同利益需要多人貢獻但個人有不貢獻誘因的主線。</p>
             <a href="https://en.wikipedia.org/wiki/Collective_action_problem" target="_blank" rel="noreferrer">Collective Action Problem</a>
           </article>
           <article class="source-card">
-            <strong>相鄰概念</strong>
-            <p>這張卡幫你把主題放回更大的制度背景，特別是 個人成本 和 搭便車 怎麼一路被放大。</p>
-            <a href="https://en.wikipedia.org/wiki/Public_good_(economics)" target="_blank" rel="noreferrer">Public Good</a>
+            <strong>相鄰脈絡</strong>
+            <p>補充公共品中不付成本仍享受收益的問題。</p>
+            <a href="https://en.wikipedia.org/wiki/Public_good_(economics)" target="_blank" rel="noreferrer">Free-Rider Problem</a>
           </article>
           <article class="source-card">
             <strong>教學整理</strong>
-            <p>本頁把 集體行動困境 帶回 文件維護、公共工具建設 與 社群治理 的部分，主要是在整理回饋鏈、制度設計與副作用之間的對應關係。</p>
+            <p>工程衛生、平台治理與安全維護案例是本頁依團隊與系統治理整理的應用。</p>
           </article>
         </div>
       </section>
@@ -279,7 +279,7 @@
           <div>
             <p class="section-label">Reference</p>
             <h2>下一步</h2>
-            <p>下次在 文件維護 或 公共工具建設 設規則時，先畫出誰會因 公共利益 改變行為，以及 個人成本 會在哪裡開始累積。</p>
+            <p>下次大家都同意某件事重要，請立刻問誰本週承擔哪一小塊。</p>
           </div>
           <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
         </div>

@@ -21,13 +21,13 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
-        <p class="kicker">Knowledge Study / Engineering</p>
+        <p class="kicker">Knowledge Study / Systems</p>
         <h1>腦裂</h1>
         <p class="topic-subtitle">Split-Brain</p>
-        <p class="thesis">當原本應該協調一致的兩邊失去連線，卻又各自繼續對外服務時，系統就可能同時長出兩份彼此衝突的『真相』。</p>
+        <p class="thesis">腦裂發生時，多個分區各自以為自己是主節點；真正可怕的是它們同時接受互相衝突的真實。</p>
         <div class="hero-prompt">
           <strong>Read For</strong>
-          <p>這頁會把 網路分區、主節點認定 這些常藏在規格外的壓力，拉回 HA 叢集 與 資料庫主從切換 的設計檢查裡。</p>
+          <p>理解 quorum、fencing、leader lease 和網路分區如何避免雙主寫入。</p>
         </div>
       </div>
       <aside class="hero-note" aria-label="主題資訊">
@@ -42,17 +42,17 @@
           </div>
           <div>
             <dt>主要判準</dt>
-            <dd>網路分區、主節點認定、資料衝突、仲裁機制</dd>
+            <dd>網路分區、主節點判定、quorum、fencing</dd>
           </div>
           <div>
             <dt>讀完產出</dt>
-            <dd>能用 Multiple sides believe they are primary 重新檢查 叢集與同步 裡的判斷失真</dd>
+            <dd>能在高可用叢集、資料庫與控制系統中辨認雙主風險</dd>
           </div>
         </dl>
         <div class="knowledge-map" aria-label="閱讀結構示意">
           <span>分區</span>
-          <span>雙主</span>
-          <span>衝突</span>
+          <span>主權</span>
+          <span>仲裁</span>
         </div>
       </aside>
     </div>
@@ -75,28 +75,28 @@
       <section class="chapter" id="core">
         <div class="section-heading">
           <p class="section-label">Orientation</p>
-          <h2>如果兩邊都還活著，為什麼這反而可能比一邊直接掛掉更危險</h2>
-          <p class="section-lede">腦裂 的價值，在於它把平常藏在接口、時序或權限邊界外的壓力，提前搬到設計與驗證桌面上。</p>
+          <h2>最危險的不是沒有人當主，而是兩邊都相信自己是主</h2>
+          <p class="section-lede">腦裂描述的是分區後多方同時取得主控身份，讓寫入、控制或決策出現不可合併的衝突。</p>
         </div>
         <div class="core-card">
           <p class="section-label">Core Tension</p>
-          <p>當原本應該協調一致的兩邊失去連線，卻又各自繼續對外服務時，系統就可能同時長出兩份彼此衝突的『真相』。</p>
+          <p>高可用追求在故障中繼續服務，但如果每個分區都為了可用性接受寫入，一致性和安全就會付出代價。</p>
         </div>
         <div class="principle-strip" aria-label="本頁讀法">
           <div>
             <span>01</span>
-            <strong>先圈出 網路分區 會在哪裡破</strong>
-            <p>網路分區 常不是抽象風險，而是會穿過具體接口、排程或權限邊界。</p>
+            <strong>用 quorum 決定主權</strong>
+            <p>只有取得足夠多投票或租約的一方能提供寫入。</p>
           </div>
           <div>
             <span>02</span>
-            <strong>再追 主節點認定 怎麼穿過邊界</strong>
-            <p>主節點認定 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現。</p>
+            <strong>隔離舊主</strong>
+            <p>Failover 不只選新主，還要 fence 掉可能仍在動的舊主。</p>
           </div>
           <div>
             <span>03</span>
-            <strong>最後查 資料衝突 何時從小事變事故</strong>
-            <p>資料衝突 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力。</p>
+            <strong>明確分區策略</strong>
+            <p>網路不通時，是停止寫入、只讀、降級，還是允許衝突後合併？</p>
           </div>
         </div>
       </section>
@@ -104,50 +104,50 @@
       <section class="chapter" id="setup">
         <div class="section-heading">
           <p class="section-label">Setup</p>
-          <h2>哪個邊界先把 網路分區 變成事故</h2>
-          <p class="section-lede">把問題壓回一個最小接口或一次時序交會，網路分區 何時變成風險、資料衝突 何時開始放大，就不容易再被模糊帶過。</p>
+          <h2>兩個資料中心斷線後，各自選出主庫接受寫入</h2>
+          <p class="section-lede">最小場景是雙方都失去和對方的連線，卻都認為自己該繼續提供主服務。</p>
         </div>
         <div class="definition-grid">
           <div class="tile">
             <strong>最小劇情</strong>
-            <p>叢集節點彼此失去心跳，但對客戶仍可回應；每邊都以為自己應該接管，於是各自寫入不同資料。</p>
+            <p>A、B 兩個資料中心之間網路分區。A 看不到 B，B 也看不到 A；兩邊的自動 failover 都把本地節點提升為 primary，接著接受同一帳戶的不同寫入。</p>
           </div>
           <div class="tile">
             <strong>真正難點</strong>
-            <p>如果兩邊都還活著，為什麼這反而可能比一邊直接掛掉更危險</p>
+            <p>每一邊都在提高本地可用性，合起來卻破壞了全局唯一主控假設。</p>
           </div>
         </div>
         <div class="concept-flow" aria-label="問題展開">
-          <div class="flow-step">局部先對付 網路分區</div>
+          <div class="flow-step">網路分區切斷心跳</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">主節點認定 穿過接口或時序邊界</div>
+          <div class="flow-step">多方各自判定對方失效</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">資料衝突 把小問題放大成現場風險</div>
+          <div class="flow-step">雙主寫入產生衝突真實</div>
         </div>
         <div class="paradox-frame">
           <strong>Key Point</strong>
-          <p>腦裂 的價值，在於它把平常埋在規格外的 網路分區、主節點認定 與 資料衝突，提前拉回 design review 能談清楚的位置。</p>
+          <p>處理腦裂要先保證主權唯一，再談如何恢復服務。</p>
         </div>
       </section>
 
       <section class="chapter" id="lenses">
         <div class="section-heading">
           <p class="section-label">Lenses</p>
-          <h2>先把 雙主衝突、仲裁缺席 與 可用性與正確性對撞 分開看</h2>
-          <p class="section-lede">表面像同一個故障，底下往往是 雙主衝突、仲裁缺席 和 可用性與正確性對撞 在不同邊界各自出力。</p>
+          <h2>檢查主權如何被授予與撤銷</h2>
+          <p class="section-lede">高可用系統要能回答誰有權寫、誰必須停、以及如何證明舊主已被隔離。</p>
         </div>
         <div class="lens-grid">
           <article class="lens-card">
-            <strong>雙主衝突</strong>
-            <p>雙主衝突 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 網路分區 轉成真正的穩定性壓力。</p>
+            <strong>仲裁來源</strong>
+            <p>主節點是否需要 quorum、外部仲裁或 lease，還是單靠心跳超時？</p>
           </article>
           <article class="lens-card">
-            <strong>仲裁缺席</strong>
-            <p>仲裁缺席 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 主節點認定 轉成真正的穩定性壓力。</p>
+            <strong>Fencing</strong>
+            <p>新主上任前，舊主是否被切斷電源、儲存、網路或寫入權？</p>
           </article>
           <article class="lens-card">
-            <strong>可用性與正確性對撞</strong>
-            <p>可用性與正確性對撞 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 資料衝突 轉成真正的穩定性壓力。</p>
+            <strong>衝突語意</strong>
+            <p>若仍允許多方寫入，衝突如何合併，哪些操作不能合併？</p>
           </article>
         </div>
       </section>
@@ -155,44 +155,44 @@
       <section class="chapter" id="psychology">
         <div class="section-heading">
           <p class="section-label">Psychology</p>
-          <h2>團隊通常在哪一步把 腦裂 當成暫時小事</h2>
-          <p class="section-lede">工程現場最危險的，不是沒人提風險，而是大家太容易把 網路分區 當成晚點再補也行的小瑕疵。</p>
+          <h2>可用性壓力會讓人想讓每一邊都繼續服務</h2>
+          <p class="section-lede">分區時停止一邊看起來像保守甚至浪費，但雙主造成的資料修復成本可能更高。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>只要活著就繼續服務</strong>
-            <p>只要活著就繼續服務 會讓人把『目前沒爆』誤讀成『設計沒問題』，於是風險一路被推往更後面。</p>
+            <strong>本地健康感誤導</strong>
+            <p>每個分區內部都看起來正常，容易低估全局一致性已經失效。</p>
           </article>
           <article class="example">
-            <strong>分區被當暫時小問題</strong>
-            <p>分區被當暫時小問題 最危險的地方，在於它常把局部成功包裝成全局安全。</p>
+            <strong>自動化信心太強</strong>
+            <p>Failover 自動化若沒有 fencing，只是自動製造雙主風險。</p>
           </article>
           <article class="example">
-            <strong>清理成本被低估</strong>
-            <p>只要 清理成本被低估 一進場，團隊就容易先相信現況撐得住，而不是先問代價正在往哪裡堆。</p>
+            <strong>短期可用壓過長期修復</strong>
+            <p>讓兩邊都寫入能暫時服務更多人，後續資料衝突卻可能不可逆。</p>
           </article>
         </div>
-        <p class="micro-note">越早把 網路分區、主節點認定 這些心理近路說出來，越不容易在 postmortem 才第一次承認它們存在。</p>
+        <p class="micro-note">腦裂設計的第一問不是誰接手最快，而是誰有不可爭辯的寫入權。</p>
       </section>
 
       <section class="chapter" id="applications">
         <div class="section-heading">
           <p class="section-label">Applications</p>
-          <h2>回到 HA 叢集、資料庫主從切換 與 仲裁設計</h2>
-          <p class="section-lede">這裡重點不是補幾個抽象案例，而是把 腦裂 直接落到 HA 叢集、資料庫主從切換 這些真的會出事的邊界上。</p>
+          <h2>把分區時的寫入權說清楚</h2>
+          <p class="section-lede">資料庫叢集、分散式 lock 和控制系統都需要避免雙主。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>HA 叢集</strong>
-            <p>把 腦裂 帶回 HA 叢集 時，最該先畫出來的是 網路分區 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>資料庫 HA</strong>
+            <p>Failover 使用 quorum 和 fencing，避免舊 primary 在隔離網段繼續寫入。</p>
           </article>
           <article class="example">
-            <strong>資料庫主從切換</strong>
-            <p>把 腦裂 帶回 資料庫主從切換 時，最該先畫出來的是 主節點認定 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>分散式 lock</strong>
+            <p>Lock lease 要考慮時鐘漂移和網路延遲，避免兩方同時持有。</p>
           </article>
           <article class="example">
-            <strong>仲裁設計</strong>
-            <p>把 腦裂 帶回 仲裁設計 時，最該先畫出來的是 資料衝突 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>控制系統</strong>
+            <p>主控切換前要確保舊 controller 無法繼續輸出命令。</p>
           </article>
         </div>
       </section>
@@ -200,30 +200,30 @@
       <section class="chapter" id="misreadings">
         <div class="section-heading">
           <p class="section-label">Misreadings</p>
-          <h2>三個常見誤讀</h2>
-          <p class="section-lede">這些誤讀常把 腦裂 降成實作瑣事，結果真正的邊界壓力根本沒被談到。</p>
+          <h2>腦裂不是普通服務中斷</h2>
+          <p class="section-lede">服務中斷可能只是不可用；腦裂是多方同時可用但產生互相衝突的權威。</p>
         </div>
         <div class="collocation-list" aria-label="常見誤讀">
           <article class="collocation-card">
             <div>
-              <strong>腦裂 只是實作細節</strong>
+              <strong>只看心跳超時</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>它常是 網路分區 最先破掉的邊界，所以不是『之後再補』就沒事。</p>
+            <p>心跳失敗不等於對方死了，也可能只是網路分區。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>只要再加更多防呆，腦裂 就會消失</strong>
+              <strong>以為雙寫可事後合併</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>如果 主節點認定 的壓力來源沒處理，防呆最後只會變成更昂貴的補丁。</p>
+            <p>有些操作可合併，餘額、權限和控制命令常不能簡單合併。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>腦裂 只和大型分散式系統有關</strong>
+              <strong>忽略舊主隔離</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>很多單機、韌體或流程系統，一樣會以更小規模的 資料衝突 形式重演。</p>
+            <p>選出新主不夠，舊主若仍能寫，雙主仍存在。</p>
           </article>
         </div>
       </section>
@@ -231,22 +231,22 @@
       <section class="chapter" id="questions">
         <div class="section-heading">
           <p class="section-label">Questions</p>
-          <h2>把 網路分區、主節點認定 追到真正會破的邊界</h2>
-          <p class="section-lede">下面兩個問題很適合在 HA 叢集、資料庫主從切換 這類設計或驗證場合直接拿來過一遍。</p>
+          <h2>問誰有唯一寫入權</h2>
+          <p class="section-lede">下面兩問適合用在 HA 設計和 failover 演練。</p>
         </div>
         <div class="prompt-grid">
           <article class="prompt-card">
-            <strong>如果第一個異常出現在 HA 叢集</strong>
-            <p>你最先會去畫哪條邊界，確認 網路分區 和 主節點認定 到底在哪一步被放大？</p>
+            <strong>分區時哪一方可以接受寫入？</strong>
+            <p>答案要依 quorum、lease 或仲裁規則，而不是依各自本地判斷。</p>
           </article>
           <article class="prompt-card">
-            <strong>如果 資料庫主從切換 團隊只回你一句『現在看起來沒事』</strong>
-            <p>你要用什麼觀測或驗證證明：資料衝突 不是只是還沒在現場結帳？</p>
+            <strong>新主上任前舊主如何被 fence？</strong>
+            <p>確認電源、儲存、網路、憑證或寫入權能被確實撤銷。</p>
           </article>
         </div>
         <div class="template-note">
           <strong>延伸路線</strong>
-          <p>延伸閱讀可以接到 Network Partition，把這頁的邊界壓力放回更大的可靠性脈絡。</p>
+          <p>可接著讀 network partition，理解分散式系統如何面對連通性分裂。</p>
         </div>
       </section>
 
@@ -254,22 +254,22 @@
         <div class="section-heading">
           <p class="section-label">Sources</p>
           <h2>來源與整理方式</h2>
-          <p class="section-lede">本頁先用 Split-Brain 條目交代故障模式與邊界壓力，再用 Network Partition 補回更大的系統背景。</p>
+          <p class="section-lede">本頁以 split-brain 的雙主風險為核心，並用 network partition 補足分區背景。</p>
         </div>
         <div class="source-grid">
           <article class="source-card">
             <strong>核心概念</strong>
-            <p>這張卡說明 腦裂 在接口、時序或權限邊界上最常怎麼冒出來。</p>
+            <p>支撐多個分區同時認為自己有主控權的主線。</p>
             <a href="https://en.wikipedia.org/wiki/Split-brain_(computing)" target="_blank" rel="noreferrer">Split-Brain</a>
           </article>
           <article class="source-card">
-            <strong>相鄰概念</strong>
-            <p>這張卡補回 Network Partition 所在的更大可靠性或系統脈絡，避免把 腦裂 只看成局部實作瑕疵。</p>
+            <strong>相鄰脈絡</strong>
+            <p>補充網路分區如何切斷節點間狀態交換。</p>
             <a href="https://en.wikipedia.org/wiki/Network_partition" target="_blank" rel="noreferrer">Network Partition</a>
           </article>
           <article class="source-card">
             <strong>教學整理</strong>
-            <p>工程映射與事故語境是本頁的教學整理，目的是把 腦裂 直接落到 HA 叢集、資料庫主從切換 與 仲裁設計 這些邊界上。</p>
+            <p>資料庫 HA、分散式 lock 與控制系統案例是本頁依分散式實務整理的應用。</p>
           </article>
         </div>
       </section>
@@ -279,7 +279,7 @@
           <div>
             <p class="section-label">Reference</p>
             <h2>下一步</h2>
-            <p>下次在 HA 叢集 或 資料庫主從切換 做設計決定時，先把 網路分區 穿過哪個邊界、何時變成 資料衝突 寫進 review。</p>
+            <p>下次設計自動 failover，請先證明舊主會被真正隔離。</p>
           </div>
           <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
         </div>

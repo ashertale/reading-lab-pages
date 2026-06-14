@@ -21,13 +21,13 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
-        <p class="kicker">Knowledge Study / Engineering</p>
+        <p class="kicker">Knowledge Study / Systems</p>
         <h1>最小權限原則</h1>
         <p class="topic-subtitle">Principle of Least Privilege</p>
-        <p class="thesis">模組、服務與人員若只拿到完成任務所需的最小權限，單一錯誤或入侵能造成的傷害就更容易被限制在局部。</p>
+        <p class="thesis">最小權限原則要求每個人、服務或程式只拿完成任務所需的權限，讓失誤和入侵的爆炸半徑變小。</p>
         <div class="hero-prompt">
           <strong>Read For</strong>
-          <p>這頁會把 最小授權、爆炸半徑 這些常藏在規格外的壓力，拉回 帳號權限設計 與 服務隔離 的設計檢查裡。</p>
+          <p>理解權限範圍、時間限制、角色分離和審計如何把便利和風險重新平衡。</p>
         </div>
       </div>
       <aside class="hero-note" aria-label="主題資訊">
@@ -42,17 +42,17 @@
           </div>
           <div>
             <dt>主要判準</dt>
-            <dd>最小授權、爆炸半徑、隔離、權限邊界</dd>
+            <dd>必要權限、權限範圍、期限、審計</dd>
           </div>
           <div>
             <dt>讀完產出</dt>
-            <dd>能用 Give only the access needed 重新檢查 權限與隔離 裡的判斷失真</dd>
+            <dd>能在帳號、服務角色、韌體 debug 和營運流程中縮小不必要存取</dd>
           </div>
         </dl>
         <div class="knowledge-map" aria-label="閱讀結構示意">
           <span>權限</span>
-          <span>縮小</span>
-          <span>隔離</span>
+          <span>必要</span>
+          <span>範圍</span>
         </div>
       </aside>
     </div>
@@ -75,28 +75,28 @@
       <section class="chapter" id="core">
         <div class="section-heading">
           <p class="section-label">Orientation</p>
-          <h2>如果多給一點權限平常比較方便，為什麼安全設計卻要反過來想辦法一直往下砍</h2>
-          <p class="section-lede">最小權限原則 的價值，在於它把平常藏在接口、時序或權限邊界外的壓力，提前搬到設計與驗證桌面上。</p>
+          <h2>方便的全權限，常把小錯誤變成大事故</h2>
+          <p class="section-lede">最小權限不是不信任人，而是承認憑證會外洩、程式會有 bug、人會按錯；權限越小，錯誤影響越小。</p>
         </div>
         <div class="core-card">
           <p class="section-label">Core Tension</p>
-          <p>模組、服務與人員若只拿到完成任務所需的最小權限，單一錯誤或入侵能造成的傷害就更容易被限制在局部。</p>
+          <p>廣權限讓工作順暢，窄權限讓事故變小；好的設計要讓日常工作可做，同時不把所有門都交給同一把鑰匙。</p>
         </div>
         <div class="principle-strip" aria-label="本頁讀法">
           <div>
             <span>01</span>
-            <strong>先圈出 最小授權 會在哪裡破</strong>
-            <p>最小授權 常不是抽象風險，而是會穿過具體接口、排程或權限邊界。</p>
+            <strong>按任務授權</strong>
+            <p>權限應對應具體操作，而不是對應職稱或方便程度。</p>
           </div>
           <div>
             <span>02</span>
-            <strong>再追 爆炸半徑 怎麼穿過邊界</strong>
-            <p>爆炸半徑 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現。</p>
+            <strong>限制時間與範圍</strong>
+            <p>臨時高權限要有到期時間、目標資源和審計紀錄。</p>
           </div>
           <div>
             <span>03</span>
-            <strong>最後查 隔離 何時從小事變事故</strong>
-            <p>隔離 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力。</p>
+            <strong>分離高風險能力</strong>
+            <p>讀、寫、刪除、部署、簽章和金流操作不應無條件集中。</p>
           </div>
         </div>
       </section>
@@ -104,50 +104,50 @@
       <section class="chapter" id="setup">
         <div class="section-heading">
           <p class="section-label">Setup</p>
-          <h2>風險不是突然出現，而是 爆炸半徑 一路堆出來的</h2>
-          <p class="section-lede">把問題壓回一個最小接口或一次時序交會，最小授權 何時變成風險、隔離 何時開始放大，就不容易再被模糊帶過。</p>
+          <h2>背景同步服務只需要讀設定，卻拿了整個資料庫寫入權</h2>
+          <p class="section-lede">最小場景是服務為了省配置使用高權限帳號，實際任務只需要很小一部分。</p>
         </div>
         <div class="definition-grid">
           <div class="tile">
             <strong>最小劇情</strong>
-            <p>程式、帳號與自動化腳本若都抱著寬鬆權限跑，平常省事，但一旦出錯，損害也會一起被放大。</p>
+            <p>一個 telemetry collector 只需讀取 device metadata，卻使用共用 admin database credential。程式漏洞被利用後，攻擊者能刪除使用者資料。</p>
           </div>
           <div class="tile">
             <strong>真正難點</strong>
-            <p>如果多給一點權限平常比較方便，為什麼安全設計卻要反過來想辦法一直往下砍</p>
+            <p>過大權限在平常像便利，事故時才顯示它把所有後果綁在一起。</p>
           </div>
         </div>
         <div class="concept-flow" aria-label="問題展開">
-          <div class="flow-step">局部先對付 最小授權</div>
+          <div class="flow-step">任務需求很小</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">爆炸半徑 穿過接口或時序邊界</div>
+          <div class="flow-step">配置給予廣權限</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">隔離 把小問題放大成現場風險</div>
+          <div class="flow-step">漏洞或誤操作放大傷害</div>
         </div>
         <div class="paradox-frame">
           <strong>Key Point</strong>
-          <p>最小權限原則 的價值，在於它把平常埋在規格外的 最小授權、爆炸半徑 與 隔離，提前拉回 design review 能談清楚的位置。</p>
+          <p>最小權限的價值，是讓單一憑證或流程失守時只失去它本該能碰的範圍。</p>
         </div>
       </section>
 
       <section class="chapter" id="lenses">
         <div class="section-heading">
           <p class="section-label">Lenses</p>
-          <h2>先把 授權最小化、錯誤侷限 與 方便與安全拉扯 分開看</h2>
-          <p class="section-lede">表面像同一個故障，底下往往是 授權最小化、錯誤侷限 和 方便與安全拉扯 在不同邊界各自出力。</p>
+          <h2>把權限拆成操作、資源與時間</h2>
+          <p class="section-lede">權限不是一個 yes/no，而是誰、能對哪個資源、做哪個操作、多久。</p>
         </div>
         <div class="lens-grid">
           <article class="lens-card">
-            <strong>授權最小化</strong>
-            <p>授權最小化 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 最小授權 轉成真正的穩定性壓力。</p>
+            <strong>操作範圍</strong>
+            <p>服務需要 read、write、delete、deploy、sign 還是只是查詢？</p>
           </article>
           <article class="lens-card">
-            <strong>錯誤侷限</strong>
-            <p>錯誤侷限 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 爆炸半徑 轉成真正的穩定性壓力。</p>
+            <strong>資源範圍</strong>
+            <p>權限是否限制到 tenant、table、bucket、device group 或環境？</p>
           </article>
           <article class="lens-card">
-            <strong>方便與安全拉扯</strong>
-            <p>方便與安全拉扯 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 隔離 轉成真正的穩定性壓力。</p>
+            <strong>時間範圍</strong>
+            <p>臨時權限是否自動過期，長期 token 是否可輪替和撤銷？</p>
           </article>
         </div>
       </section>
@@ -155,44 +155,44 @@
       <section class="chapter" id="psychology">
         <div class="section-heading">
           <p class="section-label">Psychology</p>
-          <h2>團隊通常在哪一步把 最小權限原則 當成暫時小事</h2>
-          <p class="section-lede">工程現場最危險的，不是沒人提風險，而是大家太容易把 最小授權 當成晚點再補也行的小瑕疵。</p>
+          <h2>過大權限通常不是惡意，而是為了少被流程卡住</h2>
+          <p class="section-lede">當最小權限太難申請或常阻塞工作，團隊會自然偏向共用高權限捷徑。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>方便先贏</strong>
-            <p>方便先贏 會讓人把『目前沒爆』誤讀成『設計沒問題』，於是風險一路被推往更後面。</p>
+            <strong>便利立即可見</strong>
+            <p>全權限讓開發和維運少掉摩擦，風險則通常晚到事故才可見。</p>
           </article>
           <article class="example">
-            <strong>多給一點沒差錯覺</strong>
-            <p>多給一點沒差錯覺 最危險的地方，在於它常把局部成功包裝成全局安全。</p>
+            <strong>權限清單會腐爛</strong>
+            <p>人員轉組、服務改責任、臨時例外若不回收，權限會越堆越寬。</p>
           </article>
           <article class="example">
-            <strong>少設邊界就少麻煩</strong>
-            <p>只要 少設邊界就少麻煩 一進場，團隊就容易先相信現況撐得住，而不是先問代價正在往哪裡堆。</p>
+            <strong>共用帳號模糊責任</strong>
+            <p>多人共用同一高權限帳號時，審計和回收都變困難。</p>
           </article>
         </div>
-        <p class="micro-note">越早把 最小授權、爆炸半徑 這些心理近路說出來，越不容易在 postmortem 才第一次承認它們存在。</p>
+        <p class="micro-note">最小權限能長期成立，必須讓正確權限容易取得，讓過大權限容易被看見。</p>
       </section>
 
       <section class="chapter" id="applications">
         <div class="section-heading">
           <p class="section-label">Applications</p>
-          <h2>回到 帳號權限設計、服務隔離 與 部署腳本治理</h2>
-          <p class="section-lede">這裡重點不是補幾個抽象案例，而是把 最小權限原則 直接落到 帳號權限設計、服務隔離 這些真的會出事的邊界上。</p>
+          <h2>把高權限改成可申請、可到期、可追蹤</h2>
+          <p class="section-lede">服務帳號、韌體 debug 和營運後台都需要把權限縮到任務邊界。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>帳號權限設計</strong>
-            <p>把 最小權限原則 帶回 帳號權限設計 時，最該先畫出來的是 最小授權 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>服務角色</strong>
+            <p>為每個服務建立專用 role，只允許它需要的 API、table 和環境。</p>
           </article>
           <article class="example">
-            <strong>服務隔離</strong>
-            <p>把 最小權限原則 帶回 服務隔離 時，最該先畫出來的是 爆炸半徑 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>韌體 debug</strong>
+            <p>量產裝置的 debug capability 應有簽章、期限和裝置範圍，不保留永久後門。</p>
           </article>
           <article class="example">
-            <strong>部署腳本治理</strong>
-            <p>把 最小權限原則 帶回 部署腳本治理 時，最該先畫出來的是 隔離 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>營運後台</strong>
+            <p>高風險操作使用 just-in-time elevation、雙人確認和完整 audit log。</p>
           </article>
         </div>
       </section>
@@ -200,30 +200,30 @@
       <section class="chapter" id="misreadings">
         <div class="section-heading">
           <p class="section-label">Misreadings</p>
-          <h2>三個常見誤讀</h2>
-          <p class="section-lede">這些誤讀常把 最小權限原則 降成實作瑣事，結果真正的邊界壓力根本沒被談到。</p>
+          <h2>最小權限不是讓工作做不了</h2>
+          <p class="section-lede">它要讓必要工作有剛好的權限；設計太卡會逼人繞過系統。</p>
         </div>
         <div class="collocation-list" aria-label="常見誤讀">
           <article class="collocation-card">
             <div>
-              <strong>最小權限原則 只是實作細節</strong>
+              <strong>把最小權限當禁止權限</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>它常是 最小授權 最先破掉的邊界，所以不是『之後再補』就沒事。</p>
+            <p>目標是必要且足夠，不是盲目收緊。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>只要再加更多防呆，最小權限原則 就會消失</strong>
+              <strong>只做初始設定</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>如果 爆炸半徑 的壓力來源沒處理，防呆最後只會變成更昂貴的補丁。</p>
+            <p>權限需要隨任務變更定期審查和回收。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>最小權限原則 只和大型分散式系統有關</strong>
+              <strong>忽略緊急情境</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>很多單機、韌體或流程系統，一樣會以更小規模的 隔離 形式重演。</p>
+            <p>緊急高權限可以存在，但要短期、可追蹤、可回收。</p>
           </article>
         </div>
       </section>
@@ -231,22 +231,22 @@
       <section class="chapter" id="questions">
         <div class="section-heading">
           <p class="section-label">Questions</p>
-          <h2>把 最小授權、爆炸半徑 追到真正會破的邊界</h2>
-          <p class="section-lede">下面兩個問題很適合在 帳號權限設計、服務隔離 這類設計或驗證場合直接拿來過一遍。</p>
+          <h2>問這把鑰匙能開哪些不必要的門</h2>
+          <p class="section-lede">下面兩問適合用在 IAM review、服務設計和操作流程審計。</p>
         </div>
         <div class="prompt-grid">
           <article class="prompt-card">
-            <strong>如果第一個異常出現在 帳號權限設計</strong>
-            <p>你最先會去畫哪條邊界，確認 最小授權 和 爆炸半徑 到底在哪一步被放大？</p>
+            <strong>這個任務真正需要哪些操作？</strong>
+            <p>把 read、write、delete、deploy、sign、admin 分開列。</p>
           </article>
           <article class="prompt-card">
-            <strong>如果 服務隔離 團隊只回你一句『現在看起來沒事』</strong>
-            <p>你要用什麼觀測或驗證證明：隔離 不是只是還沒在現場結帳？</p>
+            <strong>權限失守時最大傷害是什麼？</strong>
+            <p>用資源範圍、時間範圍和審計能力估算爆炸半徑。</p>
           </article>
         </div>
         <div class="template-note">
           <strong>延伸路線</strong>
-          <p>若想把這題從局部故障拉回系統設計，下一步最值得對照的是 Privilege Separation。</p>
+          <p>可接著讀 privilege separation，理解如何把高風險能力拆到不同邊界。</p>
         </div>
       </section>
 
@@ -254,22 +254,22 @@
         <div class="section-heading">
           <p class="section-label">Sources</p>
           <h2>來源與整理方式</h2>
-          <p class="section-lede">本頁先用 Principle of Least Privilege 條目交代故障模式與邊界壓力，再用 Privilege Separation 補回更大的系統背景。</p>
+          <p class="section-lede">本頁以 principle of least privilege 的必要權限限制為核心，並用 privilege separation 補足權限拆分背景。</p>
         </div>
         <div class="source-grid">
           <article class="source-card">
             <strong>核心概念</strong>
-            <p>這張卡說明 最小權限原則 在接口、時序或權限邊界上最常怎麼冒出來。</p>
+            <p>支撐只授予完成任務所需權限的安全原則。</p>
             <a href="https://en.wikipedia.org/wiki/Principle_of_least_privilege" target="_blank" rel="noreferrer">Principle of Least Privilege</a>
           </article>
           <article class="source-card">
-            <strong>相鄰概念</strong>
-            <p>這張卡補回 Privilege Separation 所在的更大可靠性或系統脈絡，避免把 最小權限原則 只看成局部實作瑕疵。</p>
+            <strong>相鄰脈絡</strong>
+            <p>補充將高風險權限拆到不同進程、角色或邊界的做法。</p>
             <a href="https://en.wikipedia.org/wiki/Privilege_separation" target="_blank" rel="noreferrer">Privilege Separation</a>
           </article>
           <article class="source-card">
             <strong>教學整理</strong>
-            <p>工程映射與事故語境是本頁的教學整理，目的是把 最小權限原則 直接落到 帳號權限設計、服務隔離 與 部署腳本治理 這些邊界上。</p>
+            <p>服務角色、韌體 debug 與營運後台案例是本頁依安全工程實務整理的應用。</p>
           </article>
         </div>
       </section>
@@ -279,7 +279,7 @@
           <div>
             <p class="section-label">Reference</p>
             <h2>下一步</h2>
-            <p>下次在 帳號權限設計 或 服務隔離 做設計決定時，先把 最小授權 穿過哪個邊界、何時變成 隔離 寫進 review。</p>
+            <p>下次有人要求 admin 權限，請先把任務拆成必要操作和期限。</p>
           </div>
           <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
         </div>

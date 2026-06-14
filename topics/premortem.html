@@ -21,13 +21,13 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
-        <p class="kicker">Knowledge Study / Principles</p>
+        <p class="kicker">Knowledge Study / Concepts</p>
         <h1>事前驗屍</h1>
         <p class="topic-subtitle">Premortem</p>
-        <p class="thesis">與其在案子死掉後才做檢討，不如在開始前先假設它已經失敗，再倒推可能怎麼死。</p>
+        <p class="thesis">事前驗屍把團隊帶到未來失敗現場：假設計畫已經慘敗，再回頭找今天不敢說、沒看見或被低估的原因。</p>
         <div class="hero-prompt">
           <strong>Read For</strong>
-          <p>這頁要幫你把 預先失敗、逆向追因 與 風險具體化 重新排好順序，讓 事前驗屍 不再只是一句會議口號。</p>
+          <p>理解反向想像、沉默風險、群體壓力和預防行動如何改善計畫。</p>
         </div>
       </div>
       <aside class="hero-note" aria-label="主題資訊">
@@ -42,17 +42,17 @@
           </div>
           <div>
             <dt>主要判準</dt>
-            <dd>預先失敗、逆向追因、風險具體化、討論安全出口</dd>
+            <dd>失敗想像、風險揭露、行動轉換、責任分配</dd>
           </div>
           <div>
             <dt>讀完產出</dt>
-            <dd>能用 Assume failure first, then work backward 重新檢查 規劃與預先檢討 裡的判斷失真</dd>
+            <dd>能在專案啟動、release readiness 和策略下注前系統性挖出盲點</dd>
           </div>
         </dl>
         <div class="knowledge-map" aria-label="閱讀結構示意">
           <span>假設失敗</span>
-          <span>倒推</span>
-          <span>補洞</span>
+          <span>找原因</span>
+          <span>改計畫</span>
         </div>
       </aside>
     </div>
@@ -75,28 +75,28 @@
       <section class="chapter" id="core">
         <div class="section-heading">
           <p class="section-label">Orientation</p>
-          <h2>如果大家都想成功，為什麼反而要先假設專案已經死了</h2>
-          <p class="section-lede">讀 事前驗屍，先別急著表態自己站哪一邊；更重要的是看在 規劃與預先檢討 裡，預先失敗、逆向追因 和 風險具體化 誰應該先被說清楚。</p>
+          <h2>與其問會不會失敗，不如先假設已經失敗</h2>
+          <p class="section-lede">事前驗屍的技巧在於解除樂觀敘事：當失敗已被設定為事實，成員更容易提出平時怕掃興的風險。</p>
         </div>
         <div class="core-card">
           <p class="section-label">Core Tension</p>
-          <p>與其在案子死掉後才做檢討，不如在開始前先假設它已經失敗，再倒推可能怎麼死。</p>
+          <p>計畫啟動時需要士氣和承諾；但過早一致會讓真實疑慮被壓到太晚才爆出。</p>
         </div>
         <div class="principle-strip" aria-label="本頁讀法">
           <div>
             <span>01</span>
-            <strong>先確認 預先失敗 沒被偷渡進來</strong>
-            <p>如果 預先失敗 沒先寫出來，後面看起來像分歧，實際上只是各自補腦。</p>
+            <strong>先設定失敗事實</strong>
+            <p>不是問可能失敗嗎，而是假設一年後確定失敗。</p>
           </div>
           <div>
             <span>02</span>
-            <strong>接著看 逆向追因 被誰省略</strong>
-            <p>把 逆向追因 講清楚後，你才看得出這條原則是在保護判準，還是在轉移代價。</p>
+            <strong>讓每個人獨立寫原因</strong>
+            <p>避免第一個發言者框住大家。</p>
           </div>
           <div>
             <span>03</span>
-            <strong>最後把 風險具體化 變成驗收</strong>
-            <p>少了 風險具體化，事前驗屍 很容易停在口頭正確，卻不知道怎麼在 專案 kickoff 或 發版前檢查 裡執行。</p>
+            <strong>轉成具體防護</strong>
+            <p>風險清單要接到 owner、trigger 和 mitigation。</p>
           </div>
         </div>
       </section>
@@ -104,50 +104,50 @@
       <section class="chapter" id="setup">
         <div class="section-heading">
           <p class="section-label">Setup</p>
-          <h2>問題不是立場，而是 風險具體化 有沒有被當成默認</h2>
-          <p class="section-lede">先把場景壓回 專案 kickoff 或 發版前檢查 這種真的要決定責任的時刻，你會更清楚 預先失敗、逆向追因 和 風險具體化 哪一個不能事後才補。</p>
+          <h2>release 前十分鐘的焦慮，應該提前兩週被請上桌</h2>
+          <p class="section-lede">最小場景是一個團隊在上線前做反向演練。</p>
         </div>
         <div class="definition-grid">
           <div class="tile">
             <strong>最小劇情</strong>
-            <p>團隊在立案或上線前，先一起想像半年後這案子失敗了，再逐條寫出最可能的死因與現在能補的缺口。</p>
+            <p>新支付流程準備上線。團隊假設三週後上線失敗、退款暴增、客服爆量；每個人寫下最可能原因，最後發現 rollback 腳本、灰度門檻和客服話術都未完成。</p>
           </div>
           <div class="tile">
             <strong>真正難點</strong>
-            <p>如果大家都想成功，為什麼反而要先假設專案已經死了</p>
+            <p>若正常問風險，大家可能只列已知項目；假設失敗後，隱性焦慮更容易浮現。</p>
           </div>
         </div>
         <div class="concept-flow" aria-label="問題展開">
-          <div class="flow-step">討論一開始就直接跳到 預先失敗</div>
+          <div class="flow-step">宣告未來失敗</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">直到追問時才發現 逆向追因 沒人接</div>
+          <div class="flow-step">收集失敗原因</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">等到落地才問 風險具體化 怎麼驗收</div>
+          <div class="flow-step">轉成防護行動</div>
         </div>
         <div class="paradox-frame">
           <strong>Key Point</strong>
-          <p>這類原則一旦失手，通常不是理論錯，而是 預先失敗 沒先寫、逆向追因 沒算進去、風險具體化 也沒被翻成行動。</p>
+          <p>事前驗屍把悲觀變成一個短時間、可操作的設計工具。</p>
         </div>
       </section>
 
       <section class="chapter" id="lenses">
         <div class="section-heading">
           <p class="section-label">Lenses</p>
-          <h2>先把 先把失敗說出口、風險變得可討論 與 樂觀偏誤被拉回來 分開看</h2>
-          <p class="section-lede">同一個原則落到現場後，往往會分裂成 先把失敗說出口、風險變得可討論 和 樂觀偏誤被拉回來 三種完全不同的操作方式。</p>
+          <h2>讓沉默的風險取得發言權</h2>
+          <p class="section-lede">好 premortem 不只是列風險，而是降低說出風險的社交成本。</p>
         </div>
         <div class="lens-grid">
           <article class="lens-card">
-            <strong>先把失敗說出口</strong>
-            <p>把焦點放在 先把失敗說出口 時，你其實是在說：預先失敗 應該先被寫清楚，否則後面的結論都站不穩。</p>
+            <strong>獨立輸入</strong>
+            <p>先匿名或個別收集，再合併討論。</p>
           </article>
           <article class="lens-card">
-            <strong>風險變得可討論</strong>
-            <p>風險變得可討論 這條線在乎的，不是誰比較有氣勢，而是 逆向追因 一旦沒被交代，現場會怎麼開始失真。</p>
+            <strong>失敗路徑</strong>
+            <p>每個原因要能連到具體事件序列。</p>
           </article>
           <article class="lens-card">
-            <strong>樂觀偏誤被拉回來</strong>
-            <p>順著 樂觀偏誤被拉回來 讀，你會發現爭點不在口號，而在 風險具體化 是否真的被變成判準。</p>
+            <strong>觸發條件</strong>
+            <p>什麼訊號出現時要啟動備案？</p>
           </article>
         </div>
       </section>
@@ -155,44 +155,44 @@
       <section class="chapter" id="psychology">
         <div class="section-heading">
           <p class="section-label">Psychology</p>
-          <h2>哪種省事直覺最常讓 事前驗屍 失焦</h2>
-          <p class="section-lede">一到現場，人最容易先抓住能讓自己省事的那一段，於是 事前驗屍 很快就從判準退化成表態。</p>
+          <h2>正向計畫會讓異議看起來像不支持</h2>
+          <p class="section-lede">事前驗屍提供一個允許懷疑的劇本，讓成員不用冒著破壞氣氛的風險。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>一開始談失敗像唱衰</strong>
-            <p>一開始談失敗像唱衰 會讓人覺得只要把話說得夠完整，就不必再補 預先失敗 的證據或代價。</p>
+            <strong>群體和諧</strong>
+            <p>大家不想在啟動會上扮演唱反調的人。</p>
           </article>
           <article class="example">
-            <strong>順利想像比較舒服</strong>
-            <p>順利想像比較舒服 常不是純粹錯誤，而是一種討論捷徑：先把自己放在合理的一邊，再晚點處理 逆向追因。</p>
+            <strong>計畫謬誤</strong>
+            <p>團隊低估整合時間和外部依賴。</p>
           </article>
           <article class="example">
-            <strong>隱憂需要安全出口</strong>
-            <p>碰到 隱憂需要安全出口 時，最危險的是大家以為原則已經被引用，實際上 風險具體化 還沒被具體說明。</p>
+            <strong>責任模糊</strong>
+            <p>風險若沒有 owner，就會留在大家都知道的狀態。</p>
           </article>
         </div>
-        <p class="micro-note">只要討論還停在『誰比較像站在對的一邊』，事前驗屍 就還沒真正開始工作。</p>
+        <p class="micro-note">premortem 的結尾不能是這些都要注意，而是每個高風險項都有下一步。</p>
       </section>
 
       <section class="chapter" id="applications">
         <div class="section-heading">
           <p class="section-label">Applications</p>
-          <h2>回到 專案 kickoff、發版前檢查 與 高風險決策會議</h2>
-          <p class="section-lede">把 事前驗屍 放回 專案 kickoff、發版前檢查 這些場景時，它的作用不是增加說服力，而是強迫大家先把責任、代價和驗收順序排好。</p>
+          <h2>把失敗想像接到工程控制點</h2>
+          <p class="section-lede">專案、上線和策略決策都適合在承諾前做短版 premortem。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>專案 kickoff</strong>
-            <p>專案 kickoff 最需要 事前驗屍 的時候，通常就是大家都急著往前走，卻還沒把 預先失敗 寫成共識。</p>
+            <strong>Release readiness</strong>
+            <p>把假想事故轉成 rollback、alert、runbook 和客服準備。</p>
           </article>
           <article class="example">
-            <strong>發版前檢查</strong>
-            <p>只要到了 發版前檢查，你就能看出 逆向追因 究竟是被真的承擔，還是只是被口頭提過。</p>
+            <strong>專案規劃</strong>
+            <p>把依賴延遲、需求變更和人力缺口轉成 trigger。</p>
           </article>
           <article class="example">
-            <strong>高風險決策會議</strong>
-            <p>在 高風險決策會議 這種場景，事前驗屍 幫你的不是贏辯論，而是把 風險具體化 先釘在桌面上，避免事後才補。</p>
+            <strong>策略下注</strong>
+            <p>列出市場、競品和內部執行失敗的早期訊號。</p>
           </article>
         </div>
       </section>
@@ -200,30 +200,30 @@
       <section class="chapter" id="misreadings">
         <div class="section-heading">
           <p class="section-label">Misreadings</p>
-          <h2>三個常見誤讀</h2>
-          <p class="section-lede">原則類概念一旦變得順耳，就很容易失手；事前驗屍 最常就是在 專案 kickoff 或 發版前檢查 這些情境裡，被縮成一句不用交代代價的口號。</p>
+          <h2>事前驗屍不是開悲觀大會</h2>
+          <p class="section-lede">它把悲觀限制在明確流程內，目標是改計畫，而不是削弱信心。</p>
         </div>
         <div class="collocation-list" aria-label="常見誤讀">
           <article class="collocation-card">
             <div>
-              <strong>事前驗屍 只是好聽口號</strong>
+              <strong>停在風險清單</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>真正難的是把 事前驗屍 翻成一組可檢查的判準，而不是把它當成結論本身。</p>
+            <p>沒有 owner 和 mitigation 的清單只是焦慮存檔。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>只要背了 事前驗屍 就能直接套用</strong>
+              <strong>讓主管先說</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>原則若不落回 預先失敗、逆向追因 和代價分配，通常會在現場變成誤用。</p>
+            <p>權威先發言會壓扁獨立判斷。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>事前驗屍 只適合高層決策</strong>
+              <strong>只找大災難</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>其實從 code review 到 規劃與預先檢討 的日常判斷，都會碰到同樣的壓力。</p>
+            <p>很多失敗來自中等風險疊加。</p>
           </article>
         </div>
       </section>
@@ -231,22 +231,22 @@
       <section class="chapter" id="questions">
         <div class="section-heading">
           <p class="section-label">Questions</p>
-          <h2>把 事前驗屍 翻成現場要回答的句子</h2>
-          <p class="section-lede">如果這條原則真的有用，它應該能在 專案 kickoff 或 發版前檢查 這種場合立刻變成追問，不是只留在會後共識。</p>
+          <h2>問未來失敗的新聞標題會怎麼寫</h2>
+          <p class="section-lede">下面兩問適合用在專案 kickoff 和上線審查。</p>
         </div>
         <div class="prompt-grid">
           <article class="prompt-card">
-            <strong>如果這題今天出現在 專案 kickoff</strong>
-            <p>哪一段該先被補齊：預先失敗 的前提、逆向追因 的代價，還是 風險具體化 的驗收方式？</p>
+            <strong>假設已經失敗，最可信的三條原因鏈是什麼？</strong>
+            <p>用過去式寫，避免空泛可能性。</p>
           </article>
           <article class="prompt-card">
-            <strong>如果你準備用 事前驗屍 說服別人</strong>
-            <p>若對方一句話都沒提到 逆向追因 或 風險具體化，你會怎麼判斷這條原則其實還沒被真正落地？</p>
+            <strong>哪些行動今天就能降低這些原因？</strong>
+            <p>把風險轉成 owner、trigger 和日期。</p>
           </article>
         </div>
         <div class="template-note">
           <strong>延伸路線</strong>
-          <p>延伸閱讀可以直接接 Prospective Hindsight，看它如何把本頁沒展開完的責任或驗收問題補齊。</p>
+          <p>可接著讀 planning fallacy，理解團隊為何系統性低估時間、成本和依賴風險。</p>
         </div>
       </section>
 
@@ -254,22 +254,22 @@
         <div class="section-heading">
           <p class="section-label">Sources</p>
           <h2>來源與整理方式</h2>
-          <p class="section-lede">來源安排先處理 事前驗屍 本身，再借 Prospective Hindsight 看它一進到 規劃與預先檢討 為什麼常被拿去替立場背書。</p>
+          <p class="section-lede">本頁以 premortem 的失敗反推為核心，並用 planning fallacy 補足計畫偏誤背景。</p>
         </div>
         <div class="source-grid">
           <article class="source-card">
             <strong>核心概念</strong>
-            <p>先靠這張卡把 預先失敗 與 逆向追因 的原始要求釘住，避免後面整頁滑回抽象表態。</p>
+            <p>支撐假設計畫已失敗再回推原因的風險揭露方法。</p>
             <a href="https://en.wikipedia.org/wiki/Pre-mortem" target="_blank" rel="noreferrer">Premortem</a>
           </article>
           <article class="source-card">
-            <strong>相鄰概念</strong>
-            <p>這張卡把主題放回更大的判準背景，避免把 事前驗屍 誤認成單一立場的裝飾語。</p>
-            <a href="https://en.wikipedia.org/wiki/Prospective_hindsight" target="_blank" rel="noreferrer">Prospective Hindsight</a>
+            <strong>相鄰脈絡</strong>
+            <p>補充人們為何低估任務時間、成本與阻礙。</p>
+            <a href="https://en.wikipedia.org/wiki/Prospective_hindsight" target="_blank" rel="noreferrer">Planning Fallacy</a>
           </article>
           <article class="source-card">
             <strong>教學整理</strong>
-            <p>本頁最主要的教學性補充，是把 事前驗屍 從概念說明推進到 專案 kickoff、發版前檢查 與 高風險決策會議 裡的責任分配與行動判準。</p>
+            <p>Release readiness、專案規劃與策略下注案例是本頁依工程與管理決策整理。</p>
           </article>
         </div>
       </section>
@@ -279,7 +279,7 @@
           <div>
             <p class="section-label">Reference</p>
             <h2>下一步</h2>
-            <p>真正要帶走的不是一句格言，而是下次遇到 專案 kickoff 時，你知道該先追 預先失敗、逆向追因 還是 風險具體化。</p>
+            <p>下次計畫看起來太順，請花二十分鐘假設它已經失敗。</p>
           </div>
           <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
         </div>

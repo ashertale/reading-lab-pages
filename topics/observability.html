@@ -21,13 +21,13 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
-        <p class="kicker">Knowledge Study / Engineering</p>
+        <p class="kicker">Knowledge Study / Systems</p>
         <h1>可觀測性</h1>
         <p class="topic-subtitle">Observability</p>
-        <p class="thesis">真正好的觀測不是收一堆數，而是讓你在未知故障發生時，仍能從輸出跡象推回系統內部到底卡在哪裡。</p>
+        <p class="thesis">可觀測性不是收集很多圖表，而是讓你能從系統外部輸出推回內部狀態與失敗原因。</p>
         <div class="hero-prompt">
           <strong>Read For</strong>
-          <p>這頁會把 狀態推知、訊號品質 這些常藏在規格外的壓力，拉回 事故追查 與 遙測設計 的設計檢查裡。</p>
+          <p>分辨 monitoring、logging、tracing、metrics 與事件脈絡如何支援未知問題診斷。</p>
         </div>
       </div>
       <aside class="hero-note" aria-label="主題資訊">
@@ -42,17 +42,17 @@
           </div>
           <div>
             <dt>主要判準</dt>
-            <dd>狀態推知、訊號品質、未知未知、診斷速度</dd>
+            <dd>內部狀態、外部輸出、診斷路徑、未知未知</dd>
           </div>
           <div>
             <dt>讀完產出</dt>
-            <dd>能用 Can we infer internal state from outputs? 重新檢查 診斷與追查 裡的判斷失真</dd>
+            <dd>能在設計服務、韌體和資料管線時決定哪些訊號足以回答下一次事故</dd>
           </div>
         </dl>
         <div class="knowledge-map" aria-label="閱讀結構示意">
           <span>訊號</span>
-          <span>推知</span>
-          <span>追查</span>
+          <span>狀態</span>
+          <span>診斷</span>
         </div>
       </aside>
     </div>
@@ -75,28 +75,28 @@
       <section class="chapter" id="core">
         <div class="section-heading">
           <p class="section-label">Orientation</p>
-          <h2>如果監控數據很多，為什麼系統出事時我們仍可能完全不知道它在裡面發生了什麼</h2>
-          <p class="section-lede">可觀測性 的價值，在於它把平常藏在接口、時序或權限邊界外的壓力，提前搬到設計與驗證桌面上。</p>
+          <h2>看得到數字，不代表推得回原因</h2>
+          <p class="section-lede">可觀測性關心的是從輸出推斷內部狀態的能力；儀表板很多但無法回答為什麼，仍然不可觀測。</p>
         </div>
         <div class="core-card">
           <p class="section-label">Core Tension</p>
-          <p>真正好的觀測不是收一堆數，而是讓你在未知故障發生時，仍能從輸出跡象推回系統內部到底卡在哪裡。</p>
+          <p>系統需要訊號才能診斷，但訊號太少會盲，太多又會淹沒；重點是讓關鍵路徑、上下文和因果鏈可被查詢。</p>
         </div>
         <div class="principle-strip" aria-label="本頁讀法">
           <div>
             <span>01</span>
-            <strong>先圈出 狀態推知 會在哪裡破</strong>
-            <p>狀態推知 常不是抽象風險，而是會穿過具體接口、排程或權限邊界。</p>
+            <strong>從問題倒推訊號</strong>
+            <p>先列事故時要回答的問題，再決定 log、metric、trace 和 event。</p>
           </div>
           <div>
             <span>02</span>
-            <strong>再追 訊號品質 怎麼穿過邊界</strong>
-            <p>訊號品質 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現。</p>
+            <strong>保留上下文</strong>
+            <p>單點數字不足以診斷，request id、版本、裝置型號、區域和依賴狀態常是關鍵。</p>
           </div>
           <div>
             <span>03</span>
-            <strong>最後查 未知未知 何時從小事變事故</strong>
-            <p>未知未知 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力。</p>
+            <strong>支援未知問題</strong>
+            <p>可觀測性要能讓人提出新查詢，而不是只能看預先定義好的告警。</p>
           </div>
         </div>
       </section>
@@ -104,50 +104,50 @@
       <section class="chapter" id="setup">
         <div class="section-heading">
           <p class="section-label">Setup</p>
-          <h2>哪個邊界先把 狀態推知 變成事故</h2>
-          <p class="section-lede">把問題壓回一個最小接口或一次時序交會，狀態推知 何時變成風險、未知未知 何時開始放大，就不容易再被模糊帶過。</p>
+          <h2>告警說錯誤率上升，卻無法回答是哪個版本、哪條路徑、哪個依賴</h2>
+          <p class="section-lede">最小場景是監控知道壞了，但缺少把壞事切開的維度。</p>
         </div>
         <div class="definition-grid">
           <div class="tile">
             <strong>最小劇情</strong>
-            <p>指標、日誌與追蹤都存在，但若彼此斷裂或缺少關鍵上下文，事故來時你只會得到一堆噪音，得不到真正的定位能力。</p>
+            <p>服務 500 error 增加，dashboard 只有全域錯誤率。團隊不知道是新版、特定 region、某個 device model，還是第三方 API 造成，只能逐一猜測。</p>
           </div>
           <div class="tile">
             <strong>真正難點</strong>
-            <p>如果監控數據很多，為什麼系統出事時我們仍可能完全不知道它在裡面發生了什麼</p>
+            <p>監控提供狀態燈，可觀測性需要提供可追問的診斷路徑。</p>
           </div>
         </div>
         <div class="concept-flow" aria-label="問題展開">
-          <div class="flow-step">局部先對付 狀態推知</div>
+          <div class="flow-step">外部症狀出現</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">訊號品質 穿過接口或時序邊界</div>
+          <div class="flow-step">訊號缺少上下文</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">未知未知 把小問題放大成現場風險</div>
+          <div class="flow-step">診斷只能靠猜測與重試</div>
         </div>
         <div class="paradox-frame">
           <strong>Key Point</strong>
-          <p>可觀測性 的價值，在於它把平常埋在規格外的 狀態推知、訊號品質 與 未知未知，提前拉回 design review 能談清楚的位置。</p>
+          <p>可觀測性的價值，是在事故中縮短從症狀到原因的距離。</p>
         </div>
       </section>
 
       <section class="chapter" id="lenses">
         <div class="section-heading">
           <p class="section-label">Lenses</p>
-          <h2>先把 訊號可用性、未知事件可追 與 數量不等於洞察 分開看</h2>
-          <p class="section-lede">表面像同一個故障，底下往往是 訊號可用性、未知事件可追 和 數量不等於洞察 在不同邊界各自出力。</p>
+          <h2>用事故問題檢查訊號設計</h2>
+          <p class="section-lede">好的訊號要能回答誰受影響、哪裡改變、哪條依賴失效，以及為什麼現在發生。</p>
         </div>
         <div class="lens-grid">
           <article class="lens-card">
-            <strong>訊號可用性</strong>
-            <p>訊號可用性 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 狀態推知 轉成真正的穩定性壓力。</p>
+            <strong>切分維度</strong>
+            <p>訊號是否能依版本、租戶、裝置、region、feature flag 和依賴切開？</p>
           </article>
           <article class="lens-card">
-            <strong>未知事件可追</strong>
-            <p>未知事件可追 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 訊號品質 轉成真正的穩定性壓力。</p>
+            <strong>因果鏈</strong>
+            <p>Trace 或 correlation id 是否能串起入口、內部服務、資料庫和外部 API？</p>
           </article>
           <article class="lens-card">
-            <strong>數量不等於洞察</strong>
-            <p>數量不等於洞察 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 未知未知 轉成真正的穩定性壓力。</p>
+            <strong>資料品質</strong>
+            <p>Log 是否結構化、時間同步、採樣合理，且不洩漏敏感資料？</p>
           </article>
         </div>
       </section>
@@ -155,44 +155,44 @@
       <section class="chapter" id="psychology">
         <div class="section-heading">
           <p class="section-label">Psychology</p>
-          <h2>團隊通常在哪一步把 可觀測性 當成暫時小事</h2>
-          <p class="section-lede">工程現場最危險的，不是沒人提風險，而是大家太容易把 狀態推知 當成晚點再補也行的小瑕疵。</p>
+          <h2>團隊容易把更多資料當成更多理解</h2>
+          <p class="section-lede">資料量增加很容易帶來安全感，但如果沒有查詢路徑和脈絡，事故時仍然只能翻牆式搜尋。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>有儀表板就安心</strong>
-            <p>有儀表板就安心 會讓人把『目前沒爆』誤讀成『設計沒問題』，於是風險一路被推往更後面。</p>
+            <strong>儀表板帶來錯覺</strong>
+            <p>滿屏圖表像控制室，卻可能都只回答已知問題。</p>
           </article>
           <article class="example">
-            <strong>只收熟悉指標</strong>
-            <p>只收熟悉指標 最危險的地方，在於它常把局部成功包裝成全局安全。</p>
+            <strong>告警和診斷被混淆</strong>
+            <p>告警負責叫醒人，可觀測資料負責讓人知道接下來查哪裡。</p>
           </article>
           <article class="example">
-            <strong>追查路徑沒被設計</strong>
-            <p>只要 追查路徑沒被設計 一進場，團隊就容易先相信現況撐得住，而不是先問代價正在往哪裡堆。</p>
+            <strong>事後才想欄位</strong>
+            <p>事故發生後才發現缺 version 或 request id，代表訊號設計沒有從 debug 問題倒推。</p>
           </article>
         </div>
-        <p class="micro-note">越早把 狀態推知、訊號品質 這些心理近路說出來，越不容易在 postmortem 才第一次承認它們存在。</p>
+        <p class="micro-note">可觀測性不是儲存所有東西，而是保存足夠回答下一個未知問題的上下文。</p>
       </section>
 
       <section class="chapter" id="applications">
         <div class="section-heading">
           <p class="section-label">Applications</p>
-          <h2>回到 事故追查、遙測設計 與 系統健康度治理</h2>
-          <p class="section-lede">這裡重點不是補幾個抽象案例，而是把 可觀測性 直接落到 事故追查、遙測設計 這些真的會出事的邊界上。</p>
+          <h2>替下一次事故預留提問能力</h2>
+          <p class="section-lede">服務、韌體和資料管線都需要能切分、串接和追問的訊號。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>事故追查</strong>
-            <p>把 可觀測性 帶回 事故追查 時，最該先畫出來的是 狀態推知 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>微服務</strong>
+            <p>用 trace id 串起入口和依賴呼叫，並讓 error metric 可依版本和 feature flag 切分。</p>
           </article>
           <article class="example">
-            <strong>遙測設計</strong>
-            <p>把 可觀測性 帶回 遙測設計 時，最該先畫出來的是 訊號品質 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>韌體裝置</strong>
+            <p>上報錯誤時包含 firmware version、硬體 revision、電源狀態和最近操作序列。</p>
           </article>
           <article class="example">
-            <strong>系統健康度治理</strong>
-            <p>把 可觀測性 帶回 系統健康度治理 時，最該先畫出來的是 未知未知 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>資料管線</strong>
+            <p>記錄批次 id、來源 offset、schema version 和轉換階段，讓錯誤資料可追溯。</p>
           </article>
         </div>
       </section>
@@ -200,30 +200,30 @@
       <section class="chapter" id="misreadings">
         <div class="section-heading">
           <p class="section-label">Misreadings</p>
-          <h2>三個常見誤讀</h2>
-          <p class="section-lede">這些誤讀常把 可觀測性 降成實作瑣事，結果真正的邊界壓力根本沒被談到。</p>
+          <h2>可觀測性不是 log 越多越好</h2>
+          <p class="section-lede">沒有結構和問題導向的 log 只會增加成本與噪音。</p>
         </div>
         <div class="collocation-list" aria-label="常見誤讀">
           <article class="collocation-card">
             <div>
-              <strong>可觀測性 只是實作細節</strong>
+              <strong>把 monitoring 當 observability</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>它常是 狀態推知 最先破掉的邊界，所以不是『之後再補』就沒事。</p>
+            <p>Monitoring 看已知狀態，可觀測性要支援未知問題的探索。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>只要再加更多防呆，可觀測性 就會消失</strong>
+              <strong>只收集不演練</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>如果 訊號品質 的壓力來源沒處理，防呆最後只會變成更昂貴的補丁。</p>
+            <p>如果 on-call 不知道怎麼用訊號排查，資料存在也沒用。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>可觀測性 只和大型分散式系統有關</strong>
+              <strong>忽略隱私和成本</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>很多單機、韌體或流程系統，一樣會以更小規模的 未知未知 形式重演。</p>
+            <p>可觀測資料也需要 retention、採樣和敏感資訊控制。</p>
           </article>
         </div>
       </section>
@@ -231,22 +231,22 @@
       <section class="chapter" id="questions">
         <div class="section-heading">
           <p class="section-label">Questions</p>
-          <h2>把 狀態推知、訊號品質 追到真正會破的邊界</h2>
-          <p class="section-lede">下面兩個問題很適合在 事故追查、遙測設計 這類設計或驗證場合直接拿來過一遍。</p>
+          <h2>問訊號能否回答事故問題</h2>
+          <p class="section-lede">下面兩問適合用在服務設計、韌體 telemetry 與 incident review。</p>
         </div>
         <div class="prompt-grid">
           <article class="prompt-card">
-            <strong>如果第一個異常出現在 事故追查</strong>
-            <p>你最先會去畫哪條邊界，確認 狀態推知 和 訊號品質 到底在哪一步被放大？</p>
+            <strong>如果明天錯誤率上升，我能按哪些維度切開？</strong>
+            <p>版本、區域、租戶、裝置、依賴和 feature flag 是否都在訊號裡？</p>
           </article>
           <article class="prompt-card">
-            <strong>如果 遙測設計 團隊只回你一句『現在看起來沒事』</strong>
-            <p>你要用什麼觀測或驗證證明：未知未知 不是只是還沒在現場結帳？</p>
+            <strong>症狀到根因的鏈路是否能串起來？</strong>
+            <p>Request、job 或 device event 是否有可追蹤的 correlation id？</p>
           </article>
         </div>
         <div class="template-note">
           <strong>延伸路線</strong>
-          <p>延伸閱讀可以接到 Monitoring，把這頁的邊界壓力放回更大的可靠性脈絡。</p>
+          <p>可接著讀 monitoring，對照已知狀態監控和未知問題診斷的差異。</p>
         </div>
       </section>
 
@@ -254,22 +254,22 @@
         <div class="section-heading">
           <p class="section-label">Sources</p>
           <h2>來源與整理方式</h2>
-          <p class="section-lede">本頁先用 Observability 條目交代故障模式與邊界壓力，再用 Monitoring 補回更大的系統背景。</p>
+          <p class="section-lede">本頁以 observability 的由外推內能力為核心，並用 monitoring 補足狀態監控背景。</p>
         </div>
         <div class="source-grid">
           <article class="source-card">
             <strong>核心概念</strong>
-            <p>這張卡說明 可觀測性 在接口、時序或權限邊界上最常怎麼冒出來。</p>
+            <p>支撐從系統輸出推斷內部狀態的核心概念。</p>
             <a href="https://en.wikipedia.org/wiki/Observability_(software)" target="_blank" rel="noreferrer">Observability</a>
           </article>
           <article class="source-card">
-            <strong>相鄰概念</strong>
-            <p>這張卡補回 Monitoring 所在的更大可靠性或系統脈絡，避免把 可觀測性 只看成局部實作瑕疵。</p>
+            <strong>相鄰脈絡</strong>
+            <p>補充監控已知指標、告警與狀態燈的實務脈絡。</p>
             <a href="https://en.wikipedia.org/wiki/Monitoring" target="_blank" rel="noreferrer">Monitoring</a>
           </article>
           <article class="source-card">
             <strong>教學整理</strong>
-            <p>工程映射與事故語境是本頁的教學整理，目的是把 可觀測性 直接落到 事故追查、遙測設計 與 系統健康度治理 這些邊界上。</p>
+            <p>微服務、韌體 telemetry 與資料管線案例是本頁依工程實務整理的應用。</p>
           </article>
         </div>
       </section>
@@ -279,7 +279,7 @@
           <div>
             <p class="section-label">Reference</p>
             <h2>下一步</h2>
-            <p>下次在 事故追查 或 遙測設計 做設計決定時，先把 狀態推知 穿過哪個邊界、何時變成 未知未知 寫進 review。</p>
+            <p>下次加一個圖表前，先問它能回答哪個事故問題。</p>
           </div>
           <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
         </div>

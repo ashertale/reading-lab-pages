@@ -21,13 +21,13 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
-        <p class="kicker">Knowledge Study / Engineering</p>
+        <p class="kicker">Knowledge Study / Systems</p>
         <h1>護送隊效應</h1>
         <p class="topic-subtitle">Convoy Effect</p>
-        <p class="thesis">當一個慢任務握住共享資源時，一整串本來很快的工作都會在它後面排成車隊，讓整體吞吐量明顯下降。</p>
+        <p class="thesis">護送隊效應出現時，整個隊伍的速度被最慢工作拖住；快工作不是不能跑，而是排在慢工作後面。</p>
         <div class="hero-prompt">
           <strong>Read For</strong>
-          <p>這頁會把 共享資源、慢任務 這些常藏在規格外的壓力，拉回 CPU 排程 與 鎖競爭 的設計檢查裡。</p>
+          <p>看懂佇列、鎖與排程如何讓單一慢任務放大成整體吞吐下降。</p>
         </div>
       </div>
       <aside class="hero-note" aria-label="主題資訊">
@@ -42,17 +42,17 @@
           </div>
           <div>
             <dt>主要判準</dt>
-            <dd>共享資源、慢任務、排隊拖累、排程公平</dd>
+            <dd>慢任務、佇列位置、共享資源、排程公平</dd>
           </div>
           <div>
             <dt>讀完產出</dt>
-            <dd>能用 One slow task drags many fast tasks 重新檢查 排程與等待 裡的判斷失真</dd>
+            <dd>能在 thread pool、I/O queue 與 RTOS 任務排程中辨認慢者拖隊</dd>
           </div>
         </dl>
         <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>佇列</span>
           <span>慢者</span>
-          <span>拖隊</span>
-          <span>降速</span>
+          <span>吞吐</span>
         </div>
       </aside>
     </div>
@@ -75,28 +75,28 @@
       <section class="chapter" id="core">
         <div class="section-heading">
           <p class="section-label">Orientation</p>
-          <h2>如果只有一個任務特別慢，為什麼最後卻能把一群快任務的效率一起拉低</h2>
-          <p class="section-lede">護送隊效應 的價值，在於它把平常藏在接口、時序或權限邊界外的壓力，提前搬到設計與驗證桌面上。</p>
+          <h2>慢工作卡在前面時，後面再快也只能一起慢</h2>
+          <p class="section-lede">護送隊效應不是平均負載太高，而是排隊順序和共享資源讓慢工作形成移動瓶頸。</p>
         </div>
         <div class="core-card">
           <p class="section-label">Core Tension</p>
-          <p>當一個慢任務握住共享資源時，一整串本來很快的工作都會在它後面排成車隊，讓整體吞吐量明顯下降。</p>
+          <p>先來先服務看似公平，但如果服務時間差異很大，公平順序會把短工作綁在長工作後面，讓系統看起來整體變慢。</p>
         </div>
         <div class="principle-strip" aria-label="本頁讀法">
           <div>
             <span>01</span>
-            <strong>先圈出 共享資源 會在哪裡破</strong>
-            <p>共享資源 常不是抽象風險，而是會穿過具體接口、排程或權限邊界。</p>
+            <strong>看隊首而不是只看平均</strong>
+            <p>平均 latency 可能還好，但 p95 或 p99 被少數慢任務拖長。</p>
           </div>
           <div>
             <span>02</span>
-            <strong>再追 慢任務 怎麼穿過邊界</strong>
-            <p>慢任務 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現。</p>
+            <strong>隔離長短工作</strong>
+            <p>把 blocking I/O、CPU heavy 與短 request 分池或分級處理。</p>
           </div>
           <div>
             <span>03</span>
-            <strong>最後查 排隊拖累 何時從小事變事故</strong>
-            <p>排隊拖累 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力。</p>
+            <strong>讓排程看見成本</strong>
+            <p>如果 scheduler 不知道任務長短或資源需求，就容易把不相容工作排在一起。</p>
           </div>
         </div>
       </section>
@@ -104,50 +104,50 @@
       <section class="chapter" id="setup">
         <div class="section-heading">
           <p class="section-label">Setup</p>
-          <h2>風險不是突然出現，而是 慢任務 一路堆出來的</h2>
-          <p class="section-lede">把問題壓回一個最小接口或一次時序交會，共享資源 何時變成風險、排隊拖累 何時開始放大，就不容易再被模糊帶過。</p>
+          <h2>一個慢 I/O 任務佔著 worker，短請求排隊等它釋放</h2>
+          <p class="section-lede">最小場景是快工作和慢工作共用同一條隊伍與同一批 worker。</p>
         </div>
         <div class="definition-grid">
           <div class="tile">
             <strong>最小劇情</strong>
-            <p>排程器讓所有工作公平輪流，但只要某個持鎖者或長任務剛好卡在前面，後面大量短任務就會一起等待。</p>
+            <p>API thread pool 同時處理短查詢和外部檔案下載。幾個下載任務阻塞 worker 後，原本十毫秒可完成的查詢也開始排隊數秒。</p>
           </div>
           <div class="tile">
             <strong>真正難點</strong>
-            <p>如果只有一個任務特別慢，為什麼最後卻能把一群快任務的效率一起拉低</p>
+            <p>系統不是沒有算力，而是排程把不同服務時間的任務混在同一等待線裡。</p>
           </div>
         </div>
         <div class="concept-flow" aria-label="問題展開">
-          <div class="flow-step">局部先對付 共享資源</div>
+          <div class="flow-step">慢任務佔住共享資源</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">慢任務 穿過接口或時序邊界</div>
+          <div class="flow-step">短任務在後面等待</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">排隊拖累 把小問題放大成現場風險</div>
+          <div class="flow-step">整體延遲被隊首放大</div>
         </div>
         <div class="paradox-frame">
           <strong>Key Point</strong>
-          <p>護送隊效應 的價值，在於它把平常埋在規格外的 共享資源、慢任務 與 排隊拖累，提前拉回 design review 能談清楚的位置。</p>
+          <p>護送隊效應的修正重點，是讓短工作不要被長工作當成同一種負載處理。</p>
         </div>
       </section>
 
       <section class="chapter" id="lenses">
         <div class="section-heading">
           <p class="section-label">Lenses</p>
-          <h2>先把 長任務持有、短任務成群等待 與 公平反成低效 分開看</h2>
-          <p class="section-lede">表面像同一個故障，底下往往是 長任務持有、短任務成群等待 和 公平反成低效 在不同邊界各自出力。</p>
+          <h2>從等待線找出誰在拖著誰</h2>
+          <p class="section-lede">看 CPU 使用率不夠，要追蹤任務等待時間、服務時間和共享資源持有時間。</p>
         </div>
         <div class="lens-grid">
           <article class="lens-card">
-            <strong>長任務持有</strong>
-            <p>長任務持有 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 共享資源 轉成真正的穩定性壓力。</p>
+            <strong>服務時間分布</strong>
+            <p>短任務和長任務是否被混在同一隊列，導致短任務被無關長任務拖累？</p>
           </article>
           <article class="lens-card">
-            <strong>短任務成群等待</strong>
-            <p>短任務成群等待 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 慢任務 轉成真正的穩定性壓力。</p>
+            <strong>資源持有</strong>
+            <p>慢任務是否長時間持有 worker、mutex、socket 或 DMA channel？</p>
           </article>
           <article class="lens-card">
-            <strong>公平反成低效</strong>
-            <p>公平反成低效 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 排隊拖累 轉成真正的穩定性壓力。</p>
+            <strong>排程策略</strong>
+            <p>FIFO、公平排程或批次處理是否在特定負載下放大尾端延遲？</p>
           </article>
         </div>
       </section>
@@ -155,44 +155,44 @@
       <section class="chapter" id="psychology">
         <div class="section-heading">
           <p class="section-label">Psychology</p>
-          <h2>團隊通常在哪一步把 護送隊效應 當成暫時小事</h2>
-          <p class="section-lede">工程現場最危險的，不是沒人提風險，而是大家太容易把 共享資源 當成晚點再補也行的小瑕疵。</p>
+          <h2>團隊常先加 worker，卻沒有問工作是否該排在一起</h2>
+          <p class="section-lede">看到排隊就擴容很直覺；但若隊列混雜或共享資源設計不當，擴容只會延後問題。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>公平排隊就會好</strong>
-            <p>公平排隊就會好 會讓人把『目前沒爆』誤讀成『設計沒問題』，於是風險一路被推往更後面。</p>
+            <strong>平均值遮住尾端</strong>
+            <p>儀表板的平均延遲可能讓護送現象不明顯，直到使用者感受到尖峰。</p>
           </article>
           <article class="example">
-            <strong>平均值掩蓋尾端</strong>
-            <p>平均值掩蓋尾端 最危險的地方，在於它常把局部成功包裝成全局安全。</p>
+            <strong>公平感掩蓋效率損失</strong>
+            <p>FIFO 容易被理解為公平，卻可能讓大量短工作為少數長工作付出代價。</p>
           </article>
           <article class="example">
-            <strong>單一慢者被低估</strong>
-            <p>只要 單一慢者被低估 一進場，團隊就容易先相信現況撐得住，而不是先問代價正在往哪裡堆。</p>
+            <strong>局部慢被誤判成全局慢</strong>
+            <p>慢外部依賴讓整個 worker pool 卡住時，團隊可能以為後端整體容量不足。</p>
           </article>
         </div>
-        <p class="micro-note">越早把 共享資源、慢任務 這些心理近路說出來，越不容易在 postmortem 才第一次承認它們存在。</p>
+        <p class="micro-note">處理護送隊效應時，先把等待和服務拆開量測，再決定分流、限流或重新排程。</p>
       </section>
 
       <section class="chapter" id="applications">
         <div class="section-heading">
           <p class="section-label">Applications</p>
-          <h2>回到 CPU 排程、鎖競爭 與 工作批次設計</h2>
-          <p class="section-lede">這裡重點不是補幾個抽象案例，而是把 護送隊效應 直接落到 CPU 排程、鎖競爭 這些真的會出事的邊界上。</p>
+          <h2>讓慢工作有自己的通道</h2>
+          <p class="section-lede">Thread pool、RTOS 任務與資料處理 pipeline 都需要避免不同成本工作互相排隊。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>CPU 排程</strong>
-            <p>把 護送隊效應 帶回 CPU 排程 時，最該先畫出來的是 共享資源 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>Thread pool</strong>
+            <p>把 blocking I/O 和短 request 分到不同 pool，並限制長工作佔用比例。</p>
           </article>
           <article class="example">
-            <strong>鎖競爭</strong>
-            <p>把 護送隊效應 帶回 鎖競爭 時，最該先畫出來的是 慢任務 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>RTOS 排程</strong>
+            <p>確認低速周邊操作不會長時間阻塞高頻控制任務的執行時槽。</p>
           </article>
           <article class="example">
-            <strong>工作批次設計</strong>
-            <p>把 護送隊效應 帶回 工作批次設計 時，最該先畫出來的是 排隊拖累 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>資料 pipeline</strong>
+            <p>把大檔案批次和小事件流分開處理，避免少數大工作拉長整批提交。</p>
           </article>
         </div>
       </section>
@@ -200,30 +200,30 @@
       <section class="chapter" id="misreadings">
         <div class="section-heading">
           <p class="section-label">Misreadings</p>
-          <h2>三個常見誤讀</h2>
-          <p class="section-lede">這些誤讀常把 護送隊效應 降成實作瑣事，結果真正的邊界壓力根本沒被談到。</p>
+          <h2>護送隊效應不是所有排隊問題</h2>
+          <p class="section-lede">如果每個工作都一樣慢，那是容量或算法問題；護送隊效應特別關心慢工作拖住快工作。</p>
         </div>
         <div class="collocation-list" aria-label="常見誤讀">
           <article class="collocation-card">
             <div>
-              <strong>護送隊效應 只是實作細節</strong>
+              <strong>只靠加 worker</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>它常是 共享資源 最先破掉的邊界，所以不是『之後再補』就沒事。</p>
+            <p>更多 worker 可能緩解，但如果共享鎖或外部 I/O 仍卡住，尾端延遲會回來。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>只要再加更多防呆，護送隊效應 就會消失</strong>
+              <strong>把 FIFO 當永遠公平</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>如果 慢任務 的壓力來源沒處理，防呆最後只會變成更昂貴的補丁。</p>
+            <p>公平順序不等於公平結果；短工作被長工作拖住時，使用者體感會很差。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>護送隊效應 只和大型分散式系統有關</strong>
+              <strong>忽略資源持有時間</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>很多單機、韌體或流程系統，一樣會以更小規模的 排隊拖累 形式重演。</p>
+            <p>真正的瓶頸可能不是任務執行，而是它持有的鎖或連線讓後續工作不能開始。</p>
           </article>
         </div>
       </section>
@@ -231,22 +231,22 @@
       <section class="chapter" id="questions">
         <div class="section-heading">
           <p class="section-label">Questions</p>
-          <h2>把 共享資源、慢任務 追到真正會破的邊界</h2>
-          <p class="section-lede">下面兩個問題很適合在 CPU 排程、鎖競爭 這類設計或驗證場合直接拿來過一遍。</p>
+          <h2>找出隊首正在拖住誰</h2>
+          <p class="section-lede">下面兩問適合用在 latency debug 與 scheduler review。</p>
         </div>
         <div class="prompt-grid">
           <article class="prompt-card">
-            <strong>如果第一個異常出現在 CPU 排程</strong>
-            <p>你最先會去畫哪條邊界，確認 共享資源 和 慢任務 到底在哪一步被放大？</p>
+            <strong>哪些短工作排在長工作後面？</strong>
+            <p>把等待時間和服務時間分開看，確認快工作是否被隊首拖慢。</p>
           </article>
           <article class="prompt-card">
-            <strong>如果 鎖競爭 團隊只回你一句『現在看起來沒事』</strong>
-            <p>你要用什麼觀測或驗證證明：排隊拖累 不是只是還沒在現場結帳？</p>
+            <strong>慢工作持有哪些共享資源？</strong>
+            <p>檢查 worker、mutex、socket 或硬體通道是否被長時間占住。</p>
           </article>
         </div>
         <div class="template-note">
           <strong>延伸路線</strong>
-          <p>若想把這題從局部故障拉回系統設計，下一步最值得對照的是 Scheduling。</p>
+          <p>可接著讀 scheduling，理解排程策略如何在公平、吞吐與延遲之間取捨。</p>
         </div>
       </section>
 
@@ -254,22 +254,22 @@
         <div class="section-heading">
           <p class="section-label">Sources</p>
           <h2>來源與整理方式</h2>
-          <p class="section-lede">本頁先用 Convoy Effect 條目交代故障模式與邊界壓力，再用 Scheduling 補回更大的系統背景。</p>
+          <p class="section-lede">本頁以 convoy effect 的慢任務拖隊為核心，並用 scheduling 補足排程背景。</p>
         </div>
         <div class="source-grid">
           <article class="source-card">
             <strong>核心概念</strong>
-            <p>這張卡說明 護送隊效應 在接口、時序或權限邊界上最常怎麼冒出來。</p>
+            <p>支撐單一慢工作拖累後續工作與整體吞吐的主線。</p>
             <a href="https://en.wikipedia.org/wiki/Convoy_effect" target="_blank" rel="noreferrer">Convoy Effect</a>
           </article>
           <article class="source-card">
-            <strong>相鄰概念</strong>
-            <p>這張卡補回 Scheduling 所在的更大可靠性或系統脈絡，避免把 護送隊效應 只看成局部實作瑕疵。</p>
+            <strong>相鄰脈絡</strong>
+            <p>補充計算系統中任務排程與資源分配的基礎脈絡。</p>
             <a href="https://en.wikipedia.org/wiki/Scheduling_(computing)" target="_blank" rel="noreferrer">Scheduling</a>
           </article>
           <article class="source-card">
             <strong>教學整理</strong>
-            <p>工程映射與事故語境是本頁的教學整理，目的是把 護送隊效應 直接落到 CPU 排程、鎖競爭 與 工作批次設計 這些邊界上。</p>
+            <p>Thread pool、RTOS 與資料 pipeline 案例是本頁依工程實務整理的應用。</p>
           </article>
         </div>
       </section>
@@ -279,7 +279,7 @@
           <div>
             <p class="section-label">Reference</p>
             <h2>下一步</h2>
-            <p>下次在 CPU 排程 或 鎖競爭 做設計決定時，先把 共享資源 穿過哪個邊界、何時變成 排隊拖累 寫進 review。</p>
+            <p>下次看到尾端延遲變長，先看短工作是不是排在慢工作後面。</p>
           </div>
           <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
         </div>

@@ -33,7 +33,7 @@ Default to Page Mode when the user says "generate", "create", "新增", "建立"
    - `topics/ship-of-theseus.html` for paradox/identity topics.
    - `topics/goodharts-law.html` for metrics/systems topics.
    - `topics/chestertons-fence.html` for principle/engineering-judgment topics.
-4. First create `data/concept-payloads/<topic-slug>.json`. Use lowercase hyphen-case slugs.
+4. First create `data/concept-payloads/<topic-slug>.json`. Use lowercase hyphen-case slugs. New or modified payloads must include `contentBrief` with `pressurePoint`, `smallestScenario`, `sourcePlan`, `transferTargets`, `commonMisreading`, `readerQuestions`, and `sectionIntents`.
 5. Render the payload with `scripts/render_concept_page.py` to `topics/<topic-slug>.html`. Do not place generated concept pages in the project root.
 6. Keep the section ids stable: `core`, `setup`, `lenses`, `psychology`, `applications`, `misreadings`, `questions`, `sources`.
 7. Keep topbar navigation concise and global only: `首頁`, `待生成`, `模板`. Do not add individual concept pages to the topbar.
@@ -50,10 +50,13 @@ Use Batch Page Mode for any request that creates more than one concept page.
 - Treat each page as its own real article. Do not use a prose generator, throwaway script, or copy/paste scaffold that fills many pages with parallel empty wording.
 - Before writing payloads, choose a diverse batch: mix topic families, page types, engineering mappings, and source plans. Avoid adding five pages that all teach the same shape with different labels.
 - Draft a one-line pressure point for every topic first. If two pressure points sound interchangeable, revise the topic or framing before creating files.
+- Before writing payloads, draft a per-topic content brief: pressure point, smallest concrete scenario, source plan, engineering/product transfer, common misreading, and two reader questions. Do not start from a prose template and fill blanks.
+- Store that brief in the payload as `contentBrief`; the validator treats this as a content contract for new or modified payloads.
 - Give every page distinct `core`, `setup`, `lenses`, `applications`, `misreadings`, and `questions`. The Reading Path structure may repeat; the ideas, examples, and verbs should not.
 - Reuse section ids only. Do not inherit another page's section `h2`, `section-lede`, `micro-note`, or `Reference` sentence stem just because the structure matches.
 - Source cards must be topic-specific. Do not reuse a generic "synthesis note" unless it names what was synthesized for that exact topic.
-- If automation is used, restrict it to mechanical file creation or rendering. Do not let a script invent broad boilerplate prose across many pages.
+- If automation is used, restrict it to mechanical file creation, indexing, rendering, or candidate listing. Do not let a script invent broad boilerplate prose across many pages.
+- Treat `scripts/generate_concept_batch.py` as a legacy planning/catalog helper only. It is blocked by default from writing publishable payloads because it contains old template-prose stems.
 - After rendering, skim the new pages side by side for repeated sentences, repeated card titles, vague filler, and mobile hero overflow before final verification.
 
 ## Dry-Run Mode
@@ -115,6 +118,7 @@ When refining layout:
 - In batch work, no page may be a thin template wearing a new title. If a paragraph could be moved to another page unchanged, rewrite it with topic-specific tension, evidence, and consequences.
 - Avoid placeholder prose such as "這裡說明", "這個主題凸顯", "可以帶回現實", or other sentences that describe the template instead of the concept.
 - Avoid house-style stock phrasing reused across many pages, including headings like "先抓住這題真正的壓力點" and stems like "這裡的心理連結是教學性整理：", "接著可以順讀...", or "本頁主軸來自...工程映射則是依...". If the sentence could fit ten other topics with light noun swaps, rewrite it.
+- Avoid generated formula stems such as "X 常不是抽象風險，而是會穿過具體接口、排程或權限邊界", "X 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現", "X 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力", or "把情境縮到一次普通判斷後，X 會怎麼替你省事...". These are template leakage even when the nouns are accurate.
 - Use applications as transfer, not decoration. For this project, engineering or product examples are especially valuable.
 - Keep common misreadings concrete and corrective.
 - Keep source notes honest about what is sourced and what is synthesis.
@@ -127,6 +131,7 @@ Always run fresh verification before claiming completion:
 - Search for forbidden type patterns: `font-size:.*vw`, `clamp\(`, and `letter-spacing: -`.
 - Confirm section anchors exist for the Reading Path.
 - Run the content lint in `scripts/validate_concept_lab.py`; fix placeholder prose, duplicated long text, and stock template sentence stems before reporting completion.
+- The default content lint blocks generated-formula stems, missing/weak `contentBrief`, cross-page similarity, and repeated section sentence frames in new or modified payloads. Use `scripts/validate_concept_lab.py --strict-content` when deliberately auditing existing pages for formulaic legacy copy.
 - Parse `topic-index.js`, `index-page.js`, and `backlog-page.js` when the homepage, backlog, or index data changes.
 - Use browser/headless screenshots for at least desktop and a narrow viewport when layout changes or a new page is created.
 - If the in-app Browser is unavailable, use local Chrome/Edge headless and state that fallback in the final answer.

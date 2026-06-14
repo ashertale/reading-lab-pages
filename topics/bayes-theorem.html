@@ -21,13 +21,13 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
-        <p class="kicker">Knowledge Study / Principles</p>
+        <p class="kicker">Knowledge Study / Concepts</p>
         <h1>貝氏定理</h1>
         <p class="topic-subtitle">Bayes' Theorem</p>
-        <p class="thesis">面對新證據時，理性的重點不只是看那個證據有多醒目，還要看它在不同前提下有多可能出現，以及原本的基線有多高。</p>
+        <p class="thesis">貝氏定理提供一個更新信念的方法：新證據的力量不只看它有多醒目，也看它在原本假設下有多意外。</p>
         <div class="hero-prompt">
           <strong>Read For</strong>
-          <p>這頁會帶你把 貝氏定理 從抽象立場拆回操作順序，知道在 故障診斷 與 風險告警 裡誰該先交代什麼。</p>
+          <p>理解先驗、似然、後驗與 base rate，避免被單一證據的戲劇性牽著走。</p>
         </div>
       </div>
       <aside class="hero-note" aria-label="主題資訊">
@@ -42,11 +42,11 @@
           </div>
           <div>
             <dt>主要判準</dt>
-            <dd>先驗機率、證據力、更新、基線</dd>
+            <dd>先驗、似然、後驗、基準率</dd>
           </div>
           <div>
             <dt>讀完產出</dt>
-            <dd>能用 Update belief with evidence and base rates 重新檢查 不確定性與證據 裡的判斷失真</dd>
+            <dd>能在診斷、告警、風險判斷和產品數據中做較穩健的信念更新</dd>
           </div>
         </dl>
         <div class="knowledge-map" aria-label="閱讀結構示意">
@@ -75,28 +75,28 @@
       <section class="chapter" id="core">
         <div class="section-heading">
           <p class="section-label">Orientation</p>
-          <h2>如果某個訊號看起來很強，為什麼仍可能不足以支持你想跳到的結論</h2>
-          <p class="section-lede">這頁真正要處理的，不是你喜不喜歡 貝氏定理，而是遇到 故障診斷 或 風險告警 時，哪些前提若沒先寫出來，討論就會失焦。</p>
+          <h2>證據不是直接給答案，而是改變原本機率</h2>
+          <p class="section-lede">貝氏定理把判斷拆成兩部分：事情原本有多可能，以及這個證據在不同假設下出現的可能性差多少。</p>
         </div>
         <div class="core-card">
           <p class="section-label">Core Tension</p>
-          <p>面對新證據時，理性的重點不只是看那個證據有多醒目，還要看它在不同前提下有多可能出現，以及原本的基線有多高。</p>
+          <p>醒目的證據容易讓人跳過先驗；但罕見事件即使測試陽性，也可能仍有不少假陽性。</p>
         </div>
         <div class="principle-strip" aria-label="本頁讀法">
           <div>
             <span>01</span>
-            <strong>第一步先把 先驗機率 寫清楚</strong>
-            <p>讀 貝氏定理 的第一步，不是贊成或反對，而是確認誰把 先驗機率 先當真。</p>
+            <strong>先放入基準率</strong>
+            <p>事件原本多常見，會強烈影響後驗。</p>
           </div>
           <div>
             <span>02</span>
-            <strong>再把 證據力 的成本攤開</strong>
-            <p>證據力 一旦只留在抽象層，這條原則就很容易被拿去替某一方省成本。</p>
+            <strong>比較似然比</strong>
+            <p>好證據應該在某假設下常見，在競爭假設下少見。</p>
           </div>
           <div>
             <span>03</span>
-            <strong>最後問 更新 怎麼落地</strong>
-            <p>更新 不是附註；它決定這條原則是可操作的判準，還是說完就散的口號。</p>
+            <strong>逐步更新</strong>
+            <p>新證據到來後更新信念，而不是每次從零開始。</p>
           </div>
         </div>
       </section>
@@ -104,50 +104,50 @@
       <section class="chapter" id="setup">
         <div class="section-heading">
           <p class="section-label">Setup</p>
-          <h2>把 貝氏定理 放進一次真實判斷，看誰先該交代</h2>
-          <p class="section-lede">這類原則一離開場景就會變口號；放回 不確定性與證據 裡的實際判斷後，誰要先說明、誰要先承擔、誰要先驗收會立刻分開。</p>
+          <h2>一個高準確率告警，在低基準率環境仍可能多數是誤報</h2>
+          <p class="section-lede">最小場景是一個安全告警看似可靠，但真實攻擊很少。</p>
         </div>
         <div class="definition-grid">
           <div class="tile">
             <strong>最小劇情</strong>
-            <p>某測試準確率很高，但目標事件本來就罕見；若忽略基線，只看測試命中，結論就會被拉得過頭。</p>
+            <p>偵測器對攻擊有 99% 命中率、1% 誤報率。若每天一百萬次事件中只有十次真攻擊，陽性告警仍會包含大量誤報，需要用基準率更新後驗。</p>
           </div>
           <div class="tile">
             <strong>真正難點</strong>
-            <p>如果某個訊號看起來很強，為什麼仍可能不足以支持你想跳到的結論</p>
+            <p>人會盯著 99% 準確率，卻忘了非攻擊事件的基數巨大。</p>
           </div>
         </div>
         <div class="concept-flow" aria-label="問題展開">
-          <div class="flow-step">會議先用 先驗機率 壓過其他問題</div>
+          <div class="flow-step">設定先驗</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">證據力 的負擔卻沒人明講</div>
+          <div class="flow-step">觀察證據</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">最後才有人追 更新 能不能檢查</div>
+          <div class="flow-step">計算後驗</div>
         </div>
         <div class="paradox-frame">
           <strong>Key Point</strong>
-          <p>貝氏定理 真正幫你做的，不是替某個立場加分，而是把 先驗機率、證據力 和 更新 排成可檢查的順序。</p>
+          <p>貝氏定理讓證據回到比例尺上：它不是有或沒有，而是讓哪個假設變得更可信。</p>
         </div>
       </section>
 
       <section class="chapter" id="lenses">
         <div class="section-heading">
           <p class="section-label">Lenses</p>
-          <h2>先把 先驗不能丟、證據是乘法不是魔法 與 更新不是重開局 分開看</h2>
-          <p class="section-lede">先驗不能丟、證據是乘法不是魔法 與 更新不是重開局 看起來都在談 貝氏定理，其實各自是在回答不同的追問：誰先說明、誰先承擔、誰來收尾。</p>
+          <h2>用四個量避免直覺跳躍</h2>
+          <p class="section-lede">把判斷寫成更新流程，可以減少對單一訊號的過度反應。</p>
         </div>
         <div class="lens-grid">
           <article class="lens-card">
-            <strong>先驗不能丟</strong>
-            <p>先驗不能丟 這條線在乎的，不是誰比較有氣勢，而是 先驗機率 一旦沒被交代，現場會怎麼開始失真。</p>
+            <strong>先驗機率</strong>
+            <p>在看到這個證據前，事件本來多可能？</p>
           </article>
           <article class="lens-card">
-            <strong>證據是乘法不是魔法</strong>
-            <p>順著 證據是乘法不是魔法 讀，你會發現爭點不在口號，而在 證據力 是否真的被變成判準。</p>
+            <strong>命中率</strong>
+            <p>若假設為真，證據出現機率多高？</p>
           </article>
           <article class="lens-card">
-            <strong>更新不是重開局</strong>
-            <p>把焦點放在 更新不是重開局 時，你其實是在說：更新 應該先被寫清楚，否則後面的結論都站不穩。</p>
+            <strong>誤報率</strong>
+            <p>若假設為假，證據也會出現多少？</p>
           </article>
         </div>
       </section>
@@ -155,44 +155,44 @@
       <section class="chapter" id="psychology">
         <div class="section-heading">
           <p class="section-label">Psychology</p>
-          <h2>現場通常怎麼把 貝氏定理 讀成順手口號</h2>
-          <p class="section-lede">真正的困難通常不在反對者，而在支持者也常不願意把 證據力 的代價和 更新 的驗收一併寫出來。</p>
+          <h2>醒目的證據會讓先驗看起來像冷冰冰的藉口</h2>
+          <p class="section-lede">人類敘事腦很重視最新、具體、情緒強的訊號；基準率則常顯得抽象。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>新證據太有畫面</strong>
-            <p>新證據太有畫面 常不是純粹錯誤，而是一種討論捷徑：先把自己放在合理的一邊，再晚點處理 先驗機率。</p>
+            <strong>忽略母數</strong>
+            <p>百分比沒有放回基數時，很容易誤導。</p>
           </article>
           <article class="example">
-            <strong>基線抽象又無聊</strong>
-            <p>碰到 基線抽象又無聊 時，最危險的是大家以為原則已經被引用，實際上 證據力 還沒被具體說明。</p>
+            <strong>近因加權</strong>
+            <p>最新證據常被賦予過高權重。</p>
           </article>
           <article class="example">
-            <strong>人喜歡直接跳結論</strong>
-            <p>人喜歡直接跳結論 會讓人覺得只要把話說得夠完整，就不必再補 更新 的證據或代價。</p>
+            <strong>確認偏誤</strong>
+            <p>支持原本立場的證據會被更新得更用力。</p>
           </article>
         </div>
-        <p class="micro-note">真正要防的不是有人沒背過 貝氏定理，而是整個討論都在引用它，卻沒人把 先驗機率 和 證據力 寫成可檢查條件。</p>
+        <p class="micro-note">每次看到強烈證據，先問它的誤報率和母數，而不是立刻改結論。</p>
       </section>
 
       <section class="chapter" id="applications">
         <div class="section-heading">
           <p class="section-label">Applications</p>
-          <h2>回到 故障診斷、風險告警 與 實驗結果判讀</h2>
-          <p class="section-lede">這類原則離開 故障診斷 或 風險告警 很容易變格言；一回到實際流程，你就得回答誰先說明、誰先買單、誰來驗證。</p>
+          <h2>把告警和診斷都寫成更新系統</h2>
+          <p class="section-lede">醫療篩檢、資安告警和產品指標都需要同時看基準率與證據品質。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>故障診斷</strong>
-            <p>只要到了 故障診斷，你就能看出 先驗機率 究竟是被真的承擔，還是只是被口頭提過。</p>
+            <strong>資安 triage</strong>
+            <p>告警優先級應結合資產風險、偵測器可靠度和歷史基準率。</p>
           </article>
           <article class="example">
-            <strong>風險告警</strong>
-            <p>在 風險告警 這種場景，貝氏定理 幫你的不是贏辯論，而是把 證據力 先釘在桌面上，避免事後才補。</p>
+            <strong>醫療篩檢</strong>
+            <p>陽性結果需依疾病盛行率和測試特性解讀。</p>
           </article>
           <article class="example">
-            <strong>實驗結果判讀</strong>
-            <p>實驗結果判讀 最需要 貝氏定理 的時候，通常就是大家都急著往前走，卻還沒把 更新 寫成共識。</p>
+            <strong>產品數據</strong>
+            <p>小樣本轉換率暴增要和先驗、樣本量及選樣偏差一起看。</p>
           </article>
         </div>
       </section>
@@ -200,30 +200,30 @@
       <section class="chapter" id="misreadings">
         <div class="section-heading">
           <p class="section-label">Misreadings</p>
-          <h2>三個常見誤讀</h2>
-          <p class="section-lede">最麻煩的不是有人反對 貝氏定理，而是很多人自以為同意，卻同意的是不同版本。</p>
+          <h2>貝氏定理不是把主觀想法包成數學</h2>
+          <p class="section-lede">先驗可以來自資料、領域知識或明確假設，但必須可討論、可更新。</p>
         </div>
         <div class="collocation-list" aria-label="常見誤讀">
           <article class="collocation-card">
             <div>
-              <strong>貝氏定理 只是好聽口號</strong>
+              <strong>先驗任意化</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>真正難的是把 貝氏定理 翻成一組可檢查的判準，而不是把它當成結論本身。</p>
+            <p>先驗不是隨便猜；應說明來源和敏感度。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>只要背了 貝氏定理 就能直接套用</strong>
+              <strong>把公式當答案</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>原則若不落回 先驗機率、證據力 和代價分配，通常會在現場變成誤用。</p>
+            <p>錯的資料和似然仍會導出錯後驗。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>貝氏定理 只適合高層決策</strong>
+              <strong>忽略模型選擇</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>其實從 code review 到 不確定性與證據 的日常判斷，都會碰到同樣的壓力。</p>
+            <p>候選假設若漏掉重要可能，更新再精確也有限。</p>
           </article>
         </div>
       </section>
@@ -231,22 +231,22 @@
       <section class="chapter" id="questions">
         <div class="section-heading">
           <p class="section-label">Questions</p>
-          <h2>把 貝氏定理 追到真的要回應的人</h2>
-          <p class="section-lede">拿這兩個問題去問，你會很快看出討論是在處理 貝氏定理，還是在借它壓人。</p>
+          <h2>問證據讓哪個假設變得更像真的</h2>
+          <p class="section-lede">下面兩問適合用在告警、實驗和判斷更新。</p>
         </div>
         <div class="prompt-grid">
           <article class="prompt-card">
-            <strong>如果 故障診斷 的會議只剩十分鐘</strong>
-            <p>如果三件事只能先問一件，你會先逼誰交代 先驗機率、證據力 或 更新 裡最容易被跳過的那一段？</p>
+            <strong>看到證據前，我們的基準率是多少？</strong>
+            <p>先把母數放進來。</p>
           </article>
           <article class="prompt-card">
-            <strong>如果有人直接引用 貝氏定理</strong>
-            <p>你會要求對方補哪一段：先驗機率 的前提、證據力 的代價，還是 更新 的驗收方式？</p>
+            <strong>這個證據在其他假設下也常見嗎？</strong>
+            <p>若常見，它的更新力量就有限。</p>
           </article>
         </div>
         <div class="template-note">
           <strong>延伸路線</strong>
-          <p>如果想測試這條原則是不是只剩口號，下一步最適合拿 Bayesian Inference 來對照。</p>
+          <p>可接著讀 base rate neglect，理解人為何常忽略先驗機率。</p>
         </div>
       </section>
 
@@ -254,22 +254,22 @@
         <div class="section-heading">
           <p class="section-label">Sources</p>
           <h2>來源與整理方式</h2>
-          <p class="section-lede">先讀 Bayes' Theorem 的核心說法，再用 Bayesian Inference 對照，你會比較看得出這條原則在哪一步開始失真。</p>
+          <p class="section-lede">本頁以 Bayes' theorem 的信念更新為核心，並用 base rate neglect 補足常見判斷錯誤。</p>
         </div>
         <div class="source-grid">
           <article class="source-card">
             <strong>核心概念</strong>
-            <p>它提供的是概念本體，不是應用口號；先看完這張卡，才知道 貝氏定理 原本要你負責什麼。</p>
+            <p>支撐由先驗、似然與證據推得後驗的更新規則。</p>
             <a href="https://en.wikipedia.org/wiki/Bayes%27_theorem" target="_blank" rel="noreferrer">Bayes' Theorem</a>
           </article>
           <article class="source-card">
-            <strong>相鄰概念</strong>
-            <p>這張卡用來對照相鄰概念，特別是 證據力 與 更新 在別的框架下會怎麼被處理。</p>
-            <a href="https://en.wikipedia.org/wiki/Bayesian_inference" target="_blank" rel="noreferrer">Bayesian Inference</a>
+            <strong>相鄰脈絡</strong>
+            <p>補充忽略基準率如何造成診斷與風險判斷錯誤。</p>
+            <a href="https://en.wikipedia.org/wiki/Bayesian_inference" target="_blank" rel="noreferrer">Base Rate Neglect</a>
           </article>
           <article class="source-card">
             <strong>教學整理</strong>
-            <p>本頁延伸到 故障診斷、風險告警 與 實驗結果判讀 的部分，主要是在示範怎麼把 貝氏定理 翻成可操作的提問與驗收順序。</p>
+            <p>資安 triage、醫療篩檢與產品數據案例是本頁依證據更新情境整理。</p>
           </article>
         </div>
       </section>
@@ -279,7 +279,7 @@
           <div>
             <p class="section-label">Reference</p>
             <h2>下一步</h2>
-            <p>下次有人在 風險告警 直接引用 貝氏定理 時，先別急著附和；先看前提、代價和驗收有沒有一起到位。</p>
+            <p>下次一個訊號很刺眼，請先把它放回先驗和誤報率裡。</p>
           </div>
           <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
         </div>

@@ -21,13 +21,13 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
-        <p class="kicker">Knowledge Study / Engineering</p>
+        <p class="kicker">Knowledge Study / Systems</p>
         <h1>關注點分離</h1>
         <p class="topic-subtitle">Separation of Concerns</p>
-        <p class="thesis">當不同責任混在同一塊邏輯裡，變更成本、理解負擔與錯誤連動都會一起升高；把它們分開，是在替未來變更買保險。</p>
+        <p class="thesis">關注點分離不是把檔案切小，而是讓不同變動理由不互相綁架。</p>
         <div class="hero-prompt">
           <strong>Read For</strong>
-          <p>這頁會把 責任邊界、模組獨立 這些常藏在規格外的壓力，拉回 架構重構 與 測試切面 的設計檢查裡。</p>
+          <p>理解責任邊界、變更理由、資料流和接口契約如何讓模組能獨立演進。</p>
         </div>
       </div>
       <aside class="hero-note" aria-label="主題資訊">
@@ -42,17 +42,17 @@
           </div>
           <div>
             <dt>主要判準</dt>
-            <dd>責任邊界、模組獨立、變更成本、耦合</dd>
+            <dd>責任邊界、變更理由、耦合方向、接口語意</dd>
           </div>
           <div>
             <dt>讀完產出</dt>
-            <dd>能用 Keep different responsibilities from tangling 重新檢查 架構與複雜度 裡的判斷失真</dd>
+            <dd>能在架構、韌體模組與 UI 狀態管理中判斷哪些責任不該混在一起</dd>
           </div>
         </dl>
         <div class="knowledge-map" aria-label="閱讀結構示意">
           <span>責任</span>
           <span>邊界</span>
-          <span>耦合</span>
+          <span>變更</span>
         </div>
       </aside>
     </div>
@@ -75,28 +75,28 @@
       <section class="chapter" id="core">
         <div class="section-heading">
           <p class="section-label">Orientation</p>
-          <h2>如果把事情全塞在一起一開始比較快，為什麼後面卻常變得每改一處就處處牽動</h2>
-          <p class="section-lede">關注點分離 的價值，在於它把平常藏在接口、時序或權限邊界外的壓力，提前搬到設計與驗證桌面上。</p>
+          <h2>真正要分開的是變動理由，不只是程式碼位置</h2>
+          <p class="section-lede">關注點分離要求不同責任有清楚邊界，讓某一種改變不必牽動無關的判斷、資料或流程。</p>
         </div>
         <div class="core-card">
           <p class="section-label">Core Tension</p>
-          <p>當不同責任混在同一塊邏輯裡，變更成本、理解負擔與錯誤連動都會一起升高；把它們分開，是在替未來變更買保險。</p>
+          <p>把東西放在一起能快速完成，但責任混雜後，任何小改都可能跨過多個概念，讓維護變成猜測。</p>
         </div>
         <div class="principle-strip" aria-label="本頁讀法">
           <div>
             <span>01</span>
-            <strong>先圈出 責任邊界 會在哪裡破</strong>
-            <p>責任邊界 常不是抽象風險，而是會穿過具體接口、排程或權限邊界。</p>
+            <strong>用變更理由切邊界</strong>
+            <p>同一模組裡的東西應該因相同原因改變。</p>
           </div>
           <div>
             <span>02</span>
-            <strong>再追 模組獨立 怎麼穿過邊界</strong>
-            <p>模組獨立 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現。</p>
+            <strong>讓接口承載語意</strong>
+            <p>邊界不是隱藏所有東西，而是把必要的資料和責任用清楚契約傳遞。</p>
           </div>
           <div>
             <span>03</span>
-            <strong>最後查 變更成本 何時從小事變事故</strong>
-            <p>變更成本 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力。</p>
+            <strong>避免雙向知道太多</strong>
+            <p>如果兩邊都需要理解對方內部，邊界只是檔案分隔。</p>
           </div>
         </div>
       </section>
@@ -104,50 +104,50 @@
       <section class="chapter" id="setup">
         <div class="section-heading">
           <p class="section-label">Setup</p>
-          <h2>把壓力壓回 責任邊界 最先失守的地方</h2>
-          <p class="section-lede">把問題壓回一個最小接口或一次時序交會，責任邊界 何時變成風險、變更成本 何時開始放大，就不容易再被模糊帶過。</p>
+          <h2>UI 按鈕直接改硬體暫存器，讓產品文案變更牽動 driver 風險</h2>
+          <p class="section-lede">最小場景是展示、業務規則和底層操作混在同一條流程裡。</p>
         </div>
         <div class="definition-grid">
           <div class="tile">
             <strong>最小劇情</strong>
-            <p>UI、商業規則、資料存取與錯誤處理若被揉進同一條流程，初期看似省事，長期卻會把理解與測試成本一起拉高。</p>
+            <p>設定頁切換某個模式時，前端 handler 直接組 protocol bytes 並寫入裝置。後來 UI 文案和模式分類改名，竟然影響底層 command mapping。</p>
           </div>
           <div class="tile">
             <strong>真正難點</strong>
-            <p>如果把事情全塞在一起一開始比較快，為什麼後面卻常變得每改一處就處處牽動</p>
+            <p>程式能跑不代表責任清楚；當變更理由不同的東西混在一起，測試和 review 都會擴散。</p>
           </div>
         </div>
         <div class="concept-flow" aria-label="問題展開">
-          <div class="flow-step">局部先對付 責任邊界</div>
+          <div class="flow-step">不同責任混在同處</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">模組獨立 穿過接口或時序邊界</div>
+          <div class="flow-step">小改跨過不相關層</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">變更成本 把小問題放大成現場風險</div>
+          <div class="flow-step">維護成本和錯誤面增加</div>
         </div>
         <div class="paradox-frame">
           <strong>Key Point</strong>
-          <p>關注點分離 的價值，在於它把平常埋在規格外的 責任邊界、模組獨立 與 變更成本，提前拉回 design review 能談清楚的位置。</p>
+          <p>關注點分離的成果，是讓某類變更有明確落點和有限影響範圍。</p>
         </div>
       </section>
 
       <section class="chapter" id="lenses">
         <div class="section-heading">
           <p class="section-label">Lenses</p>
-          <h2>先把 責任混線、邊界清楚 與 變更隔離 分開看</h2>
-          <p class="section-lede">表面像同一個故障，底下往往是 責任混線、邊界清楚 和 變更隔離 在不同邊界各自出力。</p>
+          <h2>用變更路徑檢查邊界是否有效</h2>
+          <p class="section-lede">好的邊界會讓產品文案、業務規則、通訊協定和硬體控制各自有負責位置。</p>
         </div>
         <div class="lens-grid">
           <article class="lens-card">
-            <strong>責任混線</strong>
-            <p>責任混線 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 責任邊界 轉成真正的穩定性壓力。</p>
+            <strong>責任聚合</strong>
+            <p>這段 code 同時處理展示、策略、持久化、通訊和硬體細節嗎？</p>
           </article>
           <article class="lens-card">
-            <strong>邊界清楚</strong>
-            <p>邊界清楚 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 模組獨立 轉成真正的穩定性壓力。</p>
+            <strong>變更半徑</strong>
+            <p>改一個文案、規則或底層 protocol 時，會牽動哪些無關檔案？</p>
           </article>
           <article class="lens-card">
-            <strong>變更隔離</strong>
-            <p>變更隔離 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 變更成本 轉成真正的穩定性壓力。</p>
+            <strong>接口方向</strong>
+            <p>高層是否知道太多低層細節，低層是否反過來依賴產品語意？</p>
           </article>
         </div>
       </section>
@@ -155,44 +155,44 @@
       <section class="chapter" id="psychology">
         <div class="section-heading">
           <p class="section-label">Psychology</p>
-          <h2>團隊通常在哪一步把 關注點分離 當成暫時小事</h2>
-          <p class="section-lede">工程現場最危險的，不是沒人提風險，而是大家太容易把 責任邊界 當成晚點再補也行的小瑕疵。</p>
+          <h2>快速把東西串起來很有成就感，直到第二次變更到來</h2>
+          <p class="section-lede">初次實作時混合責任最省路；真正成本通常在後續變更、測試和新人理解時出現。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>先求能動</strong>
-            <p>先求能動 會讓人把『目前沒爆』誤讀成『設計沒問題』，於是風險一路被推往更後面。</p>
+            <strong>短期速度有回報</strong>
+            <p>把所有邏輯寫在同處能很快看到結果，讓邊界設計看起來像多餘。</p>
           </article>
           <article class="example">
-            <strong>抽離看起來像過度設計</strong>
-            <p>抽離看起來像過度設計 最危險的地方，在於它常把局部成功包裝成全局安全。</p>
+            <strong>抽象焦慮</strong>
+            <p>團隊怕過度抽象，於是延後分離，最後責任已糾纏到難以拆開。</p>
           </article>
           <article class="example">
-            <strong>小專案錯覺</strong>
-            <p>只要 小專案錯覺 一進場，團隊就容易先相信現況撐得住，而不是先問代價正在往哪裡堆。</p>
+            <strong>檔案分層假象</strong>
+            <p>目錄看起來分層，不代表資料流和依賴方向真的分離。</p>
           </article>
         </div>
-        <p class="micro-note">越早把 責任邊界、模組獨立 這些心理近路說出來，越不容易在 postmortem 才第一次承認它們存在。</p>
+        <p class="micro-note">檢查關注點分離時，請追一個變更需求會穿過哪些責任，而不是只看資料夾名稱。</p>
       </section>
 
       <section class="chapter" id="applications">
         <div class="section-heading">
           <p class="section-label">Applications</p>
-          <h2>回到 架構重構、測試切面 與 韌體層次設計</h2>
-          <p class="section-lede">這裡重點不是補幾個抽象案例，而是把 關注點分離 直接落到 架構重構、測試切面 這些真的會出事的邊界上。</p>
+          <h2>讓不同責任有不同修改入口</h2>
+          <p class="section-lede">前端狀態、韌體 driver 和服務架構都需要用變更理由設計邊界。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>架構重構</strong>
-            <p>把 關注點分離 帶回 架構重構 時，最該先畫出來的是 責任邊界 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>前端狀態</strong>
+            <p>把展示狀態、server cache 和業務判斷分開，避免 UI component 變成所有邏輯入口。</p>
           </article>
           <article class="example">
-            <strong>測試切面</strong>
-            <p>把 關注點分離 帶回 測試切面 時，最該先畫出來的是 模組獨立 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>韌體模組</strong>
+            <p>讓 driver 處理硬體細節，policy layer 處理模式決策，避免產品語意滲入 register 操作。</p>
           </article>
           <article class="example">
-            <strong>韌體層次設計</strong>
-            <p>把 關注點分離 帶回 韌體層次設計 時，最該先畫出來的是 變更成本 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>服務架構</strong>
+            <p>把驗證、授權、資料存取和外部 side effect 切出明確接口，讓測試可針對責任。</p>
           </article>
         </div>
       </section>
@@ -200,30 +200,30 @@
       <section class="chapter" id="misreadings">
         <div class="section-heading">
           <p class="section-label">Misreadings</p>
-          <h2>三個常見誤讀</h2>
-          <p class="section-lede">這些誤讀常把 關注點分離 降成實作瑣事，結果真正的邊界壓力根本沒被談到。</p>
+          <h2>關注點分離不是越碎越好</h2>
+          <p class="section-lede">切分要服務變更理由；任意拆小只會增加跳轉和接口噪音。</p>
         </div>
         <div class="collocation-list" aria-label="常見誤讀">
           <article class="collocation-card">
             <div>
-              <strong>關注點分離 只是實作細節</strong>
+              <strong>把檔案拆小當完成</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>它常是 責任邊界 最先破掉的邊界，所以不是『之後再補』就沒事。</p>
+            <p>如果改同一需求仍要碰十個無關責任，拆檔沒有解決問題。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>只要再加更多防呆，關注點分離 就會消失</strong>
+              <strong>把所有耦合都視為壞</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>如果 模組獨立 的壓力來源沒處理，防呆最後只會變成更昂貴的補丁。</p>
+            <p>必要資料流和明確契約是正常耦合，問題是隱性責任交纏。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>關注點分離 只和大型分散式系統有關</strong>
+              <strong>一開始就大抽象</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>很多單機、韌體或流程系統，一樣會以更小規模的 變更成本 形式重演。</p>
+            <p>可以從最常一起變或最常互相牽連的地方開始分離。</p>
           </article>
         </div>
       </section>
@@ -231,22 +231,22 @@
       <section class="chapter" id="questions">
         <div class="section-heading">
           <p class="section-label">Questions</p>
-          <h2>把 責任邊界、模組獨立 追到真正會破的邊界</h2>
-          <p class="section-lede">下面兩個問題很適合在 架構重構、測試切面 這類設計或驗證場合直接拿來過一遍。</p>
+          <h2>用下一次變更測試邊界</h2>
+          <p class="section-lede">下面兩問適合用在模組 review 和重構前。</p>
         </div>
         <div class="prompt-grid">
           <article class="prompt-card">
-            <strong>如果第一個異常出現在 架構重構</strong>
-            <p>你最先會去畫哪條邊界，確認 責任邊界 和 模組獨立 到底在哪一步被放大？</p>
+            <strong>這段 code 有幾個變更理由？</strong>
+            <p>列出文案、規則、資料、協定、硬體或操作流程各自為何會改。</p>
           </article>
           <article class="prompt-card">
-            <strong>如果 測試切面 團隊只回你一句『現在看起來沒事』</strong>
-            <p>你要用什麼觀測或驗證證明：變更成本 不是只是還沒在現場結帳？</p>
+            <strong>改一個責任會碰到哪些無關責任？</strong>
+            <p>若常跨層修改，就需要重新設計接口或責任分配。</p>
           </article>
         </div>
         <div class="template-note">
           <strong>延伸路線</strong>
-          <p>把 Modularity 接著讀，通常會更看得出 關注點分離 不是單點 bug，而是整體設計習慣。</p>
+          <p>可接著讀 modularity，理解模組邊界如何支援替換與演進。</p>
         </div>
       </section>
 
@@ -254,22 +254,22 @@
         <div class="section-heading">
           <p class="section-label">Sources</p>
           <h2>來源與整理方式</h2>
-          <p class="section-lede">本頁先用 Separation of Concerns 條目交代故障模式與邊界壓力，再用 Modularity 補回更大的系統背景。</p>
+          <p class="section-lede">本頁以 separation of concerns 的責任分離為核心，並用 modularity 補足模組化背景。</p>
         </div>
         <div class="source-grid">
           <article class="source-card">
             <strong>核心概念</strong>
-            <p>這張卡說明 關注點分離 在接口、時序或權限邊界上最常怎麼冒出來。</p>
+            <p>支撐將不同責任分開以降低耦合和變更干擾的主線。</p>
             <a href="https://en.wikipedia.org/wiki/Separation_of_concerns" target="_blank" rel="noreferrer">Separation of Concerns</a>
           </article>
           <article class="source-card">
-            <strong>相鄰概念</strong>
-            <p>這張卡補回 Modularity 所在的更大可靠性或系統脈絡，避免把 關注點分離 只看成局部實作瑕疵。</p>
+            <strong>相鄰脈絡</strong>
+            <p>補充模組邊界、接口與獨立演進的設計脈絡。</p>
             <a href="https://en.wikipedia.org/wiki/Modularity" target="_blank" rel="noreferrer">Modularity</a>
           </article>
           <article class="source-card">
             <strong>教學整理</strong>
-            <p>工程映射與事故語境是本頁的教學整理，目的是把 關注點分離 直接落到 架構重構、測試切面 與 韌體層次設計 這些邊界上。</p>
+            <p>前端狀態、韌體模組與服務架構案例是本頁依工程實務整理的應用。</p>
           </article>
         </div>
       </section>
@@ -279,7 +279,7 @@
           <div>
             <p class="section-label">Reference</p>
             <h2>下一步</h2>
-            <p>下次在 架構重構 或 測試切面 做設計決定時，先把 責任邊界 穿過哪個邊界、何時變成 變更成本 寫進 review。</p>
+            <p>下次你想拆檔前，先問這些程式碼是不是因同一個理由改變。</p>
           </div>
           <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
         </div>

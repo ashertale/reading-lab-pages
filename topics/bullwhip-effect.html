@@ -21,13 +21,13 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
-        <p class="kicker">Knowledge Study / Systems</p>
+        <p class="kicker">Knowledge Study / Concepts</p>
         <h1>牛鞭效應</h1>
         <p class="topic-subtitle">Bullwhip Effect</p>
-        <p class="thesis">當需求訊號沿著多層系統往上傳遞時，微小波動為什麼常會被一層層放大成巨大的庫存與排程擾動？</p>
+        <p class="thesis">牛鞭效應描述需求訊號沿著供應鏈往上游傳遞時被逐層放大，最後小波動變成大震盪。</p>
         <div class="hero-prompt">
           <strong>Read For</strong>
-          <p>這頁會帶你追 延遲 怎麼透過回饋改寫 需求預測 與 排產節奏 裡的行為。</p>
+          <p>理解訂單批量、預測更新、安全庫存和資訊延遲如何把真實需求放大成錯誤行動。</p>
         </div>
       </div>
       <aside class="hero-note" aria-label="主題資訊">
@@ -42,17 +42,17 @@
           </div>
           <div>
             <dt>主要判準</dt>
-            <dd>延遲、局部最佳化、預測更新、批次決策</dd>
+            <dd>需求訊號、批量訂單、資訊延遲、上游放大</dd>
           </div>
           <div>
             <dt>讀完產出</dt>
-            <dd>能用 Signal amplification across layers 重新檢查 系統與協調 裡的判斷失真</dd>
+            <dd>能在供應鏈、容量規劃和跨團隊排程中辨認訊號放大</dd>
           </div>
         </dl>
         <div class="knowledge-map" aria-label="閱讀結構示意">
           <span>需求</span>
           <span>放大</span>
-          <span>失真</span>
+          <span>庫存</span>
         </div>
       </aside>
     </div>
@@ -75,28 +75,28 @@
       <section class="chapter" id="core">
         <div class="section-heading">
           <p class="section-label">Orientation</p>
-          <h2>如果最前端只有一點點波動，為什麼後端卻常像被重擊一樣失控</h2>
-          <p class="section-lede">牛鞭效應 值得盯的不是單一事故，而是 延遲 一旦被寫進制度，局部最佳化 和 預測更新 會怎麼一路反咬。</p>
+          <h2>上游看到的不是需求本身，而是下游對需求的反應</h2>
+          <p class="section-lede">牛鞭效應提醒我們，供應鏈每一層都在根據不完整訊號做預測和補貨，這些反應疊加後會比原始需求更劇烈。</p>
         </div>
         <div class="core-card">
           <p class="section-label">Core Tension</p>
-          <p>當需求訊號沿著多層系統往上傳遞時，微小波動為什麼常會被一層層放大成巨大的庫存與排程擾動？</p>
+          <p>每一層都想保護自己不缺貨，於是加安全量、合併訂單、追逐促銷訊號；局部理性最後變成全鏈波動。</p>
         </div>
         <div class="principle-strip" aria-label="本頁讀法">
           <div>
             <span>01</span>
-            <strong>先看 延遲 被怎麼設計</strong>
-            <p>延遲 決定系統一開始在獎勵什麼，也決定誰最早會改變行為。</p>
+            <strong>看原始需求</strong>
+            <p>把終端銷售和中間訂單分開，避免把補貨反應誤當真需求。</p>
           </div>
           <div>
             <span>02</span>
-            <strong>再追 局部最佳化 怎麼累積</strong>
-            <p>局部最佳化 很少一次爆開，常是被制度慢慢推到後面才集中結帳。</p>
+            <strong>降低批量和延遲</strong>
+            <p>批量越大、回報越慢，訊號越容易被階梯式放大。</p>
           </div>
           <div>
             <span>03</span>
-            <strong>最後查 預測更新 誰在付帳</strong>
-            <p>如果 預測更新 沒被看見，表面優化常只是把代價換人承擔。</p>
+            <strong>共享可驗證資料</strong>
+            <p>上游需要看到 sell-through、庫存和促銷脈絡，而不是只看訂單數。</p>
           </div>
         </div>
       </section>
@@ -104,50 +104,50 @@
       <section class="chapter" id="setup">
         <div class="section-heading">
           <p class="section-label">Setup</p>
-          <h2>當 延遲 被塞進制度，局部最佳化 就會開始變形</h2>
-          <p class="section-lede">先別把 牛鞭效應 想成大型事故；只看一個最小迴路，你就能看到 延遲 怎麼牽動 局部最佳化 和 預測更新。</p>
+          <h2>零售端多賣十件，上游工廠卻收到加產一百件的訊號</h2>
+          <p class="section-lede">最小場景是每一層都為了保險多下一點訂單。</p>
         </div>
         <div class="definition-grid">
           <div class="tile">
             <strong>最小劇情</strong>
-            <p>零售端的需求只小幅起伏，但批發、工廠與供應商每一層都根據自己的庫存與預測更新動作，最後整條鏈變成大震盪。</p>
+            <p>某週零售端銷量略升，門市提高補貨，區域倉再加安全庫存，品牌商擔心缺貨而放大採購，工廠最後以為需求大爆發。</p>
           </div>
           <div class="tile">
             <strong>真正難點</strong>
-            <p>如果最前端只有一點點波動，為什麼後端卻常像被重擊一樣失控</p>
+            <p>每一層都不是亂來，而是在有限資訊下保護自己的 SLA。</p>
           </div>
         </div>
         <div class="concept-flow" aria-label="問題展開">
-          <div class="flow-step">用 延遲 去推結果</div>
+          <div class="flow-step">終端需求小幅變動</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">人開始回應這套規則</div>
+          <div class="flow-step">中間層逐步加安全量</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">局部最佳化 和 預測更新 反過來改寫現場</div>
+          <div class="flow-step">上游接收到被放大的訂單</div>
         </div>
         <div class="paradox-frame">
           <strong>Key Point</strong>
-          <p>牛鞭效應 最值錢的地方，不是提供一個壞制度標籤，而是讓你看見 延遲 一旦被綁進制度，局部最佳化 會怎麼一路改寫現場。</p>
+          <p>牛鞭效應的解法不是責怪上游過度反應，而是改善訊號、批量和補貨節奏。</p>
         </div>
       </section>
 
       <section class="chapter" id="lenses">
         <div class="section-heading">
           <p class="section-label">Lenses</p>
-          <h2>先把 訊號放大、資訊延遲 與 局部補償 分開看</h2>
-          <p class="section-lede">同樣叫做 牛鞭效應，有時是 訊號放大 在作怪，有時是 資訊延遲 或 局部補償 把副作用越滾越大。</p>
+          <h2>把需求訊號和補貨反應拆開</h2>
+          <p class="section-lede">要看見牛鞭，必須同時看銷售、庫存、訂單和交期，而不是只看單一層的數字。</p>
         </div>
         <div class="lens-grid">
           <article class="lens-card">
-            <strong>訊號放大</strong>
-            <p>訊號放大 這條線關心的，不是單點錯誤，而是人一旦回應制度，延遲 會怎麼一路扭動現場行為。</p>
+            <strong>訊號來源</strong>
+            <p>訂單是終端需求，還是安全庫存、促銷、缺貨恐懼和 MOQ 的混合？</p>
           </article>
           <article class="lens-card">
-            <strong>資訊延遲</strong>
-            <p>資訊延遲 這條線關心的，不是單點錯誤，而是人一旦回應制度，局部最佳化 會怎麼一路扭動現場行為。</p>
+            <strong>延遲節奏</strong>
+            <p>資料回報、訂單處理和交貨週期越長，越容易放大猜測。</p>
           </article>
           <article class="lens-card">
-            <strong>局部補償</strong>
-            <p>局部補償 這條線關心的，不是單點錯誤，而是人一旦回應制度，預測更新 會怎麼一路扭動現場行為。</p>
+            <strong>批量規則</strong>
+            <p>MOQ、運費折扣和週期性下單會把連續需求變成尖峰訂單。</p>
           </article>
         </div>
       </section>
@@ -155,44 +155,44 @@
       <section class="chapter" id="psychology">
         <div class="section-heading">
           <p class="section-label">Psychology</p>
-          <h2>為什麼團隊會順著 牛鞭效應 的機制一路滑下去</h2>
-          <p class="section-lede">系統會滑向 牛鞭效應，往往不是因為大家不知道風險，而是因為短期看得見的好處比被延後的代價更容易抓住注意力。</p>
+          <h2>缺貨恐懼會讓每一層都多保護自己一點</h2>
+          <p class="section-lede">沒有人想成為斷貨責任人；安全量在個體層面合理，跨層疊加後就變成震盪。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>只看自己這一層</strong>
-            <p>只看自己這一層 會讓團隊只看到眼前改善，卻忘了制度一旦跑起來，副作用也會跟著長大。</p>
+            <strong>局部 KPI 驅動保守</strong>
+            <p>每層通常為自己的缺貨率或庫存週轉負責，而不是全鏈波動。</p>
           </article>
           <article class="example">
-            <strong>短缺恐慌</strong>
-            <p>短缺恐慌 很容易把短期順利誤認成長期健康，於是回饋扭曲整段被漏看。</p>
+            <strong>資訊不對稱製造猜測</strong>
+            <p>看不到終端需求時，上游只能把訂單當需求。</p>
           </article>
           <article class="example">
-            <strong>數字越大越可信</strong>
-            <p>碰到 數字越大越可信 時，人常先抓可見的好處，但系統真正要付的帳通常在後面才出現。</p>
+            <strong>促銷和短缺會污染訊號</strong>
+            <p>一次促銷或恐慌補貨可能被解讀成長期需求。</p>
           </article>
         </div>
-        <p class="micro-note">要看的不是個人善惡，而是 延遲 和 局部最佳化 怎麼把短期順手慢慢推成集體偏航。</p>
+        <p class="micro-note">要減少牛鞭，先讓每一層看到同一份需求事實，而不是各自放大猜測。</p>
       </section>
 
       <section class="chapter" id="applications">
         <div class="section-heading">
           <p class="section-label">Applications</p>
-          <h2>回到 需求預測、排產節奏 與 跨團隊同步</h2>
-          <p class="section-lede">別把它只當成大系統事故；需求預測、排產節奏 這些場景，本來就在重演同一條回饋鏈。</p>
+          <h2>在多層依賴裡控制訊號放大</h2>
+          <p class="section-lede">供應鏈之外，容量規劃和跨團隊 roadmap 也可能出現類似放大。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>需求預測</strong>
-            <p>在 需求預測 裡最容易忽略的，是一旦用 延遲 去推結果，局部最佳化 往往會反過來改寫現場行為。</p>
+            <strong>供應鏈補貨</strong>
+            <p>共享 sell-through 和庫存水位，降低只靠訂單推估需求。</p>
           </article>
           <article class="example">
-            <strong>排產節奏</strong>
-            <p>在 排產節奏 裡最容易忽略的，是一旦用 局部最佳化 去推結果，預測更新 往往會反過來改寫現場行為。</p>
+            <strong>雲容量規劃</strong>
+            <p>產品線層層加 buffer 後，平台團隊可能收到遠大於真需求的容量要求。</p>
           </article>
           <article class="example">
-            <strong>跨團隊同步</strong>
-            <p>在 跨團隊同步 裡最容易忽略的，是一旦用 預測更新 去推結果，批次決策 往往會反過來改寫現場行為。</p>
+            <strong>跨團隊排程</strong>
+            <p>每個團隊都替不確定加安全時間，最後總排程變得臃腫且仍不準。</p>
           </article>
         </div>
       </section>
@@ -200,30 +200,30 @@
       <section class="chapter" id="misreadings">
         <div class="section-heading">
           <p class="section-label">Misreadings</p>
-          <h2>三個常見誤讀</h2>
-          <p class="section-lede">最容易誤讀的，是把 牛鞭效應 當成單點事故，而不是一段會自己增強的回饋鏈。</p>
+          <h2>牛鞭效應不是需求真的大幅變動</h2>
+          <p class="section-lede">它關心的是真需求被訂單、預測和庫存策略放大後的波動。</p>
         </div>
         <div class="collocation-list" aria-label="常見誤讀">
           <article class="collocation-card">
             <div>
-              <strong>牛鞭效應 只是在怪人性</strong>
+              <strong>只怪上游反應慢</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>多數時候問題不在個人道德，而在 延遲 如何透過制度塑形行為。</p>
+            <p>上游收到的訊號可能已經失真。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>只要換一個指標或流程，牛鞭效應 就會自己消失</strong>
+              <strong>只看庫存過高</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>若 局部最佳化 的回饋結構沒重寫，換名字常常只是把同一個問題搬家。</p>
+            <p>過高庫存是結果，訊號傳遞和批量規則才是原因。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>牛鞭效應 只會發生在大組織</strong>
+              <strong>忽略局部合理性</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>小團隊一樣會遇到，只是 預測更新 的代價回得更快。</p>
+            <p>每一層的安全量都合理時，整體仍可能不合理。</p>
           </article>
         </div>
       </section>
@@ -231,22 +231,22 @@
       <section class="chapter" id="questions">
         <div class="section-heading">
           <p class="section-label">Questions</p>
-          <h2>把 延遲、局部最佳化 與 預測更新 變成追問順序</h2>
-          <p class="section-lede">下面兩個問題適合拿去拆 需求預測、排產節奏 這些場景裡的回饋鏈，看代價究竟被推到哪裡。</p>
+          <h2>問上游看到的是需求還是反應</h2>
+          <p class="section-lede">下面兩問適合用在供應鏈和容量規劃 review。</p>
         </div>
         <div class="prompt-grid">
           <article class="prompt-card">
-            <strong>如果這個機制現在就出現在 需求預測</strong>
-            <p>你最先會追哪一段：延遲、局部最佳化，還是 預測更新？哪一段最可能先把行為推偏？</p>
+            <strong>這個數字來自終端使用，還是中間層補貨？</strong>
+            <p>把 sell-through、order 和 inventory 分開看。</p>
           </article>
           <article class="prompt-card">
-            <strong>如果數字突然變好看了</strong>
-            <p>你要在哪個回饋點驗證：那是真改善，還是 延遲 正在把代價往別處推？</p>
+            <strong>每一層加了多少安全量？</strong>
+            <p>把 buffer 疊加後的總放大倍數算出來。</p>
           </article>
         </div>
         <div class="template-note">
           <strong>延伸路線</strong>
-          <p>若想追這個機制為什麼總會回來，可以再讀 Supply Chain 的系統版本。</p>
+          <p>可接著讀 supply chain，理解多層供需協調中的資訊延遲和庫存策略。</p>
         </div>
       </section>
 
@@ -254,22 +254,22 @@
         <div class="section-heading">
           <p class="section-label">Sources</p>
           <h2>來源與整理方式</h2>
-          <p class="section-lede">本頁先用 Bullwhip Effect 條目抓住 延遲 與 局部最佳化 怎麼互相推動，再用 Supply Chain 補回制度與系統背景。</p>
+          <p class="section-lede">本頁以 bullwhip effect 的需求訊號放大為核心，並用 supply chain 補足供應鏈背景。</p>
         </div>
         <div class="source-grid">
           <article class="source-card">
             <strong>核心概念</strong>
-            <p>這張卡交代制度如何把 延遲、局部最佳化 推成可重複的失真模式。</p>
+            <p>支撐需求訊號沿供應鏈逐層放大的主線。</p>
             <a href="https://en.wikipedia.org/wiki/Bullwhip_effect" target="_blank" rel="noreferrer">Bullwhip Effect</a>
           </article>
           <article class="source-card">
-            <strong>相鄰概念</strong>
-            <p>這張卡幫你把主題放回更大的制度背景，特別是 局部最佳化 和 預測更新 怎麼一路被放大。</p>
+            <strong>相鄰脈絡</strong>
+            <p>補充供應鏈中多層庫存、訂單與交付協調的脈絡。</p>
             <a href="https://en.wikipedia.org/wiki/Supply_chain" target="_blank" rel="noreferrer">Supply Chain</a>
           </article>
           <article class="source-card">
             <strong>教學整理</strong>
-            <p>本頁把 牛鞭效應 帶回 需求預測、排產節奏 與 跨團隊同步 的部分，主要是在整理回饋鏈、制度設計與副作用之間的對應關係。</p>
+            <p>補貨、雲容量和跨團隊排程案例是本頁依多層依賴系統整理的應用。</p>
           </article>
         </div>
       </section>
@@ -279,7 +279,7 @@
           <div>
             <p class="section-label">Reference</p>
             <h2>下一步</h2>
-            <p>下次在 需求預測 或 排產節奏 設規則時，先畫出誰會因 延遲 改變行為，以及 局部最佳化 會在哪裡開始累積。</p>
+            <p>下次上游說需求暴增，請先問它看到的是終端需求，還是每層保險後的訂單。</p>
           </div>
           <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
         </div>

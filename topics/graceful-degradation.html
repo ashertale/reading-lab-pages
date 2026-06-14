@@ -21,13 +21,13 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
-        <p class="kicker">Knowledge Study / Engineering</p>
+        <p class="kicker">Knowledge Study / Systems</p>
         <h1>優雅降級</h1>
         <p class="topic-subtitle">Graceful Degradation</p>
-        <p class="thesis">當部分能力失效時，系統若能退到較小但仍可用的模式，通常比整體一起倒下更有價值。</p>
+        <p class="thesis">優雅降級的目標不是假裝沒壞，而是在部分能力失效時保留最重要的服務與清楚的使用者語意。</p>
         <div class="hero-prompt">
           <strong>Read For</strong>
-          <p>這頁會把 部分可用、降階模式 這些常藏在規格外的壓力，拉回 依賴失效策略 與 UI 降階 的設計檢查裡。</p>
+          <p>理解核心功能、非核心功能、降級觸發、使用者提示與恢復路徑如何一起設計。</p>
         </div>
       </div>
       <aside class="hero-note" aria-label="主題資訊">
@@ -42,17 +42,17 @@
           </div>
           <div>
             <dt>主要判準</dt>
-            <dd>部分可用、降階模式、核心服務保留、崩潰隔離</dd>
+            <dd>核心路徑、降級觸發、使用者語意、恢復條件</dd>
           </div>
           <div>
             <dt>讀完產出</dt>
-            <dd>能用 Fail smaller instead of failing all at once 重新檢查 服務韌性 裡的判斷失真</dd>
+            <dd>能在服務依賴、UI 功能和韌體控制中設計小範圍失效</dd>
           </div>
         </dl>
         <div class="knowledge-map" aria-label="閱讀結構示意">
-          <span>降階</span>
+          <span>部分</span>
+          <span>降級</span>
           <span>保留</span>
-          <span>韌性</span>
         </div>
       </aside>
     </div>
@@ -75,28 +75,28 @@
       <section class="chapter" id="core">
         <div class="section-heading">
           <p class="section-label">Orientation</p>
-          <h2>如果做不到完全不故障，為什麼『壞得比較小』會是值得設計的目標</h2>
-          <p class="section-lede">優雅降級 的價值，在於它把平常藏在接口、時序或權限邊界外的壓力，提前搬到設計與驗證桌面上。</p>
+          <h2>壞掉時仍能提供較小但誠實的服務</h2>
+          <p class="section-lede">優雅降級承認完整功能可能不可用，於是先定義哪些能力可以暫停、替換或變慢，哪些核心承諾必須保住。</p>
         </div>
         <div class="core-card">
           <p class="section-label">Core Tension</p>
-          <p>當部分能力失效時，系統若能退到較小但仍可用的模式，通常比整體一起倒下更有價值。</p>
+          <p>完整體驗需要許多依賴，但可用性需要在依賴失效時切小；降級設計就是把全有全無改成分層承諾。</p>
         </div>
         <div class="principle-strip" aria-label="本頁讀法">
           <div>
             <span>01</span>
-            <strong>先圈出 部分可用 會在哪裡破</strong>
-            <p>部分可用 常不是抽象風險，而是會穿過具體接口、排程或權限邊界。</p>
+            <strong>排出核心功能</strong>
+            <p>先定義沒有它就不能稱為服務的最小能力。</p>
           </div>
           <div>
             <span>02</span>
-            <strong>再追 降階模式 怎麼穿過邊界</strong>
-            <p>降階模式 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現。</p>
+            <strong>明確降級觸發</strong>
+            <p>依賴錯誤率、延遲、資源水位或安全狀態達到門檻時自動降級。</p>
           </div>
           <div>
             <span>03</span>
-            <strong>最後查 核心服務保留 何時從小事變事故</strong>
-            <p>核心服務保留 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力。</p>
+            <strong>說清使用者語意</strong>
+            <p>降級不是沉默失敗，要讓使用者知道哪些功能暫停、資料可能延遲。</p>
           </div>
         </div>
       </section>
@@ -104,50 +104,50 @@
       <section class="chapter" id="setup">
         <div class="section-heading">
           <p class="section-label">Setup</p>
-          <h2>哪個邊界先把 部分可用 變成事故</h2>
-          <p class="section-lede">把問題壓回一個最小接口或一次時序交會，部分可用 何時變成風險、核心服務保留 何時開始放大，就不容易再被模糊帶過。</p>
+          <h2>推薦服務掛了，結帳流程不應一起掛掉</h2>
+          <p class="section-lede">最小場景是非核心依賴失效，如果沒有隔離，核心流程跟著失效。</p>
         </div>
         <div class="definition-grid">
           <div class="tile">
             <strong>最小劇情</strong>
-            <p>外部依賴出問題、部分模組過載或資料來源暫時不可用時，系統若能縮小功能而不是整體拒絕服務，損害就能被框住。</p>
+            <p>電商頁面載入時同步等待個人化推薦。推薦服務延遲暴增後，商品頁和結帳按鈕也被卡住，使用者無法完成原本可完成的購買。</p>
           </div>
           <div class="tile">
             <strong>真正難點</strong>
-            <p>如果做不到完全不故障，為什麼『壞得比較小』會是值得設計的目標</p>
+            <p>推薦提升體驗，但在故障時不該和核心交易共享同一個存活條件。</p>
           </div>
         </div>
         <div class="concept-flow" aria-label="問題展開">
-          <div class="flow-step">局部先對付 部分可用</div>
+          <div class="flow-step">非核心依賴變慢</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">降階模式 穿過接口或時序邊界</div>
+          <div class="flow-step">核心路徑同步等待</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">核心服務保留 把小問題放大成現場風險</div>
+          <div class="flow-step">完整頁面一起失效</div>
         </div>
         <div class="paradox-frame">
           <strong>Key Point</strong>
-          <p>優雅降級 的價值，在於它把平常埋在規格外的 部分可用、降階模式 與 核心服務保留，提前拉回 design review 能談清楚的位置。</p>
+          <p>優雅降級要先把功能分層，讓非核心能力失效時不拖走核心承諾。</p>
         </div>
       </section>
 
       <section class="chapter" id="lenses">
         <div class="section-heading">
           <p class="section-label">Lenses</p>
-          <h2>先把 全開全關之外、核心功能優先 與 失敗範圍收斂 分開看</h2>
-          <p class="section-lede">表面像同一個故障，底下往往是 全開全關之外、核心功能優先 和 失敗範圍收斂 在不同邊界各自出力。</p>
+          <h2>把完整體驗拆成可失效層</h2>
+          <p class="section-lede">每個功能都要有故障時的替代行為，而不是只寫正常情況的整合路徑。</p>
         </div>
         <div class="lens-grid">
           <article class="lens-card">
-            <strong>全開全關之外</strong>
-            <p>全開全關之外 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 部分可用 轉成真正的穩定性壓力。</p>
+            <strong>核心與附加</strong>
+            <p>哪個功能必須保留，哪個可隱藏、延後、用靜態值替代？</p>
           </article>
           <article class="lens-card">
-            <strong>核心功能優先</strong>
-            <p>核心功能優先 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 降階模式 轉成真正的穩定性壓力。</p>
+            <strong>觸發與退出</strong>
+            <p>什麼指標觸發降級，什麼條件恢復完整功能？</p>
           </article>
           <article class="lens-card">
-            <strong>失敗範圍收斂</strong>
-            <p>失敗範圍收斂 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 核心服務保留 轉成真正的穩定性壓力。</p>
+            <strong>狀態告知</strong>
+            <p>使用者、操作員和監控是否知道目前處於降級模式？</p>
           </article>
         </div>
       </section>
@@ -155,44 +155,44 @@
       <section class="chapter" id="psychology">
         <div class="section-heading">
           <p class="section-label">Psychology</p>
-          <h2>團隊通常在哪一步把 優雅降級 當成暫時小事</h2>
-          <p class="section-lede">工程現場最危險的，不是沒人提風險，而是大家太容易把 部分可用 當成晚點再補也行的小瑕疵。</p>
+          <h2>團隊容易在正常體驗上精雕細琢，卻晚到事故才設計壞掉畫面</h2>
+          <p class="section-lede">降級流程不像新功能那麼吸引人，但它決定故障時使用者看到的是小範圍限制還是整體崩潰。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>不是全好就是全壞</strong>
-            <p>不是全好就是全壞 會讓人把『目前沒爆』誤讀成『設計沒問題』，於是風險一路被推往更後面。</p>
+            <strong>完整體驗偏見</strong>
+            <p>設計和測試常以所有依賴可用為前提。</p>
           </article>
           <article class="example">
-            <strong>降階看起來像妥協</strong>
-            <p>降階看起來像妥協 最危險的地方，在於它常把局部成功包裝成全局安全。</p>
+            <strong>降級被當成失敗承認</strong>
+            <p>團隊可能不願在 UI 或 API 中明示部分不可用，結果讓錯誤更混亂。</p>
           </article>
           <article class="example">
-            <strong>平常太順而沒演練</strong>
-            <p>只要 平常太順而沒演練 一進場，團隊就容易先相信現況撐得住，而不是先問代價正在往哪裡堆。</p>
+            <strong>恢復路徑被忽略</strong>
+            <p>只知道怎麼進入降級，不知道何時安全退出，會造成長時間功能缺失。</p>
           </article>
         </div>
-        <p class="micro-note">越早把 部分可用、降階模式 這些心理近路說出來，越不容易在 postmortem 才第一次承認它們存在。</p>
+        <p class="micro-note">優雅降級是一份故障時的產品規格，不只是 try-catch。</p>
       </section>
 
       <section class="chapter" id="applications">
         <div class="section-heading">
           <p class="section-label">Applications</p>
-          <h2>回到 依賴失效策略、UI 降階 與 韌體安全模式</h2>
-          <p class="section-lede">這裡重點不是補幾個抽象案例，而是把 優雅降級 直接落到 依賴失效策略、UI 降階 這些真的會出事的邊界上。</p>
+          <h2>讓非核心依賴失效時核心仍能走完</h2>
+          <p class="section-lede">服務 UI、韌體控制和資料產品都能透過分層承諾降低故障範圍。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>依賴失效策略</strong>
-            <p>把 優雅降級 帶回 依賴失效策略 時，最該先畫出來的是 部分可用 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>服務頁面</strong>
+            <p>推薦、評論或個人化失敗時，保留商品資訊和購買流程。</p>
           </article>
           <article class="example">
-            <strong>UI 降階</strong>
-            <p>把 優雅降級 帶回 UI 降階 時，最該先畫出來的是 降階模式 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>韌體控制</strong>
+            <p>非必要感測器失效時切到保守模式，保留安全控制和告警。</p>
           </article>
           <article class="example">
-            <strong>韌體安全模式</strong>
-            <p>把 優雅降級 帶回 韌體安全模式 時，最該先畫出來的是 核心服務保留 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>資料產品</strong>
+            <p>即時分析不可用時顯示上次更新時間和延遲資料，不讓整頁空白。</p>
           </article>
         </div>
       </section>
@@ -200,30 +200,30 @@
       <section class="chapter" id="misreadings">
         <div class="section-heading">
           <p class="section-label">Misreadings</p>
-          <h2>三個常見誤讀</h2>
-          <p class="section-lede">這些誤讀常把 優雅降級 降成實作瑣事，結果真正的邊界壓力根本沒被談到。</p>
+          <h2>優雅降級不是把錯誤藏起來</h2>
+          <p class="section-lede">它要誠實呈現較小能力；隱藏錯誤只會讓使用者和操作員失去判斷。</p>
         </div>
         <div class="collocation-list" aria-label="常見誤讀">
           <article class="collocation-card">
             <div>
-              <strong>優雅降級 只是實作細節</strong>
+              <strong>把降級當靜默 fallback</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>它常是 部分可用 最先破掉的邊界，所以不是『之後再補』就沒事。</p>
+            <p>使用者若需要知道資料延遲或功能停用，就不能假裝正常。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>只要再加更多防呆，優雅降級 就會消失</strong>
+              <strong>所有功能都保留一點</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>如果 降階模式 的壓力來源沒處理，防呆最後只會變成更昂貴的補丁。</p>
+            <p>有些功能在不完整時反而危險，應該明確關閉。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>優雅降級 只和大型分散式系統有關</strong>
+              <strong>只處理前端畫面</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>很多單機、韌體或流程系統，一樣會以更小規模的 核心服務保留 形式重演。</p>
+            <p>後端依賴、資料一致性和操作 runbook 也要支援降級。</p>
           </article>
         </div>
       </section>
@@ -231,22 +231,22 @@
       <section class="chapter" id="questions">
         <div class="section-heading">
           <p class="section-label">Questions</p>
-          <h2>把 部分可用、降階模式 追到真正會破的邊界</h2>
-          <p class="section-lede">下面兩個問題很適合在 依賴失效策略、UI 降階 這類設計或驗證場合直接拿來過一遍。</p>
+          <h2>問故障時保留哪個承諾</h2>
+          <p class="section-lede">下面兩問適合用在 resilience review 和產品故障規格。</p>
         </div>
         <div class="prompt-grid">
           <article class="prompt-card">
-            <strong>如果第一個異常出現在 依賴失效策略</strong>
-            <p>你最先會去畫哪條邊界，確認 部分可用 和 降階模式 到底在哪一步被放大？</p>
+            <strong>完整功能失效時，最小可用服務是什麼？</strong>
+            <p>列出必須保留、可替代、可暫停和必須關閉的功能。</p>
           </article>
           <article class="prompt-card">
-            <strong>如果 UI 降階 團隊只回你一句『現在看起來沒事』</strong>
-            <p>你要用什麼觀測或驗證證明：核心服務保留 不是只是還沒在現場結帳？</p>
+            <strong>使用者如何知道現在是降級狀態？</strong>
+            <p>定義文案、狀態碼、時間戳和操作限制。</p>
           </article>
         </div>
         <div class="template-note">
           <strong>延伸路線</strong>
-          <p>延伸閱讀可以接到 Fault Tolerance，把這頁的邊界壓力放回更大的可靠性脈絡。</p>
+          <p>可接著讀 fault tolerance，理解局部故障如何被系統吸收。</p>
         </div>
       </section>
 
@@ -254,22 +254,22 @@
         <div class="section-heading">
           <p class="section-label">Sources</p>
           <h2>來源與整理方式</h2>
-          <p class="section-lede">本頁先用 Graceful Degradation 條目交代故障模式與邊界壓力，再用 Fault Tolerance 補回更大的系統背景。</p>
+          <p class="section-lede">本頁以 graceful degradation 的部分能力保留為核心，並用 fault tolerance 補足可靠性背景。</p>
         </div>
         <div class="source-grid">
           <article class="source-card">
             <strong>核心概念</strong>
-            <p>這張卡說明 優雅降級 在接口、時序或權限邊界上最常怎麼冒出來。</p>
+            <p>支撐系統在部分功能失效時保留較小能力的主線。</p>
             <a href="https://en.wikipedia.org/wiki/Graceful_degradation" target="_blank" rel="noreferrer">Graceful Degradation</a>
           </article>
           <article class="source-card">
-            <strong>相鄰概念</strong>
-            <p>這張卡補回 Fault Tolerance 所在的更大可靠性或系統脈絡，避免把 優雅降級 只看成局部實作瑕疵。</p>
+            <strong>相鄰脈絡</strong>
+            <p>補充系統吸收局部故障並持續運作的可靠性脈絡。</p>
             <a href="https://en.wikipedia.org/wiki/Fault_tolerance" target="_blank" rel="noreferrer">Fault Tolerance</a>
           </article>
           <article class="source-card">
             <strong>教學整理</strong>
-            <p>工程映射與事故語境是本頁的教學整理，目的是把 優雅降級 直接落到 依賴失效策略、UI 降階 與 韌體安全模式 這些邊界上。</p>
+            <p>服務頁面、韌體控制與資料產品案例是本頁依可靠性實務整理的應用。</p>
           </article>
         </div>
       </section>
@@ -279,7 +279,7 @@
           <div>
             <p class="section-label">Reference</p>
             <h2>下一步</h2>
-            <p>下次在 依賴失效策略 或 UI 降階 做設計決定時，先把 部分可用 穿過哪個邊界、何時變成 核心服務保留 寫進 review。</p>
+            <p>下次新增外部依賴時，請同時寫出它失效時哪些核心能力仍要保留。</p>
           </div>
           <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
         </div>

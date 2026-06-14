@@ -21,13 +21,13 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
-        <p class="kicker">Knowledge Study / Paradox</p>
+        <p class="kicker">Knowledge Study / Concepts</p>
         <h1>杜昂-蒯因論題</h1>
         <p class="topic-subtitle">Duhem-Quine Thesis</p>
-        <p class="thesis">當一個預測失敗時，被打臉的不一定只是主假說，還可能是它背後整包輔助假設、量測條件或模型接口。</p>
+        <p class="thesis">杜昂-蒯因論題提醒我們，實驗失敗時倒下的很少是一個孤立假說；量測、背景理論和輔助假設一起站在檯面上。</p>
         <div class="hero-prompt">
           <strong>Read For</strong>
-          <p>這頁不是替你宣布正解，而是帶你看 主假說、輔助假設 和 量測 怎麼把答案往不同方向拉。</p>
+          <p>理解證據如何檢驗整組信念網路，而不是單點打掉某一個理論。</p>
         </div>
       </div>
       <aside class="hero-note" aria-label="主題資訊">
@@ -42,17 +42,17 @@
           </div>
           <div>
             <dt>主要判準</dt>
-            <dd>主假說、輔助假設、量測、解釋空間</dd>
+            <dd>假說網路、輔助假設、量測設定、修補選擇</dd>
           </div>
           <div>
             <dt>讀完產出</dt>
-            <dd>能用 Testing bundles of assumptions 重新檢查 模型與驗證 裡的判斷失真</dd>
+            <dd>能在實驗、debug 和模型評估中避免過早指定唯一罪魁禍首</dd>
           </div>
         </dl>
         <div class="knowledge-map" aria-label="閱讀結構示意">
           <span>假說</span>
           <span>輔助</span>
-          <span>失敗</span>
+          <span>修補</span>
         </div>
       </aside>
     </div>
@@ -75,28 +75,28 @@
       <section class="chapter" id="core">
         <div class="section-heading">
           <p class="section-label">Orientation</p>
-          <h2>預測一旦失敗，被推翻的到底是理論本身，還是那整包讓理論能落地的前提</h2>
-          <p class="section-lede">杜昂-蒯因論題 真正麻煩的地方，是 主假說、輔助假設 和 量測 看起來都合理，卻不一定能一起保住。</p>
+          <h2>失敗結果通常只告訴你某個組合不對</h2>
+          <p class="section-lede">一個預測依賴主理論，也依賴儀器、資料處理、環境條件和很多未明說的假設。</p>
         </div>
         <div class="core-card">
           <p class="section-label">Core Tension</p>
-          <p>當一個預測失敗時，被打臉的不一定只是主假說，還可能是它背後整包輔助假設、量測條件或模型接口。</p>
+          <p>當觀察不符合預期，你可以放棄主假說，也可以懷疑儀器、樣本、初始條件或統計方法；證據本身不會自動指定要丟哪一個。</p>
         </div>
         <div class="principle-strip" aria-label="本頁讀法">
           <div>
             <span>01</span>
-            <strong>先把 主假說 拉到第一順位</strong>
-            <p>只要先保 主假說，預測一旦失敗，被推翻的到底是理論本身，還是那整包讓理論能落地的前提 的答案就會開始往某一邊傾。</p>
+            <strong>列出依賴鏈</strong>
+            <p>把預測成立需要的背景條件攤開。</p>
           </div>
           <div>
             <span>02</span>
-            <strong>再看 輔助假設 怎麼反咬</strong>
-            <p>輔助假設 一進來，原本看似乾淨的解法通常就得承認它正在犧牲別的直覺。</p>
+            <strong>不要單點定罪</strong>
+            <p>觀察反例先排除常見量測與操作問題。</p>
           </div>
           <div>
             <span>03</span>
-            <strong>最後問 量測 能不能和 主假說、輔助假設 並存</strong>
-            <p>在 杜昂-蒯因論題 裡，最卡的地方往往是大家想保住 量測，卻不肯先說要放掉哪個前提。</p>
+            <strong>限制修補自由</strong>
+            <p>輔助假設不能每次失敗都臨時改到理論永遠不可受傷。</p>
           </div>
         </div>
       </section>
@@ -104,50 +104,50 @@
       <section class="chapter" id="setup">
         <div class="section-heading">
           <p class="section-label">Setup</p>
-          <h2>這題一縮小，主假說 和 輔助假設 就開始打架</h2>
-          <p class="section-lede">把情境壓到只剩 主假說、輔助假設 和 量測，你就會發現答案不是藏在故事裡，而是藏在你先保哪個條件。</p>
+          <h2>模型預測錯了，可能錯在模型，也可能錯在資料管線</h2>
+          <p class="section-lede">最小場景是一個指標異常，團隊要判斷理論是否被反駁。</p>
         </div>
         <div class="definition-grid">
           <div class="tile">
             <strong>最小劇情</strong>
-            <p>模型預測某結果會出現，但實驗沒有出現；此時錯的可能是主模型、感測器校正、環境假設，甚至資料前處理。</p>
+            <p>風險模型預測低風險帳號不會大量退款，但新週期退款暴增。調查發現同時有促銷規則改版、標籤延遲和一批新使用者來源。</p>
           </div>
           <div class="tile">
             <strong>真正難點</strong>
-            <p>預測一旦失敗，被推翻的到底是理論本身，還是那整包讓理論能落地的前提</p>
+            <p>觀察結果與模型不合，卻不足以單獨說模型理論錯；整個推論環境都要被檢查。</p>
           </div>
         </div>
         <div class="concept-flow" aria-label="問題展開">
-          <div class="flow-step">先想保住 主假說</div>
+          <div class="flow-step">理論產生預測</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">發現 輔助假設 也不能輕易放掉</div>
+          <div class="flow-step">觀察結果不符</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">量測 一進場，主假說 和 輔助假設 的排列就開始分裂</div>
+          <div class="flow-step">檢查整組依賴</div>
         </div>
         <div class="paradox-frame">
           <strong>Key Point</strong>
-          <p>杜昂-蒯因論題 真正逼你做的，不是選一個漂亮答案，而是承認 主假說、輔助假設 和 量測 不一定能同時全留。</p>
+          <p>杜昂-蒯因論題讓反駁變得更謹慎：你要說明為何修這個環節，而不是別的環節。</p>
         </div>
       </section>
 
       <section class="chapter" id="lenses">
         <div class="section-heading">
           <p class="section-label">Lenses</p>
-          <h2>先把 假說網絡、量測耦合 與 診斷不唯一 分開看</h2>
-          <p class="section-lede">假說網絡、量測耦合 與 診斷不唯一 不是三種同義說法，而是三種會把答案往不同方向推的判準。</p>
+          <h2>把反例拆成一張信念依賴圖</h2>
+          <p class="section-lede">越複雜的系統，越需要看預測背後的附帶條件。</p>
         </div>
         <div class="lens-grid">
           <article class="lens-card">
-            <strong>假說網絡</strong>
-            <p>假說網絡 這條線真正要追的，是當 主假說 被推到第一順位時，哪些原本想一起保住的條件會先鬆手。</p>
+            <strong>主假說</strong>
+            <p>核心理論或模型是否真的導出這個預測？</p>
           </article>
           <article class="lens-card">
-            <strong>量測耦合</strong>
-            <p>量測耦合 這條線真正要追的，是當 輔助假設 被推到第一順位時，哪些原本想一起保住的條件會先鬆手。</p>
+            <strong>輔助條件</strong>
+            <p>量測、樣本、初始化和環境是否照預期成立？</p>
           </article>
           <article class="lens-card">
-            <strong>診斷不唯一</strong>
-            <p>診斷不唯一 這條線真正要追的，是當 量測 被推到第一順位時，哪些原本想一起保住的條件會先鬆手。</p>
+            <strong>修補原則</strong>
+            <p>修改哪個假設最節省、最可檢驗、也最不投機？</p>
           </article>
         </div>
       </section>
@@ -155,44 +155,44 @@
       <section class="chapter" id="psychology">
         <div class="section-heading">
           <p class="section-label">Psychology</p>
-          <h2>哪個直覺讓我們急著替 杜昂-蒯因論題 找單一答案</h2>
-          <p class="section-lede">這題難，不是因為資訊不夠，而是因為我們很自然想同時保住 主假說 和 輔助假設，卻沒先承認它們正在互撞。</p>
+          <h2>團隊常選擇最不痛的修補</h2>
+          <p class="section-lede">證據不足以自動決定犧牲誰，因此組織利益會影響解釋路徑。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>單點歸因衝動</strong>
-            <p>單點歸因衝動 會讓人急著把 杜昂-蒯因論題 壓成單一答案，彷彿只要選邊站就能把衝突消掉。</p>
+            <strong>保護核心投資</strong>
+            <p>昂貴模型或長期理論較不容易被立即放棄。</p>
           </article>
           <article class="example">
-            <strong>量測被自然化</strong>
-            <p>量測被自然化 常把彼此打架的條件揉回同一句話裡，讓人以為它們其實可以自然並存。</p>
+            <strong>責任轉移</strong>
+            <p>失敗可能被推給資料、操作或例外樣本。</p>
           </article>
           <article class="example">
-            <strong>整包假設透明化不足</strong>
-            <p>只要 整包假設透明化不足 一啟動，人就會想提早收斂；但 杜昂-蒯因論題 訓練的其實是延後下結論。</p>
+            <strong>修補成癮</strong>
+            <p>每次都補一個 auxiliary，最後理論看似安全卻失去可測性。</p>
           </article>
         </div>
-        <p class="micro-note">重點不是替 杜昂-蒯因論題 貼心理標籤，而是看見我們平常怎麼把 主假說 和 輔助假設 混著用。</p>
+        <p class="micro-note">當你聽到這不是模型錯，是資料問題，請要求畫出依賴鏈和可驗證的修補。</p>
       </section>
 
       <section class="chapter" id="applications">
         <div class="section-heading">
           <p class="section-label">Applications</p>
-          <h2>回到 實驗設計、感測校正 與 故障追查</h2>
-          <p class="section-lede">這裡真正要看的，不是再替 杜昂-蒯因論題 找一個漂亮比喻，而是看 實驗設計 和 感測校正 裡哪個判準其實早就在互撞。</p>
+          <h2>把實驗失敗當成依賴鏈檢查</h2>
+          <p class="section-lede">科學實驗、軟體 debug 和 ML 評估都會面對多重假設糾纏。</p>
         </div>
         <div class="example-grid">
           <article class="example">
+            <strong>系統 debug</strong>
+            <p>錯誤輸出可能來自演算法、cache、時鐘、權限或資料同步。</p>
+          </article>
+          <article class="example">
+            <strong>ML 評估</strong>
+            <p>模型退化可能是分布漂移，也可能是標籤政策改變。</p>
+          </article>
+          <article class="example">
             <strong>實驗設計</strong>
-            <p>一到 實驗設計，爭論通常不是沒有答案，而是 主假說 和 輔助假設 不再能被當成同一件事。</p>
-          </article>
-          <article class="example">
-            <strong>感測校正</strong>
-            <p>一到 感測校正，爭論通常不是沒有答案，而是 輔助假設 和 量測 不再能被當成同一件事。</p>
-          </article>
-          <article class="example">
-            <strong>故障追查</strong>
-            <p>一到 故障追查，爭論通常不是沒有答案，而是 量測 和 解釋空間 不再能被當成同一件事。</p>
+            <p>預先記錄輔助假設，能降低事後任意修補。</p>
           </article>
         </div>
       </section>
@@ -200,30 +200,30 @@
       <section class="chapter" id="misreadings">
         <div class="section-heading">
           <p class="section-label">Misreadings</p>
-          <h2>三個常見誤讀</h2>
-          <p class="section-lede">最容易失手的，不是答錯，而是把 杜昂-蒯因論題 讀成只要選邊站的智力題。</p>
+          <h2>不是說任何理論都無法被反駁</h2>
+          <p class="section-lede">它說反駁需要連同背景條件一起處理，而不是把證據變成免疫盾牌。</p>
         </div>
         <div class="collocation-list" aria-label="常見誤讀">
           <article class="collocation-card">
             <div>
-              <strong>杜昂-蒯因論題 只是腦筋急轉彎</strong>
+              <strong>滑向相對主義</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>它真正有用的地方，是逼你把 主假說、輔助假設 和 量測 不能同時全留這件事講清楚。</p>
+            <p>證據仍然有力量，只是不會單獨完成所有歸因。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>杜昂-蒯因論題 一定存在唯一正解</strong>
+              <strong>無限保護理論</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>很多時候題目的價值不在交答案，而在交代你到底先保了 主假說 還是 輔助假設。</p>
+            <p>輔助假設若不可測，就會削弱理論品質。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>杜昂-蒯因論題 和現實工作沒關係</strong>
+              <strong>忽略實務判準</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>只要你要在 模型與驗證 裡做判斷，這組判準衝突就很容易換名字再出現。</p>
+            <p>簡潔、可重現和預測力仍可引導修補選擇。</p>
           </article>
         </div>
       </section>
@@ -231,22 +231,22 @@
       <section class="chapter" id="questions">
         <div class="section-heading">
           <p class="section-label">Questions</p>
-          <h2>把 主假說、輔助假設 與 量測 的順序講清楚</h2>
-          <p class="section-lede">下面兩個問題不是為了找漂亮答案，而是讓你在 實驗設計 或 感測校正 這類場景裡說清楚自己到底先保哪個條件。</p>
+          <h2>問這個預測依賴哪些前提</h2>
+          <p class="section-lede">下面兩問適合用在實驗 review 和 incident analysis。</p>
         </div>
         <div class="prompt-grid">
           <article class="prompt-card">
-            <strong>如果這題今天出現在 實驗設計</strong>
-            <p>你會先保 主假說、輔助假設，還是 量測？哪個條件一退讓，答案就會跟著翻面？</p>
+            <strong>除了主假說，還有哪些條件必須為真？</strong>
+            <p>列出資料、儀器、環境和推論步驟。</p>
           </article>
           <article class="prompt-card">
-            <strong>如果有人堅持另一個答案</strong>
-            <p>對方可能其實在優先保 輔助假設 或 量測；你又願意為了自己的答案放掉什麼？</p>
+            <strong>我們為何修改這一項，而不是其他項？</strong>
+            <p>要求修補具備可測性和事前理由。</p>
           </article>
         </div>
         <div class="template-note">
           <strong>延伸路線</strong>
-          <p>把 Confirmation Holism 接著讀下去，會更清楚 杜昂-蒯因論題 為什麼不只是在玩邏輯花樣。</p>
+          <p>可接著讀 theory-ladenness of observation，理解觀察如何被背景理論塑形。</p>
         </div>
       </section>
 
@@ -254,22 +254,22 @@
         <div class="section-heading">
           <p class="section-label">Sources</p>
           <h2>來源與整理方式</h2>
-          <p class="section-lede">本頁先用 Duhem-Quine Thesis 的核心故事交代 主假說 和 輔助假設 為何會互撞，再用 Confirmation Holism 補上更大的理論背景。</p>
+          <p class="section-lede">本頁以 Duhem-Quine thesis 的整組假說檢驗為核心，並用 philosophy of science 補足背景。</p>
         </div>
         <div class="source-grid">
           <article class="source-card">
             <strong>核心概念</strong>
-            <p>這張卡提供故事骨架，以及 主假說 和 輔助假設 為什麼會互撞的基本背景。</p>
+            <p>支撐反例檢驗的是整個假說網路而非單一命題的主線。</p>
             <a href="https://en.wikipedia.org/wiki/Duhem-Quine_thesis" target="_blank" rel="noreferrer">Duhem-Quine Thesis</a>
           </article>
           <article class="source-card">
-            <strong>相鄰概念</strong>
-            <p>這張卡補上相鄰理論，讓你知道除了 輔助假設 之外，還有哪些框架會把答案推向別處。</p>
-            <a href="https://en.wikipedia.org/wiki/Confirmation_holism" target="_blank" rel="noreferrer">Confirmation Holism</a>
+            <strong>相鄰脈絡</strong>
+            <p>補充科學理論、觀察和證據關係的討論。</p>
+            <a href="https://en.wikipedia.org/wiki/Confirmation_holism" target="_blank" rel="noreferrer">Philosophy of Science</a>
           </article>
           <article class="source-card">
             <strong>教學整理</strong>
-            <p>表格、比較與現場映射是本頁的教學整理，用來把 杜昂-蒯因論題 從哲學題拉回 實驗設計、感測校正 與 故障追查 的判準衝突。</p>
+            <p>系統 debug、ML 評估與實驗設計案例是本頁依工程與資料科學脈絡整理。</p>
           </article>
         </div>
       </section>
@@ -279,7 +279,7 @@
           <div>
             <p class="section-label">Reference</p>
             <h2>下一步</h2>
-            <p>下次在 實驗設計 或 感測校正 遇到爭論時，先別急著選答案，先把 主假說、輔助假設 和 量測 的優先順序寫出來。</p>
+            <p>下次一個預測錯了，先問哪一整包前提一起被測到了。</p>
           </div>
           <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
         </div>

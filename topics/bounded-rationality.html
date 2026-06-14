@@ -21,13 +21,13 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
-        <p class="kicker">Knowledge Study / Principles</p>
+        <p class="kicker">Knowledge Study / Concepts</p>
         <h1>有限理性</h1>
         <p class="topic-subtitle">Bounded Rationality</p>
-        <p class="thesis">真實世界裡的理性從來不是在無限時間、完整資訊與完美計算下發生，而是在限制裡做夠好的選擇。</p>
+        <p class="thesis">有限理性描述的是人在資訊、時間和計算能力有限時如何做出足夠好的判斷；理性不是消失，而是被條件約束。</p>
         <div class="hero-prompt">
           <strong>Read For</strong>
-          <p>讀完後，你應該能分辨一個人是在真的使用 有限理性，還是只借它替自己的結論加光環。</p>
+          <p>看懂滿意化、搜尋成本、注意力限制和制度輔助如何塑造決策。</p>
         </div>
       </div>
       <aside class="hero-note" aria-label="主題資訊">
@@ -42,17 +42,17 @@
           </div>
           <div>
             <dt>主要判準</dt>
-            <dd>資訊有限、時間有限、計算有限、夠好即可</dd>
+            <dd>資訊限制、搜尋成本、滿意化、決策環境</dd>
           </div>
           <div>
             <dt>讀完產出</dt>
-            <dd>能用 Rationality under limits 重新檢查 現實中的理性 裡的判斷失真</dd>
+            <dd>能在產品流程、組織決策和工程取捨中設計支援有限理性的環境</dd>
           </div>
         </dl>
         <div class="knowledge-map" aria-label="閱讀結構示意">
           <span>限制</span>
-          <span>理性</span>
-          <span>夠好</span>
+          <span>搜尋</span>
+          <span>滿意</span>
         </div>
       </aside>
     </div>
@@ -75,28 +75,28 @@
       <section class="chapter" id="core">
         <div class="section-heading">
           <p class="section-label">Orientation</p>
-          <h2>如果人沒有算出最優解，這一定代表他不理性嗎</h2>
-          <p class="section-lede">碰到 有限理性，最容易出錯的不是沒聽過它，而是把 資訊有限、時間有限 與 計算有限 混成一句好聽卻無法執行的話。</p>
+          <h2>人不是無理性，而是沒有無限時間當最佳化機器</h2>
+          <p class="section-lede">有限理性把焦點從理想最佳解移到實際決策過程：人會在有限資訊中搜尋，找到夠好的方案就停下。</p>
         </div>
         <div class="core-card">
           <p class="section-label">Core Tension</p>
-          <p>真實世界裡的理性從來不是在無限時間、完整資訊與完美計算下發生，而是在限制裡做夠好的選擇。</p>
+          <p>要求完美最佳化會拖垮決策；過早滿意又可能錯過重要風險。好的制度要調整搜尋成本和停止規則。</p>
         </div>
         <div class="principle-strip" aria-label="本頁讀法">
           <div>
             <span>01</span>
-            <strong>先把 資訊有限 拉回起點</strong>
-            <p>很多爭論表面在談結論，其實一開始就把 資訊有限 當成默認前提。</p>
+            <strong>看約束條件</strong>
+            <p>時間、資訊、記憶、注意力和計算能力都會限制判斷。</p>
           </div>
           <div>
             <span>02</span>
-            <strong>再問 時間有限 是誰在付</strong>
-            <p>現場最常漏掉的不是立場，而是 時間有限 到底由誰承擔、何時結帳。</p>
+            <strong>設計停止規則</strong>
+            <p>什麼情況下可以接受夠好，而非繼續搜尋？</p>
           </div>
           <div>
             <span>03</span>
-            <strong>最後確認 計算有限 誰能檢查</strong>
-            <p>真正把事情做完的，往往不是表態，而是把 計算有限 翻成可被檢查的動作。</p>
+            <strong>改善環境而非責怪人</strong>
+            <p>提示、預設值和流程能讓有限理性更可靠。</p>
           </div>
         </div>
       </section>
@@ -104,50 +104,50 @@
       <section class="chapter" id="setup">
         <div class="section-heading">
           <p class="section-label">Setup</p>
-          <h2>先別問你支不支持，先問 資訊有限 和 時間有限 誰該先落筆</h2>
-          <p class="section-lede">把討論縮到一次具體決策，資訊有限 是否先被交代、時間有限 是否被偷省、計算有限 是否有驗收方式，就會一眼看出來。</p>
+          <h2>值班工程師不是在求全域最佳，只是在事故壓力下找可恢復路徑</h2>
+          <p class="section-lede">最小場景是一個人必須在資訊不足且時間緊迫時做決策。</p>
         </div>
         <div class="definition-grid">
           <div class="tile">
             <strong>最小劇情</strong>
-            <p>面對模糊需求、緊迫時間與有限注意力，多數決策其實是在有限資源下找可接受答案，而不是全局最優。</p>
+            <p>凌晨服務異常，告警、log 和使用者回報互相矛盾。值班工程師先選擇回滾最近部署，因為這是可逆、低成本且最可能止血的行動。</p>
           </div>
           <div class="tile">
             <strong>真正難點</strong>
-            <p>如果人沒有算出最優解，這一定代表他不理性嗎</p>
+            <p>事後看也許有更精準原因，但現場決策要在不完整資訊中降低損害。</p>
           </div>
         </div>
         <div class="concept-flow" aria-label="問題展開">
-          <div class="flow-step">有人先把 資訊有限 當既成前提</div>
+          <div class="flow-step">資訊不足</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">真正要付的 時間有限 被留到後面</div>
+          <div class="flow-step">搜尋有成本</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">收尾時才發現 計算有限 根本沒有操作方式</div>
+          <div class="flow-step">選擇夠好行動</div>
         </div>
         <div class="paradox-frame">
           <strong>Key Point</strong>
-          <p>把 有限理性 用好，重點不在記住一句格言，而在於知道 資訊有限 要先說、時間有限 要有人扛、計算有限 要能驗收。</p>
+          <p>有限理性不是替粗糙判斷開脫，而是要求設計出在限制下仍可靠的決策方式。</p>
         </div>
       </section>
 
       <section class="chapter" id="lenses">
         <div class="section-heading">
           <p class="section-label">Lenses</p>
-          <h2>先把 限制中的理性、最優神話退位 與 環境形塑策略 分開看</h2>
-          <p class="section-lede">如果不把 限制中的理性、最優神話退位 與 環境形塑策略 拆開，你很容易以為大家在討論同一條原則，實際上是在搶不同的判準。</p>
+          <h2>看決策者被哪些成本包住</h2>
+          <p class="section-lede">同一個人換到不同資訊環境，表現會大幅不同。</p>
         </div>
         <div class="lens-grid">
           <article class="lens-card">
-            <strong>限制中的理性</strong>
-            <p>順著 限制中的理性 讀，你會發現爭點不在口號，而在 資訊有限 是否真的被變成判準。</p>
+            <strong>搜尋成本</strong>
+            <p>取得更多資訊需要多少時間、錢或注意力？</p>
           </article>
           <article class="lens-card">
-            <strong>最優神話退位</strong>
-            <p>把焦點放在 最優神話退位 時，你其實是在說：時間有限 應該先被寫清楚，否則後面的結論都站不穩。</p>
+            <strong>錯誤成本</strong>
+            <p>選錯的代價是否可逆、可監測、可修補？</p>
           </article>
           <article class="lens-card">
-            <strong>環境形塑策略</strong>
-            <p>環境形塑策略 這條線在乎的，不是誰比較有氣勢，而是 計算有限 一旦沒被交代，現場會怎麼開始失真。</p>
+            <strong>環境支援</strong>
+            <p>系統是否提供摘要、預設、警示和分層流程？</p>
           </article>
         </div>
       </section>
@@ -155,44 +155,44 @@
       <section class="chapter" id="psychology">
         <div class="section-heading">
           <p class="section-label">Psychology</p>
-          <h2>為什麼人一忙起來就最容易把 有限理性 用歪</h2>
-          <p class="section-lede">這類原則常被用歪，不是因為內容太難，而是因為把它說成一句漂亮話，比真的交代 資訊有限、時間有限 和 計算有限 容易太多。</p>
+          <h2>人會用捷徑，問題是捷徑有沒有被設計好</h2>
+          <p class="section-lede">heuristics 不是敵人；在複雜世界中，好的捷徑比無限分析更實用。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>最優崇拜</strong>
-            <p>碰到 最優崇拜 時，最危險的是大家以為原則已經被引用，實際上 資訊有限 還沒被具體說明。</p>
+            <strong>注意力稀缺</strong>
+            <p>使用者和工程師都只會看一部分訊號。</p>
           </article>
           <article class="example">
-            <strong>事後容易嫌決策不夠完美</strong>
-            <p>事後容易嫌決策不夠完美 會讓人覺得只要把話說得夠完整，就不必再補 時間有限 的證據或代價。</p>
+            <strong>滿意化降低負荷</strong>
+            <p>夠好策略能避免決策癱瘓。</p>
           </article>
           <article class="example">
-            <strong>限制常在事前沒被寫出來</strong>
-            <p>限制常在事前沒被寫出來 常不是純粹錯誤，而是一種討論捷徑：先把自己放在合理的一邊，再晚點處理 計算有限。</p>
+            <strong>環境塑造偏差</strong>
+            <p>介面排序和預設值會決定哪些選項先被看到。</p>
           </article>
         </div>
-        <p class="micro-note">一條原則會變空話，通常不是因為字太抽象，而是因為 計算有限 從來沒有被翻成現場動作。</p>
+        <p class="micro-note">與其要求使用者更理性，不如降低重要資訊被錯過的機率。</p>
       </section>
 
       <section class="chapter" id="applications">
         <div class="section-heading">
           <p class="section-label">Applications</p>
-          <h2>回到 產品決策、現場排故 與 流程設計</h2>
-          <p class="section-lede">真正有差的，不是會議上有沒有人引用 有限理性，而是 產品決策 和 現場排故 裡的決策流程有沒有因此變得更可檢查。</p>
+          <h2>替有限理性設計護欄</h2>
+          <p class="section-lede">產品、incident 流程和管理制度都應承認人無法全知全算。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>產品決策</strong>
-            <p>在 產品決策 這種場景，有限理性 幫你的不是贏辯論，而是把 資訊有限 先釘在桌面上，避免事後才補。</p>
+            <strong>產品介面</strong>
+            <p>把高風險選項放入確認流程，低風險常用動作縮短路徑。</p>
           </article>
           <article class="example">
-            <strong>現場排故</strong>
-            <p>現場排故 最需要 有限理性 的時候，通常就是大家都急著往前走，卻還沒把 時間有限 寫成共識。</p>
+            <strong>事故處理</strong>
+            <p>runbook 提供可逆止血步驟和升級條件。</p>
           </article>
           <article class="example">
-            <strong>流程設計</strong>
-            <p>只要到了 流程設計，你就能看出 計算有限 究竟是被真的承擔，還是只是被口頭提過。</p>
+            <strong>策略決策</strong>
+            <p>用 pre-mortem 和決策紀錄補足當下看不到的盲點。</p>
           </article>
         </div>
       </section>
@@ -200,30 +200,30 @@
       <section class="chapter" id="misreadings">
         <div class="section-heading">
           <p class="section-label">Misreadings</p>
-          <h2>三個常見誤讀</h2>
-          <p class="section-lede">這類頁面最常被讀歪的地方，不是概念太抽象，而是大家太快把 資訊有限 當成價值宣示，忘了它還得連著 時間有限 和 計算有限 一起成立。</p>
+          <h2>有限理性不是說人注定糟糕</h2>
+          <p class="section-lede">它把責任從單一腦袋擴展到資訊環境、工具和制度設計。</p>
         </div>
         <div class="collocation-list" aria-label="常見誤讀">
           <article class="collocation-card">
             <div>
-              <strong>有限理性 只是好聽口號</strong>
+              <strong>把它當無能標籤</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>真正難的是把 有限理性 翻成一組可檢查的判準，而不是把它當成結論本身。</p>
+            <p>限制是人類決策的常態，不是個人缺陷。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>只要背了 有限理性 就能直接套用</strong>
+              <strong>放棄標準</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>原則若不落回 資訊有限、時間有限 和代價分配，通常會在現場變成誤用。</p>
+            <p>承認限制仍要設定檢查、回饋和學習機制。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>有限理性 只適合高層決策</strong>
+              <strong>只談心理偏誤</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>其實從 code review 到 現實中的理性 的日常判斷，都會碰到同樣的壓力。</p>
+            <p>制度和介面同樣會造成有限理性的後果。</p>
           </article>
         </div>
       </section>
@@ -231,22 +231,22 @@
       <section class="chapter" id="questions">
         <div class="section-heading">
           <p class="section-label">Questions</p>
-          <h2>把 資訊有限、時間有限 與 計算有限 變成會議上的追問</h2>
-          <p class="section-lede">下面兩個問題不是要你再複述一次原則，而是逼 產品決策、現場排故 這類場景裡的人把空白前提補完。</p>
+          <h2>問決策者能看見什麼、何時該停</h2>
+          <p class="section-lede">下面兩問適合用在流程設計與決策 review。</p>
         </div>
         <div class="prompt-grid">
           <article class="prompt-card">
-            <strong>如果 產品決策 現在就要拍板</strong>
-            <p>誰要先把 資訊有限 說清楚？時間有限 由誰承擔？若 計算有限 無法驗收，你還願意讓決定往前走嗎？</p>
+            <strong>這個決策現場有哪些資訊和時間限制？</strong>
+            <p>先描述環境，再評價選擇。</p>
           </article>
           <article class="prompt-card">
-            <strong>如果團隊說『有限理性 不是大家都同意嗎』</strong>
-            <p>怎樣才算真的用了 有限理性，而不是只借它替既有結論加上道德光澤？</p>
+            <strong>停止搜尋的規則是否合理？</strong>
+            <p>定義夠好的門檻和需要升級的條件。</p>
           </article>
         </div>
         <div class="template-note">
           <strong>延伸路線</strong>
-          <p>把 Satisficing 一起讀，會更清楚 有限理性 在別的框架裡是怎麼被重新安排的。</p>
+          <p>可接著讀 satisficing，理解在限制下尋找足夠好方案的決策策略。</p>
         </div>
       </section>
 
@@ -254,22 +254,22 @@
         <div class="section-heading">
           <p class="section-label">Sources</p>
           <h2>來源與整理方式</h2>
-          <p class="section-lede">本頁先用 Bounded Rationality 條目抓住概念的原始用法，再用 Satisficing 補出它在 現實中的理性 裡最容易被講歪的地方。</p>
+          <p class="section-lede">本頁以 bounded rationality 的限制中決策為核心，並用 satisficing 補足停止搜尋背景。</p>
         </div>
         <div class="source-grid">
           <article class="source-card">
             <strong>核心概念</strong>
-            <p>這張卡交代 有限理性 最基本的約束：哪些話不能先跳過、哪些條件不能事後才補。</p>
+            <p>支撐資訊、時間與計算限制下的實際理性。</p>
             <a href="https://en.wikipedia.org/wiki/Bounded_rationality" target="_blank" rel="noreferrer">Bounded Rationality</a>
           </article>
           <article class="source-card">
-            <strong>相鄰概念</strong>
-            <p>補讀 Satisficing 的好處，是你會看到同樣的爭點一換到別的理論裡，責任與驗收如何重新分配。</p>
+            <strong>相鄰脈絡</strong>
+            <p>補充尋找足夠好方案而非理想最優解的策略。</p>
             <a href="https://en.wikipedia.org/wiki/Satisficing" target="_blank" rel="noreferrer">Satisficing</a>
           </article>
           <article class="source-card">
             <strong>教學整理</strong>
-            <p>和原始條目相比，這一頁多出的教學整理在於：把 有限理性 直接放進 產品決策、現場排故 與 流程設計 這些實際決策場景。</p>
+            <p>產品介面、事故處理與策略決策案例是本頁依工程與組織場景整理。</p>
           </article>
         </div>
       </section>
@@ -279,7 +279,7 @@
           <div>
             <p class="section-label">Reference</p>
             <h2>下一步</h2>
-            <p>下次在 產品決策 或 現場排故 想直接往前走時，先逼自己把 資訊有限、時間有限 和 計算有限 裡最容易被默認的那一段寫出來。</p>
+            <p>下次你嫌一個決策不夠理性，先看當時的資訊、時間和停止規則。</p>
           </div>
           <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
         </div>

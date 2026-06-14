@@ -21,13 +21,13 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
-        <p class="kicker">Knowledge Study / Engineering</p>
+        <p class="kicker">Knowledge Study / Systems</p>
         <h1>單點故障</h1>
         <p class="topic-subtitle">Single Point of Failure</p>
-        <p class="thesis">只要某個元件一壞就能讓整體停擺，那個元件就不只是普通零件，而是整個系統的脆弱頸點。</p>
+        <p class="thesis">單點故障是一個元件、流程或人失效時，整個系統跟著失效的結構性脆弱點。</p>
         <div class="hero-prompt">
           <strong>Read For</strong>
-          <p>這頁會把 脆弱節點、依賴集中 這些常藏在規格外的壓力，拉回 架構審查 與 硬體設計 的設計檢查裡。</p>
+          <p>學會用依賴圖、替代路徑與演練檢查哪個點失效會讓全局中斷。</p>
         </div>
       </div>
       <aside class="hero-note" aria-label="主題資訊">
@@ -42,17 +42,17 @@
           </div>
           <div>
             <dt>主要判準</dt>
-            <dd>脆弱節點、依賴集中、冗餘不足、故障外溢</dd>
+            <dd>依賴集中、替代路徑、故障域、恢復時間</dd>
           </div>
           <div>
             <dt>讀完產出</dt>
-            <dd>能用 One component can drop the whole system 重新檢查 可靠度與冗餘 裡的判斷失真</dd>
+            <dd>能在架構、部署與操作流程中找出不該單獨承擔全局存活的節點</dd>
           </div>
         </dl>
         <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>依賴</span>
           <span>單點</span>
-          <span>斷裂</span>
-          <span>全停</span>
+          <span>冗餘</span>
         </div>
       </aside>
     </div>
@@ -75,28 +75,28 @@
       <section class="chapter" id="core">
         <div class="section-heading">
           <p class="section-label">Orientation</p>
-          <h2>如果系統有很多元件，為什麼最後卻常被一個不起眼的小點整個拉倒</h2>
-          <p class="section-lede">單點故障 的價值，在於它把平常藏在接口、時序或權限邊界外的壓力，提前搬到設計與驗證桌面上。</p>
+          <h2>真正的脆弱點，是它壞掉時沒有人能繞過它</h2>
+          <p class="section-lede">單點故障不一定是最大元件；它是依賴關係中沒有替代路徑、沒有降級方式或沒有接手人的關鍵點。</p>
         </div>
         <div class="core-card">
           <p class="section-label">Core Tension</p>
-          <p>只要某個元件一壞就能讓整體停擺，那個元件就不只是普通零件，而是整個系統的脆弱頸點。</p>
+          <p>集中化能簡化管理與一致性，但若所有路徑都穿過同一點，簡單會換來整體不可用。</p>
         </div>
         <div class="principle-strip" aria-label="本頁讀法">
           <div>
             <span>01</span>
-            <strong>先圈出 脆弱節點 會在哪裡破</strong>
-            <p>脆弱節點 常不是抽象風險，而是會穿過具體接口、排程或權限邊界。</p>
+            <strong>畫出依賴圖</strong>
+            <p>找出所有請求、部署、資料與操作流程必經的節點。</p>
           </div>
           <div>
             <span>02</span>
-            <strong>再追 依賴集中 怎麼穿過邊界</strong>
-            <p>依賴集中 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現。</p>
+            <strong>定義故障域</strong>
+            <p>問某個點壞掉會影響一個功能、一個區域，還是整個系統。</p>
           </div>
           <div>
             <span>03</span>
-            <strong>最後查 冗餘不足 何時從小事變事故</strong>
-            <p>冗餘不足 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力。</p>
+            <strong>驗證替代路徑</strong>
+            <p>備援、手動流程與降級策略要演練，否則只是文件上的安慰。</p>
           </div>
         </div>
       </section>
@@ -104,50 +104,50 @@
       <section class="chapter" id="setup">
         <div class="section-heading">
           <p class="section-label">Setup</p>
-          <h2>把壓力壓回 脆弱節點 最先失守的地方</h2>
-          <p class="section-lede">把問題壓回一個最小接口或一次時序交會，脆弱節點 何時變成風險、冗餘不足 何時開始放大，就不容易再被模糊帶過。</p>
+          <h2>所有服務都有備份，卻都依賴同一個配置服務啟動</h2>
+          <p class="section-lede">最小場景是表面上有多個副本，實際上存在共同必經點。</p>
         </div>
         <div class="definition-grid">
           <div class="tile">
             <strong>最小劇情</strong>
-            <p>看似完整的服務、板子或流程，只要某個電源、憑證、腳本或人員無法被替代，就可能瞬間讓全部功能一起停住。</p>
+            <p>後端服務部署在多個 zone，也有多份資料副本；但所有實例啟動時都要連同一個配置中心。配置中心故障後，滾動重啟讓原本健康的服務也無法回來。</p>
           </div>
           <div class="tile">
             <strong>真正難點</strong>
-            <p>如果系統有很多元件，為什麼最後卻常被一個不起眼的小點整個拉倒</p>
+            <p>冗餘通常畫在主資料路徑上，啟動、部署、認證、配置和人工作業路徑常被漏掉。</p>
           </div>
         </div>
         <div class="concept-flow" aria-label="問題展開">
-          <div class="flow-step">局部先對付 脆弱節點</div>
+          <div class="flow-step">多條路徑依賴同一點</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">依賴集中 穿過接口或時序邊界</div>
+          <div class="flow-step">該點故障或不可達</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">冗餘不足 把小問題放大成現場風險</div>
+          <div class="flow-step">全局服務失去替代路徑</div>
         </div>
         <div class="paradox-frame">
           <strong>Key Point</strong>
-          <p>單點故障 的價值，在於它把平常埋在規格外的 脆弱節點、依賴集中 與 冗餘不足，提前拉回 design review 能談清楚的位置。</p>
+          <p>找單點故障要看實際依賴，不只看元件副本數。</p>
         </div>
       </section>
 
       <section class="chapter" id="lenses">
         <div class="section-heading">
           <p class="section-label">Lenses</p>
-          <h2>先把 依賴集中、替代不足 與 故障擴散 分開看</h2>
-          <p class="section-lede">表面像同一個故障，底下往往是 依賴集中、替代不足 和 故障擴散 在不同邊界各自出力。</p>
+          <h2>找出所有不可繞過的必經點</h2>
+          <p class="section-lede">資料面、控制面和操作面都可能藏有單點，尤其是平常不在 request path 上的元件。</p>
         </div>
         <div class="lens-grid">
           <article class="lens-card">
-            <strong>依賴集中</strong>
-            <p>依賴集中 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 脆弱節點 轉成真正的穩定性壓力。</p>
+            <strong>資料面</strong>
+            <p>使用者請求是否都經過同一 load balancer、database writer 或 queue？</p>
           </article>
           <article class="lens-card">
-            <strong>替代不足</strong>
-            <p>替代不足 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 依賴集中 轉成真正的穩定性壓力。</p>
+            <strong>控制面</strong>
+            <p>部署、配置、認證、DNS 或 feature flag 是否有共同必經點？</p>
           </article>
           <article class="lens-card">
-            <strong>故障擴散</strong>
-            <p>故障擴散 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 冗餘不足 轉成真正的穩定性壓力。</p>
+            <strong>人員面</strong>
+            <p>是否只有一個人知道操作、憑證或恢復流程？</p>
           </article>
         </div>
       </section>
@@ -155,44 +155,44 @@
       <section class="chapter" id="psychology">
         <div class="section-heading">
           <p class="section-label">Psychology</p>
-          <h2>團隊通常在哪一步把 單點故障 當成暫時小事</h2>
-          <p class="section-lede">工程現場最危險的，不是沒人提風險，而是大家太容易把 脆弱節點 當成晚點再補也行的小瑕疵。</p>
+          <h2>人容易在主要路徑看到冗餘，卻忘了輔助路徑也會決定存活</h2>
+          <p class="section-lede">架構圖常強調多副本服務和資料庫，較少標出啟動、變更、憑證和手動修復依賴。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>平常都沒事就以為安全</strong>
-            <p>平常都沒事就以為安全 會讓人把『目前沒爆』誤讀成『設計沒問題』，於是風險一路被推往更後面。</p>
+            <strong>副本數帶來安全感</strong>
+            <p>三個服務副本不代表沒有單點，因為它們可能共享同一個控制面。</p>
           </article>
           <article class="example">
-            <strong>單點太熟悉而被忽略</strong>
-            <p>單點太熟悉而被忽略 最危險的地方，在於它常把局部成功包裝成全局安全。</p>
+            <strong>低頻路徑被低估</strong>
+            <p>部署、恢復和 rotate secret 不常發生，因此更容易在事故時才暴露。</p>
           </article>
           <article class="example">
-            <strong>冗餘只做在顯眼地方</strong>
-            <p>只要 冗餘只做在顯眼地方 一進場，團隊就容易先相信現況撐得住，而不是先問代價正在往哪裡堆。</p>
+            <strong>人員單點被視為正常</strong>
+            <p>組織常把唯一懂的人當效率來源，直到他不在場時才發現那是故障點。</p>
           </article>
         </div>
-        <p class="micro-note">越早把 脆弱節點、依賴集中 這些心理近路說出來，越不容易在 postmortem 才第一次承認它們存在。</p>
+        <p class="micro-note">單點故障審查要包含 request path、startup path、change path 和 recovery path。</p>
       </section>
 
       <section class="chapter" id="applications">
         <div class="section-heading">
           <p class="section-label">Applications</p>
-          <h2>回到 架構審查、硬體設計 與 值班與權限安排</h2>
-          <p class="section-lede">這裡重點不是補幾個抽象案例，而是把 單點故障 直接落到 架構審查、硬體設計 這些真的會出事的邊界上。</p>
+          <h2>把不可繞過的點改成可降級或可接手</h2>
+          <p class="section-lede">系統架構、CI/CD 和操作流程都需要單點故障檢查。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>架構審查</strong>
-            <p>把 單點故障 帶回 架構審查 時，最該先畫出來的是 脆弱節點 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>配置服務</strong>
+            <p>服務應能用最後有效配置啟動或降級，而不是配置中心短暫不可用就全局失敗。</p>
           </article>
           <article class="example">
-            <strong>硬體設計</strong>
-            <p>把 單點故障 帶回 硬體設計 時，最該先畫出來的是 依賴集中 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>CI/CD</strong>
+            <p>部署平台故障時要保留緊急 rollback 或 freeze 能力。</p>
           </article>
           <article class="example">
-            <strong>值班與權限安排</strong>
-            <p>把 單點故障 帶回 值班與權限安排 時，最該先畫出來的是 冗餘不足 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>知識交接</strong>
+            <p>把關鍵操作 runbook、憑證流程與演練分散到多人。</p>
           </article>
         </div>
       </section>
@@ -200,30 +200,30 @@
       <section class="chapter" id="misreadings">
         <div class="section-heading">
           <p class="section-label">Misreadings</p>
-          <h2>三個常見誤讀</h2>
-          <p class="section-lede">這些誤讀常把 單點故障 降成實作瑣事，結果真正的邊界壓力根本沒被談到。</p>
+          <h2>單點故障不是只看有沒有備機</h2>
+          <p class="section-lede">備機若共享同一電源、網路、憑證或操作人員，仍可能同時失效。</p>
         </div>
         <div class="collocation-list" aria-label="常見誤讀">
           <article class="collocation-card">
             <div>
-              <strong>單點故障 只是實作細節</strong>
+              <strong>把副本當獨立</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>它常是 脆弱節點 最先破掉的邊界，所以不是『之後再補』就沒事。</p>
+            <p>副本共享控制面或故障域時，不能算真正獨立。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>只要再加更多防呆，單點故障 就會消失</strong>
+              <strong>只看線上流量</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>如果 依賴集中 的壓力來源沒處理，防呆最後只會變成更昂貴的補丁。</p>
+            <p>啟動、部署、恢復和管理面也會讓系統全局失效。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>單點故障 只和大型分散式系統有關</strong>
+              <strong>忽略恢復時間</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>很多單機、韌體或流程系統，一樣會以更小規模的 冗餘不足 形式重演。</p>
+            <p>有替代路徑但切換要數小時，對使用者來說仍可能是嚴重單點。</p>
           </article>
         </div>
       </section>
@@ -231,22 +231,22 @@
       <section class="chapter" id="questions">
         <div class="section-heading">
           <p class="section-label">Questions</p>
-          <h2>把 脆弱節點、依賴集中 追到真正會破的邊界</h2>
-          <p class="section-lede">下面兩個問題很適合在 架構審查、硬體設計 這類設計或驗證場合直接拿來過一遍。</p>
+          <h2>問哪個點不能壞</h2>
+          <p class="section-lede">下面兩問適合用在架構 review、DR 演練和操作流程盤點。</p>
         </div>
         <div class="prompt-grid">
           <article class="prompt-card">
-            <strong>如果第一個異常出現在 架構審查</strong>
-            <p>你最先會去畫哪條邊界，確認 脆弱節點 和 依賴集中 到底在哪一步被放大？</p>
+            <strong>如果這個元件不可用，哪些路徑完全停止？</strong>
+            <p>同時檢查請求、啟動、部署、認證、配置與恢復路徑。</p>
           </article>
           <article class="prompt-card">
-            <strong>如果 硬體設計 團隊只回你一句『現在看起來沒事』</strong>
-            <p>你要用什麼觀測或驗證證明：冗餘不足 不是只是還沒在現場結帳？</p>
+            <strong>替代路徑最近一次演練是什麼時候？</strong>
+            <p>沒有演練的備援不能當成已驗證能力。</p>
           </article>
         </div>
         <div class="template-note">
           <strong>延伸路線</strong>
-          <p>把 Fault Tolerance 接著讀，通常會更看得出 單點故障 不是單點 bug，而是整體設計習慣。</p>
+          <p>可接著讀 fault tolerance，理解系統如何在局部故障下繼續運作。</p>
         </div>
       </section>
 
@@ -254,22 +254,22 @@
         <div class="section-heading">
           <p class="section-label">Sources</p>
           <h2>來源與整理方式</h2>
-          <p class="section-lede">本頁先用 Single Point of Failure 條目交代故障模式與邊界壓力，再用 Fault Tolerance 補回更大的系統背景。</p>
+          <p class="section-lede">本頁以 single point of failure 的依賴集中為核心，並用 fault tolerance 補足容錯背景。</p>
         </div>
         <div class="source-grid">
           <article class="source-card">
             <strong>核心概念</strong>
-            <p>這張卡說明 單點故障 在接口、時序或權限邊界上最常怎麼冒出來。</p>
+            <p>支撐單一元件失效即可造成整體失效的主線。</p>
             <a href="https://en.wikipedia.org/wiki/Single_point_of_failure" target="_blank" rel="noreferrer">Single Point of Failure</a>
           </article>
           <article class="source-card">
-            <strong>相鄰概念</strong>
-            <p>這張卡補回 Fault Tolerance 所在的更大可靠性或系統脈絡，避免把 單點故障 只看成局部實作瑕疵。</p>
+            <strong>相鄰脈絡</strong>
+            <p>補充系統如何透過容錯設計吸收局部故障。</p>
             <a href="https://en.wikipedia.org/wiki/Fault_tolerance" target="_blank" rel="noreferrer">Fault Tolerance</a>
           </article>
           <article class="source-card">
             <strong>教學整理</strong>
-            <p>工程映射與事故語境是本頁的教學整理，目的是把 單點故障 直接落到 架構審查、硬體設計 與 值班與權限安排 這些邊界上。</p>
+            <p>配置服務、CI/CD 與知識交接案例是本頁依可靠性實務整理的應用。</p>
           </article>
         </div>
       </section>
@@ -279,7 +279,7 @@
           <div>
             <p class="section-label">Reference</p>
             <h2>下一步</h2>
-            <p>下次在 架構審查 或 硬體設計 做設計決定時，先把 脆弱節點 穿過哪個邊界、何時變成 冗餘不足 寫進 review。</p>
+            <p>下次你看到多副本架構，請追問它們共享哪些不可失效的東西。</p>
           </div>
           <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
         </div>

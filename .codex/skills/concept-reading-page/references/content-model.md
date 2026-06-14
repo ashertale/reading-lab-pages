@@ -6,6 +6,7 @@ New pages should be drafted as `data/concept-payloads/<slug>.json` first, then r
 
 Current payloads keep page content as two HTML block strings:
 
+- `contentBrief`: a non-rendered quality contract required for new or modified payloads.
 - `page.heroHtml`: inserted inside `<header class="hero" id="top">`.
 - `page.mainHtml`: inserted inside `<main class="main-shell">`.
 
@@ -27,6 +28,14 @@ Every topic page should keep this reading path:
 
 ## Writing Standards
 
+- New or modified payloads must include `contentBrief` with these keys:
+  - `pressurePoint`: the central tension in one concrete sentence.
+  - `smallestScenario`: a minimal situation where the concept actually bites.
+  - `sourcePlan`: at least two source notes naming what each source supports.
+  - `transferTargets`: at least two engineering, product, system, organization, or self-understanding contexts.
+  - `commonMisreading`: one concrete wrong reading the page must correct.
+  - `readerQuestions`: at least two real questions the reader can apply.
+  - `sectionIntents`: one topic-specific intent sentence for every required section id: `core`, `setup`, `lenses`, `psychology`, `applications`, `misreadings`, `questions`, `sources`.
 - Put the concept's pressure point before history.
 - Make `thesis` a real question or claim, not a subtitle.
 - Make `Read For` describe what judgment ability the reader should gain.
@@ -35,6 +44,7 @@ Every topic page should keep this reading path:
 - Keep repeated cards parallel in function, not identical in phrasing.
 - Keep only the page anatomy shared. The visible copy should not converge on one house formula for section titles, section ledes, micro-notes, source disclosures, or "next step" lines.
 - Treat stock stems as template leakage. Avoid recurring phrasing such as "先抓住這題真正的壓力點", "把它帶回現實場景", "把它變成你的判斷工具", "這裡的心理連結是教學性整理：", or "接著可以順讀...".
+- Treat generated sentence frames as template leakage even when the substituted nouns are accurate. Do not use frames like "X 常不是抽象風險，而是會穿過具體接口、排程或權限邊界", "X 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現", "X 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力", or "把情境縮到一次普通判斷後，X 會怎麼替你省事...".
 - Use English technical terms where they are the real term of art, but explain them in Traditional Chinese.
 - Keep page copy original. Do not paste long source text.
 
@@ -43,12 +53,15 @@ Every topic page should keep this reading path:
 When creating multiple pages in one request:
 
 - Write each topic from its own pressure point. Do not start from one generic template and swap nouns.
+- Before payload work, write a compact content brief for each topic: pressure point, smallest concrete scenario, source plan, transfer target, common misreading, and two reader questions. If this brief sounds reusable across pages, revise it before writing HTML.
 - Keep only the structural anatomy shared. The examples, verbs, card titles, questions, and source notes must be topic-specific.
 - Keep the section ids stable, but rewrite section headings and section-lede voice for each topic. Matching layout does not justify matching wording.
 - Avoid repeated phrases such as "這頁要幫你看見" across every hero. Vary the sentence shape according to the topic's actual learning goal.
 - Prefer fewer strong pages over many shallow pages. If time or context pressure would force generic prose, reduce scope or pause with a clear status.
 - Review new payloads side by side before rendering. Look for identical long sentences, identical section leads, generic "工程整理" source cards, and applications that could fit any topic.
 - If using a helper script, use it only to assemble already-written, topic-specific content. Do not use it as a blank-filling content template.
+- Do not use `scripts/generate_concept_batch.py` to create publishable page prose. It is a legacy catalog/planning helper and is blocked by default because it contains old template stems.
+- `scripts/validate_concept_lab.py` compares new or modified payloads against the existing corpus. If a page is too similar overall, or if a section repeats another page's sentence frame, rewrite the prose before rendering/reporting completion.
 
 ## Topic-Specific Emphasis
 

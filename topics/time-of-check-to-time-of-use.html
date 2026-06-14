@@ -21,13 +21,13 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
-        <p class="kicker">Knowledge Study / Engineering</p>
+        <p class="kicker">Knowledge Study / Systems</p>
         <h1>檢查到使用時間差</h1>
         <p class="topic-subtitle">Time-of-Check to Time-of-Use</p>
-        <p class="thesis">你在檢查當下看到的世界，到了真正使用資源那一刻，可能已經不是同一個世界了。</p>
+        <p class="thesis">TOCTOU 的危險在於檢查通過的那一刻和真正使用資源的那一刻，中間世界已經可能變了。</p>
         <div class="hero-prompt">
           <strong>Read For</strong>
-          <p>這頁會把 檢查時間點、使用時間點 這些常藏在規格外的壓力，拉回 檔案權限 與 硬體狀態切換 的設計檢查裡。</p>
+          <p>理解檢查、使用、鎖定與權限再驗證如何避免安全假設過期。</p>
         </div>
       </div>
       <aside class="hero-note" aria-label="主題資訊">
@@ -42,17 +42,17 @@
           </div>
           <div>
             <dt>主要判準</dt>
-            <dd>檢查時間點、使用時間點、狀態變動、競態條件</dd>
+            <dd>檢查時間、使用時間、狀態變更、原子性</dd>
           </div>
           <div>
             <dt>讀完產出</dt>
-            <dd>能用 Validation can expire before use 重新檢查 檢查與執行邊界 裡的判斷失真</dd>
+            <dd>能在檔案、安全權限與硬體狀態操作中辨認過期檢查</dd>
           </div>
         </dl>
         <div class="knowledge-map" aria-label="閱讀結構示意">
           <span>檢查</span>
-          <span>延遲</span>
-          <span>失效</span>
+          <span>時間差</span>
+          <span>使用</span>
         </div>
       </aside>
     </div>
@@ -75,28 +75,28 @@
       <section class="chapter" id="core">
         <div class="section-heading">
           <p class="section-label">Orientation</p>
-          <h2>如果前面明明檢查過沒問題，為什麼到真的使用時還是可能被繞過或出錯</h2>
-          <p class="section-lede">檢查到使用時間差 的價值，在於它把平常藏在接口、時序或權限邊界外的壓力，提前搬到設計與驗證桌面上。</p>
+          <h2>檢查結果有保存期限，使用時可能已經不是同一個世界</h2>
+          <p class="section-lede">檢查到使用時間差描述的是一種競態：你先驗證條件，再根據驗證結果行動，但條件在行動前被改變。</p>
         </div>
         <div class="core-card">
           <p class="section-label">Core Tension</p>
-          <p>你在檢查當下看到的世界，到了真正使用資源那一刻，可能已經不是同一個世界了。</p>
+          <p>先檢查再使用是直覺流程，但在可變狀態上，分開的兩步會留下被插入或替換的時間窗口。</p>
         </div>
         <div class="principle-strip" aria-label="本頁讀法">
           <div>
             <span>01</span>
-            <strong>先圈出 檢查時間點 會在哪裡破</strong>
-            <p>檢查時間點 常不是抽象風險，而是會穿過具體接口、排程或權限邊界。</p>
+            <strong>縮短或消除窗口</strong>
+            <p>讓檢查與使用在同一原子操作、同一鎖或同一 transaction 裡完成。</p>
           </div>
           <div>
             <span>02</span>
-            <strong>再追 使用時間點 怎麼穿過邊界</strong>
-            <p>使用時間點 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現。</p>
+            <strong>使用穩定引用</strong>
+            <p>用 file descriptor、handle、版本號或 capability 指向已確認對象，而不是重新查路徑或名稱。</p>
           </div>
           <div>
             <span>03</span>
-            <strong>最後查 狀態變動 何時從小事變事故</strong>
-            <p>狀態變動 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力。</p>
+            <strong>使用前再驗證</strong>
+            <p>若無法原子化，就在真正使用前重新確認權限、版本與狀態。</p>
           </div>
         </div>
       </section>
@@ -104,50 +104,50 @@
       <section class="chapter" id="setup">
         <div class="section-heading">
           <p class="section-label">Setup</p>
-          <h2>哪個邊界先把 檢查時間點 變成事故</h2>
-          <p class="section-lede">把問題壓回一個最小接口或一次時序交會，檢查時間點 何時變成風險、狀態變動 何時開始放大，就不容易再被模糊帶過。</p>
+          <h2>檢查的是安全檔案，打開時路徑已被換成符號連結</h2>
+          <p class="section-lede">最小場景是被檢查的對象和被使用的對象看似同名，實際已在中間被替換。</p>
         </div>
         <div class="definition-grid">
           <div class="tile">
             <strong>最小劇情</strong>
-            <p>程式先檢查檔案權限或裝置狀態，接著才執行操作；但中間那一小段時間若狀態已被別的動作改掉，保證就會失效。</p>
+            <p>程式先檢查 /tmp/job.out 屬於目前使用者，稍後再用相同路徑寫入。攻擊者在兩步之間把路徑替換成指向敏感檔案的 symlink。</p>
           </div>
           <div class="tile">
             <strong>真正難點</strong>
-            <p>如果前面明明檢查過沒問題，為什麼到真的使用時還是可能被繞過或出錯</p>
+            <p>程式做了檢查，但檢查結果綁定的是過去那個狀態，不是使用時的實際對象。</p>
           </div>
         </div>
         <div class="concept-flow" aria-label="問題展開">
-          <div class="flow-step">局部先對付 檢查時間點</div>
+          <div class="flow-step">先驗證狀態</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">使用時間點 穿過接口或時序邊界</div>
+          <div class="flow-step">中間狀態被改變</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">狀態變動 把小問題放大成現場風險</div>
+          <div class="flow-step">根據過期結果執行操作</div>
         </div>
         <div class="paradox-frame">
           <strong>Key Point</strong>
-          <p>檢查到使用時間差 的價值，在於它把平常埋在規格外的 檢查時間點、使用時間點 與 狀態變動，提前拉回 design review 能談清楚的位置。</p>
+          <p>TOCTOU 的修法，是讓檢查和使用共享同一個不可被替換的對象或狀態。</p>
         </div>
       </section>
 
       <section class="chapter" id="lenses">
         <div class="section-heading">
           <p class="section-label">Lenses</p>
-          <h2>先把 時間差漏洞、檢查非承諾 與 狀態瞬時性 分開看</h2>
-          <p class="section-lede">表面像同一個故障，底下往往是 時間差漏洞、檢查非承諾 和 狀態瞬時性 在不同邊界各自出力。</p>
+          <h2>找出檢查和使用之間的可變窗口</h2>
+          <p class="section-lede">任何 check-then-use、authorize-then-act 或 read-then-write 都要問中間能否被改變。</p>
         </div>
         <div class="lens-grid">
           <article class="lens-card">
-            <strong>時間差漏洞</strong>
-            <p>時間差漏洞 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 檢查時間點 轉成真正的穩定性壓力。</p>
+            <strong>對象身份</strong>
+            <p>使用時是否仍是當初檢查的同一個檔案、row、裝置或 session？</p>
           </article>
           <article class="lens-card">
-            <strong>檢查非承諾</strong>
-            <p>檢查非承諾 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 使用時間點 轉成真正的穩定性壓力。</p>
+            <strong>狀態版本</strong>
+            <p>檢查後是否用版本號、etag、sequence 或 lock 保證狀態未變？</p>
           </article>
           <article class="lens-card">
-            <strong>狀態瞬時性</strong>
-            <p>狀態瞬時性 通常不會單獨出現；它多半會穿過接口、權限或排程邊界，把 狀態變動 轉成真正的穩定性壓力。</p>
+            <strong>攻擊者能力</strong>
+            <p>誰能在窗口內改 path、permission、link、buffer 或硬體狀態？</p>
           </article>
         </div>
       </section>
@@ -155,44 +155,44 @@
       <section class="chapter" id="psychology">
         <div class="section-heading">
           <p class="section-label">Psychology</p>
-          <h2>團隊通常在哪一步把 檢查到使用時間差 當成暫時小事</h2>
-          <p class="section-lede">工程現場最危險的，不是沒人提風險，而是大家太容易把 檢查時間點 當成晚點再補也行的小瑕疵。</p>
+          <h2>人容易把剛檢查過的事當成仍然成立</h2>
+          <p class="section-lede">順序閱讀程式時，檢查和使用緊貼在一起；實際執行時，中間可能足夠讓另一方插入。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>檢查過就等於安全</strong>
-            <p>檢查過就等於安全 會讓人把『目前沒爆』誤讀成『設計沒問題』，於是風險一路被推往更後面。</p>
+            <strong>程式碼鄰近造成錯覺</strong>
+            <p>兩行程式相鄰不代表執行上不可打斷。</p>
           </article>
           <article class="example">
-            <strong>時間窗太小就可忽略</strong>
-            <p>時間窗太小就可忽略 最危險的地方，在於它常把局部成功包裝成全局安全。</p>
+            <strong>安全檢查給人完成感</strong>
+            <p>看到 access check 很容易放心，卻沒有追問結果是否綁定到使用對象。</p>
           </article>
           <article class="example">
-            <strong>狀態改變被背景化</strong>
-            <p>只要 狀態改變被背景化 一進場，團隊就容易先相信現況撐得住，而不是先問代價正在往哪裡堆。</p>
+            <strong>競態被歸成偶發</strong>
+            <p>TOCTOU 常需要特定時序，因此難重現時容易被低估。</p>
           </article>
         </div>
-        <p class="micro-note">越早把 檢查時間點、使用時間點 這些心理近路說出來，越不容易在 postmortem 才第一次承認它們存在。</p>
+        <p class="micro-note">檢查安全條件時，要同時設計檢查結果如何一路帶到使用點。</p>
       </section>
 
       <section class="chapter" id="applications">
         <div class="section-heading">
           <p class="section-label">Applications</p>
-          <h2>回到 檔案權限、硬體狀態切換 與 共享資源存取</h2>
-          <p class="section-lede">這裡重點不是補幾個抽象案例，而是把 檢查到使用時間差 直接落到 檔案權限、硬體狀態切換 這些真的會出事的邊界上。</p>
+          <h2>讓安全判斷和操作共享同一個承諾</h2>
+          <p class="section-lede">檔案系統、權限 API、硬體控制和分散式資料都可能有 TOCTOU。</p>
         </div>
         <div class="example-grid">
           <article class="example">
-            <strong>檔案權限</strong>
-            <p>把 檢查到使用時間差 帶回 檔案權限 時，最該先畫出來的是 檢查時間點 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>檔案操作</strong>
+            <p>檢查後用已取得的 descriptor 操作，避免重新解析可被替換的路徑。</p>
           </article>
           <article class="example">
-            <strong>硬體狀態切換</strong>
-            <p>把 檢查到使用時間差 帶回 硬體狀態切換 時，最該先畫出來的是 使用時間點 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>權限控制</strong>
+            <p>執行敏感操作時重新驗證 capability 或版本，避免先授權後權限已變。</p>
           </article>
           <article class="example">
-            <strong>共享資源存取</strong>
-            <p>把 檢查到使用時間差 帶回 共享資源存取 時，最該先畫出來的是 狀態變動 穿過接口、時序或權限邊界的那條路。</p>
+            <strong>硬體狀態</strong>
+            <p>讀取 ready flag 後若會等待，使用前再確認狀態或鎖住對應資源。</p>
           </article>
         </div>
       </section>
@@ -200,30 +200,30 @@
       <section class="chapter" id="misreadings">
         <div class="section-heading">
           <p class="section-label">Misreadings</p>
-          <h2>三個常見誤讀</h2>
-          <p class="section-lede">這些誤讀常把 檢查到使用時間差 降成實作瑣事，結果真正的邊界壓力根本沒被談到。</p>
+          <h2>TOCTOU 不是只屬於檔案 symlink 攻擊</h2>
+          <p class="section-lede">凡是檢查結果和使用行為分離，而且狀態可變，都可能有同類問題。</p>
         </div>
         <div class="collocation-list" aria-label="常見誤讀">
           <article class="collocation-card">
             <div>
-              <strong>檢查到使用時間差 只是實作細節</strong>
+              <strong>以為檢查越多越安全</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>它常是 檢查時間點 最先破掉的邊界，所以不是『之後再補』就沒事。</p>
+            <p>多次檢查若都不綁定使用對象，仍可能過期。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>只要再加更多防呆，檢查到使用時間差 就會消失</strong>
+              <strong>只看惡意攻擊</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>如果 使用時間點 的壓力來源沒處理，防呆最後只會變成更昂貴的補丁。</p>
+            <p>正常併發更新也能讓檢查結果失效。</p>
           </article>
           <article class="collocation-card">
             <div>
-              <strong>檢查到使用時間差 只和大型分散式系統有關</strong>
+              <strong>忽略硬體和韌體</strong>
               <span class="register-tag">校正</span>
             </div>
-            <p>很多單機、韌體或流程系統，一樣會以更小規模的 狀態變動 形式重演。</p>
+            <p>暫存器狀態、DMA buffer 和 sensor ready bit 也可能在檢查後改變。</p>
           </article>
         </div>
       </section>
@@ -231,22 +231,22 @@
       <section class="chapter" id="questions">
         <div class="section-heading">
           <p class="section-label">Questions</p>
-          <h2>把 檢查時間點、使用時間點 追到真正會破的邊界</h2>
-          <p class="section-lede">下面兩個問題很適合在 檔案權限、硬體狀態切換 這類設計或驗證場合直接拿來過一遍。</p>
+          <h2>問檢查結果如何活到使用點</h2>
+          <p class="section-lede">下面兩問適合用在安全 review、driver code 和資料更新流程。</p>
         </div>
         <div class="prompt-grid">
           <article class="prompt-card">
-            <strong>如果第一個異常出現在 檔案權限</strong>
-            <p>你最先會去畫哪條邊界，確認 檢查時間點 和 使用時間點 到底在哪一步被放大？</p>
+            <strong>檢查和使用中間誰能改變狀態？</strong>
+            <p>列出可插入的執行緒、使用者、服務、硬體事件或中斷。</p>
           </article>
           <article class="prompt-card">
-            <strong>如果 硬體狀態切換 團隊只回你一句『現在看起來沒事』</strong>
-            <p>你要用什麼觀測或驗證證明：狀態變動 不是只是還沒在現場結帳？</p>
+            <strong>使用時是否仍指向同一個對象？</strong>
+            <p>用 handle、版本、lock 或 transaction 證明不是重新查到另一個東西。</p>
           </article>
         </div>
         <div class="template-note">
           <strong>延伸路線</strong>
-          <p>延伸閱讀可以接到 Race Condition，把這頁的邊界壓力放回更大的可靠性脈絡。</p>
+          <p>可接著讀 race condition，理解結果如何依賴事件交錯。</p>
         </div>
       </section>
 
@@ -254,22 +254,22 @@
         <div class="section-heading">
           <p class="section-label">Sources</p>
           <h2>來源與整理方式</h2>
-          <p class="section-lede">本頁先用 Time-of-Check to Time-of-Use 條目交代故障模式與邊界壓力，再用 Race Condition 補回更大的系統背景。</p>
+          <p class="section-lede">本頁以 TOCTOU 的檢查與使用時間差為核心，並用 race condition 補足時序競態背景。</p>
         </div>
         <div class="source-grid">
           <article class="source-card">
             <strong>核心概念</strong>
-            <p>這張卡說明 檢查到使用時間差 在接口、時序或權限邊界上最常怎麼冒出來。</p>
-            <a href="https://en.wikipedia.org/wiki/Time-of-check_to_time-of-use" target="_blank" rel="noreferrer">Time-of-Check to Time-of-Use</a>
+            <p>支撐檢查結果在使用前可能失效的安全問題。</p>
+            <a href="https://en.wikipedia.org/wiki/Time-of-check_to_time-of-use" target="_blank" rel="noreferrer">Time-of-check to Time-of-use</a>
           </article>
           <article class="source-card">
-            <strong>相鄰概念</strong>
-            <p>這張卡補回 Race Condition 所在的更大可靠性或系統脈絡，避免把 檢查到使用時間差 只看成局部實作瑕疵。</p>
+            <strong>相鄰脈絡</strong>
+            <p>補充結果依賴事件交錯與共享狀態變化的背景。</p>
             <a href="https://en.wikipedia.org/wiki/Race_condition" target="_blank" rel="noreferrer">Race Condition</a>
           </article>
           <article class="source-card">
             <strong>教學整理</strong>
-            <p>工程映射與事故語境是本頁的教學整理，目的是把 檢查到使用時間差 直接落到 檔案權限、硬體狀態切換 與 共享資源存取 這些邊界上。</p>
+            <p>檔案操作、權限控制與硬體狀態案例是本頁依安全與韌體實務整理的應用。</p>
           </article>
         </div>
       </section>
@@ -279,7 +279,7 @@
           <div>
             <p class="section-label">Reference</p>
             <h2>下一步</h2>
-            <p>下次在 檔案權限 或 硬體狀態切換 做設計決定時，先把 檢查時間點 穿過哪個邊界、何時變成 狀態變動 寫進 review。</p>
+            <p>下次你寫完檢查條件，請往下追到真正使用資源的那一行。</p>
           </div>
           <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
         </div>
