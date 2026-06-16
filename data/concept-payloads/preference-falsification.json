@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "preference-falsification",
+    "outputPath": "topics/preference-falsification.html"
+  },
+  "indexEntry": {
+    "id": "preference-falsification",
+    "title": "偏好偽裝",
+    "subtitle": "Preference Falsification",
+    "href": "./topics/preference-falsification.html",
+    "order": 234,
+    "type": "社會動力 / 公私落差",
+    "domain": "群體意見與制度壓力",
+    "focus": "People publicly state preferences different from their private ones",
+    "thesis": "當公開表態有代價時，人可能會在外部說一套、私下想一套；問題不只在誠實缺席，而在整個社會因此更難知道真實偏好分布在哪裡。",
+    "tags": [
+      "preference",
+      "falsification",
+      "signals",
+      "silence",
+      "social-pressure",
+      "meetings",
+      "public-opinion"
+    ]
+  },
+  "page": {
+    "documentTitle": "偏好偽裝 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-preference-falsification",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / signals / social / pressure</p>\n    <h1>偏好偽裝</h1>\n    <p class=\"topic-subtitle\">Preference Falsification</p>\n    <p class=\"thesis\">當公開表態有代價時，人可能會在外部說一套、私下想一套；問題不只在誠實缺席，而在整個社會因此更難知道真實偏好分布在哪裡。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>看懂為什麼場面上的一致不一定代表真的一致，也理解這種落差如何累積成制度性誤判。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>社會動力 / 公私落差</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>People publicly state preferences different from their private ones</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>表態成本、社會懲罰、私下偏好、公共訊號</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在會議、社群與政策判讀裡更敏感地分辨公開聲量和私下偏好。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>私下</span>\n      <span>公開</span>\n      <span>扭曲</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>很多看起來像共識的場面，其實只是代價把真偏好壓進了私下</h2>\n      <p class=\"section-lede\">偏好偽裝真正麻煩的不是有人不說真話，而是整個公共畫面會因此越來越不像群體真正相信的東西。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>只要公開說真話的代價夠高，人就會開始把真偏好藏起來，留下來的公共畫面因此越來越不可信。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先看說真話的代價</strong>\n        <p>代價越高，公開表態越不可靠。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再看公共訊號會怎麼誤導下一個人</strong>\n        <p>一旦大家都以為別人真的相信那套說法，偽裝會更難被打破。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後設計低風險揭露通道</strong>\n        <p>匿名回饋、分層討論與可逆表態，都是讓真偏好有機會浮上來的必要機制。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>先把制度壓回一個小場景</h2>\n      <p class=\"section-lede\">偏好偽裝最麻煩的地方，是公開紀錄看起來很整齊時，你反而更難知道真偏好已經躲到哪裡去了。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>會議裡沒人反對一個明顯有風險的時程，但私下大家都說這根本做不完，因為公開唱反調的人容易被貼上不合作標籤。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於外部一致畫面看起來很有說服力，讓人更難相信場外其實有大量未說出的保留。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">公開表態有代價</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">真偏好被往私下收縮</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">公共訊號越來越偏離真實分布</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>偏好偽裝的危險，不只是個人不誠實，而是整個群體失去校準自己真實偏好的能力。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>幾個會讓結果分岔的判準</h2>\n      <p class=\"section-lede\">這題最麻煩的不是有人說假話，而是台面上的訊號已經和私下偏好越走越遠。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>表態成本</strong>\n        <p>丟臉、被排擠、失去升遷或資源，都會讓人傾向藏起真偏好。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>訊號扭曲</strong>\n        <p>公共畫面一旦失真，後續每個人都更難估計到底有多少人真的這樣想。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>臨界翻轉</strong>\n        <p>偏好偽裝常不是慢慢修正，而是在某個臨界點後突然大量鬆動。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>制度線索</th>\n            <th>表面上像什麼</th>\n            <th>真正風險</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>公開表態風險高</td>\n            <td>場面很整齊</td>\n            <td>真偏好容易轉入地下，公共訊號失真更重</td>\n          </tr>\n          <tr>\n            <td>匿名或低風險回饋</td>\n            <td>表面可能沒那麼漂亮</td>\n            <td>卻較能看見真正的保留與分歧</td>\n          </tr>\n          <tr>\n            <td>只看公開聲量</td>\n            <td>判讀最快</td>\n            <td>最容易把集體沈默誤判成集體同意</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>為什麼好意也可能把系統推歪</h2>\n      <p class=\"section-lede\">人不是天生愛偽裝，而是當說真話的代價高到會傷身份、關係或位置時，保留就變成理性反應。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>從眾保護</strong>\n        <p>很多人不是改變信念，而是先改變說出口的版本來保護自己。</p>\n      </div>\n      <div class=\"example\">\n        <strong>孤立恐懼</strong>\n        <p>一旦以為自己是少數，就更不敢公開暴露真偏好。</p>\n      </div>\n      <div class=\"example\">\n        <strong>表面共識催眠</strong>\n        <p>越是整齊的公共畫面，越會讓人懷疑自己才是異常的那個。</p>\n      </div>\n    </div>\n    <p class=\"micro-note\">這一段要看的，是 從眾保護、孤立恐懼 這類反應如何把 偏好偽裝 指向的制度壓力在現場放大。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>這條規律在現場最有用的地方</h2>\n      <p class=\"section-lede\">團隊會議、社群治理和政策回饋都會在這裡失真，因為公開表態的風險本身就在改寫資料。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>團隊會議</strong>\n        <p>不要把沒人反對直接當成沒人反對；也許只是反對成本太高。</p>\n      </div>\n      <div class=\"example\">\n        <strong>社群管理</strong>\n        <p>公開留言區的立場不一定等於潛水者或邊緣成員的真實偏好。</p>\n      </div>\n      <div class=\"example\">\n        <strong>政策回饋</strong>\n        <p>如果申訴與不同意會帶來可見代價，正式支持率往往會高估真同意度。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>團隊會議: 提供低風險的不同意揭露機制。</li>\n      <li>社群治理: 別把公開留言直接等同於整體偏好。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>幾種常見但危險的治理讀法</h2>\n      <p class=\"section-lede\">若一開始就把 偏好偽裝 聽成「所以所有公開表態都不可信」，後面連「不是。重點是要看表態成本與替代管道，而不是全面否定公開訊號。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以所有公開表態都不可信</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。重點是要看表態成本與替代管道，而不是全面否定公開訊號。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>這只是個人膽小</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>偏好偽裝更常是結構性代價造成的理性自保。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要鼓勵誠實就好</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>若代價結構沒改，口頭鼓勵很難真的讓真偏好浮出。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>把它變成下一次治理審查的追問</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>在這個場域裡，說真話最可能付出什麼代價</strong>\n        <p>先看代價，才能判斷公開訊號值不值得信。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果把身份風險拿掉，現在的支持或反對分布會不會長得很不一樣</strong>\n        <p>這是估計真偏好最重要的一步。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Preference falsification 支撐 偏好偽裝 的主線，Spiral of silence 補上與「表態成本」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐人會因公開表態代價而隱藏真偏好的主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Preference_falsification\" target=\"_blank\" rel=\"noreferrer\">Preference falsification</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上公共訊號如何進一步壓低真偏好表達的相鄰脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Spiral_of_silence\" target=\"_blank\" rel=\"noreferrer\">Spiral of silence</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次看到一個幾乎沒人反對的場面時，先問：是大家真的同意，還是反對的成本太高？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "只要公開說真話的代價夠高，人就會開始把真偏好藏起來，留下來的公共畫面因此越來越不可信。",
+    "smallestScenario": "會議裡沒人反對一個明顯有風險的時程，但私下大家都說這根本做不完，因為公開唱反調的人容易被貼上不合作標籤。",
+    "sourcePlan": [
+      "用來支撐人會因公開表態代價而隱藏真偏好的主線。",
+      "補上公共訊號如何進一步壓低真偏好表達的相鄰脈絡。"
+    ],
+    "transferTargets": [
+      "團隊會議: 提供低風險的不同意揭露機制。",
+      "社群治理: 別把公開留言直接等同於整體偏好。",
+      "政策回饋: 估算表態成本，而不是只看表面支持率。"
+    ],
+    "commonMisreading": "把偏好偽裝讀成『大家都在騙人』會太粗，它更接近結構性代價逼出的訊號扭曲。",
+    "readerQuestions": [
+      "在這個場域裡，說真話最可能付出什麼代價？先看代價，才能判斷公開訊號值不值得信。",
+      "如果把身份風險拿掉，現在的支持或反對分布會不會長得很不一樣？這是估計真偏好最重要的一步。"
+    ],
+    "sectionIntents": {
+      "core": "用「很多看起來像共識的場面，其實只是代價把真偏好壓進了私下」建立本頁的核心張力，先讓讀者看見 只要公開說真話的代價夠高，人就會開始把真偏好藏起來，留下來的公共畫面因此越來越不可信。",
+      "setup": "以「會議裡沒人反對一個明顯有風險的時程，但私下大家都說這根本做不完，因為公開唱反調的人容易被貼上不合作標籤。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「表態成本、訊號扭曲、臨界翻轉」這幾條分析線拆開 偏好偽裝，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「從眾保護、孤立恐懼」這些反應，說明人為何會在 偏好偽裝 上滑向看似合理但代價更高的近路。",
+      "applications": "把 偏好偽裝 拉到 團隊會議、社群治理 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把偏好偽裝讀成『大家都在騙人』會太粗，它更接近結構性代價逼出的訊號扭曲。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「在這個場域裡，說真話最可能付出什麼代價、如果把身份風險拿掉，現在的支持或反對分布會不會長得很不一樣」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Preference falsification 支撐 偏好偽裝 的主線，Spiral of silence 補上與「表態成本」相關的相鄰脈絡。"
+    }
+  }
+}

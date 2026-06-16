@@ -4005,6 +4005,1001 @@ window.CONCEPT_INDEX = [
       "設計",
       "反應"
     ]
+  },
+  {
+    "id": "galls-law",
+    "title": "高爾定律",
+    "subtitle": "Gall's Law",
+    "href": "./topics/galls-law.html",
+    "order": 201,
+    "type": "系統演化 / 架構判斷",
+    "domain": "工程與系統設計",
+    "focus": "Working complexity grows from simpler systems that worked",
+    "thesis": "真正能運作的複雜系統，通常不是一次設計出來，而是從先能運作的簡單版本一路長出來。",
+    "tags": [
+      "galls",
+      "architecture",
+      "platform",
+      "feedback",
+      "refactor",
+      "incremental"
+    ]
+  },
+  {
+    "id": "second-system-effect",
+    "title": "第二系統效應",
+    "subtitle": "Second-System Effect",
+    "href": "./topics/second-system-effect.html",
+    "order": 202,
+    "type": "架構風險 / 過度設計",
+    "domain": "工程與產品演化",
+    "focus": "The second version grows bloated because the first had painful limits",
+    "thesis": "第一版留下的遺憾，常會讓團隊在第二版把所有想補的東西一次塞進去，最後反而做出更難收斂的系統。",
+    "tags": [
+      "second",
+      "system",
+      "scope",
+      "overdesign",
+      "iteration",
+      "platform",
+      "rewrite"
+    ]
+  },
+  {
+    "id": "littles-law",
+    "title": "李特爾法則",
+    "subtitle": "Little's Law",
+    "href": "./topics/littles-law.html",
+    "order": 203,
+    "type": "流程度量 / 佇列判斷",
+    "domain": "工程流程與營運",
+    "focus": "Work in progress, throughput, and wait time move together",
+    "thesis": "當在製數量、完成速度與等待時間纏在同一條佇列上時，你不可能只靠喊快一點，就把延遲從系統裡趕走。",
+    "tags": [
+      "littles",
+      "queue",
+      "throughput",
+      "wip",
+      "latency",
+      "operations"
+    ]
+  },
+  {
+    "id": "semantic-versioning",
+    "title": "語意化版本",
+    "subtitle": "Semantic Versioning",
+    "href": "./topics/semantic-versioning.html",
+    "order": 204,
+    "type": "相容性契約 / 版本治理",
+    "domain": "軟體介面與發布",
+    "focus": "Version numbers as promises about change",
+    "thesis": "版本號真正承載的不是排隊順序，而是變更承諾；一旦版本號不再對應相容性，整個生態就會開始用猜的。",
+    "tags": [
+      "semantic",
+      "versioning",
+      "api",
+      "compatibility",
+      "release",
+      "contract",
+      "sdk"
+    ]
+  },
+  {
+    "id": "circuit-breaker-pattern",
+    "title": "斷路器模式",
+    "subtitle": "Circuit Breaker Pattern",
+    "href": "./topics/circuit-breaker-pattern.html",
+    "order": 205,
+    "type": "容錯設計 / 故障隔離",
+    "domain": "服務韌性與失敗治理",
+    "focus": "Stop sending traffic into a failing dependency",
+    "thesis": "當依賴已經在失敗時，繼續照常重試只會把局部故障放大成系統性拖垮；斷路器的價值就在於承認該暫停了。",
+    "tags": [
+      "circuit",
+      "breaker",
+      "pattern",
+      "resilience",
+      "retry",
+      "timeouts",
+      "dependencies",
+      "isolation"
+    ]
+  },
+  {
+    "id": "fail-fast",
+    "title": "快速失敗",
+    "subtitle": "Fail Fast",
+    "href": "./topics/fail-fast.html",
+    "order": 206,
+    "type": "錯誤策略 / 及早暴露",
+    "domain": "工程驗證與介面設計",
+    "focus": "Expose invalid states early instead of carrying them forward",
+    "thesis": "錯誤若在最早的邊界就被明確暴露，代價通常比較便宜；真正昂貴的，是讓一個壞前提靜靜穿過很多層之後才爆。",
+    "tags": [
+      "fail",
+      "fast",
+      "validation",
+      "boundaries",
+      "errors",
+      "contracts",
+      "debugging"
+    ]
+  },
+  {
+    "id": "good-regulator-theorem",
+    "title": "好調節者定理",
+    "subtitle": "Good Regulator Theorem",
+    "href": "./topics/good-regulator-theorem.html",
+    "order": 207,
+    "type": "模型原則 / 控制與表徵",
+    "domain": "系統建模與控制",
+    "focus": "Every good regulator must carry a model of the system it regulates",
+    "thesis": "如果一個控制器想長期把系統調得好，它終究得在某種程度上帶著那個系統的模型；沒有模型的控制，多半只是碰巧有效。",
+    "tags": [
+      "good",
+      "regulator",
+      "theorem",
+      "models",
+      "control",
+      "cybernetics",
+      "feedback",
+      "representation"
+    ]
+  },
+  {
+    "id": "orthogonality-thesis",
+    "title": "正交論題",
+    "subtitle": "Orthogonality Thesis",
+    "href": "./topics/orthogonality-thesis.html",
+    "order": 208,
+    "type": "AI 原則 / 目標與能力",
+    "domain": "人工智慧與風險判斷",
+    "focus": "Intelligence and goals do not automatically align",
+    "thesis": "能力更強，不代表目標就更高尚；系統的智能程度和它追求什麼，原則上可以是兩條彼此獨立的軸。",
+    "tags": [
+      "orthogonality",
+      "thesis",
+      "alignment",
+      "goals",
+      "capability",
+      "ai-safety",
+      "optimization"
+    ]
+  },
+  {
+    "id": "instrumental-convergence",
+    "title": "工具性收斂",
+    "subtitle": "Instrumental Convergence",
+    "href": "./topics/instrumental-convergence.html",
+    "order": 209,
+    "type": "AI 風險 / 次級目標",
+    "domain": "人工智慧與策略行為",
+    "focus": "Different final goals can imply similar instrumental drives",
+    "thesis": "即使最終目標彼此完全不同，系統為了更穩定地完成那些目標，仍可能收斂出一批很像的中間追求，例如爭取資源、保全自身與維持控制。",
+    "tags": [
+      "instrumental",
+      "convergence",
+      "subgoals",
+      "ai-safety",
+      "agency",
+      "resources"
+    ]
+  },
+  {
+    "id": "moravecs-paradox",
+    "title": "莫拉維克悖論",
+    "subtitle": "Moravec's Paradox",
+    "href": "./topics/moravecs-paradox.html",
+    "order": 210,
+    "type": "AI 悖論 / 能力分布",
+    "domain": "人工智慧與人類技能",
+    "focus": "Tasks that feel easy to humans can be hard for machines",
+    "thesis": "對人類來說最順手、最不費力的感知與動作技能，常恰恰是機器最難學會的；反而抽象推理有時比較容易被機器攻下。",
+    "tags": [
+      "moravecs",
+      "paradox",
+      "robotics",
+      "perception",
+      "embodiment",
+      "automation",
+      "ai"
+    ]
+  },
+  {
+    "id": "one-way-two-way-door",
+    "title": "單向門與雙向門",
+    "subtitle": "One-Way Door / Two-Way Door",
+    "href": "./topics/one-way-two-way-door.html",
+    "order": 211,
+    "type": "決策原則 / 可逆性",
+    "domain": "產品、架構與管理節奏",
+    "focus": "Reversible and irreversible decisions need different speed and process",
+    "thesis": "不是所有決策都值得用同樣的慎重度對待；可逆決策若被過度拖慢會浪費時機，不可逆決策若被當成可隨便回頭，代價又會很高。",
+    "tags": [
+      "one",
+      "way",
+      "two",
+      "door",
+      "reversibility",
+      "management",
+      "product",
+      "architecture"
+    ]
+  },
+  {
+    "id": "two-phase-commit",
+    "title": "兩階段提交",
+    "subtitle": "Two-Phase Commit",
+    "href": "./topics/two-phase-commit.html",
+    "order": 212,
+    "type": "分散式協調 / 一致性交換",
+    "domain": "資料一致性與交易設計",
+    "focus": "Coordinating a single all-or-nothing decision across multiple participants",
+    "thesis": "想讓多個參與者一起做『要嘛都做、要嘛都不做』的決定，代價通常不是零；兩階段提交替你換來原子性，卻也同時把等待、阻塞和協調單點帶進系統。",
+    "tags": [
+      "two",
+      "phase",
+      "commit",
+      "distributed",
+      "transactions",
+      "consistency",
+      "coordination",
+      "blocking"
+    ]
+  },
+  {
+    "id": "groupthink",
+    "title": "團體迷思",
+    "subtitle": "Groupthink",
+    "href": "./topics/groupthink.html",
+    "order": 213,
+    "type": "群體偏差 / 決策失真",
+    "domain": "團隊決策與會議文化",
+    "focus": "Groups can trade critical evaluation for harmony and confidence",
+    "thesis": "群體並不是人越多就自然更聰明；當維持和諧、速度或一致信心被看得太重時，群體反而會更難看見明顯漏洞。",
+    "tags": [
+      "groupthink",
+      "meetings",
+      "consensus",
+      "critique",
+      "teams",
+      "decision-making"
+    ]
+  },
+  {
+    "id": "ergodicity-problem",
+    "title": "遍歷性問題",
+    "subtitle": "Ergodicity Problem",
+    "href": "./topics/ergodicity-problem.html",
+    "order": 214,
+    "type": "決策概念 / 平均與時間",
+    "domain": "風險、財務與策略判斷",
+    "focus": "What is true on average across many cases may not be true over time for one path",
+    "thesis": "在很多現實決策裡，『把很多人同一時間平均』和『同一個人在很長時間裡走過的路』不是同一件事；看起來平均划算的選擇，沿著時間走可能完全承受不起。",
+    "tags": [
+      "ergodicity",
+      "risk",
+      "averages",
+      "time",
+      "survival",
+      "strategy"
+    ]
+  },
+  {
+    "id": "confused-deputy-problem",
+    "title": "困惑代理問題",
+    "subtitle": "Confused Deputy Problem",
+    "href": "./topics/confused-deputy-problem.html",
+    "order": 215,
+    "type": "安全概念 / 權限誤用",
+    "domain": "系統安全與授權設計",
+    "focus": "A more privileged component can be tricked into misusing its authority",
+    "thesis": "危險不一定來自權限不夠，而可能來自一個有權限的元件被引導去替別人做本來不該做的事；問題是代理被搞混了，不是單點權限看起來太大。",
+    "tags": [
+      "confused",
+      "deputy",
+      "security",
+      "delegation",
+      "authorization",
+      "permissions",
+      "services"
+    ]
+  },
+  {
+    "id": "security-through-obscurity",
+    "title": "藉由隱蔽求安全",
+    "subtitle": "Security through Obscurity",
+    "href": "./topics/security-through-obscurity.html",
+    "order": 216,
+    "type": "安全原則 / 依賴錯位",
+    "domain": "系統安全與設計假設",
+    "focus": "Relying on secrecy of design details as the main defense",
+    "thesis": "把安全主要建立在『別人最好不要知道我們怎麼做』，短期看起來像多一層保護；但一旦祕密外洩，若核心設計本身不堪一擊，整體安全就會瞬間失去支點。",
+    "tags": [
+      "security",
+      "through",
+      "obscurity",
+      "design",
+      "authorization",
+      "defense"
+    ]
+  },
+  {
+    "id": "finite-and-infinite-games",
+    "title": "有限與無限遊戲",
+    "subtitle": "Finite and Infinite Games",
+    "href": "./topics/finite-and-infinite-games.html",
+    "order": 217,
+    "type": "框架概念 / 競爭與延續",
+    "domain": "策略、組織與人生判斷",
+    "focus": "Some games are played to win, others to keep the game going",
+    "thesis": "不是所有競爭都在追求終局勝利；有些場景真正重要的是讓遊戲能持續下去。若把後者誤當前者，很多本來該保留的關係、彈性與信任就會被你拿去換短期勝負。",
+    "tags": [
+      "finite",
+      "infinite",
+      "games",
+      "strategy",
+      "cooperation",
+      "competition",
+      "continuation",
+      "organizations"
+    ]
+  },
+  {
+    "id": "motte-and-bailey-fallacy",
+    "title": "城堡與外庭謬誤",
+    "subtitle": "Motte-and-Bailey Fallacy",
+    "href": "./topics/motte-and-bailey-fallacy.html",
+    "order": 218,
+    "type": "論證問題 / 立場切換",
+    "domain": "辯論、產品敘事與公共論述",
+    "focus": "Switching between a bold claim and a defensible claim to avoid challenge",
+    "thesis": "有些主張會先用很大、很有擴張力的版本去拿好處，一旦被挑戰，又退回一個較弱、較安全、幾乎沒人反對的版本自保；真正讓人難受的不是弱版本，而是兩者被來回偷換。",
+    "tags": [
+      "motte",
+      "bailey",
+      "fallacy",
+      "arguments",
+      "rhetoric",
+      "claims",
+      "debate",
+      "product-positioning"
+    ]
+  },
+  {
+    "id": "p-hacking",
+    "title": "p-hacking",
+    "subtitle": "p-Hacking",
+    "href": "./topics/p-hacking.html",
+    "order": 219,
+    "type": "研究偏差 / 結果篩選",
+    "domain": "實驗、分析與指標治理",
+    "focus": "Repeatedly slicing data or stopping tests until significance appears",
+    "thesis": "當人一邊看資料、一邊改切法、停測點、子群體或指標，只要有足夠多次嘗試，原本普通的雜訊也可能被磨成看似有意義的結果。",
+    "tags": [
+      "p",
+      "hacking",
+      "statistics",
+      "experiments",
+      "ab-testing",
+      "research",
+      "significance"
+    ]
+  },
+  {
+    "id": "publication-bias",
+    "title": "發表偏差",
+    "subtitle": "Publication Bias",
+    "href": "./topics/publication-bias.html",
+    "order": 220,
+    "type": "知識偏差 / 可見性過濾",
+    "domain": "研究、指標與組織學習",
+    "focus": "Positive or striking results are more likely to be visible than null results",
+    "thesis": "如果只有成功、顯著、好看或符合期待的結果比較容易被發表和看見，那我們對世界的整體理解就會系統性偏斜，因為失敗與無差異其實被藏在看不見的地方。",
+    "tags": [
+      "publication",
+      "bias",
+      "evidence",
+      "selection",
+      "research",
+      "experiments",
+      "learning"
+    ]
+  },
+  {
+    "id": "overconfidence-effect",
+    "title": "過度自信效應",
+    "subtitle": "Overconfidence Effect",
+    "href": "./topics/overconfidence-effect.html",
+    "order": 221,
+    "type": "認知偏差 / 判斷校準",
+    "domain": "估計、預測與決策",
+    "focus": "People are often more certain than the evidence justifies",
+    "thesis": "人不只會判錯，還常會對自己的判斷太有把握；最危險的不是答案錯，而是把握度錯得比答案還離譜。",
+    "tags": [
+      "overconfidence",
+      "confidence",
+      "calibration",
+      "forecasting",
+      "estimation",
+      "risk"
+    ]
+  },
+  {
+    "id": "social-proof",
+    "title": "社會認同",
+    "subtitle": "Social Proof",
+    "href": "./topics/social-proof.html",
+    "order": 222,
+    "type": "社會心理 / 訊號依賴",
+    "domain": "選擇、產品與群體行為",
+    "focus": "People use others' behavior as evidence for what to do",
+    "thesis": "當情境模糊、資訊不足或代價不明時，人很容易把『別人怎麼做』當成自己該怎麼做的證據；問題是別人的行為本身也可能只是跟著別人。",
+    "tags": [
+      "social",
+      "proof",
+      "social-proof",
+      "conformity",
+      "signals",
+      "products",
+      "culture"
+    ]
+  },
+  {
+    "id": "dunbars-number",
+    "title": "鄧巴數",
+    "subtitle": "Dunbar's Number",
+    "href": "./topics/dunbars-number.html",
+    "order": 223,
+    "type": "社會認知 / 關係上限",
+    "domain": "團隊規模與社群設計",
+    "focus": "Cognitive limits constrain stable social relationships",
+    "thesis": "人能長期維持的穩定關係數量似乎有認知上限；規模一旦超過某些邊界，協作就更依賴結構、角色和儀式，而不是靠每個人真的彼此熟悉。",
+    "tags": [
+      "dunbars",
+      "number",
+      "teams",
+      "scale",
+      "trust",
+      "organizations",
+      "social"
+    ]
+  },
+  {
+    "id": "small-world-phenomenon",
+    "title": "小世界現象",
+    "subtitle": "Small-World Phenomenon",
+    "href": "./topics/small-world-phenomenon.html",
+    "order": 224,
+    "type": "網路結構 / 傳播路徑",
+    "domain": "社群、組織與資訊流",
+    "focus": "Large networks can still have surprisingly short paths between nodes",
+    "thesis": "即使網路規模很大，節點之間的實際距離也可能比直覺短得多；這讓資訊、影響力與錯誤都能以意外快的方式穿越整張網。",
+    "tags": [
+      "small",
+      "world",
+      "phenomenon",
+      "networks",
+      "spread",
+      "bridges",
+      "social",
+      "diffusion"
+    ]
+  },
+  {
+    "id": "preferential-attachment",
+    "title": "優先連結",
+    "subtitle": "Preferential Attachment",
+    "href": "./topics/preferential-attachment.html",
+    "order": 225,
+    "type": "網路動力 / 富者愈富",
+    "domain": "平台、注意力與結構增長",
+    "focus": "Nodes with more links tend to attract even more links",
+    "thesis": "一個節點一旦先累積了較多連結、關注或引用，它往後就更容易繼續拿到更多連結；網路不是平均長大的，而是會自己把注意力往既有高位拉。",
+    "tags": [
+      "preferential",
+      "attachment",
+      "networks",
+      "attention",
+      "platforms",
+      "growth",
+      "concentration"
+    ]
+  },
+  {
+    "id": "rule-of-least-power",
+    "title": "最小能力原則",
+    "subtitle": "Rule of Least Power",
+    "href": "./topics/rule-of-least-power.html",
+    "order": 226,
+    "type": "設計原則 / 表達能力",
+    "domain": "格式、接口與系統演化",
+    "focus": "Use the least powerful language or mechanism that still solves the problem",
+    "thesis": "當一件事能用更簡單、限制更多的表達方式完成時，別急著上最強的語言或機制；能力越強，通常也代表越難分析、重用、遷移與組合。",
+    "tags": [
+      "rule",
+      "least",
+      "power",
+      "design",
+      "configuration",
+      "declarative",
+      "contracts",
+      "tooling"
+    ]
+  },
+  {
+    "id": "worse-is-better",
+    "title": "更差反而更好",
+    "subtitle": "Worse Is Better",
+    "href": "./topics/worse-is-better.html",
+    "order": 227,
+    "type": "設計哲學 / 取捨策略",
+    "domain": "系統普及與工程文化",
+    "focus": "Simple, rough designs can spread faster than more internally elegant ones",
+    "thesis": "一個設計如果夠簡單、夠容易實作、夠容易被帶出去活下來，它有時會比內部更一致、理論更漂亮的設計更快勝出；不是因為它真更好，而是因為它更容易活。",
+    "tags": [
+      "worse",
+      "is",
+      "better",
+      "adoption",
+      "simplicity",
+      "unix",
+      "design",
+      "ecosystems"
+    ]
+  },
+  {
+    "id": "tail-latency",
+    "title": "尾端延遲",
+    "subtitle": "Tail Latency",
+    "href": "./topics/tail-latency.html",
+    "order": 228,
+    "type": "效能概念 / 分布風險",
+    "domain": "系統效能與使用者體驗",
+    "focus": "A small fraction of slow requests can dominate perceived performance at scale",
+    "thesis": "平均延遲看起來不錯，並不代表體驗真的好；只要最慢那一小撮請求夠慢、夠常在關鍵路徑上出現，它們就會支配整體使用者感受與上層服務表現。",
+    "tags": [
+      "tail",
+      "latency",
+      "p99",
+      "performance",
+      "fanout",
+      "monitoring"
+    ]
+  },
+  {
+    "id": "metcalfes-law",
+    "title": "梅特卡夫定律",
+    "subtitle": "Metcalfe's Law",
+    "href": "./topics/metcalfes-law.html",
+    "order": 229,
+    "type": "網路效應 / 價值增長",
+    "domain": "平台、連線與生態",
+    "focus": "The value of a network can grow with the number of possible connections",
+    "thesis": "某些產品或系統的價值不只來自單點能力，而來自參與者之間可能形成的連線；節點一多，價值有時不是線性加，而是因為連線機會一起膨脹。",
+    "tags": [
+      "metcalfes",
+      "network-effects",
+      "platforms",
+      "adoption",
+      "connections",
+      "ecosystems"
+    ]
+  },
+  {
+    "id": "option-value",
+    "title": "選擇權價值",
+    "subtitle": "Option Value",
+    "href": "./topics/option-value.html",
+    "order": 230,
+    "type": "決策原則 / 可逆性",
+    "domain": "策略、產品與資源配置",
+    "focus": "Keeping good future options open can have present value",
+    "thesis": "有些決策現在看起來暫時沒多賺什麼，但它保留了未來更多更好的選擇；那份可逆性和延後承諾的空間，本身就是價值。",
+    "tags": [
+      "option",
+      "value",
+      "options",
+      "strategy",
+      "reversibility",
+      "uncertainty",
+      "decisions"
+    ]
+  },
+  {
+    "id": "matthew-effect",
+    "title": "馬太效應",
+    "subtitle": "Matthew Effect",
+    "href": "./topics/matthew-effect.html",
+    "order": 231,
+    "type": "累積優勢 / 分配動力",
+    "domain": "資源、聲望與組織機會",
+    "focus": "Advantages compound by attracting more advantages",
+    "thesis": "一點點先發優勢常不會停在原地；只要制度、注意力或資源分配會回頭獎勵已經領先的人，差距就會自己長大。",
+    "tags": [
+      "matthew",
+      "inequality",
+      "advantage",
+      "platforms",
+      "resources",
+      "reputation"
+    ]
+  },
+  {
+    "id": "law-of-diminishing-marginal-utility",
+    "title": "邊際效用遞減",
+    "subtitle": "Law of Diminishing Marginal Utility",
+    "href": "./topics/law-of-diminishing-marginal-utility.html",
+    "order": 232,
+    "type": "分配原則 / 價值遞減",
+    "domain": "資源配置與福利判斷",
+    "focus": "Each additional unit tends to add less value than the previous one",
+    "thesis": "同樣一單位資源，落在極度缺乏的人身上和落在已經很充足的人身上，通常不會帶來同樣多的主觀價值；越往後加，新增效用常越小。",
+    "tags": [
+      "diminishing",
+      "marginal",
+      "utility",
+      "allocation",
+      "welfare",
+      "tradeoff",
+      "margins"
+    ]
+  },
+  {
+    "id": "median-voter-theorem",
+    "title": "中位選民定理",
+    "subtitle": "Median Voter Theorem",
+    "href": "./topics/median-voter-theorem.html",
+    "order": 233,
+    "type": "政治經濟 / 聚合結果",
+    "domain": "偏好聚合與策略選擇",
+    "focus": "Competition under majority rule pulls toward the median preference",
+    "thesis": "在某些條件下，若大家只爭多數票而偏好能排成單一軸，策略常會一路往中位偏好靠攏；不是因為中間最真，而是因為它最難被兩邊同時拋下。",
+    "tags": [
+      "median",
+      "voter",
+      "theorem",
+      "voting",
+      "preferences",
+      "majority",
+      "strategy",
+      "aggregation"
+    ]
+  },
+  {
+    "id": "preference-falsification",
+    "title": "偏好偽裝",
+    "subtitle": "Preference Falsification",
+    "href": "./topics/preference-falsification.html",
+    "order": 234,
+    "type": "社會動力 / 公私落差",
+    "domain": "群體意見與制度壓力",
+    "focus": "People publicly state preferences different from their private ones",
+    "thesis": "當公開表態有代價時，人可能會在外部說一套、私下想一套；問題不只在誠實缺席，而在整個社會因此更難知道真實偏好分布在哪裡。",
+    "tags": [
+      "preference",
+      "falsification",
+      "signals",
+      "silence",
+      "social-pressure",
+      "meetings",
+      "public-opinion"
+    ]
+  },
+  {
+    "id": "spiral-of-silence",
+    "title": "沉默螺旋",
+    "subtitle": "Spiral of Silence",
+    "href": "./topics/spiral-of-silence.html",
+    "order": 235,
+    "type": "輿論動力 / 表態風險",
+    "domain": "媒體、社群與群體認知",
+    "focus": "Perceived majority pressure makes minority views go quieter",
+    "thesis": "當人以為自己站在少數，而且公開表態可能帶來孤立或懲罰時，就更傾向沉默；這份沉默又反過來讓表面的多數看起來更大，形成持續加速的螺旋。",
+    "tags": [
+      "spiral",
+      "silence",
+      "opinion",
+      "social-pressure",
+      "media",
+      "meetings"
+    ]
+  },
+  {
+    "id": "just-world-hypothesis",
+    "title": "公正世界信念",
+    "subtitle": "Just-World Hypothesis",
+    "href": "./topics/just-world-hypothesis.html",
+    "order": 236,
+    "type": "認知偏差 / 因果安慰",
+    "domain": "責任歸因與道德判斷",
+    "focus": "Believing the world is fair leads people to rationalize outcomes",
+    "thesis": "如果我們強烈相信世界大致公平，就會在看到苦難、失敗或被害時，更容易去找『他是不是哪裡做錯了』的解釋，藉此保住世界仍然有秩序的感覺。",
+    "tags": [
+      "just",
+      "world",
+      "hypothesis",
+      "fairness",
+      "victim-blaming",
+      "causality",
+      "bias",
+      "justice"
+    ]
+  },
+  {
+    "id": "illusion-of-explanatory-depth",
+    "title": "解釋深度錯覺",
+    "subtitle": "Illusion of Explanatory Depth",
+    "href": "./topics/illusion-of-explanatory-depth.html",
+    "order": 237,
+    "type": "認知偏差 / 理解自信",
+    "domain": "學習、產品與溝通",
+    "focus": "People often think they understand systems more deeply than they really do",
+    "thesis": "很多時候我們不是完全不懂，而是以為自己比實際上懂得更深；一旦被要求真的講清楚機制，理解的空洞才會露出來。",
+    "tags": [
+      "illusion",
+      "explanatory",
+      "depth",
+      "understanding",
+      "metacognition",
+      "teaching",
+      "design-review",
+      "learning"
+    ]
+  },
+  {
+    "id": "illusion-of-control",
+    "title": "控制錯覺",
+    "subtitle": "Illusion of Control",
+    "href": "./topics/illusion-of-control.html",
+    "order": 238,
+    "type": "認知偏差 / 掌控感",
+    "domain": "決策、風險與介面行為",
+    "focus": "People overestimate their ability to influence outcomes",
+    "thesis": "只要一件事看起來像有很多操作點，人就容易高估自己對結果的實際控制力；真正改變結果的因素可能根本不在那些按鈕上。",
+    "tags": [
+      "illusion",
+      "control",
+      "randomness",
+      "debugging",
+      "interfaces",
+      "risk"
+    ]
+  },
+  {
+    "id": "moral-licensing",
+    "title": "道德授權",
+    "subtitle": "Moral Licensing",
+    "href": "./topics/moral-licensing.html",
+    "order": 239,
+    "type": "認知偏差 / 自我帳本",
+    "domain": "倫理、自我管理與組織文化",
+    "focus": "Past virtue can be used to justify present indulgence or harm",
+    "thesis": "做過一件好事、說過一句正確的話，常會讓人不自覺地覺得自己已經站在『好人那邊』，於是對後續較差行為變得比較寬容。",
+    "tags": [
+      "moral",
+      "licensing",
+      "ethics",
+      "self-licensing",
+      "identity",
+      "behavior",
+      "culture"
+    ]
+  },
+  {
+    "id": "hostile-media-effect",
+    "title": "敵意媒體效應",
+    "subtitle": "Hostile Media Effect",
+    "href": "./topics/hostile-media-effect.html",
+    "order": 240,
+    "type": "認知偏差 / 媒體判讀",
+    "domain": "訊息、立場與公共討論",
+    "focus": "People with strong views see neutral coverage as biased against them",
+    "thesis": "立場越強的人，越可能把相對中性的報導也看成對自己不利；不是因為內容一定極端，而是因為自己的預設立場讓對稱資訊顯得偏向對方。",
+    "tags": [
+      "hostile",
+      "media",
+      "bias",
+      "perception",
+      "polarization",
+      "communication"
+    ]
+  },
+  {
+    "id": "frame-problem",
+    "title": "框架問題",
+    "subtitle": "Frame Problem",
+    "href": "./topics/frame-problem.html",
+    "order": 241,
+    "type": "AI 哲學 / 行動表徵",
+    "domain": "推理與世界更新",
+    "focus": "How to know what stays relevant when something changes",
+    "thesis": "真正困難的不是讓系統知道某個行動會改變什麼，而是讓它知道其他幾乎所有沒變的東西不必每次都重算一遍。",
+    "tags": [
+      "frame",
+      "reasoning",
+      "state",
+      "context",
+      "planning",
+      "common-sense"
+    ]
+  },
+  {
+    "id": "symbol-grounding-problem",
+    "title": "符號接地問題",
+    "subtitle": "Symbol Grounding Problem",
+    "href": "./topics/symbol-grounding-problem.html",
+    "order": 242,
+    "type": "認知問題 / 語意連結",
+    "domain": "語言、感知與表徵",
+    "focus": "How symbols get connected to the world they are about",
+    "thesis": "符號如果只靠其他符號來解釋，系統也許能流暢操作字串，卻不一定真的知道那些字串指向世界中的什麼。",
+    "tags": [
+      "symbol",
+      "grounding",
+      "semantics",
+      "language",
+      "representation",
+      "ai"
+    ]
+  },
+  {
+    "id": "no-free-lunch-theorem",
+    "title": "免費午餐不存在定理",
+    "subtitle": "No Free Lunch Theorem",
+    "href": "./topics/no-free-lunch-theorem.html",
+    "order": 243,
+    "type": "學習原則 / 問題分布",
+    "domain": "優化與模型選擇",
+    "focus": "No optimizer is best across all possible problems",
+    "thesis": "脫離問題分布談『哪個方法普遍最好』幾乎沒有意義；一個方法在哪些問題上特別強，通常也代表它在別的地方有偏好與盲點。",
+    "tags": [
+      "no",
+      "free",
+      "lunch",
+      "theorem",
+      "optimization",
+      "search",
+      "bias",
+      "benchmark"
+    ]
+  },
+  {
+    "id": "euthyphro-dilemma",
+    "title": "尤西弗羅兩難",
+    "subtitle": "Euthyphro Dilemma",
+    "href": "./topics/euthyphro-dilemma.html",
+    "order": 244,
+    "type": "倫理問題 / 權威與理由",
+    "domain": "倫理、規範與制度",
+    "focus": "Is something good because authority says so, or does authority track an independent good",
+    "thesis": "如果一件事之所以正確，只因為權威這樣說，那正確看起來就很任意；若權威是因為它本來就正確才這樣說，真正重要的標準似乎又不在權威本身。",
+    "tags": [
+      "euthyphro",
+      "dilemma",
+      "ethics",
+      "authority",
+      "norms",
+      "justification",
+      "rules"
+    ]
+  },
+  {
+    "id": "problem-of-induction",
+    "title": "歸納問題",
+    "subtitle": "Problem of Induction",
+    "href": "./topics/problem-of-induction.html",
+    "order": 245,
+    "type": "知識問題 / 推理正當性",
+    "domain": "科學與判斷",
+    "focus": "Why past regularity does not logically guarantee future regularity",
+    "thesis": "我們幾乎每天都靠過去經驗推未來，但真正麻煩的是：光憑『過去一直如此』，並不能在邏輯上保證未來還會如此。",
+    "tags": [
+      "induction",
+      "prediction",
+      "hume",
+      "evidence",
+      "uncertainty"
+    ]
+  },
+  {
+    "id": "menos-paradox",
+    "title": "美諾悖論",
+    "subtitle": "Meno's Paradox",
+    "href": "./topics/menos-paradox.html",
+    "order": 246,
+    "type": "知識問題 / 學習與探問",
+    "domain": "學習、研究與探索",
+    "focus": "How can you search for something when you do not yet know what it is",
+    "thesis": "如果你完全不知道自己在找什麼，就不知道該怎麼找；可如果你已經知道了，又何必再找？探問與學習似乎因此卡在一個尷尬中間帶。",
+    "tags": [
+      "menos",
+      "paradox",
+      "learning",
+      "inquiry",
+      "teaching",
+      "debugging",
+      "knowledge"
+    ]
+  },
+  {
+    "id": "pascals-wager",
+    "title": "帕斯卡賭注",
+    "subtitle": "Pascal's Wager",
+    "href": "./topics/pascals-wager.html",
+    "order": 247,
+    "type": "決策問題 / 不確定與賭注",
+    "domain": "信念、風險與選擇",
+    "focus": "How decision changes when stakes are enormous and probabilities are unclear",
+    "thesis": "當一個選項的代價或回報被描述成極大，而且機率又說不清時，決策很容易被賭注尺度拉走，而不再只看普通證據。",
+    "tags": [
+      "pascals",
+      "wager",
+      "decision",
+      "risk",
+      "expected-value",
+      "uncertainty",
+      "stakes"
+    ]
+  },
+  {
+    "id": "lucas-critique",
+    "title": "盧卡斯批判",
+    "subtitle": "Lucas Critique",
+    "href": "./topics/lucas-critique.html",
+    "order": 248,
+    "type": "政策原則 / 模型邊界",
+    "domain": "制度設計與預測",
+    "focus": "People change behavior when policy rules change",
+    "thesis": "用歷史關係式直接預測政策效果，最大的風險不是模型算錯，而是人一旦看見新規則，就會改變自己的行為，讓舊關係本身失效。",
+    "tags": [
+      "lucas",
+      "critique",
+      "policy",
+      "incentives",
+      "expectations",
+      "forecasting",
+      "behavior"
+    ]
+  },
+  {
+    "id": "greshams-law",
+    "title": "格雷欣法則",
+    "subtitle": "Gresham's Law",
+    "href": "./topics/greshams-law.html",
+    "order": 249,
+    "type": "制度動力 / 交換激勵",
+    "domain": "貨幣、品質與制度設計",
+    "focus": "When legal equivalence hides quality differences, bad money drives out good",
+    "thesis": "當制度強迫兩種品質不同的東西被當成同價值使用時，較差的版本通常會留在流通中，較好的版本則被囤起來、退出或改道。",
+    "tags": [
+      "greshams",
+      "quality",
+      "incentives",
+      "markets",
+      "selection",
+      "exchange"
+    ]
+  },
+  {
+    "id": "iron-law-of-oligarchy",
+    "title": "寡頭鐵律",
+    "subtitle": "Iron Law of Oligarchy",
+    "href": "./topics/iron-law-of-oligarchy.html",
+    "order": 250,
+    "type": "組織動力 / 權力集中",
+    "domain": "組織與治理結構",
+    "focus": "Large organizations tend to concentrate power in a few hands",
+    "thesis": "組織一旦變大、變複雜，資訊、程序與代表性常會慢慢集中到少數人手上；原本為了協作而建立的結構，最後可能反過來讓控制權更難分散。",
+    "tags": [
+      "iron",
+      "oligarchy",
+      "organizations",
+      "power",
+      "bureaucracy",
+      "governance",
+      "representation"
+    ]
   }
 ];
 

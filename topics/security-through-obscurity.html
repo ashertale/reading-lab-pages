@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>藉由隱蔽求安全 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-security-through-obscurity">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / security / design / secrecy</p>
+        <h1>藉由隱蔽求安全</h1>
+        <p class="topic-subtitle">Security through Obscurity</p>
+        <p class="thesis">把安全主要建立在『別人最好不要知道我們怎麼做』，短期看起來像多一層保護；但一旦祕密外洩，若核心設計本身不堪一擊，整體安全就會瞬間失去支點。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>分清楚祕密作為輔助防線和祕密作為唯一防線之間的差別，避免把不可驗證的隱蔽感錯當安全感。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>安全原則 / 依賴錯位</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Relying on secrecy of design details as the main defense</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>設計公開性、祕密依賴、核心防護、外洩後韌性</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在協定、工具與內部系統設計裡更清楚地評估哪些防護經得起曝光。</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>祕密</span>
+          <span>防禦</span>
+          <span>脆弱</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>如果祕密一旦被知道就全線失守，那問題通常不是祕密不夠深，而是設計本身太薄</h2>
+          <p class="section-lede">藉由隱蔽求安全 真正麻煩的地方，不在名詞，而在它逼你承認：當安全主要靠外界不知道內部細節維持時，祕密一外洩，整個防線就會暴露出原本沒有被真正保護的地方。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>當安全主要靠外界不知道內部細節維持時，祕密一外洩，整個防線就會暴露出原本沒有被真正保護的地方。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先讓防護在曝光後仍能站住</strong>
+            <p>真正穩的安全設計，應該假設攻擊者遲早會知道你的實作細節。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再把祕密留給適合的位置</strong>
+            <p>金鑰、密碼和暫時性配置可以保密，但核心機制不該只靠藏著。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後用審查檢驗韌性</strong>
+            <p>若設計一公開就站不住，通常表示它沒經過真正的對抗性思考。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>從最小可運作場景開始</h2>
+          <p class="section-lede">藉由隱蔽求安全最怕的不是有人很會猜，而是某天祕密終究不再是祕密時，後面沒有第二層防線。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>團隊把管理介面的安全幾乎全放在『內部 URL 很難猜』，一旦路徑被記錄或洩漏，後面沒有足夠授權與審計層能補位。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>難點在於祕密確實能提供一些阻力，所以人很容易把那份阻力誤當成核心安全。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">把安全寄託在不透明細節</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">祕密逐步被猜到或外洩</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">缺乏核心防護的部分全面裸露</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>藉由隱蔽求安全真正提醒你的，是祕密可以有價值，但不應該是唯一支撐安全成立的理由。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>把設計張力拆成幾條線來看</h2>
+          <p class="section-lede">只靠別人暫時不知道來維持安全，等於把設計的真正強度外包給運氣。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>核心防護</strong>
+            <p>授權、驗證、審計與最小權限應該在祕密失效後仍能提供保護。</p>
+          </article>
+          <article class="lens-card">
+            <strong>祕密壽命</strong>
+            <p>實作細節被知道往往比團隊想像得快得多，也更難保證永遠不外流。</p>
+          </article>
+          <article class="lens-card">
+            <strong>安全錯覺</strong>
+            <p>當祕密暫時有用時，人最容易停止追問核心設計是否真的能獨立成立。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>判準</th>
+                <th>當下看起來像什麼</th>
+                <th>真正代價</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>只靠隱蔽</td>
+                <td>短期部署快</td>
+                <td>一旦曝光通常是斷崖式失守</td>
+              </tr>
+              <tr>
+                <td>祕密作為輔助</td>
+                <td>設計較花工</td>
+                <td>卻能在細節外洩後仍維持核心安全</td>
+              </tr>
+              <tr>
+                <td>公開設計接受檢驗</td>
+                <td>短期較不舒服</td>
+                <td>長期更容易知道自己到底在防什麼</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>這個工程判斷抓住了哪種順手誘惑</h2>
+          <p class="section-lede">人喜歡把沒被碰過的東西當成安全，因為「目前沒人知道」比承認設計本身脆弱舒服得多。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>不透明安慰</strong>
+            <p>不知道的人看起來就比較安全，這種感覺本身很容易被誤當成果。</p>
+          </div>
+          <div class="example">
+            <strong>祕密光環</strong>
+            <p>只要細節不公開，團隊就比較容易高估它的獨特性和防禦價值。</p>
+          </div>
+          <div class="example">
+            <strong>審查逃避</strong>
+            <p>把設計藏起來也代表較少外部質疑，短期壓力小，但長期風險高。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把它帶回架構、流程與介面</h2>
+          <p class="section-lede">回到管理介面、內部工具和協定設計，這個概念是在逼你把曝光當前提而不是當例外。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>內部管理介面</strong>
+            <p>別把隱藏路徑當主要保護，授權和審計必須在曝光後仍成立。</p>
+          </div>
+          <div class="example">
+            <strong>協定設計</strong>
+            <p>若安全性只有在細節不被知道時才成立，通常表示假設本身就太脆。</p>
+          </div>
+          <div class="example">
+            <strong>工具分發</strong>
+            <p>即使只給內部使用，也該假設逆向與洩漏遲早會發生。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>管理介面: 假設路徑早晚會曝光，核心防護仍要成立。</li>
+          <li>協定設計: 讓安全依賴機制而不是依賴別人不知情。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>幾種很快但不夠準的讀法</h2>
+          <p class="section-lede">若一開始就把 藉由隱蔽求安全 聽成「所以祕密完全沒價值」，後面連「不是。祕密常能作為輔助層，但不該是唯一防線。」這層校正都很難真正進場。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以祕密完全沒價值</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。祕密常能作為輔助層，但不該是唯一防線。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要公開就更安全</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>公開本身也不會自動帶來安全，仍需要扎實的核心機制。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>這只跟密碼學有關</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>任何把路徑、格式或接口細節當主要防護的設計都會遇到。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>兩個值得帶走的工程問題</h2>
+          </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果攻擊者明天知道我們的設計細節，哪些防線仍然能站住</strong>
+            <p>這是分辨核心安全和隱蔽安全的最好方式。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>現在這份安全感，有多少其實只是因為外界還不知道我們怎麼做</strong>
+            <p>這能幫你估算虛假的安全比例。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">交代 Security through obscurity 支撐 藉由隱蔽求安全 的主線，Kerckhoffs's principle 補上與「核心防護」相關的相鄰脈絡。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>用來支撐把祕密當成主要防線會導致設計脆弱這條主線。</p>
+            <a href="https://en.wikipedia.org/wiki/Security_through_obscurity" target="_blank" rel="noreferrer">Security through obscurity</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰脈絡</strong>
+            <p>補上好的安全系統應假設設計可被知道、只保留金鑰秘密的相鄰脈絡。</p>
+            <a href="https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle" target="_blank" rel="noreferrer">Kerckhoffs&#x27;s principle</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>下次有人說『這個夠安全，因為外面不知道我們怎麼做』時，先追問：如果知道了呢？</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

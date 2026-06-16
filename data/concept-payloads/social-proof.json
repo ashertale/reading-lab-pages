@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "social-proof",
+    "outputPath": "topics/social-proof.html"
+  },
+  "indexEntry": {
+    "id": "social-proof",
+    "title": "社會認同",
+    "subtitle": "Social Proof",
+    "href": "./topics/social-proof.html",
+    "order": 222,
+    "type": "社會心理 / 訊號依賴",
+    "domain": "選擇、產品與群體行為",
+    "focus": "People use others' behavior as evidence for what to do",
+    "thesis": "當情境模糊、資訊不足或代價不明時，人很容易把『別人怎麼做』當成自己該怎麼做的證據；問題是別人的行為本身也可能只是跟著別人。",
+    "tags": [
+      "social",
+      "proof",
+      "social-proof",
+      "conformity",
+      "signals",
+      "products",
+      "culture"
+    ]
+  },
+  "page": {
+    "documentTitle": "社會認同 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-social-proof",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / social / signals / imitation</p>\n    <h1>社會認同</h1>\n    <p class=\"topic-subtitle\">Social Proof</p>\n    <p class=\"thesis\">當情境模糊、資訊不足或代價不明時，人很容易把『別人怎麼做』當成自己該怎麼做的證據；問題是別人的行為本身也可能只是跟著別人。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>看懂為什麼『很多人都這樣做』既可能是寶貴線索，也可能只是集體互相借膽。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>社會心理 / 訊號依賴</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>People use others&#x27; behavior as evidence for what to do</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>資訊不足、他人行為、從眾捷徑、訊號可靠度</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在產品設計、團隊文化與社群動態裡更早辨認從眾訊號的力量與風險。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>模糊</span>\n      <span>跟隨</span>\n      <span>放大</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>別人的行為很容易看起來像證據，但有時它只是回聲</h2>\n      <p class=\"section-lede\">社會認同之所以強，是因為人在不確定時會把別人的行動直接拿來當世界的提示。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>只要環境不夠清楚，人就會自然拿群體行為當成判斷捷徑；這讓好訊號能被放大，也讓壞訊號能變得更有說服力。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先分清別人知道什麼</strong>\n        <p>跟隨只有在他人真的掌握更多資訊時才比較像智慧。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再看行為是獨立還是互相複製</strong>\n        <p>若大家彼此只是跟隨彼此，群體行為就不再提供太多新增訊息。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後替逆風檢查留空間</strong>\n        <p>當所有人都往同一方向時，最值得保留的是檢查這個方向是否只是被訊號自己放大。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>別先談人格，先看情境怎麼拉動反應</h2>\n      <p class=\"section-lede\">這一段先從一個小會議讀起，因為社會認同最常不是靠正式規則，而是靠眼前大家都怎麼做。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>新進成員看到大家都不在會議上提風險，於是也學會把保留留到私下，久了便以為『這裡應該就是不在公開場合提問題』。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於社會認同常很有效，所以人很難只因它可能出錯就完全不用它。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">情境不明或成本不清</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">觀察他人行為當線索</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">跟隨行為被群體再放大</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>社會認同的重點不是『跟別人一樣很笨』，而是承認模糊世界裡，別人的行動本來就會成為重要訊號。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>別讓一個標籤吃掉整個機制</h2>\n      <p class=\"section-lede\">接著會把資訊訊號、回聲放大和從眾成本拆開，免得把所有跟風都簡化成盲從。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>資訊節省</strong>\n        <p>看別人怎麼做能快速節省搜尋成本，所以在模糊情境裡特別有吸引力。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>安全感借用</strong>\n        <p>群體行為會降低個體主觀風險，讓『跟著做』顯得比較不恐怖。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>回聲風險</strong>\n        <p>若他人本身也只是看別人，訊號很快就會空轉。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>心理拉力</th>\n            <th>當下看起來像什麼</th>\n            <th>代價</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>跟著真的懂的人</td>\n            <td>可快速學習</td>\n            <td>前提是對方的行為真帶著資訊而非只是習慣</td>\n          </tr>\n          <tr>\n            <td>跟著群體表面行為</td>\n            <td>心理比較安全</td>\n            <td>若訊號是回聲，整體很容易一起偏掉</td>\n          </tr>\n          <tr>\n            <td>保留獨立判斷節點</td>\n            <td>一開始較慢</td>\n            <td>卻能阻止群體把自己帶去錯方向</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>這題抓住了哪種心理捷徑</h2>\n      <p class=\"section-lede\">他人行為之所以有力，往往不是因為大家比較沒主見，而是因為群體看起來像替你省下了判斷成本。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>模糊減壓</strong>\n        <p>不知道怎麼選時，跟著別人會讓焦慮明顯下降。</p>\n      </div>\n      <div class=\"example\">\n        <strong>安全感外包</strong>\n        <p>只要很多人都這樣做，個體就比較不覺得自己要單獨承擔責任。</p>\n      </div>\n      <div class=\"example\">\n        <strong>獨立成本</strong>\n        <p>當多數已經成形，自己逆著走需要額外認知和社會勇氣。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>把它帶回管理、產品與協作</h2>\n      <p class=\"section-lede\">產品熱度、團隊默契和社群風向都會被社會認同推著跑，因為「大家都這樣」本身就像一條捷徑。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>產品介面</strong>\n        <p>顯示熱門選項能幫忙新手上手，但也可能把本來普通的選擇放大成自我實現主流。</p>\n      </div>\n      <div class=\"example\">\n        <strong>團隊文化</strong>\n        <p>新人最常學到的往往不是寫在文件裡的規則，而是大家實際怎麼做。</p>\n      </div>\n      <div class=\"example\">\n        <strong>社群平台</strong>\n        <p>按讚、轉發與觀看數既是線索，也可能是把回聲當成品質的放大器。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>產品設計: 小心熱門訊號如何自我放大。</li>\n      <li>團隊文化: 觀察大家實際怎麼做，而不只看文件寫什麼。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>這個偏差最常被怎樣誤解</h2>\n      <p class=\"section-lede\">若一開始就把 社會認同 聽成「所以從眾都很愚蠢」，後面連「不是。社會認同本來就是面對資訊不足時很合理的捷徑。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以從眾都很愚蠢</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。社會認同本來就是面對資訊不足時很合理的捷徑。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要很多人做就一定對</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>群體行為只有在獨立且帶資訊時才比較值得信。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>個人只要有主見就不會受影響</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>越模糊、越焦慮、越需要快速決策時，社會認同越有力。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>下次做判斷時先問這兩句</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>我現在跟的是有獨立資訊的人，還是只是跟著一個已經被放大的表面主流</strong>\n        <p>兩者的訊號價值差很多。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果把可見的群體指標拿掉，我還會做同樣選擇嗎</strong>\n        <p>這能幫你測試自己究竟在依賴什麼。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Social proof 支撐 社會認同 的主線，Informational social influence 補上與「資訊節省」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐人在模糊情境中會把他人行為當成判斷線索的主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Social_proof\" target=\"_blank\" rel=\"noreferrer\">Social proof</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上他人行為如何作為資訊捷徑進入判斷的相鄰脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Informational_social_influence\" target=\"_blank\" rel=\"noreferrer\">Informational social influence</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次你因為『大家都這樣』而放心時，先追問：他們知道什麼，是我沒有看到的？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "只要環境不夠清楚，人就會自然拿群體行為當成判斷捷徑；這讓好訊號能被放大，也讓壞訊號能變得更有說服力。",
+    "smallestScenario": "新進成員看到大家都不在會議上提風險，於是也學會把保留留到私下，久了便以為『這裡應該就是不在公開場合提問題』。",
+    "sourcePlan": [
+      "用來支撐人在模糊情境中會把他人行為當成判斷線索的主線。",
+      "補上他人行為如何作為資訊捷徑進入判斷的相鄰脈絡。"
+    ],
+    "transferTargets": [
+      "產品設計: 小心熱門訊號如何自我放大。",
+      "團隊文化: 觀察大家實際怎麼做，而不只看文件寫什麼。",
+      "社群判讀: 分辨『很多人做』究竟是資訊還是回聲。"
+    ],
+    "commonMisreading": "把社會認同讀成『大家都很盲從』會太粗，它真正提醒的是他人行為在資訊不足時有多大的判斷份量。",
+    "readerQuestions": [
+      "我現在跟的是有獨立資訊的人，還是只是跟著一個已經被放大的表面主流？兩者的訊號價值差很多。",
+      "如果把可見的群體指標拿掉，我還會做同樣選擇嗎？這能幫你測試自己究竟在依賴什麼。"
+    ],
+    "sectionIntents": {
+      "core": "用「別人的行為很容易看起來像證據，但有時它只是回聲」建立本頁的核心張力，先讓讀者看見 只要環境不夠清楚，人就會自然拿群體行為當成判斷捷徑；這讓好訊號能被放大，也讓壞訊號能變得更有說服力。",
+      "setup": "以「新進成員看到大家都不在會議上提風險，於是也學會把保留留到私下，久了便以為『這裡應該就是不在公開場合提問題』。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「資訊節省、安全感借用、回聲風險」這幾條分析線拆開 社會認同，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「模糊減壓、安全感外包」這些反應，說明人為何會在 社會認同 上滑向看似合理但代價更高的近路。",
+      "applications": "把 社會認同 拉到 產品設計、團隊文化 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把社會認同讀成『大家都很盲從』會太粗，它真正提醒的是他人行為在資訊不足時有多大的判斷份量。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「我現在跟的是有獨立資訊的人，還是只是跟著一個已經被放大的表面主流、如果把可見的群體指標拿掉，我還會做同樣選擇嗎」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Social proof 支撐 社會認同 的主線，Informational social influence 補上與「資訊節省」相關的相鄰脈絡。"
+    }
+  }
+}

@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>莫拉維克悖論 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-moravecs-paradox">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / ai / perception / embodiment</p>
+        <h1>莫拉維克悖論</h1>
+        <p class="topic-subtitle">Moravec&#x27;s Paradox</p>
+        <p class="thesis">對人類來說最順手、最不費力的感知與動作技能，常恰恰是機器最難學會的；反而抽象推理有時比較容易被機器攻下。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>拆開『看起來簡單』和『對機器真的簡單』之間的落差，避免錯估自動化邊界。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>AI 悖論 / 能力分布</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Tasks that feel easy to humans can be hard for machines</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>演化時間、感知運動耦合、顯性規則、隱性技能</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在工具導入與任務分工時更準確地判斷哪些能力最難被系統穩定接手。</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>直覺</span>
+          <span>感知</span>
+          <span>反轉</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>對人最自然的事，常不是對機器最容易的事</h2>
+          <p class="section-lede">莫拉維克悖論 難的不是記住術語，而是面對這個前提衝突：人類把許多高難度感知與動作整合當成『直覺』，所以會低估那些技能對機器其實極度昂貴。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>人類把許多高難度感知與動作整合當成『直覺』，所以會低估那些技能對機器其實極度昂貴。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先分開顯性規則與隱性技能</strong>
+            <p>能講成步驟的，不一定是最難；講不清卻做得順的，往往才是感知運動整合的深坑。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再看任務是否仰賴身體回饋</strong>
+            <p>只要要靠觸覺、視角、摩擦與空間細節微調，機器難度通常遠比人類直覺高。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後重估自動化順序</strong>
+            <p>先讓機器接手規則清楚的部分，常比急著模仿人類直覺行為更務實。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>別急著談終局，先看最小前提</h2>
+          <p class="section-lede">莫拉維克悖論的反差很適合從一個小場景開始：算得很快的系統，偏偏在你以為最直覺的感知動作上跌倒。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>團隊以為『只是讓相機辨識插槽方向並插上去』很簡單，結果真正麻煩的是光線、反光、偏差、摩擦與微小時序，全都藏在人類直覺裡。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>難點在於人會把自己做得很順的技能誤讀成規則很少，卻沒看到那些技能其實吸收了長年演化與大量隱性回饋。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">人類把任務視為直覺</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">低估感知與動作的複雜度</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">自動化成本被嚴重看輕</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>莫拉維克悖論提醒你：不要用主觀難度估計機器難度，因為兩者的能力地形圖完全可能倒過來。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>別讓同一個答案偷吃所有前提</h2>
+          <p class="section-lede">算得快和活在世界裡不是同一種本事；把這兩種難度拆開，悖論才會真正露出來。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>演化沉積</strong>
+            <p>人類的感知與動作系統是長時間演化成果，所以我們很容易把它們誤認成低階、低難。</p>
+          </article>
+          <article class="lens-card">
+            <strong>顯性可說性</strong>
+            <p>數學推理雖然看起來高級，卻常因規則明確而較容易程式化。</p>
+          </article>
+          <article class="lens-card">
+            <strong>身體耦合</strong>
+            <p>一旦任務要在真實世界裡看、摸、抓、躲，難度就會迅速跳高。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>分析線</th>
+                <th>它先保住什麼</th>
+                <th>會放掉什麼</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>抽象規則推理</td>
+                <td>看起來很高級</td>
+                <td>對機器有時反而較容易因為規則明確</td>
+              </tr>
+              <tr>
+                <td>感知動作整合</td>
+                <td>人做起來很自然</td>
+                <td>對機器往往更難，因為要處理大量隱性狀態</td>
+              </tr>
+              <tr>
+                <td>只看任務表面</td>
+                <td>容易低估自動化成本</td>
+                <td>實際困難常藏在身體與環境回饋裡</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>這類問題抓住了什麼直覺</h2>
+          <p class="section-lede">人容易把自己做起來毫不費力的事看成簡單，於是低估了那些能力背後其實堆了多少演化和身體經驗。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>直覺透明幻覺</strong>
+            <p>人越是做得順，越容易忘記自己其實用了很多無法明說的微調。</p>
+          </div>
+          <div class="example">
+            <strong>抽象崇拜</strong>
+            <p>很多人會把看起來像考試的能力當成高級能力，低估感知動作的深度。</p>
+          </div>
+          <div class="example">
+            <strong>工具錯位期待</strong>
+            <p>一旦系統能寫、能算、能答題，人就更容易過度外推它在實體場景裡的穩定性。</p>
+          </div>
+        </div>
+        <p class="micro-note">這段不是替 莫拉維克悖論 選立場，而是讓 直覺透明幻覺、抽象崇拜 這類直覺如何混掉前提與標準變得可見。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>放回真實系統後它會改變什麼</h2>
+          <p class="section-lede">放進機器人、介面設計和 AI 能力判讀，這個悖論能防止你錯估自動化的真正瓶頸。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>機器視覺導入</strong>
+            <p>不要因為人類覺得『一眼就看得出來』，就低估資料、光線與誤差處理成本。</p>
+          </div>
+          <div class="example">
+            <strong>人機分工</strong>
+            <p>把規則明確的規劃留給系統，把需要身體回饋與情境彈性的部分保留給人。</p>
+          </div>
+          <div class="example">
+            <strong>產品期待管理</strong>
+            <p>對 AI 功能的承諾要區分『能生成答案』和『能在真實世界穩定操作』這兩層。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>視覺自動化: 重新估算那些『人一眼就懂』任務的真成本。</li>
+          <li>人機分工: 讓規則清楚與身體耦合任務分別找到合適承接者。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>幾種看起來乾脆但其實偷換前提的讀法</h2>
+          <p class="section-lede">若一開始就把 莫拉維克悖論 聽成「所以機器永遠學不會感知動作」，後面連「不是。它只是提醒你難度排序和人類直覺不一樣。」這層校正都很難真正進場。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以機器永遠學不會感知動作</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。它只是提醒你難度排序和人類直覺不一樣。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要模型大就能自然跨過這條落差</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>很多問題仍卡在資料、感測、行動回饋與真實世界耦合。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>這代表抽象推理就不重要</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>相反，重點是別把不同類型的能力難度混成同一把尺。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>把它變成下一次判斷前的追問</h2>
+          </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>我們現在覺得『很簡單』的那一步，究竟有多少其實靠人類身體與情境直覺在撐</strong>
+            <p>先列出來，自動化評估才比較誠實。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>這個任務最難的是顯性規則，還是隱性回饋整合</strong>
+            <p>答案不同，工具選型和時程估算也會完全不同。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">交代 Moravec's paradox 支撐 莫拉維克悖論 的主線，Embodied cognition 補上與「演化沉積」相關的相鄰脈絡。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>用來支撐人類容易的感知動作技能對機器反而困難這條主線。</p>
+            <a href="https://en.wikipedia.org/wiki/Moravec%27s_paradox" target="_blank" rel="noreferrer">Moravec&#x27;s paradox</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰脈絡</strong>
+            <p>補上身體與環境回饋如何構成人類智能的一條相鄰脈絡。</p>
+            <a href="https://en.wikipedia.org/wiki/Embodied_cognition" target="_blank" rel="noreferrer">Embodied cognition</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>下次有人說『這功能很簡單，因為人一眼就知道』時，先追問：那一眼裡其實藏了多少環境與身體回饋？</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

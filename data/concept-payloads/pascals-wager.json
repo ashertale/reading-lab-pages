@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "pascals-wager",
+    "outputPath": "topics/pascals-wager.html"
+  },
+  "indexEntry": {
+    "id": "pascals-wager",
+    "title": "帕斯卡賭注",
+    "subtitle": "Pascal's Wager",
+    "href": "./topics/pascals-wager.html",
+    "order": 247,
+    "type": "決策問題 / 不確定與賭注",
+    "domain": "信念、風險與選擇",
+    "focus": "How decision changes when stakes are enormous and probabilities are unclear",
+    "thesis": "當一個選項的代價或回報被描述成極大，而且機率又說不清時，決策很容易被賭注尺度拉走，而不再只看普通證據。",
+    "tags": [
+      "pascals",
+      "wager",
+      "decision",
+      "risk",
+      "expected-value",
+      "uncertainty",
+      "stakes"
+    ]
+  },
+  "page": {
+    "documentTitle": "帕斯卡賭注 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-pascals-wager",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / decision / stakes / uncertainty</p>\n    <h1>帕斯卡賭注</h1>\n    <p class=\"topic-subtitle\">Pascal&#x27;s Wager</p>\n    <p class=\"thesis\">當一個選項的代價或回報被描述成極大，而且機率又說不清時，決策很容易被賭注尺度拉走，而不再只看普通證據。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>看懂為什麼巨大賭注會改變討論節奏，也學會分辨那種改變何時合理、何時只是被尺度綁架。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>決策問題 / 不確定與賭注</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>How decision changes when stakes are enormous and probabilities are unclear</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>機率不確定、結果尺度、期望值、選項比較</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在高代價決策與極端風險討論裡更清楚地處理『小機率但大後果』的張力。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>機率</span>\n      <span>賭注</span>\n      <span>選擇</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>賭注一旦被放到非常大，討論就很難只靠普通證據節奏前進</h2>\n      <p class=\"section-lede\">這題真正難的地方，不在背立場，而在承認：只要某個選項聲稱自己連著極大回報或極大災難，人就會開始懷疑：即使機率很小，是不是也不能輕易忽略？</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>只要某個選項聲稱自己連著極大回報或極大災難，人就會開始懷疑：即使機率很小，是不是也不能輕易忽略？</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先分開機率與尺度</strong>\n        <p>高後果不等於高機率，但也不代表可以完全忽略。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再看有哪些替代選項</strong>\n        <p>一旦不只兩個選項，賭注論證就不再那麼乾淨。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後檢查是否在拿無限或極大值壓過其他證據</strong>\n        <p>很多時候真正該問的是那些值有沒有被合理定義。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>先把問題壓回一個可爭的場景</h2>\n      <p class=\"section-lede\">帕斯卡賭注最值得先看的，不是宗教立場，而是『極大後果』這種敘事如何改寫一般風險計算。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>團隊評估一個極少發生但一旦發生就會讓整站停擺的故障模式；有人主張就算機率低，也應該為它做昂貴備援，因為後果實在太大。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點不是數學不會算，而是極端賭注會把『機率有多可靠』『比較的是哪些選項』一起扯進來。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">面對機率不清的選擇</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">某個結果尺度極大</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">討論節奏被高賭注改寫</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>帕斯卡賭注不是單純鼓勵你選最大值，而是逼你處理高賭注、低確定性與多選項比較之間的拉扯。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>從不同判準看同一題</h2>\n      <p class=\"section-lede\">極大後果一進場，機率、替代方案和定義邊界很容易一起被嚇到退場。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>後果尺度</strong>\n        <p>回報或損失一旦非常大，會自然拉高某些看似邊角選項的吸引力。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>機率可信度</strong>\n        <p>若機率估計本身很鬆，單靠期望值直覺可能會失去穩固基礎。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>選項空間</strong>\n        <p>賭注論證常假設選項很少，但真實世界裡可選路徑通常更複雜。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>判準</th>\n            <th>它會保住什麼</th>\n            <th>代價</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>只看普通機率</td>\n            <td>較不容易被極端值綁架</td>\n            <td>可能低估高後果風險</td>\n          </tr>\n          <tr>\n            <td>只看極大後果</td>\n            <td>看起來很保守</td>\n            <td>容易讓不穩固的賭注無限放大</td>\n          </tr>\n          <tr>\n            <td>同時檢查機率、尺度與替代選項</td>\n            <td>比較麻煩</td>\n            <td>卻能避免被單一巨大數字直接拉走</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>人為什麼會在這裡不自覺換標準</h2>\n      <p class=\"section-lede\">人面對巨大可能後果時會自然緊張，於是只要有人把損益畫得夠極端，很多細節就會先被略過。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>巨大後果牽引</strong>\n        <p>只要後果被說得足夠大，人就很難維持對小機率的平常心。</p>\n      </div>\n      <div class=\"example\">\n        <strong>害怕漏接災難</strong>\n        <p>人寧可被笑太保守，也不想成為低估極端風險的那個人。</p>\n      </div>\n      <div class=\"example\">\n        <strong>極值麻醉</strong>\n        <p>一旦賭注尺度被拉到很高，很多中等代價與替代方案會突然顯得像不存在。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>把它帶回制度、工程與自我理解</h2>\n      <p class=\"section-lede\">高風險工程、安全政策和個人重大選擇都可能被這種巨大賭注帶偏，所以更需要把算式拆回來。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>高風險工程決策</strong>\n        <p>對低機率高衝擊故障做備援是合理的，但仍要檢查機率基礎與替代成本。</p>\n      </div>\n      <div class=\"example\">\n        <strong>安全政策</strong>\n        <p>不能只用『萬一很大』就壓過所有其他風險與資源配置。</p>\n      </div>\n      <div class=\"example\">\n        <strong>個人信念選擇</strong>\n        <p>當選項被綁上極端後果時，更需要追問假設本身是否合理而不只看恐懼。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>高風險工程: 對低機率高衝擊場景保留理性備援，而不是只被恐懼或僥倖帶著走。</li>\n      <li>安全政策: 同時檢查後果尺度、機率可信度與替代成本。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>幾種常見但太快的讀法</h2>\n      <p class=\"section-lede\">若一開始就把 帕斯卡賭注 聽成「所以任何極端風險都應該全力押注」，後面連「若機率估計與選項空間都不穩，這樣做很容易被操控。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以任何極端風險都應該全力押注</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>若機率估計與選項空間都不穩，這樣做很容易被操控。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>帕斯卡賭注只是宗教笑話</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>它其實碰到的是任何高賭注不確定決策都會遇到的結構。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要說後果夠大就能贏辯論</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>真正成熟的決策仍要追問機率依據與替代選項。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>兩個值得帶走的追問</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>這個巨大賭注到底是建立在多穩的機率與後果估計上</strong>\n        <p>如果兩者都很鬆，單靠尺度很容易把判斷帶歪。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>除了眼前這兩個選項，還有沒有第三條能降低賭注卻不必全押的路</strong>\n        <p>很多辯論之所以卡死，是因為選項被假裝成只剩二選一。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Pascal's wager 支撐 帕斯卡賭注 的主線，Decision theory 補上與「後果尺度」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐在高賭注與機率不確定下，選擇節奏會被改寫這條主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Pascal%27s_wager\" target=\"_blank\" rel=\"noreferrer\">Pascal&#x27;s wager</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上期望值、選項比較與不確定決策的相鄰脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Decision_theory\" target=\"_blank\" rel=\"noreferrer\">Decision theory</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次有人用極端後果壓決策時，先問：這個賭注的機率、尺度和可替代方案分別有多穩？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "只要某個選項聲稱自己連著極大回報或極大災難，人就會開始懷疑：即使機率很小，是不是也不能輕易忽略？",
+    "smallestScenario": "團隊評估一個極少發生但一旦發生就會讓整站停擺的故障模式；有人主張就算機率低，也應該為它做昂貴備援，因為後果實在太大。",
+    "sourcePlan": [
+      "用來支撐在高賭注與機率不確定下，選擇節奏會被改寫這條主線。",
+      "補上期望值、選項比較與不確定決策的相鄰脈絡。"
+    ],
+    "transferTargets": [
+      "高風險工程: 對低機率高衝擊場景保留理性備援，而不是只被恐懼或僥倖帶著走。",
+      "安全政策: 同時檢查後果尺度、機率可信度與替代成本。",
+      "個人選擇: 別讓極大值敘事直接吃掉整個判斷空間。"
+    ],
+    "commonMisreading": "把帕斯卡賭注理解成『只要後果夠大就應該相信』，會忽略機率、選項與定義本身也需要受審查。",
+    "readerQuestions": [
+      "這個巨大賭注到底是建立在多穩的機率與後果估計上？如果兩者都很鬆，單靠尺度很容易把判斷帶歪。",
+      "除了眼前這兩個選項，還有沒有第三條能降低賭注卻不必全押的路？很多辯論之所以卡死，是因為選項被假裝成只剩二選一。"
+    ],
+    "sectionIntents": {
+      "core": "用「賭注一旦被放到非常大，討論就很難只靠普通證據節奏前進」建立本頁的核心張力，先讓讀者看見 只要某個選項聲稱自己連著極大回報或極大災難，人就會開始懷疑：即使機率很小，是不是也不能輕易忽略？",
+      "setup": "以「團隊評估一個極少發生但一旦發生就會讓整站停擺的故障模式；有人主張就算機率低，也應該為它做昂貴備援，因為後果實在太大。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「後果尺度、機率可信度、選項空間」這幾條分析線拆開 帕斯卡賭注，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「巨大後果牽引、害怕漏接災難」這些反應，說明人為何會在 帕斯卡賭注 上滑向看似合理但代價更高的近路。",
+      "applications": "把 帕斯卡賭注 拉到 高風險工程、安全政策 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把帕斯卡賭注理解成『只要後果夠大就應該相信』，會忽略機率、選項與定義本身也需要受審查。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「這個巨大賭注到底是建立在多穩的機率與後果估計上、除了眼前這兩個選項，還有沒有第三條能降低賭注卻不必全押的路」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Pascal's wager 支撐 帕斯卡賭注 的主線，Decision theory 補上與「後果尺度」相關的相鄰脈絡。"
+    }
+  }
+}

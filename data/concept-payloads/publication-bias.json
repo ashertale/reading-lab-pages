@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "publication-bias",
+    "outputPath": "topics/publication-bias.html"
+  },
+  "indexEntry": {
+    "id": "publication-bias",
+    "title": "發表偏差",
+    "subtitle": "Publication Bias",
+    "href": "./topics/publication-bias.html",
+    "order": 220,
+    "type": "知識偏差 / 可見性過濾",
+    "domain": "研究、指標與組織學習",
+    "focus": "Positive or striking results are more likely to be visible than null results",
+    "thesis": "如果只有成功、顯著、好看或符合期待的結果比較容易被發表和看見，那我們對世界的整體理解就會系統性偏斜，因為失敗與無差異其實被藏在看不見的地方。",
+    "tags": [
+      "publication",
+      "bias",
+      "evidence",
+      "selection",
+      "research",
+      "experiments",
+      "learning"
+    ]
+  },
+  "page": {
+    "documentTitle": "發表偏差 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-publication-bias",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / evidence / visibility / selection</p>\n    <h1>發表偏差</h1>\n    <p class=\"topic-subtitle\">Publication Bias</p>\n    <p class=\"thesis\">如果只有成功、顯著、好看或符合期待的結果比較容易被發表和看見，那我們對世界的整體理解就會系統性偏斜，因為失敗與無差異其實被藏在看不見的地方。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>看懂為什麼『我看到的大多都成功』不一定代表成功真的很多，也可能只是失敗比較少被留下。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>知識偏差 / 可見性過濾</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Positive or striking results are more likely to be visible than null results</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>可見性門檻、失敗沉沒、樣本偏差、學習閉環</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在研究閱讀、實驗治理與組織復盤中更警覺看不見的結果本身就是訊號。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>結果</span>\n      <span>可見</span>\n      <span>偏斜</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>很多偏差不是出在有些結果被說太大，而是有些結果根本沒被留下</h2>\n      <p class=\"section-lede\">發表偏差 的力道，不在口號，而在它逼你看見：只要可見性偏好成功與顯著，失敗、無差異和不漂亮結果就會被系統性排出視野，讓整體證據地形變形。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>只要可見性偏好成功與顯著，失敗、無差異和不漂亮結果就會被系統性排出視野，讓整體證據地形變形。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先把沒效果也視為結果</strong>\n        <p>若只有『有故事的結果』才被記錄，組織就很難真正學到全貌。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再問不可見樣本在哪</strong>\n        <p>任何結論都值得追問：還有多少做過但沒被看到的版本？</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後把失敗留進知識庫</strong>\n        <p>成熟學習系統不只累積成功，也累積哪些路不值得再走。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>先把制度壓回一個小場景</h2>\n      <p class=\"section-lede\">發表偏差不是論文圈才有的毛病，它常從『不好看的結果就先別整理』這個小決定開始。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>團隊分享會上幾乎都在講成功 A/B test，很少有人整理那些沒效果或反效果的測試，久了大家開始高估『大多數實驗都能找到增長槓桿』。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於不可見的東西天然不吵，所以發表偏差往往不像錯誤，而像一種乾淨的成功敘事。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">正向結果更容易被留下</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">負向與無差異結果逐步沉沒</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">外界對整體效果形成過度樂觀認知</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>發表偏差最關鍵的提醒是：如果你只能看到活下來的結果，證據本身就已經在進場前被篩過一次。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>把制度壓力拆成幾條線</h2>\n      <p class=\"section-lede\">決定整體判讀的，常不是單篇結果有多亮眼，而是哪些結果連上桌的資格都沒有。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>可見性過濾</strong>\n        <p>不是所有結果都有同樣機會被記錄、發表或被人看見。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>成功敘事</strong>\n        <p>只剩正向結果時，世界看起來會比真實更可控、更樂觀。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>學習斷層</strong>\n        <p>失敗若不被保存，組織就會重複踩同樣坑，卻以為那是新的探索。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>制度線索</th>\n            <th>表面上像什麼</th>\n            <th>真正風險</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>只發成功案例</td>\n            <td>士氣很高</td>\n            <td>卻會讓對效果的整體判斷越來越失真</td>\n          </tr>\n          <tr>\n            <td>保留無差異與失敗</td>\n            <td>短期沒那麼光鮮</td>\n            <td>卻更能讓後續判斷站在完整證據上</td>\n          </tr>\n          <tr>\n            <td>不追不可見樣本</td>\n            <td>報告很精簡</td>\n            <td>最容易把幸存結果誤當成總體真相</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>為什麼人和制度會往這裡滑</h2>\n      <p class=\"section-lede\">成功故事比較容易被記住、被分享，也比較像值得花時間整理的成果，於是失敗結果自然被埋起來。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>好消息偏好</strong>\n        <p>人自然更願意分享能證明自己有效或正確的結果。</p>\n      </div>\n      <div class=\"example\">\n        <strong>失敗沉默</strong>\n        <p>沒效果的結果既不光彩也不好講，所以最容易被默默放掉。</p>\n      </div>\n      <div class=\"example\">\n        <strong>成功放大</strong>\n        <p>當你看到的全是成功故事，大腦就會自然把成功率想得比真實高。</p>\n      </div>\n    </div>\n    <p class=\"micro-note\">這一段要看的，是 好消息偏好、失敗沉默 這類反應如何把 發表偏差 指向的制度壓力在現場放大。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>放回真實治理後它會改變什麼</h2>\n      <p class=\"section-lede\">回到實驗平台、知識庫與產品學習，這個概念能幫你看見組織是在累積證據還是在累積好消息。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>實驗文化</strong>\n        <p>把『沒效果』和『反效果』也納入固定分享與歸檔，才能避免組織集體失憶。</p>\n      </div>\n      <div class=\"example\">\n        <strong>研究閱讀</strong>\n        <p>遇到很一致的正向文獻時，要主動問那些沒出來的結果去了哪。</p>\n      </div>\n      <div class=\"example\">\n        <strong>產品決策</strong>\n        <p>別只看被留下來的成功案例，也看多少嘗試其實沒推進整體結果。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>實驗治理: 把沒效果結果也做成一等知識資產。</li>\n      <li>研究閱讀: 主動追問看不見的樣本去了哪。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>幾種常見但危險的治理讀法</h2>\n      <p class=\"section-lede\">若一開始就把 發表偏差 聽成「所以所有成功結果都不能信」，後面連「不是。問題是要把它放回完整可見性結構裡理解。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以所有成功結果都不能信</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。問題是要把它放回完整可見性結構裡理解。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要多做幾次就自然會平衡</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>若可見性機制不改，做越多也可能只是沉更多失敗。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>這只是學術期刊問題</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>內部實驗、專案回顧和產品案例分享也一樣會中。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>下次做制度選擇前先問這兩句</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>這份證據背後，有多少無差異或失敗結果沒有被留下來</strong>\n        <p>先問這題，才能估計眼前結論是否被可見性放大。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>我們現在的知識庫，是真的在累積結果，還是在累積好看的結果</strong>\n        <p>兩者長出來的組織學習完全不同。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Publication bias 支撐 發表偏差 的主線，File drawer effect 補上與「可見性過濾」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐正向或顯著結果較容易被看見、因此扭曲整體證據地形的主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Publication_bias\" target=\"_blank\" rel=\"noreferrer\">Publication bias</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上無結果研究如何被留在抽屜裡、進而影響判讀的相鄰脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/File_drawer_problem\" target=\"_blank\" rel=\"noreferrer\">File drawer effect</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次看到一串漂亮成功案例時，先補問：那些沒成功的、沒顯著的、沒故事的，現在在哪裡？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "只要可見性偏好成功與顯著，失敗、無差異和不漂亮結果就會被系統性排出視野，讓整體證據地形變形。",
+    "smallestScenario": "團隊分享會上幾乎都在講成功 A/B test，很少有人整理那些沒效果或反效果的測試，久了大家開始高估『大多數實驗都能找到增長槓桿』。",
+    "sourcePlan": [
+      "用來支撐正向或顯著結果較容易被看見、因此扭曲整體證據地形的主線。",
+      "補上無結果研究如何被留在抽屜裡、進而影響判讀的相鄰脈絡。"
+    ],
+    "transferTargets": [
+      "實驗治理: 把沒效果結果也做成一等知識資產。",
+      "研究閱讀: 主動追問看不見的樣本去了哪。",
+      "產品學習: 別只用成功案例塑造整體策略信心。"
+    ],
+    "commonMisreading": "把發表偏差聽成『正向結果都假』太簡化，它真正指出的是可見性本身已經在幫你篩故事。",
+    "readerQuestions": [
+      "這份證據背後，有多少無差異或失敗結果沒有被留下來？先問這題，才能估計眼前結論是否被可見性放大。",
+      "我們現在的知識庫，是真的在累積結果，還是在累積好看的結果？兩者長出來的組織學習完全不同。"
+    ],
+    "sectionIntents": {
+      "core": "用「很多偏差不是出在有些結果被說太大，而是有些結果根本沒被留下」建立本頁的核心張力，先讓讀者看見 只要可見性偏好成功與顯著，失敗、無差異和不漂亮結果就會被系統性排出視野，讓整體證據地形變形。",
+      "setup": "以「團隊分享會上幾乎都在講成功 A/B test，很少有人整理那些沒效果或反效果的測試，久了大家開始高估『大多數實驗都能找到增長槓桿』。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「可見性過濾、成功敘事、學習斷層」這幾條分析線拆開 發表偏差，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「好消息偏好、失敗沉默」這些反應，說明人為何會在 發表偏差 上滑向看似合理但代價更高的近路。",
+      "applications": "把 發表偏差 拉到 實驗治理、研究閱讀 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把發表偏差聽成『正向結果都假』太簡化，它真正指出的是可見性本身已經在幫你篩故事。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「這份證據背後，有多少無差異或失敗結果沒有被留下來、我們現在的知識庫，是真的在累積結果，還是在累積好看的結果」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Publication bias 支撐 發表偏差 的主線，File drawer effect 補上與「可見性過濾」相關的相鄰脈絡。"
+    }
+  }
+}

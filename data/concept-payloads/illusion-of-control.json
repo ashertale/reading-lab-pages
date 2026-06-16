@@ -1,0 +1,59 @@
+{
+  "target": {
+    "slug": "illusion-of-control",
+    "outputPath": "topics/illusion-of-control.html"
+  },
+  "indexEntry": {
+    "id": "illusion-of-control",
+    "title": "控制錯覺",
+    "subtitle": "Illusion of Control",
+    "href": "./topics/illusion-of-control.html",
+    "order": 238,
+    "type": "認知偏差 / 掌控感",
+    "domain": "決策、風險與介面行為",
+    "focus": "People overestimate their ability to influence outcomes",
+    "thesis": "只要一件事看起來像有很多操作點，人就容易高估自己對結果的實際控制力；真正改變結果的因素可能根本不在那些按鈕上。",
+    "tags": [
+      "illusion",
+      "control",
+      "randomness",
+      "debugging",
+      "interfaces",
+      "risk"
+    ]
+  },
+  "page": {
+    "documentTitle": "控制錯覺 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-illusion-of-control",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / control / risk / confidence</p>\n    <h1>控制錯覺</h1>\n    <p class=\"topic-subtitle\">Illusion of Control</p>\n    <p class=\"thesis\">只要一件事看起來像有很多操作點，人就容易高估自己對結果的實際控制力；真正改變結果的因素可能根本不在那些按鈕上。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>看懂為什麼多一點按鈕、多一點參數、多一點儀式，常會讓人高估自己其實沒有的控制力。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>認知偏差 / 掌控感</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>People overestimate their ability to influence outcomes</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>可操作感、隨機成分、回饋誤讀、自我效能投射</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在產品介面、風險判斷與流程設計上更早辨認『掌控感 ≠ 真控制』。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>操作</span>\n      <span>掌控</span>\n      <span>誤判</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>只要感覺手上有桿子，人就很容易以為方向真的都在自己手裡</h2>\n      <p class=\"section-lede\">控制錯覺 最值得看的地方，不是替人貼標籤，而是理解：當結果受大量隨機性或外部條件影響時，表面的可操作感仍會讓人高估自己其實沒有那麼多的控制力。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>當結果受大量隨機性或外部條件影響時，表面的可操作感仍會讓人高估自己其實沒有那麼多的控制力。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先分開可操作與可控制</strong>\n        <p>你能動很多東西，不代表那些東西真的決定結果。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再看結果裡有多少外部或隨機成分</strong>\n        <p>只要隨機性高，掌控感就更容易跑在真控制力前面。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後用可重現性檢驗控制力</strong>\n        <p>真控制通常能跨次數、跨人、跨條件重現，而不是只靠一次剛好。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>先把它放回一次普通判斷</h2>\n      <p class=\"section-lede\">控制錯覺最容易出現在那種表面上很可操作、實際上卻被大量外部條件支配的場景裡。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>工程師在不穩定的測試環境裡反覆切換執行順序與按鈕節奏，感覺自己快要抓到規律，實際上真正影響結果的是另一個隨機資源競爭條件。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於有操作感會大幅降低焦慮，所以人會自然依戀那些不一定真的有用的控制儀式。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">表面上有很多可操作點</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">主觀掌控感提高</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">實際控制力被過度高估</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>控制錯覺最值得警惕的，是它會讓人把掌控感當成掌控事實，於是忽略真正該追的因果結構。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>把心理拉力拆成幾條線</h2>\n      <p class=\"section-lede\">這題的關鍵是把真正會改變結果的控制桿，和只是剛好陪你出現的操作儀式分開。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>介面操控感</strong>\n        <p>滑桿、按鈕和調整步驟會自然放大人對控制的主觀感受。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>結果誤歸因</strong>\n        <p>只要某次操作碰巧伴隨成功，人就更容易把成功回算到自己的那個動作。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>隨機遮蔽</strong>\n        <p>外部波動越大，人越容易用自我控制故事去填補因果空白。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>心理拉力</th>\n            <th>當下看起來像什麼</th>\n            <th>代價</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>很多操作點</td>\n            <td>看起來更能掌控</td>\n            <td>若因果薄弱，常只是在放大主觀控制感</td>\n          </tr>\n          <tr>\n            <td>少量但有驗證的控制桿</td>\n            <td>感覺不那麼爽</td>\n            <td>卻比較可能真的改變結果</td>\n          </tr>\n          <tr>\n            <td>只看單次成功</td>\n            <td>很容易自信上升</td>\n            <td>最難分清是自己厲害還是剛好碰運氣</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>這題抓住了哪種心理捷徑</h2>\n      <p class=\"section-lede\">人對自己的操作特別敏感，於是很容易把剛好搭上的巧合經驗收編成『我找到方法了』。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>儀式安定感</strong>\n        <p>只要有一套可重複的操作節奏，人會比較安心，也更容易高估它的真效力。</p>\n      </div>\n      <div class=\"example\">\n        <strong>勝利綁定</strong>\n        <p>成功案例會讓人把注意力綁在當時做的那幾個動作上。</p>\n      </div>\n      <div class=\"example\">\n        <strong>焦慮補償</strong>\n        <p>越是不確定的場景，人越需要一種『我至少有在掌控』的感覺。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>把它帶回管理、產品與協作</h2>\n      <p class=\"section-lede\">除錯、介面設計和風險判斷都會被掌控感誤導，所以重現性比手感更值得先信。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>除錯流程</strong>\n        <p>如果某個操作真正有效，就應該能在多次重現中穩定改變結果，而不是只靠一次巧合。</p>\n      </div>\n      <div class=\"example\">\n        <strong>產品介面</strong>\n        <p>別用太多假控制感元件掩蓋系統其實沒有讓使用者多掌握什麼。</p>\n      </div>\n      <div class=\"example\">\n        <strong>風險判斷</strong>\n        <p>把可見操作和真正影響風險的因子分開，才能避免把精力耗在儀式上。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>除錯流程: 用重現性檢驗真正的控制桿。</li>\n      <li>產品介面: 區分真控制和只是讓人感覺有控制。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>幾種很快但太扁的讀法</h2>\n      <p class=\"section-lede\">若一開始就把 控制錯覺 聽成「所以主觀掌控感都不好」，後面連「不是。掌控感很重要，只是別把它誤當成已被驗證的控制力。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以主觀掌控感都不好</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。掌控感很重要，只是別把它誤當成已被驗證的控制力。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要有成功結果就代表控制有效</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>若不能穩定重現，成功可能只是剛好碰上。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>這只發生在賭博或迷信</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>工程、管理與產品設計裡一樣常見，只是形式比較現代。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>兩個值得帶走的校正問題</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>我現在以為自己在控制的那件事，能不能跨條件穩定重現</strong>\n        <p>如果不能，掌控感可能跑在因果前面。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果把我的操作拿掉，結果真的會大幅改變嗎</strong>\n        <p>這能幫你分辨控制桿和安慰按鈕。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Illusion of control 支撐 控制錯覺 的主線，Locus of control 補上與「介面操控感」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐人會高估自己對結果影響力的主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Illusion_of_control\" target=\"_blank\" rel=\"noreferrer\">Illusion of control</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上人如何理解自己與外部事件關係的相鄰脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Locus_of_control\" target=\"_blank\" rel=\"noreferrer\">Locus of control</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次你很想一直調同一個按鈕時，先停一下問：這個動作真的在改變系統，還是在安撫我自己？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "當結果受大量隨機性或外部條件影響時，表面的可操作感仍會讓人高估自己其實沒有那麼多的控制力。",
+    "smallestScenario": "工程師在不穩定的測試環境裡反覆切換執行順序與按鈕節奏，感覺自己快要抓到規律，實際上真正影響結果的是另一個隨機資源競爭條件。",
+    "sourcePlan": [
+      "用來支撐人會高估自己對結果影響力的主線。",
+      "補上人如何理解自己與外部事件關係的相鄰脈絡。"
+    ],
+    "transferTargets": [
+      "除錯流程: 用重現性檢驗真正的控制桿。",
+      "產品介面: 區分真控制和只是讓人感覺有控制。",
+      "風險判斷: 別把操作儀式誤當成因果掌握。"
+    ],
+    "commonMisreading": "把控制錯覺理解成『主觀感覺都沒價值』會太粗，它真正提醒的是別讓掌控感取代因果驗證。",
+    "readerQuestions": [
+      "我現在以為自己在控制的那件事，能不能跨條件穩定重現？如果不能，掌控感可能跑在因果前面。",
+      "如果把我的操作拿掉，結果真的會大幅改變嗎？這能幫你分辨控制桿和安慰按鈕。"
+    ],
+    "sectionIntents": {
+      "core": "用「只要感覺手上有桿子，人就很容易以為方向真的都在自己手裡」建立本頁的核心張力，先讓讀者看見 當結果受大量隨機性或外部條件影響時，表面的可操作感仍會讓人高估自己其實沒有那麼多的控制力。",
+      "setup": "以「工程師在不穩定的測試環境裡反覆切換執行順序與按鈕節奏，感覺自己快要抓到規律，實際上真正影響結果的是另一個隨機資源競爭條件。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「介面操控感、結果誤歸因、隨機遮蔽」這幾條分析線拆開 控制錯覺，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「儀式安定感、勝利綁定」這些反應，說明人為何會在 控制錯覺 上滑向看似合理但代價更高的近路。",
+      "applications": "把 控制錯覺 拉到 除錯流程、產品介面 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把控制錯覺理解成『主觀感覺都沒價值』會太粗，它真正提醒的是別讓掌控感取代因果驗證。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「我現在以為自己在控制的那件事，能不能跨條件穩定重現、如果把我的操作拿掉，結果真的會大幅改變嗎」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Illusion of control 支撐 控制錯覺 的主線，Locus of control 補上與「介面操控感」相關的相鄰脈絡。"
+    }
+  }
+}

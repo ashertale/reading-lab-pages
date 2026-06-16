@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>斷路器模式 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-circuit-breaker-pattern">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / resilience / failures / isolation</p>
+        <h1>斷路器模式</h1>
+        <p class="topic-subtitle">Circuit Breaker Pattern</p>
+        <p class="thesis">當依賴已經在失敗時，繼續照常重試只會把局部故障放大成系統性拖垮；斷路器的價值就在於承認該暫停了。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>看懂什麼時候該切斷呼叫、什麼時候該半開恢復，而不是把重試當成萬用解藥。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>容錯設計 / 故障隔離</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Stop sending traffic into a failing dependency</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>依賴健康、失敗門檻、恢復探測、擴散成本</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在服務依賴、雲端 API 與韌體外部資源存取上更早阻止故障擴散。</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>失敗</span>
+          <span>隔離</span>
+          <span>恢復</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>真正昂貴的，常不是第一次失敗，而是還假裝它沒失敗</h2>
+          <p class="section-lede">斷路器模式 真正麻煩的地方，不在名詞，而在它逼你承認：當依賴已經處於高錯誤或高延遲狀態時，持續灌流量只會把上游資源也一起拖進故障裡。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>當依賴已經處於高錯誤或高延遲狀態時，持續灌流量只會把上游資源也一起拖進故障裡。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先定義什麼叫依賴不健康</strong>
+            <p>沒有清楚門檻時，團隊通常會把每次失敗都當成再試一次就好。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再把隔離當成保護而不是放棄</strong>
+            <p>切斷流量不是承認失敗，而是替其他還能活的能力保留資源。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後設計可控恢復</strong>
+            <p>半開探測的價值，在於讓系統不是永久封鎖，而是有節奏地確認依賴是否回來。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>先看現場最早卡住的地方</h2>
+          <p class="section-lede">斷路器模式最好先從資源被拖死的那一刻看起，因為它要切斷的不是單次錯誤，而是故障蔓延。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>裝置管理服務依賴遠端憑證 API；當 API 逾時後，上游還持續同步重試，每個 request 都卡住執行緒池，結果連本來可以處理的本地工作也一起停擺。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>難點不在切斷呼叫本身，而在團隊往往怕『明明還有一點機會成功』，於是不敢承認該先保全整體。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">依賴開始高延遲或高錯誤</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">上游照常灌請求與重試</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">局部故障擴散成全局塞車</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>斷路器模式的關鍵不是悲觀，而是承認：暫時拒絕比持續拖垮整體更負責任。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>別讓同一個名詞包掉全部設計判斷</h2>
+          <p class="section-lede">這一段會把失敗門檻、半開恢復和降級路徑分開看，免得把斷路器誤當重試參數微調。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>擴散成本</strong>
+            <p>這個依賴失敗時，會吃掉多少執行緒、連線、記憶體與等待時間。</p>
+          </article>
+          <article class="lens-card">
+            <strong>恢復節奏</strong>
+            <p>恢復不該靠全量流量猛灌，而要有受控探測與回復條件。</p>
+          </article>
+          <article class="lens-card">
+            <strong>降級策略</strong>
+            <p>被切斷後，系統是明確失敗、回退快取，還是提供較小但可接受的服務。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>判準</th>
+                <th>當下看起來像什麼</th>
+                <th>真正代價</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>持續照常重試</td>
+                <td>看起來沒有放棄任何請求</td>
+                <td>常把依賴故障擴散成上游全面塞車</td>
+              </tr>
+              <tr>
+                <td>及時斷路</td>
+                <td>部分功能會暫時拒絕</td>
+                <td>卻能保住其他能力與恢復空間</td>
+              </tr>
+              <tr>
+                <td>沒有半開探測</td>
+                <td>實作比較單純</td>
+                <td>要嘛永遠封鎖，要嘛一恢復就又被全量流量撞壞</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>人和團隊為什麼會往錯的簡化走</h2>
+          <p class="section-lede">人在依賴失靈時很容易加碼重試，因為「再試一次」看起來總比承認現在該停更積極。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>僥倖重試</strong>
+            <p>只要偶爾有成功案例，人就容易高估『再試一次』的價值。</p>
+          </div>
+          <div class="example">
+            <strong>不願顯式失敗</strong>
+            <p>很多團隊寧可拖長等待，也不想讓使用者立刻看到錯誤，結果反而把更大範圍一起拖壞。</p>
+          </div>
+          <div class="example">
+            <strong>局部樂觀</strong>
+            <p>負責單一請求的人會想救這一單，卻較難同時看到整體資源正在被抽乾。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把它帶回架構、流程與介面</h2>
+          <p class="section-lede">放進 API 依賴、裝置連線和內部服務，斷路器其實是在替整體韌性留生路。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>外部 API 依賴</strong>
+            <p>當上游服務持續超時時，斷路器能保住本地執行緒池與快取服務。</p>
+          </div>
+          <div class="example">
+            <strong>裝置側網路資源</strong>
+            <p>對慢或不穩定的遠端端點先限流與斷路，比讓裝置一直卡在等待更健康。</p>
+          </div>
+          <div class="example">
+            <strong>內部微服務</strong>
+            <p>把單點依賴的失敗明確隔離，才能避免全站級 cascade。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>外部 API 依賴: 先保住本地資源，不讓遠端故障擴散。</li>
+          <li>裝置網路行為: 對不穩定端點做斷路與降級，而不是無限等待。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>這個概念最常被怎樣讀歪</h2>
+          <p class="section-lede">若一開始就把 斷路器模式 聽成「有重試就夠了」，後面連「沒有斷路條件的重試，常只是更快地把自己也拖進去。」這層校正都很難真正進場。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>有重試就夠了</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>沒有斷路條件的重試，常只是更快地把自己也拖進去。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>斷路器代表系統不可靠</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>相反，它是承認依賴不可靠後，仍努力保住整體可靠性的一種設計。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要切掉就行</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>沒有恢復探測與降級策略，斷路器只完成了一半。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>下次做設計前先問這兩句</h2>
+          </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>這個依賴如果連續失敗三十秒，最先被它拖死的是哪種資源</strong>
+            <p>先答出來，才知道斷路門檻該怎麼設。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>依賴被切斷後，系統還打算怎麼提供較小但可接受的行為</strong>
+            <p>若沒有答案，斷路只會從拖垮變成失明。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">交代 Circuit Breaker 支撐 斷路器模式 的主線，Fail-fast 補上與「擴散成本」相關的相鄰脈絡。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>用來支撐依賴失敗時應暫停呼叫、隔離故障與受控恢復的核心主線。</p>
+            <a href="https://martinfowler.com/bliki/CircuitBreaker.html" target="_blank" rel="noreferrer">Circuit Breaker</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰脈絡</strong>
+            <p>補上為何及早承認失敗，常比拖長等待更能保全整體系統。</p>
+            <a href="https://en.wikipedia.org/wiki/Fail-fast" target="_blank" rel="noreferrer">Fail-fast</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>下次設計重試前，先寫下：如果依賴整整一分鐘都很差，我的系統準備怎麼活下來？</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

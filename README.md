@@ -4,8 +4,8 @@
 
 ## 目前狀態
 
-- `topics/`：目前已發布 200 個概念頁；實際數量應持續和 `data/concept-payloads/` 一一對齊。
-- `data/concept-payloads/`：目前 200 份可審核 payload，對應 200 個已發布頁面。
+- `topics/`：目前已發布 250 個概念頁；實際數量應持續和 `data/concept-payloads/` 一一對齊。
+- `data/concept-payloads/`：目前 250 份可審核 payload，對應 250 個已發布頁面。
 - `data/concept-suggestions.json`：目前為空，可作為下一批 backlog 入口。
 
 ## 架構總覽
@@ -34,12 +34,12 @@ data/concept-suggestions.json
 
 ## Scripts 分層
 
-- `scripts/generate_concept_batch.py`：舊批次文案產生器，預設已禁止寫 payload；只可用 `--list-topics` 看候選題，避免模板句型再次進入可發布內容。
+- `scripts/generate_concept_batch.py`：純 backlog / suggestions 檢視工具；只讀 `data/concept-suggestions.json`，不內建候選文案、不可寫 payload。
 - `scripts/render_concept_page.py`：從 payload render `topics/*.html`，並可同步更新 `topic-index.js`。
 - `scripts/validate_concept_lab.py`：檢查 HTML、index、payload 對齊、JS parse 與禁用樣式模式。
 - `scripts/audit_concept_content.py`：輸出既有 payload 的制式句型、跨頁相似度與 section 句架盤點報告；報告寫入已忽略的 `.superpowers/concept-audits/`。
 - `scripts/bootstrap_existing_concept_payloads.py`：從既有 `topic-index.js` 與 `topics/*.html` 反推 payload。
-- `scripts/archive/`：存放一次性或歷史性的批次生成輔助腳本，不是日常維護主流程。
+- `scripts/archive/`：存放一次性或歷史性的維護輔助腳本；若腳本帶有內容生成傾向，應直接移除，不保留為備用流程。
 
 ## 新增概念頁流程
 
@@ -59,7 +59,7 @@ Render 既有 payload：
 & 'C:\Users\CHEN\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' scripts\render_concept_page.py data\concept-payloads --sync-index
 ```
 
-列出舊候選題資料，只供批次規劃，不會寫 payload：
+列出 backlog 候選題，只讀 `data/concept-suggestions.json`，不內建任何內容模板：
 
 ```powershell
 & 'C:\Users\CHEN\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' scripts\generate_concept_batch.py --list-topics --limit 20
@@ -76,6 +76,7 @@ Render 既有 payload：
 - `topic-index.js`、`index-page.js`、`backlog-page.js` 是否能被 JS parser 接受。
 - `topics/*.html` 與 `topic-index.js` 是否和 payload / suggestions JSON 同步。
 - `scripts/render_concept_page.py --check --sync-index` 是否沒有寫入副作用。
+- `scripts/` 是否重新混入內容模板產生器殘留，例如 `hash_pick`、`*_LEDE_VARIANTS`、`legacy-template-prose`。
 - HTML section 開關數、頁內 anchor target、概念頁必要 section 是否完整。
 - CSS/HTML 是否出現禁用的 viewport type pattern：`font-size: *vw`、`clamp(`、負 `letter-spacing`。
 - `data/concept-payloads/*.json` 與 `topics/*.html` 是否一一對齊。
@@ -83,7 +84,7 @@ Render 既有 payload：
 - 新增或修改的 payload 是否帶有批次模板句型，例如「常不是抽象風險」、「如果沒被提前畫出來」、「把情境縮到一次普通判斷後」這類可替換句架。
 - 新增或修改的 payload 是否和既有頁面整體過度相似，或在同一 section 重複既有句架。
 
-若要盤點既有 200 頁的內容舊債，可加上嚴格模式：
+若要盤點既有 250 頁的內容舊債，可加上嚴格模式：
 
 ```powershell
 & 'C:\Users\CHEN\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' scripts\validate_concept_lab.py --strict-content

@@ -1,0 +1,61 @@
+{
+  "target": {
+    "slug": "finite-and-infinite-games",
+    "outputPath": "topics/finite-and-infinite-games.html"
+  },
+  "indexEntry": {
+    "id": "finite-and-infinite-games",
+    "title": "有限與無限遊戲",
+    "subtitle": "Finite and Infinite Games",
+    "href": "./topics/finite-and-infinite-games.html",
+    "order": 217,
+    "type": "框架概念 / 競爭與延續",
+    "domain": "策略、組織與人生判斷",
+    "focus": "Some games are played to win, others to keep the game going",
+    "thesis": "不是所有競爭都在追求終局勝利；有些場景真正重要的是讓遊戲能持續下去。若把後者誤當前者，很多本來該保留的關係、彈性與信任就會被你拿去換短期勝負。",
+    "tags": [
+      "finite",
+      "infinite",
+      "games",
+      "strategy",
+      "cooperation",
+      "competition",
+      "continuation",
+      "organizations"
+    ]
+  },
+  "page": {
+    "documentTitle": "有限與無限遊戲 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-finite-and-infinite-games",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / strategy / continuation / competition</p>\n    <h1>有限與無限遊戲</h1>\n    <p class=\"topic-subtitle\">Finite and Infinite Games</p>\n    <p class=\"thesis\">不是所有競爭都在追求終局勝利；有些場景真正重要的是讓遊戲能持續下去。若把後者誤當前者，很多本來該保留的關係、彈性與信任就會被你拿去換短期勝負。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>看懂什麼場景該追求贏、什麼場景該先保住可持續參與，避免把所有互動都做成零和比賽。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>框架概念 / 競爭與延續</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Some games are played to win, others to keep the game going</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>終局條件、參與目的、規則彈性、存續價值</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在管理、職涯與合作裡更清楚區分短期勝利和長期遊戲延續。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>勝負</span>\n      <span>延續</span>\n      <span>框架</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>有些局面最重要的不是贏一次，而是別把之後還能玩的可能性一起贏掉</h2>\n      <p class=\"section-lede\">有限與無限遊戲最難的不是記住兩個名詞，而是承認很多你以為要贏的局，其實更該先保住之後還能一起玩。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>當一個本該為了長期延續而存在的關係、制度或市場，被當成只求眼前勝負的有限遊戲來玩，後續能共同存在的空間就會被迅速耗掉。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先認清這局到底有沒有終局</strong>\n        <p>若沒有清楚終局條件，過度勝負化往往只會破壞未來繼續合作的可能。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再看贏這次是否會傷到能繼續玩的條件</strong>\n        <p>信任、聲譽、彈性和生態健康都可能是被短期勝利吃掉的東西。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後讓規則服務於長期目的</strong>\n        <p>無限遊戲不代表沒有規則，而是規則必須能支撐遊戲延續。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>從最小思想實驗看張力在哪裡</h2>\n      <p class=\"section-lede\">這一段先把畫面縮到一次談判，因為長期遊戲最常是在看似漂亮的單次勝利裡被自己打壞。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>供應商談判中，一方這次成功把價格壓到極低，短期像贏了；幾季後卻換來供應品質下降、合作關係惡化與更脆弱的供應鏈。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於短期勝利通常更可見、更容易被獎勵，而延續價值很少立刻出現在戰報上。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">把互動框成單次勝負</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">為贏當下犧牲延續條件</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">長期可共同存在的空間被自己耗掉</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>有限與無限遊戲的框架價值，在於它逼你先問：我現在是在追終局勝利，還是在保全一個還值得繼續玩的局。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>這題真正分岔的地方</h2>\n      <p class=\"section-lede\">接下來要分開看終局、關係成本和規則彈性，否則兩種遊戲很容易在口號裡被混成同一件事。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>終局條件</strong>\n        <p>有限遊戲有清楚勝負與結束；無限遊戲更在乎持續參與與持續創造。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>關係成本</strong>\n        <p>若互動還要持續，短期極限壓榨常會直接傷到未來合作條件。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>規則彈性</strong>\n        <p>為了讓遊戲延續，規則有時需要隨環境調整，而不是被拿來壓出一次性勝利。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>判準</th>\n            <th>它會保住什麼</th>\n            <th>代價</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>把長期互動當單次勝負</td>\n            <td>短期戰報很好看</td>\n            <td>長期關係與生態常被自己打薄</td>\n          </tr>\n          <tr>\n            <td>看重延續條件</td>\n            <td>當下不一定最爽</td>\n            <td>卻更能保住之後還能玩的價值</td>\n          </tr>\n          <tr>\n            <td>混淆兩種遊戲</td>\n            <td>判斷最容易失焦</td>\n            <td>要贏的地方和該保全的地方會被一起搞亂</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>為什麼這題會讓人卡住</h2>\n      <p class=\"section-lede\">短期勝負特別容易讓人上頭，因為它有明確分數，延續價值卻常只能靠事後才看得見的損失提醒你。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>勝利獎勵</strong>\n        <p>可見的輸贏很容易刺激人，把長期延續價值壓成次要。</p>\n      </div>\n      <div class=\"example\">\n        <strong>短視回饋</strong>\n        <p>多數制度會更快獎勵當季表現，而不是關係能否長期健康。</p>\n      </div>\n      <div class=\"example\">\n        <strong>框架偷換</strong>\n        <p>很多衝突之所以惡化，是因為雙方沒有意識到自己在玩不同種類的遊戲。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>把它帶回制度、工程與自我理解</h2>\n      <p class=\"section-lede\">供應鏈談判、團隊管理和職涯選擇看似不同，其實都在問：這次的勝利值不值得拿未來的參與資格去換。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>供應商合作</strong>\n        <p>若合作本身是長期遊戲，別把每次談判都玩成只求單次最大化。</p>\n      </div>\n      <div class=\"example\">\n        <strong>團隊管理</strong>\n        <p>若你要的是長期創造力，就不能把每次討論都做成輸贏分明的權力比賽。</p>\n      </div>\n      <div class=\"example\">\n        <strong>職涯判斷</strong>\n        <p>有些看似吃虧的選擇，其實是在保住你未來還能參與更大局的資格。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>供應商合作: 別用單次勝利吃掉長期互信。</li>\n      <li>團隊管理: 分清哪些競爭應該有終局，哪些協作更該保住延續。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>這題最容易被讀歪的地方</h2>\n      <p class=\"section-lede\">若一開始就把 有限與無限遊戲 聽成「所以不能競爭」，後面連「不是。有限遊戲本來就有其位置，重點是不要把所有局都誤判成有限遊戲。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以不能競爭</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。有限遊戲本來就有其位置，重點是不要把所有局都誤判成有限遊戲。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>無限遊戲代表永遠不要計較短期輸贏</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。它只是要求你把短期輸贏放回更大的延續脈絡裡看。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>這只是勵志說法</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>它其實很實用，因為很多決策就是在混淆兩種遊戲時做壞的。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>下次遇到相似判斷先問這兩句</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>我現在最想贏的這件事，會不會剛好在削弱之後還能一起玩的條件</strong>\n        <p>若會，這局可能被你玩錯了。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>這個場景真正的成功指標，是一次勝負，還是長期能繼續創造與合作</strong>\n        <p>先答這題，很多取捨會重排。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Finite and Infinite Games 支撐 有限與無限遊戲 的主線，Game theory 補上與「終局條件」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐有限遊戲與無限遊戲在目的與規則上的差異主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Finite_and_Infinite_Games\" target=\"_blank\" rel=\"noreferrer\">Finite and Infinite Games</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上策略互動與勝負框架如何影響選擇的相鄰脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Game_theory\" target=\"_blank\" rel=\"noreferrer\">Game theory</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次你很想『這次一定要贏』時，先問：贏完之後，這個局還值不值得、還能不能繼續玩？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "當一個本該為了長期延續而存在的關係、制度或市場，被當成只求眼前勝負的有限遊戲來玩，後續能共同存在的空間就會被迅速耗掉。",
+    "smallestScenario": "供應商談判中，一方這次成功把價格壓到極低，短期像贏了；幾季後卻換來供應品質下降、合作關係惡化與更脆弱的供應鏈。",
+    "sourcePlan": [
+      "用來支撐有限遊戲與無限遊戲在目的與規則上的差異主線。",
+      "補上策略互動與勝負框架如何影響選擇的相鄰脈絡。"
+    ],
+    "transferTargets": [
+      "供應商合作: 別用單次勝利吃掉長期互信。",
+      "團隊管理: 分清哪些競爭應該有終局，哪些協作更該保住延續。",
+      "職涯選擇: 評估是否在為短期輸贏犧牲長期參與資格。"
+    ],
+    "commonMisreading": "把有限與無限遊戲讀成『不要競爭』會太軟，它真正要求的是別把遊戲類型判錯。",
+    "readerQuestions": [
+      "我現在最想贏的這件事，會不會剛好在削弱之後還能一起玩的條件？若會，這局可能被你玩錯了。",
+      "這個場景真正的成功指標，是一次勝負，還是長期能繼續創造與合作？先答這題，很多取捨會重排。"
+    ],
+    "sectionIntents": {
+      "core": "用「有些局面最重要的不是贏一次，而是別把之後還能玩的可能性一起贏掉」建立本頁的核心張力，先讓讀者看見 當一個本該為了長期延續而存在的關係、制度或市場，被當成只求眼前勝負的有限遊戲來玩，後續能共同存在的空間就會被迅速耗掉。",
+      "setup": "以「供應商談判中，一方這次成功把價格壓到極低，短期像贏了；幾季後卻換來供應品質下降、合作關係惡化與更脆弱的供應鏈。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「終局條件、關係成本、規則彈性」這幾條分析線拆開 有限與無限遊戲，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「勝利獎勵、短視回饋」這些反應，說明人為何會在 有限與無限遊戲 上滑向看似合理但代價更高的近路。",
+      "applications": "把 有限與無限遊戲 拉到 供應商合作、團隊管理 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把有限與無限遊戲讀成『不要競爭』會太軟，它真正要求的是別把遊戲類型判錯。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「我現在最想贏的這件事，會不會剛好在削弱之後還能一起玩的條件、這個場景真正的成功指標，是一次勝負，還是長期能繼續創造與合作」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Finite and Infinite Games 支撐 有限與無限遊戲 的主線，Game theory 補上與「終局條件」相關的相鄰脈絡。"
+    }
+  }
+}

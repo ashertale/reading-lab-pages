@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "lucas-critique",
+    "outputPath": "topics/lucas-critique.html"
+  },
+  "indexEntry": {
+    "id": "lucas-critique",
+    "title": "盧卡斯批判",
+    "subtitle": "Lucas Critique",
+    "href": "./topics/lucas-critique.html",
+    "order": 248,
+    "type": "政策原則 / 模型邊界",
+    "domain": "制度設計與預測",
+    "focus": "People change behavior when policy rules change",
+    "thesis": "用歷史關係式直接預測政策效果，最大的風險不是模型算錯，而是人一旦看見新規則，就會改變自己的行為，讓舊關係本身失效。",
+    "tags": [
+      "lucas",
+      "critique",
+      "policy",
+      "incentives",
+      "expectations",
+      "forecasting",
+      "behavior"
+    ]
+  },
+  "page": {
+    "documentTitle": "盧卡斯批判 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-lucas-critique",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / policy / models / behavior</p>\n    <h1>盧卡斯批判</h1>\n    <p class=\"topic-subtitle\">Lucas Critique</p>\n    <p class=\"thesis\">用歷史關係式直接預測政策效果，最大的風險不是模型算錯，而是人一旦看見新規則，就會改變自己的行為，讓舊關係本身失效。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>看清楚為什麼制度一改，過去數據裡看似穩定的關係也可能跟著崩掉。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>政策原則 / 模型邊界</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>People change behavior when policy rules change</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>政策規則、預期調整、行為反應、結構穩定性</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在產品機制、績效制度與政策預測裡更早防範『人會回應規則』這件事。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>規則</span>\n      <span>預期</span>\n      <span>改變</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>一旦規則被看見，規則就會開始改寫它原本想描述的世界</h2>\n      <p class=\"section-lede\">很多制度看起來是在追效率，最後卻會被這個張力拉歪：過去資料裡的相關關係，常建立在過去那套激勵與預期之上；當規則一變，人就不會再按舊模式行動。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>過去資料裡的相關關係，常建立在過去那套激勵與預期之上；當規則一變，人就不會再按舊模式行動。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先分清哪些關係是結構、哪些只是歷史產物</strong>\n        <p>不是所有過去穩定的數字關係都值得被當成未來政策規劃的基礎。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再問規則改變會如何改變預期</strong>\n        <p>人看到新獎懲、新限制與新機會後，行為常會跟著重排。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後用情境測試而不只用外推</strong>\n        <p>好制度預測不能只靠延長折線，還要看折線底下的人會怎麼反應。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>先把制度壓回一個小場景</h2>\n      <p class=\"section-lede\">盧卡斯批判最值得先抓住的，是政策一旦改變，人本身也會跟著改變，於是舊關係式不再原封不動。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>團隊根據過去客服處理數據設計新的獎勵制度，以為提高關單獎勵就能線性提升效率；結果客服開始改分類、提早結案，舊關係式立刻失真。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於歷史數字常看起來很穩，讓人誤以為它們像自然定律，而不是一群會回應規則的人留下的痕跡。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">用歷史關係預估新政策</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">參與者看見新規則後調整行為</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">原本的關係式被自己依賴的規則改寫</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>盧卡斯批判的提醒是：任何牽涉人與激勵的模型，都要先問規則改了以後，人還會不會照舊行動。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>幾個會讓結果分岔的判準</h2>\n      <p class=\"section-lede\">只要規則一變，人就會跟著學、跟著調整，於是昨天的關係式不再能原樣搬去預測明天。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>行為回應</strong>\n        <p>政策或制度一旦進場，人不是靜止樣本，而會主動調整策略。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>預期更新</strong>\n        <p>很多結果取決於人如何預期未來規則，而不是只取決於當下規則文本。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>模型穩定性</strong>\n        <p>真正有用的模型，得能承受規則改變後人類行為的重新排列。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>制度線索</th>\n            <th>表面上像什麼</th>\n            <th>真正風險</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>直接外推歷史關係</td>\n            <td>決策比較快</td>\n            <td>規則一改，模型最容易失靈</td>\n          </tr>\n          <tr>\n            <td>把行為回應納入設計</td>\n            <td>分析較辛苦</td>\n            <td>卻更能防範制度上線後的反作用</td>\n          </tr>\n          <tr>\n            <td>忽略預期變化</td>\n            <td>短期看起來問題較少</td>\n            <td>真正副作用常在上線後才成形</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>這條制度動力抓住了哪種人性</h2>\n      <p class=\"section-lede\">我們喜歡直接延長既有數據關係，因為這比承認人會回應規則、進而改寫資料生成過程省事得多。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>數字安慰</strong>\n        <p>只要歷史圖表很穩，人就容易忘記那其實是人在舊規則下的產物。</p>\n      </div>\n      <div class=\"example\">\n        <strong>制度靜態幻覺</strong>\n        <p>設計者常把制度想成只會推動別人，不會反過來改寫別人的策略。</p>\n      </div>\n      <div class=\"example\">\n        <strong>外推省力</strong>\n        <p>延長一條已知曲線，比重新思考人會怎麼變，心理上省力很多。</p>\n      </div>\n    </div>\n    <p class=\"micro-note\">這一段要看的，是 數字安慰、制度靜態幻覺 這類反應如何把 盧卡斯批判 指向的制度壓力在現場放大。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>放回真實治理後它會改變什麼</h2>\n      <p class=\"section-lede\">政策、產品激勵和組織制度最容易踩這個洞，因為它們都在對會回應規則的人出手。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>績效制度調整</strong>\n        <p>別只看舊數據，還要想新獎勵會怎麼改變分類、回報與努力分配。</p>\n      </div>\n      <div class=\"example\">\n        <strong>產品機制改版</strong>\n        <p>規則改了，使用者不會像昨天那樣用你的系統。</p>\n      </div>\n      <div class=\"example\">\n        <strong>政策模擬</strong>\n        <p>把預期反應、策略調整與替代路徑都列進去，勝過只做靜態試算。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>績效制度: 先預想新規則如何重排行為，而不是只延長舊圖表。</li>\n      <li>產品機制: 假設使用者會讀懂並回應規則，而不是永遠照舊使用。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>幾種常見但危險的治理讀法</h2>\n      <p class=\"section-lede\">若一開始就把 盧卡斯批判 聽成「所以歷史資料完全沒用」，後面連「不是。重點是不能把它們當成規則不變時才成立的關係照搬到新制度裡。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以歷史資料完全沒用</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。重點是不能把它們當成規則不變時才成立的關係照搬到新制度裡。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要加更多變數就能解</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>若忽略人會回應規則，再多變數也可能只是把舊世界描述得更細。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>這只和總體經濟有關</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>任何會被人回應的指標、平台規則與獎懲制度都碰得到。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>兩個值得帶走的制度問題</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>這個新規則一上線，參與者最可能先改變哪個行為</strong>\n        <p>那條改變常比靜態效益更值得先看。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>我們現在依賴的歷史關係，究竟是結構性的，還是只在舊規則下暫時成立</strong>\n        <p>沒分清這點，預測通常會太樂觀。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Lucas critique 支撐 盧卡斯批判 的主線，Rational expectations 補上與「行為回應」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐規則改變會讓歷史關係失效、因而限制政策外推的主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Lucas_critique\" target=\"_blank\" rel=\"noreferrer\">Lucas critique</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上人會根據新規則更新預期，進而改寫行為的相鄰脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Rational_expectations\" target=\"_blank\" rel=\"noreferrer\">Rational expectations</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次你想直接拿歷史數據證明新制度會有效時，先補問：規則改了之後，人還會不會像以前那樣行動？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "過去資料裡的相關關係，常建立在過去那套激勵與預期之上；當規則一變，人就不會再按舊模式行動。",
+    "smallestScenario": "團隊根據過去客服處理數據設計新的獎勵制度，以為提高關單獎勵就能線性提升效率；結果客服開始改分類、提早結案，舊關係式立刻失真。",
+    "sourcePlan": [
+      "用來支撐規則改變會讓歷史關係失效、因而限制政策外推的主線。",
+      "補上人會根據新規則更新預期，進而改寫行為的相鄰脈絡。"
+    ],
+    "transferTargets": [
+      "績效制度: 先預想新規則如何重排行為，而不是只延長舊圖表。",
+      "產品機制: 假設使用者會讀懂並回應規則，而不是永遠照舊使用。",
+      "政策模擬: 對預期反應做情境測試，而不是只做靜態試算。"
+    ],
+    "commonMisreading": "把盧卡斯批判聽成『資料沒用』會太極端，它真正要求的是把人對規則的回應放回模型裡。",
+    "readerQuestions": [
+      "這個新規則一上線，參與者最可能先改變哪個行為？那條改變常比靜態效益更值得先看。",
+      "我們現在依賴的歷史關係，究竟是結構性的，還是只在舊規則下暫時成立？沒分清這點，預測通常會太樂觀。"
+    ],
+    "sectionIntents": {
+      "core": "用「一旦規則被看見，規則就會開始改寫它原本想描述的世界」建立本頁的核心張力，先讓讀者看見 過去資料裡的相關關係，常建立在過去那套激勵與預期之上；當規則一變，人就不會再按舊模式行動。",
+      "setup": "以「團隊根據過去客服處理數據設計新的獎勵制度，以為提高關單獎勵就能線性提升效率；結果客服開始改分類、提早結案，舊關係式立刻失真。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「行為回應、預期更新、模型穩定性」這幾條分析線拆開 盧卡斯批判，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「數字安慰、制度靜態幻覺」這些反應，說明人為何會在 盧卡斯批判 上滑向看似合理但代價更高的近路。",
+      "applications": "把 盧卡斯批判 拉到 績效制度、產品機制 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把盧卡斯批判聽成『資料沒用』會太極端，它真正要求的是把人對規則的回應放回模型裡。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「這個新規則一上線，參與者最可能先改變哪個行為、我們現在依賴的歷史關係，究竟是結構性的，還是只在舊規則下暫時成立」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Lucas critique 支撐 盧卡斯批判 的主線，Rational expectations 補上與「行為回應」相關的相鄰脈絡。"
+    }
+  }
+}

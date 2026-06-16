@@ -1,0 +1,61 @@
+{
+  "target": {
+    "slug": "no-free-lunch-theorem",
+    "outputPath": "topics/no-free-lunch-theorem.html"
+  },
+  "indexEntry": {
+    "id": "no-free-lunch-theorem",
+    "title": "免費午餐不存在定理",
+    "subtitle": "No Free Lunch Theorem",
+    "href": "./topics/no-free-lunch-theorem.html",
+    "order": 243,
+    "type": "學習原則 / 問題分布",
+    "domain": "優化與模型選擇",
+    "focus": "No optimizer is best across all possible problems",
+    "thesis": "脫離問題分布談『哪個方法普遍最好』幾乎沒有意義；一個方法在哪些問題上特別強，通常也代表它在別的地方有偏好與盲點。",
+    "tags": [
+      "no",
+      "free",
+      "lunch",
+      "theorem",
+      "optimization",
+      "search",
+      "bias",
+      "benchmark"
+    ]
+  },
+  "page": {
+    "documentTitle": "免費午餐不存在定理 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-no-free-lunch-theorem",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / optimization / bias / distribution</p>\n    <h1>免費午餐不存在定理</h1>\n    <p class=\"topic-subtitle\">No Free Lunch Theorem</p>\n    <p class=\"thesis\">脫離問題分布談『哪個方法普遍最好』幾乎沒有意義；一個方法在哪些問題上特別強，通常也代表它在別的地方有偏好與盲點。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>看清楚為什麼『通用最好方法』幾乎總是過度承諾，並學會把方法放回它依賴的問題分布。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>學習原則 / 問題分布</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>No optimizer is best across all possible problems</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>問題分布、歸納偏好、平均表現、適用邊界</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在模型、演算法與流程選型時更早追問方法背後的隱性偏好。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>方法</span>\n      <span>分布</span>\n      <span>偏好</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>一個方法之所以在這裡好用，通常正是因為它替某類問題帶了偏好</h2>\n      <p class=\"section-lede\">免費午餐不存在定理 難的不是記住術語，而是面對這個前提衝突：如果把所有可能問題一視同仁，沒有哪個方法會普遍領先；任何看起來很強的方法，都在偷偷假設某種世界結構。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>如果把所有可能問題一視同仁，沒有哪個方法會普遍領先；任何看起來很強的方法，都在偷偷假設某種世界結構。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先說清楚你的問題長什麼樣</strong>\n        <p>沒有問題分布，就沒有可誠實討論的方法優劣。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再問方法在哪裡偷帶偏好</strong>\n        <p>特徵、損失函數、搜索策略與資料前提都在替方法塑形。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後接受沒有脫脈絡王者</strong>\n        <p>真正成熟的選型，不是找通吃工具，而是承認適配邊界。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>從最小思想實驗開始</h2>\n      <p class=\"section-lede\">免費午餐不存在定理最好別一開始就聽成悲觀口號，它真正刺的是「有沒有放諸四海皆準的最佳方法」。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>團隊想找『通用最佳』異常偵測模型，但不同場景的訊號密度、標註品質與風險形狀完全不同，結果模型換了好幾輪還是互有勝負。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於人很想要一個可複製的最佳答案，卻不願意先承認自己的問題分布本來就很偏。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">尋找通用最佳方法</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">忽略問題分布差異</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">方法優劣在不同場景反覆翻轉</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>免費午餐不存在定理最有價值的地方，是迫使你把『方法好不好』翻成『它對哪類問題帶了什麼偏好』。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>別讓同一個答案偷吃所有前提</h2>\n      <p class=\"section-lede\">一旦不先說清楚問題分布，「哪個方法最好」這句話本身就已經說太滿了。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>問題分布</strong>\n        <p>方法的強弱永遠要放回它面對的是哪些資料形狀、風險偏好與任務代價。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>歸納偏好</strong>\n        <p>任何演算法都靠某些假設壓縮搜尋空間；假設對了很強，錯了就可能失靈。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>平均神話</strong>\n        <p>把所有問題平均在一起談，有時反而剛好遮住現場真正重要的那幾類問題。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>分析線</th>\n            <th>它先保住什麼</th>\n            <th>會放掉什麼</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>找通用最佳法</td>\n            <td>決策看起來更輕鬆</td>\n            <td>最容易把真正的問題分布與風險代價遮掉</td>\n          </tr>\n          <tr>\n            <td>承認方法有偏好</td>\n            <td>比較沒那麼爽快</td>\n            <td>卻更能解釋為什麼方法在不同場景表現翻轉</td>\n          </tr>\n          <tr>\n            <td>只看單一 benchmark</td>\n            <td>評估很乾淨</td>\n            <td>一換任務形狀常立刻露出盲點</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>為什麼這題會一直卡住人</h2>\n      <p class=\"section-lede\">人愛找萬用法，因為一套方法通吃所有問題的想像特別省力，也特別像掌握了真理。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>王者渴望</strong>\n        <p>人天然喜歡排行榜與冠軍敘事，因為它看起來能替複雜選型節省很多痛苦。</p>\n      </div>\n      <div class=\"example\">\n        <strong>benchmark 依賴</strong>\n        <p>只要某套方法在熟悉測試集很好，人就容易把那種優勢錯誤外推到所有現場。</p>\n      </div>\n      <div class=\"example\">\n        <strong>偏好失明</strong>\n        <p>承認方法靠偏好取勝會讓成功看起來沒那麼神，所以團隊會傾向忽略它。</p>\n      </div>\n    </div>\n    <p class=\"micro-note\">這段不是替 免費午餐不存在定理 選立場，而是讓 王者渴望、benchmark 依賴 這類直覺如何混掉前提與標準變得可見。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>這個概念在當代技術裡最有用的地方</h2>\n      <p class=\"section-lede\">放進模型選擇、搜尋策略與產品方法論，這個定理是在提醒你把情境分布講清楚。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>模型選型</strong>\n        <p>先看你的資料錯誤成本與分布特性，再決定該偏哪種方法，而不是先追最新榜單。</p>\n      </div>\n      <div class=\"example\">\n        <strong>演算法評估</strong>\n        <p>讓 benchmark 反映真實任務形狀，不要用一套漂亮平均數掩蓋關鍵邊界。</p>\n      </div>\n      <div class=\"example\">\n        <strong>流程設計</strong>\n        <p>連流程模板都有問題分布依賴，別把某次成功做法直接當成萬用劇本。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>模型選型: 先描述問題分布，再討論方法優劣。</li>\n      <li>benchmark 設計: 不要讓平均數遮住真實任務的重要邊界。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>別讓它變成一句立場標語</h2>\n      <p class=\"section-lede\">若一開始就把 免費午餐不存在定理 聽成「所以任何方法都一樣」，後面連「不是。重點是方法好不好要放回特定問題分布，而不是說差別不存在。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以任何方法都一樣</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。重點是方法好不好要放回特定問題分布，而不是說差別不存在。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要資料夠多就能跳過偏好</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>資料再多，特徵、損失與評估方式仍在偷偷決定你重視什麼。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>這只屬於學術理論</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>任何模型選型、流程模板與工具評估都在面對同樣結構。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>把它變成下一次判斷前的追問</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>我們現在說某個方法『最好』，到底是對哪一類問題、哪一種錯誤成本來說最好</strong>\n        <p>先答這題，選型討論才不會空心。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>這套方法若在別的資料形狀或風險偏好下失靈，我們最可能在哪裡最先看到徵兆</strong>\n        <p>那就是它的真邊界。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 No free lunch in search and optimization 支撐 免費午餐不存在定理 的主線，Inductive bias 補上與「問題分布」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐沒有單一方法能在所有可能問題上普遍最佳這條主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/No_free_lunch_in_search_and_optimization\" target=\"_blank\" rel=\"noreferrer\">No free lunch in search and optimization</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上方法為何總要帶著某種偏好才能在特定問題上表現好的相鄰脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Inductive_bias\" target=\"_blank\" rel=\"noreferrer\">Inductive bias</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次你想問『哪個方法最好』時，先把後半句補完：對哪種資料、哪種錯誤代價、哪種現場條件來說？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "如果把所有可能問題一視同仁，沒有哪個方法會普遍領先；任何看起來很強的方法，都在偷偷假設某種世界結構。",
+    "smallestScenario": "團隊想找『通用最佳』異常偵測模型，但不同場景的訊號密度、標註品質與風險形狀完全不同，結果模型換了好幾輪還是互有勝負。",
+    "sourcePlan": [
+      "用來支撐沒有單一方法能在所有可能問題上普遍最佳這條主線。",
+      "補上方法為何總要帶著某種偏好才能在特定問題上表現好的相鄰脈絡。"
+    ],
+    "transferTargets": [
+      "模型選型: 先描述問題分布，再討論方法優劣。",
+      "benchmark 設計: 不要讓平均數遮住真實任務的重要邊界。",
+      "流程模板: 承認成功做法也有它的適用世界。"
+    ],
+    "commonMisreading": "把免費午餐不存在定理讀成『所有方法都差不多』，會錯過它真正要你看見的是偏好與分布。",
+    "readerQuestions": [
+      "我們現在說某個方法『最好』，到底是對哪一類問題、哪一種錯誤成本來說最好？先答這題，選型討論才不會空心。",
+      "這套方法若在別的資料形狀或風險偏好下失靈，我們最可能在哪裡最先看到徵兆？那就是它的真邊界。"
+    ],
+    "sectionIntents": {
+      "core": "用「一個方法之所以在這裡好用，通常正是因為它替某類問題帶了偏好」建立本頁的核心張力，先讓讀者看見 如果把所有可能問題一視同仁，沒有哪個方法會普遍領先；任何看起來很強的方法，都在偷偷假設某種世界結構。",
+      "setup": "以「團隊想找『通用最佳』異常偵測模型，但不同場景的訊號密度、標註品質與風險形狀完全不同，結果模型換了好幾輪還是互有勝負。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「問題分布、歸納偏好、平均神話」這幾條分析線拆開 免費午餐不存在定理，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「王者渴望、benchmark 依賴」這些反應，說明人為何會在 免費午餐不存在定理 上滑向看似合理但代價更高的近路。",
+      "applications": "把 免費午餐不存在定理 拉到 模型選型、benchmark 設計 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把免費午餐不存在定理讀成『所有方法都差不多』，會錯過它真正要你看見的是偏好與分布。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「我們現在說某個方法『最好』，到底是對哪一類問題、哪一種錯誤成本來說最好、這套方法若在別的資料形狀或風險偏好下失靈，我們最可能在哪裡最先看到徵兆」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 No free lunch in search and optimization 支撐 免費午餐不存在定理 的主線，Inductive bias 補上與「問題分布」相關的相鄰脈絡。"
+    }
+  }
+}

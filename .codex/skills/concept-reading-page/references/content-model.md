@@ -43,8 +43,12 @@ Every topic page should keep this reading path:
 - Prefer specific situations over abstract nouns.
 - Keep repeated cards parallel in function, not identical in phrasing.
 - Keep only the page anatomy shared. The visible copy should not converge on one house formula for section titles, section ledes, micro-notes, source disclosures, or "next step" lines.
+- In the `questions` section, the safest default is no `section-lede`. Use the `h2` plus prompt cards as the framing, and only keep a bridge line if removing it would lose truly topic-specific content.
 - Treat stock stems as template leakage. Avoid recurring phrasing such as "先抓住這題真正的壓力點", "把它帶回現實場景", "把它變成你的判斷工具", "這裡的心理連結是教學性整理：", or "接著可以順讀...".
 - Treat generated sentence frames as template leakage even when the substituted nouns are accurate. Do not use frames like "X 常不是抽象風險，而是會穿過具體接口、排程或權限邊界", "X 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現", "X 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力", or "把情境縮到一次普通判斷後，X 會怎麼替你省事...".
+- Treat the 2026-06 batch frames as template leakage too. Avoid sentence families like "只要把 X 放回真實判斷，最先出現的就是這個張力", "真正要讀懂 X，得先把它放回『...』開始的現場", "這裡不把 X 當成單一答案", "X 常被做歪，往往不是因為沒聽過原理", "把 X 放進『...』這種現場最容易讀出它的手感", "這一節把 X 收束成可以帶回現場的追問", "若要把這頁往外推一步", "本頁先用 A 釐清 X 的主線", and "本頁把 X 拉到 A、B 這兩類場景".
+- Treat `questions` bridge lines like "下面兩個問題很適合...", "下面兩問適合...", "這組提問要你先...", or "這兩個追問會..." as template leakage. Prefer deleting that line over writing another generic bridge sentence.
+- Use the validator as a backstop, not as permission to reuse an unlisted sentence frame. If the prose still reads like a fill-in-the-blank family, rewrite it before render.
 - Use English technical terms where they are the real term of art, but explain them in Traditional Chinese.
 - Keep page copy original. Do not paste long source text.
 

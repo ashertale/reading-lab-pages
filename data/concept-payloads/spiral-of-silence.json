@@ -1,0 +1,59 @@
+{
+  "target": {
+    "slug": "spiral-of-silence",
+    "outputPath": "topics/spiral-of-silence.html"
+  },
+  "indexEntry": {
+    "id": "spiral-of-silence",
+    "title": "沉默螺旋",
+    "subtitle": "Spiral of Silence",
+    "href": "./topics/spiral-of-silence.html",
+    "order": 235,
+    "type": "輿論動力 / 表態風險",
+    "domain": "媒體、社群與群體認知",
+    "focus": "Perceived majority pressure makes minority views go quieter",
+    "thesis": "當人以為自己站在少數，而且公開表態可能帶來孤立或懲罰時，就更傾向沉默；這份沉默又反過來讓表面的多數看起來更大，形成持續加速的螺旋。",
+    "tags": [
+      "spiral",
+      "silence",
+      "opinion",
+      "social-pressure",
+      "media",
+      "meetings"
+    ]
+  },
+  "page": {
+    "documentTitle": "沉默螺旋 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-spiral-of-silence",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / media / silence / majority</p>\n    <h1>沉默螺旋</h1>\n    <p class=\"topic-subtitle\">Spiral of Silence</p>\n    <p class=\"thesis\">當人以為自己站在少數，而且公開表態可能帶來孤立或懲罰時，就更傾向沉默；這份沉默又反過來讓表面的多數看起來更大，形成持續加速的螺旋。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>看懂為什麼某些立場不是被反駁掉，而是被氣氛慢慢壓到不敢出聲。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>輿論動力 / 表態風險</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Perceived majority pressure makes minority views go quieter</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>多數感知、表態風險、孤立恐懼、訊號放大</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在社群、組織與公共討論裡辨認『聲量放大了多數感』這種動力。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>少數</span>\n      <span>沉默</span>\n      <span>放大</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>越覺得自己像少數，人越不敢出聲；越不出聲，表面多數就越像真的</h2>\n      <p class=\"section-lede\">沉默螺旋最可怕的地方，是表面上的多數感會自己養大自己，直到更多保留意見乾脆不再出聲。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>只要人把外部氣氛感知成『大多數都站那邊』，即使真實偏好沒那麼一面倒，也可能因為孤立恐懼而逐步沉默。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先分開真多數和感知多數</strong>\n        <p>很多螺旋不是從真壓倒性多數開始，而是從一種被感知成多數的氣氛開始。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再看沉默成本</strong>\n        <p>只要出聲可能換來排斥、嘲笑或損失，人就會更願意把保留吞回去。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後替少數意見留可見入口</strong>\n        <p>沒有這種入口，表面共識會越來越難被修正。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>別先談大詞，先看最小互動怎麼失真</h2>\n      <p class=\"section-lede\">沉默螺旋最需要先看到的，是「看起來像多數」這件事本身如何讓更多人不敢開口。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>團隊裡幾位資深成員先強烈表態支持某方案，其他人雖有保留卻因不想被看成扯後腿而不出聲，最後會議記錄上像是全票支持。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於沉默本身沒有內容，卻會被旁觀者自動解讀成支持或至少沒有反對。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">形成看似主流的公開氣氛</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">少數感者降低發聲意願</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">沉默又把主流感進一步放大</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>沉默螺旋最危險的不是意見不同，而是意見不同的人逐步不再被看見。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>把制度壓力拆成幾條線</h2>\n      <p class=\"section-lede\">一旦「看起來像多數」開始壓低別人的表態意願，沉默就不再是結果，而是下一輪氣氛的燃料。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>氣氛感知</strong>\n        <p>媒體、主持人、資深者與演算法都可能讓某一邊看起來更像主流。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>孤立恐懼</strong>\n        <p>人在不確定時會特別在意自己會不會因此被排除在團體外。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>自我增強</strong>\n        <p>越多人沉默，越多人以為自己真的是少數，螺旋就越轉越快。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>制度線索</th>\n            <th>表面上像什麼</th>\n            <th>真正風險</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>主流感很強</td>\n            <td>表面秩序較整齊</td>\n            <td>少數意見會加速隱形，判讀越來越失真</td>\n          </tr>\n          <tr>\n            <td>鼓勵反方發言</td>\n            <td>討論較吵</td>\n            <td>卻較能看見真實分歧而非只看表面聲量</td>\n          </tr>\n          <tr>\n            <td>只看可見聲量</td>\n            <td>理解最快</td>\n            <td>最容易把沉默誤讀成同意</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>這條制度動力抓住了哪種人性</h2>\n      <p class=\"section-lede\">人對被排除在外特別敏感，所以只要感覺自己像少數，就會先縮回去保護位置。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>孤立規避</strong>\n        <p>即使心裡不同意，人也常先選擇不讓自己變成場內突兀的人。</p>\n      </div>\n      <div class=\"example\">\n        <strong>氣氛順從</strong>\n        <p>當某邊看起來明顯占上風，很多人會下意識把自己的語氣往安全位置調。</p>\n      </div>\n      <div class=\"example\">\n        <strong>沈默誤讀</strong>\n        <p>沒說話的人其實可能很多想法，但外界很容易直接把空白填成支持。</p>\n      </div>\n    </div>\n    <p class=\"micro-note\">這一段要看的，是 孤立規避、氣氛順從 這類反應如何把 沉默螺旋 指向的制度壓力在現場放大。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>放回真實治理後它會改變什麼</h2>\n      <p class=\"section-lede\">回到會議主持、社群平台和內部文化，這個概念能幫你抓出哪些設計正在把主流感做得過滿。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>會議主持</strong>\n        <p>先讓保留意見有被點名和保護的機會，才能避免會議結果被表面主流綁架。</p>\n      </div>\n      <div class=\"example\">\n        <strong>社群平台</strong>\n        <p>聲量排序若只放大主流觀點，少數觀點會更快失去出聲空間。</p>\n      </div>\n      <div class=\"example\">\n        <strong>內部文化</strong>\n        <p>只要不同意會被貼標，組織就會越來越依賴表面共識而不是真實判斷。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>會議主持: 用流程保護保留意見，而不是只保護發言效率。</li>\n      <li>社群平台: 別讓排序邏輯只放大主流可見度。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>幾種常見但危險的治理讀法</h2>\n      <p class=\"section-lede\">若一開始就把 沉默螺旋 聽成「所以少數意見一定是對的」，後面連「不是。問題不在少數一定正確，而在少數若不敢出聲，群體就失去校正機會。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以少數意見一定是對的</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。問題不在少數一定正確，而在少數若不敢出聲，群體就失去校正機會。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要大家勇敢發言就好</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>若表態成本和懲罰結構沒改，鼓勵通常撐不了多久。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>這和媒體才有關</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>任何有主流感、孤立風險與公開表態的場域都會遇到。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>兩個值得帶走的制度問題</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>這個場域裡，誰最有資格定義『看起來像多數』</strong>\n        <p>很多螺旋就從這個位置長出來。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果讓保留意見先匿名出現，現在看到的共識還會不會長得一樣</strong>\n        <p>這是估計沉默螺旋強度的好方法。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Spiral of silence 支撐 沉默螺旋 的主線，Preference falsification 補上與「氣氛感知」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐少數感與沉默如何互相增強成輿論螺旋的主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Spiral_of_silence\" target=\"_blank\" rel=\"noreferrer\">Spiral of silence</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上私下偏好與公開表態落差如何為沉默螺旋提供燃料的相鄰脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Preference_falsification\" target=\"_blank\" rel=\"noreferrer\">Preference falsification</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次你看到某個觀點突然在場面上消失時，先問：是它真的被說服了，還是它開始不敢講了？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "只要人把外部氣氛感知成『大多數都站那邊』，即使真實偏好沒那麼一面倒，也可能因為孤立恐懼而逐步沉默。",
+    "smallestScenario": "團隊裡幾位資深成員先強烈表態支持某方案，其他人雖有保留卻因不想被看成扯後腿而不出聲，最後會議記錄上像是全票支持。",
+    "sourcePlan": [
+      "用來支撐少數感與沉默如何互相增強成輿論螺旋的主線。",
+      "補上私下偏好與公開表態落差如何為沉默螺旋提供燃料的相鄰脈絡。"
+    ],
+    "transferTargets": [
+      "會議主持: 用流程保護保留意見，而不是只保護發言效率。",
+      "社群平台: 別讓排序邏輯只放大主流可見度。",
+      "內部文化: 檢查不同意會不會被結構性地懲罰。"
+    ],
+    "commonMisreading": "把沉默螺旋讀成『只要有人不說話就算』會太寬，它真正關心的是少數感和表態風險如何互相放大。",
+    "readerQuestions": [
+      "這個場域裡，誰最有資格定義『看起來像多數』？很多螺旋就從這個位置長出來。",
+      "如果讓保留意見先匿名出現，現在看到的共識還會不會長得一樣？這是估計沉默螺旋強度的好方法。"
+    ],
+    "sectionIntents": {
+      "core": "用「越覺得自己像少數，人越不敢出聲；越不出聲，表面多數就越像真的」建立本頁的核心張力，先讓讀者看見 只要人把外部氣氛感知成『大多數都站那邊』，即使真實偏好沒那麼一面倒，也可能因為孤立恐懼而逐步沉默。",
+      "setup": "以「團隊裡幾位資深成員先強烈表態支持某方案，其他人雖有保留卻因不想被看成扯後腿而不出聲，最後會議記錄上像是全票支持。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「氣氛感知、孤立恐懼、自我增強」這幾條分析線拆開 沉默螺旋，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「孤立規避、氣氛順從」這些反應，說明人為何會在 沉默螺旋 上滑向看似合理但代價更高的近路。",
+      "applications": "把 沉默螺旋 拉到 會議主持、社群平台 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把沉默螺旋讀成『只要有人不說話就算』會太寬，它真正關心的是少數感和表態風險如何互相放大。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「這個場域裡，誰最有資格定義『看起來像多數』、如果讓保留意見先匿名出現，現在看到的共識還會不會長得一樣」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Spiral of silence 支撐 沉默螺旋 的主線，Preference falsification 補上與「氣氛感知」相關的相鄰脈絡。"
+    }
+  }
+}

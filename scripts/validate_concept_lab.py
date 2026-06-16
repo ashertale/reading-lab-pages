@@ -31,6 +31,10 @@ PLACEHOLDER_TEXT_PATTERNS = (
     re.compile(r"待補"),
     re.compile(r"TBD", re.I),
 )
+QUESTION_SECTION_PATTERN = re.compile(
+    r'<section\b[^>]*\bid=(["\'])questions\1[^>]*>(?P<body>.*?)</section>',
+    re.I | re.S,
+)
 STOCK_TEMPLATE_TEXT_PATTERNS = (
     re.compile(r"^先抓住這題真正的壓力點$"),
     re.compile(r"^為什麼人會被這題拉走$"),
@@ -66,6 +70,28 @@ STOCK_TEMPLATE_TEXT_PATTERNS = (
     re.compile(r"^先讓原則落在一次真的要做判斷的場景，才能看出 .+ 和 .+ 到底誰該先被問、.+ 又要怎麼被確認。$"),
     re.compile(r"^本頁把 .+ 往 .+ 延伸的部分，屬於依照上述概念結構展開的教學性 synthesis。$"),
     re.compile(r"^延伸閱讀可以和.+對照，看看它如何補強.+留下的壓力，或把問題改寫成另一種版本。$"),
+    re.compile(r"^只要把 .+ 放回(真實判斷|日常判斷)，最先出現的就是這個張力：.+$"),
+    re.compile(r"^只要把 .+ 放回日常判斷，就會看見這個張力：.+$"),
+    re.compile(r"^真正要讀懂 .+，得先把它放回「.+」開始的現場，因為 .+$"),
+    re.compile(r"^這裡不把 .+ 當成單一答案，而是沿著 .+ 這幾條線把判準拆開。$"),
+    re.compile(r"^.+ 常被做歪，往往不是因為沒聽過原理，而是像 .+ 這些反應會把人推向看似省事的近路。$"),
+    re.compile(r"^這段不是(把|替) .+ (心理化|當成單一答案|找情緒答案)，而是.+$"),
+    re.compile(r"^這段不是重複定義 .+，而是把 .+ 這些心理近路拆開，讓校正有入口。$"),
+    re.compile(r"^把 .+ 放進「.+」這種現場最容易讀出它的手感，因為你得直接處理：.+$"),
+    re.compile(r"^這一節把 .+ 收束成可以帶回現場的追問，第一個入口就是：.+$"),
+    re.compile(r"^若要把這頁往外推一步，可以接著看 .+，因為它會把.+轉成更偏向「.+」的一條分析線。$"),
+    re.compile(r"^本頁先用 .+ 釐清 .+ 的主線，再借 .+ 對照「.+」這條分析線；.+的現場映射則標成教學整理。$"),
+    re.compile(r"^本頁把 .+ 拉到 .+ 這兩類場景，目的是讓.+在現場變得可操作；這部分屬教學整理。$"),
+    re.compile(r"^下面.{0,16}(問題|提問|追問|兩問).*$"),
+    re.compile(r"^這兩個(問題|提問|追問).*$"),
+    re.compile(r"^這組(問題|提問|追問).*$"),
+    re.compile(r"^這些(提問|追問).*$"),
+)
+CHANGED_SCOPE_STOCK_TEMPLATE_PATTERNS = (
+    re.compile(r"^這裡會把 .+ (拆開|分開).+$"),
+    re.compile(r"^放回.+，.+$"),
+    re.compile(r"^(下面|這些|這組).{0,6}(問題|追問|提問).{0,2}(會|是).+$"),
+    re.compile(r"^來源(?:部分|一邊).+$"),
 )
 GENERATED_FORMULA_TEXT_PATTERNS = (
     re.compile(r"^.+ 抓到的不是抽象名詞，而是大腦在 .+ 裡最常拿來省事的那一步。?$"),
@@ -91,6 +117,20 @@ GENERATED_FORMULA_TEXT_PATTERNS = (
     re.compile(r"^只要 .+ 一進場，團隊就容易先相信現況撐得住，而不是先問代價正在往哪裡堆。?$"),
     re.compile(r"^這裡重點不是補幾個抽象案例，而是把 .+ 直接落到 .+ 這些真的會出事的邊界上。?$"),
     re.compile(r"^把 .+ 帶回 .+ 時，最該先畫出來的是 .+ 穿過接口、時序或權限邊界的那條路。?$"),
+)
+LEGACY_CONTENT_TEMPLATE_MARKERS = (
+    "hash_pick(",
+    "hash_pick_key(",
+    "SECTION_TITLE_VARIANTS",
+    "CORE_LEDE_VARIANTS",
+    "SETUP_LEDE_VARIANTS",
+    "LENSES_LEDE_VARIANTS",
+    "PSYCH_LEDE_VARIANTS",
+    "APPS_LEDE_VARIANTS",
+    "MISREADINGS_LEDE_VARIANTS",
+    "QUESTIONS_LEDE_VARIANTS",
+    "PSYCH_NOTES",
+    "legacy-template-prose",
 )
 ALLOWED_REPEATED_TEXT = {
     "Reading Path",
@@ -296,6 +336,25 @@ def check_forbidden_styles(errors: list[str]) -> None:
         print("forbidden style patterns: none")
 
 
+def check_no_legacy_content_template_scripts(errors: list[str]) -> None:
+    hits: list[str] = []
+    for path in iter_source_files((".py",)):
+        relative = rel(path)
+        if not relative.startswith("scripts/"):
+            continue
+        if path.name == "validate_concept_lab.py":
+            continue
+        text = path.read_text(encoding="utf-8")
+        for marker in LEGACY_CONTENT_TEMPLATE_MARKERS:
+            if marker in text:
+                hits.append(f"{relative} contains legacy content-template marker: {marker}")
+
+    if hits:
+        errors.append("Legacy content-template generator code found:\n" + "\n".join(hits))
+    else:
+        print("legacy content-template scan: none")
+
+
 def check_payload_topic_alignment(errors: list[str]) -> None:
     payload_outputs: set[Path] = set()
     for path in sorted(PAYLOAD_DIR.glob("*.json")):
@@ -408,6 +467,22 @@ def payload_section_segments(payload: dict) -> dict[str, list[str]]:
     return sections
 
 
+def question_section_has_lede(payload: dict) -> bool:
+    page = payload.get("page", {})
+    if not isinstance(page, dict):
+        return False
+
+    main_html = page.get("mainHtml")
+    if not isinstance(main_html, str):
+        return False
+
+    match = QUESTION_SECTION_PATTERN.search(main_html)
+    if not match:
+        return False
+
+    return '<p class="section-lede">' in match.group("body")
+
+
 def dedupe_keep_order(items: list[str]) -> list[str]:
     seen: set[str] = set()
     ordered: list[str] = []
@@ -507,6 +582,20 @@ def changed_payload_paths() -> set[Path] | None:
                 continue
             changed.add((ROOT / name).resolve())
     return changed
+
+
+def tracked_payload_paths() -> set[Path] | None:
+    code, output = run(["git", "ls-files", "--", "data/concept-payloads"])
+    if code:
+        return None
+
+    tracked: set[Path] = set()
+    for line in output.splitlines():
+        name = line.strip()
+        if not name.endswith(".json") or not name.startswith("data/concept-payloads/"):
+            continue
+        tracked.add((ROOT / name).resolve())
+    return tracked
 
 
 def brief_text_has_forbidden_pattern(text: str) -> bool:
@@ -677,6 +766,7 @@ def check_payload_content_quality(errors: list[str], strict_content: bool) -> No
     content_brief_hits: list[str] = []
     page_similarity_hits: list[str] = []
     section_frame_hits: list[str] = []
+    question_lede_hits: list[str] = []
     payload_count = 0
     payloads = load_payloads_for_quality(errors)
 
@@ -686,6 +776,10 @@ def check_payload_content_quality(errors: list[str], strict_content: bool) -> No
         changed_scope: set[Path] = set()
     else:
         changed_scope = changed_paths
+    tracked_paths = tracked_payload_paths()
+    if tracked_paths is None:
+        errors.append("Cannot determine tracked payload inventory for content brief gate; git ls-files command failed")
+        tracked_paths = set()
 
     if strict_content:
         formula_scope = {path.resolve() for path in PAYLOAD_DIR.glob("*.json")}
@@ -698,9 +792,15 @@ def check_payload_content_quality(errors: list[str], strict_content: bool) -> No
         similarity_scope = changed_scope
         similarity_scope_label = "changed/new payloads"
 
+    content_brief_scope: set[Path] = set()
     for path in sorted(changed_scope):
         payload = payloads.get(path)
-        if payload is not None:
+        if payload is None:
+            continue
+        has_brief = isinstance(payload.get("contentBrief"), dict)
+        is_new_payload = path not in tracked_paths
+        if has_brief or is_new_payload:
+            content_brief_scope.add(path)
             content_brief_hits.extend(check_content_brief(path, payload))
 
     if similarity_scope:
@@ -710,6 +810,11 @@ def check_payload_content_quality(errors: list[str], strict_content: bool) -> No
     for path, payload in sorted(payloads.items(), key=lambda item: rel(item[0])):
         payload_count += 1
         scan_generated_formulas = path.resolve() in formula_scope
+        scan_changed_scope_stems = path.resolve() in changed_scope
+        if question_section_has_lede(payload):
+            question_lede_hits.append(
+                f"{rel(path)}: questions section should omit section-lede and let the prompt cards carry the topic-specific framing"
+            )
 
         for segment in payload_text_segments(payload):
             for pattern in PLACEHOLDER_TEXT_PATTERNS:
@@ -721,6 +826,12 @@ def check_payload_content_quality(errors: list[str], strict_content: bool) -> No
                 if pattern.search(segment):
                     stock_phrase_hits.append(f"{rel(path)}: {segment}")
                     break
+            else:
+                if scan_changed_scope_stems:
+                    for pattern in CHANGED_SCOPE_STOCK_TEMPLATE_PATTERNS:
+                        if pattern.search(segment):
+                            stock_phrase_hits.append(f"{rel(path)}: {segment}")
+                            break
 
             if scan_generated_formulas:
                 for pattern in GENERATED_FORMULA_TEXT_PATTERNS:
@@ -796,6 +907,14 @@ def check_payload_content_quality(errors: list[str], strict_content: bool) -> No
             f"Section sentence-frame gate failed for {similarity_scope_label}. Rewrite repeated sentence shapes inside the named sections:\n"
             + preview
         )
+    if question_lede_hits:
+        preview = "\n".join(question_lede_hits[:60])
+        if len(question_lede_hits) > 60:
+            preview += "\n..."
+        errors.append(
+            "Questions sections should not use bridge-lede copy. Remove the section-lede and keep the framing in the H2 plus prompt cards:\n"
+            + preview
+        )
     if duplicate_hits:
         errors.append("Repeated long payload text found:\n" + "\n".join(duplicate_hits[:20]))
     if medium_duplicate_hits:
@@ -807,10 +926,10 @@ def check_payload_content_quality(errors: list[str], strict_content: bool) -> No
         print(f"generated formula scan ({formula_scope_label}): {len(formula_scope)} payload(s)")
     else:
         print("generated formula scan: no changed/new payloads")
-    if changed_scope:
-        print(f"content brief scan (changed/new payloads): {len(changed_scope)} payload(s)")
+    if content_brief_scope:
+        print(f"content brief scan (new payloads + brief-enabled payloads): {len(content_brief_scope)} payload(s)")
     else:
-        print("content brief scan: no changed/new payloads")
+        print("content brief scan: no new payloads or brief-enabled payloads")
     if similarity_scope:
         print(f"similarity scan ({similarity_scope_label}): {len(similarity_scope)} payload(s)")
     else:
@@ -823,6 +942,7 @@ def check_payload_content_quality(errors: list[str], strict_content: bool) -> No
         and not content_brief_hits
         and not page_similarity_hits
         and not section_frame_hits
+        and not question_lede_hits
         and not duplicate_hits
         and not medium_duplicate_hits
     ):
@@ -843,6 +963,7 @@ def main(argv: list[str] | None = None) -> int:
     check_render_sync(errors)
     check_html_structure(errors)
     check_forbidden_styles(errors)
+    check_no_legacy_content_template_scripts(errors)
     check_payload_topic_alignment(errors)
     check_payload_content_quality(errors, strict_content=args.strict_content)
 

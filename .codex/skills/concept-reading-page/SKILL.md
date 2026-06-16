@@ -53,6 +53,7 @@ Use Batch Page Mode for any request that creates more than one concept page.
 - Before writing payloads, draft a per-topic content brief: pressure point, smallest concrete scenario, source plan, engineering/product transfer, common misreading, and two reader questions. Do not start from a prose template and fill blanks.
 - Store that brief in the payload as `contentBrief`; the validator treats this as a content contract for new or modified payloads.
 - Give every page distinct `core`, `setup`, `lenses`, `applications`, `misreadings`, and `questions`. The Reading Path structure may repeat; the ideas, examples, and verbs should not.
+- In `questions`, prefer a strong `h2` plus prompt cards. Do not add a bridge `section-lede` unless it carries genuinely irreplaceable topic-specific information; if it reads like glue copy, omit it.
 - Reuse section ids only. Do not inherit another page's section `h2`, `section-lede`, `micro-note`, or `Reference` sentence stem just because the structure matches.
 - Source cards must be topic-specific. Do not reuse a generic "synthesis note" unless it names what was synthesized for that exact topic.
 - If automation is used, restrict it to mechanical file creation, indexing, rendering, or candidate listing. Do not let a script invent broad boilerplate prose across many pages.
@@ -119,6 +120,9 @@ When refining layout:
 - Avoid placeholder prose such as "這裡說明", "這個主題凸顯", "可以帶回現實", or other sentences that describe the template instead of the concept.
 - Avoid house-style stock phrasing reused across many pages, including headings like "先抓住這題真正的壓力點" and stems like "這裡的心理連結是教學性整理：", "接著可以順讀...", or "本頁主軸來自...工程映射則是依...". If the sentence could fit ten other topics with light noun swaps, rewrite it.
 - Avoid generated formula stems such as "X 常不是抽象風險，而是會穿過具體接口、排程或權限邊界", "X 如果沒被提前畫出來，就很容易在現場才以更貴的形式出現", "X 一旦被低估，局部看似沒事的設計很快就會變成穩定性壓力", or "把情境縮到一次普通判斷後，X 會怎麼替你省事...". These are template leakage even when the nouns are accurate.
+- Also reject newer batch-style frames such as "只要把 X 放回真實判斷，最先出現的就是這個張力", "真正要讀懂 X，得先把它放回『...』開始的現場", "這裡不把 X 當成單一答案", "X 常被做歪，往往不是因為沒聽過原理", "把 X 放進『...』這種現場最容易讀出它的手感", "這一節把 X 收束成可以帶回現場的追問", "若要把這頁往外推一步", "本頁先用 A 釐清 X 的主線", or "本頁把 X 拉到 A、B 這兩類場景". These are not acceptable house style; they are template leakage.
+- The `questions` section is especially prone to template glue such as "下面兩個問題很適合..." or "這兩個追問會...". Do not rewrite those into softer boilerplate; remove the bridge line and let the question prompts do the teaching.
+- Treat the validator as a floor, not a license. Passing `scripts/validate_concept_lab.py` does not make repeated sentence frames acceptable if a human can still recognize the template behind them.
 - Use applications as transfer, not decoration. For this project, engineering or product examples are especially valuable.
 - Keep common misreadings concrete and corrective.
 - Keep source notes honest about what is sourced and what is synthesis.

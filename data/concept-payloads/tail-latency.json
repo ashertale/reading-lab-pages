@@ -1,0 +1,59 @@
+{
+  "target": {
+    "slug": "tail-latency",
+    "outputPath": "topics/tail-latency.html"
+  },
+  "indexEntry": {
+    "id": "tail-latency",
+    "title": "尾端延遲",
+    "subtitle": "Tail Latency",
+    "href": "./topics/tail-latency.html",
+    "order": 228,
+    "type": "效能概念 / 分布風險",
+    "domain": "系統效能與使用者體驗",
+    "focus": "A small fraction of slow requests can dominate perceived performance at scale",
+    "thesis": "平均延遲看起來不錯，並不代表體驗真的好；只要最慢那一小撮請求夠慢、夠常在關鍵路徑上出現，它們就會支配整體使用者感受與上層服務表現。",
+    "tags": [
+      "tail",
+      "latency",
+      "p99",
+      "performance",
+      "fanout",
+      "monitoring"
+    ]
+  },
+  "page": {
+    "documentTitle": "尾端延遲 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-tail-latency",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / latency / performance / distribution</p>\n    <h1>尾端延遲</h1>\n    <p class=\"topic-subtitle\">Tail Latency</p>\n    <p class=\"thesis\">平均延遲看起來不錯，並不代表體驗真的好；只要最慢那一小撮請求夠慢、夠常在關鍵路徑上出現，它們就會支配整體使用者感受與上層服務表現。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>把效能從平均值拉回分布，分清楚為什麼『只有少數很慢』也可能已經足以拖垮整體體驗。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>效能概念 / 分布風險</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>A small fraction of slow requests can dominate perceived performance at scale</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>分位數、關鍵路徑、扇出請求、尾端放大</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在服務設計、監控與壓測時更早把尾端行為當成一等風險。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>平均</span>\n      <span>尾端</span>\n      <span>體感</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>少數很慢，不代表影響很小</h2>\n      <p class=\"section-lede\">這個工程概念會一直被拿出來講，是因為 只要系統的關鍵路徑會碰到很多子請求，再少量的慢尾也會被上層聚合成顯著的整體卡頓。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>只要系統的關鍵路徑會碰到很多子請求，再少量的慢尾也會被上層聚合成顯著的整體卡頓。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先看分位數而不是只看平均</strong>\n        <p>平均值會把真正讓人痛的慢尾洗平。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再看關鍵路徑扇出</strong>\n        <p>上層一次要等越多子請求，越容易被任何一個尾端拖住。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後設計尾端對策</strong>\n        <p>隔離、超時、快取、hedging 與資源保護，都是對付慢尾的工具。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>把問題放回一個小型系統</h2>\n      <p class=\"section-lede\">尾端延遲最該先看的不是平均數，而是那些本來占比不高的慢請求怎麼在扇出後變成主角。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>一個頁面要並行打十個後端；每個後端只有少數請求很慢，但十個相乘後，使用者遇到慢頁的機率遠比單個服務看起來高得多。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於平均數很平滑，會讓團隊誤以為少數慢請求只是瑕疵，而不是體驗主因。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">單點服務存在少量慢尾</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">上層聚合許多子請求</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">慢尾被關鍵路徑放大成整體卡頓</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>尾端延遲真正提醒你的是：規模一上來，最慢的那群往往比平均值更值得被盯住。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>把設計張力拆成幾條線來看</h2>\n      <p class=\"section-lede\">平均數會把慢尾藏起來，但使用者碰到的是整條鏈路裡最慢那一截。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>分布尾端</strong>\n        <p>少數極慢請求雖然不多，卻可能決定整體體感。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>扇出放大</strong>\n        <p>多個子請求並行時，『碰到至少一個慢的』機率會快速上升。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>資源競爭</strong>\n        <p>慢尾常不是單一 bug，而是排隊、干擾與資源抖動共同造成。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>判準</th>\n            <th>當下看起來像什麼</th>\n            <th>真正代價</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>只看平均延遲</td>\n            <td>報表很漂亮</td>\n            <td>卻可能完全看不見使用者真的在等什麼</td>\n          </tr>\n          <tr>\n            <td>盯高分位數</td>\n            <td>資料看起來比較刺眼</td>\n            <td>卻更接近真實體感與關鍵路徑風險</td>\n          </tr>\n          <tr>\n            <td>忽略扇出效應</td>\n            <td>單服務評估較簡單</td>\n            <td>一到整體服務就會低估慢尾放大</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>這個工程判斷抓住了哪種順手誘惑</h2>\n      <p class=\"section-lede\">平均值特別會讓人鬆懈，因為它把那些偶爾很慢但足以毀掉整體感受的點藏進漂亮數字裡。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>平均數安慰</strong>\n        <p>平均值低會讓人覺得大致沒事，即使尾端其實已經在傷害體驗。</p>\n      </div>\n      <div class=\"example\">\n        <strong>少數忽略</strong>\n        <p>聽到『只有幾個很慢』時，大腦自然會把它當成可忽略的角落。</p>\n      </div>\n      <div class=\"example\">\n        <strong>局部視角</strong>\n        <p>每個服務團隊都看自己的慢尾不多，卻不容易一起看到上層聚合後的放大。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>工程現場最常用到它的地方</h2>\n      <p class=\"section-lede\">服務監控、頁面聚合和效能優化真正該盯的，是哪個慢尾會先把整體體感拖下去。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>服務監控</strong>\n        <p>把 P95、P99 和關鍵路徑上的慢尾同時盯住，不要只看平均。</p>\n      </div>\n      <div class=\"example\">\n        <strong>扇出設計</strong>\n        <p>若單個畫面或流程要打很多下游，就要預設尾端會被放大。</p>\n      </div>\n      <div class=\"example\">\n        <strong>效能優化</strong>\n        <p>不是所有快取都為了拉平均，有些是專門為了壓低最慢那群。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>監控設計: 把高分位數視為核心體驗指標之一。</li>\n      <li>扇出架構: 假設慢尾會被並行依賴放大，而不是平均抵消。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>幾種很快但不夠準的讀法</h2>\n      <p class=\"section-lede\">若一開始就把 尾端延遲 聽成「所以平均值完全沒用」，後面連「不是。平均仍有用，只是不能拿它替代分布尾端。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以平均值完全沒用</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。平均仍有用，只是不能拿它替代分布尾端。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要盯 P99 就夠了</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>若不知道慢尾怎麼進入關鍵路徑，單看指標仍可能修不到要害。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>尾端延遲只是大型網路服務問題</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>任何有多步驟依賴或排隊競爭的系統都可能被它咬。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>兩個值得帶走的工程問題</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>這個流程裡，最容易把少量慢尾放大成整體卡頓的扇出點在哪</strong>\n        <p>先找到它，優化才不會只修表面。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果今天平均延遲不動，但 P99 惡化很多，使用者最可能先在哪裡感到差</strong>\n        <p>這常比平均圖更值得先看。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 The Tail at Scale 支撐 尾端延遲 的主線，Latency 補上與「分布尾端」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐少量慢請求在大規模服務裡如何主導整體體驗的主線。</p>\n        <a href=\"https://research.google/pubs/the-tail-at-scale/\" target=\"_blank\" rel=\"noreferrer\">The Tail at Scale</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上延遲分布與系統效能判讀的相鄰脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Latency_(engineering)\" target=\"_blank\" rel=\"noreferrer\">Latency</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次平均延遲看起來還行時，順手再打開高分位圖看一眼：真正讓人痛的會不會其實都躲在尾端？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "只要系統的關鍵路徑會碰到很多子請求，再少量的慢尾也會被上層聚合成顯著的整體卡頓。",
+    "smallestScenario": "一個頁面要並行打十個後端；每個後端只有少數請求很慢，但十個相乘後，使用者遇到慢頁的機率遠比單個服務看起來高得多。",
+    "sourcePlan": [
+      "用來支撐少量慢請求在大規模服務裡如何主導整體體驗的主線。",
+      "補上延遲分布與系統效能判讀的相鄰脈絡。"
+    ],
+    "transferTargets": [
+      "監控設計: 把高分位數視為核心體驗指標之一。",
+      "扇出架構: 假設慢尾會被並行依賴放大，而不是平均抵消。",
+      "效能優化: 對慢尾採取專門策略，而不只修整體平均。"
+    ],
+    "commonMisreading": "把尾端延遲讀成『少數慢沒關係』剛好反了，它真正要你盯的是少數慢為何能支配體驗。",
+    "readerQuestions": [
+      "這個流程裡，最容易把少量慢尾放大成整體卡頓的扇出點在哪？先找到它，優化才不會只修表面。",
+      "如果今天平均延遲不動，但 P99 惡化很多，使用者最可能先在哪裡感到差？這常比平均圖更值得先看。"
+    ],
+    "sectionIntents": {
+      "core": "用「少數很慢，不代表影響很小」建立本頁的核心張力，先讓讀者看見 只要系統的關鍵路徑會碰到很多子請求，再少量的慢尾也會被上層聚合成顯著的整體卡頓。",
+      "setup": "以「一個頁面要並行打十個後端；每個後端只有少數請求很慢，但十個相乘後，使用者遇到慢頁的機率遠比單個服務看起來高得多。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「分布尾端、扇出放大、資源競爭」這幾條分析線拆開 尾端延遲，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「平均數安慰、少數忽略」這些反應，說明人為何會在 尾端延遲 上滑向看似合理但代價更高的近路。",
+      "applications": "把 尾端延遲 拉到 監控設計、扇出架構 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把尾端延遲讀成『少數慢沒關係』剛好反了，它真正要你盯的是少數慢為何能支配體驗。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「這個流程裡，最容易把少量慢尾放大成整體卡頓的扇出點在哪、如果今天平均延遲不動，但 P99 惡化很多，使用者最可能先在哪裡感到差」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 The Tail at Scale 支撐 尾端延遲 的主線，Latency 補上與「分布尾端」相關的相鄰脈絡。"
+    }
+  }
+}

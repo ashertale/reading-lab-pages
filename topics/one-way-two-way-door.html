@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>單向門與雙向門 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-one-way-two-way-door">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / decisions / reversibility / tempo</p>
+        <h1>單向門與雙向門</h1>
+        <p class="topic-subtitle">One-Way Door / Two-Way Door</p>
+        <p class="thesis">不是所有決策都值得用同樣的慎重度對待；可逆決策若被過度拖慢會浪費時機，不可逆決策若被當成可隨便回頭，代價又會很高。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>看懂什麼決策該快、什麼決策該慢，避免把所有選擇都塞進同一種審批節奏。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>決策原則 / 可逆性</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Reversible and irreversible decisions need different speed and process</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>可逆性、修正成本、資訊等待價值、決策節拍</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在產品策略、架構變更與組織節拍上更清楚地匹配決策流程和決策性質。</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>可逆</span>
+          <span>不可逆</span>
+          <span>節奏</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>真正拖慢團隊的，常不是做錯決策，而是把可快的決策也做成不可逆決策的樣子</h2>
+          <p class="section-lede">這個工程概念會一直被拿出來講，是因為 可逆決策若被過度升格，組織會失去速度；不可逆決策若被低估，錯誤又會以更貴的形式回來。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>可逆決策若被過度升格，組織會失去速度；不可逆決策若被低估，錯誤又會以更貴的形式回來。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先判斷回頭成本</strong>
+            <p>能快速試錯與回滾的決策，本來就不該享受和鎖死架構一樣的審批待遇。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再讓流程跟著決策性質走</strong>
+            <p>可逆決策要重速度，不可逆決策要重資訊密度與反證。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後為可逆性刻意設計</strong>
+            <p>很多決策之所以變成單向門，不是本質如此，而是前期沒有為回頭留結構。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>把問題放回一個小型系統</h2>
+          <p class="section-lede">單向門與雙向門的價值，在於把「先做再說」和「這一步其實很難回頭」分出不同重量。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>團隊為了一個可快速回滾的 UI 試驗跑完整月審批流程，卻對一個難以逆轉的資料模型鎖定只用一天拍板。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>難點在於很多組織用相同流程處理不同性質的決策，於是既慢又不準。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">把不同決策混進同一套流程</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">可逆決策被拖慢、不可逆決策被低估</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">速度與風險同時失衡</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>單向門與雙向門最實用的地方，是讓你先判斷決策的可逆性，再決定該用多快、多寬鬆、多少人參與的流程。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>把設計張力拆成幾條線來看</h2>
+          <p class="section-lede">門是不是難回頭，不是看決策當下有多大聲，而是事後要不要為它付出高昂撤回成本。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>可逆性</strong>
+            <p>一個決策能不能低成本回頭，決定了它值不值得快試。</p>
+          </article>
+          <article class="lens-card">
+            <strong>節拍匹配</strong>
+            <p>決策流程若和決策性質不匹配，組織就會在錯的地方慢、錯的地方快。</p>
+          </article>
+          <article class="lens-card">
+            <strong>結構設計</strong>
+            <p>有些雙向門是被設計出來的，例如 feature flag、試點和可替換邊界。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>判準</th>
+                <th>當下看起來像什麼</th>
+                <th>真正代價</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>可逆決策走重流程</td>
+                <td>看起來很穩</td>
+                <td>常把試驗速度和學習節奏一起拖死</td>
+              </tr>
+              <tr>
+                <td>不可逆決策走快路</td>
+                <td>短期很省事</td>
+                <td>一旦錯，代價常遠超過當初省下的時間</td>
+              </tr>
+              <tr>
+                <td>流程按可逆性分流</td>
+                <td>管理較細</td>
+                <td>卻更能同時保住速度與風險控制</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼團隊容易在這裡失手</h2>
+          <p class="section-lede">團隊常把一時好推進的決定誤當成可逆，只因為真正的回頭成本還沒被寫上白板。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>形式公平</strong>
+            <p>很多組織喜歡所有決策走同樣流程，因為看起來最一致。</p>
+          </div>
+          <div class="example">
+            <strong>速度誤配</strong>
+            <p>一旦習慣快決，連難逆轉決策也會被同一種節奏拖走。</p>
+          </div>
+          <div class="example">
+            <strong>回頭幻覺</strong>
+            <p>人常高估自己未來回頭重做的容易度，所以低估單向門風險。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把它帶回架構、流程與介面</h2>
+          <p class="section-lede">回到架構選型、產品實驗與流程變更，這個框架很適合幫你重排決策節奏。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>產品試驗</strong>
+            <p>可快速回滾的體驗變更應該用小步快跑，而不是走完整月治理。</p>
+          </div>
+          <div class="example">
+            <strong>架構選型</strong>
+            <p>一旦會綁死資料模型或供應商，決策就該升格成單向門處理。</p>
+          </div>
+          <div class="example">
+            <strong>團隊節拍</strong>
+            <p>把決策先分類成可逆與難逆，會比先討論誰權限高更有效。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>產品試驗: 對可回滾變更採小步快跑，不要走重流程。</li>
+          <li>架構變更: 對鎖死型決策提高資訊密度和反證要求。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>這個概念最常被怎樣讀歪</h2>
+          <p class="section-lede">若一開始就把 單向門與雙向門 聽成「所以所有決策都該快」，後面連「不是。只有可逆決策值得在較低資訊密度下快速前進。」這層校正都很難真正進場。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以所有決策都該快</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。只有可逆決策值得在較低資訊密度下快速前進。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要說成雙向門就能隨便試</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>如果回滾成本其實很高，假裝它可逆只會讓風險失真。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>這只是管理口號</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>任何牽涉試錯、回滾與鎖定成本的系統都能直接受用。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>把它變成下一次重構前的追問</h2>
+          </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>這個決策如果做錯，回頭到底要花多少時間、資金和信任成本</strong>
+            <p>先量出來，流程該快還是慢會清楚很多。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>我們能不能先改設計，把單向門變成雙向門，再來追求速度</strong>
+            <p>很多速度問題其實是結構設計問題。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">交代 2015 Letter to Shareholders 支撐 單向門與雙向門 的主線，Decision-making at Amazon 補上與「可逆性」相關的相鄰脈絡。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>用來支撐可逆與不可逆決策應採不同節奏與治理方式的主線。</p>
+            <a href="https://www.aboutamazon.com/news/company-news/2015-letter-to-shareholders" target="_blank" rel="noreferrer">2015 Letter to Shareholders</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰脈絡</strong>
+            <p>補上單向門與雙向門如何被帶回實際管理與產品節拍的相鄰脈絡。</p>
+            <a href="https://www.aboutamazon.com/news/workplace/what-is-a-one-way-door-decision" target="_blank" rel="noreferrer">Decision-making at Amazon</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>下次你覺得流程太慢時，先問：是我們太保守，還是其實沒有先把決策分成可逆和難逆？</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

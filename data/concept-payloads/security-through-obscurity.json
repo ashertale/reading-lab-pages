@@ -1,0 +1,59 @@
+{
+  "target": {
+    "slug": "security-through-obscurity",
+    "outputPath": "topics/security-through-obscurity.html"
+  },
+  "indexEntry": {
+    "id": "security-through-obscurity",
+    "title": "藉由隱蔽求安全",
+    "subtitle": "Security through Obscurity",
+    "href": "./topics/security-through-obscurity.html",
+    "order": 216,
+    "type": "安全原則 / 依賴錯位",
+    "domain": "系統安全與設計假設",
+    "focus": "Relying on secrecy of design details as the main defense",
+    "thesis": "把安全主要建立在『別人最好不要知道我們怎麼做』，短期看起來像多一層保護；但一旦祕密外洩，若核心設計本身不堪一擊，整體安全就會瞬間失去支點。",
+    "tags": [
+      "security",
+      "through",
+      "obscurity",
+      "design",
+      "authorization",
+      "defense"
+    ]
+  },
+  "page": {
+    "documentTitle": "藉由隱蔽求安全 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-security-through-obscurity",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / security / design / secrecy</p>\n    <h1>藉由隱蔽求安全</h1>\n    <p class=\"topic-subtitle\">Security through Obscurity</p>\n    <p class=\"thesis\">把安全主要建立在『別人最好不要知道我們怎麼做』，短期看起來像多一層保護；但一旦祕密外洩，若核心設計本身不堪一擊，整體安全就會瞬間失去支點。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>分清楚祕密作為輔助防線和祕密作為唯一防線之間的差別，避免把不可驗證的隱蔽感錯當安全感。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>安全原則 / 依賴錯位</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Relying on secrecy of design details as the main defense</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>設計公開性、祕密依賴、核心防護、外洩後韌性</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在協定、工具與內部系統設計裡更清楚地評估哪些防護經得起曝光。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>祕密</span>\n      <span>防禦</span>\n      <span>脆弱</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>如果祕密一旦被知道就全線失守，那問題通常不是祕密不夠深，而是設計本身太薄</h2>\n      <p class=\"section-lede\">藉由隱蔽求安全 真正麻煩的地方，不在名詞，而在它逼你承認：當安全主要靠外界不知道內部細節維持時，祕密一外洩，整個防線就會暴露出原本沒有被真正保護的地方。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>當安全主要靠外界不知道內部細節維持時，祕密一外洩，整個防線就會暴露出原本沒有被真正保護的地方。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先讓防護在曝光後仍能站住</strong>\n        <p>真正穩的安全設計，應該假設攻擊者遲早會知道你的實作細節。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再把祕密留給適合的位置</strong>\n        <p>金鑰、密碼和暫時性配置可以保密，但核心機制不該只靠藏著。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後用審查檢驗韌性</strong>\n        <p>若設計一公開就站不住，通常表示它沒經過真正的對抗性思考。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>從最小可運作場景開始</h2>\n      <p class=\"section-lede\">藉由隱蔽求安全最怕的不是有人很會猜，而是某天祕密終究不再是祕密時，後面沒有第二層防線。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>團隊把管理介面的安全幾乎全放在『內部 URL 很難猜』，一旦路徑被記錄或洩漏，後面沒有足夠授權與審計層能補位。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於祕密確實能提供一些阻力，所以人很容易把那份阻力誤當成核心安全。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">把安全寄託在不透明細節</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">祕密逐步被猜到或外洩</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">缺乏核心防護的部分全面裸露</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>藉由隱蔽求安全真正提醒你的，是祕密可以有價值，但不應該是唯一支撐安全成立的理由。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>把設計張力拆成幾條線來看</h2>\n      <p class=\"section-lede\">只靠別人暫時不知道來維持安全，等於把設計的真正強度外包給運氣。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>核心防護</strong>\n        <p>授權、驗證、審計與最小權限應該在祕密失效後仍能提供保護。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>祕密壽命</strong>\n        <p>實作細節被知道往往比團隊想像得快得多，也更難保證永遠不外流。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>安全錯覺</strong>\n        <p>當祕密暫時有用時，人最容易停止追問核心設計是否真的能獨立成立。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>判準</th>\n            <th>當下看起來像什麼</th>\n            <th>真正代價</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>只靠隱蔽</td>\n            <td>短期部署快</td>\n            <td>一旦曝光通常是斷崖式失守</td>\n          </tr>\n          <tr>\n            <td>祕密作為輔助</td>\n            <td>設計較花工</td>\n            <td>卻能在細節外洩後仍維持核心安全</td>\n          </tr>\n          <tr>\n            <td>公開設計接受檢驗</td>\n            <td>短期較不舒服</td>\n            <td>長期更容易知道自己到底在防什麼</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>這個工程判斷抓住了哪種順手誘惑</h2>\n      <p class=\"section-lede\">人喜歡把沒被碰過的東西當成安全，因為「目前沒人知道」比承認設計本身脆弱舒服得多。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>不透明安慰</strong>\n        <p>不知道的人看起來就比較安全，這種感覺本身很容易被誤當成果。</p>\n      </div>\n      <div class=\"example\">\n        <strong>祕密光環</strong>\n        <p>只要細節不公開，團隊就比較容易高估它的獨特性和防禦價值。</p>\n      </div>\n      <div class=\"example\">\n        <strong>審查逃避</strong>\n        <p>把設計藏起來也代表較少外部質疑，短期壓力小，但長期風險高。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>把它帶回架構、流程與介面</h2>\n      <p class=\"section-lede\">回到管理介面、內部工具和協定設計，這個概念是在逼你把曝光當前提而不是當例外。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>內部管理介面</strong>\n        <p>別把隱藏路徑當主要保護，授權和審計必須在曝光後仍成立。</p>\n      </div>\n      <div class=\"example\">\n        <strong>協定設計</strong>\n        <p>若安全性只有在細節不被知道時才成立，通常表示假設本身就太脆。</p>\n      </div>\n      <div class=\"example\">\n        <strong>工具分發</strong>\n        <p>即使只給內部使用，也該假設逆向與洩漏遲早會發生。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>管理介面: 假設路徑早晚會曝光，核心防護仍要成立。</li>\n      <li>協定設計: 讓安全依賴機制而不是依賴別人不知情。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>幾種很快但不夠準的讀法</h2>\n      <p class=\"section-lede\">若一開始就把 藉由隱蔽求安全 聽成「所以祕密完全沒價值」，後面連「不是。祕密常能作為輔助層，但不該是唯一防線。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以祕密完全沒價值</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。祕密常能作為輔助層，但不該是唯一防線。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要公開就更安全</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>公開本身也不會自動帶來安全，仍需要扎實的核心機制。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>這只跟密碼學有關</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>任何把路徑、格式或接口細節當主要防護的設計都會遇到。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>兩個值得帶走的工程問題</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>如果攻擊者明天知道我們的設計細節，哪些防線仍然能站住</strong>\n        <p>這是分辨核心安全和隱蔽安全的最好方式。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>現在這份安全感，有多少其實只是因為外界還不知道我們怎麼做</strong>\n        <p>這能幫你估算虛假的安全比例。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Security through obscurity 支撐 藉由隱蔽求安全 的主線，Kerckhoffs's principle 補上與「核心防護」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐把祕密當成主要防線會導致設計脆弱這條主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Security_through_obscurity\" target=\"_blank\" rel=\"noreferrer\">Security through obscurity</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上好的安全系統應假設設計可被知道、只保留金鑰秘密的相鄰脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle\" target=\"_blank\" rel=\"noreferrer\">Kerckhoffs&#x27;s principle</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次有人說『這個夠安全，因為外面不知道我們怎麼做』時，先追問：如果知道了呢？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "當安全主要靠外界不知道內部細節維持時，祕密一外洩，整個防線就會暴露出原本沒有被真正保護的地方。",
+    "smallestScenario": "團隊把管理介面的安全幾乎全放在『內部 URL 很難猜』，一旦路徑被記錄或洩漏，後面沒有足夠授權與審計層能補位。",
+    "sourcePlan": [
+      "用來支撐把祕密當成主要防線會導致設計脆弱這條主線。",
+      "補上好的安全系統應假設設計可被知道、只保留金鑰秘密的相鄰脈絡。"
+    ],
+    "transferTargets": [
+      "管理介面: 假設路徑早晚會曝光，核心防護仍要成立。",
+      "協定設計: 讓安全依賴機制而不是依賴別人不知情。",
+      "內部工具: 把外洩視為前提，而不是例外。"
+    ],
+    "commonMisreading": "把藉由隱蔽求安全讀成『祕密都沒用』太極端，它真正反對的是把祕密當成唯一支點。",
+    "readerQuestions": [
+      "如果攻擊者明天知道我們的設計細節，哪些防線仍然能站住？這是分辨核心安全和隱蔽安全的最好方式。",
+      "現在這份安全感，有多少其實只是因為外界還不知道我們怎麼做？這能幫你估算虛假的安全比例。"
+    ],
+    "sectionIntents": {
+      "core": "用「如果祕密一旦被知道就全線失守，那問題通常不是祕密不夠深，而是設計本身太薄」建立本頁的核心張力，先讓讀者看見 當安全主要靠外界不知道內部細節維持時，祕密一外洩，整個防線就會暴露出原本沒有被真正保護的地方。",
+      "setup": "以「團隊把管理介面的安全幾乎全放在『內部 URL 很難猜』，一旦路徑被記錄或洩漏，後面沒有足夠授權與審計層能補位。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「核心防護、祕密壽命、安全錯覺」這幾條分析線拆開 藉由隱蔽求安全，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「不透明安慰、祕密光環」這些反應，說明人為何會在 藉由隱蔽求安全 上滑向看似合理但代價更高的近路。",
+      "applications": "把 藉由隱蔽求安全 拉到 管理介面、協定設計 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把藉由隱蔽求安全讀成『祕密都沒用』太極端，它真正反對的是把祕密當成唯一支點。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「如果攻擊者明天知道我們的設計細節，哪些防線仍然能站住、現在這份安全感，有多少其實只是因為外界還不知道我們怎麼做」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Security through obscurity 支撐 藉由隱蔽求安全 的主線，Kerckhoffs's principle 補上與「核心防護」相關的相鄰脈絡。"
+    }
+  }
+}

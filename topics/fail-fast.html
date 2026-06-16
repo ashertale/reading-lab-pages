@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>快速失敗 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-fail-fast">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / validation / errors / feedback</p>
+        <h1>快速失敗</h1>
+        <p class="topic-subtitle">Fail Fast</p>
+        <p class="thesis">錯誤若在最早的邊界就被明確暴露，代價通常比較便宜；真正昂貴的，是讓一個壞前提靜靜穿過很多層之後才爆。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>分清楚何時該立刻擋下壞狀態，何時該帶著降級策略前進，而不是把 fail fast 讀成逞強或粗暴。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>錯誤策略 / 及早暴露</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Expose invalid states early instead of carrying them forward</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>錯誤可見性、失敗時點、修正成本、錯誤擴散距離</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在資料驗證、裝置狀態機與服務接口上更早設下有價值的失敗邊界。</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>前提</span>
+          <span>暴露</span>
+          <span>修正</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>最貴的失敗，常是那種一路被放行的失敗</h2>
+          <p class="section-lede">把 快速失敗 放進真實系統後，最先跳出來的不是定義，而是這個張力：當錯誤前提沒有在最靠近來源的位置被攔下，它就會帶著更高修復成本穿過更多模組與更多人手。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>當錯誤前提沒有在最靠近來源的位置被攔下，它就會帶著更高修復成本穿過更多模組與更多人手。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先在最接近來源的位置檢查</strong>
+            <p>越早失敗，越容易知道哪個前提壞掉，也越少人會一起被拖下水。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再讓錯誤訊息能指向修法</strong>
+            <p>若報錯只會說『失敗了』卻不說為何失敗，系統只是更早地讓人困惑。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後分清楚何時要擋、何時要降級</strong>
+            <p>不是所有情境都該硬停，但任何放行都應知道自己在買什麼風險。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>先看現場最早卡住的地方</h2>
+          <p class="section-lede">快速失敗真正想縮短的不是流程，而是錯前提在系統裡亂跑的距離。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>設定檔裡某個單位值填錯，解析器沒有當場拒絕，只在之後控制迴路跑起來時才造成振盪；此時已經很難追到最初根因。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>難點在於很多團隊把『不想打斷流程』看得比『及早暴露錯誤』更重要，於是讓問題一路潛伏。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">壞前提在入口被放行</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">錯誤穿過多層系統</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">最後在昂貴的位置才爆出來</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>Fail fast 不是追求更多報錯，而是追求在修正成本最低、語意最清楚的位置，把錯誤說破。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>把設計張力拆成幾條線來看</h2>
+          <p class="section-lede">錯誤早出現還不夠，還得知道它是在入口被攔下、在狀態轉換中露餡，還是只留下無法修的爆炸聲。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>入口驗證</strong>
+            <p>資料、權限、狀態與時序是否在最靠近來源的地方就被檢查。</p>
+          </article>
+          <article class="lens-card">
+            <strong>錯誤語意</strong>
+            <p>報錯內容是否能讓下一手知道該修什麼，而不是只知道哪裡壞。</p>
+          </article>
+          <article class="lens-card">
+            <strong>傳遞代價</strong>
+            <p>這個壞狀態若再往後走兩層、五層、十層，修復成本會膨脹多少。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>判準</th>
+                <th>當下看起來像什麼</th>
+                <th>真正代價</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>入口就拒絕壞資料</td>
+                <td>當下會比較刺耳</td>
+                <td>卻能省下後續追根因與資料清洗的昂貴代價</td>
+              </tr>
+              <tr>
+                <td>先放過再說</td>
+                <td>流程表面更順</td>
+                <td>真正故障往往更晚、更多層、更難追</td>
+              </tr>
+              <tr>
+                <td>只追求早失敗</td>
+                <td>看起來很乾淨</td>
+                <td>若沒有錯誤語意與降級設計，也可能只是更早讓使用者無助</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>人和團隊為什麼會往錯的簡化走</h2>
+          <p class="section-lede">團隊常拖到很後面才揭露錯誤，因為表面平靜比提早暴露問題更不刺眼。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>怕打斷流程</strong>
+            <p>人容易把眼前不中斷視為體驗好，卻低估日後追錯與補救的總成本。</p>
+          </div>
+          <div class="example">
+            <strong>僥倖放行</strong>
+            <p>只要過去曾有一次『雖然資料怪但後面也沒出事』，團隊就更容易選擇再放一次。</p>
+          </div>
+          <div class="example">
+            <strong>責任往後推</strong>
+            <p>不在自己這層報錯，短期壓力較小，但長期往往把更大的混亂推給下游。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把它帶回架構、流程與介面</h2>
+          <p class="section-lede">回到設定解析、狀態機與服務邊界，fail fast 最值錢的地方是替後面省掉追根究柢的工。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>設定與 schema 驗證</strong>
+            <p>在入口就說清楚單位、範圍與必要欄位，比讓錯誤一路帶到控制層更便宜。</p>
+          </div>
+          <div class="example">
+            <strong>狀態機轉移</strong>
+            <p>不合法狀態當場拒絕，比讓它進場後再期待後續模組『自己會處理』更穩。</p>
+          </div>
+          <div class="example">
+            <strong>服務接口</strong>
+            <p>早期驗權與參數驗證能把錯誤停在邊界，而不是進到商業邏輯才模糊爆炸。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>設定驗證: 在入口就說破壞掉的是哪個前提。</li>
+          <li>狀態機設計: 別讓不合法狀態一路混進後續模組。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>幾種很快但不夠準的讀法</h2>
+          <p class="section-lede">若一開始就把 快速失敗 聽成「越早炸掉就一定越好」，後面連「如果沒有清楚錯誤語意與必要降級，早炸也可能只是更早讓人卡住。」這層校正都很難真正進場。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>越早炸掉就一定越好</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>如果沒有清楚錯誤語意與必要降級，早炸也可能只是更早讓人卡住。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>Fail fast 等於對使用者不友善</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>對錯前提早說清楚，常比讓使用者走完整段錯流程後才失敗更友善。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要加更多 assert 就行</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>Fail fast 要設計的是有意義的失敗邊界，不是把所有地方都變成地雷。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>下次做設計前先問這兩句</h2>
+          </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>這個壞前提若不在這裡被攔下，後面最貴的爆點會在哪裡</strong>
+            <p>先看那個成本，才知道這一層該不該硬擋。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>我們的錯誤訊息有沒有真的幫下一手修法，還只是讓人知道『哪裡有火』</strong>
+            <p>不能修的早失敗，價值會打很多折扣。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">交代 Fail-fast 支撐 快速失敗 的主線，Circuit Breaker 補上與「入口驗證」相關的相鄰脈絡。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>用來支撐在錯誤最靠近來源時及早暴露、降低修復成本的核心主線。</p>
+            <a href="https://en.wikipedia.org/wiki/Fail-fast" target="_blank" rel="noreferrer">Fail-fast</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰脈絡</strong>
+            <p>補上在依賴失敗情境裡，及早承認錯誤如何保全整體的相鄰思路。</p>
+            <a href="https://martinfowler.com/bliki/CircuitBreaker.html" target="_blank" rel="noreferrer">Circuit Breaker</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>下次遇到一個模糊錯誤時，回頭找找看：它原本最早應該在哪一層就被攔下來？</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

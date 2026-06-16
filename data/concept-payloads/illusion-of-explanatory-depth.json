@@ -1,0 +1,61 @@
+{
+  "target": {
+    "slug": "illusion-of-explanatory-depth",
+    "outputPath": "topics/illusion-of-explanatory-depth.html"
+  },
+  "indexEntry": {
+    "id": "illusion-of-explanatory-depth",
+    "title": "解釋深度錯覺",
+    "subtitle": "Illusion of Explanatory Depth",
+    "href": "./topics/illusion-of-explanatory-depth.html",
+    "order": 237,
+    "type": "認知偏差 / 理解自信",
+    "domain": "學習、產品與溝通",
+    "focus": "People often think they understand systems more deeply than they really do",
+    "thesis": "很多時候我們不是完全不懂，而是以為自己比實際上懂得更深；一旦被要求真的講清楚機制，理解的空洞才會露出來。",
+    "tags": [
+      "illusion",
+      "explanatory",
+      "depth",
+      "understanding",
+      "metacognition",
+      "teaching",
+      "design-review",
+      "learning"
+    ]
+  },
+  "page": {
+    "documentTitle": "解釋深度錯覺 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-illusion-of-explanatory-depth",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / understanding / confidence / explanation</p>\n    <h1>解釋深度錯覺</h1>\n    <p class=\"topic-subtitle\">Illusion of Explanatory Depth</p>\n    <p class=\"thesis\">很多時候我們不是完全不懂，而是以為自己比實際上懂得更深；一旦被要求真的講清楚機制，理解的空洞才會露出來。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>看清楚『感覺懂』和『真的能講清楚』之間的落差，減少會議裡那種大家都點頭、其實沒人真正對齊的時刻。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>認知偏差 / 理解自信</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>People often think they understand systems more deeply than they really do</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>主觀理解感、機制細節、可解釋性、校正契機</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在設計討論、教學和自學中更早發現理解其實還停在表面。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>以為懂</span>\n      <span>講不清</span>\n      <span>露底</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>最危險的誤會之一，就是以為自己已經理解了</h2>\n      <p class=\"section-lede\">這種偏差之所以頑固，是因為 只要平常不用真的把機制說出來，人就很容易把熟悉感誤認成深刻理解。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>只要平常不用真的把機制說出來，人就很容易把熟悉感誤認成深刻理解。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先把『知道名詞』和『知道機制』分開</strong>\n        <p>很多誤會都是因為這兩種知道在主觀上被混成同一件事。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再用解釋要求檢驗理解深度</strong>\n        <p>當你得把過程說清楚，空洞通常會比在腦中想像時更快露出來。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後把卡住點變成學習入口</strong>\n        <p>暴露空洞不是丟臉，而是理解真正開始長深的時刻。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>先把它放回一次普通判斷</h2>\n      <p class=\"section-lede\">解釋深度錯覺最適合從一件熟到不能再熟的事開始，因為真正的落差往往要等你開口解釋才露出來。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>大家都說自己懂某個上電流程，但一旦要逐步畫出時序與依賴，才發現許多人只記得結果，不知道中間靠哪些條件撐住。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於熟悉名詞、看過圖和真正能解釋機制，主觀感受上常長得很像。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">對概念產生熟悉感</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">把熟悉感誤認成理解</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">一被要求解釋就暴露深度不足</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>解釋深度錯覺最有用的提醒是：真正的理解，通常經得起你把過程講給別人聽或拆給自己看。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>幾個最容易混在一起的判準</h2>\n      <p class=\"section-lede\">「熟悉一個東西」跟「能把機制逐步講清楚」中間，其實還隔著很長一段路。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>熟悉感</strong>\n        <p>看過、用過、聽過，會讓人誤以為自己也懂得足以重建機制。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>機制缺口</strong>\n        <p>一旦被追問中間步驟、邊界條件與例外，理解深度的落差就會浮出來。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>校正機會</strong>\n        <p>讓人試著教、畫、拆，是最快看見理解真正厚度的方法之一。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>心理拉力</th>\n            <th>當下看起來像什麼</th>\n            <th>代價</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>只問懂不懂</td>\n            <td>大家很容易點頭</td>\n            <td>實際深度差距完全看不出來</td>\n          </tr>\n          <tr>\n            <td>要求逐步解釋</td>\n            <td>當下可能比較卡</td>\n            <td>卻能讓理解空洞被提早發現與補起來</td>\n          </tr>\n          <tr>\n            <td>把空洞藏起來</td>\n            <td>會議看起來比較順</td>\n            <td>後面實作與交接最容易爆出對齊落差</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>大腦為什麼會把這條近路誤認成好判斷</h2>\n      <p class=\"section-lede\">大腦很容易把長期接觸帶來的順手感誤判成理解深度，尤其當平常根本不需要自己把流程講全。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>熟悉感偷換</strong>\n        <p>人會把常接觸到的東西誤當成自己已經能深入說明的東西。</p>\n      </div>\n      <div class=\"example\">\n        <strong>面子保護</strong>\n        <p>承認自己其實講不清楚，比一開始點頭說懂更難。</p>\n      </div>\n      <div class=\"example\">\n        <strong>群體共振</strong>\n        <p>當場上很多人都表現得像懂，個體更不容易主動暴露自己的理解空洞。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>把它帶回管理、產品與協作</h2>\n      <p class=\"section-lede\">設計評審、帶新人和寫文件時，這個錯覺最容易被拆穿，因為一開口解釋就知道哪裡是空的。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>設計評審</strong>\n        <p>請提案者把狀態流、失敗路徑和例外條件畫出來，能比抽象大詞更快對齊真理解。</p>\n      </div>\n      <div class=\"example\">\n        <strong>新人教學</strong>\n        <p>讓新人試著教回去，常比單向聽課更能暴露哪裡其實還沒懂。</p>\n      </div>\n      <div class=\"example\">\n        <strong>文件撰寫</strong>\n        <p>能把流程寫成讓別人照著走，通常比口頭說『我知道』更接近真理解。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>設計評審: 用逐步解釋逼出真理解，而不是只靠熟悉術語。</li>\n      <li>新人教學: 讓學習者教回去，提早暴露理解空洞。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>別把它拿來亂貼標籤</h2>\n      <p class=\"section-lede\">若一開始就把 解釋深度錯覺 聽成「所以大家都不懂」，後面連「不是。重點是理解深度常比主觀感覺淺，需要更好的檢查方式。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以大家都不懂</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。重點是理解深度常比主觀感覺淺，需要更好的檢查方式。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要能解釋就一定會做</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>能說清楚是重要一步，但和穩定實作仍是兩回事。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>這只是學生問題</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>資深工程師和管理者一樣很容易掉進這種熟悉感陷阱。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>把它變成下一次自我檢查前的追問</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>如果現在不能看文件、不能看圖，我能不能把這個機制一步一步講給別人聽</strong>\n        <p>不能時，理解通常還停在表層。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>我以為自己懂的部分裡，哪一段一旦被追問邊界條件就會開始模糊</strong>\n        <p>那就是下一步該補的洞。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Illusion of explanatory depth 支撐 解釋深度錯覺 的主線，Metacognition 補上與「熟悉感」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐人常高估自己對機制性事物理解深度的主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Illusion_of_explanatory_depth\" target=\"_blank\" rel=\"noreferrer\">Illusion of explanatory depth</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上人如何評估自己理解與知識狀態的相鄰脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Metacognition\" target=\"_blank\" rel=\"noreferrer\">Metacognition</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次你很確定自己懂某件事時，試著不用圖和文件把它講清楚，看看哪裡最先打滑。</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "只要平常不用真的把機制說出來，人就很容易把熟悉感誤認成深刻理解。",
+    "smallestScenario": "大家都說自己懂某個上電流程，但一旦要逐步畫出時序與依賴，才發現許多人只記得結果，不知道中間靠哪些條件撐住。",
+    "sourcePlan": [
+      "用來支撐人常高估自己對機制性事物理解深度的主線。",
+      "補上人如何評估自己理解與知識狀態的相鄰脈絡。"
+    ],
+    "transferTargets": [
+      "設計評審: 用逐步解釋逼出真理解，而不是只靠熟悉術語。",
+      "新人教學: 讓學習者教回去，提早暴露理解空洞。",
+      "文件撰寫: 以能否被他人重現流程來檢驗理解深度。"
+    ],
+    "commonMisreading": "把解釋深度錯覺聽成『大家都只是裝懂』太苛刻，它更常是熟悉感自然滑過了真理解檢查。",
+    "readerQuestions": [
+      "如果現在不能看文件、不能看圖，我能不能把這個機制一步一步講給別人聽？不能時，理解通常還停在表層。",
+      "我以為自己懂的部分裡，哪一段一旦被追問邊界條件就會開始模糊？那就是下一步該補的洞。"
+    ],
+    "sectionIntents": {
+      "core": "用「最危險的誤會之一，就是以為自己已經理解了」建立本頁的核心張力，先讓讀者看見 只要平常不用真的把機制說出來，人就很容易把熟悉感誤認成深刻理解。",
+      "setup": "以「大家都說自己懂某個上電流程，但一旦要逐步畫出時序與依賴，才發現許多人只記得結果，不知道中間靠哪些條件撐住。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「熟悉感、機制缺口、校正機會」這幾條分析線拆開 解釋深度錯覺，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「熟悉感偷換、面子保護」這些反應，說明人為何會在 解釋深度錯覺 上滑向看似合理但代價更高的近路。",
+      "applications": "把 解釋深度錯覺 拉到 設計評審、新人教學 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把解釋深度錯覺聽成『大家都只是裝懂』太苛刻，它更常是熟悉感自然滑過了真理解檢查。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「如果現在不能看文件、不能看圖，我能不能把這個機制一步一步講給別人聽、我以為自己懂的部分裡，哪一段一旦被追問邊界條件就會開始模糊」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Illusion of explanatory depth 支撐 解釋深度錯覺 的主線，Metacognition 補上與「熟悉感」相關的相鄰脈絡。"
+    }
+  }
+}

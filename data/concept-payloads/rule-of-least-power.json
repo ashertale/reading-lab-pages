@@ -1,0 +1,61 @@
+{
+  "target": {
+    "slug": "rule-of-least-power",
+    "outputPath": "topics/rule-of-least-power.html"
+  },
+  "indexEntry": {
+    "id": "rule-of-least-power",
+    "title": "最小能力原則",
+    "subtitle": "Rule of Least Power",
+    "href": "./topics/rule-of-least-power.html",
+    "order": 226,
+    "type": "設計原則 / 表達能力",
+    "domain": "格式、接口與系統演化",
+    "focus": "Use the least powerful language or mechanism that still solves the problem",
+    "thesis": "當一件事能用更簡單、限制更多的表達方式完成時，別急著上最強的語言或機制；能力越強，通常也代表越難分析、重用、遷移與組合。",
+    "tags": [
+      "rule",
+      "least",
+      "power",
+      "design",
+      "configuration",
+      "declarative",
+      "contracts",
+      "tooling"
+    ]
+  },
+  "page": {
+    "documentTitle": "最小能力原則 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-rule-of-least-power",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / design / languages / constraints</p>\n    <h1>最小能力原則</h1>\n    <p class=\"topic-subtitle\">Rule of Least Power</p>\n    <p class=\"thesis\">當一件事能用更簡單、限制更多的表達方式完成時，別急著上最強的語言或機制；能力越強，通常也代表越難分析、重用、遷移與組合。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>分清楚『能做更多』和『更適合留下長期資產』不是同一件事。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>設計原則 / 表達能力</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Use the least powerful language or mechanism that still solves the problem</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>表達能力、可分析性、可重用性、組合成本</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在設定格式、資料交換與工具邊界上更早做出有利演化的選擇。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>限制</span>\n      <span>可讀</span>\n      <span>演化</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>最強的工具不一定最適合當共用契約</h2>\n      <p class=\"section-lede\">這個工程概念會一直被拿出來講，是因為 一旦你把問題交給過於強大的表達機制，短期也許更方便，長期卻常失去靜態分析、重用與跨系統組合的好處。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>一旦你把問題交給過於強大的表達機制，短期也許更方便，長期卻常失去靜態分析、重用與跨系統組合的好處。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先問目標到底要多大的表達力</strong>\n        <p>很多任務其實不需要可執行腳本，只需要可描述資料。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再看後續誰需要分析與組合</strong>\n        <p>若別的工具、人或系統要長期接手，較弱但可讀的格式往往更有利。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後保留向上逃逸通道</strong>\n        <p>真的需要更強能力時再局部引入，通常比一開始全盤放飛更健康。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>先看現場最早卡住的地方</h2>\n      <p class=\"section-lede\">最小能力原則要處理的不是克制美德，而是你是否把問題交給了一種強過頭、於是難以分析的表達方式。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>團隊用可執行腳本定義裝置設定，短期非常靈活；幾個版本後，沒人能可靠地分析哪些設定相依、哪些裝置真的會受影響。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於能力越強越讓人有掌控感，所以很難在一開始就自願接受限制。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">為了方便選擇強大機制</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">更多行為被藏進黑箱</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">分析與演化成本逐步升高</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>最小能力原則不是崇拜簡單，而是提醒你：當表達能力過強，共享與演化常會先被吃掉。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>別讓同一個名詞包掉全部設計判斷</h2>\n      <p class=\"section-lede\">表達工具越強，未來要分析、重用和檢查它的人，常就越難看清它到底做了什麼。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>可分析性</strong>\n        <p>能力較弱的表示法更容易被檢查、搜尋、轉換與驗證。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>可重用性</strong>\n        <p>表達越接近資料而非任意程式，越容易被不同工具重新利用。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>組合成本</strong>\n        <p>強大語言把很多行為隱進黑箱後，其他系統就更難安全地和它組合。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>判準</th>\n            <th>當下看起來像什麼</th>\n            <th>真正代價</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>一開始就用最強機制</td>\n            <td>短期最自由</td>\n            <td>長期最容易失去分析與共享能力</td>\n          </tr>\n          <tr>\n            <td>先用較弱的資料格式</td>\n            <td>初期感覺比較受限</td>\n            <td>後續更容易驗證、遷移與跨工具組合</td>\n          </tr>\n          <tr>\n            <td>局部升級表達力</td>\n            <td>設計較細</td>\n            <td>能把靈活度和可讀性留在比較可控的平衡點</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>人和團隊為什麼會往錯的簡化走</h2>\n      <p class=\"section-lede\">大家常先偏愛最靈活的工具，因為它最像『之後什麼都能做』，而長期的可讀與可驗證性通常不在當下尖叫。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>自由偏好</strong>\n        <p>人天然會喜歡『以後什麼都做得到』的感覺，所以難以接受早期限制。</p>\n      </div>\n      <div class=\"example\">\n        <strong>黑箱偷懶</strong>\n        <p>把行為藏進腳本或強語言很省力，因為不用先明確說出資料結構和邊界。</p>\n      </div>\n      <div class=\"example\">\n        <strong>未來想像過度</strong>\n        <p>很多過強設計在乎的是想像中的將來彈性，而不是眼前真的需要解的問題。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>放回真實系統後它會改變什麼</h2>\n      <p class=\"section-lede\">回到設定格式、接口契約與工具鏈設計，這個原則是在逼你為未來維護者保留理解空間。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>設定格式</strong>\n        <p>能用宣告式配置就別先用任意可執行語言，這會讓驗證和差異分析輕鬆很多。</p>\n      </div>\n      <div class=\"example\">\n        <strong>接口契約</strong>\n        <p>對外公開的最好是可明確解讀的資料契約，而不是依賴執行期副作用的腳本行為。</p>\n      </div>\n      <div class=\"example\">\n        <strong>工具管線</strong>\n        <p>弱格式雖然一開始限制多，但更利於多工具共用與後續演化。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>設定格式: 優先使用可驗證、可 diff 的宣告式資料。</li>\n      <li>接口契約: 讓共享邊界靠資料而不是黑箱副作用。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>別讓這條原則變成口號</h2>\n      <p class=\"section-lede\">若一開始就把 最小能力原則 聽成「所以越弱越好」，後面連「不是。重點是用剛好足夠的能力，而不是盲目追求最弱。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以越弱越好</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。重點是用剛好足夠的能力，而不是盲目追求最弱。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要可執行就是壞</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>很多地方確實需要強能力，只是別把它拿來當默認共享格式。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>這只是網頁設計原則</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>任何資料契約、設定格式與跨工具接口都會碰到同樣取捨。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>兩個值得帶走的工程問題</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>這件事如果改用更弱但更可分析的表示法，會失去什麼、又會換回哪些長期好處</strong>\n        <p>這通常是更好的起點問題。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>未來需要接手這份格式的人或工具，是更需要靈活度，還是更需要可讀與可驗證</strong>\n        <p>答案會直接改變你該選的能力層級。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 The Rule of Least Power 支撐 最小能力原則 的主線，Declarative programming 補上與「可分析性」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐應以最低足夠能力的語言或格式描述問題這條主線。</p>\n        <a href=\"https://www.w3.org/DesignIssues/Principles.html#PLP\" target=\"_blank\" rel=\"noreferrer\">The Rule of Least Power</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上較弱但可分析表示法為何常更利於共享與組合的相鄰脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Declarative_programming\" target=\"_blank\" rel=\"noreferrer\">Declarative programming</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次你想直接上可執行腳本時，先問：這件事真的需要那麼強，還是我只是不想先說清楚資料結構？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "一旦你把問題交給過於強大的表達機制，短期也許更方便，長期卻常失去靜態分析、重用與跨系統組合的好處。",
+    "smallestScenario": "團隊用可執行腳本定義裝置設定，短期非常靈活；幾個版本後，沒人能可靠地分析哪些設定相依、哪些裝置真的會受影響。",
+    "sourcePlan": [
+      "用來支撐應以最低足夠能力的語言或格式描述問題這條主線。",
+      "補上較弱但可分析表示法為何常更利於共享與組合的相鄰脈絡。"
+    ],
+    "transferTargets": [
+      "設定格式: 優先使用可驗證、可 diff 的宣告式資料。",
+      "接口契約: 讓共享邊界靠資料而不是黑箱副作用。",
+      "工具鏈設計: 把強能力留在必要局部，不要當預設格式。"
+    ],
+    "commonMisreading": "把最小能力原則當成『限制越多越高尚』會太教條，它真正要求的是剛好足夠的能力。",
+    "readerQuestions": [
+      "這件事如果改用更弱但更可分析的表示法，會失去什麼、又會換回哪些長期好處？這通常是更好的起點問題。",
+      "未來需要接手這份格式的人或工具，是更需要靈活度，還是更需要可讀與可驗證？答案會直接改變你該選的能力層級。"
+    ],
+    "sectionIntents": {
+      "core": "用「最強的工具不一定最適合當共用契約」建立本頁的核心張力，先讓讀者看見 一旦你把問題交給過於強大的表達機制，短期也許更方便，長期卻常失去靜態分析、重用與跨系統組合的好處。",
+      "setup": "以「團隊用可執行腳本定義裝置設定，短期非常靈活；幾個版本後，沒人能可靠地分析哪些設定相依、哪些裝置真的會受影響。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「可分析性、可重用性、組合成本」這幾條分析線拆開 最小能力原則，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「自由偏好、黑箱偷懶」這些反應，說明人為何會在 最小能力原則 上滑向看似合理但代價更高的近路。",
+      "applications": "把 最小能力原則 拉到 設定格式、接口契約 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把最小能力原則當成『限制越多越高尚』會太教條，它真正要求的是剛好足夠的能力。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「這件事如果改用更弱但更可分析的表示法，會失去什麼、又會換回哪些長期好處、未來需要接手這份格式的人或工具，是更需要靈活度，還是更需要可讀與可驗證」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 The Rule of Least Power 支撐 最小能力原則 的主線，Declarative programming 補上與「可分析性」相關的相鄰脈絡。"
+    }
+  }
+}

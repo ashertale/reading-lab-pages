@@ -1,0 +1,61 @@
+{
+  "target": {
+    "slug": "just-world-hypothesis",
+    "outputPath": "topics/just-world-hypothesis.html"
+  },
+  "indexEntry": {
+    "id": "just-world-hypothesis",
+    "title": "公正世界信念",
+    "subtitle": "Just-World Hypothesis",
+    "href": "./topics/just-world-hypothesis.html",
+    "order": 236,
+    "type": "認知偏差 / 因果安慰",
+    "domain": "責任歸因與道德判斷",
+    "focus": "Believing the world is fair leads people to rationalize outcomes",
+    "thesis": "如果我們強烈相信世界大致公平，就會在看到苦難、失敗或被害時，更容易去找『他是不是哪裡做錯了』的解釋，藉此保住世界仍然有秩序的感覺。",
+    "tags": [
+      "just",
+      "world",
+      "hypothesis",
+      "fairness",
+      "victim-blaming",
+      "causality",
+      "bias",
+      "justice"
+    ]
+  },
+  "page": {
+    "documentTitle": "公正世界信念 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-just-world-hypothesis",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / fairness / blame / meaning</p>\n    <h1>公正世界信念</h1>\n    <p class=\"topic-subtitle\">Just-World Hypothesis</p>\n    <p class=\"thesis\">如果我們強烈相信世界大致公平，就會在看到苦難、失敗或被害時，更容易去找『他是不是哪裡做錯了』的解釋，藉此保住世界仍然有秩序的感覺。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>看懂為什麼人在面對不幸時，有時先做的不是同理，而是替世界找一個看起來還算公平的解釋。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>認知偏差 / 因果安慰</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Believing the world is fair leads people to rationalize outcomes</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>秩序需求、受害者歸因、自我保護、道德合理化</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在事故檢討、社會判斷與自我反應裡更早發現『先怪受害者』的心理路徑。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>公平</span>\n      <span>歸因</span>\n      <span>安慰</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>世界若一定要看起來公平，受害者就很容易先被拿來補故事</h2>\n      <p class=\"section-lede\">公正世界信念 最值得看的地方，不是替人貼標籤，而是理解：當現實發生明顯不公時，為了維持『世界大致有秩序』的心理安定，人往往會不自覺地把部分責任推回受害者身上。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>當現實發生明顯不公時，為了維持『世界大致有秩序』的心理安定，人往往會不自覺地把部分責任推回受害者身上。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先分開事實原因與心理安慰</strong>\n        <p>很多看似冷靜的責任分析，底下其實有很強的秩序安撫需求。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再看制度因素有沒有被遮掉</strong>\n        <p>一旦先把責任丟回個人，流程、權力與結構因素就很容易失聲。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後保留對運氣與不公的容納力</strong>\n        <p>成熟判斷的一部分，是承認世界有時真的不按道德帳本運作。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>別先談人格，先看情境怎麼拉動反應</h2>\n      <p class=\"section-lede\">公正世界信念真正刺人的地方，是它常在你以為自己只是在找原因時，偷偷把秩序安慰摻進判斷裡。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>看到同事因專案爆炸被連帶牽連時，旁觀者先想的是『他是不是本來就不夠謹慎』，而不是先問制度與資訊落差出了什麼問題。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於這種歸因通常不被感覺成冷酷，而是被感覺成『我只是想把原因想清楚』。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">看到不幸或失敗</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">秩序感受到威脅</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">大腦傾向回推受害者或當事人的責任</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>公正世界信念最值得防範的，不是相信公平本身，而是為了保住公平想像而扭曲對不幸的理解。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>別讓一個標籤吃掉整個機制</h2>\n      <p class=\"section-lede\">一旦不把秩序感和責任判斷拆開，人就很容易用「他一定做錯了什麼」來替世界補平衡。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>秩序需求</strong>\n        <p>人需要相信世界大致可理解、可預期，這會推高對『事情一定有道理』的渴望。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>受害者歸因</strong>\n        <p>把部分責任推回當事人，能暫時降低自己也可能遇到同樣不幸的焦慮。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>結構失明</strong>\n        <p>當事人一旦被當成主要原因，制度與情境條件就更難被看見。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>心理拉力</th>\n            <th>當下看起來像什麼</th>\n            <th>代價</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>先怪當事人</td>\n            <td>故事很完整</td>\n            <td>卻容易遮掉真正可修的制度因素</td>\n          </tr>\n          <tr>\n            <td>承認運氣與結構</td>\n            <td>比較不舒服</td>\n            <td>卻更接近現實也更有修復價值</td>\n          </tr>\n          <tr>\n            <td>只追求心理安定</td>\n            <td>當下較容易過去</td>\n            <td>長期會養出對不公的鈍化與誤判</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>這題抓住了哪種心理捷徑</h2>\n      <p class=\"section-lede\">面對不公時，人會本能地想把事情說得比較可控制，於是責任很容易先往當事人身上收。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>安全距離幻覺</strong>\n        <p>只要把原因放回當事人身上，旁觀者就比較能相信自己只要不同做法就能避開同樣命運。</p>\n      </div>\n      <div class=\"example\">\n        <strong>道德帳本想像</strong>\n        <p>人容易把世界想成某種『善有善報、惡有惡報』的延伸版本。</p>\n      </div>\n      <div class=\"example\">\n        <strong>因果補空白</strong>\n        <p>遇到複雜又痛的事件時，快速找一個看起來說得通的責任歸因，能暫時降低不確定。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>把它帶回管理、產品與協作</h2>\n      <p class=\"section-lede\">事故檢討、社會事件和自我反省最怕這種心理補償，因為它會把制度因素悄悄擠出畫面。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>事故檢討</strong>\n        <p>若一開始就把錯全丟給操作員，最容易錯過流程、負荷與訊號設計問題。</p>\n      </div>\n      <div class=\"example\">\n        <strong>社會議題判讀</strong>\n        <p>別把受害結果直接倒推出受害者一定有應得原因。</p>\n      </div>\n      <div class=\"example\">\n        <strong>自我反應</strong>\n        <p>當你急著說『他一定哪裡有問題』時，也值得檢查自己是不是在替世界找安定感。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>事故檢討: 別讓秩序安慰遮掉制度根因。</li>\n      <li>社會判讀: 對受害者歸因保留更高的證據門檻。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>幾種很快但太扁的讀法</h2>\n      <p class=\"section-lede\">若一開始就把 公正世界信念 聽成「所以責任都不存在」，後面連「不是。問題是不要讓責任分析被秩序安慰偷走。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以責任都不存在</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。問題是不要讓責任分析被秩序安慰偷走。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只有冷血的人才會這樣</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>很多時候這是很普通的人類自我保護機制。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>承認不公就會失去行動力</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>相反，只有先承認不公可能存在，制度修補才找得到方向。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>把它變成下一次自我檢查前的追問</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>我現在是在找真原因，還是在替世界補一個讓我比較安心的故事</strong>\n        <p>兩者的差別常決定你會不會看見結構因素。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>若把當事人先從故事裡拿掉，還有哪些制度或情境條件仍然能解釋這件事</strong>\n        <p>這能幫你校正過度歸因。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Just-world hypothesis 支撐 公正世界信念 的主線，Victim blaming 補上與「秩序需求」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐人為了維持世界公平感而傾向合理化不幸這條主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Just-world_hypothesis\" target=\"_blank\" rel=\"noreferrer\">Just-world hypothesis</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上這種秩序需求如何轉成對受害者的歸因偏差。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Victim_blaming\" target=\"_blank\" rel=\"noreferrer\">Victim blaming</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次你想說『他會這樣一定有原因』時，試著再補問一句：那個原因是事實，還是只是讓我比較安心？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "當現實發生明顯不公時，為了維持『世界大致有秩序』的心理安定，人往往會不自覺地把部分責任推回受害者身上。",
+    "smallestScenario": "看到同事因專案爆炸被連帶牽連時，旁觀者先想的是『他是不是本來就不夠謹慎』，而不是先問制度與資訊落差出了什麼問題。",
+    "sourcePlan": [
+      "用來支撐人為了維持世界公平感而傾向合理化不幸這條主線。",
+      "補上這種秩序需求如何轉成對受害者的歸因偏差。"
+    ],
+    "transferTargets": [
+      "事故檢討: 別讓秩序安慰遮掉制度根因。",
+      "社會判讀: 對受害者歸因保留更高的證據門檻。",
+      "自我校正: 留意自己是否在用責怪換取安全感。"
+    ],
+    "commonMisreading": "把公正世界信念讀成『相信公平就是錯』會太粗，它真正提醒的是別讓公平想像扭曲對現實不公的理解。",
+    "readerQuestions": [
+      "我現在是在找真原因，還是在替世界補一個讓我比較安心的故事？兩者的差別常決定你會不會看見結構因素。",
+      "若把當事人先從故事裡拿掉，還有哪些制度或情境條件仍然能解釋這件事？這能幫你校正過度歸因。"
+    ],
+    "sectionIntents": {
+      "core": "用「世界若一定要看起來公平，受害者就很容易先被拿來補故事」建立本頁的核心張力，先讓讀者看見 當現實發生明顯不公時，為了維持『世界大致有秩序』的心理安定，人往往會不自覺地把部分責任推回受害者身上。",
+      "setup": "以「看到同事因專案爆炸被連帶牽連時，旁觀者先想的是『他是不是本來就不夠謹慎』，而不是先問制度與資訊落差出了什麼問題。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「秩序需求、受害者歸因、結構失明」這幾條分析線拆開 公正世界信念，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「安全距離幻覺、道德帳本想像」這些反應，說明人為何會在 公正世界信念 上滑向看似合理但代價更高的近路。",
+      "applications": "把 公正世界信念 拉到 事故檢討、社會判讀 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把公正世界信念讀成『相信公平就是錯』會太粗，它真正提醒的是別讓公平想像扭曲對現實不公的理解。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「我現在是在找真原因，還是在替世界補一個讓我比較安心的故事、若把當事人先從故事裡拿掉，還有哪些制度或情境條件仍然能解釋這件事」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Just-world hypothesis 支撐 公正世界信念 的主線，Victim blaming 補上與「秩序需求」相關的相鄰脈絡。"
+    }
+  }
+}

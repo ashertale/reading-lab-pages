@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>符號接地問題 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-symbol-grounding-problem">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / symbols / meaning / grounding</p>
+        <h1>符號接地問題</h1>
+        <p class="topic-subtitle">Symbol Grounding Problem</p>
+        <p class="thesis">符號如果只靠其他符號來解釋，系統也許能流暢操作字串，卻不一定真的知道那些字串指向世界中的什麼。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>拆開『會處理符號』和『知道符號在世界裡指什麼』這兩層，避免把流暢輸出誤讀成穩固理解。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>認知問題 / 語意連結</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>How symbols get connected to the world they are about</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>語意來源、感知連接、閉環表徵、世界對應</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在 AI、工具設計與資料介面上更清楚地看見語意落地的需求。</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>符號</span>
+          <span>世界</span>
+          <span>連結</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>會搬動符號，不代表符號已經真的碰到世界</h2>
+          <p class="section-lede">一旦把 符號接地問題 放進 AI 或模型設計，最先冒出來的就是這個張力：只要意義仍然只是靠字典式互相轉譯，系統就可能在符號網裡轉得很快，卻沒有可靠地接上它要描述的現實。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>只要意義仍然只是靠字典式互相轉譯，系統就可能在符號網裡轉得很快，卻沒有可靠地接上它要描述的現實。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先問符號到底靠什麼接地</strong>
+            <p>如果沒有感知、行動、使用情境或外部校準，語意常只是系統內部的互指。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再看符號是否能經得起世界回饋</strong>
+            <p>真正接地的表徵，不只會說得通，也能在碰到真實差異時被校正。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後分清字串流暢與語意穩固</strong>
+            <p>兩者會一起出現，但絕不能互相保證。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>從最小思想實驗開始</h2>
+          <p class="section-lede">符號接地問題最需要先避開的一個錯覺，是以為只要詞與詞之間互相解釋得很順，就算真的理解了世界。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>系統能把『溫度過高』轉成警報與工單，但若感測、語境與實際設備狀態之間沒有穩固對應，它可能只是在字串層面來回搬運『過高』這個詞。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>難點在於語言流暢度很容易讓人誤以為語意也已經穩固接地，而真正的世界對應其實可能相當脆弱。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">符號彼此互相定義</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">輸出看起來很流暢</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">世界對應卻可能仍然鬆動或錯位</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>符號接地問題真正提醒的，是不要把符號系統的內部一致性直接等同於對世界的理解能力。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>真正有差別的是你保住哪個判準</h2>
+          <p class="section-lede">詞和詞可以互相解釋很多輪，但如果沒有哪一層真正接到感知和世界，語意還是浮著的。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>定義閉環</strong>
+            <p>如果所有詞都只靠其他詞解釋，系統其實可能一直在封閉字典裡打轉。</p>
+          </article>
+          <article class="lens-card">
+            <strong>感知接點</strong>
+            <p>哪些表徵真的和外部量測、身體回饋或操作結果連在一起。</p>
+          </article>
+          <article class="lens-card">
+            <strong>校準機制</strong>
+            <p>當世界和符號預測不一致時，系統有沒有辦法修正自己的語意對應。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>分析線</th>
+                <th>它先保住什麼</th>
+                <th>會放掉什麼</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>只靠語料互指</td>
+                <td>輸出很流暢</td>
+                <td>語意邊界在真實場景裡可能相當鬆動</td>
+              </tr>
+              <tr>
+                <td>有世界回饋接點</td>
+                <td>設計較複雜</td>
+                <td>表徵比較有機會經得起校正</td>
+              </tr>
+              <tr>
+                <td>把流暢度當理解</td>
+                <td>評估很輕鬆</td>
+                <td>最容易高估系統在陌生現場的穩定性</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>這類問題抓住了什麼直覺</h2>
+          <p class="section-lede">流暢的命名系統很容易讓人安心，因為我們平常就靠詞彙操作大量抽象事物，直到遇到現實對不上才驚覺落差。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>流暢即理解幻覺</strong>
+            <p>只要語言夠順，人就自然傾向相信背後也有相等程度的世界掌握。</p>
+          </div>
+          <div class="example">
+            <strong>字典安心感</strong>
+            <p>符號之間互相支撐看起來很完整，會讓人忘記仍需要某個非符號接點。</p>
+          </div>
+          <div class="example">
+            <strong>黑箱省力</strong>
+            <p>承認語意沒接地很不舒服，所以人更願意把流暢對話當成理解證據。</p>
+          </div>
+        </div>
+        <p class="micro-note">這段不是替 符號接地問題 選立場，而是讓 流暢即理解幻覺、字典安心感 這類直覺如何混掉前提與標準變得可見。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>這個概念在當代技術裡最有用的地方</h2>
+          <p class="section-lede">AI 助手、監控詞彙和資料標籤都怕這件事，因為流暢命名很容易偽裝成真理解。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>AI 助手設計</strong>
+            <p>若沒有和實際狀態、工具回饋與使用環境接上，語言流暢不代表任務理解可靠。</p>
+          </div>
+          <div class="example">
+            <strong>監控詞彙治理</strong>
+            <p>像『高風險』『異常』『完成』這類字眼，若沒有對應到穩固量測與流程，最後會變成人人各自理解。</p>
+          </div>
+          <div class="example">
+            <strong>資料標籤系統</strong>
+            <p>標籤能否接地，不只看命名好不好聽，也看它是否對應到真實可驗證差異。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>AI 助手: 把流暢輸出和真實任務理解分開驗證。</li>
+          <li>監控詞彙: 讓關鍵狀態名稱對應到可驗證的世界差異。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>這類思想實驗最常被讀薄的地方</h2>
+          <p class="section-lede">若一開始就把 符號接地問題 聽成「所以符號系統都沒有用」，後面連「不是。問題不是不要符號，而是要看符號怎麼和世界接起來。」這層校正都很難真正進場。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以符號系統都沒有用</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。問題不是不要符號，而是要看符號怎麼和世界接起來。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要加感測器就自然接地</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>感測只是入口，語意仍需要在任務與回饋中被持續校準。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>這只在哲學上重要</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>任何依賴詞彙、標籤與狀態名稱工作的系統，都在面對同樣結構。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>下次討論 AI 時可先問這兩句</h2>
+          </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>我們現在使用的這個關鍵詞，究竟靠哪些真實世界差異在撐住它的意思</strong>
+            <p>答不出來時，符號通常還沒真正接地。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>若世界狀態和系統描述不一致，系統有什麼機制能修正這個詞的使用邊界</strong>
+            <p>沒有的話，語意多半只是停在字串層。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">交代 Symbol grounding problem 支撐 符號接地問題 的主線，Embodied cognition 補上與「定義閉環」相關的相鄰脈絡。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>用來支撐符號若只靠其他符號定義，語意仍可能沒有真正接上世界這條主線。</p>
+            <a href="https://en.wikipedia.org/wiki/Symbol_grounding_problem" target="_blank" rel="noreferrer">Symbol grounding problem</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰脈絡</strong>
+            <p>補上感知、身體與世界互動如何成為語意接地的重要相鄰脈絡。</p>
+            <a href="https://en.wikipedia.org/wiki/Embodied_cognition" target="_blank" rel="noreferrer">Embodied cognition</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>下次你說一個系統『知道這是異常』時，先追問：那個『異常』究竟是在哪裡被接到真實世界的？</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

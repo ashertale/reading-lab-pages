@@ -1,0 +1,61 @@
+{
+  "target": {
+    "slug": "median-voter-theorem",
+    "outputPath": "topics/median-voter-theorem.html"
+  },
+  "indexEntry": {
+    "id": "median-voter-theorem",
+    "title": "中位選民定理",
+    "subtitle": "Median Voter Theorem",
+    "href": "./topics/median-voter-theorem.html",
+    "order": 233,
+    "type": "政治經濟 / 聚合結果",
+    "domain": "偏好聚合與策略選擇",
+    "focus": "Competition under majority rule pulls toward the median preference",
+    "thesis": "在某些條件下，若大家只爭多數票而偏好能排成單一軸，策略常會一路往中位偏好靠攏；不是因為中間最真，而是因為它最難被兩邊同時拋下。",
+    "tags": [
+      "median",
+      "voter",
+      "theorem",
+      "voting",
+      "preferences",
+      "majority",
+      "strategy",
+      "aggregation"
+    ]
+  },
+  "page": {
+    "documentTitle": "中位選民定理 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-median-voter-theorem",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / strategy / majority / aggregation</p>\n    <h1>中位選民定理</h1>\n    <p class=\"topic-subtitle\">Median Voter Theorem</p>\n    <p class=\"thesis\">在某些條件下，若大家只爭多數票而偏好能排成單一軸，策略常會一路往中位偏好靠攏；不是因為中間最真，而是因為它最難被兩邊同時拋下。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>把『為什麼競爭者都往中間靠』從政治直覺拉回偏好聚合結構。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>政治經濟 / 聚合結果</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Competition under majority rule pulls toward the median preference</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>單峰偏好、多數決、策略靠攏、代表性邊界</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在投票、需求排序與策略設定中更清楚看見中位偏好的牽引力與限制。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>偏好</span>\n      <span>多數</span>\n      <span>中位</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>很多看似務實的往中間靠，其實是被多數規則拉出來的</h2>\n      <p class=\"section-lede\">中位選民定理真正改變直覺的地方，是它把「贏」和「說服所有人」拆開：有時只要佔住中間，就已經夠了。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>只要贏的標準是拿到多數，而且偏好能沿一條軸排序，最安全的策略通常就會往中位偏好靠。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先檢查偏好是否真在同一軸上</strong>\n        <p>若議題其實有多維張力，往中位靠的預測力會大幅下降。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再問競爭者到底在爭什麼</strong>\n        <p>只要勝負條件是多數支持，策略收斂就會比價值主張更強。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後看中位位置代表了誰、忽略了誰</strong>\n        <p>被拉向中位的過程，常會讓邊緣但重要的少數議題失語。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>從最小治理情境看問題怎麼長出來</h2>\n      <p class=\"section-lede\">中位選民定理要先成立，前提其實不少，所以這裡先把那張看似直觀的左右光譜攤平。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>兩個產品方案都想拿到最多內部支持票，結果最後都逐步往『大多數人可以忍受、但沒人特別熱愛』的中間版本靠攏。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於人很容易把『往中間靠』讀成成熟折衷，卻沒看到那可能只是投票規則下的策略結果。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">偏好沿單一軸排列</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">競爭者都想拿多數</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">策略逐步向中位偏好靠攏</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>中位選民定理最有用的地方，是提醒你：中間常不是最對，而是最容易在多數決下變成穩定策略位置。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>把制度壓力拆成幾條線</h2>\n      <p class=\"section-lede\">這裡會分開看單峰偏好、競爭策略和議題維度，因為一旦條件變形，中位位置就未必還能支配結果。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>單峰偏好</strong>\n        <p>定理成立很仰賴偏好能沿單軸排序，否則中位未必能穩定代表多數。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>策略收斂</strong>\n        <p>競爭者若只想贏，會自然往最不容易失票的位置靠。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>代表性代價</strong>\n        <p>越往中位靠，越可能把某些強烈但不居中的偏好排除到邊上。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>制度線索</th>\n            <th>表面上像什麼</th>\n            <th>真正風險</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>偏好單軸且多數決</td>\n            <td>中位位置很有吸力</td>\n            <td>策略容易收斂到安全但不一定精彩的中間</td>\n          </tr>\n          <tr>\n            <td>議題多維</td>\n            <td>中位預測變弱</td>\n            <td>競爭者可能改走聯盟與議程設定路線</td>\n          </tr>\n          <tr>\n            <td>只看最終中間位置</td>\n            <td>故事很簡單</td>\n            <td>會忽略哪些群體和議題被這個結構擠掉</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>這條制度動力抓住了哪種人性</h2>\n      <p class=\"section-lede\">它之所以有吸引力，是因為「往中間靠就能贏」比面對多維偏好和動員差異簡單太多。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>安全票心理</strong>\n        <p>在競爭裡，人會自然偏好看起來最不容易大敗的位置。</p>\n      </div>\n      <div class=\"example\">\n        <strong>中間即合理幻覺</strong>\n        <p>只要很多人都往中間靠，旁觀者很容易把它誤讀成『中間本來就比較對』。</p>\n      </div>\n      <div class=\"example\">\n        <strong>少數失語</strong>\n        <p>被多數結構排擠的群體，常會被說成太極端，而不是被看成偏好聚合的副作用。</p>\n      </div>\n    </div>\n    <p class=\"micro-note\">這一段要看的，是 安全票心理、中間即合理幻覺 這類反應如何把 中位選民定理 指向的制度壓力在現場放大。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>放回真實治理後它會改變什麼</h2>\n      <p class=\"section-lede\">回到選舉、產品定位與組織表決，這個定理能幫你辨認何時中間位置真的重要，何時只是神話。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>產品方案投票</strong>\n        <p>若決策只靠多數表決，方案很可能慢慢被壓成最安全的中間版。</p>\n      </div>\n      <div class=\"example\">\n        <strong>需求排序</strong>\n        <p>內部競爭資源時，提案者常會主動調整語言去靠近大多數可接受的位置。</p>\n      </div>\n      <div class=\"example\">\n        <strong>治理設計</strong>\n        <p>若想保留少數需求，光靠單輪多數決可能不夠，還得設額外保護機制。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>產品投票: 分清楚中間方案是最優，還是只是最容易過票。</li>\n      <li>需求排序: 注意多數決是否系統性壓掉邊緣但關鍵需求。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>幾種常見但危險的治理讀法</h2>\n      <p class=\"section-lede\">若一開始就把 中位選民定理 聽成「所以中間一定最好」，後面連「定理只說它在某些規則下容易勝出，不代表它價值上一定最優。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以中間一定最好</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>定理只說它在某些規則下容易勝出，不代表它價值上一定最優。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要有投票就一定往中位收斂</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>多維議題、低投票率與身份動員都可能讓結果偏離。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>這只適用政治選舉</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>任何靠多數選擇且偏好可排序的場景，都可能出現類似拉力。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>兩個值得帶走的制度問題</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>我們現在看到的『折衷』，究竟是價值上真的更好，還是只是多數規則下的安全位置</strong>\n        <p>這兩種中間不是同一件事。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>在這套決策規則下，哪些少數但重要的偏好最容易被中位牽引力壓掉</strong>\n        <p>先點出來，才可能補保護機制。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Median voter theorem 支撐 中位選民定理 的主線，Single-peaked preferences 補上與「單峰偏好」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐在單峰偏好與多數決下，策略會向中位偏好收斂的主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Median_voter_theorem\" target=\"_blank\" rel=\"noreferrer\">Median voter theorem</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上定理成立所依賴的偏好結構相鄰條件。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Single-peaked_preferences\" target=\"_blank\" rel=\"noreferrer\">Single-peaked preferences</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次看到兩邊都往中間靠時，先問：這是成熟協調，還是多數規則把大家拉去同一個安全位？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "只要贏的標準是拿到多數，而且偏好能沿一條軸排序，最安全的策略通常就會往中位偏好靠。",
+    "smallestScenario": "兩個產品方案都想拿到最多內部支持票，結果最後都逐步往『大多數人可以忍受、但沒人特別熱愛』的中間版本靠攏。",
+    "sourcePlan": [
+      "用來支撐在單峰偏好與多數決下，策略會向中位偏好收斂的主線。",
+      "補上定理成立所依賴的偏好結構相鄰條件。"
+    ],
+    "transferTargets": [
+      "產品投票: 分清楚中間方案是最優，還是只是最容易過票。",
+      "需求排序: 注意多數決是否系統性壓掉邊緣但關鍵需求。",
+      "治理設計: 若想保留少數聲音，別只靠單輪多數決。"
+    ],
+    "commonMisreading": "把中位選民定理讀成『中間就是對的』，會把策略位置錯認成價值判準。",
+    "readerQuestions": [
+      "我們現在看到的『折衷』，究竟是價值上真的更好，還是只是多數規則下的安全位置？這兩種中間不是同一件事。",
+      "在這套決策規則下，哪些少數但重要的偏好最容易被中位牽引力壓掉？先點出來，才可能補保護機制。"
+    ],
+    "sectionIntents": {
+      "core": "用「很多看似務實的往中間靠，其實是被多數規則拉出來的」建立本頁的核心張力，先讓讀者看見 只要贏的標準是拿到多數，而且偏好能沿一條軸排序，最安全的策略通常就會往中位偏好靠。",
+      "setup": "以「兩個產品方案都想拿到最多內部支持票，結果最後都逐步往『大多數人可以忍受、但沒人特別熱愛』的中間版本靠攏。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「單峰偏好、策略收斂、代表性代價」這幾條分析線拆開 中位選民定理，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「安全票心理、中間即合理幻覺」這些反應，說明人為何會在 中位選民定理 上滑向看似合理但代價更高的近路。",
+      "applications": "把 中位選民定理 拉到 產品投票、需求排序 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把中位選民定理讀成『中間就是對的』，會把策略位置錯認成價值判準。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「我們現在看到的『折衷』，究竟是價值上真的更好，還是只是多數規則下的安全位置、在這套決策規則下，哪些少數但重要的偏好最容易被中位牽引力壓掉」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Median voter theorem 支撐 中位選民定理 的主線，Single-peaked preferences 補上與「單峰偏好」相關的相鄰脈絡。"
+    }
+  }
+}

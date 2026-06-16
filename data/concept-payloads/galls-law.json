@@ -1,0 +1,59 @@
+{
+  "target": {
+    "slug": "galls-law",
+    "outputPath": "topics/galls-law.html"
+  },
+  "indexEntry": {
+    "id": "galls-law",
+    "title": "高爾定律",
+    "subtitle": "Gall's Law",
+    "href": "./topics/galls-law.html",
+    "order": 201,
+    "type": "系統演化 / 架構判斷",
+    "domain": "工程與系統設計",
+    "focus": "Working complexity grows from simpler systems that worked",
+    "thesis": "真正能運作的複雜系統，通常不是一次設計出來，而是從先能運作的簡單版本一路長出來。",
+    "tags": [
+      "galls",
+      "architecture",
+      "platform",
+      "feedback",
+      "refactor",
+      "incremental"
+    ]
+  },
+  "page": {
+    "documentTitle": "高爾定律 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-galls-law",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / systems / architecture / evolution</p>\n    <h1>高爾定律</h1>\n    <p class=\"topic-subtitle\">Gall&#x27;s Law</p>\n    <p class=\"thesis\">真正能運作的複雜系統，通常不是一次設計出來，而是從先能運作的簡單版本一路長出來。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>分清楚何時該先把系統做小做通，何時才值得把能力層層堆回去。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>系統演化 / 架構判斷</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Working complexity grows from simpler systems that worked</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>可工作的最小版本、演化路徑、回饋速度、整體耦合</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在重構、平台化與產品規劃裡看見『先可工作，再可宏大』的節奏。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>簡單</span>\n      <span>演化</span>\n      <span>複雜</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>太早追求完整，常比不完整更容易把系統做死</h2>\n      <p class=\"section-lede\">把 高爾定律 放進真實系統後，最先跳出來的不是定義，而是這個張力：當團隊想直接跳到成熟終局時，往往會失去那個能提供真實回饋的簡單中介版本。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>當團隊想直接跳到成熟終局時，往往會失去那個能提供真實回饋的簡單中介版本。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先守住可工作的最小核心</strong>\n        <p>若連最基本的使用路徑都還沒證明能跑，後面的抽象能力多半只是把未知包得更漂亮。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再看新能力能不能沿著現有回饋長出來</strong>\n        <p>能被逐步接上的能力，比一次性大拼圖更容易被真實場景修正。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後才談整體化與平台化</strong>\n        <p>當核心穩了，再談抽象層和統一框架，才比較不會為了想像中的一致性犧牲可用性。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>把問題放回一個小型系統</h2>\n      <p class=\"section-lede\">高爾定律最好從「哪個簡單版本本來能先跑」這個角度進場，因為問題通常不是野心，而是跳過學習階段。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>團隊想一次做完裝置管理平台、權限模型、報表與跨區同步，結果最基本的設備註冊流程遲遲跑不通。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點不是大家不知道複雜系統要拆，而是常低估『先做出可工作小系統』本身就是最重要的架構工作。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">先想像完整終局</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">跳過可工作的小版本</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">失去真實回饋與修正節點</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>高爾定律不是崇拜簡陋，而是提醒你：沒有經過運作驗證的複雜設計，通常不知道自己哪裡最脆弱。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>別讓同一個名詞包掉全部設計判斷</h2>\n      <p class=\"section-lede\">這裡把演化順序、抽象時機和回饋密度拆開看，才能分辨系統是複雜得太早，還是只是正常長大。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>回饋密度</strong>\n        <p>哪個版本最早能讓你接到真實資料、真使用者與真故障，而不是只接到會議室裡的想像。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>耦合壓力</strong>\n        <p>一次把太多能力捆在一起，會讓任何一條小錯都阻塞整個系統的成長節奏。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>可替換性</strong>\n        <p>如果某個子系統還沒有被現場證明，最好讓它先能被換、被砍、被重做，而不是先被神聖化。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>判準</th>\n            <th>當下看起來像什麼</th>\n            <th>真正代價</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>先做全功能平台</td>\n            <td>藍圖很完整、介面很整齊</td>\n            <td>最小主線一直跑不通，團隊沒有真回饋可修</td>\n          </tr>\n          <tr>\n            <td>先做可工作的窄切片</td>\n            <td>一開始看起來不夠漂亮</td>\n            <td>卻能更早暴露依賴、權限和資料流的真正阻力</td>\n          </tr>\n          <tr>\n            <td>過早抽象化</td>\n            <td>重用性好像先被保住</td>\n            <td>其實常把尚未穩定的需求鎖成更難拆的架構</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>人和團隊為什麼會往錯的簡化走</h2>\n      <p class=\"section-lede\">第二版藍圖特別誘人，因為它讓人感覺自己終於能把第一次做不完的都補齊。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>終局幻覺</strong>\n        <p>人很容易把最完整的藍圖誤認成最成熟的路線，因為它看起來比較像真正的產品。</p>\n      </div>\n      <div class=\"example\">\n        <strong>抽象的榮譽感</strong>\n        <p>設計更通用、更可重用的東西通常很有成就感，於是團隊會低估先做窄切片的重要性。</p>\n      </div>\n      <div class=\"example\">\n        <strong>害怕重做</strong>\n        <p>很多人不想先做小，是因為怕之後要推翻；但跳過小版本往往只是把更大的重做往後延。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>工程現場最常用到它的地方</h2>\n      <p class=\"section-lede\">平台重做、協議翻修和工具換代最怕的，就是還沒跑通最小骨架就先愛上最終藍圖。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>平台化規劃</strong>\n        <p>先把最核心的裝置上線、更新與診斷流程做通，再決定哪些共通層真的值得抽出。</p>\n      </div>\n      <div class=\"example\">\n        <strong>韌體重構</strong>\n        <p>先拿一條高價值路徑證明新架構能跑，再逐步把其餘功能搬過來，比一次全部翻修更穩。</p>\n      </div>\n      <div class=\"example\">\n        <strong>跨團隊協作</strong>\n        <p>先讓真實資料流與責任邊界跑起來，遠比先做一張漂亮的全域框架圖更有校正力。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>架構規劃: 先證明最小工作路徑能跑，再逐步擴張能力。</li>\n      <li>平台設計: 把未經驗證的抽象留在可替換邊界外。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>這個概念最常被怎樣讀歪</h2>\n      <p class=\"section-lede\">若一開始就把 高爾定律 聽成「所以簡單永遠比較好」，後面連「不是。高爾定律在乎的是演化順序，不是把系統永遠停在簡單版。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以簡單永遠比較好</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。高爾定律在乎的是演化順序，不是把系統永遠停在簡單版。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>先做小代表可以忽略架構</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>也不是。重點是先替最小工作路徑設對可擴充的邊界，而不是完全不設計。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要做 MVP 就自然會長成好系統</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>若最小版本沒有承接真正風險與回饋，它也可能只是另一種自我安慰。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>下次做設計前先問這兩句</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>我們現在跳過了哪個本來能先被現場驗證的小版本</strong>\n        <p>如果說不出來，通常代表藍圖已經比回饋更大聲。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>現有設計有哪一塊還沒被真實場景證明，卻已經被我們當成不能動的架構</strong>\n        <p>那往往就是未來最昂貴的重做來源。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Gall's law 支撐 高爾定律 的主線，Second-system effect 補上與「回饋密度」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐複雜系統往往只能從先能運作的簡單系統演化出來這條主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Gall%27s_law\" target=\"_blank\" rel=\"noreferrer\">Gall&#x27;s law</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上工程團隊在第二代系統裡過度堆功能與抽象的相鄰壓力。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Second-system_effect\" target=\"_blank\" rel=\"noreferrer\">Second-system effect</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次看到一個很完整的系統藍圖，先追問：哪個更小但可工作的版本本來應該先出現？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "當團隊想直接跳到成熟終局時，往往會失去那個能提供真實回饋的簡單中介版本。",
+    "smallestScenario": "團隊想一次做完裝置管理平台、權限模型、報表與跨區同步，結果最基本的設備註冊流程遲遲跑不通。",
+    "sourcePlan": [
+      "用來支撐複雜系統往往只能從先能運作的簡單系統演化出來這條主線。",
+      "補上工程團隊在第二代系統裡過度堆功能與抽象的相鄰壓力。"
+    ],
+    "transferTargets": [
+      "架構規劃: 先證明最小工作路徑能跑，再逐步擴張能力。",
+      "平台設計: 把未經驗證的抽象留在可替換邊界外。",
+      "重構節奏: 先選窄切片落地，比一次翻盤更容易接到真回饋。"
+    ],
+    "commonMisreading": "把高爾定律聽成『反對複雜系統』，會錯過它真正針對的是錯的演化順序。",
+    "readerQuestions": [
+      "我們現在跳過了哪個本來能先被現場驗證的小版本？如果說不出來，通常代表藍圖已經比回饋更大聲。",
+      "現有設計有哪一塊還沒被真實場景證明，卻已經被我們當成不能動的架構？那往往就是未來最昂貴的重做來源。"
+    ],
+    "sectionIntents": {
+      "core": "用「太早追求完整，常比不完整更容易把系統做死」建立本頁的核心張力，先讓讀者看見 當團隊想直接跳到成熟終局時，往往會失去那個能提供真實回饋的簡單中介版本。",
+      "setup": "以「團隊想一次做完裝置管理平台、權限模型、報表與跨區同步，結果最基本的設備註冊流程遲遲跑不通。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「回饋密度、耦合壓力、可替換性」這幾條分析線拆開 高爾定律，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「終局幻覺、抽象的榮譽感」這些反應，說明人為何會在 高爾定律 上滑向看似合理但代價更高的近路。",
+      "applications": "把 高爾定律 拉到 架構規劃、平台設計 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把高爾定律聽成『反對複雜系統』，會錯過它真正針對的是錯的演化順序。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「我們現在跳過了哪個本來能先被現場驗證的小版本、現有設計有哪一塊還沒被真實場景證明，卻已經被我們當成不能動的架構」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Gall's law 支撐 高爾定律 的主線，Second-system effect 補上與「回饋密度」相關的相鄰脈絡。"
+    }
+  }
+}

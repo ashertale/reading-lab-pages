@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "confused-deputy-problem",
+    "outputPath": "topics/confused-deputy-problem.html"
+  },
+  "indexEntry": {
+    "id": "confused-deputy-problem",
+    "title": "困惑代理問題",
+    "subtitle": "Confused Deputy Problem",
+    "href": "./topics/confused-deputy-problem.html",
+    "order": 215,
+    "type": "安全概念 / 權限誤用",
+    "domain": "系統安全與授權設計",
+    "focus": "A more privileged component can be tricked into misusing its authority",
+    "thesis": "危險不一定來自權限不夠，而可能來自一個有權限的元件被引導去替別人做本來不該做的事；問題是代理被搞混了，不是單點權限看起來太大。",
+    "tags": [
+      "confused",
+      "deputy",
+      "security",
+      "delegation",
+      "authorization",
+      "permissions",
+      "services"
+    ]
+  },
+  "page": {
+    "documentTitle": "困惑代理問題 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-confused-deputy-problem",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / security / authority / delegation</p>\n    <h1>困惑代理問題</h1>\n    <p class=\"topic-subtitle\">Confused Deputy Problem</p>\n    <p class=\"thesis\">危險不一定來自權限不夠，而可能來自一個有權限的元件被引導去替別人做本來不該做的事；問題是代理被搞混了，不是單點權限看起來太大。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>分清楚『誰有權』和『誰在替誰用權』之間的差別，避免把授權漏洞只看成單點權限大小問題。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>安全概念 / 權限誤用</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>A more privileged component can be tricked into misusing its authority</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>權限邊界、代理上下文、請求來源、授權傳遞</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在工具、服務與檔案操作流程裡更早看見代理權限被錯用的路徑。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>代理</span>\n      <span>權限</span>\n      <span>誤用</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>有權限不一定危險，替錯的人使用權限才危險</h2>\n      <p class=\"section-lede\">這個工程概念會一直被拿出來講，是因為 當高權限元件看不清自己是在替誰做事時，它就可能在合法權限內替不該被服務的對象完成敏感操作。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>當高權限元件看不清自己是在替誰做事時，它就可能在合法權限內替不該被服務的對象完成敏感操作。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先分清誰是請求者、誰是執行者</strong>\n        <p>只知道執行者有權還不夠，還要知道它此刻在替誰行事。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再讓授權跟著上下文走</strong>\n        <p>若代理元件拿自己的權限直接處理外部請求，就很容易混掉真正應該檢查的主體。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後縮小可被代理的能力</strong>\n        <p>把高權限能力切細、顯式授權，通常比事後補黑名單更穩。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>把問題放回一個小型系統</h2>\n      <p class=\"section-lede\">困惑代理問題不是一般的權限過大而已，它關鍵在於高權限者開始替錯的人使用那份權力。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>一個有寫入系統檔案權限的工具接收外部給的路徑參數，結果被誘導去覆寫原本不該讓使用者碰的目標檔。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於表面上看，每個參與者都像在做自己被允許做的事，漏洞卻出在權限上下文被混掉了。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">高權限元件接收外部請求</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">代理上下文沒有被清楚傳遞</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">合法權限被誤用到錯的目標上</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>困惑代理問題的重點不是『權限太大』四個字，而是授權決策若沒把請求來源與目的綁清楚，就會讓代理替錯的人出力。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>幾條真正有用的工程判準</h2>\n      <p class=\"section-lede\">一旦分不清誰在發請求、誰在動手、權限又是替誰開的，代理漏洞就會冒出來。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>代理上下文</strong>\n        <p>系統是否有保留『這個操作是替誰做的』資訊，並用它決定授權。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>權限繼承</strong>\n        <p>高權限元件若直接用自己的全權服務外部請求，風險會顯著升高。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>目標混淆</strong>\n        <p>真正被操作的資源是否和請求者原本應被允許接觸的資源一致。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>判準</th>\n            <th>當下看起來像什麼</th>\n            <th>真正代價</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>只看執行者權限</td>\n            <td>審查較快</td>\n            <td>最容易漏掉代理其實在替誰用這個權限</td>\n          </tr>\n          <tr>\n            <td>把代理上下文帶進授權</td>\n            <td>設計較細</td>\n            <td>卻較能阻止合法元件被借刀誤用</td>\n          </tr>\n          <tr>\n            <td>高權限大包服務</td>\n            <td>開發省事</td>\n            <td>一旦上下文混淆，爆點通常很深</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>為什麼團隊容易在這裡失手</h2>\n      <p class=\"section-lede\">人很容易只看「這個服務本來就有權限」，卻忘了真正該問的是它現在在替誰用。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>角色簡化</strong>\n        <p>人容易把『有權限的服務』直接當成可信任的服務，忽略它也可能被利用。</p>\n      </div>\n      <div class=\"example\">\n        <strong>合法外表安慰</strong>\n        <p>只要操作看起來走的是正式工具鏈，就比較難想到權限其實被借道誤用。</p>\n      </div>\n      <div class=\"example\">\n        <strong>上下文偷懶</strong>\n        <p>明確傳遞代理上下文很麻煩，所以系統常偷懶用『反正這服務本來就能做』帶過。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>放回真實系統後它會改變什麼</h2>\n      <p class=\"section-lede\">後端代辦、檔案工具和自動化流程最常在這裡出事，因為服務自己的高權限太容易蓋過請求者身分。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>檔案工具</strong>\n        <p>高權限工具必須把目標資源與請求來源綁清楚，不能只看自己本身有權。</p>\n      </div>\n      <div class=\"example\">\n        <strong>後端服務</strong>\n        <p>代辦操作若不帶使用者上下文，服務就容易拿自己的權限替別人做超出授權的事。</p>\n      </div>\n      <div class=\"example\">\n        <strong>自動化流程</strong>\n        <p>跨服務代辦時要分清誰在簽名、誰在批准、誰在真正承擔這次操作的權限。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>後端代辦: 把使用者上下文帶進授權，而不是只看服務自己有沒有權。</li>\n      <li>檔案工具: 別讓高權限工具直接替外部參數打開任何目標。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>別讓這條原則變成口號</h2>\n      <p class=\"section-lede\">若一開始就把 困惑代理問題 聽成「所以高權限服務都不該存在」，後面連「不是。問題是高權限服務不能在代理上下文混亂時直接拿自己全權辦事。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以高權限服務都不該存在</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。問題是高權限服務不能在代理上下文混亂時直接拿自己全權辦事。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要做路徑白名單就夠了</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>若沒把代理主體綁清楚，很多變體仍可能借其他路徑進場。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>這只是老式系統漏洞</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>任何會代辦、轉交、代簽或代操作的現代服務都可能踩到。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>把它變成下一次重構前的追問</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>這個元件此刻是在替誰執行權限，而那個『誰』有沒有被明確帶到授權檢查裡</strong>\n        <p>這通常是漏洞最早的切口。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果把執行者自己的高權限拿掉，只剩請求者原本該有的能力，這個操作還做得成嗎</strong>\n        <p>若做得成太多，代理設計多半有問題。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Confused deputy problem 支撐 困惑代理問題 的主線，Capability-based security 補上與「代理上下文」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐高權限元件在代理上下文混淆時會被誘導誤用權限這條主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Confused_deputy_problem\" target=\"_blank\" rel=\"noreferrer\">Confused deputy problem</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上把權限和主體/目標綁更細如何降低代理混淆的相鄰脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Capability-based_security\" target=\"_blank\" rel=\"noreferrer\">Capability-based security</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次你看到一個能代辦很多事的高權限服務時，先問：它真的知道自己現在是在替誰做事嗎？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "當高權限元件看不清自己是在替誰做事時，它就可能在合法權限內替不該被服務的對象完成敏感操作。",
+    "smallestScenario": "一個有寫入系統檔案權限的工具接收外部給的路徑參數，結果被誘導去覆寫原本不該讓使用者碰的目標檔。",
+    "sourcePlan": [
+      "用來支撐高權限元件在代理上下文混淆時會被誘導誤用權限這條主線。",
+      "補上把權限和主體/目標綁更細如何降低代理混淆的相鄰脈絡。"
+    ],
+    "transferTargets": [
+      "後端代辦: 把使用者上下文帶進授權，而不是只看服務自己有沒有權。",
+      "檔案工具: 別讓高權限工具直接替外部參數打開任何目標。",
+      "流程自動化: 清楚分離請求者、批准者與執行者的權限來源。"
+    ],
+    "commonMisreading": "把困惑代理問題只讀成『權限太大』會太淺，它更關乎代理上下文沒有被清楚保留。",
+    "readerQuestions": [
+      "這個元件此刻是在替誰執行權限，而那個『誰』有沒有被明確帶到授權檢查裡？這通常是漏洞最早的切口。",
+      "如果把執行者自己的高權限拿掉，只剩請求者原本該有的能力，這個操作還做得成嗎？若做得成太多，代理設計多半有問題。"
+    ],
+    "sectionIntents": {
+      "core": "用「有權限不一定危險，替錯的人使用權限才危險」建立本頁的核心張力，先讓讀者看見 當高權限元件看不清自己是在替誰做事時，它就可能在合法權限內替不該被服務的對象完成敏感操作。",
+      "setup": "以「一個有寫入系統檔案權限的工具接收外部給的路徑參數，結果被誘導去覆寫原本不該讓使用者碰的目標檔。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「代理上下文、權限繼承、目標混淆」這幾條分析線拆開 困惑代理問題，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「角色簡化、合法外表安慰」這些反應，說明人為何會在 困惑代理問題 上滑向看似合理但代價更高的近路。",
+      "applications": "把 困惑代理問題 拉到 後端代辦、檔案工具 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把困惑代理問題只讀成『權限太大』會太淺，它更關乎代理上下文沒有被清楚保留。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「這個元件此刻是在替誰執行權限，而那個『誰』有沒有被明確帶到授權檢查裡、如果把執行者自己的高權限拿掉，只剩請求者原本該有的能力，這個操作還做得成嗎」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Confused deputy problem 支撐 困惑代理問題 的主線，Capability-based security 補上與「代理上下文」相關的相鄰脈絡。"
+    }
+  }
+}

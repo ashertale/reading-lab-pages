@@ -1,0 +1,61 @@
+{
+  "target": {
+    "slug": "two-phase-commit",
+    "outputPath": "topics/two-phase-commit.html"
+  },
+  "indexEntry": {
+    "id": "two-phase-commit",
+    "title": "兩階段提交",
+    "subtitle": "Two-Phase Commit",
+    "href": "./topics/two-phase-commit.html",
+    "order": 212,
+    "type": "分散式協調 / 一致性交換",
+    "domain": "資料一致性與交易設計",
+    "focus": "Coordinating a single all-or-nothing decision across multiple participants",
+    "thesis": "想讓多個參與者一起做『要嘛都做、要嘛都不做』的決定，代價通常不是零；兩階段提交替你換來原子性，卻也同時把等待、阻塞和協調單點帶進系統。",
+    "tags": [
+      "two",
+      "phase",
+      "commit",
+      "distributed",
+      "transactions",
+      "consistency",
+      "coordination",
+      "blocking"
+    ]
+  },
+  "page": {
+    "documentTitle": "兩階段提交 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-two-phase-commit",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / distributed / transactions / coordination</p>\n    <h1>兩階段提交</h1>\n    <p class=\"topic-subtitle\">Two-Phase Commit</p>\n    <p class=\"thesis\">想讓多個參與者一起做『要嘛都做、要嘛都不做』的決定，代價通常不是零；兩階段提交替你換來原子性，卻也同時把等待、阻塞和協調單點帶進系統。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>分清楚『想要一次一致』和『系統願意為此付出多少等待與阻塞成本』之間的交易。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>分散式協調 / 一致性交換</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Coordinating a single all-or-nothing decision across multiple participants</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>原子性、協調者、阻塞風險、失敗恢復</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在資料更新、跨服務交易與工作流設計上更清楚評估原子一致性的代價。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>原子</span>\n      <span>協調</span>\n      <span>阻塞</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>一致性不是免費午餐，尤其當你想讓很多人同時說 yes 的時候</h2>\n      <p class=\"section-lede\">兩階段提交 真正麻煩的地方，不在名詞，而在它逼你承認：只要你要求多方一起達成單一原子決定，就得把等待、協調、阻塞與恢復難題一起買進來。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>只要你要求多方一起達成單一原子決定，就得把等待、協調、阻塞與恢復難題一起買進來。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先確認你真的需要原子一致</strong>\n        <p>不是所有跨服務更新都值得用最重的協調換來全有全無。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再把阻塞成本算進來</strong>\n        <p>一旦有人卡住，整體等待與資源占用會成為系統成本，而不是邊角例外。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後設計失敗替代方案</strong>\n        <p>有些場景用補償、saga 或明確狀態機，比硬追單次原子性更合適。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>把問題放回一個小型系統</h2>\n      <p class=\"section-lede\">兩階段提交最難的地方不在多寫一次確認，而在你從此得面對誰卡住、誰等待、誰來恢復的整串問題。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>訂單、庫存和付款三個服務想保證『要嘛都成功、要嘛都不算』，結果真正的複雜度不是寫三次 update，而是其中一方卡住時大家怎麼一起等、一起回退。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於原子語意看起來很乾淨，讓人容易低估協調層本身的脆弱與延遲成本。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">協調者先詢問是否可提交</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">各方進入準備狀態等待總決定</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">原子性換來阻塞與恢復壓力</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>兩階段提交最值得學的不是流程口訣，而是它逼你正視：想要跨多方的一致，通常得拿可用性與簡單度去換。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>幾條真正有用的工程判準</h2>\n      <p class=\"section-lede\">你要的不只是一起成功，而是一起等待、一起卡住、一起在故障後找回同一個決定。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>原子性收益</strong>\n        <p>兩階段提交真正買來的是全有全無的一致保證。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>阻塞風險</strong>\n        <p>參與者在等待最終決定時，會帶著鎖、資源或不確定狀態一起卡住。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>恢復複雜度</strong>\n        <p>協調者或參與者在中途失敗時，誰知道最終該 commit 還是 abort，本身就是系統問題。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>判準</th>\n            <th>當下看起來像什麼</th>\n            <th>真正代價</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>強追單次原子一致</td>\n            <td>語意最乾淨</td>\n            <td>阻塞與恢復成本最高</td>\n          </tr>\n          <tr>\n            <td>接受補償式一致</td>\n            <td>語意較沒那麼爽快</td>\n            <td>卻能降低協調與可用性壓力</td>\n          </tr>\n          <tr>\n            <td>忽略等待狀態</td>\n            <td>設計看起來簡單</td>\n            <td>實際上最容易在故障時整包卡住</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>為什麼團隊容易在這裡失手</h2>\n      <p class=\"section-lede\">人很容易先被「要嘛都成功、要嘛都不算」的整齊感吸引，晚一點才發現自己買進的是協調成本。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>語意潔癖</strong>\n        <p>只要『全有全無』看起來比較乾淨，人就會低估為此付出的分散式成本。</p>\n      </div>\n      <div class=\"example\">\n        <strong>單機類比</strong>\n        <p>很多人會用本機交易直覺去想像跨服務交易，忽略網路與失敗恢復帶來的額外代價。</p>\n      </div>\n      <div class=\"example\">\n        <strong>失敗想像不足</strong>\n        <p>在一切順利時，兩階段提交流程很漂亮；真正難的是中途不順時誰能知道真相。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>把它帶回架構、流程與介面</h2>\n      <p class=\"section-lede\">跨服務交易、工作流和資料系統選型都得先回答：這份原子一致，值不值得把阻塞成本一起買進來。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>跨服務交易</strong>\n        <p>在採用兩階段提交前，先問自己是否真的比補償流程更需要單次原子性。</p>\n      </div>\n      <div class=\"example\">\n        <strong>工作流設計</strong>\n        <p>若步驟間已可被清楚重試與補償，硬綁在同一交易裡未必划算。</p>\n      </div>\n      <div class=\"example\">\n        <strong>資料系統選型</strong>\n        <p>對分散式資料庫的一致性承諾，要連阻塞與恢復代價一起理解，而不只看 brochure。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>跨服務交易: 先分清楚真需要的原子性等級。</li>\n      <li>工作流設計: 對阻塞與恢復成本做顯性評估。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>別讓這條原則變成口號</h2>\n      <p class=\"section-lede\">若一開始就把 兩階段提交 聽成「所以兩階段提交不好」，後面連「不是。它在需要原子性的場景非常有價值，只是代價不能被浪漫化。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以兩階段提交不好</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。它在需要原子性的場景非常有價值，只是代價不能被浪漫化。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要網路夠快就沒事</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>速度能改善一些成本，但阻塞與故障恢復問題不會因此消失。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>補償流程一定比較差</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>很多業務場景本來就更適合明確補償，而不是追求一次性完美原子。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>把它變成下一次重構前的追問</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>這個場景真的需要單次原子一致，還是其實可以接受可追蹤的補償與中間狀態</strong>\n        <p>先答這題，架構才不會過重。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果協調者或其中一方在最尷尬的時刻掛掉，其他人要靠什麼知道該 commit 還是 abort</strong>\n        <p>這是理解代價的關鍵問題。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Two-phase commit protocol 支撐 兩階段提交 的主線，Distributed transaction 補上與「原子性收益」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐跨多參與者達成原子提交時的協調與阻塞主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Two-phase_commit_protocol\" target=\"_blank\" rel=\"noreferrer\">Two-phase commit protocol</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上分散式一致性與協調代價的相鄰脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Distributed_transaction\" target=\"_blank\" rel=\"noreferrer\">Distributed transaction</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次有人說『這個就用 2PC 解掉』時，先補問：我們願意為這份原子性付出哪些可用性與恢復成本？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "只要你要求多方一起達成單一原子決定，就得把等待、協調、阻塞與恢復難題一起買進來。",
+    "smallestScenario": "訂單、庫存和付款三個服務想保證『要嘛都成功、要嘛都不算』，結果真正的複雜度不是寫三次 update，而是其中一方卡住時大家怎麼一起等、一起回退。",
+    "sourcePlan": [
+      "用來支撐跨多參與者達成原子提交時的協調與阻塞主線。",
+      "補上分散式一致性與協調代價的相鄰脈絡。"
+    ],
+    "transferTargets": [
+      "跨服務交易: 先分清楚真需要的原子性等級。",
+      "工作流設計: 對阻塞與恢復成本做顯性評估。",
+      "資料系統選型: 把一致性承諾和可用性代價一起看。"
+    ],
+    "commonMisreading": "把兩階段提交讀成『只是多一步確認』會嚴重低估它真正買進來的阻塞與恢復問題。",
+    "readerQuestions": [
+      "這個場景真的需要單次原子一致，還是其實可以接受可追蹤的補償與中間狀態？先答這題，架構才不會過重。",
+      "如果協調者或其中一方在最尷尬的時刻掛掉，其他人要靠什麼知道該 commit 還是 abort？這是理解代價的關鍵問題。"
+    ],
+    "sectionIntents": {
+      "core": "用「一致性不是免費午餐，尤其當你想讓很多人同時說 yes 的時候」建立本頁的核心張力，先讓讀者看見 只要你要求多方一起達成單一原子決定，就得把等待、協調、阻塞與恢復難題一起買進來。",
+      "setup": "以「訂單、庫存和付款三個服務想保證『要嘛都成功、要嘛都不算』，結果真正的複雜度不是寫三次 update，而是其中一方卡住時大家怎麼一起等、一起回退。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「原子性收益、阻塞風險、恢復複雜度」這幾條分析線拆開 兩階段提交，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「語意潔癖、單機類比」這些反應，說明人為何會在 兩階段提交 上滑向看似合理但代價更高的近路。",
+      "applications": "把 兩階段提交 拉到 跨服務交易、工作流設計 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把兩階段提交讀成『只是多一步確認』會嚴重低估它真正買進來的阻塞與恢復問題。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「這個場景真的需要單次原子一致，還是其實可以接受可追蹤的補償與中間狀態、如果協調者或其中一方在最尷尬的時刻掛掉，其他人要靠什麼知道該 commit 還是 abort」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Two-phase commit protocol 支撐 兩階段提交 的主線，Distributed transaction 補上與「原子性收益」相關的相鄰脈絡。"
+    }
+  }
+}

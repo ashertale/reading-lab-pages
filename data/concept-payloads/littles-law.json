@@ -1,0 +1,59 @@
+{
+  "target": {
+    "slug": "littles-law",
+    "outputPath": "topics/littles-law.html"
+  },
+  "indexEntry": {
+    "id": "littles-law",
+    "title": "李特爾法則",
+    "subtitle": "Little's Law",
+    "href": "./topics/littles-law.html",
+    "order": 203,
+    "type": "流程度量 / 佇列判斷",
+    "domain": "工程流程與營運",
+    "focus": "Work in progress, throughput, and wait time move together",
+    "thesis": "當在製數量、完成速度與等待時間纏在同一條佇列上時，你不可能只靠喊快一點，就把延遲從系統裡趕走。",
+    "tags": [
+      "littles",
+      "queue",
+      "throughput",
+      "wip",
+      "latency",
+      "operations"
+    ]
+  },
+  "page": {
+    "documentTitle": "李特爾法則 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-littles-law",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / flow / queues / throughput</p>\n    <h1>李特爾法則</h1>\n    <p class=\"topic-subtitle\">Little&#x27;s Law</p>\n    <p class=\"thesis\">當在製數量、完成速度與等待時間纏在同一條佇列上時，你不可能只靠喊快一點，就把延遲從系統裡趕走。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>把『為什麼事情一直排隊』從感覺拉回結構，分清楚是做太多、做太慢，還是兩者一起發生。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>流程度量 / 佇列判斷</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Work in progress, throughput, and wait time move together</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>在製量、吞吐率、等待時間、穩態條件</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在任務排程、客服處理與驗證管線中用同一組結構看延遲。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>在製</span>\n      <span>速率</span>\n      <span>等待</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>佇列不會靠意志變短，它只會回應系統結構</h2>\n      <p class=\"section-lede\">李特爾法則 真正麻煩的地方，不在名詞，而在它逼你承認：只要在製量撐高、吞吐又沒有同步提升，等待時間幾乎一定會往上堆。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>只要在製量撐高、吞吐又沒有同步提升，等待時間幾乎一定會往上堆。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先數系統裡同時躺著多少工作</strong>\n        <p>在製量若一直膨脹，再高效的個人也會被佇列結構拖慢。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再看完成速率是否真的提高</strong>\n        <p>很多看似忙碌的優化只是把工作搬來搬去，吞吐率並沒有真正上升。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後才談催件與加班</strong>\n        <p>若不先動在製量與瓶頸，催得越兇常只是讓整體切換成本更高。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>把問題放回一個小型系統</h2>\n      <p class=\"section-lede\">李特爾法則之所以實用，是因為它把「怎麼大家都只多排一點點，卻一起等很久」說成可以計的關係。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>驗證實驗室一天只能完整跑 20 組回歸，但同時塞進去 80 張工單，結果每個人都覺得自己只多排一點點，整體等待卻一路炸開。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於大家常把延遲讀成個別人不夠努力，卻忽略佇列本身的幾何放大效果。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">在製量一路增加</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">吞吐沒有跟上</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">平均等待時間被整體拉長</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>李特爾法則最有用的地方，是它迫使你把『感覺很忙』翻成在製量、速率和等待之間的結構關係。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>幾條真正有用的工程判準</h2>\n      <p class=\"section-lede\">下面分開看在製量、吞吐與等待時間，因為這三個量只要動一個，現場體感就會整個改觀。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>在製壓力</strong>\n        <p>同時開太多工作會把切換、等待與阻塞一起帶進來。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>瓶頸位置</strong>\n        <p>真正控制等待時間的，通常不是平均速度，而是最慢那段資源的產能。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>穩態假設</strong>\n        <p>李特爾法則不是魔法，它在進出大致平衡的情況下最有判斷力。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>判準</th>\n            <th>當下看起來像什麼</th>\n            <th>真正代價</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>在製量暴增</td>\n            <td>大家都很忙</td>\n            <td>等待時間常會比想像中更快惡化</td>\n          </tr>\n          <tr>\n            <td>吞吐率提高</td>\n            <td>看板移動變快</td>\n            <td>如果在製不降，等待改善仍可能有限</td>\n          </tr>\n          <tr>\n            <td>只靠加速催件</td>\n            <td>某些單件看似被救到</td>\n            <td>整體系統常被更多切換與插隊弄得更慢</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>這個工程判斷抓住了哪種順手誘惑</h2>\n      <p class=\"section-lede\">人很容易低估佇列，因為個別工單看起來只是多等一點，系統總延遲卻是一起累加。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>局部忙碌錯覺</strong>\n        <p>只要每個人看起來都很忙，團隊就容易誤以為整個流程一定在高效率前進。</p>\n      </div>\n      <div class=\"example\">\n        <strong>插隊誘惑</strong>\n        <p>每個人都覺得自己的工作只是插一下，卻沒看到整條佇列因此更不穩。</p>\n      </div>\n      <div class=\"example\">\n        <strong>忽略系統量</strong>\n        <p>人比較容易記住單一緊急件，不容易持續關注系統同時躺了多少工作。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>放回真實系統後它會改變什麼</h2>\n      <p class=\"section-lede\">不論是驗證實驗室、ticket 流程還是產線節點，這條法則都在幫你抓真正的塞點。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>驗證排程</strong>\n        <p>限制同時進場的回歸任務量，比一味增加催單頻率更能壓住總等待。</p>\n      </div>\n      <div class=\"example\">\n        <strong>客服工單</strong>\n        <p>若結案速率沒變，持續放更多 ticket 進系統只會讓每張工單平均更晚被看見。</p>\n      </div>\n      <div class=\"example\">\n        <strong>開發看板</strong>\n        <p>管在製上限能減少上下文切換，讓吞吐和等待都比較穩。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>驗證排程: 管住同時進場的工作量，比單純催件更有效。</li>\n      <li>客服流程: 先看系統裡躺了多少工單，再談個別人是否夠快。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>幾種很快但不夠準的讀法</h2>\n      <p class=\"section-lede\">若一開始就把 李特爾法則 聽成「所以只要減少在製就一定最好」，後面連「若減到低於瓶頸可利用的程度，也可能讓資源閒著。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以只要減少在製就一定最好</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>若減到低於瓶頸可利用的程度，也可能讓資源閒著。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>這只是工業流程理論</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>任何有到達、等待、處理和離開的系統都會遇到同樣結構。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要增加人力就能解</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>若瓶頸不在缺人，而在設備、權限或交接，單純加人未必有效。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>把它變成下一次重構前的追問</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>我們現在的等待，主要是因為在製量太高，還是因為瓶頸吞吐太低</strong>\n        <p>先分清楚，才不會把解法用反。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果今天不能多加任何資源，哪個在製上限調整最可能立刻縮短等待</strong>\n        <p>這通常比再喊快一點更有用。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Little's law 支撐 李特爾法則 的主線，Queueing theory 補上與「在製壓力」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐在製量、吞吐率與等待時間之間的核心關係。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Little%27s_law\" target=\"_blank\" rel=\"noreferrer\">Little&#x27;s law</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上佇列、瓶頸與穩態條件的相鄰分析脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Queueing_theory\" target=\"_blank\" rel=\"noreferrer\">Queueing theory</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次抱怨某條流程太慢時，先寫下在製量、完成速率和等待時間三個數字，再討論責任與優化。</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "只要在製量撐高、吞吐又沒有同步提升，等待時間幾乎一定會往上堆。",
+    "smallestScenario": "驗證實驗室一天只能完整跑 20 組回歸，但同時塞進去 80 張工單，結果每個人都覺得自己只多排一點點，整體等待卻一路炸開。",
+    "sourcePlan": [
+      "用來支撐在製量、吞吐率與等待時間之間的核心關係。",
+      "補上佇列、瓶頸與穩態條件的相鄰分析脈絡。"
+    ],
+    "transferTargets": [
+      "驗證排程: 管住同時進場的工作量，比單純催件更有效。",
+      "客服流程: 先看系統裡躺了多少工單，再談個別人是否夠快。",
+      "開發看板: 把在製上限視為等待時間控制器，而不是官僚規定。"
+    ],
+    "commonMisreading": "把李特爾法則當成單純數學公式而不去看現場佇列，會錯過它真正提供的流程直覺。",
+    "readerQuestions": [
+      "我們現在的等待，主要是因為在製量太高，還是因為瓶頸吞吐太低？先分清楚，才不會把解法用反。",
+      "如果今天不能多加任何資源，哪個在製上限調整最可能立刻縮短等待？這通常比再喊快一點更有用。"
+    ],
+    "sectionIntents": {
+      "core": "用「佇列不會靠意志變短，它只會回應系統結構」建立本頁的核心張力，先讓讀者看見 只要在製量撐高、吞吐又沒有同步提升，等待時間幾乎一定會往上堆。",
+      "setup": "以「驗證實驗室一天只能完整跑 20 組回歸，但同時塞進去 80 張工單，結果每個人都覺得自己只多排一點點，整體等待卻一路炸開。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「在製壓力、瓶頸位置、穩態假設」這幾條分析線拆開 李特爾法則，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「局部忙碌錯覺、插隊誘惑」這些反應，說明人為何會在 李特爾法則 上滑向看似合理但代價更高的近路。",
+      "applications": "把 李特爾法則 拉到 驗證排程、客服流程 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把李特爾法則當成單純數學公式而不去看現場佇列，會錯過它真正提供的流程直覺。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「我們現在的等待，主要是因為在製量太高，還是因為瓶頸吞吐太低、如果今天不能多加任何資源，哪個在製上限調整最可能立刻縮短等待」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Little's law 支撐 李特爾法則 的主線，Queueing theory 補上與「在製壓力」相關的相鄰脈絡。"
+    }
+  }
+}

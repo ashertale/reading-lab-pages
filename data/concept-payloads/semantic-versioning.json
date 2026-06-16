@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "semantic-versioning",
+    "outputPath": "topics/semantic-versioning.html"
+  },
+  "indexEntry": {
+    "id": "semantic-versioning",
+    "title": "語意化版本",
+    "subtitle": "Semantic Versioning",
+    "href": "./topics/semantic-versioning.html",
+    "order": 204,
+    "type": "相容性契約 / 版本治理",
+    "domain": "軟體介面與發布",
+    "focus": "Version numbers as promises about change",
+    "thesis": "版本號真正承載的不是排隊順序，而是變更承諾；一旦版本號不再對應相容性，整個生態就會開始用猜的。",
+    "tags": [
+      "semantic",
+      "versioning",
+      "api",
+      "compatibility",
+      "release",
+      "contract",
+      "sdk"
+    ]
+  },
+  "page": {
+    "documentTitle": "語意化版本 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-semantic-versioning",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / versions / compatibility / contracts</p>\n    <h1>語意化版本</h1>\n    <p class=\"topic-subtitle\">Semantic Versioning</p>\n    <p class=\"thesis\">版本號真正承載的不是排隊順序，而是變更承諾；一旦版本號不再對應相容性，整個生態就會開始用猜的。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>分清楚版本號何時是清楚契約，何時只是看起來有秩序的數字裝飾。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>相容性契約 / 版本治理</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Version numbers as promises about change</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>公開 API、相容性承諾、破壞性變更、發布紀律</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在 SDK、韌體、CLI 與內部服務發布時更誠實地處理破壞性變更。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>承諾</span>\n      <span>變更</span>\n      <span>相容</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>版本號一旦不再對應承諾，生態就會開始靠運氣存活</h2>\n      <p class=\"section-lede\">把 語意化版本 放進真實系統後，最先跳出來的不是定義，而是這個張力：當升版不再清楚表示哪些變更安全、哪些需要遷移時，使用者的真正成本會被推到整合現場。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>當升版不再清楚表示哪些變更安全、哪些需要遷移時，使用者的真正成本會被推到整合現場。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先把公開契約說清楚</strong>\n        <p>如果連哪些東西算 API 都說不清，版本號自然也不可能誠實。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再讓版本號對應真變更</strong>\n        <p>破壞性就是破壞性，不應因為想降低阻力就假裝它只是小修。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後設計遷移節奏</strong>\n        <p>版本號能告訴人風險，但真正的相容性治理仍需要 deprecation 與遷移期。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>先看現場最早卡住的地方</h2>\n      <p class=\"section-lede\">語意化版本要處理的不是數字整齊，而是下游能不能提前讀懂這次升版到底會不會咬人。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>某 SDK 將回傳欄位語義改掉卻只升 patch 版，結果下游裝置雖然編譯成功，監控邏輯卻在正式環境悄悄失準。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點不是不會編版本號，而是很多團隊想保留『看起來沒那麼嚇人』的升版表面，於是把變更誠實度犧牲掉。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">對外介面發生改變</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">版本號沒有如實表態</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">整合成本被推給下游現場</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>語意化版本最重要的不是格式，而是讓變更成本能在發布時被提前看見，而不是等到整合現場才爆。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>別讓同一個名詞包掉全部設計判斷</h2>\n      <p class=\"section-lede\">真正出事的常不是程式碼改多少，而是版本號有沒有誠實說出契約究竟動了哪一層。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>承諾邊界</strong>\n        <p>版本號承諾的是哪一層：封包格式、API 回傳、CLI 行為，還是整體產品體驗。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>破壞性判定</strong>\n        <p>不只編譯錯才算 break；語義改變、預設值改變與時序改變都可能是破壞。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>生態信任</strong>\n        <p>一旦使用者學會版本號不可信，他們就會回到 pin 版本、人工測爆與口耳相傳。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>判準</th>\n            <th>當下看起來像什麼</th>\n            <th>真正代價</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>誠實升 major</td>\n            <td>短期看起來比較嚇人</td>\n            <td>卻能讓下游提早安排遷移與測試</td>\n          </tr>\n          <tr>\n            <td>把 break 假裝成 minor</td>\n            <td>升版阻力表面較小</td>\n            <td>真正代價被推到現場與事故後面</td>\n          </tr>\n          <tr>\n            <td>沒定義公開 API</td>\n            <td>看起來比較自由</td>\n            <td>版本號最後很難對外形成可信承諾</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>人和團隊為什麼會往錯的簡化走</h2>\n      <p class=\"section-lede\">大家容易把版本號當行政欄位填完就好，因為真正的遷移成本通常是下游在現場替你付。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>害怕嚇跑使用者</strong>\n        <p>很多團隊不想升 major，是因為它象徵麻煩，但問題只會被延後到別人身上。</p>\n      </div>\n      <div class=\"example\">\n        <strong>模糊比較省事</strong>\n        <p>版本號模糊時，內部協調比較少，但外部整合成本會快速升高。</p>\n      </div>\n      <div class=\"example\">\n        <strong>局部正確幻覺</strong>\n        <p>只要自己這邊測試過了，團隊就容易低估語義微調對下游造成的實際傷害。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>放回真實系統後它會改變什麼</h2>\n      <p class=\"section-lede\">回到 SDK、韌體和內部服務發布，semver 的價值其實是降低跨團隊猜測。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>SDK 發布</strong>\n        <p>把回傳欄位、錯誤語義與預設值變動都納入版本契約，而不是只盯函式簽名。</p>\n      </div>\n      <div class=\"example\">\n        <strong>韌體相容</strong>\n        <p>若 bootloader 或 config schema 有 break，就該明確暴露遷移需求，不要讓現場猜。</p>\n      </div>\n      <div class=\"example\">\n        <strong>內部服務</strong>\n        <p>即便只服務組織內部，誠實版本號仍能減少跨團隊升版時的隱性摩擦。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>SDK 發布: 把語義改動視為契約變動，而不只是程式碼差異。</li>\n      <li>韌體升版: 讓現場能從版本號提早判斷遷移風險。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>這個概念最常被怎樣讀歪</h2>\n      <p class=\"section-lede\">若一開始就把 語意化版本 聽成「語意化版本只是一套命名格式」，後面連「若沒有公開契約和遷移紀律，格式本身不會自動產生信任。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>語意化版本只是一套命名格式</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>若沒有公開契約和遷移紀律，格式本身不會自動產生信任。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要程式還能跑就不算 break</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>語義與時序的變動，同樣可能讓下游系統默默壞掉。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>內部系統不用在意版本誠實</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>越是跨團隊依賴多的內部服務，越需要靠版本號降低整合猜測。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>下次做設計前先問這兩句</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>我們這次變更到底改動了哪一層承諾，版本號有沒有如實說出來</strong>\n        <p>若說不清，升版策略大多半已經開始靠運氣。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果下游只看 release note 和版本號，不進原始碼，能不能判斷這次升版風險</strong>\n        <p>不能的話，契約通常還不夠清楚。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Semantic Versioning 支撐 語意化版本 的主線，Backward compatibility 補上與「承諾邊界」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐版本號應對應公開 API 與相容性承諾的核心主線。</p>\n        <a href=\"https://semver.org/\" target=\"_blank\" rel=\"noreferrer\">Semantic Versioning</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上相容性設計與版本治理為何會纏在一起的相鄰脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Backward_compatibility\" target=\"_blank\" rel=\"noreferrer\">Backward compatibility</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次發版前，試著寫下這次改動究竟動了哪一層承諾，再看版本號是不是還算誠實。</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "當升版不再清楚表示哪些變更安全、哪些需要遷移時，使用者的真正成本會被推到整合現場。",
+    "smallestScenario": "某 SDK 將回傳欄位語義改掉卻只升 patch 版，結果下游裝置雖然編譯成功，監控邏輯卻在正式環境悄悄失準。",
+    "sourcePlan": [
+      "用來支撐版本號應對應公開 API 與相容性承諾的核心主線。",
+      "補上相容性設計與版本治理為何會纏在一起的相鄰脈絡。"
+    ],
+    "transferTargets": [
+      "SDK 發布: 把語義改動視為契約變動，而不只是程式碼差異。",
+      "韌體升版: 讓現場能從版本號提早判斷遷移風險。",
+      "內部服務: 用誠實的版本承諾減少跨團隊整合猜測。"
+    ],
+    "commonMisreading": "把語意化版本理解成『把數字排整齊』，會錯過它真正要維護的是相容性信任。",
+    "readerQuestions": [
+      "我們這次變更到底改動了哪一層承諾，版本號有沒有如實說出來？若說不清，升版策略大多半已經開始靠運氣。",
+      "如果下游只看 release note 和版本號，不進原始碼，能不能判斷這次升版風險？不能的話，契約通常還不夠清楚。"
+    ],
+    "sectionIntents": {
+      "core": "用「版本號一旦不再對應承諾，生態就會開始靠運氣存活」建立本頁的核心張力，先讓讀者看見 當升版不再清楚表示哪些變更安全、哪些需要遷移時，使用者的真正成本會被推到整合現場。",
+      "setup": "以「某 SDK 將回傳欄位語義改掉卻只升 patch 版，結果下游裝置雖然編譯成功，監控邏輯卻在正式環境悄悄失準。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「承諾邊界、破壞性判定、生態信任」這幾條分析線拆開 語意化版本，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「害怕嚇跑使用者、模糊比較省事」這些反應，說明人為何會在 語意化版本 上滑向看似合理但代價更高的近路。",
+      "applications": "把 語意化版本 拉到 SDK 發布、韌體升版 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把語意化版本理解成『把數字排整齊』，會錯過它真正要維護的是相容性信任。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「我們這次變更到底改動了哪一層承諾，版本號有沒有如實說出來、如果下游只看 release note 和版本號，不進原始碼，能不能判斷這次升版風險」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Semantic Versioning 支撐 語意化版本 的主線，Backward compatibility 補上與「承諾邊界」相關的相鄰脈絡。"
+    }
+  }
+}

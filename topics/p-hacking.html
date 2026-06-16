@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>p-hacking | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-p-hacking">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / research / statistics / selection</p>
+        <h1>p-hacking</h1>
+        <p class="topic-subtitle">p-Hacking</p>
+        <p class="thesis">當人一邊看資料、一邊改切法、停測點、子群體或指標，只要有足夠多次嘗試，原本普通的雜訊也可能被磨成看似有意義的結果。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>看懂為什麼某些看起來『有數據證明』的結論，其實只是被反覆試到剛好顯著。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>研究偏差 / 結果篩選</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Repeatedly slicing data or stopping tests until significance appears</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>檢定次數、停測規則、指標切換、預註冊</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在實驗、A/B test 與內部分析裡更敏感地檢查結果是否經得起設計前承諾。</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>嘗試</span>
+          <span>顯著</span>
+          <span>偽發現</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>不是每個顯著結果都在說話，有些只是被試到剛好浮上來</h2>
+          <p class="section-lede">p-hacking 的力道，不在口號，而在它逼你看見：只要檢定、切法和停點足夠靈活，資料裡總有機會長出一個看似漂亮的顯著結果，即使背後沒有真效應。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>只要檢定、切法和停點足夠靈活，資料裡總有機會長出一個看似漂亮的顯著結果，即使背後沒有真效應。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先分開探索與驗證</strong>
+            <p>探索可以很自由，但若要宣稱結論成立，就應有事前設計或額外驗證。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再讓停測與指標規則前置</strong>
+            <p>很多偽發現就長在『看一眼再改一下』的彈性裡。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後把嘗試次數透明化</strong>
+            <p>看過多少切法、換過多少指標，直接影響結果該被信到什麼程度。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>別先談大詞，先看最小互動怎麼失真</h2>
+          <p class="section-lede">p-hacking 最好先從一個看似普通的分析流程讀起，因為危險往往不是單次造假，而是自由度累加。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>團隊做 A/B test，先看整體沒差，又切新客、切老客、改觀察天數、換指標，最後終於找到一個剛好過門檻的子群體結論。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>難點在於每一步單看都像合理探索，但多步疊起來後，顯著性就不再代表原本以為的那種證據強度。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">反覆嘗試不同切法或停點</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">在雜訊中找到顯著片段</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">把偶然結果包裝成穩定發現</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>p-hacking 的重點不是禁止探索，而是把探索和驗證分開，別讓雜訊穿上『被證明了』的外衣。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>幾個會讓結果分岔的判準</h2>
+          <p class="section-lede">一個結果為什麼會顯著，往往不是只看最後那個數字，而是看它背後到底走過多少條路。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>多重比較</strong>
+            <p>測越多子群、越多指標，越有機會在純雜訊裡挖到顯著。</p>
+          </article>
+          <article class="lens-card">
+            <strong>停測彈性</strong>
+            <p>邊看邊停會讓結果門檻失去原本假設的意義。</p>
+          </article>
+          <article class="lens-card">
+            <strong>敘事包裝</strong>
+            <p>找到結果後再回頭組故事，會讓偶然顯得像原本就該如此。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>制度線索</th>
+                <th>表面上像什麼</th>
+                <th>真正風險</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>事前固定設計</td>
+                <td>探索空間較少</td>
+                <td>但結論的證據解讀比較穩</td>
+              </tr>
+              <tr>
+                <td>邊看邊改</td>
+                <td>更容易找到『有趣結果』</td>
+                <td>卻很可能只是提高假陽性率</td>
+              </tr>
+              <tr>
+                <td>探索後再驗證</td>
+                <td>流程較長</td>
+                <td>能同時保留發現和可信度</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼人和制度會往這裡滑</h2>
+          <p class="section-lede">人遇到沒有故事的結果時，很自然就會想再多看一眼、多切一次，直到資料終於給出想要的訊號。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>結果飢渴</strong>
+            <p>只要很想看到有差異，人就會自然偏好繼續翻資料直到找到什麼。</p>
+          </div>
+          <div class="example">
+            <strong>局部合理化</strong>
+            <p>每一次切群或延長觀察都看起來不離譜，因而更難感受到總體偏差累積。</p>
+          </div>
+          <div class="example">
+            <strong>顯著崇拜</strong>
+            <p>只要出現顯著星號，很多人就會暫時停止再問設計過程。</p>
+          </div>
+        </div>
+        <p class="micro-note">這一段要看的，是 結果飢渴、局部合理化 這類反應如何把 p-hacking 指向的制度壓力在現場放大。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把它帶回管理、政策與組織設計</h2>
+          <p class="section-lede">A/B test、產品分析和研究治理都得防這件事，因為探索一旦假裝成驗證，整個結論就會變形。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>A/B test</strong>
+            <p>在看結果前就先寫下主要指標、觀察窗口與停止規則。</p>
+          </div>
+          <div class="example">
+            <strong>產品分析</strong>
+            <p>探索性切群可以做，但要標清楚是探索而不是已確認結論。</p>
+          </div>
+          <div class="example">
+            <strong>研究報告</strong>
+            <p>把試過多少版本和最後挑哪個版本交代清楚，遠比只秀最好看那張圖誠實。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>A/B test: 先寫停測與主要指標規則。</li>
+          <li>產品分析: 把探索性發現和驗證性結論清楚分欄。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>這個制度概念最常被怎樣誤用</h2>
+          <p class="section-lede">若一開始就把 p-hacking 聽成「所以不能探索資料」，後面連「不是。問題是探索不能直接偽裝成已驗證結論。」這層校正都很難真正進場。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以不能探索資料</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。問題是探索不能直接偽裝成已驗證結論。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要結果顯著就夠了</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>若設計過程高度彈性，顯著性本身的解讀就會大幅鬆動。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>這只是學術界問題</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>商業分析、產品實驗和內部 dashboard 一樣很容易踩到。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>兩個值得帶走的制度問題</h2>
+          </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>這個結果在看資料前就被定義好了，還是看完才挑出來的</strong>
+            <p>這題會直接決定你該給它多少信任。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果把所有試過的切法和指標都攤開，現在這個『顯著結果』還有多特別</strong>
+            <p>答案常比單一報表刺得多。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">交代 p-Hacking 支撐 p-hacking 的主線，Multiple comparisons problem 補上與「多重比較」相關的相鄰脈絡。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>用來支撐反覆切資料、換指標或改停點會製造偽顯著這條主線。</p>
+            <a href="https://en.wikipedia.org/wiki/Data_dredging" target="_blank" rel="noreferrer">p-Hacking</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰脈絡</strong>
+            <p>補上多次嘗試如何提高假陽性風險的相鄰脈絡。</p>
+            <a href="https://en.wikipedia.org/wiki/Multiple_comparisons_problem" target="_blank" rel="noreferrer">Multiple comparisons problem</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>下次你看到一個很漂亮的顯著結果時，先問：這是事前承諾要看的，還是試很多次才終於挑到的？</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

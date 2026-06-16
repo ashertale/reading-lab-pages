@@ -1,0 +1,61 @@
+{
+  "target": {
+    "slug": "small-world-phenomenon",
+    "outputPath": "topics/small-world-phenomenon.html"
+  },
+  "indexEntry": {
+    "id": "small-world-phenomenon",
+    "title": "小世界現象",
+    "subtitle": "Small-World Phenomenon",
+    "href": "./topics/small-world-phenomenon.html",
+    "order": 224,
+    "type": "網路結構 / 傳播路徑",
+    "domain": "社群、組織與資訊流",
+    "focus": "Large networks can still have surprisingly short paths between nodes",
+    "thesis": "即使網路規模很大，節點之間的實際距離也可能比直覺短得多；這讓資訊、影響力與錯誤都能以意外快的方式穿越整張網。",
+    "tags": [
+      "small",
+      "world",
+      "phenomenon",
+      "networks",
+      "spread",
+      "bridges",
+      "social",
+      "diffusion"
+    ]
+  },
+  "page": {
+    "documentTitle": "小世界現象 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-small-world-phenomenon",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / networks / distance / spread</p>\n    <h1>小世界現象</h1>\n    <p class=\"topic-subtitle\">Small-World Phenomenon</p>\n    <p class=\"thesis\">即使網路規模很大，節點之間的實際距離也可能比直覺短得多；這讓資訊、影響力與錯誤都能以意外快的方式穿越整張網。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>看懂為什麼『人很多、層很多』不一定代表距離很遠，也理解這種短路徑如何同時帶來機會與風險。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>網路結構 / 傳播路徑</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Large networks can still have surprisingly short paths between nodes</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>平均路徑長度、橋接節點、群聚、擴散速度</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在組織溝通、社群傳播與平台擴散上更準確地估計影響如何穿網而過。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>節點</span>\n      <span>路徑</span>\n      <span>傳播</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>網路可以很大，但距離未必很遠</h2>\n      <p class=\"section-lede\">小世界現象 的力道，不在口號，而在它逼你看見：只要橋接節點和短路徑夠多，資訊、口碑、恐慌或錯誤就可能比你以為的更快穿過整張網。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>只要橋接節點和短路徑夠多，資訊、口碑、恐慌或錯誤就可能比你以為的更快穿過整張網。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先找橋接節點在哪</strong>\n        <p>不是每個節點都一樣重要，能跨圈連接的人和節點往往最能縮短距離。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再看群聚如何和捷徑並存</strong>\n        <p>網路常同時有強群聚與短路徑，這讓局部文化和全域擴散一起成立。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後用結構思維看傳播</strong>\n        <p>想阻止或加速傳播，常比想像中更需要調整橋接與路徑，而不只是增加公告。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>從最小治理情境看問題怎麼長出來</h2>\n      <p class=\"section-lede\">小世界現象的重點不是大家都彼此認識，而是很遠的地方往往比你以為的更容易被幾個橋接點接起來。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>某個產品缺陷原本只在少數論壇被討論，但因幾個橋接帳號轉貼，很快就傳進大社群、媒體群組與內部客服體系，速度遠超過團隊預估。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於人很容易用行政層級或社群大小想像距離，卻忽略實際網路的捷徑節點。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">網路規模持續擴大</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">少數橋接節點縮短平均距離</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">訊息與影響跨圈傳播速度暴增</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>小世界現象最值得記住的，是大規模和近距離可以同時成立，因此擴散風險與協作機會都會被放大。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>把制度壓力拆成幾條線</h2>\n      <p class=\"section-lede\">一張網可以同時很擠、也很短；真正決定訊息怎麼飛出去的，往往是少數跨圈的橋。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>平均路徑</strong>\n        <p>看似龐大的網路，兩點之間實際可能只差幾個中介。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>橋接角色</strong>\n        <p>跨群節點能顯著加速訊息、信任或錯誤的全網擴散。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>群聚結構</strong>\n        <p>局部圈子維持自己的語言與規範，同時又能被少數橋接點快速連到外部。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>制度線索</th>\n            <th>表面上像什麼</th>\n            <th>真正風險</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>只看行政層級</td>\n            <td>距離看起來很遠</td>\n            <td>容易低估訊息其實能用捷徑快速擴散</td>\n          </tr>\n          <tr>\n            <td>識別橋接節點</td>\n            <td>分析較麻煩</td>\n            <td>卻更能掌握真正的擴散與協作路線</td>\n          </tr>\n          <tr>\n            <td>忽略群聚與捷徑並存</td>\n            <td>故事比較單純</td>\n            <td>最容易誤估危機傳播與文化滲透速度</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>為什麼人和制度會往這裡滑</h2>\n      <p class=\"section-lede\">人對網路距離的直覺通常太線性，容易低估幾個跨圈節點就能把局部事件帶到多遠。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>大網路錯覺</strong>\n        <p>只要群體很大，人就會直覺地把彼此距離想得很遠。</p>\n      </div>\n      <div class=\"example\">\n        <strong>熟圈偏見</strong>\n        <p>待在自己的小圈子裡時，很容易忘記幾個橋接者其實能把圈子迅速打通。</p>\n      </div>\n      <div class=\"example\">\n        <strong>傳播驚訝</strong>\n        <p>人常在事件已經擴散很遠之後，才意識到網路原來比自己想像得更短。</p>\n      </div>\n    </div>\n    <p class=\"micro-note\">這一段要看的，是 大網路錯覺、熟圈偏見 這類反應如何把 小世界現象 指向的制度壓力在現場放大。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>放回真實治理後它會改變什麼</h2>\n      <p class=\"section-lede\">危機傳播、組織協作和社群經營都別只看總量，因為真正有力量的是那幾條捷徑。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>危機傳播</strong>\n        <p>真正要盯的常不是總人數，而是那幾個能把訊息帶出原圈的橋接節點。</p>\n      </div>\n      <div class=\"example\">\n        <strong>組織協作</strong>\n        <p>想加速跨部門資訊流時，建立橋接角色往往比多加一層公告更有效。</p>\n      </div>\n      <div class=\"example\">\n        <strong>社群經營</strong>\n        <p>看懂哪些連接點在縮短距離，就更能預估內容如何突然放大。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>危機傳播: 先找橋接節點而不是只看總聲量。</li>\n      <li>組織協作: 用跨群角色縮短真正重要的路徑。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>幾種常見但危險的治理讀法</h2>\n      <p class=\"section-lede\">若一開始就把 小世界現象 聽成「所以所有人彼此都很近」，後面連「不是。小世界現象談的是平均路徑短，不代表局部差異不存在。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以所有人彼此都很近</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。小世界現象談的是平均路徑短，不代表局部差異不存在。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要路徑短就一定是好事</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>同樣結構也會讓錯誤訊息、恐慌與攻擊更快擴散。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>這只和社交網站有關</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>組織、供應鏈和知識網路一樣會遇到。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>下次做制度選擇前先問這兩句</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>這張網裡真正把不同圈子接起來的是哪些節點</strong>\n        <p>那通常比總節點數更值得先看。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果某個訊息今天開始擴散，最可能靠哪條捷徑穿出原本的局部圈</strong>\n        <p>那是危機與機會都會先經過的路。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Small-world phenomenon 支撐 小世界現象 的主線，Small-world network 補上與「平均路徑」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐大型社會網路仍可能有很短連接路徑這條主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Small-world_experiment\" target=\"_blank\" rel=\"noreferrer\">Small-world phenomenon</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上群聚與短路徑如何並存的相鄰網路脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Small-world_network\" target=\"_blank\" rel=\"noreferrer\">Small-world network</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次你覺得某件事『應該傳不到那麼遠』時，先去找找看：這張網裡有哪些被你忽略的捷徑？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "只要橋接節點和短路徑夠多，資訊、口碑、恐慌或錯誤就可能比你以為的更快穿過整張網。",
+    "smallestScenario": "某個產品缺陷原本只在少數論壇被討論，但因幾個橋接帳號轉貼，很快就傳進大社群、媒體群組與內部客服體系，速度遠超過團隊預估。",
+    "sourcePlan": [
+      "用來支撐大型社會網路仍可能有很短連接路徑這條主線。",
+      "補上群聚與短路徑如何並存的相鄰網路脈絡。"
+    ],
+    "transferTargets": [
+      "危機傳播: 先找橋接節點而不是只看總聲量。",
+      "組織協作: 用跨群角色縮短真正重要的路徑。",
+      "社群經營: 把擴散捷徑視為一等結構變數。"
+    ],
+    "commonMisreading": "把小世界現象誤解成『大家彼此都熟』會太樂觀，它更像是在提醒距離短不代表關係厚。",
+    "readerQuestions": [
+      "這張網裡真正把不同圈子接起來的是哪些節點？那通常比總節點數更值得先看。",
+      "如果某個訊息今天開始擴散，最可能靠哪條捷徑穿出原本的局部圈？那是危機與機會都會先經過的路。"
+    ],
+    "sectionIntents": {
+      "core": "用「網路可以很大，但距離未必很遠」建立本頁的核心張力，先讓讀者看見 只要橋接節點和短路徑夠多，資訊、口碑、恐慌或錯誤就可能比你以為的更快穿過整張網。",
+      "setup": "以「某個產品缺陷原本只在少數論壇被討論，但因幾個橋接帳號轉貼，很快就傳進大社群、媒體群組與內部客服體系，速度遠超過團隊預估。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「平均路徑、橋接角色、群聚結構」這幾條分析線拆開 小世界現象，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「大網路錯覺、熟圈偏見」這些反應，說明人為何會在 小世界現象 上滑向看似合理但代價更高的近路。",
+      "applications": "把 小世界現象 拉到 危機傳播、組織協作 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把小世界現象誤解成『大家彼此都熟』會太樂觀，它更像是在提醒距離短不代表關係厚。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「這張網裡真正把不同圈子接起來的是哪些節點、如果某個訊息今天開始擴散，最可能靠哪條捷徑穿出原本的局部圈」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Small-world phenomenon 支撐 小世界現象 的主線，Small-world network 補上與「平均路徑」相關的相鄰脈絡。"
+    }
+  }
+}

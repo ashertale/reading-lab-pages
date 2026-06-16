@@ -1,0 +1,61 @@
+{
+  "target": {
+    "slug": "motte-and-bailey-fallacy",
+    "outputPath": "topics/motte-and-bailey-fallacy.html"
+  },
+  "indexEntry": {
+    "id": "motte-and-bailey-fallacy",
+    "title": "城堡與外庭謬誤",
+    "subtitle": "Motte-and-Bailey Fallacy",
+    "href": "./topics/motte-and-bailey-fallacy.html",
+    "order": 218,
+    "type": "論證問題 / 立場切換",
+    "domain": "辯論、產品敘事與公共論述",
+    "focus": "Switching between a bold claim and a defensible claim to avoid challenge",
+    "thesis": "有些主張會先用很大、很有擴張力的版本去拿好處，一旦被挑戰，又退回一個較弱、較安全、幾乎沒人反對的版本自保；真正讓人難受的不是弱版本，而是兩者被來回偷換。",
+    "tags": [
+      "motte",
+      "bailey",
+      "fallacy",
+      "arguments",
+      "rhetoric",
+      "claims",
+      "debate",
+      "product-positioning"
+    ]
+  },
+  "page": {
+    "documentTitle": "城堡與外庭謬誤 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-motte-and-bailey-fallacy",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / arguments / rhetoric / positioning</p>\n    <h1>城堡與外庭謬誤</h1>\n    <p class=\"topic-subtitle\">Motte-and-Bailey Fallacy</p>\n    <p class=\"thesis\">有些主張會先用很大、很有擴張力的版本去拿好處，一旦被挑戰，又退回一個較弱、較安全、幾乎沒人反對的版本自保；真正讓人難受的不是弱版本，而是兩者被來回偷換。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>學會辨認一個說法是不是在不同壓力下偷偷換版本，避免和一個永遠會後退的主張纏鬥。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>論證問題 / 立場切換</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Switching between a bold claim and a defensible claim to avoid challenge</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>主張範圍、可防守性、偷換節點、語境切換</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在討論、規格與產品敘事裡更快指出『你現在 defend 的不是你剛剛 claim 的那個』這件事。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>擴張</span>\n      <span>退守</span>\n      <span>偷換</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>最耗人的論戰之一，就是對方永遠有一個更安全的版本可以退回去</h2>\n      <p class=\"section-lede\">這題真正難的地方，不在背立場，而在承認：只要一個人能在擴張主張拿好處、在受挑戰時退回安全版本，他就能同時享受兩個版本的優勢，卻不必承擔一致責任。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>只要一個人能在擴張主張拿好處、在受挑戰時退回安全版本，他就能同時享受兩個版本的優勢，卻不必承擔一致責任。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先把強版本和弱版本分開寫下來</strong>\n        <p>只要版本被拆開，偷換空間就會立刻縮小。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再問剛才拿好處的是哪個版本</strong>\n        <p>如果宣傳、權威或道德壓力靠的是強版本，就不能只用弱版本來防守。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後要求單一責任邊界</strong>\n        <p>主張若要被接受，就應接受它在相同版本下被檢查。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>從最小思想實驗看張力在哪裡</h2>\n      <p class=\"section-lede\">城堡與外庭謬誤要先看到的，不是誰講話大聲，而是主張如何在壓力來時偷偷換殼。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>某團隊先高調宣稱『我們的 AI 會自動理解使用者真正意圖』，被追問失誤與責任邊界時，又退回『我們只是說它能提供一些輔助建議』。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於較弱版本往往本身並不荒唐，所以人很容易在追問過程中忘記最初其實被主張的是更大的版本。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">先提出擴張性很高的主張</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">被質疑時退回安全版本</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">壓力一過又繼續借大版本拿好處</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>城堡與外庭謬誤最重要的識別點，不是某個版本對不對，而是兩個版本是否被偷換來回使用。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>從不同判準看同一題</h2>\n      <p class=\"section-lede\">這種謬誤真正難抓的，不是主張強或弱，而是它在受壓時究竟躲回哪個安全版本。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>擴張版本</strong>\n        <p>外庭通常範圍大、吸引力強，能替說話者拿到注意力或道德位置。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>防守版本</strong>\n        <p>城堡通常較窄、較安全，讓人很難直接反對。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>偷換節點</strong>\n        <p>真正要抓的，是何時從大版本滑回小版本，又何時偷偷滑回去。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>判準</th>\n            <th>它會保住什麼</th>\n            <th>代價</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>主張與防守用同一版本</td>\n            <td>辯論比較辛苦</td>\n            <td>但責任邊界清楚</td>\n          </tr>\n          <tr>\n            <td>主張大、退守小</td>\n            <td>短期很有彈性</td>\n            <td>對話品質和責任界線會一起崩掉</td>\n          </tr>\n          <tr>\n            <td>不追版本切換</td>\n            <td>表面較客氣</td>\n            <td>實際上很容易被牽著在不同命題間繞圈</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>為什麼這題會讓人卡住</h2>\n      <p class=\"section-lede\">人會被這種話術卡住，常因為自己在回應哪個主張這件事已經被對方悄悄改掉。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>大話吸引力</strong>\n        <p>大版本比較容易拿到注意力、認同或權威位置。</p>\n      </div>\n      <div class=\"example\">\n        <strong>退守安全感</strong>\n        <p>一被質疑就退到弱版本，能快速降低被打穿的不適。</p>\n      </div>\n      <div class=\"example\">\n        <strong>旁觀者失焦</strong>\n        <p>若沒有把版本寫清楚，旁觀者很容易只記得最後那個較安全的說法。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>放回真實判斷後它會改變什麼</h2>\n      <p class=\"section-lede\">公共辯論、產品宣稱和內部提案都怕這種切換，因為責任常在最需要釘住時被悄悄抽走。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>產品宣傳</strong>\n        <p>不要讓行銷大話和實際規格邊界在不同場景裡來回切換。</p>\n      </div>\n      <div class=\"example\">\n        <strong>政策辯論</strong>\n        <p>當對方退回安全版時，提醒大家最初被拿來動員的到底是哪一版。</p>\n      </div>\n      <div class=\"example\">\n        <strong>內部提案</strong>\n        <p>把 claim、assumption 和 actual guarantee 分欄，能大幅降低偷換。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>產品敘事: 把宣稱版和保證版拆開寫，避免偷換。</li>\n      <li>政策辯論: 追問最初動員用的是哪一版主張。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>別把它讀成單純表態</h2>\n      <p class=\"section-lede\">若一開始就把 城堡與外庭謬誤 聽成「只要立場有層次就是謬誤」，後面連「不是。問題是層次被偷換使用，而不是本來就有細緻版本。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要立場有層次就是謬誤</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。問題是層次被偷換使用，而不是本來就有細緻版本。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>弱版本就一定不對</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>弱版本可能完全合理，問題在於它不能替強版本背書。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>這只是辯論技巧</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>產品宣稱、政策口號和內部規格常一樣會中。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>下次遇到相似判斷先問這兩句</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>你現在 defend 的這個版本，和你剛剛拿來主張或動員的是同一個版本嗎</strong>\n        <p>這通常是拆掉偷換的第一步。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果只保留你現在這個安全版本，原本那些較大的承諾、聲量或資源還拿得到嗎</strong>\n        <p>若拿不到，偷換大概已經發生。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Motte-and-bailey fallacy 支撐 城堡與外庭謬誤 的主線，Argumentation theory 補上與「擴張版本」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐強主張與弱主張之間被來回偷換的主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Motte-and-bailey_fallacy\" target=\"_blank\" rel=\"noreferrer\">Motte-and-bailey fallacy</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上論證責任與命題一致性如何影響對話品質的相鄰脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Argumentation_theory\" target=\"_blank\" rel=\"noreferrer\">Argumentation theory</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次你覺得某個說法怎麼打都打不到時，先問：是不是因為對方其實一直在換他要 defend 的版本？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "只要一個人能在擴張主張拿好處、在受挑戰時退回安全版本，他就能同時享受兩個版本的優勢，卻不必承擔一致責任。",
+    "smallestScenario": "某團隊先高調宣稱『我們的 AI 會自動理解使用者真正意圖』，被追問失誤與責任邊界時，又退回『我們只是說它能提供一些輔助建議』。",
+    "sourcePlan": [
+      "用來支撐強主張與弱主張之間被來回偷換的主線。",
+      "補上論證責任與命題一致性如何影響對話品質的相鄰脈絡。"
+    ],
+    "transferTargets": [
+      "產品敘事: 把宣稱版和保證版拆開寫，避免偷換。",
+      "政策辯論: 追問最初動員用的是哪一版主張。",
+      "內部提案: 用分欄方式固定 claim 與 guarantee 的邊界。"
+    ],
+    "commonMisreading": "把城堡與外庭謬誤當成『所有保守退回都很可惡』會太粗，它真正關心的是版本偷換。",
+    "readerQuestions": [
+      "你現在 defend 的這個版本，和你剛剛拿來主張或動員的是同一個版本嗎？這通常是拆掉偷換的第一步。",
+      "如果只保留你現在這個安全版本，原本那些較大的承諾、聲量或資源還拿得到嗎？若拿不到，偷換大概已經發生。"
+    ],
+    "sectionIntents": {
+      "core": "用「最耗人的論戰之一，就是對方永遠有一個更安全的版本可以退回去」建立本頁的核心張力，先讓讀者看見 只要一個人能在擴張主張拿好處、在受挑戰時退回安全版本，他就能同時享受兩個版本的優勢，卻不必承擔一致責任。",
+      "setup": "以「某團隊先高調宣稱『我們的 AI 會自動理解使用者真正意圖』，被追問失誤與責任邊界時，又退回『我們只是說它能提供一些輔助建議』。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「擴張版本、防守版本、偷換節點」這幾條分析線拆開 城堡與外庭謬誤，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「大話吸引力、退守安全感」這些反應，說明人為何會在 城堡與外庭謬誤 上滑向看似合理但代價更高的近路。",
+      "applications": "把 城堡與外庭謬誤 拉到 產品敘事、政策辯論 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把城堡與外庭謬誤當成『所有保守退回都很可惡』會太粗，它真正關心的是版本偷換。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「你現在 defend 的這個版本，和你剛剛拿來主張或動員的是同一個版本嗎、如果只保留你現在這個安全版本，原本那些較大的承諾、聲量或資源還拿得到嗎」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Motte-and-bailey fallacy 支撐 城堡與外庭謬誤 的主線，Argumentation theory 補上與「擴張版本」相關的相鄰脈絡。"
+    }
+  }
+}

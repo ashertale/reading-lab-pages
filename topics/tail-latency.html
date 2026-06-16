@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>尾端延遲 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-tail-latency">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / latency / performance / distribution</p>
+        <h1>尾端延遲</h1>
+        <p class="topic-subtitle">Tail Latency</p>
+        <p class="thesis">平均延遲看起來不錯，並不代表體驗真的好；只要最慢那一小撮請求夠慢、夠常在關鍵路徑上出現，它們就會支配整體使用者感受與上層服務表現。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>把效能從平均值拉回分布，分清楚為什麼『只有少數很慢』也可能已經足以拖垮整體體驗。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>效能概念 / 分布風險</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>A small fraction of slow requests can dominate perceived performance at scale</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>分位數、關鍵路徑、扇出請求、尾端放大</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在服務設計、監控與壓測時更早把尾端行為當成一等風險。</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>平均</span>
+          <span>尾端</span>
+          <span>體感</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>少數很慢，不代表影響很小</h2>
+          <p class="section-lede">這個工程概念會一直被拿出來講，是因為 只要系統的關鍵路徑會碰到很多子請求，再少量的慢尾也會被上層聚合成顯著的整體卡頓。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>只要系統的關鍵路徑會碰到很多子請求，再少量的慢尾也會被上層聚合成顯著的整體卡頓。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先看分位數而不是只看平均</strong>
+            <p>平均值會把真正讓人痛的慢尾洗平。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再看關鍵路徑扇出</strong>
+            <p>上層一次要等越多子請求，越容易被任何一個尾端拖住。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後設計尾端對策</strong>
+            <p>隔離、超時、快取、hedging 與資源保護，都是對付慢尾的工具。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>把問題放回一個小型系統</h2>
+          <p class="section-lede">尾端延遲最該先看的不是平均數，而是那些本來占比不高的慢請求怎麼在扇出後變成主角。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>一個頁面要並行打十個後端；每個後端只有少數請求很慢，但十個相乘後，使用者遇到慢頁的機率遠比單個服務看起來高得多。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>難點在於平均數很平滑，會讓團隊誤以為少數慢請求只是瑕疵，而不是體驗主因。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">單點服務存在少量慢尾</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">上層聚合許多子請求</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">慢尾被關鍵路徑放大成整體卡頓</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>尾端延遲真正提醒你的是：規模一上來，最慢的那群往往比平均值更值得被盯住。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>把設計張力拆成幾條線來看</h2>
+          <p class="section-lede">平均數會把慢尾藏起來，但使用者碰到的是整條鏈路裡最慢那一截。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>分布尾端</strong>
+            <p>少數極慢請求雖然不多，卻可能決定整體體感。</p>
+          </article>
+          <article class="lens-card">
+            <strong>扇出放大</strong>
+            <p>多個子請求並行時，『碰到至少一個慢的』機率會快速上升。</p>
+          </article>
+          <article class="lens-card">
+            <strong>資源競爭</strong>
+            <p>慢尾常不是單一 bug，而是排隊、干擾與資源抖動共同造成。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>判準</th>
+                <th>當下看起來像什麼</th>
+                <th>真正代價</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>只看平均延遲</td>
+                <td>報表很漂亮</td>
+                <td>卻可能完全看不見使用者真的在等什麼</td>
+              </tr>
+              <tr>
+                <td>盯高分位數</td>
+                <td>資料看起來比較刺眼</td>
+                <td>卻更接近真實體感與關鍵路徑風險</td>
+              </tr>
+              <tr>
+                <td>忽略扇出效應</td>
+                <td>單服務評估較簡單</td>
+                <td>一到整體服務就會低估慢尾放大</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>這個工程判斷抓住了哪種順手誘惑</h2>
+          <p class="section-lede">平均值特別會讓人鬆懈，因為它把那些偶爾很慢但足以毀掉整體感受的點藏進漂亮數字裡。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>平均數安慰</strong>
+            <p>平均值低會讓人覺得大致沒事，即使尾端其實已經在傷害體驗。</p>
+          </div>
+          <div class="example">
+            <strong>少數忽略</strong>
+            <p>聽到『只有幾個很慢』時，大腦自然會把它當成可忽略的角落。</p>
+          </div>
+          <div class="example">
+            <strong>局部視角</strong>
+            <p>每個服務團隊都看自己的慢尾不多，卻不容易一起看到上層聚合後的放大。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>工程現場最常用到它的地方</h2>
+          <p class="section-lede">服務監控、頁面聚合和效能優化真正該盯的，是哪個慢尾會先把整體體感拖下去。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>服務監控</strong>
+            <p>把 P95、P99 和關鍵路徑上的慢尾同時盯住，不要只看平均。</p>
+          </div>
+          <div class="example">
+            <strong>扇出設計</strong>
+            <p>若單個畫面或流程要打很多下游，就要預設尾端會被放大。</p>
+          </div>
+          <div class="example">
+            <strong>效能優化</strong>
+            <p>不是所有快取都為了拉平均，有些是專門為了壓低最慢那群。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>監控設計: 把高分位數視為核心體驗指標之一。</li>
+          <li>扇出架構: 假設慢尾會被並行依賴放大，而不是平均抵消。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>幾種很快但不夠準的讀法</h2>
+          <p class="section-lede">若一開始就把 尾端延遲 聽成「所以平均值完全沒用」，後面連「不是。平均仍有用，只是不能拿它替代分布尾端。」這層校正都很難真正進場。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以平均值完全沒用</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。平均仍有用，只是不能拿它替代分布尾端。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要盯 P99 就夠了</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>若不知道慢尾怎麼進入關鍵路徑，單看指標仍可能修不到要害。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>尾端延遲只是大型網路服務問題</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>任何有多步驟依賴或排隊競爭的系統都可能被它咬。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>兩個值得帶走的工程問題</h2>
+          </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>這個流程裡，最容易把少量慢尾放大成整體卡頓的扇出點在哪</strong>
+            <p>先找到它，優化才不會只修表面。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果今天平均延遲不動，但 P99 惡化很多，使用者最可能先在哪裡感到差</strong>
+            <p>這常比平均圖更值得先看。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">交代 The Tail at Scale 支撐 尾端延遲 的主線，Latency 補上與「分布尾端」相關的相鄰脈絡。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>用來支撐少量慢請求在大規模服務裡如何主導整體體驗的主線。</p>
+            <a href="https://research.google/pubs/the-tail-at-scale/" target="_blank" rel="noreferrer">The Tail at Scale</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰脈絡</strong>
+            <p>補上延遲分布與系統效能判讀的相鄰脈絡。</p>
+            <a href="https://en.wikipedia.org/wiki/Latency_(engineering)" target="_blank" rel="noreferrer">Latency</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>下次平均延遲看起來還行時，順手再打開高分位圖看一眼：真正讓人痛的會不會其實都躲在尾端？</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

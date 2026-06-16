@@ -1,0 +1,59 @@
+{
+  "target": {
+    "slug": "groupthink",
+    "outputPath": "topics/groupthink.html"
+  },
+  "indexEntry": {
+    "id": "groupthink",
+    "title": "團體迷思",
+    "subtitle": "Groupthink",
+    "href": "./topics/groupthink.html",
+    "order": 213,
+    "type": "群體偏差 / 決策失真",
+    "domain": "團隊決策與會議文化",
+    "focus": "Groups can trade critical evaluation for harmony and confidence",
+    "thesis": "群體並不是人越多就自然更聰明；當維持和諧、速度或一致信心被看得太重時，群體反而會更難看見明顯漏洞。",
+    "tags": [
+      "groupthink",
+      "meetings",
+      "consensus",
+      "critique",
+      "teams",
+      "decision-making"
+    ]
+  },
+  "page": {
+    "documentTitle": "團體迷思 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-groupthink",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / teams / consensus / critique</p>\n    <h1>團體迷思</h1>\n    <p class=\"topic-subtitle\">Groupthink</p>\n    <p class=\"thesis\">群體並不是人越多就自然更聰明；當維持和諧、速度或一致信心被看得太重時，群體反而會更難看見明顯漏洞。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>看懂為什麼有些看似高共識、高效率的會議，其實正是壞決策最容易長出來的地方。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>群體偏差 / 決策失真</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Groups can trade critical evaluation for harmony and confidence</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>異議空間、領導壓力、同質性、自我審查</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在會議、評審與跨部門合作中更早識別『和諧吃掉質疑』的信號。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>和諧</span>\n      <span>盲點</span>\n      <span>群體</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>很多群體失誤不是因為沒人有答案，而是因為沒人願意把答案講破</h2>\n      <p class=\"section-lede\">這種偏差之所以頑固，是因為 只要維持一致的壓力大過檢查想法的壓力，群體就會開始把保留吞回去，把信心推高，把漏洞留到事後才看見。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>只要維持一致的壓力大過檢查想法的壓力，群體就會開始把保留吞回去，把信心推高，把漏洞留到事後才看見。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先替異議留制度空間</strong>\n        <p>沒有明確的反方角色與低風險反對入口，異議很容易先在腦中就被消音。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再區分速度和深度</strong>\n        <p>會議很快結束不代表決策品質高，可能只是質疑沒有成功進場。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後讓信心接受獨立檢查</strong>\n        <p>越是全場都很有把握的案子，越值得安排外部或逆風審查。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>從最小日常場景看偏差怎麼啟動</h2>\n      <p class=\"section-lede\">團體迷思不是一群人突然變笨，而是保留意見開始沒有安全出口的那個時刻。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>設計評審裡大家都知道時程很緊、方案也有洞，但因為負責人態度很強、全場又想趕快過關，最後只留下看起來一致的支持紀錄。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於團體迷思在當下常看起來像效率、默契與高信心，而不是像偏差。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">維持和諧與速度的壓力升高</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">異議開始自我審查</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">群體信心上升但檢查深度下降</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>團體迷思真正可怕的地方，不是大家意見一樣，而是不同意見在還來不及被檢查時就先消失了。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>別讓一個標籤吃掉整個機制</h2>\n      <p class=\"section-lede\">這裡把一致壓力、異議成本和風險檢查拆開，因為共識出錯通常不是單一人格問題。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>自我審查</strong>\n        <p>成員會先在心裡把保留過濾掉，避免破壞氣氛或招來負面標籤。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>領導影子</strong>\n        <p>只要權威立場太早太強，整場討論就更容易往確認而非檢查滑去。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>一致幻覺</strong>\n        <p>沒人反對常被當成全體認同，反而進一步壓低剩餘異議的存活機會。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>心理拉力</th>\n            <th>當下看起來像什麼</th>\n            <th>代價</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>高和諧但低異議</td>\n            <td>會議很順</td>\n            <td>決策盲點往往最難在當下被看見</td>\n          </tr>\n          <tr>\n            <td>刻意保留反方檢查</td>\n            <td>過程較慢較吵</td>\n            <td>卻較能提早抓出群體正在共同忽略的東西</td>\n          </tr>\n          <tr>\n            <td>領導先表態太滿</td>\n            <td>方向很清楚</td>\n            <td>其他人的校正功能很容易一起失效</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>大腦為什麼會把這條近路誤認成好判斷</h2>\n      <p class=\"section-lede\">只要場面明顯偏向某個答案，人就會先算說出反話的社會代價，再算那個反話本身對不對。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>歸屬需求</strong>\n        <p>人自然不想成為那個破壞氣氛的人，尤其在高壓時刻更是如此。</p>\n      </div>\n      <div class=\"example\">\n        <strong>一致安全感</strong>\n        <p>只要大家看起來一致，群體就會主觀感到比較安全。</p>\n      </div>\n      <div class=\"example\">\n        <strong>責任稀釋</strong>\n        <p>群體裡做錯時，個體較容易覺得『應該不是只有我沒看見』。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>放回真實現場後它會改變什麼</h2>\n      <p class=\"section-lede\">回到設計評審、跨部門會議與高壓時程，這個概念能幫你看見哪裡正在把檢查能力換成表面整齊。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>設計評審</strong>\n        <p>指派反方或預先匿名收保留意見，常比現場即興問『有人有問題嗎』更有用。</p>\n      </div>\n      <div class=\"example\">\n        <strong>事故前檢討</strong>\n        <p>越是大家都覺得方向對時，越值得安排一輪 premortem 或外部檢查。</p>\n      </div>\n      <div class=\"example\">\n        <strong>跨部門決策</strong>\n        <p>讓不同部門先各自寫下主要風險，再合併討論，能降低現場從眾壓力。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>會議設計: 用流程保護異議，而不是只問一句『有人反對嗎』。</li>\n      <li>評審文化: 讓高信心提案接受外部或逆風檢查。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>這個偏差最常被怎樣誤解</h2>\n      <p class=\"section-lede\">若一開始就把 團體迷思 聽成「所以共識都很危險」，後面連「不是。問題不在有共識，而在共識是不是經過足夠異議與檢查。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以共識都很危險</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。問題不在有共識，而在共識是不是經過足夠異議與檢查。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要有人唱反調就不會團體迷思</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>若反對沒有制度支撐，很容易被快速消化掉。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>這是團隊感情太好才會發生</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>高壓、權威強和目標緊迫的團隊同樣容易中。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>兩個值得帶走的校正問題</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>現在這個場面裡，誰最可能其實有保留但最不敢講</strong>\n        <p>那個位置通常最值得被主動保護。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果今天一定要有人當反方，我們最希望他挑哪一種洞</strong>\n        <p>先把這題說清，檢查才有入口。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Groupthink 支撐 團體迷思 的主線，Premortem 補上與「自我審查」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐群體為了和諧與一致而犧牲批判檢查的主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Groupthink\" target=\"_blank\" rel=\"noreferrer\">Groupthink</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上群體決策裡如何刻意為異議與風險想像開入口的相鄰脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Premortem\" target=\"_blank\" rel=\"noreferrer\">Premortem</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次會議太順時，別急著高興，先問：是方向真的好，還是反方還沒被允許進場？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "只要維持一致的壓力大過檢查想法的壓力，群體就會開始把保留吞回去，把信心推高，把漏洞留到事後才看見。",
+    "smallestScenario": "設計評審裡大家都知道時程很緊、方案也有洞，但因為負責人態度很強、全場又想趕快過關，最後只留下看起來一致的支持紀錄。",
+    "sourcePlan": [
+      "用來支撐群體為了和諧與一致而犧牲批判檢查的主線。",
+      "補上群體決策裡如何刻意為異議與風險想像開入口的相鄰脈絡。"
+    ],
+    "transferTargets": [
+      "會議設計: 用流程保護異議，而不是只問一句『有人反對嗎』。",
+      "評審文化: 讓高信心提案接受外部或逆風檢查。",
+      "跨部門合作: 先收斂風險清單，再收斂方向。"
+    ],
+    "commonMisreading": "把團體迷思等同於『大家感情太好』會太淺，它更關乎異議如何被結構性地吃掉。",
+    "readerQuestions": [
+      "現在這個場面裡，誰最可能其實有保留但最不敢講？那個位置通常最值得被主動保護。",
+      "如果今天一定要有人當反方，我們最希望他挑哪一種洞？先把這題說清，檢查才有入口。"
+    ],
+    "sectionIntents": {
+      "core": "用「很多群體失誤不是因為沒人有答案，而是因為沒人願意把答案講破」建立本頁的核心張力，先讓讀者看見 只要維持一致的壓力大過檢查想法的壓力，群體就會開始把保留吞回去，把信心推高，把漏洞留到事後才看見。",
+      "setup": "以「設計評審裡大家都知道時程很緊、方案也有洞，但因為負責人態度很強、全場又想趕快過關，最後只留下看起來一致的支持紀錄。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「自我審查、領導影子、一致幻覺」這幾條分析線拆開 團體迷思，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「歸屬需求、一致安全感」這些反應，說明人為何會在 團體迷思 上滑向看似合理但代價更高的近路。",
+      "applications": "把 團體迷思 拉到 會議設計、評審文化 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把團體迷思等同於『大家感情太好』會太淺，它更關乎異議如何被結構性地吃掉。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「現在這個場面裡，誰最可能其實有保留但最不敢講、如果今天一定要有人當反方，我們最希望他挑哪一種洞」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Groupthink 支撐 團體迷思 的主線，Premortem 補上與「自我審查」相關的相鄰脈絡。"
+    }
+  }
+}

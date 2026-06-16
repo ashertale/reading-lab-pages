@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>框架問題 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-frame-problem">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / ai / reasoning / relevance</p>
+        <h1>框架問題</h1>
+        <p class="topic-subtitle">Frame Problem</p>
+        <p class="thesis">真正困難的不是讓系統知道某個行動會改變什麼，而是讓它知道其他幾乎所有沒變的東西不必每次都重算一遍。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>分清楚『知道會變什麼』和『知道其他什麼不必重新想』之間的差別，避免低估常識推理的成本。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>AI 哲學 / 行動表徵</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>How to know what stays relevant when something changes</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>狀態更新、相關性判斷、常識背景、計算成本</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能看見為什麼世界更新與相關性篩選，是很多 AI 與工具系統難做穩的根部問題。</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>行動</span>
+          <span>相關</span>
+          <span>更新</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>最難的常不是要加進新資訊，而是要排除海量其實不用重算的舊資訊</h2>
+          <p class="section-lede">很多人以為 框架問題 只是理論爭辯；真正卡人的地方，是 只要系統得在真實世界裡行動，它就必須判斷哪些後果重要、哪些背景維持不變；這件事遠比列出單一規則難得多。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>只要系統得在真實世界裡行動，它就必須判斷哪些後果重要、哪些背景維持不變；這件事遠比列出單一規則難得多。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先問行動之後哪些變化真的重要</strong>
+            <p>如果所有可能後果都一視同仁，系統會被自己要更新的世界壓垮。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再問哪些背景可暫時視為穩定</strong>
+            <p>常識推理的核心之一，就是知道哪些東西暫時不用重算。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後承認相關性不是免費的</strong>
+            <p>只要場景稍微複雜，相關性篩選本身就會成為主要難題。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>從最小思想實驗開始</h2>
+          <p class="section-lede">框架問題真正麻煩的不是列規則，而是世界一動起來之後，你還得知道哪些東西根本不用跟著重算。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>機器人把杯子從桌上移到架上後，系統不只要知道杯子位置變了，還要知道房間牆壁、燈光、其他家具大多沒變，否則推理成本會立刻爆炸。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>難點在於人類對『哪些東西大致維持原樣』幾乎是無感完成，所以很容易低估那其實是巨大背景知識工程。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">執行一個行動</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">世界裡有些事情變了</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">系統還得知道更多事情其實沒變</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>框架問題不是小小的邏輯瑕疵，而是任何想在真實世界裡持續行動的系統都得面對的相關性管理。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>真正有差別的是你保住哪個判準</h2>
+          <p class="section-lede">困難不在寫出規則，而在每次世界有事發生時，系統要知道哪些後果值得追、哪些背景其實根本沒動。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>世界更新</strong>
+            <p>行動不只產生主效果，還牽動系統要如何維護對世界狀態的整體描述。</p>
+          </article>
+          <article class="lens-card">
+            <strong>相關性篩選</strong>
+            <p>真正昂貴的不是列出所有事實，而是知道在此刻哪些事實值得被重新帶進來。</p>
+          </article>
+          <article class="lens-card">
+            <strong>常識背景</strong>
+            <p>人類習以為常的背景穩定性，對系統卻常是需要被明示或學會的能力。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>分析線</th>
+                <th>它先保住什麼</th>
+                <th>會放掉什麼</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>只列主要效果</td>
+                <td>規則看起來很乾淨</td>
+                <td>一進複雜環境就不知道哪些背景仍成立</td>
+              </tr>
+              <tr>
+                <td>每次重算所有狀態</td>
+                <td>理論上完整</td>
+                <td>計算與表示成本會迅速失控</td>
+              </tr>
+              <tr>
+                <td>有選擇地維護背景</td>
+                <td>設計較麻煩</td>
+                <td>卻比較接近真實世界裡可持續運作的推理</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>人為什麼會在這裡混用兩套標準</h2>
+          <p class="section-lede">人之所以常低估這題，是因為對我們來說『大部分東西都沒變』太自然，反而不容易看見那是巨大能力。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>常識透明錯覺</strong>
+            <p>人類太習慣自動忽略不重要變化，所以會低估這份篩選本身的難度。</p>
+          </div>
+          <div class="example">
+            <strong>規則幻覺</strong>
+            <p>只要主效果規則寫得很清楚，人就容易誤以為世界更新問題已經解決。</p>
+          </div>
+          <div class="example">
+            <strong>背景失聲</strong>
+            <p>那些沒有變的東西因為不吵不鬧，反而最容易在設計時被完全忘記。</p>
+          </div>
+        </div>
+        <p class="micro-note">這段不是替 框架問題 選立場，而是讓 常識透明錯覺、規則幻覺 這類直覺如何混掉前提與標準變得可見。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>把它帶回 AI、模型與工具設計</h2>
+          <p class="section-lede">狀態管理、規則引擎和機器人規劃都會在這裡卡住，因為重算太多和假設不變都同樣危險。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>代理工具設計</strong>
+            <p>任何會根據使用者動作持續維護狀態的工具，都得想清楚哪些上下文該保留、哪些該重算。</p>
+          </div>
+          <div class="example">
+            <strong>機器人任務規劃</strong>
+            <p>真實環境中的相關性判斷，常比單一步驟規劃更難。</p>
+          </div>
+          <div class="example">
+            <strong>事件驅動系統</strong>
+            <p>系統收到新事件時，哪些快取、規則和衍生狀態真的需要更新，這就是工程版的框架問題。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>狀態管理: 別讓每次事件都把整個世界重算一遍。</li>
+          <li>規則引擎: 先定義哪些背景前提該維持、哪些事件會真正使其失效。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>幾種看起來乾脆但其實偷換前提的讀法</h2>
+          <p class="section-lede">若一開始就把 框架問題 聽成「這只是早期 AI 的理論麻煩」，後面連「任何要在狀態豐富世界裡持續推理的系統，都還會遇到它。」這層校正都很難真正進場。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>這只是早期 AI 的理論麻煩</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>任何要在狀態豐富世界裡持續推理的系統，都還會遇到它。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要更多算力就能硬解</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>算力能幫忙，但不會自動告訴你什麼相關、什麼可忽略。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只跟機器人有關</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>介面狀態管理、快取更新與規則引擎一樣在面對相同結構。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>把它變成下一次判斷前的追問</h2>
+          </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>我們現在的系統，每次收到新事件後到底重算了哪些其實不必重算的東西</strong>
+            <p>那往往就是可見的工程摩擦來源。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>哪些背景前提正在默默被假設成不變，但其實偶爾會變</strong>
+            <p>那常是最危險、也最難 debug 的地方。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">交代 Frame problem 支撐 框架問題 的主線，Common-sense reasoning 補上與「世界更新」相關的相鄰脈絡。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>用來支撐行動後如何判斷哪些狀態需要更新、哪些背景維持不變的主線。</p>
+            <a href="https://en.wikipedia.org/wiki/Frame_problem" target="_blank" rel="noreferrer">Frame problem</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰脈絡</strong>
+            <p>補上相關性判斷與日常背景知識為何會成為 AI 推理的相鄰難題。</p>
+            <a href="https://en.wikipedia.org/wiki/Common_sense_reasoning" target="_blank" rel="noreferrer">Common-sense reasoning</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>下次看到一個因事件更新而越來越慢的系統時，試著問：它是不是在工程上重新上演框架問題？</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

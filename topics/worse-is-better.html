@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>更差反而更好 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-worse-is-better">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / design / tradeoffs / adoption</p>
+        <h1>更差反而更好</h1>
+        <p class="topic-subtitle">Worse Is Better</p>
+        <p class="thesis">一個設計如果夠簡單、夠容易實作、夠容易被帶出去活下來，它有時會比內部更一致、理論更漂亮的設計更快勝出；不是因為它真更好，而是因為它更容易活。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>分清楚一個系統『設計比較漂亮』和『比較容易被採用』為什麼常不是同一條線。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>設計哲學 / 取捨策略</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Simple, rough designs can spread faster than more internally elegant ones</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>簡單性、一致性、可實作性、擴散速度</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在產品策略與工程取捨裡更誠實地面對『可活下來』和『很優雅』之間的拉扯。</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>簡單</span>
+          <span>存活</span>
+          <span>擴散</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>有些系統不是因為最漂亮才贏，而是因為最容易先活下來</h2>
+          <p class="section-lede">這個工程概念會一直被拿出來講，是因為 當簡單性、實作速度與一致性拉扯時，較粗糙但更容易普及的方案常會先取得生態優勢。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>當簡單性、實作速度與一致性拉扯時，較粗糙但更容易普及的方案常會先取得生態優勢。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先分開設計美感和擴散條件</strong>
+            <p>一個內部更漂亮的系統，不一定比較容易被安裝、理解與接上現場。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再看哪些摩擦最決定存活</strong>
+            <p>部署難度、學習成本和相容性，常比理論一致性更早決定誰先活下來。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後決定你要贏哪種戰場</strong>
+            <p>如果目標是普及，就得正視存活條件；如果目標是核心品質，也要承認擴散可能慢。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>從最小可運作場景開始</h2>
+          <p class="section-lede">更差反而更好之所以常讓人不舒服，是因為它逼你承認設計優雅和生態存活不一定走同一條路。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>團隊有一個架構更一致的內部工具，但另一個功能比較少、接口比較醜的版本因為更好裝、更好接，反而先被整個組織用起來。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>難點在於工程師常直覺地把內部美感和外部存活能力綁在一起，現實卻未必如此。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">兩種設計各有優劣</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">較簡單可活的版本先被採用</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">生態優勢反過來鞏固原本較粗糙的選擇</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>更差反而更好不是在歌頌粗糙，而是在提醒你：生態採用和內部優雅是兩種不同勝利條件。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>幾條真正有用的工程判準</h2>
+          <p class="section-lede">有時先活下來的不是最漂亮的設計，而是那個讓別人最少卡關的版本。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>簡單性</strong>
+            <p>簡單不只是功能少，也包含實作、理解與接入門檻較低。</p>
+          </article>
+          <article class="lens-card">
+            <strong>一致性</strong>
+            <p>理論上更整齊的設計，未必在現場更容易被使用者完整接住。</p>
+          </article>
+          <article class="lens-card">
+            <strong>生態滾動</strong>
+            <p>一旦某方案先被廣泛採用，周邊工具、文件與習慣也會一起替它加分。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>判準</th>
+                <th>當下看起來像什麼</th>
+                <th>真正代價</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>內部設計較優雅</td>
+                <td>原則很整齊</td>
+                <td>若導入摩擦高，可能很難先活進生態</td>
+              </tr>
+              <tr>
+                <td>功能較少但容易用</td>
+                <td>看起來沒那麼漂亮</td>
+                <td>卻可能因採用速度快而先取得地盤</td>
+              </tr>
+              <tr>
+                <td>忽略擴散條件</td>
+                <td>工程上比較舒服</td>
+                <td>產品與生態上可能輸得很早</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼團隊容易在這裡失手</h2>
+          <p class="section-lede">人很容易替自己喜歡的設計加上道德分數，於是忽略了別人其實只是在選更容易用的工具。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>優雅偏愛</strong>
+            <p>做得漂亮會讓工程師很有成就感，也更容易低估導入端的摩擦。</p>
+          </div>
+          <div class="example">
+            <strong>先活下來效應</strong>
+            <p>一旦某方案先到位，人就會自然替它補文件、補教學、補依賴。</p>
+          </div>
+          <div class="example">
+            <strong>粗糙羞恥</strong>
+            <p>承認『這個比較醜但比較能活』對很多團隊來說情感上很難。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>工程現場最常用到它的地方</h2>
+          <p class="section-lede">工具推廣、API 設計和產品策略都會被這個現象提醒：採用摩擦本身就是競爭條件。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>內部工具推廣</strong>
+            <p>先讓最少阻力版本活進日常，再逐步把一致性和完整性往回補。</p>
+          </div>
+          <div class="example">
+            <strong>API 設計</strong>
+            <p>一個容易接上的窄接口，常比大而全但進入成本高的接口更容易長出生態。</p>
+          </div>
+          <div class="example">
+            <strong>產品策略</strong>
+            <p>別只問哪個設計更完美，也要問哪個版本比較可能先被真正用起來。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>工具推廣: 別忽視安裝、學習與接入門檻對存活的影響。</li>
+          <li>API 設計: 有時窄而可用比大而全更容易長出生態。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>這個概念最常被怎樣讀歪</h2>
+          <p class="section-lede">若一開始就把 更差反而更好 聽成「所以粗糙永遠會贏」，後面連「不是。它只是在提醒擴散條件很重要，不是說品質可以永久被忽略。」這層校正都很難真正進場。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以粗糙永遠會贏</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。它只是在提醒擴散條件很重要，不是說品質可以永久被忽略。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要先活就不用再修</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>很多粗糙勝出的系統若不持續補課，最終也會被自己的債反咬。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>這代表優雅沒有價值</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>優雅依然重要，只是它未必是最先決定生死的因子。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>把它變成下一次重構前的追問</h2>
+          </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>我們現在比較在乎的是內部一致性，還是讓方案先活進更多使用場景</strong>
+            <p>先說清楚，取捨才不會假裝沒有代價。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>若這個設計真的比較漂亮，它卡在現場的最大摩擦是什麼，能不能先拆掉那個摩擦</strong>
+            <p>很多好設計輸的其實不是原理。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">交代 Worse is better 支撐 更差反而更好 的主線，Unix philosophy 補上與「簡單性」相關的相鄰脈絡。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>用來支撐較簡單、較容易實作的設計有時會比更優雅設計更快擴散的主線。</p>
+            <a href="https://en.wikipedia.org/wiki/Worse_is_better" target="_blank" rel="noreferrer">Worse is better</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰脈絡</strong>
+            <p>補上簡單、可組合與能活下來的設計文化相鄰脈絡。</p>
+            <a href="https://en.wikipedia.org/wiki/Unix_philosophy" target="_blank" rel="noreferrer">Unix philosophy</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>下次你很想證明自己的方案更漂亮時，先問一句：它也比較容易活下來嗎？</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

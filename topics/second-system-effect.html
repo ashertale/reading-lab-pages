@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第二系統效應 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-second-system-effect">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / architecture / iteration / scope</p>
+        <h1>第二系統效應</h1>
+        <p class="topic-subtitle">Second-System Effect</p>
+        <p class="thesis">第一版留下的遺憾，常會讓團隊在第二版把所有想補的東西一次塞進去，最後反而做出更難收斂的系統。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>看清楚第二版為什麼特別容易長胖，並分辨哪些補償真的必要、哪些只是報復性加料。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>架構風險 / 過度設計</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>The second version grows bloated because the first had painful limits</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>補償性設計、範圍膨脹、抽象衝動、驗證節點</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在大改版、第二代平台或新框架設計時提早阻止 scope 爆開。</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>補償</span>
+          <span>膨脹</span>
+          <span>失控</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>第一版的痛，常會在第二版變成過量補償</h2>
+          <p class="section-lede">這個工程概念會一直被拿出來講，是因為 當團隊終於有機會重做時，最容易發生的不是更精準的修補，而是把多年積怨一次全塞進去。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>當團隊終於有機會重做時，最容易發生的不是更精準的修補，而是把多年積怨一次全塞進去。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先分清修補與報復</strong>
+            <p>真正值得優先修的是第一版反覆咬人的瓶頸，不是每一個曾讓人不爽的地方都同等重要。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>保留可驗證階段</strong>
+            <p>第二版若沒有中途能落地的切片，最後很容易只剩一個不斷延後的宏大承諾。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>替額外抽象設成本上限</strong>
+            <p>每多一層通用化都應該回答：它現在解了哪個真問題，而不是只是避免未來想像中的不優雅。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>先看現場最早卡住的地方</h2>
+          <p class="section-lede">第二系統效應不是抽象警語，它通常從「這次終於可以把所有怨氣一次補回來」的時刻開始。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>團隊做完第一版 OTA 工具後，第二版打算一次納入多租戶、離線同步、規則引擎、可視化編輯與策略回滾，結果半年後連基本更新流程都還沒重新打通。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>難點不是功能想像力不夠，而是太多『這次順便一起做』會讓系統失去可驗證節點。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">第一版留下很多遺憾</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">第二版想一次補齊全部</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">範圍與抽象一起失控</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>第二系統效應不是說不要重做，而是提醒你：第二版最大的風險，往往是把修補變成報復性膨脹。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>幾條真正有用的工程判準</h2>
+          <p class="section-lede">這裡要分開看補償衝動、範圍膨脹和里程碑設計，因為第二版失控很少只是一個原因。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>補償衝動</strong>
+            <p>這次加的能力究竟是在修真實痛點，還是在宣洩第一版當年的挫折。</p>
+          </article>
+          <article class="lens-card">
+            <strong>驗證節點</strong>
+            <p>第二版有沒有任何階段能先證明核心路徑更穩，而不是要等全部做完才知道成敗。</p>
+          </article>
+          <article class="lens-card">
+            <strong>抽象負債</strong>
+            <p>通用化越早、越廣，越可能在還沒被需求證明前就把未來變更綁死。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>判準</th>
+                <th>當下看起來像什麼</th>
+                <th>真正代價</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>只修核心痛點</td>
+                <td>範圍看起來比較保守</td>
+                <td>卻更容易拿到早期驗證與可用改進</td>
+              </tr>
+              <tr>
+                <td>把所有遺憾一次補齊</td>
+                <td>藍圖很療癒</td>
+                <td>核心路徑可能遲遲無法重建</td>
+              </tr>
+              <tr>
+                <td>過早做通用框架</td>
+                <td>看似未來很省</td>
+                <td>實際常把還不穩定的需求過早凍結</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>這個工程判斷抓住了哪種順手誘惑</h2>
+          <p class="section-lede">人對第二版特別寬容，因為第一版的痛點都還在記憶裡，於是每個新增需求都像正義。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>補償快感</strong>
+            <p>第一版的委屈會讓人對第二版有很強的『這次一定要做完整』衝動。</p>
+          </div>
+          <div class="example">
+            <strong>歷史記憶放大</strong>
+            <p>團隊會把最痛的少數事件記得很深，於是高估那些能力在新版本裡的即時必要性。</p>
+          </div>
+          <div class="example">
+            <strong>重做幻覺</strong>
+            <p>很多人以為既然都重做了，就該一次解決未來三年的問題，結果反而連今年的問題都沒先解掉。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>放回真實系統後它會改變什麼</h2>
+          <p class="section-lede">回到平台重做、協議翻修與工具換代，這個概念最能幫你砍掉那些暫時還養不起的理想功能。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>第二代平台</strong>
+            <p>先替第一版最昂貴的維運摩擦開刀，而不是急著把每一個『這次也順便』都包進來。</p>
+          </div>
+          <div class="example">
+            <strong>韌體協議改版</strong>
+            <p>把格式清理、錯誤模型收斂與實際互通問題排前面，比先做超完整擴充欄位更有價值。</p>
+          </div>
+          <div class="example">
+            <strong>內部工具重寫</strong>
+            <p>讓最常被用的工作流先重新跑通，再決定哪些低頻能力真的值得長回來。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>第二代平台: 先修最昂貴的痛點，而不是一次補完全部理想。</li>
+          <li>協議重寫: 優先重建穩定核心路徑，再逐步長回擴充能力。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>幾種很快但不夠準的讀法</h2>
+          <p class="section-lede">若一開始就把 第二系統效應 聽成「所以第二版都不該重做」，後面連「不是。第二版常常很需要，只是需要比第一版更強的節制。」這層校正都很難真正進場。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以第二版都不該重做</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。第二版常常很需要，只是需要比第一版更強的節制。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要範圍小就不會失敗</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>若小的部分沒有選到真正痛點，也可能只是做了一個更瘦但同樣沒用的版本。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>問題只是 PM 沒控 scope</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>工程抽象與架構潔癖同樣會把第二版推向膨脹。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>下次做設計前先問這兩句</h2>
+          </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>這次哪些需求真的是在修復第一版反覆咬人的現場，而哪些只是情緒補償</strong>
+            <p>先分清兩類，第二版才不會一開始就過重。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>若只能保留三個里程碑，哪三個節點能最早證明第二版真的比第一版更好</strong>
+            <p>沒有答案時，通常代表範圍已經過度整包。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">交代 Second-system effect 支撐 第二系統效應 的主線，The Mythical Man-Month 補上與「補償衝動」相關的相鄰脈絡。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>用來支撐第二版因為補償第一版遺憾而過度膨脹的主線。</p>
+            <a href="https://en.wikipedia.org/wiki/Second-system_effect" target="_blank" rel="noreferrer">Second-system effect</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰脈絡</strong>
+            <p>補上 Brooks 對系統設計、複雜度與第二代過度擴張的原始脈絡。</p>
+            <a href="https://en.wikipedia.org/wiki/The_Mythical_Man-Month" target="_blank" rel="noreferrer">The Mythical Man-Month</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>下次規劃第二代系統時，試著把每個新增能力標成『真痛點修補』或『補償性加料』，看比例長什麼樣子。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

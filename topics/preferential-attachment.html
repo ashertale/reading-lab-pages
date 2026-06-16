@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>優先連結 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-preferential-attachment">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / networks / attention / growth</p>
+        <h1>優先連結</h1>
+        <p class="topic-subtitle">Preferential Attachment</p>
+        <p class="thesis">一個節點一旦先累積了較多連結、關注或引用，它往後就更容易繼續拿到更多連結；網路不是平均長大的，而是會自己把注意力往既有高位拉。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>看懂為什麼很多網路與平台最後都會長出頭部，不是因為一開始就差很多，而是因為後續連結規則會繼續放大差距。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>網路動力 / 富者愈富</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Nodes with more links tend to attract even more links</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>初始連結、可見度增益、網路成長、頭部集中</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在平台排序、知識網路與組織影響力分析裡更早識別『連得越多越容易再被連』的結構。</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>連結</span>
+          <span>累積</span>
+          <span>集中</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>連結一旦先往某些點集中，後面就常會自己越集中</h2>
+          <p class="section-lede">優先連結 的力道，不在口號，而在它逼你看見：只要新連結更傾向接到本來就很多連結的節點，網路就會自然長出頭部集中，而不是平均分散。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>只要新連結更傾向接到本來就很多連結的節點，網路就會自然長出頭部集中，而不是平均分散。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先看新連結怎麼分配</strong>
+            <p>若新進節點總偏好接到舊的高連結節點，集中化幾乎是結構性結果。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再問可見度是否帶來自我增益</strong>
+            <p>排序、推薦與引用慣性都可能替頭部節點提供額外放大器。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後替新節點留入口</strong>
+            <p>若沒有冷啟動通道，網路會越來越難讓新價值浮出來。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>別先談大詞，先看最小互動怎麼失真</h2>
+          <p class="section-lede">優先連結最值得先看的，不是熱門本身，而是新連結為什麼老是先落到已經很熱的地方。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>內部知識平台上，最早被很多人引用的幾篇文件之後更容易被首頁推薦、再被新文件連結，其他其實不差的內容卻很難再進入可見範圍。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>難點在於這種集中看起來像『自然最有價值的內容勝出』，卻常混著結構性可見度加成。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">部分節點先拿到較多連結</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">可見度帶來更多後續連結</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">頭部逐步變得更頭部</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>優先連結不是在否認品質，而是在提醒你：品質之外，連結規則本身也在塑造誰越來越容易被看見。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>把制度壓力拆成幾條線</h2>
+          <p class="section-lede">新連結不是平均撒出去的；誰先被看見，誰就更容易在下一輪再被看見。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>連結慣性</strong>
+            <p>越多人連過的節點越容易被視為安全、值得信任或應該先看。</p>
+          </article>
+          <article class="lens-card">
+            <strong>可見度放大</strong>
+            <p>頭部節點因為本來就更可見，又更容易在下一輪繼續拿到注意力。</p>
+          </article>
+          <article class="lens-card">
+            <strong>冷啟動困境</strong>
+            <p>新節點若沒有額外入口，很難只靠品質和既有頭部競爭。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>制度線索</th>
+                <th>表面上像什麼</th>
+                <th>真正風險</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>新連結偏向熱門節點</td>
+                <td>導航較省力</td>
+                <td>頭部集中會越來越強</td>
+              </tr>
+              <tr>
+                <td>替新節點保留入口</td>
+                <td>排序較不純粹</td>
+                <td>卻能減少結構性可見度壟斷</td>
+              </tr>
+              <tr>
+                <td>只把頭部優勢當作品質證明</td>
+                <td>故事較簡單</td>
+                <td>最容易忽略結構放大本身的力量</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼好意也可能把系統推歪</h2>
+          <p class="section-lede">人會順著眼前最醒目的節點做選擇，於是可見度本身就慢慢變成新的資源來源。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>安全跟隨</strong>
+            <p>看到很多人已經連到某個點，人就更放心跟著連。</p>
+          </div>
+          <div class="example">
+            <strong>熱門即價值幻覺</strong>
+            <p>可見度和價值常會互相支持，讓人更難分清哪部分是品質、哪部分是結構。</p>
+          </div>
+          <div class="example">
+            <strong>冷門忽略</strong>
+            <p>低可見度節點就算內容不差，也很難進到大多數人的搜索路線裡。</p>
+          </div>
+        </div>
+        <p class="micro-note">這一段要看的，是 安全跟隨、熱門即價值幻覺 這類反應如何把 優先連結 指向的制度壓力在現場放大。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>放回真實治理後它會改變什麼</h2>
+          <p class="section-lede">內容平台、文件系統和組織舞台都會長出這種頭部鎖定，因為可見度本身會再生可見度。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>內容平台</strong>
+            <p>首頁與推薦系統若只看既有互動量，頭部內容會持續自我放大。</p>
+          </div>
+          <div class="example">
+            <strong>知識文件網路</strong>
+            <p>常用文件越被引用越容易成為默認入口，新知識若沒有入口就更難被看見。</p>
+          </div>
+          <div class="example">
+            <strong>組織影響力</strong>
+            <p>能見度高的人會更容易再拿到會議、資源與發言空間。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>內容平台: 替新內容保留不只靠既有熱度的入口。</li>
+          <li>文件系統: 避免舊頭部文件壟斷所有導覽流量。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>別讓它變成立場口號</h2>
+          <p class="section-lede">若一開始就把 優先連結 聽成「所以一切都是結構，品質不重要」，後面連「不是。重點是品質和結構常一起塑造結果，不能只看其中一邊。」這層校正都很難真正進場。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以一切都是結構，品質不重要</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。重點是品質和結構常一起塑造結果，不能只看其中一邊。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要熱門就是壞事</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>熱門有時真的反映價值，但不代表後續集中沒有被規則放大。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>這只和網路科學有關</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>平台排序、文件入口和組織舞台分配都會遇到類似結構。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>兩個值得帶走的制度問題</h2>
+          </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>這個系統裡，新連結到底是因為品質、因為可見度，還是因為兩者一起在作用</strong>
+            <p>拆清楚後才知道該修哪裡。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果今天有一個高品質新節點進來，它有沒有任何不靠運氣就能被看見的入口</strong>
+            <p>沒有的話，頭部結構通常會越鎖越死。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">交代 Preferential attachment 支撐 優先連結 的主線，Scale-free network 補上與「連結慣性」相關的相鄰脈絡。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>用來支撐連結越多的節點越容易再拿到新連結這條主線。</p>
+            <a href="https://en.wikipedia.org/wiki/Preferential_attachment" target="_blank" rel="noreferrer">Preferential attachment</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰脈絡</strong>
+            <p>補上優先連結如何讓網路長出頭部集中的相鄰脈絡。</p>
+            <a href="https://en.wikipedia.org/wiki/Scale-free_network" target="_blank" rel="noreferrer">Scale-free network</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>下次你看到某個平台或團隊越來越頭部化時，先問：新連結的規則是不是本來就偏向已經在頭部的人？</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

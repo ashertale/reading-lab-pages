@@ -1,0 +1,61 @@
+{
+  "target": {
+    "slug": "good-regulator-theorem",
+    "outputPath": "topics/good-regulator-theorem.html"
+  },
+  "indexEntry": {
+    "id": "good-regulator-theorem",
+    "title": "好調節者定理",
+    "subtitle": "Good Regulator Theorem",
+    "href": "./topics/good-regulator-theorem.html",
+    "order": 207,
+    "type": "模型原則 / 控制與表徵",
+    "domain": "系統建模與控制",
+    "focus": "Every good regulator must carry a model of the system it regulates",
+    "thesis": "如果一個控制器想長期把系統調得好，它終究得在某種程度上帶著那個系統的模型；沒有模型的控制，多半只是碰巧有效。",
+    "tags": [
+      "good",
+      "regulator",
+      "theorem",
+      "models",
+      "control",
+      "cybernetics",
+      "feedback",
+      "representation"
+    ]
+  },
+  "page": {
+    "documentTitle": "好調節者定理 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-good-regulator-theorem",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / models / control / systems</p>\n    <h1>好調節者定理</h1>\n    <p class=\"topic-subtitle\">Good Regulator Theorem</p>\n    <p class=\"thesis\">如果一個控制器想長期把系統調得好，它終究得在某種程度上帶著那個系統的模型；沒有模型的控制，多半只是碰巧有效。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>把『為什麼有些控制邏輯總是修一處壞一片』和『模型其實藏在哪裡』看清楚。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>模型原則 / 控制與表徵</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Every good regulator must carry a model of the system it regulates</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>系統表徵、控制精度、狀態可見性、回饋閉環</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在控制策略、監控設計與流程治理中辨認哪些地方其實缺的是可用模型。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>控制</span>\n      <span>模型</span>\n      <span>對應</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>沒有模型的調節，往往只在你沒碰到邊界前看起來有效</h2>\n      <p class=\"section-lede\">很多人以為 好調節者定理 只是理論爭辯；真正卡人的地方，是 任何真的能穩定調節複雜系統的機制，最後都得在內部保有某種對應的世界表徵，不然它只是在窄場景裡瞎猜。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>任何真的能穩定調節複雜系統的機制，最後都得在內部保有某種對應的世界表徵，不然它只是在窄場景裡瞎猜。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先找系統到底靠哪些狀態被辨認</strong>\n        <p>若連哪些變數在左右控制決策都說不清，模型其實只是被埋在補丁後面。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再看控制規則是否對應真機制</strong>\n        <p>能穩定工作的調節，多半不是偶然配方，而是抓到某些重要因果結構。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後承認模型邊界</strong>\n        <p>任何控制器都只在部分世界圖上有效；超出邊界時，最危險的是還誤以為自己很懂。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>先把題目縮到一個可對照的場景</h2>\n      <p class=\"section-lede\">好調節者定理的切口不在數學形式，而在那個「控制得不錯，卻說不出自己到底看見了什麼」的系統。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>某個自動調參機制在固定環境下表現很好，但一換裝置批次、溫度或供電條件就失控，因為它從來沒有把那些狀態當成系統模型的一部分。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點不是『要不要有模型』，而是很多模型其實已經存在，只是被藏在經驗規則、閾值堆和補丁裡，沒被看見。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">先靠局部規則硬調</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">場景一變就失真</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">逼出對系統的隱性模型需求</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>好調節者定理不是要每個人都寫出完美世界模型，而是提醒你：控制能力總是在某處偷用了世界表徵。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>真正有差別的是你保住哪個判準</h2>\n      <p class=\"section-lede\">這裡要分清楚內部表徵、被忽略的狀態和模型失真邊界，因為調節能力常壞在看不見自己沒看見什麼。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>表徵位置</strong>\n        <p>模型可能寫在參數、狀態機、監控欄位或操作員心智模型裡，不一定長得像學術方程。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>狀態可見性</strong>\n        <p>看不見的狀態通常也很難被穩定調節，因為控制器無從知道自己在對什麼施力。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>泛化邊界</strong>\n        <p>一套控制在窄環境有效，並不等於它已經帶著足夠的系統模型面對更大變化。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>分析線</th>\n            <th>它先保住什麼</th>\n            <th>會放掉什麼</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>只靠經驗閾值</td>\n            <td>局部場景常能先跑</td>\n            <td>場景一變就容易失準，因為模型太窄</td>\n          </tr>\n          <tr>\n            <td>讓表徵對應真狀態</td>\n            <td>前期需要更多思考</td>\n            <td>長期更容易解釋、調整與擴展控制行為</td>\n          </tr>\n          <tr>\n            <td>把模型藏在補丁裡</td>\n            <td>短期上線快</td>\n            <td>久了沒人知道系統到底在對哪些世界假設運作</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>人為什麼會在這裡混用兩套標準</h2>\n      <p class=\"section-lede\">人容易把暫時能用的補丁誤讀成真正理解，尤其當系統在熟悉環境裡看起來很穩。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>規則成功幻覺</strong>\n        <p>只要眼前幾次調節看起來有效，人就容易忘記那些成功其實依賴了大量未說破的環境假設。</p>\n      </div>\n      <div class=\"example\">\n        <strong>黑箱安逸</strong>\n        <p>如果控制器一度有效，團隊常不想再追問它到底在假設什麼，直到環境變了才痛。</p>\n      </div>\n      <div class=\"example\">\n        <strong>反射式修補</strong>\n        <p>每次出錯就加一條例外，很容易把原本可理解的模型慢慢塞成不可讀的補丁堆。</p>\n      </div>\n    </div>\n    <p class=\"micro-note\">這段不是替 好調節者定理 選立場，而是讓 規則成功幻覺、黑箱安逸 這類直覺如何混掉前提與標準變得可見。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>放回真實系統後它會改變什麼</h2>\n      <p class=\"section-lede\">只要你在做控制、監控或流程治理，遲早都得回答同一題：這套調節到底看見了什麼世界。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>韌體控制迴路</strong>\n        <p>比起一路補閾值，更重要的是確認控制邏輯是否真的對應供電、負載與溫度的主要狀態。</p>\n      </div>\n      <div class=\"example\">\n        <strong>監控與告警</strong>\n        <p>若告警規則總是誤報或漏報，通常代表你對系統健康的模型太薄。</p>\n      </div>\n      <div class=\"example\">\n        <strong>流程治理</strong>\n        <p>流程若只靠事後救火維持穩定，多半是因為真正的狀態模型還藏在老鳥腦中。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>控制設計: 看清楚控制器究竟依賴哪些狀態表徵。</li>\n      <li>監控告警: 把『健康』背後的系統模型說明白。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>幾種看起來乾脆但其實偷換前提的讀法</h2>\n      <p class=\"section-lede\">若一開始就把 好調節者定理 聽成「所以每件事都要做完整理論模型」，後面連「不是。重點是承認控制總有表徵依賴，而不是要求形式一定很學術。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以每件事都要做完整理論模型</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。重點是承認控制總有表徵依賴，而不是要求形式一定很學術。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>規則有效就代表不需要模型</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>規則能工作常只是模型被藏起來了。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>模型只屬於 AI 或控制理論</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>任何長期有效的管理、監控與操作流程，都在某處帶著系統模型。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>兩個值得帶走的對照問題</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>這套控制策略到底在假設哪些世界狀態，而那些狀態現在有沒有被看見</strong>\n        <p>若說不清，模型大概只是被埋在補丁裡。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>當環境變動時，哪一個假設最可能先失真，讓控制突然變笨</strong>\n        <p>先找出這條邊界，很多事故能更早被預告。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Good regulator theorem 支撐 好調節者定理 的主線，Cybernetics 補上與「表徵位置」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐任何好的調節者都必須在某種程度上帶著被調節系統模型這條主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Good_regulator\" target=\"_blank\" rel=\"noreferrer\">Good regulator theorem</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上回饋、控制與表徵如何纏在一起的相鄰理論背景。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Cybernetics\" target=\"_blank\" rel=\"noreferrer\">Cybernetics</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次看到一個『其實就是靠經驗』的控制規則時，先問：它其實在偷偷假設哪些世界狀態？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "任何真的能穩定調節複雜系統的機制，最後都得在內部保有某種對應的世界表徵，不然它只是在窄場景裡瞎猜。",
+    "smallestScenario": "某個自動調參機制在固定環境下表現很好，但一換裝置批次、溫度或供電條件就失控，因為它從來沒有把那些狀態當成系統模型的一部分。",
+    "sourcePlan": [
+      "用來支撐任何好的調節者都必須在某種程度上帶著被調節系統模型這條主線。",
+      "補上回饋、控制與表徵如何纏在一起的相鄰理論背景。"
+    ],
+    "transferTargets": [
+      "控制設計: 看清楚控制器究竟依賴哪些狀態表徵。",
+      "監控告警: 把『健康』背後的系統模型說明白。",
+      "流程治理: 別讓真正的模型只活在少數老鳥腦中。"
+    ],
+    "commonMisreading": "把好調節者定理讀成『一定要有大而全的理論模型』，會錯過它其實在提醒你辨認隱性模型。",
+    "readerQuestions": [
+      "這套控制策略到底在假設哪些世界狀態，而那些狀態現在有沒有被看見？若說不清，模型大概只是被埋在補丁裡。",
+      "當環境變動時，哪一個假設最可能先失真，讓控制突然變笨？先找出這條邊界，很多事故能更早被預告。"
+    ],
+    "sectionIntents": {
+      "core": "用「沒有模型的調節，往往只在你沒碰到邊界前看起來有效」建立本頁的核心張力，先讓讀者看見 任何真的能穩定調節複雜系統的機制，最後都得在內部保有某種對應的世界表徵，不然它只是在窄場景裡瞎猜。",
+      "setup": "以「某個自動調參機制在固定環境下表現很好，但一換裝置批次、溫度或供電條件就失控，因為它從來沒有把那些狀態當成系統模型的一部分。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「表徵位置、狀態可見性、泛化邊界」這幾條分析線拆開 好調節者定理，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「規則成功幻覺、黑箱安逸」這些反應，說明人為何會在 好調節者定理 上滑向看似合理但代價更高的近路。",
+      "applications": "把 好調節者定理 拉到 控制設計、監控告警 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把好調節者定理讀成『一定要有大而全的理論模型』，會錯過它其實在提醒你辨認隱性模型。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「這套控制策略到底在假設哪些世界狀態，而那些狀態現在有沒有被看見、當環境變動時，哪一個假設最可能先失真，讓控制突然變笨」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Good regulator theorem 支撐 好調節者定理 的主線，Cybernetics 補上與「表徵位置」相關的相鄰脈絡。"
+    }
+  }
+}

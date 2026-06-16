@@ -1,0 +1,59 @@
+{
+  "target": {
+    "slug": "hostile-media-effect",
+    "outputPath": "topics/hostile-media-effect.html"
+  },
+  "indexEntry": {
+    "id": "hostile-media-effect",
+    "title": "敵意媒體效應",
+    "subtitle": "Hostile Media Effect",
+    "href": "./topics/hostile-media-effect.html",
+    "order": 240,
+    "type": "認知偏差 / 媒體判讀",
+    "domain": "訊息、立場與公共討論",
+    "focus": "People with strong views see neutral coverage as biased against them",
+    "thesis": "立場越強的人，越可能把相對中性的報導也看成對自己不利；不是因為內容一定極端，而是因為自己的預設立場讓對稱資訊顯得偏向對方。",
+    "tags": [
+      "hostile",
+      "media",
+      "bias",
+      "perception",
+      "polarization",
+      "communication"
+    ]
+  },
+  "page": {
+    "documentTitle": "敵意媒體效應 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-hostile-media-effect",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / media / bias / perception</p>\n    <h1>敵意媒體效應</h1>\n    <p class=\"topic-subtitle\">Hostile Media Effect</p>\n    <p class=\"thesis\">立場越強的人，越可能把相對中性的報導也看成對自己不利；不是因為內容一定極端，而是因為自己的預設立場讓對稱資訊顯得偏向對方。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>看懂為什麼『兩邊都覺得媒體偏對方』常不是巧合，而是一種有立場者常見的感知偏差。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>認知偏差 / 媒體判讀</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>People with strong views see neutral coverage as biased against them</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>既有立場、選擇性感受、媒體信任、對稱偏差</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在媒體判讀、社群爭論與內部溝通中更小心地處理『看起來偏袒』這種直覺。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>立場</span>\n      <span>解讀</span>\n      <span>敵意</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>同一篇看起來中性的內容，常會同時被兩邊讀成對自己不公平</h2>\n      <p class=\"section-lede\">敵意媒體效應 最值得看的地方，不是替人貼標籤，而是理解：只要一個人對議題投入很深，他就更容易把平衡呈現也感受成對立方被給了太多空間。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>只要一個人對議題投入很深，他就更容易把平衡呈現也感受成對立方被給了太多空間。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先承認立場會改變感受比例</strong>\n        <p>不是所有『看起來偏』都真來自內容本身，有些來自讀者自己的對稱預期。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再把感受和可檢查內容分開</strong>\n        <p>語氣不舒服是一回事，事實是否失衡、引述是否失真則需要另外檢查。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後設計交叉閱讀</strong>\n        <p>同一份內容若換位讀會怎麼看，是校正敵意感受的好方法。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>從最小日常場景看偏差怎麼啟動</h2>\n      <p class=\"section-lede\">敵意媒體效應要先看的不是媒體立場，而是投入很深的人為什麼連相對平衡的呈現都會感到被冒犯。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>公司發布一份相對中性的事故通告，同時列出維運與產品兩邊的失誤；兩邊團隊卻都覺得這份文案特別針對自己。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於這種偏差不太像看錯事實，更像是對資訊比例、語氣和重點的敵意感受。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">先帶著強烈立場閱讀</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">中性資訊被感受成偏向對方</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">對媒體與訊息來源的信任繼續下降</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>敵意媒體效應提醒你：當你很在乎某議題時，自己對偏差的感受也需要被校正，而不是直接拿來當證據。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>別讓一個標籤吃掉整個機制</h2>\n      <p class=\"section-lede\">內容本身偏不偏，和你被它刺不刺，是兩條必須分開走的分析線。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>投入程度</strong>\n        <p>越覺得議題攸關自己，越容易放大任何對方被呈現的比例。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>比例感受</strong>\n        <p>即使內容在事實上相對對稱，讀者仍可能覺得那種對稱本身已經不公平。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>信任耗損</strong>\n        <p>一再感到被針對會讓人快速失去對媒體與共同資訊場的信任。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>心理拉力</th>\n            <th>當下看起來像什麼</th>\n            <th>代價</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>只靠感受判媒體</td>\n            <td>反應最快</td>\n            <td>最容易把自己的敵意感受誤當成內容偏差</td>\n          </tr>\n          <tr>\n            <td>把感受和內容拆開檢查</td>\n            <td>比較麻煩</td>\n            <td>卻能分辨真失衡和感受失衡</td>\n          </tr>\n          <tr>\n            <td>完全不校正立場投入</td>\n            <td>討論更容易升溫</td>\n            <td>共同資訊基礎會越來越難維持</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>這題抓住了哪種心理捷徑</h2>\n      <p class=\"section-lede\">當議題和身份綁得很緊時，人會特別敏感於任何把對方觀點放上檯面的篇幅與語氣。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>身份投入</strong>\n        <p>議題越和身份綁在一起，越容易把中性呈現感受到像立場威脅。</p>\n      </div>\n      <div class=\"example\">\n        <strong>對稱不滿足</strong>\n        <p>只要覺得自己的那一邊才是比較正確的一邊，平衡呈現就可能被感成偏袒對方。</p>\n      </div>\n      <div class=\"example\">\n        <strong>敵意快感</strong>\n        <p>把內容讀成被針對，有時也會強化群體內部的凝聚與受害感。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>這種偏差在工作裡最有用的地方</h2>\n      <p class=\"section-lede\">事故通告、公共評論和社群爭議最常被這個效應攪亂，因為每一方都先感覺自己被點名。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>公共議題判讀</strong>\n        <p>別把『我覺得它在幫對方說話』直接等於內容真的不平衡。</p>\n      </div>\n      <div class=\"example\">\n        <strong>內部事故溝通</strong>\n        <p>同一份檢討若兩邊都覺得被針對，可能是敵意感受在先，不只是不公文字。</p>\n      </div>\n      <div class=\"example\">\n        <strong>社群經營</strong>\n        <p>面對偏袒指控時，最好能區分具體失衡點和整體敵意感受。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>公共判讀: 把感受敵意和具體內容偏差拆開審查。</li>\n      <li>事故溝通: 若兩邊都覺得被針對，先檢查是否是立場投入造成的感知偏移。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>這個偏差最常被怎樣誤解</h2>\n      <p class=\"section-lede\">若一開始就把 敵意媒體效應 聽成「所以媒體都沒有偏差」，後面連「不是。敵意媒體效應提醒的是感受也會偏，並不否認真實偏差存在。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以媒體都沒有偏差</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。敵意媒體效應提醒的是感受也會偏，並不否認真實偏差存在。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要兩邊都不滿就代表你中立</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>也不一定，內容仍值得被具體審查。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>這只是政治新聞才有</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>任何高度投入、身份感強的議題都可能出現。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>兩個值得帶走的校正問題</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>我現在感受到的偏袒，哪些能被指出成具體事實失衡，哪些只是比例與語氣的不舒服</strong>\n        <p>把這兩者分開，討論才會落地。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果同一篇內容給對方陣營看，他們會不會也覺得被針對</strong>\n        <p>若是，敵意媒體效應就很可能已經進場。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Hostile media effect 支撐 敵意媒體效應 的主線，Media bias 補上與「投入程度」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐立場強烈者會把中性報導感受成偏向對方這條主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Hostile_media_effect\" target=\"_blank\" rel=\"noreferrer\">Hostile media effect</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上感受偏差與真實媒體偏差之間需要被分開檢查的相鄰脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Media_bias\" target=\"_blank\" rel=\"noreferrer\">Media bias</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次你很快覺得某篇內容在針對自己這邊時，先停一下問：哪個部分是具體失衡，哪個部分只是我對比例的敵意感受？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "只要一個人對議題投入很深，他就更容易把平衡呈現也感受成對立方被給了太多空間。",
+    "smallestScenario": "公司發布一份相對中性的事故通告，同時列出維運與產品兩邊的失誤；兩邊團隊卻都覺得這份文案特別針對自己。",
+    "sourcePlan": [
+      "用來支撐立場強烈者會把中性報導感受成偏向對方這條主線。",
+      "補上感受偏差與真實媒體偏差之間需要被分開檢查的相鄰脈絡。"
+    ],
+    "transferTargets": [
+      "公共判讀: 把感受敵意和具體內容偏差拆開審查。",
+      "事故溝通: 若兩邊都覺得被針對，先檢查是否是立場投入造成的感知偏移。",
+      "社群管理: 面對偏袒指控時，要求具體指出內容失衡點。"
+    ],
+    "commonMisreading": "把敵意媒體效應讀成『媒體偏差都是幻想』會太武斷，它真正要你做的是把感受偏差和內容偏差分開檢查。",
+    "readerQuestions": [
+      "我現在感受到的偏袒，哪些能被指出成具體事實失衡，哪些只是比例與語氣的不舒服？把這兩者分開，討論才會落地。",
+      "如果同一篇內容給對方陣營看，他們會不會也覺得被針對？若是，敵意媒體效應就很可能已經進場。"
+    ],
+    "sectionIntents": {
+      "core": "用「同一篇看起來中性的內容，常會同時被兩邊讀成對自己不公平」建立本頁的核心張力，先讓讀者看見 只要一個人對議題投入很深，他就更容易把平衡呈現也感受成對立方被給了太多空間。",
+      "setup": "以「公司發布一份相對中性的事故通告，同時列出維運與產品兩邊的失誤；兩邊團隊卻都覺得這份文案特別針對自己。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「投入程度、比例感受、信任耗損」這幾條分析線拆開 敵意媒體效應，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「身份投入、對稱不滿足」這些反應，說明人為何會在 敵意媒體效應 上滑向看似合理但代價更高的近路。",
+      "applications": "把 敵意媒體效應 拉到 公共判讀、事故溝通 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把敵意媒體效應讀成『媒體偏差都是幻想』會太武斷，它真正要你做的是把感受偏差和內容偏差分開檢查。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「我現在感受到的偏袒，哪些能被指出成具體事實失衡，哪些只是比例與語氣的不舒服、如果同一篇內容給對方陣營看，他們會不會也覺得被針對」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Hostile media effect 支撐 敵意媒體效應 的主線，Media bias 補上與「投入程度」相關的相鄰脈絡。"
+    }
+  }
+}

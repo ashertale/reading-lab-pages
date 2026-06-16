@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>歸納問題 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-problem-of-induction">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / induction / evidence / prediction</p>
+        <h1>歸納問題</h1>
+        <p class="topic-subtitle">Problem of Induction</p>
+        <p class="thesis">我們幾乎每天都靠過去經驗推未來，但真正麻煩的是：光憑『過去一直如此』，並不能在邏輯上保證未來還會如此。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>把『過去很常對』和『因此未來一定對』拆開，避免把成功經驗直接誤讀成絕對保證。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>知識問題 / 推理正當性</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Why past regularity does not logically guarantee future regularity</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>經驗累積、規律假設、預測正當性、反例脆弱度</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在數據、工程經驗與策略預測中更誠實地面對規律外推的邊界。</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>過去</span>
+          <span>規律</span>
+          <span>未來</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>經驗可以很有用，但它從來不是不敗保證書</h2>
+          <p class="section-lede">歸納問題不是要你停止預測，而是逼你承認預測從來都比回顧多跨出一步。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>只要你的理由主要是『過去一直都這樣』，它就會碰到同一個問題：為什麼未來必須繼續配合這個過去規律？</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先承認外推一定有跳躍</strong>
+            <p>只要從已觀察案例推到未觀察案例，就已經跨出了純描述。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再看你靠哪些結構縮小跳躍</strong>
+            <p>理論、機制理解、邊界條件與持續監控，都是替歸納補支撐的方法。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後保留對反例的敏感度</strong>
+            <p>越把過去成功當成保證，越容易在環境變化時被反例重擊。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>別急著找立場，先把條件排開</h2>
+          <p class="section-lede">這裡先把場景縮到一個感測器，因為歸納問題最有力的時候，往往就是你幾乎已經想說「這次應該也一樣」的時候。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小劇情</strong>
+            <p>某個感測器在歷次量產都穩定，團隊因此認定新版板子也不會出問題；但材料批次一變，過去的成功規律立刻失效。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>難點在於日常生活與工程實務都嚴重依賴歸納，所以人很容易把『非常合理』誤讀成『邏輯上已被保證』。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">觀察過去規律</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">用規律推未來</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">發現規律延續本身仍需要額外假設</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>歸納問題不是要你放棄經驗，而是提醒你：所有經驗外推都帶著沒辦法被純粹經驗自己保證的跳躍。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>幾條不能混在一起的分析線</h2>
+          <p class="section-lede">接下來會把歷史規律、機制理解和邊界條件拆開，看看外推的信心究竟靠哪一層在撐。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>規律延續假設</strong>
+            <p>很多預測靠的是世界大致會繼續像以前那樣運作的前提。</p>
+          </article>
+          <article class="lens-card">
+            <strong>機制補強</strong>
+            <p>若你知道背後機制，歸納就不只剩『它以前都這樣』。</p>
+          </article>
+          <article class="lens-card">
+            <strong>邊界條件</strong>
+            <p>歸納最容易失效的地方，常是材料、環境、互動條件悄悄換了。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>判準</th>
+                <th>它會保住什麼</th>
+                <th>代價</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>只靠歷史成功</td>
+                <td>信心很足</td>
+                <td>一旦背景改變，最容易被新條件打穿</td>
+              </tr>
+              <tr>
+                <td>加上機制理解</td>
+                <td>推理比較慢</td>
+                <td>卻更能知道規律何時可能失效</td>
+              </tr>
+              <tr>
+                <td>持續監控反例</td>
+                <td>看起來不夠痛快</td>
+                <td>但能讓歸納保持可修正而不是僵化</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>這類問題抓住了哪種日常直覺</h2>
+          <p class="section-lede">連續成功特別會讓人放鬆，因為『一直都這樣』很容易滑成『所以未來也不會例外』。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>連續成功麻醉</strong>
+            <p>成功經驗越長，人越容易把它讀成理所當然。</p>
+          </div>
+          <div class="example">
+            <strong>熟悉替代論證</strong>
+            <p>只要事情一直沒出錯，大腦就會傾向停止追問『為什麼會一直沒出錯』。</p>
+          </div>
+          <div class="example">
+            <strong>保證渴望</strong>
+            <p>面對不確定時，人會自然把高機率成功說成近乎必然，換取心理安定。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>這個哲學問題在現場最有用的地方</h2>
+          <p class="section-lede">回歸測試、模型預測和制度沿用最怕的，就是把「一直有效」悄悄說成「因此未來也保證有效」。</p>
+        </div>
+        <div class="example-grid">
+          <div class="example">
+            <strong>工程驗證</strong>
+            <p>回歸測試一直過不代表未來也會過，特別是環境、供應鏈或負載條件變動時。</p>
+          </div>
+          <div class="example">
+            <strong>數據預測</strong>
+            <p>模型在歷史資料表現很好，不保證分布轉移後仍然可靠。</p>
+          </div>
+          <div class="example">
+            <strong>組織判斷</strong>
+            <p>過去某套流程一直有效，不代表它在團隊規模與目標改變後仍然不需重審。</p>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li>工程驗證: 把回歸成功和未來保證分開看。</li>
+          <li>模型預測: 對分布轉移保持監控，不把歷史高分當成永久保單。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>幾種常見但太快的讀法</h2>
+          <p class="section-lede">若一開始就把 歸納問題 聽成「所以經驗都不可靠」，後面連「不是。經驗很有用，只是它的力量不是邏輯保證，而是可修正的實務依據。」這層校正都很難真正進場。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以經驗都不可靠</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。經驗很有用，只是它的力量不是邏輯保證，而是可修正的實務依據。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要樣本夠多就沒問題</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>樣本多能提高信心，但仍無法取消未來可能換世界的風險。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>這只屬於哲學課本</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>任何回歸測試、預測模型與歷史類比都在面對它。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>下次遇到相似判斷先問這兩句</h2>
+          </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>我們現在是靠『以前都這樣』，還是也知道為什麼它大致會繼續這樣</strong>
+            <p>兩者對風險管理的意義完全不同。</p>
+          </article>
+          <article class="prompt-card">
+            <strong>哪個背景條件一旦變了，這條經驗規律最可能先失效</strong>
+            <p>那就是你該放監控的地方。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">交代 Problem of induction 支撐 歸納問題 的主線，David Hume 補上與「規律延續假設」相關的相鄰脈絡。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>用來支撐從過去規律推未來規律在邏輯上無法被自身保證的主線。</p>
+            <a href="https://en.wikipedia.org/wiki/Problem_of_induction" target="_blank" rel="noreferrer">Problem of induction</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰脈絡</strong>
+            <p>補上這個問題在懷疑論與因果理解裡的哲學脈絡。</p>
+            <a href="https://en.wikipedia.org/wiki/David_Hume" target="_blank" rel="noreferrer">David Hume</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>下次你說『以前都沒出事』時，補上第二句：那是因為什麼條件一直沒變？</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

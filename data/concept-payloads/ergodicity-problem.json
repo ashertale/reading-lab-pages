@@ -1,0 +1,59 @@
+{
+  "target": {
+    "slug": "ergodicity-problem",
+    "outputPath": "topics/ergodicity-problem.html"
+  },
+  "indexEntry": {
+    "id": "ergodicity-problem",
+    "title": "遍歷性問題",
+    "subtitle": "Ergodicity Problem",
+    "href": "./topics/ergodicity-problem.html",
+    "order": 214,
+    "type": "決策概念 / 平均與時間",
+    "domain": "風險、財務與策略判斷",
+    "focus": "What is true on average across many cases may not be true over time for one path",
+    "thesis": "在很多現實決策裡，『把很多人同一時間平均』和『同一個人在很長時間裡走過的路』不是同一件事；看起來平均划算的選擇，沿著時間走可能完全承受不起。",
+    "tags": [
+      "ergodicity",
+      "risk",
+      "averages",
+      "time",
+      "survival",
+      "strategy"
+    ]
+  },
+  "page": {
+    "documentTitle": "遍歷性問題 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-ergodicity-problem",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / risk / time / averages</p>\n    <h1>遍歷性問題</h1>\n    <p class=\"topic-subtitle\">Ergodicity Problem</p>\n    <p class=\"thesis\">在很多現實決策裡，『把很多人同一時間平均』和『同一個人在很長時間裡走過的路』不是同一件事；看起來平均划算的選擇，沿著時間走可能完全承受不起。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>把『平均而言值得』和『我真的走得完這條路』拆開，避免被漂亮平均值騙進走不到終點的策略。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>決策概念 / 平均與時間</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>What is true on average across many cases may not be true over time for one path</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>時間平均、集合平均、路徑依賴、破產風險</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在風險、投資與產品策略裡更早看見路徑與存活的重要性。</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>平均</span>\n      <span>時間</span>\n      <span>路徑</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>平均上的好選擇，不一定是你走得完的選擇</h2>\n      <p class=\"section-lede\">遍歷性問題 的力道，不在口號，而在它逼你看見：只要損失不可逆、破產會中斷遊戲，集合平均上的高報酬策略就可能完全不適合單一路徑上的真實行動者。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>只要損失不可逆、破產會中斷遊戲，集合平均上的高報酬策略就可能完全不適合單一路徑上的真實行動者。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先問遊戲能不能中斷</strong>\n        <p>一旦存在破產或不可逆損失，平均值就不能單獨指導決策。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再分清集合平均和時間平均</strong>\n        <p>別把『很多人分散承受』和『同一個人一路承受』混成同一種風險。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後把存活放回策略中心</strong>\n        <p>能活著持續玩，比一次性看起來平均更賺的方案更重要。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>先把制度壓回一個小場景</h2>\n      <p class=\"section-lede\">遍歷性問題最需要先釘住的，不是平均值，而是那條一旦斷掉就再也回不來的單一路徑。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小劇情</strong>\n        <p>某策略平均回報看起來很高，但偶爾一次的大幅虧損就足以讓小團隊現金流斷掉；對單一路徑來說，『長期平均會賺』根本沒有實際意義。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>難點在於報表與簡報很愛用平均值說話，卻不自然展示『你能不能活到拿到那個平均』。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">看到集合平均很誘人</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">忽略路徑中的不可逆損失</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">單一路徑在還沒吃到平均前就先出局</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>遍歷性問題最重要的提醒是：只要遊戲會中斷、損失會複利、資本會耗盡，時間上的可活性就比平均值更重要。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>把制度壓力拆成幾條線</h2>\n      <p class=\"section-lede\">把時間一路走完的人，和站在場外看所有樣本平均的人，看到的根本不是同一種風險。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>路徑依賴</strong>\n        <p>同樣的平均報酬，走法不同就可能導向完全不同的可存活性。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>不可逆損失</strong>\n        <p>只要某次損失會讓你退出遊戲，後面的平均好處就不再屬於你。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>複利效果</strong>\n        <p>時間路徑上的連續乘積，會讓波動與下跌帶來比平均更大的實際影響。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>制度線索</th>\n            <th>表面上像什麼</th>\n            <th>真正風險</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>只看集合平均</td>\n            <td>報表很漂亮</td>\n            <td>最容易忽略單一路徑能否活到最後</td>\n          </tr>\n          <tr>\n            <td>看時間路徑與存活</td>\n            <td>比較不浪漫</td>\n            <td>卻更接近真實決策者承受的世界</td>\n          </tr>\n          <tr>\n            <td>忽略不可逆中斷</td>\n            <td>短期像在追高報酬</td>\n            <td>長期最容易在半路失去遊戲資格</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>為什麼人和制度會往這裡滑</h2>\n      <p class=\"section-lede\">漂亮平均很能麻痺人，因為它看起來客觀，卻常剛好蓋住最不允許發生的那次大虧。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>平均崇拜</strong>\n        <p>平均值乾淨又好講，會讓人低估路徑中的存活風險。</p>\n      </div>\n      <div class=\"example\">\n        <strong>報酬炫光</strong>\n        <p>高平均回報很容易蓋過『但偶爾會死一次』這種不舒服細節。</p>\n      </div>\n      <div class=\"example\">\n        <strong>幸存敘事</strong>\n        <p>只看到活下來的人如何吃到平均，也會進一步強化誤判。</p>\n      </div>\n    </div>\n    <p class=\"micro-note\">這一段要看的，是 平均崇拜、報酬炫光 這類反應如何把 遍歷性問題 指向的制度壓力在現場放大。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>把它帶回管理、政策與組織設計</h2>\n      <p class=\"section-lede\">投資、產品下注與營運存活都會碰到同一題：平均再漂亮，只要中途會出局，策略就未必值得走。</p>\n    </div>\n    <div class=\"example-grid\">\n      <div class=\"example\">\n        <strong>財務風險</strong>\n        <p>不要只看平均收益，也要看單次重挫是否會讓你失去繼續下注的能力。</p>\n      </div>\n      <div class=\"example\">\n        <strong>產品策略</strong>\n        <p>高風險試驗若可能一次吃掉團隊主要資源，就不能只看平均成功率。</p>\n      </div>\n      <div class=\"example\">\n        <strong>營運決策</strong>\n        <p>對現金流脆弱的組織來說，保命常比追求更高平均回報重要。</p>\n      </div>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>財務決策: 別讓漂亮平均掩蓋破產風險。</li>\n      <li>產品策略: 評估高風險嘗試時同時看存活性。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>別讓它變成立場口號</h2>\n      <p class=\"section-lede\">若一開始就把 遍歷性問題 聽成「所以平均值完全沒用」，後面連「不是。平均值有用，只是它不能替代對單一路徑與存活性的判斷。」這層校正都很難真正進場。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以平均值完全沒用</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>不是。平均值有用，只是它不能替代對單一路徑與存活性的判斷。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要夠分散就沒問題</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>若實際承擔者仍是同一條資本路徑，分散敘事可能只是表面。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>這只和投資有關</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>任何會累積、會中斷、會因一次大錯而出局的策略都會遇到。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>下次做制度選擇前先問這兩句</h2>\n      </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>這個『平均很划算』的選擇，沿著單一路徑真的走得完嗎</strong>\n        <p>如果走不到終點，平均值對你就沒有意義。</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>哪一次單點失敗足以讓我們直接退出遊戲，而那件事現在有沒有被平均圖遮掉</strong>\n        <p>那通常才是第一個該看的風險。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">交代 Ergodicity economics 支撐 遍歷性問題 的主線，Ergodicity 補上與「路徑依賴」相關的相鄰脈絡。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>用來支撐集合平均與時間平均在現實決策中常不等價這條主線。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Ergodicity_economics\" target=\"_blank\" rel=\"noreferrer\">Ergodicity economics</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰脈絡</strong>\n        <p>補上遍歷性概念及其為何會影響長期路徑判斷的相鄰脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Ergodicity\" target=\"_blank\" rel=\"noreferrer\">Ergodicity</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次看到一條很漂亮的平均回報曲線時，先問：我有沒有可能在吃到那個平均之前就先死在路上？</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "只要損失不可逆、破產會中斷遊戲，集合平均上的高報酬策略就可能完全不適合單一路徑上的真實行動者。",
+    "smallestScenario": "某策略平均回報看起來很高，但偶爾一次的大幅虧損就足以讓小團隊現金流斷掉；對單一路徑來說，『長期平均會賺』根本沒有實際意義。",
+    "sourcePlan": [
+      "用來支撐集合平均與時間平均在現實決策中常不等價這條主線。",
+      "補上遍歷性概念及其為何會影響長期路徑判斷的相鄰脈絡。"
+    ],
+    "transferTargets": [
+      "財務決策: 別讓漂亮平均掩蓋破產風險。",
+      "產品策略: 評估高風險嘗試時同時看存活性。",
+      "營運管理: 把『能不能繼續玩下去』放回核心指標。"
+    ],
+    "commonMisreading": "把遍歷性問題讀成抽象數學名詞會可惜，它真正要你校正的是平均值和可存活路徑之間的落差。",
+    "readerQuestions": [
+      "這個『平均很划算』的選擇，沿著單一路徑真的走得完嗎？如果走不到終點，平均值對你就沒有意義。",
+      "哪一次單點失敗足以讓我們直接退出遊戲，而那件事現在有沒有被平均圖遮掉？那通常才是第一個該看的風險。"
+    ],
+    "sectionIntents": {
+      "core": "用「平均上的好選擇，不一定是你走得完的選擇」建立本頁的核心張力，先讓讀者看見 只要損失不可逆、破產會中斷遊戲，集合平均上的高報酬策略就可能完全不適合單一路徑上的真實行動者。",
+      "setup": "以「某策略平均回報看起來很高，但偶爾一次的大幅虧損就足以讓小團隊現金流斷掉；對單一路徑來說，『長期平均會賺』根本沒有實際意義。」作為最小情境，避免概念停留在抽象口號。",
+      "lenses": "沿著「路徑依賴、不可逆損失、複利效果」這幾條分析線拆開 遍歷性問題，讓讀者知道不同判準各自在保什麼。",
+      "psychology": "利用「平均崇拜、報酬炫光」這些反應，說明人為何會在 遍歷性問題 上滑向看似合理但代價更高的近路。",
+      "applications": "把 遍歷性問題 拉到 財務決策、產品策略 兩類現場，讓抽象概念落到具體取捨與操作判斷。",
+      "misreadings": "校正「把遍歷性問題讀成抽象數學名詞會可惜，它真正要你校正的是平均值和可存活路徑之間的落差。」這條常見走偏線，保留概念的使用邊界。",
+      "questions": "把本頁收束成「這個『平均很划算』的選擇，沿著單一路徑真的走得完嗎、哪一次單點失敗足以讓我們直接退出遊戲，而那件事現在有沒有被平均圖遮掉」這兩個可直接帶去下一次判斷的追問。",
+      "sources": "交代 Ergodicity economics 支撐 遍歷性問題 的主線，Ergodicity 補上與「路徑依賴」相關的相鄰脈絡。"
+    }
+  }
+}
