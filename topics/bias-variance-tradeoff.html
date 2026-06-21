@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>偏差與變異權衡 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-bias-variance-tradeoff">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / modeling / prediction / generalization</p>
+        <h1>偏差與變異權衡</h1>
+        <p class="topic-subtitle">Bias-Variance Tradeoff</p>
+        <p class="thesis">模型錯誤不只來自學不夠，也來自學太用力；抓太緊會把噪音當規律，抓太鬆又會把真正結構一起抹平。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁不是要你背一張 U 形圖，而是學會問：現在的誤差是因為模型看不見結構，還是因為它把結構以外的東西也學走了？</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>模型判準 / 泛化取捨</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Rigidity vs. overreaction to noise</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>模型彈性、樣本量、噪音、驗證誤差</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能判斷一個模型錯在太僵硬還是太容易被資料情緒帶著跑</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>剛性</span>
+          <span>噪音</span>
+          <span>泛化</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+
+    <section class="chapter" id="core">
+    <div class="section-heading">
+      <p class="section-label">Orientation</p>
+      <h2>模型可以錯得太少，也可以錯得太用力</h2>
+      <p class="section-lede">偏差與變異權衡最容易被誤解成一條漂亮曲線；它真正有用的地方，是逼你把『學不到』和『學過頭』當成兩種完全不同的失敗。</p>
+    </div>
+    <div class="core-card">
+      <p class="section-label">Core Tension</p>
+      <p>模型越剛硬，越容易穩定地忽略真實結構；模型越靈活，越容易把資料裡的偶然起伏當成規律帶走。泛化誤差就在這兩邊拉扯。</p>
+    </div>
+    <div class="principle-strip" aria-label="本頁讀法">
+      <div>
+        <span>01</span>
+        <strong>先問模型有沒有能力看見該看的東西</strong>
+        <p>若表示能力太弱、假設太死，再多資料也只是更穩定地錯過真正的訊號。</p>
+      </div>
+      <div>
+        <span>02</span>
+        <strong>再問它有沒有把不該學的也學進去</strong>
+        <p>當模型對樣本細節太敏感，訓練集表現會很好，換資料卻容易崩。</p>
+      </div>
+      <div>
+        <span>03</span>
+        <strong>最後用泛化而不是訓練成績做裁判</strong>
+        <p>偏差與變異誰在主導，不能只看訓練誤差；得看新的資料上它會不會失手。</p>
+      </div>
+    </div>
+    </section>
+
+    <section class="chapter" id="setup">
+    <div class="section-heading">
+      <p class="section-label">Setup</p>
+      <h2>從感測器校準兩種失敗開始</h2>
+      <p class="section-lede">同一份資料，太簡單和太複雜都可能做出錯的模型，只是錯法不同。</p>
+    </div>
+    <div class="definition-grid">
+      <div class="tile">
+        <strong>最小場景</strong>
+        <p>你拿兩百筆溫度補償資料做校準。線性模型太硬，明顯看不到溫區轉折；高次多項式卻把幾個偶然離群點也跟著穿過，訓練誤差漂亮得不像真的。</p>
+      </div>
+      <div class="tile">
+        <strong>真正難點</strong>
+        <p>這兩種模型都可能在訓練集上給你信心，但一個對真結構視而不見，另一個對偶然細節過度認真，最後都會在新板子上出事。</p>
+      </div>
+    </div>
+    <div class="concept-flow" aria-label="問題展開">
+      <div class="flow-step">模型太剛硬時看不見真結構</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">模型太靈活時連噪音都一起追</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">真正要緊的是換資料後能不能站住</div>
+    </div>
+    <div class="paradox-frame">
+      <strong>Key Point</strong>
+      <p>偏差與變異權衡不是在鼓勵折中主義，而是在提醒你用對症下藥的方式診斷泛化失敗。</p>
+    </div>
+    </section>
+
+    <section class="chapter" id="lenses">
+    <div class="section-heading">
+      <p class="section-label">Lenses</p>
+      <h2>四個透鏡，找出模型現在是往哪邊偏</h2>
+      <p class="section-lede">你要修的是哪一種錯，決定了你該加資料、換表示、做正則化，還是乾脆重想問題邊界。</p>
+    </div>
+    <div class="lens-grid">
+      <article class="lens-card">
+        <strong>偏差主導</strong>
+        <p>模型假設太強或特徵太弱時，會穩定犯同一類錯，對資料裡明顯存在的彎曲或交互作用視而不見。</p>
+      </article>
+      <article class="lens-card">
+        <strong>變異主導</strong>
+        <p>模型過度敏感時，不同訓練切片會長出很不一樣的結果，代表它對樣本情緒反應過大。</p>
+      </article>
+      <article class="lens-card">
+        <strong>資料量與噪音</strong>
+        <p>高噪音、小樣本會讓高彈性模型更危險；低噪音、資料充足時，較高複雜度才比較站得住。</p>
+      </article>
+      <article class="lens-card">
+        <strong>驗證視角</strong>
+        <p>validation gap 往往比訓練表現更能告訴你問題在哪邊，因為它真正測的是跨資料集的穩定性。</p>
+      </article>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>你看到的症狀</th>
+            <th>比較像哪一側</th>
+            <th>較合理的反應</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>訓練誤差和驗證誤差都高</td>
+            <td>偏差偏大</td>
+            <td>提升表示能力、換特徵或放鬆模型假設</td>
+          </tr>
+          <tr>
+            <td>訓練誤差很低但驗證誤差高</td>
+            <td>變異偏大</td>
+            <td>加正則化、收斂複雜度或增加資料</td>
+          </tr>
+          <tr>
+            <td>不同 fold 結果差很多</td>
+            <td>對樣本過敏</td>
+            <td>檢查資料量、離群點與模型彈性是否失衡</td>
+          </tr>
+          <tr>
+            <td>換資料域就掉得很快</td>
+            <td>可能同時有高變異與錯誤假設</td>
+            <td>重看資料分布、特徵定義與泛化目標</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </section>
+
+    <section class="chapter" id="psychology">
+    <div class="section-heading">
+      <p class="section-label">Psychology</p>
+      <h2>人為什麼容易愛上錯的那一邊</h2>
+      <p class="section-lede">模型表現不佳時，人不是害怕太簡單，就是迷戀太精準；偏差與變異的麻煩在於這兩種直覺都會自帶說服力。</p>
+    </div>
+    <div class="example-grid">
+      <div class="example">
+        <strong>完美擬合的誘惑</strong>
+        <p>看到訓練誤差幾乎歸零時，大腦很難不產生征服感，即使那個征服其實只是把噪音也背下來。</p>
+      </div>
+      <div class="example">
+        <strong>簡單模型的道德光環</strong>
+        <p>我們也常把簡單等同於乾淨與可解釋，結果忽略它可能只是系統性漏掉重要結構。</p>
+      </div>
+      <div class="example">
+        <strong>單一分數焦慮</strong>
+        <p>一旦團隊只盯著單一 leaderboard，大家就更容易追逐短期分數，而不是穩定的泛化能力。</p>
+      </div>
+    </div>
+    <p class="micro-note">這一節想保留的是診斷感：不要把模型壞掉都歸成同一類，否則修法只會愈修愈亂。</p>
+    </section>
+
+    <section class="chapter" id="applications">
+    <div class="section-heading">
+      <p class="section-label">Applications</p>
+      <h2>把它帶回校準、閾值與預測工具</h2>
+      <p class="section-lede">偏差與變異權衡不只屬於機器學習競賽，它每天都在各種工程判斷裡重演。</p>
+    </div>
+    <div class="example-grid">
+      <div class="example">
+        <strong>感測器補償模型</strong>
+        <p>太簡單的模型會錯過溫區轉折，太複雜的模型則容易把測試夾具噪音、批次偶然差異也學進去。</p>
+      </div>
+      <div class="example">
+        <strong>異常偵測閾值</strong>
+        <p>閾值太鈍時抓不到真正異常，太敏感時又會被正常波動狂觸發；這其實也是偏差與變異的另一種語言。</p>
+      </div>
+      <div class="example">
+        <strong>維護性預測工具</strong>
+        <p>若一個預測模型在歷史資料上很神，但換客戶、換機種就掉，通常不是魔法失靈，而是它對樣本故事學得太深了。</p>
+      </div>
+    </div>
+    <ul class="bullet-list">
+      <li>診斷模型時，不要只問『準不準』，要問『它是穩定地錯，還是情緒化地對資料過度反應』。</li>
+      <li>validation、cross-validation 與 out-of-domain 測試，本質上都是在查變異側有沒有開始主導。</li>
+    </ul>
+    </section>
+
+    <section class="chapter" id="misreadings">
+    <div class="section-heading">
+      <p class="section-label">Misreadings</p>
+      <h2>三種常把團隊帶歪的說法</h2>
+      <p class="section-lede">若把偏差與變異權衡讀成『複雜模型不好』或『訓練分數越高越好』，等於直接錯過它的主要價值。</p>
+    </div>
+    <div class="collocation-list" aria-label="常見誤讀">
+      <article class="collocation-card">
+        <div>
+          <strong>訓練誤差越低就代表模型越好</strong>
+          <span class="register-tag">校正</span>
+        </div>
+        <p>訓練誤差只告訴你模型多會背眼前資料，沒有告訴你它換到新資料後是否還能站住。</p>
+      </article>
+      <article class="collocation-card">
+        <div>
+          <strong>偏差就是主觀偏見</strong>
+          <span class="register-tag">校正</span>
+        </div>
+        <p>在這裡，bias 談的是模型系統性偏離真結構，不是道德或政治語境裡的偏見。</p>
+      </article>
+      <article class="collocation-card">
+        <div>
+          <strong>只要找一個最佳複雜度，之後都照用就好</strong>
+          <span class="register-tag">校正</span>
+        </div>
+        <p>資料量、噪音、任務邊界一變，平衡點也會跟著變，沒有一個固定旋鈕可以永久通吃。</p>
+      </article>
+    </div>
+    </section>
+
+    <section class="chapter" id="questions">
+    <div class="section-heading">
+      <p class="section-label">Questions</p>
+      <h2>每次模型表現不對勁時，先問這兩題</h2>
+    </div>
+    <div class="prompt-grid">
+      <article class="prompt-card">
+        <strong>我們現在錯在看不見結構，還是錯在把噪音也當成結構？</strong>
+        <p>若連這個都沒分清楚，就很容易把提高複雜度和降低複雜度交替當成迷信操作。</p>
+      </article>
+      <article class="prompt-card">
+        <strong>換資料、換批次、換場域後，這個模型還是不是同一種表現？</strong>
+        <p>只有跨資料保持穩定，才算真的把規律學到了，而不是把當下資料的情緒背起來。</p>
+      </article>
+    </div>
+    <div class="template-note">
+      <strong>延伸路線</strong>
+      <p>若想沿著這條線再讀，可接 regularization、cross-validation、underfitting and overfitting，把不同修法和症狀一一對起來。</p>
+    </div>
+    </section>
+
+    <section class="chapter" id="sources">
+    <div class="section-heading">
+      <p class="section-label">Sources</p>
+      <h2>來源與整理方式</h2>
+      <p class="section-lede">本頁以偏差與變異權衡的標準統計讀法為主，再用 scikit-learn 的例子與 ESL 作為更工程化的對照。</p>
+    </div>
+    <div class="source-grid">
+      <article class="source-card">
+        <strong>主條目</strong>
+        <p>Bias-variance tradeoff 條目整理了誤差分解、過擬合與欠擬合的核心關係，是本頁的骨架。</p>
+        <a href="https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff" target="_blank" rel="noreferrer">Bias-variance tradeoff</a>
+      </article>
+      <article class="source-card">
+        <strong>工程例子</strong>
+        <p>scikit-learn 的 underfitting/overfitting 範例很適合用來對照偏差與變異兩種錯法在實作上的樣子。</p>
+        <a href="https://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting_overfitting.html" target="_blank" rel="noreferrer">Underfitting vs. Overfitting</a>
+      </article>
+      <article class="source-card">
+        <strong>教科書脈絡</strong>
+        <p>The Elements of Statistical Learning 提供更系統的統計學背景，方便把這個權衡放回一般化誤差與模型複雜度討論中。</p>
+        <a href="https://hastie.su.domains/ElemStatLearn/" target="_blank" rel="noreferrer">The Elements of Statistical Learning</a>
+      </article>
+    </div>
+    </section>
+
+    <section class="chapter">
+      <div class="reference-box">
+        <div>
+          <p class="section-label">Reference</p>
+          <h2>下一步</h2>
+          <p>如果之後想補一頁跟它互相照應的主題，cross-validation 會很合適，因為它就是工程上最常拿來看變異是否失控的鏡子。</p>
+        </div>
+        <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+      </div>
+    </section>
+
+    </article>
+  </main>
+</body>
+</html>

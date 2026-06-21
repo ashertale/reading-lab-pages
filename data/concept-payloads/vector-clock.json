@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "vector-clock",
+    "outputPath": "topics/vector-clock.html"
+  },
+  "indexEntry": {
+    "id": "vector-clock",
+    "title": "向量時鐘",
+    "subtitle": "Vector Clock",
+    "href": "./topics/vector-clock.html",
+    "order": 302,
+    "type": "分散式時間 / 因果排序",
+    "domain": "分散式系統、同步、離線合併與除錯",
+    "focus": "Detect causality without one global clock",
+    "thesis": "向量時鐘不追求全域幾點幾分，而是記錄每個節點知道哪些事件已經發生，藉此區分因果先後與真正並發。",
+    "tags": [
+      "vector-clock",
+      "logical-clock",
+      "causality",
+      "distributed-systems",
+      "sync",
+      "debugging"
+    ]
+  },
+  "contentBrief": {
+    "pressurePoint": "單一時間戳會把並發事件硬排成先後，向量時鐘則保留誰知道誰的因果資訊。",
+    "smallestScenario": "兩台離線設備都改了同一份設定，重新連線後伺服器要判斷其中一份是否包含另一份，或必須啟動衝突合併。",
+    "sourcePlan": [
+      "Vector clock 條目支撐每節點計數器與偏序比較的核心概念。",
+      "Lamport clock 條目提供純量邏輯時鐘作為對照。",
+      "Mattern/Fidge 脈絡補上向量時間用於分散式因果關係的研究背景。"
+    ],
+    "transferTargets": [
+      "offline sync",
+      "replicated configuration",
+      "distributed trace analysis"
+    ],
+    "commonMisreading": "向量時鐘不是讓所有事件有唯一總排序；它有意保留無法排序的並發關係。",
+    "readerQuestions": [
+      "兩個版本的向量是否一方每個分量都大於等於另一方？",
+      "若版本彼此不可比較，產品語意要自動 merge、保留兩份，還是要求人工處理？"
+    ],
+    "sectionIntents": {
+      "core": "展示向量時鐘如何保留因果偏序而非捏造全序。",
+      "setup": "用離線設定同步說明單一 timestamp 的問題。",
+      "lenses": "拆成 increment、send/receive merge、comparison 與向量大小。",
+      "psychology": "指出人容易把時間順序誤當因果證明。",
+      "applications": "映射到 sync engine、replica conflict、trace 與 device fleet。",
+      "misreadings": "校正全域時鐘、全排序與自動解決衝突的誤讀。",
+      "questions": "要求讀者用向量比較判斷覆蓋或衝突。",
+      "sources": "以 vector clock、Lamport clock 與分散式因果研究為來源。"
+    }
+  },
+  "page": {
+    "documentTitle": "向量時鐘 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-vector-clock",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / distributed systems / causality / sync</p>\n    <h1>向量時鐘</h1>\n    <p class=\"topic-subtitle\">Vector Clock</p>\n    <p class=\"thesis\">向量時鐘不追求全域幾點幾分，而是記錄每個節點知道哪些事件已經發生，藉此區分因果先後與真正並發。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>適合看離線同步、multi-master replication、事件追蹤、衝突偵測與沒有可信全域時鐘的系統除錯。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>分散式時間 / 因果排序</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Detect causality without one global clock</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>節點維度、偏序、並發、版本比較</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能判斷兩個版本是誰覆蓋誰，還是彼此沒有因果關係</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>事件</span>\n      <span>因果</span>\n      <span>並發</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>時間不是一條線，而是一張知道關係</h2>\n      <p class=\"section-lede\">每個節點維護一個向量，記錄自己與其他節點的事件進度；比較兩個向量時，可以看出包含、落後或並發。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>系統很想用 timestamp 選勝者，但 wall clock 漂移與離線更新會把真正並發的事件偽裝成先後。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先記本地進度</strong>\n        <p>節點發生事件時增加自己的分量。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再交換知識</strong>\n        <p>訊息攜帶向量；接收端逐分量取最大值並記錄新事件。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後比較偏序</strong>\n        <p>一方全分量不小於另一方才代表因果包含；否則可能是並發。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>兩台設備離線後都改了設定</h2>\n      <p class=\"section-lede\">Device A 和 Device B 各自改同一個 threshold。重新連線時，只看最後修改時間會讓其中一份直接消失。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小場景</strong>\n        <p>A 的版本向量是 4/1，B 的版本向量是 3/2；A 知道較多 A 事件，B 知道較多 B 事件。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>兩個向量互相都不是完全大於對方，代表它們不是單純新舊，而是各自分岔。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">本地事件遞增</div>\n      <div class=\"flow-arrow\">→</div>\n<div class=\"flow-step\">同步時合併向量</div>\n      <div class=\"flow-arrow\">→</div>\n<div class=\"flow-step\">不可比較時標記衝突</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>向量時鐘的價值在於告訴你何時不該安靜覆蓋。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>用四個動作讀懂版本關係</h2>\n      <p class=\"section-lede\">向量時鐘的運算規則簡單，困難在於把比較結果接到正確的產品語意。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>Increment</strong>\n        <p>本地寫入、狀態轉移或事件發生時，只增加自己的 slot。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Merge</strong>\n        <p>收到遠端向量後逐項取最大值，表示已吸收對方知道的歷史。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Dominance</strong>\n        <p>若 X 每項都大於等於 Y，且至少一項更大，X 因果上晚於 Y。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Concurrency</strong>\n        <p>兩邊各有較大分量時，代表沒有包含關係，需要衝突策略。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr><th>比較結果</th><th>語意</th><th>同步動作</th></tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>A dominates B</td>\n            <td>A 已包含 B 的歷史</td>\n            <td>可用 A 覆蓋或讓 B 快進</td>\n          </tr>\n          <tr>\n            <td>B dominates A</td>\n            <td>B 已包含 A 的歷史</td>\n            <td>可用 B 作為較新版本</td>\n          </tr>\n          <tr>\n            <td>不可比較</td>\n            <td>兩邊並發分岔</td>\n            <td>執行 merge rule 或保留衝突</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>人會把鐘面順序誤認成因果</h2>\n      <p class=\"section-lede\">看到較晚 timestamp 很舒服，因為它給出一個單一答案；但分散式系統裡，較晚不一定代表知道較多。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>最後寫入迷信</strong>\n        <p>Last-write-wins 簡單，但會把離線期間的合法工作丟掉。</p>\n      </article>\n      <article class=\"example\">\n        <strong>時鐘權威錯覺</strong>\n        <p>NTP 或 RTC 讓時間看似共同，但網路延遲與裝置漂移仍會破壞判斷。</p>\n      </article>\n      <article class=\"example\">\n        <strong>衝突羞恥感</strong>\n        <p>團隊常把衝突視為系統失敗，其實有些衝突是世界真的同時分岔。</p>\n      </article>\n    </div>\n    <p class=\"micro-note\">向量時鐘把不確定性留在資料裡，逼產品決定並發更新的處理方式。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>把衝突偵測放進同步協議</h2>\n      <p class=\"section-lede\">只要系統允許多端離線寫入，版本欄位就不能只是一個自增整數或牆上時間。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>Device configuration</strong>\n        <p>工廠工具與現場設備各自修改設定，回傳後用向量判斷誰包含誰。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Distributed tracing</strong>\n        <p>跨服務事件可用邏輯時間輔助判讀因果，而不是只看 log 排列。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Replicated document</strong>\n        <p>協作文件的編輯若不可比較，系統需要 CRDT、OT 或人工合併策略。</p>\n      </article>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>節點數固定且小時，完整向量很直觀；大型系統需考慮 version vector、dotted version vector 或壓縮表示。</li>\n      <li>向量時鐘只偵測因果，不替業務決定哪個值正確。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>它不是更準的時鐘</h2>\n      <p class=\"section-lede\">向量時鐘的名字容易誤導；它不量秒數，而是量每個節點看過的事件前綴。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>可以取代所有 timestamp</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>審計、UI 顯示與 timeout 仍需要實際時間；向量解的是因果比較。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>能自動合併衝突</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>它只標出並發，merge 規則仍要依資料型別設計。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>節點越多越簡單</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>向量大小跟參與者數量相關；動態 membership 需要額外工程處理。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>這兩個版本真的是新舊，還是分岔</h2>\n    </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>如果兩個向量不可比較</strong>\n        <p>你要保留雙版本、要求人工選擇，還是有資料型別能安全合併？</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果節點會加入離開</strong>\n        <p>向量維度如何分配、回收與壓縮，是否會讓 metadata 比 payload 還重？</p>\n      </article>\n    </div>\n    <div class=\"template-note\">\n      <strong>延伸路線</strong>\n      <p>再往下可讀 Lamport clocks、CRDT、causal consistency 與 version vector，建立離線同步的因果語彙。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">向量時鐘段落依分散式系統因果排序整理；離線設備例子是同步協議的工程轉譯。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>Vector clock 條目整理向量計數器、偏序與並發偵測。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Vector_clock\" target=\"_blank\" rel=\"noreferrer\">Vector clock</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰概念</strong>\n        <p>Lamport timestamps 提供較輕量的邏輯時間對照，但無法完整偵測並發。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Lamport_timestamp\" target=\"_blank\" rel=\"noreferrer\">Lamport timestamp</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>研究背景</strong>\n        <p>Mattern 的 virtual time 論文是向量時間與全域狀態脈絡的重要來源之一。</p>\n        <a href=\"https://de.wikipedia.org/wiki/Friedemann_Mattern\" target=\"_blank\" rel=\"noreferrer\">Friedemann Mattern</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>找一個目前用 updated_at 解決衝突的同步流程，寫出它遇到雙離線更新時會丟掉哪個事實。</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  }
+}

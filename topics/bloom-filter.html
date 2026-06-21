@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>布隆過濾器 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-bloom-filter">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / data structures / hashing / memory</p>
+        <h1>布隆過濾器</h1>
+        <p class="topic-subtitle">Bloom Filter</p>
+        <p class="thesis">布隆過濾器用極少記憶體回答集合成員問題；它允許 false positive，但不允許 false negative。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>適合查 cache miss、封包去重、儲存索引與任何只需要快速排除不存在項目的場景。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>機率資料結構 / 集合查詢</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Possibly present, definitely absent</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>位元陣列、hash 數量、false positive、容量</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能判斷何時用少量記憶體換取可接受的誤判率</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>集合</span>
+          <span>位元</span>
+          <span>誤判</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>它最有價值的回答是「一定不在」</h2>
+          <p class="section-lede">布隆過濾器用多個 hash function 把元素映射到位元陣列；查詢時只要有任一位元為 0，就能確定元素沒被加入過。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>它用少量空間換來一種不對稱錯誤：可能把不存在的元素誤判為存在，但不會把已加入元素判成不存在。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先決定可錯方向</strong>
+            <p>只有 false positive 可接受時，Bloom filter 才是好交易。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再估容量</strong>
+            <p>元素數超過設計量後，位元陣列變滿，誤判率會快速上升。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後保留真資料</strong>
+            <p>Filter 只是一個前置判斷；真正需要資料時仍要查 backing store。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>用幾 KB 記住最近看過的 ID</h2>
+          <p class="section-lede">一個小型 gateway 要避免重複處理 event ID，但 RAM 只夠放位元陣列，無法保存完整近期集合。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>收到 ID 後寫入 k 個 hash 對應位元；下次查詢若有任一位元為 0，就知道它沒出現過。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>若所有位元都是 1，只能說可能出現過；系統必須能承受偶爾多做一次查證或跳過某些低價值工作。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">元素經多個 hash</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">設定位元陣列</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">查詢得到可能存在或必定不存在</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>Bloom filter 的核心不是更快的 hash set，而是用概率承諾壓低記憶體。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個會決定誤判率的旋鈕</h2>
+          <p class="section-lede">布隆過濾器看似簡單，實際設計要同時估元素數、位元數與 hash 數量。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>位元陣列大小</strong>
+            <p>越大越能降低碰撞，但佔用 RAM 或 cache 空間也越多。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Hash 個數</strong>
+            <p>太少會分散不足，太多會快速填滿位元並增加 CPU 成本。</p>
+          </article>
+          <article class="lens-card">
+            <strong>元素上限</strong>
+            <p>超過設計容量後，所有查詢都越來越像 positive。</p>
+          </article>
+          <article class="lens-card">
+            <strong>刪除策略</strong>
+            <p>標準 Bloom filter 不能安全刪除；需要 counting variant 才能處理移除。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>需求</th><th>適合</th><th>不適合</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>快速排除不存在</td>
+                <td>查 backing store 前先擋掉 miss</td>
+                <td>需要精確列舉集合</td>
+              </tr>
+              <tr>
+                <td>RAM 很少</td>
+                <td>embedded cache、邊緣設備</td>
+                <td>每次誤判都會造成安全問題</td>
+              </tr>
+              <tr>
+                <td>資料只增不刪</td>
+                <td>批次索引、短期去重</td>
+                <td>頻繁刪除且不能留殘影</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>「可能存在」很容易被聽成「存在」</h2>
+          <p class="section-lede">概率型資料結構最大的風險，常不是演算法，而是介面命名讓使用者誤會承諾。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>API 語意太強</strong>
+            <p>函式若叫 contains，呼叫者可能忘記它只代表 probably contains。</p>
+          </article>
+          <article class="example">
+            <strong>誤判被低估</strong>
+            <p>1% false positive 在每天數百萬次查詢時並不小。</p>
+          </article>
+          <article class="example">
+            <strong>容量超載難察覺</strong>
+            <p>Filter 飽和通常不會爆炸，只是默默變得越來越沒鑑別力。</p>
+          </article>
+        </div>
+        <p class="micro-note">好的 Bloom filter 介面應把可能性寫進命名、文件與監控，而不是埋在 implementation detail 裡。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>用在先篩掉不可能的查詢</h2>
+          <p class="section-lede">Bloom filter 適合當第一道低成本檢查，尤其在 backing store 很慢或記憶體有限時。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>Cache miss avoidance</strong>
+            <p>查磁碟或網路前先判斷 key 是否必定不存在，減少昂貴查詢。</p>
+          </article>
+          <article class="example">
+            <strong>封包或事件去重</strong>
+            <p>短時間內避免重複處理；誤判成本需要被流程吸收。</p>
+          </article>
+          <article class="example">
+            <strong>儲存索引</strong>
+            <p>LSM tree、資料庫與分散式儲存常用 filter 降低不必要讀取。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>在監控裡記錄 estimated fill ratio 與 false positive sample，而不是只看查詢速度。</li>
+          <li>把回傳值命名成 maybe_present / definitely_absent，降低語意誤用。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>它不是安全名單，也不是可列舉集合</h2>
+          <p class="section-lede">Bloom filter 的錯誤方向讓它很有用，也讓某些用途直接不合格。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>可以用來擋惡意 ID</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>false positive 可能放錯或擋錯；安全決策不能只靠它。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>可以取代 hash set</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>它不存原始元素，不能列舉、取值或回答確定存在。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>誤判率固定不變</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>加入元素越多，誤判率會跟著改變。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>你能接受哪一種錯</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果它誤判存在</strong>
+            <p>系統只是多查一次、少做一個低價值工作，還是會丟掉不可恢復的資料？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果容量被低估</strong>
+            <p>有沒有監控能在 filter 接近飽和時重建、旋轉或擴容？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>可與 cache invalidation、signal-to-noise ratio 與 approximate membership query filters 對照，理解省空間與承諾邊界。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">來源卡以 Bloom filter 的資料結構定義與原始論文脈絡為主，實務案例屬工程使用整理。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Bloom filter 條目整理位元陣列、多 hash 與 false positive / false negative 承諾。</p>
+            <a href="https://en.wikipedia.org/wiki/Bloom_filter" target="_blank" rel="noreferrer">Bloom filter</a>
+          </article>
+          <article class="source-card">
+            <strong>原始論文</strong>
+            <p>Burton Bloom 1970 的 Space/Time Trade-offs in Hash Coding with Allowable Errors 是概念來源。</p>
+            <a href="https://dl.acm.org/doi/10.1145/362686.362692" target="_blank" rel="noreferrer">Bloom 1970</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰類型</strong>
+            <p>Approximate membership query filter 條目補上更廣義的近似集合查詢資料結構。</p>
+            <a href="https://en.wikipedia.org/wiki/Approximate_membership_query_filter" target="_blank" rel="noreferrer">Approximate membership query filter</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>可與 cache invalidation、signal-to-noise ratio 與 approximate membership query filters 對照，理解省空間與承諾邊界。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

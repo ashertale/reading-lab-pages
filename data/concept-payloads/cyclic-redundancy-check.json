@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "cyclic-redundancy-check",
+    "outputPath": "topics/cyclic-redundancy-check.html"
+  },
+  "indexEntry": {
+    "id": "cyclic-redundancy-check",
+    "title": "循環冗餘校驗",
+    "subtitle": "Cyclic Redundancy Check",
+    "href": "./topics/cyclic-redundancy-check.html",
+    "order": 285,
+    "type": "錯誤偵測碼 / 資料完整性",
+    "domain": "通訊、儲存、封包與韌體協定",
+    "focus": "Detect accidental corruption with polynomial remainders",
+    "thesis": "CRC 用 GF(2) 多項式除法替資料加上一小段檢查值；它擅長抓偶發錯誤，但不是防竄改的安全機制。",
+    "tags": [
+      "CRC",
+      "checksum",
+      "error-detection",
+      "protocol",
+      "firmware",
+      "storage"
+    ]
+  },
+  "contentBrief": {
+    "pressurePoint": "CRC 很容易被當成 checksum 小細節，但多項式與參數選錯會讓偵測能力和互通性一起出問題。",
+    "smallestScenario": "兩端都寫 CRC-16，卻一邊反射 bit、一邊不反射；測試向量沒定義清楚，封包偶爾全數被判錯。",
+    "sourcePlan": [
+      "主概念：Cyclic redundancy check 條目整理多項式餘式、資料完整性與常見限制。",
+      "實作指南：Ross Williams 的 Painless Guide 是工程界常用的 CRC 參數與實作解說。",
+      "多項式選擇：Philip Koopman 的 CRC polynomial 資料整理不同訊息長度下的偵測能力。"
+    ],
+    "transferTargets": [
+      "通訊封包",
+      "bootloader image",
+      "NVM 資料完整性"
+    ],
+    "commonMisreading": "CRC 不是密碼學驗證；攻擊者能重算 CRC，所以它不能替代 MAC 或簽章。",
+    "readerQuestions": [
+      "協定是否明確寫出 polynomial、init、refin/refout、xorout 與 check value？",
+      "資料面臨的是偶發 bit error、burst error，還是惡意修改？"
+    ],
+    "sectionIntents": {
+      "core": "說明 CRC 的餘式檢查與 accidental corruption 邊界。",
+      "setup": "用兩端 CRC 參數不一致展示互通問題。",
+      "lenses": "拆成 polynomial、參數、錯誤模型與安全界線。",
+      "psychology": "指出名稱相同造成的自信陷阱。",
+      "applications": "連到封包、firmware image、NVM 與硬體加速。",
+      "misreadings": "校正把 CRC 當 hash、加密或單一標準的誤解。",
+      "questions": "要求讀者先寫測試向量與錯誤模型。",
+      "sources": "以 CRC 條目、Ross Williams guide 與 Koopman polynomial 資料作基礎。"
+    }
+  },
+  "page": {
+    "documentTitle": "循環冗餘校驗 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-cyclic-redundancy-check",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / error detection / protocols / firmware</p>\n    <h1>循環冗餘校驗</h1>\n    <p class=\"topic-subtitle\">Cyclic Redundancy Check</p>\n    <p class=\"thesis\">CRC 用 GF(2) 多項式除法替資料加上一小段檢查值；它擅長抓偶發錯誤，但不是防竄改的安全機制。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>適合設計 UART/SPI 封包、bootloader image、NVM 資料區與任何需要檢查 accidental corruption 的格式。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>錯誤偵測碼 / 資料完整性</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Detect accidental corruption with polynomial remainders</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>多項式、初始值、反射、殘值、Hamming distance</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能分辨 CRC 參數、錯誤偵測能力與安全認證之間的邊界</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>資料</span>\n      <span>餘式</span>\n      <span>偵測</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>一小段餘式，守的是資料有沒有走樣</h2>\n      <p class=\"section-lede\">CRC 把 bit string 視為 GF(2) 多項式，除以約定的 generator polynomial，將餘式作為檢查值附在資料後。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>它很適合抓通道噪聲、儲存腐敗與 burst error；但若參數沒寫清楚，兩個都叫 CRC-16 的實作可能完全不相容。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先定義完整參數</strong>\n        <p>polynomial、init、refin/refout、xorout 與 check value 都要進規格。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再對齊錯誤模型</strong>\n        <p>不同多項式對短訊息、長訊息與 burst error 的偵測能力不同。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後別拿來防攻擊</strong>\n        <p>CRC 是錯誤偵測，不是認證；惡意者可修改資料後重算。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>兩端都說 CRC-16，封包卻永遠不通</h2>\n      <p class=\"section-lede\">一個 MCU 和 host tool 都實作 CRC-16，但 host 用 reflected input，MCU 用 normal bit order，測試時每包都 mismatch。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小場景</strong>\n        <p>規格只寫 CRC-16-CCITT，沒有給 init、xorout、bit order 與標準字串 check value。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>CRC 名稱常像共同語言，實際上參數族非常多；沒有測試向量就無法保證互通。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">約定資料位元序</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">計算多項式餘式</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">接收端重算並比對</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>CRC 規格不是一句演算法名，而是一組可重現的參數與測試向量。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>設計 CRC 時別只問幾位元</h2>\n      <p class=\"section-lede\">CRC-8、CRC-16、CRC-32 只是長度；真正的偵測能力取決於多項式與訊息長度。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>Polynomial</strong>\n        <p>generator polynomial 決定哪些錯誤型態容易被抓到。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Parameter set</strong>\n        <p>init、reflection、final xor 與 residue 會影響互通結果。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Message length</strong>\n        <p>同一多項式對不同最大訊息長度有不同 Hamming distance。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Threat model</strong>\n        <p>偶發 corruption 用 CRC；惡意 tampering 需要 MAC、signature 或 authenticated encryption。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr><th>用途</th><th>CRC 適合度</th><th>補充機制</th></tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>UART 封包噪聲</td>\n            <td>很適合</td>\n            <td>定義長度、序列號與重傳</td>\n          </tr>\n          <tr>\n            <td>Firmware image 完整性</td>\n            <td>可抓 accidental corruption</td>\n            <td>若要防竄改需簽章</td>\n          </tr>\n          <tr>\n            <td>NVM 設定區</td>\n            <td>適合偵測 bit rot 或寫入中斷</td>\n            <td>搭配版本、雙 bank 或 journal</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>名字熟，反而讓人少問參數</h2>\n      <p class=\"section-lede\">CRC 太常見，工程師容易跳過最重要的規格細節。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>複製貼上</strong>\n        <p>網路範例可能使用不同 endian、reflection 或 initial value。</p>\n      </article>\n      <article class=\"example\">\n        <strong>測試資料太乾淨</strong>\n        <p>只用空字串或單一短封包測試，抓不到參數差異。</p>\n      </article>\n      <article class=\"example\">\n        <strong>安全語感混淆</strong>\n        <p>checksum、hash、signature 都在檢查資料，但威脅模型完全不同。</p>\n      </article>\n    </div>\n    <p class=\"micro-note\">CRC review 最有用的問題通常很樸素：標準字串 123456789 的結果是多少？</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>封包、映像檔與 NVM 都需要不同規格粒度</h2>\n      <p class=\"section-lede\">韌體使用 CRC 時，關鍵不是把函式呼叫上去，而是把資料邊界與錯誤處理寫清楚。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>通訊封包</strong>\n        <p>CRC 覆蓋 header 還是 payload、是否包含 length，都會影響錯誤偵測與解析流程。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Bootloader image</strong>\n        <p>CRC 可先抓傳輸或 flash corruption；正式安全啟動仍需簽章驗證。</p>\n      </article>\n      <article class=\"example\">\n        <strong>NVM 資料</strong>\n        <p>設定區可用 CRC 加版本號判斷資料是否完整，並在失敗時回退 default 或另一份 copy。</p>\n      </article>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>規格中放入至少一組完整測試向量，包含輸入 bytes 與預期 CRC。</li>\n      <li>把 CRC failure 的 recovery path 寫出來；偵測到錯誤但無法恢復，系統仍然不可靠。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>CRC 不是加密，也不是萬用 hash</h2>\n      <p class=\"section-lede\">它的強項是快速偵測偶發錯誤，不是抵抗有意識的修改。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>CRC 可以防止竄改</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>攻擊者可改資料再重算 CRC；需要 authentication 才能防竄改。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>CRC-32 一定比 CRC-16 好</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>長度重要，但多項式與最大訊息長度也會影響偵測能力。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>同名 CRC 必定相容</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>CRC-16 家族有多種參數；不給 check value 就容易錯接。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>先把參數寫到不能誤會</h2>\n    </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>如果交給另一個團隊實作</strong>\n        <p>他們只看規格能不能得到完全相同的 check value？</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果 CRC fail</strong>\n        <p>裝置會重傳、回退、拒絕啟動、還是只印 log 繼續跑？</p>\n      </article>\n    </div>\n    <div class=\"template-note\">\n      <strong>延伸路線</strong>\n      <p>可延伸到 Hamming distance、error-correcting codes 與 secure boot，分清楚偵測、校正與認證。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">來源卡以 CRC 定義與實作指南為主；韌體情境屬協定設計與可靠性映射。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>Cyclic redundancy check 條目整理多項式餘式、資料完整性與常見限制。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Cyclic_redundancy_check\" target=\"_blank\" rel=\"noreferrer\">Cyclic redundancy check</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>實作指南</strong>\n        <p>Ross Williams 的 Painless Guide 是工程界常用的 CRC 參數與實作解說。</p>\n        <a href=\"https://zlib.net/crc_v3.txt\" target=\"_blank\" rel=\"noreferrer\">A Painless Guide to CRC Error Detection Algorithms</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>多項式選擇</strong>\n        <p>Philip Koopman 的 CRC polynomial 資料整理不同訊息長度下的偵測能力。</p>\n        <a href=\"https://users.ece.cmu.edu/~koopman/crc/\" target=\"_blank\" rel=\"noreferrer\">Koopman CRC Polynomial Zoo</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>可延伸到 Hamming distance、error-correcting codes 與 secure boot，分清楚偵測、校正與認證。</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  }
+}

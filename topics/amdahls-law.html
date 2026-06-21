@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>阿姆達爾定律 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-amdahls-law">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / parallelism / bottlenecks / performance</p>
+        <h1>阿姆達爾定律</h1>
+        <p class="topic-subtitle">Amdahl&#x27;s Law</p>
+        <p class="thesis">系統加速的上限，常被那段看似很小、但無法並行的工作鎖住。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>讀這頁時，把它當成效能估算的煞車踏板：不是反對平行化，而是提醒你先把不可並行、同步等待與初始化收尾的比例算進去。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>效能法則 / 並行化邊界</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Serial fraction limits speedup</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>串行比例、並行粒度、同步成本、量測邊界</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在加硬體、加核心或加 thread 前，先估出真正會卡住 speedup 的段落</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>比例</span>
+          <span>瓶頸</span>
+          <span>上限</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>加速不是平均分給每個核心</h2>
+          <p class="section-lede">阿姆達爾定律把效能討論從「有幾個處理單元」拉回「工作裡有多少比例真的能同時做」。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>只要有一小段工作必須按順序完成，無論後面堆多少核心，整體速度都會逐漸撞上那段串行工作的天花板。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先找不可拆的段落</strong>
+            <p>初始化、鎖、單一匯流排、序列化協定與收尾合併，常比主迴圈更能決定上限。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再看同步吃掉多少</strong>
+            <p>平行化本身會帶來分派、等待、cache miss 與合併成本，這些不會自動免費。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後估理論之外的現場</strong>
+            <p>量測要包含真實資料、I/O、interrupt 與排程抖動；漂亮公式只能告訴你該追哪裡。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>一次優化會議裡的冷水</h2>
+          <p class="section-lede">把問題縮到一個 firmware build 或測試流程：九成步驟能丟給多台機器，剩下一成必須等待同一份簽章、同一個治具或同一條硬體連線。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>團隊想把 nightly validation 從 60 分鐘降到 10 分鐘，於是加了 8 台 runner；實跑後只降到 24 分鐘，因為 flashing、license checkout 與結果彙整仍排隊。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>直覺會把 runner 數量當成加速倍率，但總時間裡最硬的那段不是 test case 本身，而是所有 job 都必須回到同一個關口。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">切出可並行工作</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">剩下串行關口</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">speedup 被比例封頂</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>阿姆達爾的重點不是公式漂亮，而是讓你在買硬體之前先問：總時間裡哪一段仍只能一個一個來？</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個判斷 speedup 的角度</h2>
+          <p class="section-lede">同一份 workload 可以從比例、粒度、共享資源與觀測窗口來拆；任何一個角度漏掉，都會把效能計畫估得過度樂觀。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>串行比例</strong>
+            <p>若 5% 時間必須單線完成，無限多核心也不會讓整體快過 20 倍；這個比例越早量出來越好。</p>
+          </article>
+          <article class="lens-card">
+            <strong>工作粒度</strong>
+            <p>任務切得太細會讓排程與同步超過計算本體；切得太粗又會讓部分 worker 提早閒置。</p>
+          </article>
+          <article class="lens-card">
+            <strong>共享瓶頸</strong>
+            <p>flash programmer、global lock、memory bus、log sink 或 license server 都可能把平行工作重新壓成排隊。</p>
+          </article>
+          <article class="lens-card">
+            <strong>固定問題大小</strong>
+            <p>阿姆達爾通常假設問題規模不變；如果你因資源增加而處理更大資料集，就要同時看古斯塔夫森定律。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>現場訊號</th>
+                <th>容易誤判</th>
+                <th>阿姆達爾提醒</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>CPU 使用率不滿</td>
+                <td>再加核心就會快</td>
+                <td>也許 worker 正在等鎖、I/O 或單一設備。</td>
+              </tr>
+              <tr>
+                <td>單一測項很快</td>
+                <td>全部測項可等比縮短</td>
+                <td>setup、teardown 與報告彙整可能沒有一起縮短。</td>
+              </tr>
+              <tr>
+                <td>平均時間下降</td>
+                <td>最佳化成功</td>
+                <td>尾端等待可能仍決定 release 何時能過關。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>為什麼人喜歡相信多加資源會線性變快</h2>
+          <p class="section-lede">更多核心、更多人、更多機器給人立即可見的控制感；串行比例卻常藏在流程邊界與工具限制裡。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>可見資源比隱形等待好算</strong>
+            <p>硬體數量可以列在表上，等待鎖或等待治具的時間卻常散在 log 裡。</p>
+          </article>
+          <article class="example">
+            <strong>局部 benchmark 讓人高估</strong>
+            <p>一段 kernel 或 algorithm 變快，不代表整條 pipeline 的固定成本也被移除。</p>
+          </article>
+          <article class="example">
+            <strong>買資源比改流程痛感低</strong>
+            <p>拆掉單點關口常牽涉 ownership、工具鏈與驗證策略，比加 worker 難討論。</p>
+          </article>
+        </div>
+        <p class="micro-note">這個心理入口特別適合用在效能會議：先把不可並行比例公開，團隊才不會把希望全部押在擴機。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>帶回 firmware 效能與測試排程</h2>
+          <p class="section-lede">Firmware 團隊常同時碰到多核、DMA、CI runner、硬體治具與 release gate；阿姆達爾能把這些資源討論拉成一張上限表。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>多核 RTOS 任務</strong>
+            <p>把工作分到多核心前，先量 critical section、cache invalidation 與 IPC 等待；它們會變成真正的串行段。</p>
+          </article>
+          <article class="example">
+            <strong>硬體在迴路測試</strong>
+            <p>HIL 測試通常不是 test script 慢，而是 fixture、power cycle、flash 與人工換線成了共享瓶頸。</p>
+          </article>
+          <article class="example">
+            <strong>資料處理 pipeline</strong>
+            <p>log parsing 可以平行，最後排序、去重、簽章與 artifact 上傳仍可能讓整體卡在固定尾巴。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>做效能 proposal 時，同步列出可並行比例、不可並行比例與同步成本，而不是只列新增資源。</li>
+          <li>如果 speedup 卡住，優先找共享關口與固定成本；它們比主程式迴圈更常限制整體改善。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>容易把它讀得太悲觀</h2>
+          <p class="section-lede">阿姆達爾定律不是叫你放棄平行化，而是要求先承認上限從哪裡來。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所以平行化不值得</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>錯。它只說 speedup 有上限；若串行比例低，平行化仍可能非常值得。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要算一次比例就夠</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>比例會跟資料集、硬體、工具版本與 workload 改變；舊估算不能永久當真。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>瓶頸只能靠硬體解</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>很多串行段其實是流程或協定設計造成的，重排 ownership 可能比買設備有效。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>估加速前先問這兩件事</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果新增 4 倍資源</strong>
+            <p>總時間裡哪幾段完全不會受益？它們合計佔比多少？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果 speedup 低於預期</strong>
+            <p>你會先查 CPU 飽和、鎖等待、I/O 排隊、fixture 佔用，還是結果彙整？為什麼？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>可接著讀古斯塔夫森定律，對照固定工作量與放大工作量兩種截然不同的 scaling 故事。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這頁用 Amdahl 的 speedup 上限作為核心，並用 Gustafson 的 scaled speedup 補上問題規模會變大的另一種讀法。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>原始法則</strong>
+            <p>Amdahl&#x27;s Law 條目整理串行比例如何限制平行 speedup，以及它在電腦架構裡的典型公式。</p>
+            <a href="https://en.wikipedia.org/wiki/Amdahl%27s_law" target="_blank" rel="noreferrer">Amdahl&#x27;s law</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰觀點</strong>
+            <p>Gustafson&#x27;s Law 說明當問題規模隨資源增加而放大時，平行效益的判準會不同。</p>
+            <a href="https://en.wikipedia.org/wiki/Gustafson%27s_law" target="_blank" rel="noreferrer">Gustafson&#x27;s law</a>
+          </article>
+          <article class="source-card">
+            <strong>原始脈絡</strong>
+            <p>Amdahl 1967 年的討論提供大型計算能力與單處理器取徑之間的歷史背景。</p>
+            <a href="https://dl.acm.org/doi/10.1145/1465482.1465560" target="_blank" rel="noreferrer">Amdahl 1967</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>可接著讀古斯塔夫森定律，對照固定工作量與放大工作量兩種截然不同的 scaling 故事。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

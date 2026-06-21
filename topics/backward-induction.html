@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>逆向歸納 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-backward-induction">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / game theory / strategy / decision trees</p>
+        <h1>逆向歸納</h1>
+        <p class="topic-subtitle">Backward Induction</p>
+        <p class="thesis">逆向歸納從最後一個選擇往前推，讓你看清楚今天的承諾是否會在未來節點上站得住。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>適合談判、release gate、技術債償還承諾、roadmap sequencing 與任何今天選擇會改變明天選項的問題。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>賽局推理 / 序列決策</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Reason backward from future choices</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>終局、子賽局、可信承諾、倒推</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能把序列決策拆成後續節點，檢查當下策略是否可信</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>終局</span>
+          <span>倒推</span>
+          <span>承諾</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>先問最後會怎麼選，再決定現在怎麼走</h2>
+          <p class="section-lede">在序列賽局中，逆向歸納從最後一個決策點開始，逐步往前推每個玩家在該節點的理性選擇。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>很多計畫在今天看起來合理，是因為它假設未來會做某件不再有誘因的事；倒推會把這種承諾拆穿。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先畫終局</strong>
+            <p>列出最後可選動作與各自 payoff。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再倒推節點</strong>
+            <p>每個中間節點都假設玩家會選當時最有利的行動。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後檢查承諾</strong>
+            <p>若未來不會自願執行，需要現在創造可信約束。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>這版先欠著，下版真的會還嗎</h2>
+          <p class="section-lede">為了趕客戶 demo，團隊把 workaround 合進主線，會議紀錄寫著下版清理。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>到了下版，清理沒有新功能可展示，還可能引入 regression；新的 deadline 讓團隊再次延後。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>今天的承諾若沒有預留時間、測試與 owner，未來節點的誘因會把它推翻。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">看最後節點的理性選擇</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">往前修正中間策略</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">今天建立可信承諾</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>逆向歸納把「之後再說」改成「到時候為什麼真的會做」。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個倒推視角</h2>
+          <p class="section-lede">倒推不是算命，而是把選擇、誘因與承諾放到時間序列裡檢查。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>Game tree</strong>
+            <p>把每個節點的可選動作列出來，避免只看眼前一步。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Subgame</strong>
+            <p>從每個局部遊戲看玩家在那一刻的最佳回應。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Credible commitment</strong>
+            <p>若想讓未來行動可信，需要現在鎖定資源、制度或架構。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Path dependence</strong>
+            <p>早期選擇會改變後續選項；不是每條路都能無成本回頭。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>承諾</th><th>未來誘因</th><th>提高可信度</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>下版補測試</td>
+                <td>新功能又優先</td>
+                <td>把測試列為 merge gate</td>
+              </tr>
+              <tr>
+                <td>未來移除 legacy</td>
+                <td>客戶仍在用</td>
+                <td>先收集使用量並公布 deprecation date</td>
+              </tr>
+              <tr>
+                <td>之後降成本</td>
+                <td>短期 revenue 壓力</td>
+                <td>預留 capacity budget</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>未來的自己通常比較忙</h2>
+          <p class="section-lede">人很容易相信未來會更有空、更理性、更願意做不討喜的事。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>規劃樂觀</strong>
+            <p>今天低估未來需求，承諾看起來比實際便宜。</p>
+          </article>
+          <article class="example">
+            <strong>承諾折現</strong>
+            <p>沒有立即成本的承諾很容易被說出口，也很容易被忘掉。</p>
+          </article>
+          <article class="example">
+            <strong>局部理性</strong>
+            <p>每個節點單看都合理，整條路卻把系統帶到不想要的位置。</p>
+          </article>
+        </div>
+        <p class="micro-note">倒推讓計畫多一點冷感：不是問大家願不願意，而是問到時候還會不會願意。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>工程決策常是序列賽局</h2>
+          <p class="section-lede">Roadmap、重構、相容性與 release gate 都不是一次性選擇；每一步會改變下一步的誘因。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>Release gate</strong>
+            <p>若允許一次 bypass，未來每次 deadline 都會引用先例。</p>
+          </article>
+          <article class="example">
+            <strong>Technical debt</strong>
+            <p>承諾償還要有 budget、owner 與阻止繼續借債的機制。</p>
+          </article>
+          <article class="example">
+            <strong>Platform compatibility</strong>
+            <p>一旦承諾支援舊接口，未來移除會面對客戶與營收壓力。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>每個「之後」都要配一個未來節點：誰決策、當時誘因、拒絕成本、成功標準。</li>
+          <li>若未來節點不會自然做對的事，今天就要設 gate、budget 或不可逆約束。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>倒推不是只顧眼前利益</h2>
+          <p class="section-lede">它不是叫你短視，而是讓長期計畫面對每個節點的實際誘因。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>所有人都完全理性</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>現實中人會犯錯；倒推仍可用來檢查承諾和誘因。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>結論一定悲觀</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>若有可信承諾，倒推也能支持長期投資。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只適合賽局理論課本</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>工程 roadmap、deprecation 與談判同樣有序列決策。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>最後一步會不會背叛今天的計畫</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果未來 deadline 壓近</strong>
+            <p>當時團隊為什麼仍會選擇還債，而不是再次延期？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果對方知道你的未來誘因</strong>
+            <p>今天的威脅或承諾還可信嗎，需要先付出什麼押金？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>可接 subgame perfect equilibrium、sunk cost fallacy、one-way/two-way door 與 credible commitment。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">來源卡以 game theory 與 backward induction 定義為主，工程規劃案例屬決策轉譯。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Backward induction 條目整理從 game tree 終端節點往前求解的基本方法。</p>
+            <a href="https://en.wikipedia.org/wiki/Backward_induction" target="_blank" rel="noreferrer">Backward induction</a>
+          </article>
+          <article class="source-card">
+            <strong>賽局背景</strong>
+            <p>Stanford Encyclopedia of Philosophy 的 game theory 章節提供序列決策與理性分析脈絡。</p>
+            <a href="https://plato.stanford.edu/entries/game-theory/" target="_blank" rel="noreferrer">Game Theory</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰概念</strong>
+            <p>Subgame perfect equilibrium 可補上為何每個子賽局都要符合序列理性。</p>
+            <a href="https://en.wikipedia.org/wiki/Subgame_perfect_equilibrium" target="_blank" rel="noreferrer">Subgame perfect equilibrium</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>可接 subgame perfect equilibrium、sunk cost fallacy、one-way/two-way door 與 credible commitment。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

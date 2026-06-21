@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>絞殺榕模式 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-strangler-fig-pattern">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / legacy modernization / migration / architecture</p>
+        <h1>絞殺榕模式</h1>
+        <p class="topic-subtitle">Strangler Fig Pattern</p>
+        <p class="thesis">絞殺榕模式不主張一次重寫；它在舊系統周圍建立新路徑，逐步移走行為，直到舊核心可以安全退休。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>適合 legacy service、舊 driver、bootloader protocol、工廠工具與任何一次重寫風險太大的系統。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>現代化策略 / 漸進替換</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Replace old behavior incrementally around the edges</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>邊界、轉接層、行為覆蓋、退休條件</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能把大重寫拆成可驗證、可回退、可累積的替換步驟</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>包覆</span>
+          <span>轉移</span>
+          <span>退休</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>大重寫最危險的部分，是以為需求已經懂了</h2>
+          <p class="section-lede">絞殺榕模式在舊系統外建立新入口或新服務，把特定行為逐步導向新實作，而不是一次關掉舊系統。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>舊系統的行為常藏著例外、客戶依賴與歷史 workaround；一次重寫會把未知集中在同一天爆開。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先找 seam</strong>
+            <p>可攔截、可路由、可比較結果的邊界是第一個替換點。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再平行運行</strong>
+            <p>新舊路徑可短期共存，用觀測資料確認行為差異。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後刪掉舊路徑</strong>
+            <p>每次遷移都應縮小 legacy，而不是只增加一層轉接。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>舊工具不能停，新工具也不能等兩年才上線</h2>
+          <p class="section-lede">產線工具有大量舊流程與客戶例外；團隊想換 UI、協定與資料模型，但停線重寫不可接受。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>新工具先接管查詢與 log 匯出，燒錄與特殊 recovery 仍導向舊工具。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>轉接層要能觀察誰還在用舊路徑，否則新系統只是在舊系統旁邊多一套。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">建立可攔截邊界</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">逐步導流到新實作</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">移除已被取代的舊行為</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>漸進替換的勝利條件是 legacy surface 逐步縮小，而不是新舊永遠共存。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個讓遷移真的前進的判準</h2>
+          <p class="section-lede">遷移計畫要避免只新增 adapter；每個 slice 都要有觀測、比對與退休節點。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>Seam</strong>
+            <p>找到能攔截呼叫、資料或 UI flow 的位置，讓單一行為可被替換。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Routing</strong>
+            <p>用 feature flag、proxy、command dispatcher 或 protocol gateway 控制流量走向。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Behavior comparison</strong>
+            <p>在切換前後比對結果、錯誤率與使用情境，降低 hidden behavior 風險。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Retirement criteria</strong>
+            <p>當使用量、覆蓋率與例外處理達標，舊路徑要被刪除或封存。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Slice</th><th>適合先做</th><th>不適合先做</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>低風險高頻查詢</td>
+                <td>容易比對、價值早出現</td>
+                <td>資料語意仍不清楚</td>
+              </tr>
+              <tr>
+                <td>高風險寫入</td>
+                <td>要等冪等與回退設計完成</td>
+                <td>直接作為第一刀</td>
+              </tr>
+              <tr>
+                <td>少數客戶例外</td>
+                <td>可先記錄與隔離</td>
+                <td>不理解就硬搬進新模型</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>新系統在紙上總是比較乾淨</h2>
+          <p class="section-lede">重寫計畫常低估舊系統裡那些沒人喜歡、卻仍被現場依賴的行為。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>乾淨模型誘惑</strong>
+            <p>設計新模型時很容易把例外當髒資料，但客戶流程可能靠它活著。</p>
+          </article>
+          <article class="example">
+            <strong>遷移疲勞</strong>
+            <p>新舊並存需要操作成本，若沒有退休節奏，團隊會失去耐心。</p>
+          </article>
+          <article class="example">
+            <strong>成功片段被忽略</strong>
+            <p>漸進替換的價值是每一段都能上線學習，而不是等最後一天一次證明。</p>
+          </article>
+        </div>
+        <p class="micro-note">這個模式要求技術與產品一起決定：哪個行為先搬、怎麼驗證、何時宣布舊路徑死亡。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>Legacy driver、服務與工具都可以切片替換</h2>
+          <p class="section-lede">只要能找到穩定邊界，就能把重寫改成一系列小型可驗證遷移。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>Backend service</strong>
+            <p>用 proxy 把單一路由導到新服務，其餘仍由 monolith 處理。</p>
+          </article>
+          <article class="example">
+            <strong>Firmware protocol</strong>
+            <p>先讓新 command set 支援少數操作，gateway 負責新舊格式轉換與 telemetry。</p>
+          </article>
+          <article class="example">
+            <strong>Factory tool</strong>
+            <p>先替換 log viewer、查詢、報表等低風險高頻功能，累積使用資料。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>為每個 slice 定義 done：流量比例、錯誤率、使用量、舊路徑刪除日期。</li>
+          <li>轉接層要有 owner；沒有 owner 的 adapter 很容易變成下一代 legacy。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>漸進不是無期限共存</h2>
+          <p class="section-lede">這個模式降低大重寫風險，但也會製造過渡架構；若不移除，它會變成新負擔。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>先包一層就好了</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>包覆只是開始；真正工作是逐步移走行為。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>不需要理解舊系統</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>恰好相反，切 slice 需要理解邊界、例外與使用流量。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>永遠保持雙軌最安全</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>雙軌越久，測試、資料同步與操作複雜度越高。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>第一個 slice 要小到能驗證，也大到有價值</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果要選第一刀</strong>
+            <p>哪個功能邊界最清楚、使用量高、錯誤代價低，且能用指標比較新舊行為？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果轉接層上線</strong>
+            <p>它的退休條件、owner、觀測指標與移除日期是否已經寫進計畫？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>可接著看 parallel change、one-way/two-way door、Chesterton's Fence 與 technical debt，補上遷移判斷語言。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">來源卡以 Fowler 對 Strangler Fig 的現代化說明為主，工程段落聚焦可切片遷移。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Martin Fowler 的 Strangler Fig 文章說明以漸進現代化取代一次性重寫。</p>
+            <a href="https://martinfowler.com/bliki/StranglerFigApplication.html" target="_blank" rel="noreferrer">Strangler Fig</a>
+          </article>
+          <article class="source-card">
+            <strong>架構模式</strong>
+            <p>Microsoft Azure Strangler Fig pattern 文件整理以 facade 與 routing 漸進替換 legacy。</p>
+            <a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/strangler-fig" target="_blank" rel="noreferrer">Strangler Fig pattern</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰方法</strong>
+            <p>Patterns of Legacy Displacement 提供更多 legacy replacement 的切片與轉換模式。</p>
+            <a href="https://martinfowler.com/articles/patterns-legacy-displacement/" target="_blank" rel="noreferrer">Patterns of Legacy Displacement</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>可接著看 parallel change、one-way/two-way door、Chesterton's Fence 與 technical debt，補上遷移判斷語言。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

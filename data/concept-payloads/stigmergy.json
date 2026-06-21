@@ -1,0 +1,59 @@
+{
+  "target": {
+    "slug": "stigmergy",
+    "outputPath": "topics/stigmergy.html"
+  },
+  "indexEntry": {
+    "id": "stigmergy",
+    "title": "跡化協作",
+    "subtitle": "Stigmergy",
+    "href": "./topics/stigmergy.html",
+    "order": 300,
+    "type": "自組織機制 / 間接協調",
+    "domain": "分散式協作、工具設計、知識庫與工作流",
+    "focus": "Coordinate through traces left in the environment",
+    "thesis": "跡化協作描述個體不必直接溝通，也能透過環境中留下的痕跡引導後續行動。",
+    "tags": [
+      "stigmergy",
+      "coordination",
+      "self-organization",
+      "workflow",
+      "knowledge-management"
+    ]
+  },
+  "contentBrief": {
+    "pressurePoint": "團隊不一定靠更多會議協調；有時需要讓工作環境本身留下足夠清楚的下一步線索。",
+    "smallestScenario": "CI fail、owner 標籤、測試 artifact 與 issue 狀態若清楚，下一個工程師不用開會也知道該接哪裡。",
+    "sourcePlan": [
+      "主概念：Stigmergy 條目整理透過環境痕跡進行間接協調與自組織的定義。",
+      "研究脈絡：Heylighen 的 Stigmergy as a universal coordination mechanism 討論定義與組成。",
+      "相鄰觀點：Extended mind thesis 可補上把記憶與認知部分外部化到環境的哲學背景。"
+    ],
+    "transferTargets": [
+      "issue tracker",
+      "CI workflow",
+      "knowledge base"
+    ],
+    "commonMisreading": "跡化協作不是完全不用溝通；它是把一部分協調負擔轉移到共享環境與可見痕跡。",
+    "readerQuestions": [
+      "目前工作流留下的痕跡是否足以讓下一個人判斷狀態、owner 與下一步？",
+      "哪些協調會議其實是在補工具與環境沒有留下的資訊？"
+    ],
+    "sectionIntents": {
+      "core": "說明透過環境痕跡進行間接協調。",
+      "setup": "用 CI/issue 狀態展示不用同步會議也能接續工作。",
+      "lenses": "拆成痕跡品質、可見性、回饋與腐敗風險。",
+      "psychology": "指出人容易只想到直接溝通而忽略環境設計。",
+      "applications": "映射到工程工作流、文件、review 與 incident response。",
+      "misreadings": "校正把它當無管理、無 owner 或自動協作的誤用。",
+      "questions": "要求讀者找出工作環境中的資訊缺口。",
+      "sources": "以 stigmergy 條目與相關協作認知研究為來源。"
+    }
+  },
+  "page": {
+    "documentTitle": "跡化協作 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-stigmergy",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / coordination / self-organization / workflow</p>\n    <h1>跡化協作</h1>\n    <p class=\"topic-subtitle\">Stigmergy</p>\n    <p class=\"thesis\">跡化協作描述個體不必直接溝通，也能透過環境中留下的痕跡引導後續行動。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>適合思考 issue tracker、CI 狀態、看板、文件註記、review workflow 與分散式團隊協作。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>自組織機制 / 間接協調</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Coordinate through traces left in the environment</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>痕跡、環境、回饋、局部行動</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能設計讓工作痕跡自然引導下一步的協作系統</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>痕跡</span>\n      <span>環境</span>\n      <span>行動</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>工作痕跡也能成為協調訊號</h2>\n      <p class=\"section-lede\">Stigmergy 指的是個體透過改變環境留下痕跡，後續個體再依痕跡行動，形成間接協調。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>直接溝通昂貴且容易遺失；環境痕跡能降低同步成本，但痕跡若模糊或過期，也會引導錯誤行動。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先留下狀態</strong>\n        <p>工作到哪、誰負責、卡在哪裡，要在環境中可見。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再引導下一步</strong>\n        <p>好的痕跡不只記錄過去，還提示後續可行動作。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後清理殘影</strong>\n        <p>過期標籤、壞 dashboard 與舊文件會變成反向協調。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>下一個值班工程師不用先問一輪</h2>\n      <p class=\"section-lede\">一個 nightly build 失敗；CI artifact、owner label、bisect result 與 issue 狀態若完整，接手者能直接行動。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小場景</strong>\n        <p>前一位工程師留下失敗測試、可疑 commit、已排除原因與下一個檢查點。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>若所有脈絡只存在聊天訊息或腦中，交接就必須靠同步溝通，且容易漏資訊。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">行動留下痕跡</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">他人讀取痕跡</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">後續行動改變環境</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>跡化協作把部分 coordination 存進共享環境。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>痕跡要能被看見、理解與更新</h2>\n      <p class=\"section-lede\">不是所有紀錄都有協調價值；好的痕跡要在正確時間出現在正確地方。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>可見性</strong>\n        <p>狀態藏在私人筆記或聊天深處，就無法引導團隊行動。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>語意清楚</strong>\n        <p>標籤、狀態與欄位要有共同定義，否則每個人讀法不同。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>回饋速度</strong>\n        <p>CI、監控、review bot 的回饋越靠近工作點，越能引導下一步。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>腐敗控制</strong>\n        <p>過期痕跡需要被移除或標記，避免舊訊號誤導新行動。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr><th>環境痕跡</th><th>協調作用</th><th>壞掉時</th></tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>CI 狀態</td>\n            <td>指出可合併或需修復</td>\n            <td>flaky 測試讓大家忽略紅燈</td>\n          </tr>\n          <tr>\n            <td>Issue label</td>\n            <td>顯示 owner、priority、blocked reason</td>\n            <td>標籤過期造成錯誤排程</td>\n          </tr>\n          <tr>\n            <td>Runbook 註記</td>\n            <td>保留事故處理路徑</td>\n            <td>未更新會導向舊系統</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>我們常把協調想成開會</h2>\n      <p class=\"section-lede\">會議能解決不確定性，但若每次都要開會，代表環境沒有承載足夠狀態。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>口頭脈絡依賴</strong>\n        <p>知道的人一離線，工作就停住。</p>\n      </article>\n      <article class=\"example\">\n        <strong>工具被當倉庫</strong>\n        <p>如果 issue tracker 只是事後歸檔，它就不會引導當下行動。</p>\n      </article>\n      <article class=\"example\">\n        <strong>訊號疲勞</strong>\n        <p>過多 bot 訊息和狀態會讓真正重要痕跡被淹沒。</p>\n      </article>\n    </div>\n    <p class=\"micro-note\">協作工具的設計問題常不是資訊太少，而是資訊沒有變成可行動的痕跡。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>讓工作流自己提示下一步</h2>\n      <p class=\"section-lede\">工程團隊每天都在使用 stigmergic systems，只是常沒有用這個名字。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>Issue tracker</strong>\n        <p>狀態、owner、blocked reason 與 reproduction steps 讓任務能非同步接力。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Code review</strong>\n        <p>inline comments、check runs 與 requested changes 在程式碼旁留下可處理痕跡。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Incident response</strong>\n        <p>timeline、current hypothesis、mitigation status 讓下一班不用重建整個故事。</p>\n      </article>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>把下一步放在工作物件旁，而不是只放在聊天訊息裡。</li>\n      <li>定期刪除或標記 stale labels、flaky checks 與過期 runbook，避免環境說謊。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>自組織不等於沒責任</h2>\n      <p class=\"section-lede\">環境痕跡能降低協調成本，但仍需要 owner、清理規則與例外處理。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>不用溝通</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>複雜衝突、價值判斷與模糊責任仍需要直接對話。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>工具會自動協作</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>工具只承載痕跡；痕跡品質取決於團隊行為。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>越多狀態越好</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>太多欄位和 bot 訊息會讓重要線索失去注意力。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>下一個人能不能只看環境就接上</h2>\n    </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>如果 owner 離線</strong>\n        <p>issue、branch、CI artifact 和文件是否足以讓別人知道目前判斷與下一步？</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果某個標籤過期</strong>\n        <p>誰會清理，多久清理一次，系統是否會提醒它已不可信？</p>\n      </article>\n    </div>\n    <div class=\"template-note\">\n      <strong>延伸路線</strong>\n      <p>可接 observability、Conway's Law、knowledge management 與 double-loop learning，思考組織如何透過環境學習。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">來源卡以 stigmergy 的間接協調定義為主，工程工作流段落是協作系統設計轉譯。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>Stigmergy 條目整理透過環境痕跡進行間接協調與自組織的定義。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Stigmergy\" target=\"_blank\" rel=\"noreferrer\">Stigmergy</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>研究脈絡</strong>\n        <p>Heylighen 的 Stigmergy as a universal coordination mechanism 討論定義與組成。</p>\n        <a href=\"https://doi.org/10.1016/j.cogsys.2015.12.002\" target=\"_blank\" rel=\"noreferrer\">Stigmergy as a universal coordination mechanism</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰觀點</strong>\n        <p>Extended mind thesis 可補上把記憶與認知部分外部化到環境的哲學背景。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Extended_mind_thesis\" target=\"_blank\" rel=\"noreferrer\">Extended mind thesis</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>可接 observability、Conway's Law、knowledge management 與 double-loop learning，思考組織如何透過環境學習。</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  }
+}

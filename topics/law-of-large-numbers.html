@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>大數法則 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-law-of-large-numbers">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / probability / sampling / estimation</p>
+        <h1>大數法則</h1>
+        <p class="topic-subtitle">Law of Large Numbers</p>
+        <p class="thesis">平均值會穩，不是因為每次觀測都可靠，而是因為足夠多次、條件相近的觀測會慢慢把偶然波動沖淡。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁想拆掉的，是『我已經看了幾次，應該差不多了吧』這種危險安心感。大數法則談的是收斂條件，不是替小樣本背書。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>機率原理 / 取樣判準</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>When averages become trustworthy</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>樣本量、可比性、獨立性、波動幅度</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能分辨一個平均值何時值得信，何時還只是小樣本的情緒投影</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>重複</span>
+          <span>平均</span>
+          <span>收斂</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+
+    <section class="chapter" id="core">
+    <div class="section-heading">
+      <p class="section-label">Orientation</p>
+      <h2>平均會變穩，但穩定不是免費送的</h2>
+      <p class="section-lede">大數法則常被誤聽成『多做幾次就一定準』；真正要緊的是，什麼叫做夠多、什麼叫做可比，以及你平均的究竟是不是同一件事。</p>
+    </div>
+    <div class="core-card">
+      <p class="section-label">Core Tension</p>
+      <p>我們幾乎每天都靠平均值下判斷，但平均之所以有用，是因為重複觀測在條件足夠一致時會互相抵消波動；條件不對，平均就只是把雜訊抹平得更好看。</p>
+    </div>
+    <div class="principle-strip" aria-label="本頁讀法">
+      <div>
+        <span>01</span>
+        <strong>先把次數和可信度分開</strong>
+        <p>觀測次數增加會幫助收斂，但它不會自動修正偏差、漂移或量測定義本身的錯。</p>
+      </div>
+      <div>
+        <span>02</span>
+        <strong>再看樣本是不是可比</strong>
+        <p>只有在條件相近時，平均才像平均；若資料生成機制在變，疊得再多也未必會朝同一值收斂。</p>
+      </div>
+      <div>
+        <span>03</span>
+        <strong>最後承認短期波動仍有語義</strong>
+        <p>小樣本的起伏不一定是假象，但它通常還不足以承受過重的結論。</p>
+      </div>
+    </div>
+    </section>
+
+    <section class="chapter" id="setup">
+    <div class="section-heading">
+      <p class="section-label">Setup</p>
+      <h2>從十台樣機的『零故障』開始</h2>
+      <p class="section-lede">工程場景裡，大數法則最常不是被反對，而是被過早套用。</p>
+    </div>
+    <div class="definition-grid">
+      <div class="tile">
+        <strong>最小場景</strong>
+        <p>你做了十台樣機 burn-in，剛好都沒看到 reset，團隊開始說「看起來已經很穩」。又或者你只測了八個客戶站點，就想估場域故障率。</p>
+      </div>
+      <div class="tile">
+        <strong>真正難點</strong>
+        <p>零故障不代表故障率為零；它只代表目前樣本裡剛好還沒看見。若樣本量小、場景差異大，平均值離它的長期樣貌可能還很遠。</p>
+      </div>
+    </div>
+    <div class="concept-flow" aria-label="問題展開">
+      <div class="flow-step">拿到少量觀測後先看到一個漂亮平均</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">把漂亮數字誤讀成穩定真相</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">在更大樣本或更異質場景出現時被現實打回來</div>
+    </div>
+    <div class="paradox-frame">
+      <strong>Key Point</strong>
+      <p>大數法則提供的是長期收斂的方向感，不是短期樣本就能直接領走的保證書。</p>
+    </div>
+    </section>
+
+    <section class="chapter" id="lenses">
+    <div class="section-heading">
+      <p class="section-label">Lenses</p>
+      <h2>四個透鏡，判斷平均值到底靠不靠得住</h2>
+      <p class="section-lede">當你說『平均已經很穩』時，至少要同時回答樣本量、波動、可比性與資料生成是否在變。</p>
+    </div>
+    <div class="lens-grid">
+      <article class="lens-card">
+        <strong>樣本量</strong>
+        <p>次數太少時，偶然波動會主導畫面；此時平均更像暫時快照，而不是可靠估計。</p>
+      </article>
+      <article class="lens-card">
+        <strong>變異大小</strong>
+        <p>同樣是十次觀測，高變異系統比低變異系統需要更多樣本才會把平均穩下來。</p>
+      </article>
+      <article class="lens-card">
+        <strong>可比性</strong>
+        <p>若每次試驗條件、負載、溫度或客戶使用方式差很多，『把它們平均』本身就可能先有問題。</p>
+      </article>
+      <article class="lens-card">
+        <strong>漂移與依賴</strong>
+        <p>資料若存在時間漂移、批次效應或互相依賴，再多樣本也不代表你在看同一個分布。</p>
+      </article>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>看到的現象</th>
+            <th>太快的解讀</th>
+            <th>更穩妥的追問</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>前十次都沒失敗</td>
+            <td>故障率應該很低</td>
+            <td>這十次條件相近嗎？樣本量夠承擔這句話嗎？</td>
+          </tr>
+          <tr>
+            <td>平均延遲下降</td>
+            <td>系統整體變快了</td>
+            <td>是樣本組成變了，還是真的每一類情境都改善了？</td>
+          </tr>
+          <tr>
+            <td>兩批量測平均接近</td>
+            <td>產品表現穩定</td>
+            <td>變異與尾端是否也接近，還是只是均值剛好差不多？</td>
+          </tr>
+          <tr>
+            <td>長期平均不錯</td>
+            <td>局部異常可忽略</td>
+            <td>那些異常是偶發噪音，還是暗示分布正在變？</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </section>
+
+    <section class="chapter" id="psychology">
+    <div class="section-heading">
+      <p class="section-label">Psychology</p>
+      <h2>人為什麼這麼容易過早相信平均值</h2>
+      <p class="section-lede">因為平均看起來安靜、有序、像答案。它能把混亂壓成單一數字，而我們很容易對這種整齊過度感謝。</p>
+    </div>
+    <div class="example-grid">
+      <div class="example">
+        <strong>小樣本也想講大故事</strong>
+        <p>只要數字朝喜歡方向動幾次，人就會忍不住替它加上趨勢、品質或能力的敘事。</p>
+      </div>
+      <div class="example">
+        <strong>零次觀測很有誘惑</strong>
+        <p>當某個壞事暫時沒出現時，我們會把『沒看見』誤讀成『幾乎不存在』，尤其在專案壓力很大時更如此。</p>
+      </div>
+      <div class="example">
+        <strong>平均值掩蓋尾端</strong>
+        <p>平均一旦好看，極端值和分布形狀就很容易被一起藏起來，讓人忽略真正痛的風險可能還在尾端。</p>
+      </div>
+    </div>
+    <p class="micro-note">真正成熟的讀法不是迷信平均，而是知道平均何時有資格站上台，何時還該留在草稿區。</p>
+    </section>
+
+    <section class="chapter" id="applications">
+    <div class="section-heading">
+      <p class="section-label">Applications</p>
+      <h2>把它帶回測試、benchmark 與場域資料</h2>
+      <p class="section-lede">工程團隊最常誤用大數法則的地方，就是太快把少量成功樣本包裝成穩定結論。</p>
+    </div>
+    <div class="example-grid">
+      <div class="example">
+        <strong>量產良率</strong>
+        <p>試產前幾批的平均良率若看起來漂亮，仍要小心批次差異、供應商切換或工藝暖機期帶來的偏差。</p>
+      </div>
+      <div class="example">
+        <strong>benchmark 與延遲量測</strong>
+        <p>跑了幾次平均變快不代表系統整體更好；工作負載組成、快取暖身與尾端延遲都可能讓均值很好看。</p>
+      </div>
+      <div class="example">
+        <strong>場域故障率</strong>
+        <p>客戶數一少、場景差異一大時，把早期站點資料直接平均後當總體真相，通常會太樂觀也太粗糙。</p>
+      </div>
+    </div>
+    <ul class="bullet-list">
+      <li>看平均值時，至少一起看樣本量、變異、尾端和資料條件是否可比。</li>
+      <li>若資料生成機制正在漂移，再多歷史平均都不能直接替未來背書。</li>
+    </ul>
+    </section>
+
+    <section class="chapter" id="misreadings">
+    <div class="section-heading">
+      <p class="section-label">Misreadings</p>
+      <h2>三個最容易造成誤判的說法</h2>
+      <p class="section-lede">大數法則常被拿來替過度自信背書，但那不是它的工作。</p>
+    </div>
+    <div class="collocation-list" aria-label="常見誤讀">
+      <article class="collocation-card">
+        <div>
+          <strong>樣本一多，偏差自然會消失</strong>
+          <span class="register-tag">校正</span>
+        </div>
+        <p>若量測方法本身偏、取樣方式偏，更多樣本只會更精準地重複同一個偏差。</p>
+      </article>
+      <article class="collocation-card">
+        <div>
+          <strong>大數法則就是中央極限定理</strong>
+          <span class="register-tag">校正</span>
+        </div>
+        <p>兩者有關但不相同；一個談平均是否收斂，另一個談標準化後的分布形狀。</p>
+      </article>
+      <article class="collocation-card">
+        <div>
+          <strong>平均不錯，所以系統就沒事</strong>
+          <span class="register-tag">校正</span>
+        </div>
+        <p>平均可能掩蓋尾端風險與分布漂移，尤其在可靠性與延遲問題上特別危險。</p>
+      </article>
+    </div>
+    </section>
+
+    <section class="chapter" id="questions">
+    <div class="section-heading">
+      <p class="section-label">Questions</p>
+      <h2>每次想引用平均值前，先問這兩題</h2>
+    </div>
+    <div class="prompt-grid">
+      <article class="prompt-card">
+        <strong>這些觀測真的夠多、也夠可比嗎？</strong>
+        <p>若條件差異大、樣本又少，平均值通常還沒有資格被拿來當穩定結論。</p>
+      </article>
+      <article class="prompt-card">
+        <strong>我們平均掉的是偶然波動，還是把真正重要的結構也一起磨平了？</strong>
+        <p>當尾端風險、批次效應或使用情境差異被抹掉時，平均值就可能剛好遮住最該看的東西。</p>
+      </article>
+    </div>
+    <div class="template-note">
+      <strong>延伸路線</strong>
+      <p>下一步可以接 regression to the mean、selection bias、central limit theorem，一起把『平均何時有用、何時會騙人』的輪廓補完整。</p>
+    </div>
+    </section>
+
+    <section class="chapter" id="sources">
+    <div class="section-heading">
+      <p class="section-label">Sources</p>
+      <h2>來源與整理方式</h2>
+      <p class="section-lede">本頁以大數法則的經典數學敘述為主，再補上歷史脈絡與伯努力版本，工程例子則是依同一統計結構做的教學整理。</p>
+    </div>
+    <div class="source-grid">
+      <article class="source-card">
+        <strong>主條目</strong>
+        <p>Wikipedia 的 Law of large numbers 條目整理了弱、強版本與常見誤會，適合當總覽骨架。</p>
+        <a href="https://en.wikipedia.org/wiki/Law_of_large_numbers" target="_blank" rel="noreferrer">Law of large numbers</a>
+      </article>
+      <article class="source-card">
+        <strong>數學百科</strong>
+        <p>Encyclopedia of Mathematics 的條目把 Bernoulli、Poisson、Chebyshev 到 Kolmogorov 的脈絡收得很完整。</p>
+        <a href="https://encyclopediaofmath.org/wiki/Law_of_large_numbers" target="_blank" rel="noreferrer">Law of large numbers - Encyclopedia of Mathematics</a>
+      </article>
+      <article class="source-card">
+        <strong>早期版本</strong>
+        <p>Bernoulli theorem 的條目能補上『事件頻率趨近機率』這個最直覺、也最容易被過度延伸的版本。</p>
+        <a href="https://en.wikipedia.org/wiki/Bernoulli%27s_theorem" target="_blank" rel="noreferrer">Bernoulli's theorem</a>
+      </article>
+    </div>
+    </section>
+
+    <section class="chapter">
+      <div class="reference-box">
+        <div>
+          <p class="section-label">Reference</p>
+          <h2>下一步</h2>
+          <p>若要讓這組機率頁面更完整，之後很適合補 central limit theorem，因為它正好回答另一個常被混進來的問題：平均長什麼樣。</p>
+        </div>
+        <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+      </div>
+    </section>
+
+    </article>
+  </main>
+</body>
+</html>

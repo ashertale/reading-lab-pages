@@ -1,0 +1,59 @@
+{
+  "target": {
+    "slug": "bulkhead-pattern",
+    "outputPath": "topics/bulkhead-pattern.html"
+  },
+  "indexEntry": {
+    "id": "bulkhead-pattern",
+    "title": "隔艙模式",
+    "subtitle": "Bulkhead Pattern",
+    "href": "./topics/bulkhead-pattern.html",
+    "order": 288,
+    "type": "韌性模式 / 資源隔離",
+    "domain": "分散式系統、韌體任務與服務資源池",
+    "focus": "Partition resources to contain failure",
+    "thesis": "隔艙模式把資源切成可控區塊，讓一個區塊卡死時，不會拖垮整艘系統。",
+    "tags": [
+      "bulkhead",
+      "resilience",
+      "isolation",
+      "thread-pool",
+      "fault-containment"
+    ]
+  },
+  "contentBrief": {
+    "pressurePoint": "共享資源提高利用率，也讓一個慢依賴有機會耗盡所有工作者。",
+    "smallestScenario": "低優先 telemetry 上傳卡在網路 timeout，卻吃滿共用 thread pool，導致 command path 也無法回應。",
+    "sourcePlan": [
+      "模式定義：Microsoft Azure Architecture Center 的 Bulkhead pattern 說明以資源分區限制故障傳播。",
+      "概念背景：Bulkhead pattern 條目整理 software architecture 中以資源池隔離故障的語意。",
+      "相鄰模式：Circuit breaker pattern 可與隔艙搭配，避免壞依賴持續消耗隔艙資源。"
+    ],
+    "transferTargets": [
+      "thread pool",
+      "RTOS task",
+      "connection pool"
+    ],
+    "commonMisreading": "隔艙不是任意切小；切太碎會造成低利用率與操作複雜度。",
+    "readerQuestions": [
+      "哪些低價值或高風險工作正在與安全關鍵路徑共用同一個資源池？",
+      "某個依賴變慢時，系統是否能只降級一部分功能而保住核心控制面？"
+    ],
+    "sectionIntents": {
+      "core": "說明資源隔離如何阻止 failure cascade。",
+      "setup": "用 telemetry 卡住 command path 展示共用池耗盡。",
+      "lenses": "拆成隔離邊界、配額、降級與利用率 tradeoff。",
+      "psychology": "指出共享池讓早期效率好看但風險耦合。",
+      "applications": "映射到 cloud services、RTOS、firmware memory 與 I/O queue。",
+      "misreadings": "校正把隔艙當萬用分割或只靠服務拆分的誤用。",
+      "questions": "要求讀者找出核心路徑與噪音路徑的共享耗盡點。",
+      "sources": "以 Microsoft bulkhead pattern 與軟體架構定義為主。"
+    }
+  },
+  "page": {
+    "documentTitle": "隔艙模式 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-bulkhead-pattern",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / resilience / isolation / resource pools</p>\n    <h1>隔艙模式</h1>\n    <p class=\"topic-subtitle\">Bulkhead Pattern</p>\n    <p class=\"thesis\">隔艙模式把資源切成可控區塊，讓一個區塊卡死時，不會拖垮整艘系統。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>適合檢查 thread pool、connection pool、RTOS task priority、memory partition 與跨服務依賴。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>韌性模式 / 資源隔離</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Partition resources to contain failure</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>隔離邊界、資源池、降級、利用率</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能判斷哪些工作不該共用同一個耗盡點</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>分艙</span>\n      <span>耗盡</span>\n      <span>保命</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>不要讓低價值工作吃掉救命資源</h2>\n      <p class=\"section-lede\">隔艙模式把 thread、connection、queue、memory 或 service instances 分成獨立池，讓故障停在邊界內。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>共享資源最省，但也最容易讓一個慢 downstream、buggy feature 或流量尖峰把整個系統拖住。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先找共享耗盡點</strong>\n        <p>thread pool、socket、heap、queue depth 都可能是失效傳播通道。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再切核心路徑</strong>\n        <p>控制、恢復、安全與管理面不該和低價值背景工作完全共用資源。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後接受利用率代價</strong>\n        <p>隔離會犧牲部分效率，換來故障時的可預測降級。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>Telemetry 卡住，控制命令也失靈</h2>\n      <p class=\"section-lede\">設備把 telemetry upload、remote command、firmware check 都丟進同一個 worker pool；網路慢時，upload 任務佔滿 worker。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小場景</strong>\n        <p>低優先上傳任務等待 timeout，command handler 排在後面，使用者以為設備死機。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>功能彼此看似無關，卻透過 thread pool 和 socket pool 共享同一個耗盡點。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">低價值任務變慢</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">共用資源被吃滿</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">核心路徑無法取得執行機會</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>隔艙模式把故障傳播路徑改成可設計的邊界。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>隔離要切在會耗盡的地方</h2>\n      <p class=\"section-lede\">服務拆開不代表隔離完成；若仍共用同一個資料庫連線池或 executor，失效仍會穿過去。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>資源池</strong>\n        <p>獨立 thread pool、connection pool 或 queue quota 能防止單一路徑吃滿全部。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>優先級</strong>\n        <p>安全與控制路徑需要保留容量，不應與 bulk work 競爭到最後一格。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>降級模式</strong>\n        <p>隔艙滿了時要回傳 degraded，而不是讓請求無限等待。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>觀測性</strong>\n        <p>每個隔艙都需要水位、拒絕數、延遲與飽和時間。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr><th>切法</th><th>保護</th><th>風險</th></tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>獨立 thread pool</td>\n            <td>慢任務不吃掉控制 worker</td>\n            <td>池太小會降低吞吐</td>\n          </tr>\n          <tr>\n            <td>連線配額</td>\n            <td>壞 downstream 不佔滿所有 sockets</td>\n            <td>需要依流量調整配額</td>\n          </tr>\n          <tr>\n            <td>記憶體區隔</td>\n            <td>低優先 buffer 不壓垮核心狀態</td>\n            <td>浪費未用保留空間</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>共享池在正常時最迷人</h2>\n      <p class=\"section-lede\">早期負載小時，共享 pool 看起來簡潔又高效；直到某條路徑變慢，耦合才浮現。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>效率偏誤</strong>\n        <p>大家會看到平均利用率提高，卻低估故障時的競爭。</p>\n      </article>\n      <article class=\"example\">\n        <strong>功能邊界幻覺</strong>\n        <p>程式碼模組分開，不代表 runtime resource 也分開。</p>\n      </article>\n      <article class=\"example\">\n        <strong>降級不敢設計</strong>\n        <p>怕拒絕請求看起來壞，結果讓整個系統一起等死。</p>\n      </article>\n    </div>\n    <p class=\"micro-note\">隔艙的 review 重點是問：哪一類失敗可以被允許局部發生？</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>雲端服務和 RTOS 任務都有隔艙問題</h2>\n      <p class=\"section-lede\">隔艙不是微服務專用；嵌入式系統裡的 task、queue、DMA buffer 與 heap 也需要邊界。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>Cloud backend</strong>\n        <p>把報表查詢、批次工作與交易 API 分開資源池，避免慢查詢拖垮交易。</p>\n      </article>\n      <article class=\"example\">\n        <strong>RTOS firmware</strong>\n        <p>讓 safety monitor、control loop 與 telemetry 分別有優先級和 queue 限額。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Connection pools</strong>\n        <p>不同 downstream 設獨立配額，避免單一依賴故障耗盡所有連線。</p>\n      </article>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>為每個隔艙設 saturation metric；沒有觀測性，隔離只是一張架構圖。</li>\n      <li>用故障演練驗證：某隔艙滿載時，核心路徑是否仍在 deadline 內完成。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>隔艙不是把所有東西切碎</h2>\n      <p class=\"section-lede\">切太細會降低利用率、增加配置成本，甚至讓排程更難理解。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>服務拆開就等於隔艙</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>如果共用同一個 DB pool、executor 或 rate limit，故障仍可傳播。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>隔艙越多越安全</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>過度切分會造成資源閒置與難以調參。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>隔艙可替代 timeout</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>隔離需要搭配 timeout、circuit breaker 與 fallback 才能完整控制失效。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>哪個耗盡點不該被共享</h2>\n    </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>如果某個 feature 卡住</strong>\n        <p>它會吃掉哪些 thread、connection、memory 或 queue，是否影響安全或控制路徑？</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果隔艙滿了</strong>\n        <p>系統會明確拒絕、降級、排隊，還是讓 caller 無限等待？</p>\n      </article>\n    </div>\n    <div class=\"template-note\">\n      <strong>延伸路線</strong>\n      <p>可與 circuit breaker、blast radius、backpressure 與 graceful degradation 一起看，形成完整失效控制策略。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">來源卡以雲端架構模式描述為主，RTOS 與韌體例子是資源隔離觀念的工程轉譯。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>模式定義</strong>\n        <p>Microsoft Azure Architecture Center 的 Bulkhead pattern 說明以資源分區限制故障傳播。</p>\n        <a href=\"https://learn.microsoft.com/en-us/azure/architecture/patterns/bulkhead\" target=\"_blank\" rel=\"noreferrer\">Bulkhead pattern</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>概念背景</strong>\n        <p>Bulkhead pattern 條目整理 software architecture 中以資源池隔離故障的語意。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Bulkhead_pattern\" target=\"_blank\" rel=\"noreferrer\">Bulkhead pattern overview</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰模式</strong>\n        <p>Circuit breaker pattern 可與隔艙搭配，避免壞依賴持續消耗隔艙資源。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Circuit_breaker_design_pattern\" target=\"_blank\" rel=\"noreferrer\">Circuit breaker pattern</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>可與 circuit breaker、blast radius、backpressure 與 graceful degradation 一起看，形成完整失效控制策略。</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  }
+}

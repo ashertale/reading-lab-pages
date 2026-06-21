@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>側信道攻擊 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-side-channel-attack">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / security / timing / physical leakage</p>
+        <h1>側信道攻擊</h1>
+        <p class="topic-subtitle">Side-Channel Attack</p>
+        <p class="thesis">演算法可以在數學上正確，實作仍可能透過時間、功耗、快取或電磁訊號把秘密漏出去。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>適合看 secure boot、金鑰比較、加密加速器、smart card、TrustZone 邊界與任何秘密資料會碰到實體或微架構效應的地方。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>安全攻擊 / 實作洩漏</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Secrets leaking through implementation behavior</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>可觀測訊號、秘密相關性、統計樣本、常數時間</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能把安全 review 從演算法正確延伸到實作是否暴露秘密相關訊號</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>秘密</span>
+          <span>訊號</span>
+          <span>推論</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>秘密不只會從輸出流出，也會從過程流出</h2>
+          <p class="section-lede">Side channel 指攻擊者不直接破解規格，而是觀察實作時附帶產生的訊號，例如耗時、功耗、cache hit 或電磁輻射。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>安全設計常證明演算法輸出不洩密；硬體和軟體實作卻會把中間狀態壓到可觀測世界。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先找可觀測量</strong>
+            <p>時間、電流、cache、錯誤訊息與 RF/EM 訊號都可能成為線索。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再問秘密相關性</strong>
+            <p>若 secret bit 會改變分支或 memory access，訊號就可能可分類。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後估攻擊樣本</strong>
+            <p>單次量測很吵不代表安全；大量樣本可把噪聲平均掉。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>Token 比對早一點返回</h2>
+          <p class="section-lede">函式逐 byte 比對輸入 token 和真值；遇到第一個不相等就 return false。攻擊者量回應時間，就能猜前綴長度。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>第一個 byte 猜對時，比完全猜錯多跑一次比較；多次量測後，差異可被統計放大。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>程式的輸出只有 true/false，但 timing side channel 額外提供了接近程度。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">秘密影響控制流程</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">外部量到時間差</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">統計推回秘密前綴</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>側信道讓安全邊界從 API 介面擴展到物理與微架構行為。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>攻擊者讀的是哪一種旁路訊號</h2>
+          <p class="section-lede">不同側信道需要不同防護；把 leakage class 分清楚，才不會用錯藥。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>Timing</strong>
+            <p>秘密影響執行時間、重試次數、branch 或記憶體延遲。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Power/EM</strong>
+            <p>資料切換與硬體單元活動會留下功耗或電磁特徵。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Cache</strong>
+            <p>共享微架構狀態讓攻擊者透過 hit/miss 推測 victim access pattern。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Fault-assisted</strong>
+            <p>故意注入 glitch、電壓或時鐘錯誤，觀察錯誤輸出推回內部狀態。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>訊號</th><th>常見場景</th><th>防護方向</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>時間</td>
+                <td>密碼比對、模冪、branch on secret</td>
+                <td>常數時間、固定路徑</td>
+              </tr>
+              <tr>
+                <td>功耗</td>
+                <td>AES、ECC、smart card</td>
+                <td>遮罩、隨機化、平衡邏輯</td>
+              </tr>
+              <tr>
+                <td>快取</td>
+                <td>shared CPU、TEE、雲端 co-location</td>
+                <td>隔離、flush 策略、constant access pattern</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>抽象演算法讓人忘記機器會發熱、耗電、走捷徑</h2>
+          <p class="section-lede">我們習慣把程式想成理想步驟；真正晶片上的資料路徑會留下許多不在規格書輸出欄位裡的痕跡。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>單元測試看不見</strong>
+            <p>functional test 只看結果正確，不會告訴你不同 secret 的時間分布是否可分。</p>
+          </article>
+          <article class="example">
+            <strong>效能優化衝突</strong>
+            <p>lookup table、early exit、branch prediction 常讓程式更快，也可能讓 secret 進入可觀測路徑。</p>
+          </article>
+          <article class="example">
+            <strong>噪聲帶來假安全感</strong>
+            <p>示波器上看起來很亂，統計工具仍可能把相關性挖出來。</p>
+          </article>
+        </div>
+        <p class="micro-note">做安全 review 時，請把攻擊者當成能量測系統行為的人，而不只是能呼叫 API 的人。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>韌體安全要把密鑰操作放到可量測世界裡看</h2>
+          <p class="section-lede">MCU、secure element、boot ROM 與加密加速器都可能在秘密資料運算時留下外部訊號。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>Secure boot</strong>
+            <p>簽章驗證、hash 比對與錯誤碼要避免透露哪一步或哪個 byte 接近成功。</p>
+          </article>
+          <article class="example">
+            <strong>Crypto driver</strong>
+            <p>DMA、cache line、table lookup 與 interrupt timing 可能把 key-dependent access 暴露出去。</p>
+          </article>
+          <article class="example">
+            <strong>Production test</strong>
+            <p>治具若能重複觸發加密操作，樣本數可能足以進行功耗分析。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>秘密控制流程和秘密控制記憶體位置，都要被標成高風險程式碼。</li>
+          <li>防護要跟攻擊模型對齊；常數時間不會自動解決功耗或 fault injection。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>不是只有密碼學家才需要擔心</h2>
+          <p class="section-lede">任何秘密會影響可觀測行為的地方，都可能形成資訊旁路。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>演算法安全就夠</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>AES、RSA 或 ECC 正確不代表你的實作不會透過 timing 或 power 洩密。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>加一點 random delay 就好</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>隨機延遲可能被平均掉，也可能破壞系統即時性卻沒堵住主要訊號。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>攻擊者一定要拆機</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>有些 timing/cache side channel 可遠端或在同機隔離邊界內利用。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>秘密值有沒有改變機器留下的痕跡</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果 secret bit 翻轉</strong>
+            <p>branch、loop 次數、memory address、DMA 長度、cache line 或功耗波形是否跟著變？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果攻擊者能重複觸發一萬次</strong>
+            <p>現在認為不可見的微小差異，是否會在平均後變成穩定訊號？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>下一步可連到 constant-time programming、DPA masking、fault injection 與 microarchitectural attacks。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">來源聚焦側信道定義與功耗分析；韌體 secure boot 與量產測試段落是安全工程映射。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>攻擊分類</strong>
+            <p>Side-channel attack 條目整理 timing、power、EM、cache 與 acoustic 等旁路。</p>
+            <a href="https://en.wikipedia.org/wiki/Side-channel_attack" target="_blank" rel="noreferrer">Side-channel attack</a>
+          </article>
+          <article class="source-card">
+            <strong>功耗分析</strong>
+            <p>Power analysis 條目說明 SPA/DPA 透過硬體耗電變化推論秘密資料。</p>
+            <a href="https://en.wikipedia.org/wiki/Power_analysis" target="_blank" rel="noreferrer">Power analysis</a>
+          </article>
+          <article class="source-card">
+            <strong>經典論文</strong>
+            <p>Kocher、Jaffe、Jun 的 Differential Power Analysis 是硬體密碼側信道的重要來源。</p>
+            <a href="https://www.cryptography.com/public/pdf/DPA.pdf" target="_blank" rel="noreferrer">Differential Power Analysis</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>選一段處理 key、token 或簽章的程式，標出所有由秘密控制的 branch、table lookup 與錯誤返回路徑。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

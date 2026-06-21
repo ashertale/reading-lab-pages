@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>奈奎斯特-香農取樣定理 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-nyquist-shannon-sampling-theorem">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / signals / sampling / aliasing</p>
+        <h1>奈奎斯特-香農取樣定理</h1>
+        <p class="topic-subtitle">Nyquist-Shannon Sampling Theorem</p>
+        <p class="thesis">離散取樣能不能保留連續訊號，不取決於資料點看起來多不多，而取決於你是否先管住頻寬與混疊。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁要讓你在調 ADC rate、log interval 或 sensor pipeline 時，先問訊號被假設成多寬、前端是否真的濾掉了不該進來的頻率。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>訊號定理 / 取樣邊界</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Sampling rate vs. bandwidth</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>頻寬、取樣率、anti-aliasing、重建假設</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能在 ADC、sensor log 或資料降採樣前，先判斷哪些資訊會不可逆地折回來</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>頻寬</span>
+          <span>取樣</span>
+          <span>混疊</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>取樣不是把時間切成格子那麼簡單</h2>
+          <p class="section-lede">奈奎斯特-香農取樣定理說明：若訊號已被限制在某個頻寬內，足夠高的取樣率可以保留重建所需資訊。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>工程現場的麻煩在於訊號通常不會自動 band-limited；若前端沒有先處理高頻成分，再密的後端分析也可能是在分析混疊後的假象。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先界定頻寬</strong>
+            <p>你需要知道想保留的最高頻率，以及不想保留的高頻是否會進入 ADC 或資料流。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再配置取樣率</strong>
+            <p>理想定理要求取樣率相對於頻寬有足夠餘裕；現場還要加上 filter roll-off 與時鐘誤差。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後檢查混疊路徑</strong>
+            <p>一旦高頻折回低頻，資料裡看到的慢變化可能根本不是原始訊號的慢變化。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>看似平滑的曲線可能是錯的</h2>
+          <p class="section-lede">把情境縮到一個電流感測：你每 10 ms 記一次 log，圖上看起來波動很小，於是判定 power rail 穩定。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>實際上 rail 上有高頻 switching noise 與短脈衝，但取樣率太低且前端濾波不足，資料點把高頻折成一條似乎有週期的低頻擺動。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>資料不是少一點精細度而已；混疊會創造錯誤的形狀，讓你追一個原本不存在的低頻原因。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">連續訊號含高頻</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">低率取樣且濾波不足</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">高頻折回成假低頻</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>真正危險的是混疊後的資料仍然很像合理訊號，除非你回頭查取樣與前端濾波。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>從四個位置查取樣是否可信</h2>
+          <p class="section-lede">取樣定理不只是一條 2B 規則；它同時要求你說清楚訊號假設、濾波位置、時鐘品質與重建目的。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>band-limited 假設</strong>
+            <p>定理的乾淨版本建立在頻寬有限的訊號上；未濾波 sensor 不能自動套用。</p>
+          </article>
+          <article class="lens-card">
+            <strong>anti-aliasing filter</strong>
+            <p>ADC 前的 analog filter 比後處理更關鍵，因為混疊一旦發生就難以用數位方法分離。</p>
+          </article>
+          <article class="lens-card">
+            <strong>取樣時鐘</strong>
+            <p>jitter、drift 與非均勻取樣會改變可重建性，特別是在高頻或相位敏感量測裡。</p>
+          </article>
+          <article class="lens-card">
+            <strong>目的差異</strong>
+            <p>監控趨勢、估 RMS、重建波形與抓 transient，需要的取樣與濾波策略不一樣。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>決策</th>
+                <th>可接受假設</th>
+                <th>需要警覺</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>低頻溫度 log</td>
+                <td>變化慢且 sensor 本身有慣性</td>
+                <td>突發熱事件可能被平均掉。</td>
+              </tr>
+              <tr>
+                <td>電流 transient</td>
+                <td>前端頻寬與取樣率一起設計</td>
+                <td>短脈衝可能被漏掉或折成假週期。</td>
+              </tr>
+              <tr>
+                <td>振動分析</td>
+                <td>取樣率高於分析頻帶且有 anti-aliasing</td>
+                <td>機械諧波會讓混疊更像真特徵。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>圖很順，人就容易相信資料可靠</h2>
+          <p class="section-lede">取樣問題常被視覺化掩蓋：漂亮平滑曲線會降低懷疑，鋸齒或亂點反而讓人想查。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>平滑造成安全感</strong>
+            <p>低取樣率常讓圖變得更乾淨，卻不代表訊號更穩，只代表你看不到變化。</p>
+          </article>
+          <article class="example">
+            <strong>資料點數被當成品質</strong>
+            <p>長時間 log 很多點不等於頻域資訊足夠；取樣間隔仍可能錯過關鍵瞬間。</p>
+          </article>
+          <article class="example">
+            <strong>後處理的錯覺</strong>
+            <p>濾波、平均與插值能讓曲線好看，但無法還原取樣前已經混在一起的頻率。</p>
+          </article>
+        </div>
+        <p class="micro-note">對 firmware debugging 來說，先查量測鏈，比直接解讀曲線更省時間。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>用在 ADC、sensor 與 log 設計</h2>
+          <p class="section-lede">這個定理在 firmware 裡不只是 DSP 教科書；它會影響 sampling ISR、DMA buffer、telemetry rate 與 field log 的可信度。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>ADC 前端</strong>
+            <p>選 ADC sample rate 時，同時規格化 analog filter、input bandwidth 與 layout noise，不要只看 MCU 最大取樣率。</p>
+          </article>
+          <article class="example">
+            <strong>sensor fusion</strong>
+            <p>不同 sensor 的取樣率與延遲若沒對齊，後端融合可能把 alias 與 phase lag 當成真動作。</p>
+          </article>
+          <article class="example">
+            <strong>field telemetry</strong>
+            <p>為了省 bandwidth 而降採樣前，先決定要保留的是平均趨勢、尖峰、週期性還是故障前兆。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>每一條低頻結論旁邊都應該能回答：高頻成分是否在取樣前被控制住？</li>
+          <li>若資料來源已經混疊，不要把後處理圖形解釋成原始物理現象。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>取樣定理最常被背成口號</h2>
+          <p class="section-lede">它不是只要超過兩倍就萬事安全；那只是理想條件下的核心邊界。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>取樣率大於兩倍就夠</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>錯。現實 filter 有轉換帶，訊號也可能有未預期高頻，通常需要設計餘裕。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>混疊只是解析度下降</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不是。混疊會把頻率折成別的樣子，讓錯誤結論看起來很有規律。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>可以事後補救</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>若高頻已在 ADC 前折回，數位後處理很難知道哪個低頻成分是真的。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>讀任何 log 前先問取樣鏈</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果圖上看到低頻擺動</strong>
+            <p>你能證明它不是高頻 noise 或 transient 被低取樣率折回來的結果嗎？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果要降 telemetry rate</strong>
+            <p>哪個故障特徵會先消失？你需要保留峰值、能量、頻率，還是事件順序？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>可延伸到訊噪比與香農熵：前者處理訊號相對雜訊，後者處理資訊量與壓縮下限。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這頁以取樣定理與 aliasing 為核心，工程段落把它轉到 ADC、sensor logging 與資料降採樣。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>定理概要</strong>
+            <p>Nyquist-Shannon sampling theorem 條目整理 band-limited 訊號、取樣率與重建條件。</p>
+            <a href="https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem" target="_blank" rel="noreferrer">Nyquist-Shannon sampling theorem</a>
+          </article>
+          <article class="source-card">
+            <strong>Shannon 論文</strong>
+            <p>Shannon 的通訊理論文本提供取樣與資訊理論脈絡，適合回頭看原始問題設定。</p>
+            <a href="https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf" target="_blank" rel="noreferrer">Shannon 1948 communication paper</a>
+          </article>
+          <article class="source-card">
+            <strong>混疊概念</strong>
+            <p>Aliasing 條目說明不同訊號在取樣後變得不可區分的現象。</p>
+            <a href="https://en.wikipedia.org/wiki/Aliasing" target="_blank" rel="noreferrer">Aliasing</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>可延伸到訊噪比與香農熵：前者處理訊號相對雜訊，後者處理資訊量與壓縮下限。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

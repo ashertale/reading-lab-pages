@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>摩爾定律 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-moores-law">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / semiconductors / roadmaps / expectations</p>
+        <h1>摩爾定律</h1>
+        <p class="topic-subtitle">Moore's Law</p>
+        <p class="thesis">當預測變成產業節奏，時間表就不再只是旁觀描述；它會反過來塑造投資、架構選擇與大家對『明年應該更便宜更快』的期待。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁希望你帶走的是：摩爾定律最有趣的地方，不只在它準不準，而在它如何把整個產業的投資、設計與期待綁成一條共同時間線。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>技術節奏 / 產業預期</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Trend, roadmap, and scaling expectations</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>縮放節奏、成本曲線、路線圖依賴、預測邊界</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能把摩爾定律看成一種產業協調節奏，而不是永遠保證的自然律</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>節奏</span>
+          <span>依賴</span>
+          <span>邊界</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+
+    <section class="chapter" id="core">
+    <div class="section-heading">
+      <p class="section-label">Orientation</p>
+      <h2>當預測被所有人當成路線圖，產業就開始照著它前進</h2>
+      <p class="section-lede">摩爾定律最值得讀的，不是『每隔多久會翻倍』這個表面數字，而是它如何從觀察變成協調機制，讓設計者、製造商與投資者一起押注未來節奏。</p>
+    </div>
+    <div class="core-card">
+      <p class="section-label">Core Tension</p>
+      <p>歷史曲線給人強烈確定感，但一旦大家把它內建到產品規劃、資本支出與軟硬體分工裡，曲線本身也會成為壓力源；當節奏放慢，整套預期就得重寫。</p>
+    </div>
+    <div class="principle-strip" aria-label="本頁讀法">
+      <div>
+        <span>01</span>
+        <strong>先把它當成經驗規律</strong>
+        <p>摩爾定律起初是對元件密度與成本趨勢的觀察，不是物理學保證。</p>
+      </div>
+      <div>
+        <span>02</span>
+        <strong>再看它如何變成協調節奏</strong>
+        <p>只要整個產業都依它規劃，架構取捨、軟體假設與資本投入就會跟著被這條節奏塑形。</p>
+      </div>
+      <div>
+        <span>03</span>
+        <strong>最後承認邊界會改變設計哲學</strong>
+        <p>當縮放不再像從前那樣自然，系統就得更多地靠封裝、平行化、專用化與軟體效率換性能。</p>
+      </div>
+    </div>
+    </section>
+
+    <section class="chapter" id="setup">
+    <div class="section-heading">
+      <p class="section-label">Setup</p>
+      <h2>從一份產品時程表看它的力量</h2>
+      <p class="section-lede">很多團隊其實不是在直接引用摩爾定律，而是在默默活在它留下的產業預設裡。</p>
+    </div>
+    <div class="definition-grid">
+      <div class="tile">
+        <strong>最小場景</strong>
+        <p>一條產品線預設兩年後可以用到更便宜的 flash、更多 SRAM、更快的 MCU，於是當下先把韌體分層、演算法精度與功能清單都壓在這條預期上。</p>
+      </div>
+      <div class="tile">
+        <strong>真正難點</strong>
+        <p>若節點推進、供應鏈或成本曲線沒有如預期到位，前面的設計假設就不是單純『晚一點而已』，而是整個架構押注都得重估。</p>
+      </div>
+    </div>
+    <div class="concept-flow" aria-label="問題展開">
+      <div class="flow-step">產業觀察被寫進路線圖假設</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">產品與架構設計跟著押注未來成本性能</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">一旦節奏改變，整串依賴會一起受影響</div>
+    </div>
+    <div class="paradox-frame">
+      <strong>Key Point</strong>
+      <p>摩爾定律最像的不是自然法則，而是高強度、跨公司的集體預期管理。</p>
+    </div>
+    </section>
+
+    <section class="chapter" id="lenses">
+    <div class="section-heading">
+      <p class="section-label">Lenses</p>
+      <h2>四個透鏡，讀懂它為何既像描述又像承諾</h2>
+      <p class="section-lede">只把摩爾定律當數字會太扁；它同時牽涉製造、投資、軟體假設和產品規劃。</p>
+    </div>
+    <div class="lens-grid">
+      <article class="lens-card">
+        <strong>經驗觀察</strong>
+        <p>它首先是一條歷史趨勢，用來描述整合電路上元件密度與成本改善如何持續推進。</p>
+      </article>
+      <article class="lens-card">
+        <strong>產業協調</strong>
+        <p>一旦上游製造與下游產品都按這條節奏準備，這個觀察本身就成了跨供應鏈的時間語言。</p>
+      </article>
+      <article class="lens-card">
+        <strong>架構押注</strong>
+        <p>系統設計者常會把未來更便宜的記憶體、更高的算力當成今天某些簡化選擇的依據。</p>
+      </article>
+      <article class="lens-card">
+        <strong>後摩爾轉向</strong>
+        <p>當平面縮放放慢，進步會轉向封裝、異質整合、專用加速與能效優化，語法不再只是『等下一代製程』。</p>
+      </article>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>你在說的其實是</th>
+            <th>它給人的安心感</th>
+            <th>容易被忽略的代價</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>密度趨勢</td>
+            <td>硬體很快會更強更便宜</td>
+            <td>趨勢不是每一條產品線都能無痛承接</td>
+          </tr>
+          <tr>
+            <td>產業路線圖</td>
+            <td>大家大致會一起往前走</td>
+            <td>一旦節奏延遲，整串依賴會一起抖動</td>
+          </tr>
+          <tr>
+            <td>設計假設</td>
+            <td>現在先不做也許以後硬體就能扛</td>
+            <td>把未來進步當借口，可能把當前效率與可維護性欠下來</td>
+          </tr>
+          <tr>
+            <td>後摩爾轉向</td>
+            <td>反正還會有別的技術接手</td>
+            <td>轉向通常伴隨新的成本結構與軟硬整合要求</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </section>
+
+    <section class="chapter" id="psychology">
+    <div class="section-heading">
+      <p class="section-label">Psychology</p>
+      <h2>為什麼這條曲線會讓人如此放心</h2>
+      <p class="section-lede">因為它長期太成功，成功到很多人已經不把它當假設，而當成背景常數。</p>
+    </div>
+    <div class="example-grid">
+      <div class="example">
+        <strong>歷史成功會產生自然律錯覺</strong>
+        <p>一條趨勢若持續多年，人很容易把它從『到目前為止如此』升格成『之後也理當如此』。</p>
+      </div>
+      <div class="example">
+        <strong>未來硬體會幫你擦屁股的誘惑</strong>
+        <p>當團隊相信下一代晶片一定更寬裕，今天就比較容易容忍效率不佳、邊界模糊或抽象過重的設計。</p>
+      </div>
+      <div class="example">
+        <strong>時間表的安定感</strong>
+        <p>有共同節奏能讓投資與規劃變得比較可說，但也會讓人低估節奏改變時需要重寫前提的痛。</p>
+      </div>
+    </div>
+    <p class="micro-note">這頁不打算神化或貶低摩爾定律，而是想把它從『自然會發生』的背景音，重新拉回『需要被檢查的產業假設』。</p>
+    </section>
+
+    <section class="chapter" id="applications">
+    <div class="section-heading">
+      <p class="section-label">Applications</p>
+      <h2>把它帶回硬體規劃、韌體設計與產品節奏</h2>
+      <p class="section-lede">對工程師來說，摩爾定律最實際的影響，常不是課本裡的曲線，而是它如何悄悄決定『現在要不要先優化』。</p>
+    </div>
+    <div class="example-grid">
+      <div class="example">
+        <strong>記憶體與演算法押注</strong>
+        <p>若團隊預設下一代容量一定更寬裕，今天可能就會把壓縮、資料布局與功耗優化先延後，這是很典型的摩爾式借貸。</p>
+      </div>
+      <div class="example">
+        <strong>產品時程規劃</strong>
+        <p>當 BOM 成本、算力與封裝進度都被綁進 roadmap，摩爾定律就不只是觀察，而是規劃語法的一部分。</p>
+      </div>
+      <div class="example">
+        <strong>後摩爾架構選擇</strong>
+        <p>若縮放帶來的好處不再像從前那樣自動，團隊就要更早考慮專用加速、演算法效率、封裝方案與能效權衡。</p>
+      </div>
+    </div>
+    <ul class="bullet-list">
+      <li>遇到『以後硬體會更好』這類說法時，先追問它是觀察、承諾，還是還沒定案的市場假設。</li>
+      <li>當節奏放慢時，軟體效率、架構清晰度與系統邊界設計的重要性會被重新放大，而不是自動被硬體進步蓋過。</li>
+    </ul>
+    </section>
+
+    <section class="chapter" id="misreadings">
+    <div class="section-heading">
+      <p class="section-label">Misreadings</p>
+      <h2>三種最容易把它讀歪的方式</h2>
+      <p class="section-lede">摩爾定律之所以常被誤用，是因為它的歷史成功太容易讓人忘記它本來就是條件性的產業經驗。</p>
+    </div>
+    <div class="collocation-list" aria-label="常見誤讀">
+      <article class="collocation-card">
+        <div>
+          <strong>這是永遠有效的自然定律</strong>
+          <span class="register-tag">校正</span>
+        </div>
+        <p>它不是。它描述的是半導體產業特定時期、特定技術與投資節奏下形成的趨勢。</p>
+      </article>
+      <article class="collocation-card">
+        <div>
+          <strong>既然硬體會進步，現在不用太在意效率</strong>
+          <span class="register-tag">校正</span>
+        </div>
+        <p>這種想法常把短期設計債包裝成長期樂觀，而節奏一變，代價就會集中浮現。</p>
+      </article>
+      <article class="collocation-card">
+        <div>
+          <strong>摩爾定律放慢就代表創新結束</strong>
+          <span class="register-tag">校正</span>
+        </div>
+        <p>放慢不等於停止，而是進步的來源與成本結構改變了，系統設計語法也得跟著變。</p>
+      </article>
+    </div>
+    </section>
+
+    <section class="chapter" id="questions">
+    <div class="section-heading">
+      <p class="section-label">Questions</p>
+      <h2>每次想把未來硬體當成前提時，先問這兩題</h2>
+    </div>
+    <div class="prompt-grid">
+      <article class="prompt-card">
+        <strong>我們現在押注的是歷史觀察、供應商承諾，還是自己的一廂情願？</strong>
+        <p>把來源講清楚，才能知道這是不是可以進設計假設的東西，還是只能當樂觀選項。</p>
+      </article>
+      <article class="prompt-card">
+        <strong>如果節奏比預期慢兩年，這個產品或架構還站得住嗎？</strong>
+        <p>這一問能逼出哪些決策其實過度依賴『未來一定更便宜更快』這個背景信仰。</p>
+      </article>
+    </div>
+    <div class="template-note">
+      <strong>延伸路線</strong>
+      <p>若想順著這條線再讀，可接 Amdahl's law、Dennard scaling、specialization，去看後摩爾時代性能語法如何重組。</p>
+    </div>
+    </section>
+
+    <section class="chapter" id="sources">
+    <div class="section-heading">
+      <p class="section-label">Sources</p>
+      <h2>來源與整理方式</h2>
+      <p class="section-lede">本頁把摩爾定律當成觀察、協調節奏與設計假設三層來整理；後兩層屬於依既有產業脈絡延伸出的教學整理。</p>
+    </div>
+    <div class="source-grid">
+      <article class="source-card">
+        <strong>主條目</strong>
+        <p>Moore's law 條目整理了 Gordon Moore 的原始說法、後續修正，以及這條趨勢如何被廣泛引用。</p>
+        <a href="https://en.wikipedia.org/wiki/Moore%27s_law" target="_blank" rel="noreferrer">Moore's law</a>
+      </article>
+      <article class="source-card">
+        <strong>產業說明</strong>
+        <p>Intel 的資源頁能補上這條法則如何被半導體產業自己理解、更新與對外解釋。</p>
+        <a href="https://www.intel.com/content/www/us/en/newsroom/resources/moores-law.html" target="_blank" rel="noreferrer">Intel on Moore's Law</a>
+      </article>
+      <article class="source-card">
+        <strong>歷史回顧</strong>
+        <p>Intel 的四十週年資料頁整理了 Gordon Moore 原始文章與後續討論，是讀歷史脈絡的好入口。</p>
+        <a href="https://www.intel.com/pressroom/kits/events/moores_law_40th/index.htm" target="_blank" rel="noreferrer">Moore's Law 40th Anniversary</a>
+      </article>
+    </div>
+    </section>
+
+    <section class="chapter">
+      <div class="reference-box">
+        <div>
+          <p class="section-label">Reference</p>
+          <h2>下一步</h2>
+          <p>若這頁之後要補一篇更偏物理與架構的對照，Dennard scaling 會是很自然的下一頁，因為它正好交代『為什麼頻率與功耗語法後來變了』。</p>
+        </div>
+        <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+      </div>
+    </section>
+
+    </article>
+  </main>
+</body>
+</html>

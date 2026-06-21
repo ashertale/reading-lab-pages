@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "precision-and-recall",
+    "outputPath": "topics/precision-and-recall.html"
+  },
+  "indexEntry": {
+    "id": "precision-and-recall",
+    "title": "精確率與召回率",
+    "subtitle": "Precision and Recall",
+    "href": "./topics/precision-and-recall.html",
+    "order": 282,
+    "type": "評估指標 / 分類取捨",
+    "domain": "測試判讀、搜尋、告警與模型評估",
+    "focus": "False positives vs. false negatives",
+    "thesis": "同一套偵測系統可以少誤報，也可以少漏報；精確率與召回率迫使你說清楚哪種錯比較貴。",
+    "tags": [
+      "precision",
+      "recall",
+      "classification",
+      "metrics",
+      "alerts",
+      "validation"
+    ]
+  },
+  "contentBrief": {
+    "pressurePoint": "提升命中率聽起來簡單，但真正的選擇是在 false positive 與 false negative 之間分配代價。",
+    "smallestScenario": "測試系統標出疑似電源異常，門檻太低會讓工程師每天追一堆雜訊，門檻太高又可能放過真失效。",
+    "sourcePlan": [
+      "定義來源：Precision and recall 條目整理 true positive、false positive 與 false negative 的分母關係。",
+      "工具文件：scikit-learn metrics 文件呈現 precision、recall、F-score 與 scoring 選擇。",
+      "相鄰概念：Confusion matrix 條目可補上四格結果如何支撐不同分類指標。"
+    ],
+    "transferTargets": [
+      "告警規則",
+      "ATE triage",
+      "搜尋與分類模型"
+    ],
+    "commonMisreading": "F1 分數不是中立答案；若漏報比誤報貴很多，單一平均值會掩蓋真正的風險偏好。",
+    "readerQuestions": [
+      "在這個流程裡，false positive 與 false negative 分別會造成什麼具體成本？",
+      "目前門檻是為了工程師時間、客戶安全、產線吞吐，還是報表好看而設？"
+    ],
+    "sectionIntents": {
+      "core": "建立 precision 與 recall 的分母差異，讓讀者看到兩者不是同一種好。",
+      "setup": "用告警門檻說明同一批資料會因目標不同得到不同評估結論。",
+      "lenses": "拆成混淆矩陣、門檻、base rate 與錯誤成本四條判斷線。",
+      "psychology": "指出團隊容易偏愛讓 dashboard 漂亮的指標，而忽略被漏掉的案例。",
+      "applications": "把指標帶到測試、搜尋、log classifier 與 defect triage。",
+      "misreadings": "修正把 accuracy 或 F1 當作萬用分數的習慣。",
+      "questions": "要求讀者先定義錯誤代價，再談模型或門檻。",
+      "sources": "以 precision/recall 與 scikit-learn metrics 文件為定義來源，工程段落是評估策略整理。"
+    }
+  },
+  "page": {
+    "documentTitle": "精確率與召回率 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-precision-and-recall",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / metrics / classification / tradeoffs</p>\n    <h1>精確率與召回率</h1>\n    <p class=\"topic-subtitle\">Precision and Recall</p>\n    <p class=\"thesis\">同一套偵測系統可以少誤報，也可以少漏報；精確率與召回率迫使你說清楚哪種錯比較貴。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>適合拿來檢查 log classifier、ATE failure triage、搜尋結果與任何會把樣本分成 positive/negative 的流程。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>評估指標 / 分類取捨</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>False positives vs. false negatives</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>TP、FP、FN、閾值、錯誤成本</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能為告警、測試與分類器選擇符合風險的 operating point</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>命中</span>\n      <span>誤報</span>\n      <span>漏報</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>兩種好，分母不一樣</h2>\n      <p class=\"section-lede\">Precision 問的是被你抓出來的有多少是真的；recall 問的是所有真的案例裡你抓到了多少。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>想少誤報，就會提高門檻；想少漏報，就會降低門檻。指標不是替你消除取捨，而是讓取捨被明白寫出來。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>Precision 看被選中的品質</strong>\n        <p>高 precision 代表工程師打開告警時，比較少遇到空包彈。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>Recall 看真案例的覆蓋</strong>\n        <p>高 recall 代表真問題比較不容易被系統漏掉。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>門檻決定立場</strong>\n        <p>同一個模型只要換 threshold，就可能從保守偵測變成激進篩選。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>一條過熱告警規則該多敏感</h2>\n      <p class=\"section-lede\">假設 firmware 監控某電源 rail 的 transient，偵測器會把 log 片段標成 suspicious 或 normal。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小場景</strong>\n        <p>門檻設得太寬鬆，半夜告警大量湧入；門檻設得太嚴格，少數真異常滑過 release gate。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>團隊不是在追求一個抽象最高分，而是在決定哪種錯誤會傷害安全、吞吐、信任或工程時間。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">設定分類門檻</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">得到 TP/FP/FN</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">按錯誤成本選 operating point</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>精確率與召回率讓你把「抓得準」和「抓得全」分開談。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>看分類器時先拆四件事</h2>\n      <p class=\"section-lede\">沒有錯誤成本的指標討論，很快會變成大家各自挑一個好看的分數。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>混淆矩陣</strong>\n        <p>TP、FP、TN、FN 是所有後續指標的底層帳本。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>門檻移動</strong>\n        <p>降低 threshold 通常提高 recall、犧牲 precision；提高 threshold 則反過來。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>基準率</strong>\n        <p>罕見事件下，即使 false positive rate 很低，也可能產生大量誤報。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>人力回路</strong>\n        <p>若每個 positive 都要工程師讀 log，precision 會直接影響 triage 成本。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr><th>目標</th><th>偏好的指標</th><th>例子</th></tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>漏掉真失效很危險</td>\n            <td>偏 recall</td>\n            <td>安全相關 fault detection</td>\n          </tr>\n          <tr>\n            <td>誤報會耗盡人力</td>\n            <td>偏 precision</td>\n            <td>每日人工 triage queue</td>\n          </tr>\n          <tr>\n            <td>排序後人工看前幾筆</td>\n            <td>看 Precision@k</td>\n            <td>搜尋、缺陷推薦、相似 log</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>人很容易愛上單一分數</h2>\n      <p class=\"section-lede\">單一分數帶來管理上的舒服感，但它也會把錯誤類型、資料分布與門檻選擇壓扁。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>Accuracy 的誘惑</strong>\n        <p>資料極度不平衡時，永遠猜 normal 也可能有漂亮 accuracy。</p>\n      </article>\n      <article class=\"example\">\n        <strong>誤報比較吵</strong>\n        <p>FP 會立刻打擾團隊，FN 則常等事故或客訴才被看見。</p>\n      </article>\n      <article class=\"example\">\n        <strong>報表會塑造行為</strong>\n        <p>如果 KPI 只獎勵 precision，大家可能把困難案例留在系統外。</p>\n      </article>\n    </div>\n    <p class=\"micro-note\">好的評估會把錯誤代價寫進決策，而不是只把分數放進簡報。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>從模型評估回到工程流程</h2>\n      <p class=\"section-lede\">不只 ML 需要這組概念；任何篩選、告警、搜尋與測試判讀都在做 precision/recall 取捨。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>ATE failure triage</strong>\n        <p>若 false fail 會卡住大量良品，precision 重要；若 false pass 會出貨風險，recall 不能低。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Log classifier</strong>\n        <p>前幾筆要給人看的推薦系統，通常要把 Precision@k 設為主要觀察點。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Security alert</strong>\n        <p>初期偵測可偏 recall，但必須設計分級與去重，否則人會被告警淹沒。</p>\n      </article>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>每次調 threshold 都記錄 precision、recall、樣本數與人工處理成本。</li>\n      <li>在 review 裡問清楚：這個系統寧可吵一點，還是寧可漏少一點？</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>F1 不是風險委員會</h2>\n      <p class=\"section-lede\">F1 把 precision 與 recall 合成一個數，但它不知道你的 false negative 是小麻煩還是大事故。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>F1 最高就最好</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>如果錯誤代價不對稱，F1 可能選到商業或安全上錯的門檻。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>Precision 高代表模型可靠</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>也可能只是門檻太高，幾乎什麼都不抓。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>Recall 高代表系統安全</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>抓很多不等於可用；沒有 triage 能力，高 recall 會變成噪音製造器。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>先替錯誤標價，再調門檻</h2>\n    </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>如果漏報一次</strong>\n        <p>它會造成 field return、安全風險、客戶信任損失，還是只是一個可補的分析延遲？</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果誤報一百次</strong>\n        <p>誰要讀、誰要決策、哪個流程會被卡住，系統能否自動降噪或分級？</p>\n      </article>\n    </div>\n    <div class=\"template-note\">\n      <strong>延伸路線</strong>\n      <p>可接到 signal detection theory、base rate neglect 與 ROC/PR curve，補上分布與閾值移動的觀察方法。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">來源卡用標準定義建立 precision/recall，再把工程判斷段落標為指標選擇的教學整理。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>定義來源</strong>\n        <p>Precision and recall 條目整理 true positive、false positive 與 false negative 的分母關係。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Precision_and_recall\" target=\"_blank\" rel=\"noreferrer\">Precision and recall</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>工具文件</strong>\n        <p>scikit-learn metrics 文件呈現 precision、recall、F-score 與 scoring 選擇。</p>\n        <a href=\"https://scikit-learn.org/stable/modules/model_evaluation.html#precision-recall-f-measure-metrics\" target=\"_blank\" rel=\"noreferrer\">scikit-learn metrics</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰概念</strong>\n        <p>Confusion matrix 條目可補上四格結果如何支撐不同分類指標。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Confusion_matrix\" target=\"_blank\" rel=\"noreferrer\">Confusion matrix</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>可接到 signal detection theory、base rate neglect 與 ROC/PR curve，補上分布與閾值移動的觀察方法。</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  }
+}

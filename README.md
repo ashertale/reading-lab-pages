@@ -4,8 +4,8 @@
 
 ## 目前狀態
 
-- `topics/`：目前已發布 250 個概念頁；實際數量應持續和 `data/concept-payloads/` 一一對齊。
-- `data/concept-payloads/`：目前 250 份可審核 payload，對應 250 個已發布頁面。
+- `topics/`：目前已發布 310 個概念頁；實際數量應持續和 `data/concept-payloads/` 一一對齊。
+- `data/concept-payloads/`：目前 310 份可審核 payload，對應 310 個已發布頁面。
 - `data/concept-suggestions.json`：目前為空，可作為下一批 backlog 入口。
 
 ## 架構總覽
@@ -84,7 +84,7 @@ Render 既有 payload：
 - 新增或修改的 payload 是否帶有批次模板句型，例如「常不是抽象風險」、「如果沒被提前畫出來」、「把情境縮到一次普通判斷後」這類可替換句架。
 - 新增或修改的 payload 是否和既有頁面整體過度相似，或在同一 section 重複既有句架。
 
-若要盤點既有 250 頁的內容舊債，可加上嚴格模式：
+若要盤點既有 310 頁的內容舊債，可加上嚴格模式：
 
 ```powershell
 & 'C:\Users\CHEN\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' scripts\validate_concept_lab.py --strict-content

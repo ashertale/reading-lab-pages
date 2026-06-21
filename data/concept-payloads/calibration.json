@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "calibration",
+    "outputPath": "topics/calibration.html"
+  },
+  "indexEntry": {
+    "id": "calibration",
+    "title": "機率校準",
+    "subtitle": "Calibration",
+    "href": "./topics/calibration.html",
+    "order": 283,
+    "type": "機率評估 / 信心可靠度",
+    "domain": "預測模型、風險評估與決策門檻",
+    "focus": "Do predicted probabilities match outcomes?",
+    "thesis": "一個模型說 80% 時，長期是否真的約有八成會發生？校準關心的不是排序漂亮，而是信心能不能被拿來決策。",
+    "tags": [
+      "calibration",
+      "probability",
+      "forecasting",
+      "Brier-score",
+      "risk",
+      "ML"
+    ]
+  },
+  "contentBrief": {
+    "pressurePoint": "模型分數能把樣本排好，不代表 0.8 這個數字就能當成真實風險使用。",
+    "smallestScenario": "一個 defect predictor 給某批 device 80% fail risk，但歷史上這個分數桶只有 45% 真的失敗；產線因此過度攔貨。",
+    "sourcePlan": [
+      "統計定義：Calibration 條目說明機率分類中，預測機率要與長期觀察比例相符。",
+      "工具文件：scikit-learn calibration 文件展示 probability calibration 與 reliability diagrams。",
+      "預測評估：Probabilistic forecasting 條目補上 Brier score 與 proper scoring rules 的評估背景。"
+    ],
+    "transferTargets": [
+      "風險分數",
+      "測試優先排序",
+      "自動決策門檻"
+    ],
+    "commonMisreading": "AUC 高不代表機率校準；排序能力與機率可信度可以分開壞掉。",
+    "readerQuestions": [
+      "同一個預測分數區間裡，實際發生比例是否長期接近模型宣稱的機率？",
+      "決策流程用的是排序、分級，還是真的把 70% 當作成本計算輸入？"
+    ],
+    "sectionIntents": {
+      "core": "區分 ranking performance 與 probability calibration，讓信心數字接受現實比例檢查。",
+      "setup": "用 defect predictor 的過度自信展示校準不良如何影響產線決策。",
+      "lenses": "用 reliability diagram、分桶、proper scoring rule 與資料漂移拆解問題。",
+      "psychology": "說明人容易把精密小數誤讀成可靠知識。",
+      "applications": "映射到預測維修、測試排序、風險 dashboard 與自動化閾值。",
+      "misreadings": "修正把校準等同準確率或事後調分的誤用。",
+      "questions": "要求讀者判斷模型分數到底要服務排序還是機率決策。",
+      "sources": "以 statistical calibration、probabilistic forecasting 與 scikit-learn calibration 文件為基礎。"
+    }
+  },
+  "page": {
+    "documentTitle": "機率校準 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-calibration",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / probability / forecasting / reliability</p>\n    <h1>機率校準</h1>\n    <p class=\"topic-subtitle\">Calibration</p>\n    <p class=\"thesis\">一個模型說 80% 時，長期是否真的約有八成會發生？校準關心的不是排序漂亮，而是信心能不能被拿來決策。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>適合用在 failure prediction、defect risk scoring、測試優先級與任何會把機率交給人或自動流程的模型。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>機率評估 / 信心可靠度</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Do predicted probabilities match outcomes?</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>信心分桶、實際比例、Brier score、決策成本</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能分辨模型會排序與模型能輸出可信機率是兩件事</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>信心</span>\n      <span>比例</span>\n      <span>決策</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>分數會排序，不等於機率可信</h2>\n      <p class=\"section-lede\">校準問的是預測機率和長期發生比例是否對得上；它比單次猜中更關心信心刻度是否誠實。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>一個模型可以很會把高風險排前面，卻把 60% 說成 90%。若 downstream 拿這個數字做成本決策，過度自信會比單純錯排更麻煩。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先分清任務</strong>\n        <p>排序任務看前後順序；機率任務要求數字能和實際比例對齊。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再看信心分桶</strong>\n        <p>把 0.7 到 0.8 的樣本放一起，觀察實際事件比例。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後連到決策</strong>\n        <p>若決策使用期望成本，未校準機率會把成本估錯。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>一個太有把握的 defect predictor</h2>\n      <p class=\"section-lede\">模型把某批裝置標成 80% fail risk，產線決定加測；幾週後回看，該區間實際 fail rate 明顯低很多。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小場景</strong>\n        <p>分數高的確比低分危險，但 80% 桶只有 45% 事件率；排序有用，機率刻度不可信。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>團隊可能以為模型只是保守，實際上 downstream 已把這個數字轉成加測成本、排程與庫存決策。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">模型輸出機率</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">實際比例不匹配</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">成本決策被信心誤差帶偏</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>校準把「模型覺得很可能」改成可審計的長期比例問題。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>四個檢查信心刻度的方法</h2>\n      <p class=\"section-lede\">校準不只是畫一張圖，而是確認模型輸出能否進入決策算式。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>Reliability diagram</strong>\n        <p>把預測機率分桶，對照每桶實際事件率，看線是否貼近對角線。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Proper scoring rule</strong>\n        <p>Brier score 或 log loss 會懲罰錯誤又過度自信的預測。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>資料漂移</strong>\n        <p>原本校準的模型，遇到新產品線、新測試條件或供應商變化後可能失準。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>分群校準</strong>\n        <p>整體看起來準，某個機種、地區或 firmware branch 仍可能系統性偏高或偏低。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr><th>現象</th><th>可能代表</th><th>先查</th></tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>高分桶實際比例偏低</td>\n            <td>模型過度自信</td>\n            <td>訓練分布、label delay、後處理校準</td>\n          </tr>\n          <tr>\n            <td>低分桶仍常出事</td>\n            <td>低估尾端風險</td>\n            <td>漏掉的特徵或分群偏差</td>\n          </tr>\n          <tr>\n            <td>排序好但成本差</td>\n            <td>AUC 與機率校準分離</td>\n            <td>決策是否使用預測機率本身</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>小數點會讓人以為你懂了</h2>\n      <p class=\"section-lede\">0.83 看起來比「高風險」更科學，但精密呈現不等於可靠校準。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>信心外觀</strong>\n        <p>帶小數的機率容易被管理流程當成客觀事實，而不是模型輸出的估計。</p>\n      </article>\n      <article class=\"example\">\n        <strong>單次結果迷思</strong>\n        <p>80% 事件沒發生不代表模型錯；要看同類預測的長期比例。</p>\n      </article>\n      <article class=\"example\">\n        <strong>成功排序的遮蔽</strong>\n        <p>高風險排前面很有價值，但它可能遮住機率刻度偏移。</p>\n      </article>\n    </div>\n    <p class=\"micro-note\">校準訓練的是團隊對不確定性的語感：不是問它有沒有猜中，而是問信心是否可兌現。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>當機率會進入流程，校準就不是裝飾</h2>\n      <p class=\"section-lede\">只要預測分數會觸發加測、停線、升級處理或自動拒絕，它就需要校準檢查。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>Predictive maintenance</strong>\n        <p>若 30% failure risk 會決定是否提前換件，就要確認同分數桶的真實故障比例。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Test prioritization</strong>\n        <p>排序可以只看相對分數；若要估算省下多少風險，機率刻度必須可信。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Risk dashboard</strong>\n        <p>高層看到 90% 風險會做資源決策，模型過度自信會造成反覆救火。</p>\n      </article>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>同時報告 discrimination 指標與 calibration 指標，避免一個漂亮排序掩蓋錯誤機率。</li>\n      <li>每次產品線或資料來源改變後，重新畫分群 reliability diagram。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>校準不是把分數調到好看</h2>\n      <p class=\"section-lede\">校準要服務未來決策，而不是事後讓歷史圖表更平滑。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>準確率高就校準好</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>分類正確率只看門檻後結果，校準看門檻前的機率刻度。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>校準會讓模型更會排序</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>校準通常調整機率解讀，不保證 ranking 變好。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>整體校準就夠</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>某些 subgroup 可能嚴重偏差，尤其是不同機種、地區或測試站。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>這個數字要被當成排名，還是當成風險</h2>\n    </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>如果只需要排序</strong>\n        <p>你是否誤把 0.72 和 0.81 的差距拿去做成本估算，而不只是排先後？</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果要自動決策</strong>\n        <p>哪個分數區間的實際比例最該先驗證，因為它最接近停線、加測或升級門檻？</p>\n      </article>\n    </div>\n    <div class=\"template-note\">\n      <strong>延伸路線</strong>\n      <p>接續可讀 Brier score、proper scoring rules 與 base rate neglect，補上機率預測與人類判讀的落差。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">來源卡整理統計校準與機率預測評估；工程案例是把校準帶入產品風險流程的教學性轉譯。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>統計定義</strong>\n        <p>Calibration 條目說明機率分類中，預測機率要與長期觀察比例相符。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Calibration_%28statistics%29\" target=\"_blank\" rel=\"noreferrer\">Calibration (statistics)</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>工具文件</strong>\n        <p>scikit-learn calibration 文件展示 probability calibration 與 reliability diagrams。</p>\n        <a href=\"https://scikit-learn.org/stable/modules/calibration.html\" target=\"_blank\" rel=\"noreferrer\">Probability calibration</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>預測評估</strong>\n        <p>Probabilistic forecasting 條目補上 Brier score 與 proper scoring rules 的評估背景。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Probabilistic_forecasting\" target=\"_blank\" rel=\"noreferrer\">Probabilistic forecasting</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>接續可讀 Brier score、proper scoring rules 與 base rate neglect，補上機率預測與人類判讀的落差。</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  }
+}

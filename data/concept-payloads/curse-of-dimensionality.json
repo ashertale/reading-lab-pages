@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "curse-of-dimensionality",
+    "outputPath": "topics/curse-of-dimensionality.html"
+  },
+  "indexEntry": {
+    "id": "curse-of-dimensionality",
+    "title": "維度災難",
+    "subtitle": "Curse of Dimensionality",
+    "href": "./topics/curse-of-dimensionality.html",
+    "order": 255,
+    "type": "統計直覺 / 模型邊界",
+    "domain": "資料、搜尋與泛化",
+    "focus": "High dimensions make data sparse",
+    "thesis": "變數一多，不只資料需求暴增，連『附近』、『密度』與『代表性』這些低維直覺都會一起失靈。",
+    "tags": [
+      "dimensions",
+      "data",
+      "sampling",
+      "optimization",
+      "nearest-neighbor",
+      "generalization"
+    ]
+  },
+  "page": {
+    "documentTitle": "維度災難 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-curse-of-dimensionality",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / statistics / modeling / search</p>\n    <h1>維度災難</h1>\n    <p class=\"topic-subtitle\">Curse of Dimensionality</p>\n    <p class=\"thesis\">變數一多，不只資料需求暴增，連『附近』、『密度』與『代表性』這些低維直覺都會一起失靈。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>這頁要幫你修正一個很常見的工程直覺：多加幾個 feature 不只是多幾欄資料，它會改變空間幾何、搜尋成本與你對『相似』的理解。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>統計直覺 / 模型邊界</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>High dimensions make data sparse</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>樣本稀疏、距離退化、組合爆炸、結構假設</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能看出問題何時不是演算法不夠聰明，而是空間太大、資料太薄</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>空間</span>\n      <span>稀疏</span>\n      <span>失靈</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n\n<section class=\"chapter\" id=\"core\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Orientation</p>\n  <h2>維度一高，很多你以為理所當然的幾何直覺會整批失效</h2>\n  <p class=\"section-lede\">維度災難不是單一公式，而是一串互相牽動的現象：空間體積膨脹、樣本變得稀、距離分不開、搜尋與覆蓋成本一起爆。</p>\n</div>\n<div class=\"core-card\">\n  <p class=\"section-label\">Core Tension</p>\n  <p>你想靠更多維度描述更多細節，但每多一個軸，資料需求與搜尋難度都會成倍擴張；模型得到的不是更清楚的世界，而可能是更空曠的世界。</p>\n</div>\n<div class=\"principle-strip\" aria-label=\"本頁讀法\">\n  <div>\n    <span>01</span>\n    <strong>先看體積怎麼膨脹</strong>\n    <p>在高維空間裡，要維持同樣密度與解析度，所需樣本數會比直覺成長得快得多。</p>\n  </div>\n  <div>\n    <span>02</span>\n    <strong>再看『附近』還有沒有意義</strong>\n    <p>當點與點普遍都很遠、距離差異變小，鄰近搜尋和相似度判斷就容易失去原本的辨識力。</p>\n  </div>\n  <div>\n    <span>03</span>\n    <strong>最後承認結構不是免費的</strong>\n    <p>你若想在高維問題裡活下來，通常得引入先驗結構、降維、分解或更強的歸納偏好。</p>\n  </div>\n</div>\n</section>\n\n<section class=\"chapter\" id=\"setup\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Setup</p>\n  <h2>從校準矩陣爆掉開始</h2>\n  <p class=\"section-lede\">想像你不是在談抽象幾何，而是在排一個真的要跑完的驗證計畫。</p>\n</div>\n<div class=\"definition-grid\">\n  <div class=\"tile\">\n    <strong>最小場景</strong>\n    <p>你要調 12 個感測器校準參數，每個參數先只試 5 個候選值。光是完整網格搜尋就變成 5 的 12 次方，也就是兩億多種組合，根本不可能實跑。</p>\n  </div>\n  <div class=\"tile\">\n    <strong>真正難點</strong>\n    <p>就算你取樣了一小部分組合，『彼此很近的樣本應該很像』這個想法在高維裡也開始不牢，因為幾乎所有點都一起變得稀疏。</p>\n  </div>\n</div>\n<div class=\"concept-flow\" aria-label=\"問題展開\">\n  <div class=\"flow-step\">每加一個維度就擴大可行空間</div>\n  <div class=\"flow-arrow\">→</div>\n  <div class=\"flow-step\">固定樣本量被攤得愈來愈薄</div>\n  <div class=\"flow-arrow\">→</div>\n  <div class=\"flow-step\">搜尋、估計與相似度判斷一起惡化</div>\n</div>\n<div class=\"paradox-frame\">\n  <strong>Key Point</strong>\n  <p>維度災難不是說高維不能做，而是說你不能再沿用低維時那套『多收一點樣本就好』的樂觀直覺。</p>\n</div>\n</section>\n\n<section class=\"chapter\" id=\"lenses\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Lenses</p>\n  <h2>四個角度，判斷你到底是卡在哪一種災難</h2>\n  <p class=\"section-lede\">有些人卡在組合數，有些人卡在距離函數，有些人卡在資料密度；把它們分開，解法才會不同。</p>\n</div>\n<div class=\"lens-grid\">\n  <article class=\"lens-card\">\n    <strong>組合爆炸</strong>\n    <p>離散參數一多，完整枚舉立刻失去現實性，驗證計畫與搜尋預算會先被打穿。</p>\n  </article>\n  <article class=\"lens-card\">\n    <strong>樣本稀疏</strong>\n    <p>同樣數量的資料攤到更大的空間後，每個局部區域都變得更空，統計估計也更不穩。</p>\n  </article>\n  <article class=\"lens-card\">\n    <strong>距離退化</strong>\n    <p>很多高維資料裡，最近鄰和最遠鄰的距離差距會縮小，讓『近』不再像低維時那麼有訊號。</p>\n  </article>\n  <article class=\"lens-card\">\n    <strong>結構需求</strong>\n    <p>若資料其實躺在低維流形、具有稀疏性或可分解結構，你得把這些先驗寫進方法裡，否則就會被空間白白拖垮。</p>\n  </article>\n</div>\n<div class=\"table-wrap\">\n  <table>\n    <thead>\n      <tr>\n        <th>現象</th>\n        <th>表面上像什麼問題</th>\n        <th>真正比較像什麼</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td>搜尋空間太大</td>\n        <td>電腦不夠快</td>\n        <td>維度和解析度一起把組合數炸開</td>\n      </tr>\n      <tr>\n        <td>nearest-neighbor 表現變差</td>\n        <td>距離函數挑錯</td>\n        <td>高維裡『近』本身就比較弱</td>\n      </tr>\n      <tr>\n        <td>少量資料下模型很飄</td>\n        <td>模型太笨</td>\n        <td>樣本量相對於空間體積根本不夠</td>\n      </tr>\n      <tr>\n        <td>特徵越加越差</td>\n        <td>需要更多微調</td>\n        <td>你可能在引入噪音維度而不是有效結構</td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n</section>\n\n<section class=\"chapter\" id=\"psychology\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Psychology</p>\n  <h2>人為什麼會一直低估高維問題的代價</h2>\n  <p class=\"section-lede\">因為我們腦裡的幾何幾乎都活在二維和三維。很多在白板上看起來自然的話，進到高維後就不再自然。</p>\n</div>\n<div class=\"example-grid\">\n  <div class=\"example\">\n    <strong>feature 貪婪</strong>\n    <p>只要一個欄位看起來可能有用，人就會想先加進去；但每個維度都在收費，費用常不是線性的。</p>\n  </div>\n  <div class=\"example\">\n    <strong>平面圖像誤導</strong>\n    <p>我們習慣靠散點圖、邊界與群聚想像資料分布，這種直觀在高維裡很容易失真。</p>\n  </div>\n  <div class=\"example\">\n    <strong>成功案例倖存偏差</strong>\n    <p>少數高維成功專案通常背後有大量先驗結構、特徵工程或資料規模支撐，外表卻常被說成只是『模型夠強』。</p>\n  </div>\n</div>\n<p class=\"micro-note\">這一節不是要你害怕高維，而是提醒你每加一個自由度，都在向樣本、計算與幾何可解釋性借錢。</p>\n</section>\n\n<section class=\"chapter\" id=\"applications\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Applications</p>\n  <h2>把它帶回實驗設計、搜尋與特徵工程</h2>\n  <p class=\"section-lede\">維度災難最常以『這件事怎麼突然怎麼調都不穩』的形式出現在工程現場。</p>\n</div>\n<div class=\"example-grid\">\n  <div class=\"example\">\n    <strong>驗證矩陣設計</strong>\n    <p>當校準參數、環境條件和模式切換一起增加時，完整測試矩陣很快不再可能，只能靠分解與主效應假設活下來。</p>\n  </div>\n  <div class=\"example\">\n    <strong>相似案例搜尋</strong>\n    <p>若你拿高維 telemetry 做 nearest-neighbor 類型的相似案例回溯，先得確認距離仍有辨識力，而不是所有樣本都差不多遠。</p>\n  </div>\n  <div class=\"example\">\n    <strong>特徵工程與模型選擇</strong>\n    <p>更多 feature 不一定更好；沒有對應資料量、正則化或先驗結構時，它們常只是把噪音帶進去。</p>\n  </div>\n</div>\n<ul class=\"bullet-list\">\n  <li>遇到高維問題時，第一反應應該是找結構，不是盲目把搜尋算力往上加。</li>\n  <li>降維、稀疏化、分層實驗與局部模型，往往比硬扛完整空間更實際。</li>\n</ul>\n</section>\n\n<section class=\"chapter\" id=\"misreadings\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Misreadings</p>\n  <h2>三個常見的誤解</h2>\n  <p class=\"section-lede\">維度災難常被當成 ML 黑話，但它真正描述的是更一般的空間與取樣關係。</p>\n</div>\n<div class=\"collocation-list\" aria-label=\"常見誤讀\">\n  <article class=\"collocation-card\">\n    <div>\n      <strong>只要資料再多一點就會好</strong>\n      <span class=\"register-tag\">校正</span>\n    </div>\n    <p>問題通常不是『再多一點』，而是你需要的量級可能隨維度快速上升，完全不是同一個等級。</p>\n  </article>\n  <article class=\"collocation-card\">\n    <div>\n      <strong>這只跟機器學習有關</strong>\n      <span class=\"register-tag\">校正</span>\n    </div>\n    <p>參數調校、實驗設計、數值搜尋、資料庫索引都會遇到相同結構，只是症狀名字不同。</p>\n  </article>\n  <article class=\"collocation-card\">\n    <div>\n      <strong>多加 feature 總比少加安全</strong>\n      <span class=\"register-tag\">校正</span>\n    </div>\n    <p>若新增維度主要帶來噪音或無關變異，它們會讓空間更空、估計更飄，而不只是『資訊更多』。</p>\n  </article>\n</div>\n</section>\n\n<section class=\"chapter\" id=\"questions\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Questions</p>\n  <h2>當空間愈做愈大時，先停下來問這兩題</h2>\n</div>\n<div class=\"prompt-grid\">\n  <article class=\"prompt-card\">\n    <strong>這些維度有多少是真正值得付樣本成本的？</strong>\n    <p>若你答不出每個維度為什麼值得存在，通常表示問題已經開始被 feature 貪婪牽著走。</p>\n  </article>\n  <article class=\"prompt-card\">\n    <strong>我們是不是其實有某種可利用的低維結構？</strong>\n    <p>稀疏性、流形、分解規則、物理約束或工程先驗，常是你逃離高維空曠世界的真正出口。</p>\n  </article>\n</div>\n<div class=\"template-note\">\n  <strong>延伸路線</strong>\n  <p>接著可讀 dimensionality reduction、nearest-neighbor methods、regularization，去看不同方法如何用結構換回可學性。</p>\n</div>\n</section>\n\n<section class=\"chapter\" id=\"sources\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Sources</p>\n  <h2>來源與整理方式</h2>\n  <p class=\"section-lede\">本頁以 Bellman 所命名的 curse of dimensionality 為主，並用高維空間稀疏與降維脈絡補上工程可操作的讀法。</p>\n</div>\n<div class=\"source-grid\">\n  <article class=\"source-card\">\n    <strong>主概念</strong>\n    <p>Curse of dimensionality 條目整理了組合爆炸、樣本稀疏、距離退化等多種高維現象，是本頁的主骨架。</p>\n    <a href=\"https://en.wikipedia.org/wiki/Curse_of_dimensionality\" target=\"_blank\" rel=\"noreferrer\">Curse of dimensionality</a>\n  </article>\n  <article class=\"source-card\">\n    <strong>命名來源</strong>\n    <p>Richard Bellman 的條目補上這個說法來自動態規劃與高維最佳化，不只是後來的機器學習用語。</p>\n    <a href=\"https://en.wikipedia.org/wiki/Richard_E._Bellman\" target=\"_blank\" rel=\"noreferrer\">Richard E. Bellman</a>\n  </article>\n  <article class=\"source-card\">\n    <strong>相鄰出路</strong>\n    <p>Dimensionality reduction 條目提供降維這條鄰近分析線，方便對照哪些高維問題其實能靠結構壓回可處理範圍。</p>\n    <a href=\"https://en.wikipedia.org/wiki/Dimensionality_reduction\" target=\"_blank\" rel=\"noreferrer\">Dimensionality reduction</a>\n  </article>\n</div>\n</section>\n\n<section class=\"chapter\">\n  <div class=\"reference-box\">\n    <div>\n      <p class=\"section-label\">Reference</p>\n      <h2>下一步</h2>\n      <p>之後若想延伸這頁，一個很自然的下一篇會是 bias-variance tradeoff，因為兩者都在提醒你『複雜度不是免費的』。</p>\n    </div>\n    <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n  </div>\n</section>\n\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "變數一多，不只資料需求暴增，連『附近』、『密度』與『代表性』這些低維直覺都會一起失靈。",
+    "smallestScenario": "要調 12 個參數、每個只試 5 個值時，完整搜尋已經超過兩億組，而高維空間裡樣本又會稀到連『鄰近』都不太可信。",
+    "sourcePlan": [
+      "用 curse of dimensionality 條目支撐高維空間的主要現象與工程後果。",
+      "用 Richard Bellman 條目支撐這個概念來自動態規劃與高維最佳化的歷史脈絡。",
+      "用 dimensionality reduction 條目補上工程常見的結構化出路。"
+    ],
+    "transferTargets": [
+      "參數校準矩陣設計",
+      "相似案例搜尋",
+      "特徵工程與模型選擇"
+    ],
+    "commonMisreading": "把高維問題當成單純算力不足，會讓人忽略真正缺的是結構假設與樣本密度。",
+    "readerQuestions": [
+      "這些維度有多少是真正值得付樣本與搜尋成本的，而不是只是看起來也許有用？",
+      "我們是否其實擁有某種低維結構，可以把高維問題壓回可學習或可驗證的範圍？"
+    ],
+    "sectionIntents": {
+      "core": "先把高維問題的幾何直覺翻轉過來，讓讀者理解這不是單一演算法缺陷。",
+      "setup": "用 12 參數校準矩陣這種具體情境把組合爆炸與稀疏化直接落地。",
+      "lenses": "拆出組合爆炸、樣本稀疏、距離退化與結構需求四種常見失靈方式。",
+      "psychology": "說明 feature 貪婪與平面幾何直覺如何系統性低估高維代價。",
+      "applications": "把主題拉回實驗設計、搜尋與特徵工程，讓概念有工程抓手。",
+      "misreadings": "校正『多一點資料就好』與『只跟 ML 有關』這兩種低估問題本質的讀法。",
+      "questions": "把頁面收成兩個直接指向結構與樣本成本的追問。",
+      "sources": "交代主概念、命名來源與降維出路如何共同支撐本頁內容。"
+    }
+  }
+}

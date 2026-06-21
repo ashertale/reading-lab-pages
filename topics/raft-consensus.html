@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Raft 共識演算法 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-raft-consensus">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / consensus / replicated log / leader election</p>
+        <h1>Raft 共識演算法</h1>
+        <p class="topic-subtitle">Raft Consensus</p>
+        <p class="thesis">Raft 用 leader、term 與 replicated log 把共識拆得較容易理解，但它仍要求多數派、穩定日誌與非拜占庭假設。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>適合看 metadata cluster、分散式設定庫、HA controller、control-plane state 與需要多節點同意同一串命令的系統。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>分散式共識 / Leader-based replication</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Leader election and replicated log agreement</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>term、leader、majority、log matching、commit index</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能把 Raft 的正常路徑、leader crash 與 log 修復放進同一張圖理解</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>選主</span>
+          <span>複製</span>
+          <span>提交</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>共識先交給一個被多數派承認的 leader</h2>
+          <p class="section-lede">Raft 把伺服器分成 follower、candidate 與 leader；正常情況由 leader 接收命令、複製日誌並在多數派保存後提交。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>Leader 讓系統比較好懂，卻也讓正確性集中在選主、term 單調性與日誌匹配規則上。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先用 term 分世代</strong>
+            <p>每次選舉進入新 term，舊 leader 的權威會被較新 term 擋下。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再用多數派授權</strong>
+            <p>leader 必須拿到 majority vote，提交也依賴 majority replication。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後維持日誌前綴</strong>
+            <p>已提交的 entry 不能被未來 leader 覆蓋，這是 replicated state machine 的核心。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>Leader 寫到一半就消失</h2>
+          <p class="section-lede">三節點叢集要更新 active channel。Leader 把 entry 發給一個 follower 後當機；client 到底能不能把這次寫入視為成功？</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>若 entry 已在多數派保存並被 leader commit，後續 leader 必須保留它；若只在少數節點，可能被覆寫。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>節點重啟、網路延遲與重複 RPC 都會讓同一段 log 看起來有多個版本。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">Follower timeout 發起選舉</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">新 leader 對齊 log</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">多數派保存後提交命令</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>Raft 的安全性不靠大家同時在線，而靠 majority 與 log matching 限制未來能承認什麼。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>從五個欄位追日誌是否站得住</h2>
+          <p class="section-lede">看 Raft 問題時，先別跳到整個叢集；term、index、commit index、last applied 與 vote record 往往已經說出大半真相。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>Term</strong>
+            <p>每個 RPC 都帶 term，讓節點能辨認過期權威。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Election timeout</strong>
+            <p>隨機 timeout 降低 split vote；太短會被網路 jitter 擾亂。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Log matching</strong>
+            <p>若兩份 log 在同 index/term 相同，之前的 prefix 應相同。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Snapshot</strong>
+            <p>日誌不能無限長；快照要保留足夠資訊讓落後節點追上。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>情境</th><th>Raft 依靠</th><th>工程風險</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Leader crash</td>
+                <td>新 term election 與 majority vote</td>
+                <td>timeout 設太敏感造成頻繁改選</td>
+              </tr>
+              <tr>
+                <td>Follower log 落後</td>
+                <td>AppendEntries 對齊 prefix</td>
+                <td>大量補 log 影響恢復時間</td>
+              </tr>
+              <tr>
+                <td>Cluster membership change</td>
+                <td>joint consensus 或等價過渡</td>
+                <td>一次改太多節點破壞多數派交集</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>易懂的演算法會讓人想自己寫一版</h2>
+          <p class="section-lede">Raft 的貢獻之一是可理解性；但 production 正確性藏在磁碟、時鐘、網路與 membership change 的邊角。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>把 demo 當規格</strong>
+            <p>動畫能說明正常路徑，卻不會替你處理 fsync failure 或 torn write。</p>
+          </article>
+          <article class="example">
+            <strong>過度相信 leader</strong>
+            <p>Leader 是便利的協調點，不是絕對真理；term 與 majority 才是權威來源。</p>
+          </article>
+          <article class="example">
+            <strong>忽略慢節點</strong>
+            <p>一個長期落後的 follower 會牽動 snapshot、catch-up 與維運策略。</p>
+          </article>
+        </div>
+        <p class="micro-note">Raft review 最怕只討論 election happy path，卻沒有逐項列出持久化與重啟後的不變量。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>控制面的狀態最適合用 replicated log 思考</h2>
+          <p class="section-lede">當系統需要所有節點按同一順序套用命令，Raft 的 log 模型比共享資料庫直覺更清楚。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>Metadata store</strong>
+            <p>服務發現、cluster config、lease 狀態可透過 replicated log 保持一致。</p>
+          </article>
+          <article class="example">
+            <strong>Firmware channel</strong>
+            <p>多個管理節點用同一串命令決定哪些 device group 進入哪個 release channel。</p>
+          </article>
+          <article class="example">
+            <strong>Feature flag control</strong>
+            <p>旗標變更若需要強順序，可把開關操作納入共識 log。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>Raft 處理的是 crash fault，不是節點惡意撒謊；安全通訊與身份驗證仍要另外設計。</li>
+          <li>先決定哪些狀態真的需要強一致，否則 leader bottleneck 會把所有更新都拉進同一條隊伍。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>Raft 好懂，不代表沒有坑</h2>
+          <p class="section-lede">它降低了心智負擔，但不會消除分散式系統的基本成本。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>等同拜占庭容錯</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>Raft 假設節點不惡意偽造訊息；壞節點模型不同時要換工具。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只要三台就永遠可用</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>三台只能容忍一台失效；網路分區後少數派必須停止提交。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>Log replication 就是資料備份</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>它複製的是命令順序；snapshot、compaction 與 state machine determinism 仍要處理。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>哪一筆 entry 已經不能被未來抹掉</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果 leader 回覆 client 成功</strong>
+            <p>這筆 entry 是否已被多數派持久保存，重啟後是否仍能被新 leader 看見？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果網路分成二比一</strong>
+            <p>少數派節點會拒絕寫入、只讀、還是可能誤以為自己仍有權提交？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>再讀 Paxos、Viewstamped Replication、quorum systems 與 split-brain，能更精準理解 Raft 的取捨。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這頁以 Raft 原始論文的分解方式為主；控制面與 firmware channel 是把 replicated log 契約帶回工程現場。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>原始論文</strong>
+            <p>Ongaro 與 Ousterhout 的 extended paper 說明 leader election、log replication 與 safety。</p>
+            <a href="https://raft.github.io/raft.pdf" target="_blank" rel="noreferrer">In Search of an Understandable Consensus Algorithm</a>
+          </article>
+          <article class="source-card">
+            <strong>官方資源</strong>
+            <p>Raft website 收錄論文、視覺化、talk 與實作資源。</p>
+            <a href="https://raft.github.io/" target="_blank" rel="noreferrer">Raft Consensus Algorithm</a>
+          </article>
+          <article class="source-card">
+            <strong>概覽</strong>
+            <p>Raft algorithm 條目補上角色、term、membership change 與常見實作背景。</p>
+            <a href="https://en.wikipedia.org/wiki/Raft_(algorithm)" target="_blank" rel="noreferrer">Raft algorithm</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>檢查一個你熟悉的 HA 控制面，寫出它在 leader crash 後如何證明舊命令不會被新命令覆蓋。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

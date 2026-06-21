@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>讀取複製更新 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-read-copy-update">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / concurrency / kernel / memory reclamation</p>
+        <h1>讀取複製更新</h1>
+        <p class="topic-subtitle">Read-Copy-Update (RCU)</p>
+        <p class="thesis">RCU 讓讀者幾乎不用停下來，但更新者必須把替換、可見性與舊物件回收分成不同階段處理。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>適合看 Linux kernel、driver lookup table、read-mostly cache、hot path 設計與不可在中斷脈絡長時間阻塞的資料讀取。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>併發同步 / 讀多寫少結構</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Fast readers with deferred reclamation</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>讀者臨界區、pointer publish、grace period、reclamation</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能分辨 RCU 解的是讀取延遲，並同時看見它把更新與回收變難</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>讀取</span>
+          <span>替換</span>
+          <span>回收</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>讀者可以快，舊資料不能早死</h2>
+          <p class="section-lede">RCU 把共享資料的更新拆成發布新版本與延後回收舊版本；讀者在短臨界區內拿到的指標必須保持可用。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>傳統鎖讓更新者等讀者，RCU 則讓讀者少付同步成本；省下的讀取成本會轉移到更新者的排序、版本替換與 grace period 管理。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先保護讀者窗口</strong>
+            <p>讀者進入臨界區後，所見物件在離開前不得被回收。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再發布完整版本</strong>
+            <p>更新者要先準備新資料，再用正確的 pointer publish 讓讀者看見。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後等過渡期</strong>
+            <p>回收舊物件前，要確認替換當時已存在的讀者都結束了。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>查表正在跑，控制面想換表</h2>
+          <p class="section-lede">資料面每個封包都查一次表；控制面偶爾更新規則。讓封包路徑拿重鎖會很貴，但直接釋放舊表會炸到正在讀的人。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>CPU 0 進入 RCU read-side section 後取得舊 route pointer；CPU 1 建好新表並交換全域 pointer。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>CPU 1 看不到 CPU 0 還會不會 dereference 舊節點，所以不能只因為全域 pointer 已更新就 free。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">讀者取得舊版本</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">更新者發布新版本</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">回收者等待 grace period</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>RCU 的安全感來自延後破壞舊世界，而不是讓所有人同步停下來。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個必須一起看的接口</h2>
+          <p class="section-lede">RCU 不是單一 API 名稱，而是一組時間與空間約束；少看任何一段都可能變成 use-after-free。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>Read-side section</strong>
+            <p>讀者用極短窗口宣告自己可能持有 RCU 保護的指標。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Pointer publication</strong>
+            <p>新物件的欄位要先初始化完成，才讓其他 CPU 透過指標看到它。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Grace period</strong>
+            <p>它回答的是替換前已開始的讀者是否都離開，而不是所有未來讀者。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Reclamation pressure</strong>
+            <p>更新太快會堆積待回收物件，記憶體壓力可能轉成另一種可靠性問題。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>檢查點</th><th>要確認什麼</th><th>常見失誤</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>讀者範圍</td>
+                <td>哪些路徑會 dereference 指標</td>
+                <td>忘記中斷、timer 或 workqueue 也可能讀</td>
+              </tr>
+              <tr>
+                <td>發布順序</td>
+                <td>新資料在 pointer 可見前已完整</td>
+                <td>普通 assignment 遮掉 memory ordering 問題</td>
+              </tr>
+              <tr>
+                <td>回收時機</td>
+                <td>舊讀者已全部離開</td>
+                <td>交換 pointer 後立刻 kfree</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>沒有鎖的讀者看起來像沒有責任</h2>
+          <p class="section-lede">RCU 的讀者路徑太輕，容易讓 review 只盯著更新程式碼，而忽略讀者拿到的指標仍需要生命週期保護。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>Hot path 崇拜</strong>
+            <p>大家喜歡零等待的讀取，但很少同步檢查待回收佇列是否堆高。</p>
+          </article>
+          <article class="example">
+            <strong>測試不容易撞中</strong>
+            <p>use-after-free 常要在特定 CPU interleaving 下才出現，單元測試可能長期全綠。</p>
+          </article>
+          <article class="example">
+            <strong>名字造成錯覺</strong>
+            <p>Read-copy-update 聽起來像更新策略，實際上還包含讀者宣告與回收協議。</p>
+          </article>
+        </div>
+        <p class="micro-note">評審 RCU 程式碼時，請把讀者、更新者、回收者當成三個角色分別走一次。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>讀多寫少的共享狀態最常受益</h2>
+          <p class="section-lede">RCU 很適合資料讀取極頻繁、更新相對少、且讀者可以容忍新舊版本短暫共存的地方。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>Kernel lookup</strong>
+            <p>routing、dentry、policy table 這類 lookup path 可避免每次讀取都撞全域鎖。</p>
+          </article>
+          <article class="example">
+            <strong>Driver state snapshot</strong>
+            <p>狀態表更新不頻繁，但 IRQ 或 poll path 需要低延遲讀取。</p>
+          </article>
+          <article class="example">
+            <strong>配置快取</strong>
+            <p>韌體可用類似世代替換思路發布新配置，舊配置等所有使用者離開後再回收。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>若讀者可能睡眠、持有指標跨臨界區，先檢查 RCU flavor 是否匹配。</li>
+          <li>把待回收數量、grace period 延遲與更新節流納入壓測，不只看讀取吞吐。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>RCU 不是把鎖拿掉就結束</h2>
+          <p class="section-lede">它提供的是一種特定生命週期契約；違反契約時，錯誤通常比普通鎖競爭更難查。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>等同 reader-writer lock</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>reader-writer lock 排斥更新與讀取；RCU 允許讀者看舊版本，語意不同。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>會自動回收所有東西</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>RCU 告訴你何時能回收，不會替你修好外部引用或錯誤 ownership。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只適合 kernel</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>核心是版本發布與延後回收；使用者態或韌體也可借用概念，但要重建等價保證。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>舊指標何時真正沒有人碰</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果更新者現在釋放舊物件</strong>
+            <p>哪些 CPU、ISR、callback 或讀者還可能持有它？證據來自鎖、臨界區，還是只是時間推測？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果更新暴增</strong>
+            <p>待回收物件會堆在哪裡，是否有節流、批次回收或記憶體壓力警訊？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>下一步可以把 RCU 與 ABA problem、hazard pointer、epoch-based reclamation 對照，分清楚不同記憶體回收契約。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">資料來源採 Linux kernel 文件作為主軸；驅動與韌體段落是依 RCU 的生命週期契約做工程轉譯。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>Kernel 文件</strong>
+            <p>Linux kernel RCU 文件詳細說明 removal、grace period、reclamation 與核心 API。</p>
+            <a href="https://docs.kernel.org/RCU/whatisRCU.html" target="_blank" rel="noreferrer">What is RCU?</a>
+          </article>
+          <article class="source-card">
+            <strong>概念背景</strong>
+            <p>Read-copy-update 條目整理 RCU 的讀多寫少用途、API 與歷史。</p>
+            <a href="https://en.wikipedia.org/wiki/Read-copy-update" target="_blank" rel="noreferrer">Read-copy-update</a>
+          </article>
+          <article class="source-card">
+            <strong>API 讀法</strong>
+            <p>LWN 的 RCU API 系列適合對照 synchronize_rcu、call_rcu 與讀者臨界區的實務語意。</p>
+            <a href="https://lwn.net/Articles/264090/" target="_blank" rel="noreferrer">RCU part 3: the RCU API</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>讀完後挑一段共享表格程式碼，分別標出 pointer publish、reader critical section 與真正 free 的位置。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

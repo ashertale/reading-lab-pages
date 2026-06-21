@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "token-bucket",
+    "outputPath": "topics/token-bucket.html"
+  },
+  "indexEntry": {
+    "id": "token-bucket",
+    "title": "令牌桶",
+    "subtitle": "Token Bucket",
+    "href": "./topics/token-bucket.html",
+    "order": 273,
+    "type": "流量控制 / 速率限制",
+    "domain": "網路、排程與資源保護",
+    "focus": "Average rate with bounded burst",
+    "thesis": "令牌桶讓系統允許短暫爆發，但把長期平均速率鎖住；它管的不是每一秒都一樣，而是爆發不能無限借未來。",
+    "tags": [
+      "token-bucket",
+      "rate-limit",
+      "traffic-shaping",
+      "flow-control",
+      "scheduling",
+      "firmware"
+    ]
+  },
+  "contentBrief": {
+    "pressurePoint": "當系統既要吸收突發請求又不能被長期壓垮時，令牌桶提供一個清楚的速率與爆發分離模型。",
+    "smallestScenario": "每台裝置在失敗後快速 retry，上游剛恢復就被尖峰打滿；若每台裝置有 token bucket，短期可重試，但長期速率受控。",
+    "sourcePlan": [
+      "演算法概要：Token bucket 條目整理 token 補充、桶容量、封包消耗與 traffic shaping/policing 的基本語義。",
+      "相鄰模型：Leaky bucket 條目可用來對照更平滑的排隊/漏水模型與 token bucket 的 burst 差異。",
+      "流量整形：Traffic shaping 條目補充 rate limiting 在網路與資源管理裡的常見用途。"
+    ],
+    "transferTargets": [
+      "網路、排程與資源保護",
+      "用在 firmware log、重試與 IO 節流",
+      "firmware review"
+    ],
+    "commonMisreading": "桶越大越友善：桶太大會把累積信用一次釋放給下游，造成尖峰。",
+    "readerQuestions": [
+      "每台的桶容量與補充速率會讓上游看到多大的瞬間峰值？",
+      "這類工作應該被丟棄、延後、合併、降級，還是只記錄摘要？"
+    ],
+    "sectionIntents": {
+      "core": "令牌桶用固定速率補充 token，請求到來時消耗 token；桶容量決定可累積的短期 burst。",
+      "setup": "單次請求是否合理，不等於群體負載可承受；rate limiter 要管的是總體時間分布。",
+      "lenses": "一個 token bucket 的行為主要由補充速率、桶容量、消耗單位與超額策略決定。",
+      "psychology": "團隊常拿平均 QPS 或平均 log rate 判斷安全；令牌桶逼你同時看 burst 能量。",
+      "applications": "Embedded 系統常有有限 buffer、flash endurance、radio bandwidth 與 cloud quota；令牌桶能把這些限制轉成可調策略。",
+      "misreadings": "Token bucket 和固定窗口限制不同；它保留短期信用，也因此需要小心 burst 容量。",
+      "questions": "每台的桶容量與補充速率會讓上游看到多大的瞬間峰值？",
+      "sources": "這頁以 token bucket 的速率與 burst 模型為核心，工程轉用聚焦於 firmware log、retry 與 IO 節流。"
+    }
+  },
+  "page": {
+    "documentTitle": "令牌桶 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-token-bucket",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / rate limiting / bursts / flow control</p>\n    <h1>令牌桶</h1>\n    <p class=\"topic-subtitle\">Token Bucket</p>\n    <p class=\"thesis\">令牌桶讓系統允許短暫爆發，但把長期平均速率鎖住；它管的不是每一秒都一樣，而是爆發不能無限借未來。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>這頁適合用在 log throttle、API rate limit、DMA/IO 排程與錯誤重試保護：它會讓你把平均負載與短期 burst 分開設計。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>流量控制 / 速率限制</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Average rate with bounded burst</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>補充速率、桶容量、burst、拒絕或排隊策略</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能設計兼顧突發工作與長期資源保護的 rate limiter</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>令牌</span>\n      <span>爆發</span>\n      <span>平均</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>允許爆發，但不允許無限透支</h2>\n      <p class=\"section-lede\">令牌桶用固定速率補充 token，請求到來時消耗 token；桶容量決定可累積的短期 burst。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>完全禁止 burst 會犧牲延遲與使用體驗；完全放任 burst 會讓下游資源被尖峰打穿。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先定補充速率</strong>\n        <p>補充速率代表長期平均允許量，應對齊下游可承受容量。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再定桶容量</strong>\n        <p>容量代表可容忍的瞬間爆發，太小會卡正常尖峰，太大會讓下游吃到過大衝擊。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後決定超額行為</strong>\n        <p>token 不足時要 drop、delay、降級或標記，這是產品與可靠性決策。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>錯誤重試把服務打更壞</h2>\n      <p class=\"section-lede\">想像裝置連不上伺服器後立刻密集重試；單台裝置看似合理，整個 fleet 同時重試就會放大故障。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小場景</strong>\n        <p>每台裝置在失敗後快速 retry，上游剛恢復就被尖峰打滿；若每台裝置有 token bucket，短期可重試，但長期速率受控。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>單次請求是否合理，不等於群體負載可承受；rate limiter 要管的是總體時間分布。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">token 穩定補充</div>\n      <div class=\"flow-arrow\">→</div>\n<div class=\"flow-step\">請求消耗 token</div>\n      <div class=\"flow-arrow\">→</div>\n<div class=\"flow-step\">burst 被桶容量限制</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>令牌桶把『偶爾快一點』和『長期太多』拆成兩個參數。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>設計令牌桶的四個旋鈕</h2>\n      <p class=\"section-lede\">一個 token bucket 的行為主要由補充速率、桶容量、消耗單位與超額策略決定。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>補充速率 r</strong>\n        <p>代表平均允許工作量；要根據下游吞吐與公平性設定。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>桶容量 b</strong>\n        <p>代表可累積信用；越大越能吸收突發，也越可能把尖峰傳給下游。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>消耗權重</strong>\n        <p>不同請求可消耗不同 token，例如大封包、昂貴 log 或高成本操作。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>超額處理</strong>\n        <p>delay 適合 shaping，drop 適合 protection，mark 適合後續分級處理。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>需求</th>\n            <th>參數傾向</th>\n            <th>可能副作用</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>保護下游</td>\n            <td>低 r、小 b、超額 drop</td>\n            <td>使用者尖峰體驗較差。</td>\n          </tr>\n          <tr>\n            <td>吸收自然 burst</td>\n            <td>合理 r、中等 b、超額 queue</td>\n            <td>排隊延遲需受控。</td>\n          </tr>\n          <tr>\n            <td>高成本操作</td>\n            <td>依成本消耗多 token</td>\n            <td>需要估算權重與公平性。</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>平均值讓尖峰看起來無害</h2>\n      <p class=\"section-lede\">團隊常拿平均 QPS 或平均 log rate 判斷安全；令牌桶逼你同時看 burst 能量。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>尖峰短所以被忽略</strong>\n        <p>幾秒鐘的 burst 可能足以耗盡 thread、buffer 或上游 quota。</p>\n      </article>\n      <article class=\"example\">\n        <strong>公平性被單機視角遮住</strong>\n        <p>每台裝置都覺得自己不多，但 fleet 同步後會形成群體尖峰。</p>\n      </article>\n      <article class=\"example\">\n        <strong>排隊看似溫和</strong>\n        <p>把超額請求全部排隊可能只是把 overload 延後，並增加 latency 與記憶體壓力。</p>\n      </article>\n    </div>\n    <p class=\"micro-note\">Rate limiting 不是只為了拒絕請求，而是讓負載形狀可被下游承受。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>用在 firmware log、重試與 IO 節流</h2>\n      <p class=\"section-lede\">Embedded 系統常有有限 buffer、flash endurance、radio bandwidth 與 cloud quota；令牌桶能把這些限制轉成可調策略。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>Log throttling</strong>\n        <p>高頻錯誤可消耗 token，token 不足時只保留摘要，避免 log storm 吃掉 flash 或 uplink。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Retry control</strong>\n        <p>失敗重試使用 token bucket 加 jitter，可避免大規模裝置同時敲上游。</p>\n      </article>\n      <article class=\"example\">\n        <strong>IO scheduling</strong>\n        <p>低優先工作可用較小補充速率，避免背景寫入長期壓縮前景 latency。</p>\n      </article>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>為每個 rate limiter 同時寫出平均速率、最大 burst 與超額行為。</li>\n      <li>若請求成本差異大，讓 token 消耗反映成本，而不是每次都消耗 1。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>它不是單純每秒最多 N 次</h2>\n      <p class=\"section-lede\">Token bucket 和固定窗口限制不同；它保留短期信用，也因此需要小心 burst 容量。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>桶越大越友善</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>桶太大會把累積信用一次釋放給下游，造成尖峰。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>平均速率足夠就安全</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>平均安全不代表瞬間安全；buffer、thread 與上游 quota 都會被尖峰影響。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>超額一定要 drop</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>可以 delay、降級、合併或標記，取決於請求是否仍有時效價值。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>分別設定平均與爆發</h2>\n    </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>如果 1000 台裝置同時重試</strong>\n        <p>每台的桶容量與補充速率會讓上游看到多大的瞬間峰值？</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果 token 不足</strong>\n        <p>這類工作應該被丟棄、延後、合併、降級，還是只記錄摘要？</p>\n      </article>\n    </div>\n    <div class=\"template-note\">\n      <strong>延伸路線</strong>\n      <p>可接著看 backpressure、circuit breaker 與 thundering herd，補齊 overload protection 的其他工具。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">這頁以 token bucket 的速率與 burst 模型為核心，工程轉用聚焦於 firmware log、retry 與 IO 節流。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>演算法概要</strong>\n        <p>Token bucket 條目整理 token 補充、桶容量、封包消耗與 traffic shaping/policing 的基本語義。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Token_bucket\" target=\"_blank\" rel=\"noreferrer\">Token bucket</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰模型</strong>\n        <p>Leaky bucket 條目可用來對照更平滑的排隊/漏水模型與 token bucket 的 burst 差異。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Leaky_bucket\" target=\"_blank\" rel=\"noreferrer\">Leaky bucket</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>流量整形</strong>\n        <p>Traffic shaping 條目補充 rate limiting 在網路與資源管理裡的常見用途。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Traffic_shaping\" target=\"_blank\" rel=\"noreferrer\">Traffic shaping</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>可接著看 backpressure、circuit breaker 與 thundering herd，補齊 overload protection 的其他工具。</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  }
+}

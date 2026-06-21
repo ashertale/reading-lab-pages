@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>帕累托效率 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-pareto-efficiency">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / optimization / tradeoffs / economics</p>
+        <h1>帕累托效率</h1>
+        <p class="topic-subtitle">Pareto Efficiency</p>
+        <p class="thesis">當一個方案已經站在帕累托效率點上，再說『讓每個面向都更好』通常不是技術問題，而是你還沒承認真正的取捨。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁要教你的，不是把『效率』當成萬能好詞，而是拆開兩件常被混在一起的事：移除明顯浪費，和在多個好目標之間承認必須讓步。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>取捨原理 / 效率邊界</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>No free improvement after the frontier</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>被支配方案、效率前緣、價值權重、轉移代價</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能分辨一個爭論是在清除浪費，還是在偷避真正的價值排序</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>支配</span>
+          <span>前緣</span>
+          <span>取捨</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+
+    <section class="chapter" id="core">
+    <div class="section-heading">
+      <p class="section-label">Orientation</p>
+      <h2>不是所有『再優化一下』都還有免費午餐</h2>
+      <p class="section-lede">帕累托效率最有力的地方，是它強迫人先清掉被支配方案，然後誠實承認：剩下來的很多選擇，已經不是單純技術問題，而是偏好與代價的排序問題。</p>
+    </div>
+    <div class="core-card">
+      <p class="section-label">Core Tension</p>
+      <p>只要還有一個方案能在不傷任何人的前提下讓至少一個面向更好，浪費就還沒清完；可一旦走到效率前緣，再往前就意味著某個重要維度必須退一步。</p>
+    </div>
+    <div class="principle-strip" aria-label="本頁讀法">
+      <div>
+        <span>01</span>
+        <strong>先刪掉被支配方案</strong>
+        <p>若某個方案在所有關心面向上都不如另一個方案，它就不該繼續佔用討論版面。</p>
+      </div>
+      <div>
+        <span>02</span>
+        <strong>再承認前緣不是單一答案</strong>
+        <p>站上效率前緣的方案可能有很多個；它們誰比較好，得看你願意讓哪個維度承擔代價。</p>
+      </div>
+      <div>
+        <span>03</span>
+        <strong>最後分清效率與公平</strong>
+        <p>一個方案可以很有效率，卻把代價集中到特定人或特定部門身上；效率不是正義的代名詞。</p>
+      </div>
+    </div>
+    </section>
+
+    <section class="chapter" id="setup">
+    <div class="section-heading">
+      <p class="section-label">Setup</p>
+      <h2>把它縮成一次產品權衡</h2>
+      <p class="section-lede">你不需要進入宏觀經濟學，只要想一個資源真的有限的工程決策就夠了。</p>
+    </div>
+    <div class="definition-grid">
+      <div class="tile">
+        <strong>最小場景</strong>
+        <p>團隊在同一顆 MCU 上同時追求更短開機時間、更低功耗、更小韌體體積與更強診斷資訊。明顯笨的配置先被排除後，剩下來的幾組方案都各有亮點，也各要犧牲別的東西。</p>
+      </div>
+      <div class="tile">
+        <strong>真正難點</strong>
+        <p>討論常卡在『能不能全部都要』。若你已經站在前緣上，真正的下一步不是再喊優化，而是講清楚哪個維度現在更值得保。</p>
+      </div>
+    </div>
+    <div class="concept-flow" aria-label="問題展開">
+      <div class="flow-step">先淘汰明顯被支配的爛方案</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">剩下多個互不支配的好方案</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">真正分勝負的變成價值排序而不是口號</div>
+    </div>
+    <div class="paradox-frame">
+      <strong>Key Point</strong>
+      <p>帕累托效率把討論切成兩段：第一段處理浪費，第二段處理取捨；把兩段混在一起，會讓會議永遠像還有免費改進可以撿。</p>
+    </div>
+    </section>
+
+    <section class="chapter" id="lenses">
+    <div class="section-heading">
+      <p class="section-label">Lenses</p>
+      <h2>四個角度，看清你現在到底在爭哪一層</h2>
+      <p class="section-lede">很多人一說效率，就把被支配、前緣、公平與轉移補償全部揉成一團；這會讓討論既吵又不精準。</p>
+    </div>
+    <div class="lens-grid">
+      <article class="lens-card">
+        <strong>被支配方案</strong>
+        <p>這一層最單純：若 A 在你所有在乎的面向上都不比 B 好，A 就應該被刪掉。</p>
+      </article>
+      <article class="lens-card">
+        <strong>效率前緣</strong>
+        <p>留在前緣上的方案彼此互不支配，表示它們各自保住了不同的價值組合。</p>
+      </article>
+      <article class="lens-card">
+        <strong>權重與補償</strong>
+        <p>一旦要在前緣內選一點，你其實在說明誰的成本可以被接受、誰的收益值得保護。</p>
+      </article>
+      <article class="lens-card">
+        <strong>公平與可接受性</strong>
+        <p>有些方案雖然有效率，但代價集中到特定角色，實務上可能根本推不動或不該推。</p>
+      </article>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>會議上的句子</th>
+            <th>它比較像哪一層問題</th>
+            <th>真正該補什麼</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>這方案明顯哪裡都不佔優</td>
+            <td>被支配方案</td>
+            <td>直接淘汰，不必再浪費時間護航</td>
+          </tr>
+          <tr>
+            <td>這兩案都各有犧牲，怎麼選？</td>
+            <td>前緣內取捨</td>
+            <td>明講價值權重與承擔代價者</td>
+          </tr>
+          <tr>
+            <td>能不能再微調到每邊都好？</td>
+            <td>是否仍有浪費</td>
+            <td>確認是否其實還沒走到前緣</td>
+          </tr>
+          <tr>
+            <td>這案很有效率，但某組會特別痛</td>
+            <td>公平與補償</td>
+            <td>補上分配與可執行性的討論</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </section>
+
+    <section class="chapter" id="psychology">
+    <div class="section-heading">
+      <p class="section-label">Psychology</p>
+      <h2>人為什麼討厭承認自己已經走到取捨邊界</h2>
+      <p class="section-lede">因為一旦承認在前緣上，你就不能再把爭論包裝成單純找最佳解，而得面對價值選擇本身。</p>
+    </div>
+    <div class="example-grid">
+      <div class="example">
+        <strong>免費午餐幻覺</strong>
+        <p>團隊很容易相信再多花一點努力就能每個面向都更好，因為承認取捨比承認還有浪費來得不舒服。</p>
+      </div>
+      <div class="example">
+        <strong>效率語言的道德遮罩</strong>
+        <p>只要把選擇包裝成『提高效率』，就比較不必正面談誰在付成本、誰在得利。</p>
+      </div>
+      <div class="example">
+        <strong>單一指標誘惑</strong>
+        <p>把多維問題壓成一個分數很省事，但也很容易把真正的衝突從畫面上刪掉。</p>
+      </div>
+    </div>
+    <p class="micro-note">這一節不是要否定效率，而是提醒你：效率前緣之後的討論，應該從『哪邊還有浪費』轉成『我們接受哪種讓步』。</p>
+    </section>
+
+    <section class="chapter" id="applications">
+    <div class="section-heading">
+      <p class="section-label">Applications</p>
+      <h2>把它帶回設計、排程與資源配置</h2>
+      <p class="section-lede">帕累托效率對工程最有用的地方，是它能阻止團隊一直拿『再優化一下』來逃避真正的優先序。</p>
+    </div>
+    <div class="example-grid">
+      <div class="example">
+        <strong>韌體體積、速度與診斷資訊</strong>
+        <p>當你已經把明顯重複與浪費清掉後，剩下來的差異往往反映的是產品到底更重視開機手感、續航，還是現場可維護性。</p>
+      </div>
+      <div class="example">
+        <strong>專案進度、品質與人力</strong>
+        <p>有些排程已經沒有不用付代價的改善空間；此時說『三者都再更好』只是在延後面對現實。</p>
+      </div>
+      <div class="example">
+        <strong>產品分層</strong>
+        <p>不同 SKU 的配置若都在前緣上，真正問題就不是哪個笨，而是你想把哪種價值給哪一群使用者。</p>
+      </div>
+    </div>
+    <ul class="bullet-list">
+      <li>先用帕累托概念清掉被支配方案，再用價值與責任語言討論前緣內取捨，會比整場混著吵更有效。</li>
+      <li>每當有人說『可不可以都不要犧牲』，先確認那是不是還有浪費，還是其實只是還不肯命名代價。</li>
+    </ul>
+    </section>
+
+    <section class="chapter" id="misreadings">
+    <div class="section-heading">
+      <p class="section-label">Misreadings</p>
+      <h2>三個最常見的誤讀</h2>
+      <p class="section-lede">若把帕累托效率讀得太薄，最後只會得到一個聽起來專業、實際上卻躲開爭點的口號。</p>
+    </div>
+    <div class="collocation-list" aria-label="常見誤讀">
+      <article class="collocation-card">
+        <div>
+          <strong>有效率就表示公平</strong>
+          <span class="register-tag">校正</span>
+        </div>
+        <p>不對。效率只告訴你有沒有免費改進，沒有告訴你成本與收益是不是被合理分配。</p>
+      </article>
+      <article class="collocation-card">
+        <div>
+          <strong>走到前緣就代表完美</strong>
+          <span class="register-tag">校正</span>
+        </div>
+        <p>前緣只表示沒有無痛升級，不代表那個位置本身符合你的目的、倫理或商業策略。</p>
+      </article>
+      <article class="collocation-card">
+        <div>
+          <strong>只要算出一條前緣，決策就完成了</strong>
+          <span class="register-tag">校正</span>
+        </div>
+        <p>前緣只是把真正的價值選擇攤開，沒有替你做掉那個選擇。</p>
+      </article>
+    </div>
+    </section>
+
+    <section class="chapter" id="questions">
+    <div class="section-heading">
+      <p class="section-label">Questions</p>
+      <h2>當討論一直卡在『能不能都要』時，先問這兩題</h2>
+    </div>
+    <div class="prompt-grid">
+      <article class="prompt-card">
+        <strong>我們現在還在清浪費，還是其實已經來到真正的取捨點？</strong>
+        <p>若已經沒有被支配方案，繼續假裝只是技術優化問題，只會讓決策語言愈來愈空。</p>
+      </article>
+      <article class="prompt-card">
+        <strong>一旦要讓某個維度退一步，那個代價落到誰身上、為什麼值得？</strong>
+        <p>把承擔者講清楚，能避免效率這個詞被拿來遮住分配問題。</p>
+      </article>
+    </div>
+    <div class="template-note">
+      <strong>延伸路線</strong>
+      <p>若要順著這條線再往外讀，可接 trade-off analysis、opportunity cost、mechanism design，去看不同系統如何把價值衝突明文化。</p>
+    </div>
+    </section>
+
+    <section class="chapter" id="sources">
+    <div class="section-heading">
+      <p class="section-label">Sources</p>
+      <h2>來源與整理方式</h2>
+      <p class="section-lede">本頁以 Pareto efficiency 的基本概念為骨架，再用 efficiency 的經濟學說明補上效率與公平不是同一件事這條重要邊界。</p>
+    </div>
+    <div class="source-grid">
+      <article class="source-card">
+        <strong>主條目</strong>
+        <p>Pareto efficiency 條目提供被支配方案、效率前緣與無免費改進這些最核心的定義。</p>
+        <a href="https://en.wikipedia.org/wiki/Pareto_efficiency" target="_blank" rel="noreferrer">Pareto efficiency</a>
+      </article>
+      <article class="source-card">
+        <strong>效率的經濟學說明</strong>
+        <p>Econlib 的效率條目適合拿來對照『有效率』不等於『公平』，以及不同效率語境其實在談什麼。</p>
+        <a href="https://www.econlib.org/library/Enc/Efficiency.html" target="_blank" rel="noreferrer">Efficiency at Econlib</a>
+      </article>
+      <article class="source-card">
+        <strong>理論鄰居</strong>
+        <p>Economic efficiency 條目把帕累托概念放回更大經濟效率家族，方便對照哪些問題超出它能回答的範圍。</p>
+        <a href="https://en.wikipedia.org/wiki/Economic_efficiency" target="_blank" rel="noreferrer">Economic efficiency</a>
+      </article>
+    </div>
+    </section>
+
+    <section class="chapter">
+      <div class="reference-box">
+        <div>
+          <p class="section-label">Reference</p>
+          <h2>下一步</h2>
+          <p>若之後要補一頁更偏工程的對照，pareto frontier 會是很自然的下一站，因為它能把這裡的抽象取捨圖像化。</p>
+        </div>
+        <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+      </div>
+    </section>
+
+    </article>
+  </main>
+</body>
+</html>

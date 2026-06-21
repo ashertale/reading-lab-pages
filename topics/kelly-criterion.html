@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kelly 準則 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-kelly-criterion">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / risk sizing / growth / uncertainty</p>
+        <h1>Kelly 準則</h1>
+        <p class="topic-subtitle">Kelly Criterion</p>
+        <p class="thesis">有優勢不代表該押滿；Kelly 準則問的是在不確定且可重複的賭局裡，該投入多少比例才不會讓成長被波動毀掉。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁不是投資建議，而是把 Kelly 當成風險配置心智模型：用來區分方向正確、投入比例與估計不確定。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>風險配置 / 成長準則</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Size bets for long-run logarithmic growth</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>edge、odds、position sizing、估計誤差</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能把『值得做』和『值得投入多少』分開，避免因高信心而過度下注</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>優勢</span>
+          <span>比例</span>
+          <span>波動</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>押對方向仍可能押錯大小</h2>
+          <p class="section-lede">Kelly 準則在可重複且有機率優勢的賭局中，選擇最大化長期對數成長率的下注比例。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>下注太少浪費優勢，下注太多則讓波動與連敗吞掉本金；最危險的是把不確定估計當成確定優勢。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先估 edge</strong>
+            <p>沒有正優勢，Kelly 不會神奇創造收益；輸入估錯時，輸出會很危險。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再算比例</strong>
+            <p>重點是投入比例，不是只判斷要不要參與。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後打折</strong>
+            <p>實務上常用 fractional Kelly，承認模型誤差、風險承受度與不可重複性。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>一個看起來很划算的專案</h2>
+          <p class="section-lede">想像團隊發現某個新架構很可能降低 20% 成本，但若判斷錯，會拖慢主線六個月。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>正期望值不代表要把全隊押上去；你可以用小團隊、prototype、里程碑與停止條件控制投入比例。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>工程討論常只問該不該做，卻少問應該用多少資源下注，以及估計錯誤時能不能活下來。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">估計有優勢</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">選擇投入比例</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">保留承受連敗的能力</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>Kelly 的工程啟發是：不要把一個好機會變成過大單點風險。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>從下注大小看風險配置</h2>
+          <p class="section-lede">Kelly 不只談機率，也談資本路徑；長期成長被大幅回撤破壞後，很難靠平均期望值挽回。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>優勢大小</strong>
+            <p>勝率與賠率共同決定合理比例；高勝率但小收益不一定值得重押。</p>
+          </article>
+          <article class="lens-card">
+            <strong>波動與回撤</strong>
+            <p>過度下注會讓連續失敗造成不可恢復損失，即使平均期望值為正。</p>
+          </article>
+          <article class="lens-card">
+            <strong>估計誤差</strong>
+            <p>工程機會的勝率與收益常是粗估，應對 Kelly 結果保守打折。</p>
+          </article>
+          <article class="lens-card">
+            <strong>不可重複性</strong>
+            <p>若只玩一次或輸了會失去關鍵能力，對數成長模型不能直接套。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>決策語句</th>
+                <th>Kelly 會追問</th>
+                <th>工程轉用</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>這方向值得做</td>
+                <td>值得押多少？</td>
+                <td>先做 bounded prototype。</td>
+              </tr>
+              <tr>
+                <td>勝率很高</td>
+                <td>賠率與估計誤差呢？</td>
+                <td>把收益、損失與信心分開列。</td>
+              </tr>
+              <tr>
+                <td>錯了再說</td>
+                <td>錯了會不會出局？</td>
+                <td>保留主線與回退資源。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>信心會偷偷變成倉位</h2>
+          <p class="section-lede">人一旦相信某個方向，就容易把資源集中視為果斷；Kelly 把信心與投注比例拆開。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>正確方向的過度自信</strong>
+            <p>看對趨勢不等於承受得住路上的波動。</p>
+          </article>
+          <article class="example">
+            <strong>全押顯得有魄力</strong>
+            <p>組織文化有時獎勵大膽投入，卻低估失敗後失去選項的成本。</p>
+          </article>
+          <article class="example">
+            <strong>估計被包裝成事實</strong>
+            <p>勝率、收益與損失多半不是精確數字；模型越漂亮，越需要折扣。</p>
+          </article>
+        </div>
+        <p class="micro-note">Kelly 的冷靜感來自一句話：edge 是方向，size 是生存。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>用在專案投注與風險分層</h2>
+          <p class="section-lede">Firmware roadmaps 常要在平台重構、新功能、良率改善與可靠性投資間下注；Kelly 可作為比例思考。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>架構重寫</strong>
+            <p>若收益大但估計誤差也大，先以 spike 或平行路徑下注，避免全隊停擺。</p>
+          </article>
+          <article class="example">
+            <strong>供應替代</strong>
+            <p>即使新料成本優勢明顯，也不要在 qualification 前把所有版本押到單一新來源。</p>
+          </article>
+          <article class="example">
+            <strong>可靠性投資</strong>
+            <p>若某 defect class 反覆造成 field cost，可逐步增加資源，而不是只在事故後一次性大押。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>把每個大機會拆成勝率、收益、損失與投入比例，而不是只寫優缺點。</li>
+          <li>對粗估機會使用折扣後比例，並設 milestone 重新估算。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>Kelly 不是叫你精準賭博</h2>
+          <p class="section-lede">在工程決策裡，它更像一個提醒：估計越不確定，投入比例越不能裝作精準。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>公式能給唯一答案</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>輸入通常有誤差，fractional Kelly 或更保守策略才常見。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>有 edge 就該最大化</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>最大化長期成長不等於符合組織風險、現金流或任務約束。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>可直接套到一次性決策</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>一次性、不可逆或輸了會出局的決策，需要更保守的風險框架。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>把值得做和押多少拆開</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果你認為這案子很有機會</strong>
+            <p>你的勝率、收益、損失與估計誤差分別是多少？投入比例是否已經反映不確定性？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果連續幾次判斷錯</strong>
+            <p>團隊還有沒有資源回到主線？這個下注會不會讓你失去下一次機會？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>可接著讀 expected value、option value 與 margin of safety，把收益估計、保留選項與安全邊際連起來。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這頁以 Kelly criterion 的長期成長與投注比例為核心，工程轉用到資源配置與專案風險分層。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>準則概要</strong>
+            <p>Kelly criterion 條目整理長期對數成長、下注比例與風險配置的基本公式。</p>
+            <a href="https://en.wikipedia.org/wiki/Kelly_criterion" target="_blank" rel="noreferrer">Kelly criterion</a>
+          </article>
+          <article class="source-card">
+            <strong>原始論文</strong>
+            <p>Kelly 的 A New Interpretation of Information Rate 是此準則與資訊率連結的原始來源。</p>
+            <a href="https://archive.org/details/bstj35-4-917" target="_blank" rel="noreferrer">A New Interpretation of Information Rate</a>
+          </article>
+          <article class="source-card">
+            <strong>風險對照</strong>
+            <p>Expected utility hypothesis 可用來對照 Kelly 與個體風險偏好之間的差異。</p>
+            <a href="https://en.wikipedia.org/wiki/Expected_utility_hypothesis" target="_blank" rel="noreferrer">Expected utility hypothesis</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>可接著讀 expected value、option value 與 margin of safety，把收益估計、保留選項與安全邊際連起來。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

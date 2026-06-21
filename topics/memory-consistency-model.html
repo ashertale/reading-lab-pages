@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>記憶體一致性模型 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-memory-consistency-model">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / memory ordering / concurrency / contracts</p>
+        <h1>記憶體一致性模型</h1>
+        <p class="topic-subtitle">Memory Consistency Model</p>
+        <p class="thesis">多核心系統裡，程式寫下的順序不必然就是其他核心、DMA 或中斷看見的順序；一致性模型定義了這份契約。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁適合用在多核心 MCU、DMA descriptor、ISR/main loop 與 lock-free code：它會把『我明明先寫了』改成『誰被保證能按什麼順序看見』。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>併發模型 / 順序契約</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>What order other agents may observe</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>program order、visibility、barrier、atomic semantics</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能判斷何時需要 memory barrier、volatile 不足在哪裡，以及硬體/編譯器可重排到什麼程度</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>順序</span>
+          <span>可見</span>
+          <span>屏障</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>程式順序不是觀察順序的保證</h2>
+          <p class="section-lede">記憶體一致性模型定義多個執行單元對讀寫順序與可見性的共同規則；它是硬體、編譯器與程式之間的契約。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>為了效能，CPU、cache 與 compiler 可能重排或延遲可見性；為了正確，程式必須在共享邊界使用適當同步。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先分 coherence 與 consistency</strong>
+            <p>同一地址的寫入順序是一回事，不同地址之間的可見順序又是另一回事。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再看同步原語</strong>
+            <p>atomic acquire/release、fence、barrier 與 lock 定義哪些讀寫不能被跨越。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後對上硬體代理</strong>
+            <p>DMA、peripheral、ISR 與另一顆 core 都可能有不同的 cache 與 ordering 要求。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>資料寫完了，flag 卻先被看見</h2>
+          <p class="section-lede">一個 producer 先填 descriptor，再把 ready flag 設成 1；consumer 看到 flag 後讀 descriptor。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>在弱排序或 compiler optimization 下，flag 的可見性可能早於 descriptor 欄位，或 consumer 的讀取被提早；結果 consumer 看到 ready，卻讀到舊資料。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>程式碼文字順序給了人安全感，但硬體與編譯器只遵守模型允許的順序，不遵守你的直覺。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">寫資料</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">發布 flag</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">缺少 barrier 導致觀察順序破裂</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>共享邊界不是靠註解保證，而是靠明確同步原語把順序寫進契約。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>看記憶體模型要拆四層</h2>
+          <p class="section-lede">同一個 bug 可能來自 compiler、CPU、cache 或 peripheral ordering；逐層拆才能找出需要哪種 barrier。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>Compiler reordering</strong>
+            <p>編譯器可以在不改變單執行緒語義下重排；共享資料需要 atomic 或特定約束。</p>
+          </article>
+          <article class="lens-card">
+            <strong>CPU reordering</strong>
+            <p>核心可能讓 store buffer、load speculation 或 cache 行為改變其他 agent 的觀察順序。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Cache visibility</strong>
+            <p>DMA 或 peripheral 可能看不到 CPU cache 裡尚未 clean 的資料。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Device ordering</strong>
+            <p>MMIO 存取常需要特定 barrier，避免 register write 被合併、延遲或跨越。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>場景</th>
+                <th>常見誤解</th>
+                <th>需要檢查</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>flag + payload</td>
+                <td>先寫 payload 就一定先可見</td>
+                <td>release/acquire 或 explicit fence。</td>
+              </tr>
+              <tr>
+                <td>DMA descriptor</td>
+                <td>memory write 後 DMA 自然看得到</td>
+                <td>cache clean/invalidate 與 device barrier。</td>
+              </tr>
+              <tr>
+                <td>ISR flag</td>
+                <td>volatile 等於同步</td>
+                <td>volatile 只處理可見存取，不等於跨核心 ordering。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>原始碼順序很會騙人</h2>
+          <p class="section-lede">人閱讀程式時自然按行號想像執行；記憶體模型讓你改看誰被允許觀察到什麼順序。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>單核心經驗外溢</strong>
+            <p>在簡單 MCU 上成立的直覺，移到 cache、多核心或 DMA 後可能失效。</p>
+          </article>
+          <article class="example">
+            <strong>volatile 被過度信任</strong>
+            <p>volatile 常被當成同步萬用工具，但它無法替代 atomic ordering 與 cache maintenance。</p>
+          </article>
+          <article class="example">
+            <strong>偶發性讓 bug 像硬體問題</strong>
+            <p>ordering bug 常隨負載、最佳化等級與中斷時序出現，容易被誤判成雜訊。</p>
+          </article>
+        </div>
+        <p class="micro-note">一旦共享資料跨越 core、ISR、DMA 或 peripheral，就該把同步契約寫出來。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>用在 DMA、ISR 與多核心 firmware</h2>
+          <p class="section-lede">Firmware 最容易踩到記憶體模型的地方，往往不是高階 lock-free，而是描述子、flag、cache 與 MMIO 的邊界。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>DMA ring</strong>
+            <p>CPU 更新 descriptor 後，要確保資料與 descriptor 對 DMA 可見，再啟動 doorbell。</p>
+          </article>
+          <article class="example">
+            <strong>ISR/main handoff</strong>
+            <p>若 ISR 發布事件並填資料，main loop 讀取前需要明確的順序與臨界區策略。</p>
+          </article>
+          <article class="example">
+            <strong>多核心共享狀態</strong>
+            <p>release/acquire 或平台 barrier 要與 cache policy 一起設計，不要只靠 shared struct。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>替每個 shared flag 寫出它保護哪些 payload，以及需要哪種 publish/consume ordering。</li>
+          <li>把 cache maintenance、barrier 與 MMIO ordering 放進 driver API 合約，而不是散在呼叫端。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>volatile 不是記憶體模型答案</h2>
+          <p class="section-lede">volatile 可能防止某些編譯器最佳化，但不代表跨核心或 DMA 的同步已經正確。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>行號就是順序</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>原始碼順序只是 programmer view；其他 agent 看到的順序要看模型與 barrier。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>加 delay 可以修 ordering</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>delay 只能改時間，不提供正式可見性或順序保證。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>所有平台都一樣</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>x86、ARM、RISC-V、MCU bus 與 DMA 的規則不同；要讀平台手冊。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>把共享邊界改寫成同步契約</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果 consumer 看到 ready flag</strong>
+            <p>哪些資料被保證已經可見？這個保證來自 atomic ordering、barrier、lock，還是只是直覺？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果 DMA 讀到舊資料</strong>
+            <p>CPU cache 是否 clean？descriptor write 與 doorbell write 之間是否有 device ordering 保證？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>可接著讀 ABA problem、race condition 與 time-of-check-to-time-of-use，把共享狀態的時間問題一起檢查。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這頁以 consistency model 與 programming memory model 為核心，工程段落聚焦在 firmware 常見的 barrier、cache 與 DMA 邊界。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>一致性模型</strong>
+            <p>Consistency model 條目整理多個處理單元對記憶體讀寫順序的契約概念。</p>
+            <a href="https://en.wikipedia.org/wiki/Consistency_model" target="_blank" rel="noreferrer">Consistency model</a>
+          </article>
+          <article class="source-card">
+            <strong>程式語言模型</strong>
+            <p>Memory model in programming 條目說明語言與編譯器如何定義 thread 之間的記憶體互動。</p>
+            <a href="https://en.wikipedia.org/wiki/Memory_model_%28programming%29" target="_blank" rel="noreferrer">Memory model</a>
+          </article>
+          <article class="source-card">
+            <strong>順序基準</strong>
+            <p>Sequential consistency 條目可用來對照較直覺但成本較高的記憶體順序模型。</p>
+            <a href="https://en.wikipedia.org/wiki/Sequential_consistency" target="_blank" rel="noreferrer">Sequential consistency</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>可接著讀 ABA problem、race condition 與 time-of-check-to-time-of-use，把共享狀態的時間問題一起檢查。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "phase-margin",
+    "outputPath": "topics/phase-margin.html"
+  },
+  "indexEntry": {
+    "id": "phase-margin",
+    "title": "相位裕度",
+    "subtitle": "Phase Margin",
+    "href": "./topics/phase-margin.html",
+    "order": 295,
+    "type": "控制穩定性 / 頻域判準",
+    "domain": "電源迴路、放大器、馬達與控制系統",
+    "focus": "How close feedback is to oscillation",
+    "thesis": "相位裕度量的是回饋系統離震盪還有多少餘地；反應越快不一定越好，穩定餘度太小會帶來 ringing 或失穩。",
+    "tags": [
+      "phase-margin",
+      "control",
+      "feedback",
+      "stability",
+      "Bode",
+      "power"
+    ]
+  },
+  "contentBrief": {
+    "pressurePoint": "把迴路調得更快會吃掉穩定餘度，最後可能用響應速度換來 ringing 或震盪。",
+    "smallestScenario": "DC/DC 負載瞬變時輸出有明顯 ringing；增益 crossover 附近相位落後太多，phase margin 不足。",
+    "sourcePlan": [
+      "主概念：Phase margin 條目定義 unity gain 附近相位距離與穩定性關係。",
+      "頻域工具：Bode plot 條目補上增益、相位與 crossover 的視覺化方法。",
+      "控制背景：Control theory 條目提供 feedback、stability 與控制系統的基本語彙。"
+    ],
+    "transferTargets": [
+      "power supply loop",
+      "op-amp stability",
+      "control loop tuning"
+    ],
+    "commonMisreading": "相位裕度不是越大越好；太大可能代表迴路過慢，response 變鈍。",
+    "readerQuestions": [
+      "迴路在 unity gain crossing 時還剩多少相位距離才到 -180 度？",
+      "目前 ringing 是補償、負載、取樣延遲，還是 sensor/actuator 造成的相位落後？"
+    ],
+    "sectionIntents": {
+      "core": "說明 phase margin 作為閉迴路穩定餘度。",
+      "setup": "用電源負載瞬變 ringing 展示速度與穩定性的交換。",
+      "lenses": "拆成 Bode plot、gain crossover、相位落後與補償。",
+      "psychology": "指出工程師容易只追 step response 的快。",
+      "applications": "映射到電源、op-amp、馬達與 firmware control loop。",
+      "misreadings": "校正越大越好、只看 DC gain 與忽略 delay 的誤讀。",
+      "questions": "要求讀者連結頻域量測與時域現象。",
+      "sources": "以 phase margin、Bode plot 與 control theory 條目為來源。"
+    }
+  },
+  "page": {
+    "documentTitle": "相位裕度 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-phase-margin",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / feedback / frequency response / stability</p>\n    <h1>相位裕度</h1>\n    <p class=\"topic-subtitle\">Phase Margin</p>\n    <p class=\"thesis\">相位裕度量的是回饋系統離震盪還有多少餘地；反應越快不一定越好，穩定餘度太小會帶來 ringing 或失穩。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>適合看 DC/DC compensation、op-amp loop、馬達控制、thermal loop 與任何閉迴路調校。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>控制穩定性 / 頻域判準</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>How close feedback is to oscillation</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>unity gain、相位落後、gain margin、ringing</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能把控制迴路的快慢與穩定餘度一起評估</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>增益</span>\n      <span>相位</span>\n      <span>餘度</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>回饋系統離自我打架還有多遠</h2>\n      <p class=\"section-lede\">Phase margin 通常看 loop gain 為 0 dB 的頻率，當下相位距離 -180 度還剩多少。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>提高 bandwidth 能讓反應變快，但也可能讓延遲與相位落後把負回授推近正回授，造成 ringing 或震盪。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先看 crossover</strong>\n        <p>unity gain 附近的相位最能揭露穩定餘度。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再看時域現象</strong>\n        <p>overshoot、ringing 與 settling time 通常能對應到頻域裕度。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後調補償</strong>\n        <p>compensation network 或控制參數要同時處理速度、相位與噪聲。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>負載一跳，電源輸出開始響</h2>\n      <p class=\"section-lede\">板上 DC/DC 在負載瞬變時有過衝和 ringing；單看穩態電壓合格，卻無法說明動態穩定性。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小場景</strong>\n        <p>負載 step 後輸出震盪幾個週期才 settle，EMI 與 downstream reset 風險上升。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>迴路不是只有 DC accuracy；補償、輸出電容 ESR、layout 與負載都會改變相位。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">loop gain 下降到 0 dB</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">相位已接近 -180 度</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">小擾動被放大成 ringing</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>相位裕度把看似抽象的頻域圖，連到示波器上的過衝和震盪。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>用 Bode plot 看穩定餘地</h2>\n      <p class=\"section-lede\">相位裕度和增益裕度一起告訴你，回饋系統能承受多少模型誤差與條件變動。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>Gain crossover</strong>\n        <p>loop gain 等於 1 的頻率通常是計算 phase margin 的關鍵點。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Phase lag</strong>\n        <p>感測、計算、濾波、plant delay 都會增加相位落後。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Compensation</strong>\n        <p>零點與極點安排可改善相位，但也會影響 bandwidth 與噪聲。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Load variation</strong>\n        <p>負載、溫度與元件容差會讓裕度在 field 中改變。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr><th>現象</th><th>可能線索</th><th>檢查</th></tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Ringing 明顯</td>\n            <td>phase margin 偏低</td>\n            <td>loop response 與補償網路</td>\n          </tr>\n          <tr>\n            <td>反應過慢</td>\n            <td>bandwidth 太低或裕度過保守</td>\n            <td>crossover frequency</td>\n          </tr>\n          <tr>\n            <td>不同板子差異大</td>\n            <td>元件容差或 layout 影響 pole/zero</td>\n            <td>量測多批次與溫度</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>快反應很容易被誤認成好控制</h2>\n      <p class=\"section-lede\">Demo 時快速追上 setpoint 很吸引人，但沒有穩定餘度的快，會在擾動和量產差異下還債。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>速度偏誤</strong>\n        <p>大家先看到 rise time，晚一點才看到 ringing、噪聲與 overshoot。</p>\n      </article>\n      <article class=\"example\">\n        <strong>穩態遮蔽</strong>\n        <p>穩態誤差很小不代表動態過程安全。</p>\n      </article>\n      <article class=\"example\">\n        <strong>模型過度信任</strong>\n        <p>模擬 plant 太理想，field 的 delay 和 parasitic 會吃掉 margin。</p>\n      </article>\n    </div>\n    <p class=\"micro-note\">控制 review 應把 bandwidth 和 margin 放在同一句話裡，避免只談快慢。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>電源、放大器與韌體控制都需要裕度</h2>\n      <p class=\"section-lede\">凡是負回授系統，只要有延遲與頻率響應，就會遇到穩定餘度問題。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>Power supply</strong>\n        <p>DC/DC compensation 要在 transient response、phase margin 與 output capacitance 間取捨。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Op-amp loop</strong>\n        <p>容性負載或不當 feedback network 會降低 phase margin，造成 ringing。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Firmware loop</strong>\n        <p>取樣週期、濾波與計算延遲會把 digital control 的相位往後推。</p>\n      </article>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>不要只驗證 nominal load；要在 min/max load、溫度與元件容差下看 transient。</li>\n      <li>把 ringing frequency 和 loop crossover 對照，常能快速定位是哪段迴路在發聲。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>裕度不是越大越漂亮</h2>\n      <p class=\"section-lede\">相位裕度太低危險，太高也可能代表迴路太慢或過度保守。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>60 度永遠最佳</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>常見目標有參考價值，但不同 plant、負載與產品需求會改變最佳點。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只看 phase margin</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>gain margin、load transient、noise 與 saturation 也會影響穩定感。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>韌體控制不用看頻域</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>取樣與濾波同樣會產生 phase lag；digital loop 也需要裕度概念。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>你的快，剩多少穩定餘地</h2>\n    </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>如果加快迴路</strong>\n        <p>unity gain crossover 會移到哪裡，相位落後還剩多少空間？</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果 field 條件變差</strong>\n        <p>溫度、負載、老化或取樣 jitter 會不會把 margin 推到 ringing 邊緣？</p>\n      </article>\n    </div>\n    <div class=\"template-note\">\n      <strong>延伸路線</strong>\n      <p>可接 PID control、Nyquist stability、Bode plot 與 hysteresis，建立完整回饋系統語彙。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">來源卡以 phase margin 與控制理論背景為主，電源與韌體迴路是工程應用整理。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>Phase margin 條目定義 unity gain 附近相位距離與穩定性關係。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Phase_margin\" target=\"_blank\" rel=\"noreferrer\">Phase margin</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>頻域工具</strong>\n        <p>Bode plot 條目補上增益、相位與 crossover 的視覺化方法。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Bode_plot\" target=\"_blank\" rel=\"noreferrer\">Bode plot</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>控制背景</strong>\n        <p>Control theory 條目提供 feedback、stability 與控制系統的基本語彙。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Control_theory\" target=\"_blank\" rel=\"noreferrer\">Control theory</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>可接 PID control、Nyquist stability、Bode plot 與 hysteresis，建立完整回饋系統語彙。</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  }
+}

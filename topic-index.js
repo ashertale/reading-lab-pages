@@ -5000,6 +5000,1138 @@ window.CONCEPT_INDEX = [
       "governance",
       "representation"
     ]
+  },
+  {
+    "id": "robust-yet-fragile",
+    "title": "穩而脆",
+    "subtitle": "Robust Yet Fragile",
+    "href": "./topics/robust-yet-fragile.html",
+    "order": 251,
+    "type": "系統原理 / 可靠性張力",
+    "domain": "韌性、相依與失效模式",
+    "focus": "Routine resilience vs. tail fragility",
+    "thesis": "一個系統對常見擾動越能穩定吸收，往往越可能把風險壓進少見但代價巨大的共同失效。",
+    "tags": [
+      "robustness",
+      "fragility",
+      "reliability",
+      "tail-risk",
+      "coupling",
+      "resilience"
+    ]
+  },
+  {
+    "id": "stag-hunt",
+    "title": "鹿獵博弈",
+    "subtitle": "Stag Hunt",
+    "href": "./topics/stag-hunt.html",
+    "order": 252,
+    "type": "博弈情境 / 協作判準",
+    "domain": "協調、信任與承諾",
+    "focus": "Assurance vs. safe fallback",
+    "thesis": "大家都知道一起追大獵物比較好，但只要懷疑別人會先轉去抓兔子，保守選項就會重新變得合理。",
+    "tags": [
+      "stag-hunt",
+      "coordination",
+      "trust",
+      "assurance",
+      "game-theory",
+      "cooperation"
+    ]
+  },
+  {
+    "id": "condorcet-paradox",
+    "title": "孔多塞悖論",
+    "subtitle": "Condorcet Paradox",
+    "href": "./topics/condorcet-paradox.html",
+    "order": 253,
+    "type": "集體決策 / 多數悖論",
+    "domain": "投票、排序與議程設定",
+    "focus": "Majority cycles without a stable winner",
+    "thesis": "把每一對選項都交給多數決，並不保證整體會得到一致排序；群體可以同時偏好 A 勝 B、B 勝 C，卻又讓 C 勝 A。",
+    "tags": [
+      "condorcet",
+      "voting",
+      "majority-rule",
+      "social-choice",
+      "agenda",
+      "ranking"
+    ]
+  },
+  {
+    "id": "teletransportation-paradox",
+    "title": "傳送悖論",
+    "subtitle": "Teletransportation Paradox",
+    "href": "./topics/teletransportation-paradox.html",
+    "order": 254,
+    "type": "身份悖論 / 思想實驗",
+    "domain": "自我、連續性與複製",
+    "focus": "Copying vs. bodily continuity",
+    "thesis": "若一個裝置能把你的結構完整重建、記憶與性格也延續，真正分裂的不是資料，而是我們對『同一個人』到底靠什麼延續的判準。",
+    "tags": [
+      "identity",
+      "teletransportation",
+      "parfit",
+      "continuity",
+      "duplication",
+      "philosophy"
+    ]
+  },
+  {
+    "id": "curse-of-dimensionality",
+    "title": "維度災難",
+    "subtitle": "Curse of Dimensionality",
+    "href": "./topics/curse-of-dimensionality.html",
+    "order": 255,
+    "type": "統計直覺 / 模型邊界",
+    "domain": "資料、搜尋與泛化",
+    "focus": "High dimensions make data sparse",
+    "thesis": "變數一多，不只資料需求暴增，連『附近』、『密度』與『代表性』這些低維直覺都會一起失靈。",
+    "tags": [
+      "dimensions",
+      "data",
+      "sampling",
+      "optimization",
+      "nearest-neighbor",
+      "generalization"
+    ]
+  },
+  {
+    "id": "law-of-large-numbers",
+    "title": "大數法則",
+    "subtitle": "Law of Large Numbers",
+    "href": "./topics/law-of-large-numbers.html",
+    "order": 256,
+    "type": "機率原理 / 取樣判準",
+    "domain": "估計、測試與不確定",
+    "focus": "When averages become trustworthy",
+    "thesis": "平均值會穩，不是因為每次觀測都可靠，而是因為足夠多次、條件相近的觀測會慢慢把偶然波動沖淡。",
+    "tags": [
+      "probability",
+      "sampling",
+      "averages",
+      "estimation",
+      "variance",
+      "statistics"
+    ]
+  },
+  {
+    "id": "pareto-efficiency",
+    "title": "帕累托效率",
+    "subtitle": "Pareto Efficiency",
+    "href": "./topics/pareto-efficiency.html",
+    "order": 257,
+    "type": "取捨原理 / 效率邊界",
+    "domain": "最佳化、資源與設計",
+    "focus": "No free improvement after the frontier",
+    "thesis": "當一個方案已經站在帕累托效率點上，再說『讓每個面向都更好』通常不是技術問題，而是你還沒承認真正的取捨。",
+    "tags": [
+      "pareto",
+      "efficiency",
+      "tradeoff",
+      "optimization",
+      "frontier",
+      "design"
+    ]
+  },
+  {
+    "id": "price-of-anarchy",
+    "title": "無政府代價",
+    "subtitle": "Price of Anarchy",
+    "href": "./topics/price-of-anarchy.html",
+    "order": 258,
+    "type": "系統誘因 / 分散最佳化",
+    "domain": "路由、排程與協調成本",
+    "focus": "Local equilibrium vs. global cost",
+    "thesis": "每個參與者都照自己的局部成本行動，並不保證系統只是『沒那麼理想』；在某些網路裡，全員理性甚至會把整體成本明顯推高。",
+    "tags": [
+      "price-of-anarchy",
+      "routing",
+      "equilibrium",
+      "coordination",
+      "externalities",
+      "systems"
+    ]
+  },
+  {
+    "id": "bias-variance-tradeoff",
+    "title": "偏差與變異權衡",
+    "subtitle": "Bias-Variance Tradeoff",
+    "href": "./topics/bias-variance-tradeoff.html",
+    "order": 259,
+    "type": "模型判準 / 泛化取捨",
+    "domain": "學習、校準與預測",
+    "focus": "Rigidity vs. overreaction to noise",
+    "thesis": "模型錯誤不只來自學不夠，也來自學太用力；抓太緊會把噪音當規律，抓太鬆又會把真正結構一起抹平。",
+    "tags": [
+      "bias",
+      "variance",
+      "overfitting",
+      "underfitting",
+      "modeling",
+      "generalization"
+    ]
+  },
+  {
+    "id": "moores-law",
+    "title": "摩爾定律",
+    "subtitle": "Moore's Law",
+    "href": "./topics/moores-law.html",
+    "order": 260,
+    "type": "技術節奏 / 產業預期",
+    "domain": "晶片、路線圖與規模",
+    "focus": "Trend, roadmap, and scaling expectations",
+    "thesis": "當預測變成產業節奏，時間表就不再只是旁觀描述；它會反過來塑造投資、架構選擇與大家對『明年應該更便宜更快』的期待。",
+    "tags": [
+      "moores-law",
+      "semiconductors",
+      "roadmap",
+      "scaling",
+      "planning",
+      "technology"
+    ]
+  },
+  {
+    "id": "amdahls-law",
+    "title": "阿姆達爾定律",
+    "subtitle": "Amdahl's Law",
+    "href": "./topics/amdahls-law.html",
+    "order": 261,
+    "type": "效能法則 / 並行化邊界",
+    "domain": "效能、架構與瓶頸",
+    "focus": "Serial fraction limits speedup",
+    "thesis": "系統加速的上限，常被那段看似很小、但無法並行的工作鎖住。",
+    "tags": [
+      "amdahl",
+      "performance",
+      "parallelism",
+      "bottleneck",
+      "speedup",
+      "architecture",
+      "firmware"
+    ]
+  },
+  {
+    "id": "gustafsons-law",
+    "title": "古斯塔夫森定律",
+    "subtitle": "Gustafson's Law",
+    "href": "./topics/gustafsons-law.html",
+    "order": 262,
+    "type": "效能法則 / 規模化判準",
+    "domain": "平行計算、工作量與容量規劃",
+    "focus": "Scaled speedup when problem size grows",
+    "thesis": "資源變多時，真正被放大的往往不是同一份工作跑更快，而是你開始處理原本不敢處理的大問題。",
+    "tags": [
+      "gustafson",
+      "scaled-speedup",
+      "parallelism",
+      "capacity",
+      "performance",
+      "workload"
+    ]
+  },
+  {
+    "id": "nyquist-shannon-sampling-theorem",
+    "title": "奈奎斯特-香農取樣定理",
+    "subtitle": "Nyquist-Shannon Sampling Theorem",
+    "href": "./topics/nyquist-shannon-sampling-theorem.html",
+    "order": 263,
+    "type": "訊號定理 / 取樣邊界",
+    "domain": "訊號處理、ADC 與量測",
+    "focus": "Sampling rate vs. bandwidth",
+    "thesis": "離散取樣能不能保留連續訊號，不取決於資料點看起來多不多，而取決於你是否先管住頻寬與混疊。",
+    "tags": [
+      "nyquist",
+      "shannon",
+      "sampling",
+      "aliasing",
+      "ADC",
+      "signal-processing",
+      "firmware"
+    ]
+  },
+  {
+    "id": "shannon-entropy",
+    "title": "香農熵",
+    "subtitle": "Shannon Entropy",
+    "href": "./topics/shannon-entropy.html",
+    "order": 264,
+    "type": "資訊理論 / 不確定性度量",
+    "domain": "通訊、壓縮與觀測",
+    "focus": "Average surprise in a source",
+    "thesis": "一串資料真正佔多少資訊，不看它表面有多長，而看接收者在看見前有多少不確定性被消掉。",
+    "tags": [
+      "shannon",
+      "entropy",
+      "information-theory",
+      "compression",
+      "uncertainty",
+      "telemetry"
+    ]
+  },
+  {
+    "id": "signal-detection-theory",
+    "title": "訊號偵測理論",
+    "subtitle": "Signal Detection Theory",
+    "href": "./topics/signal-detection-theory.html",
+    "order": 265,
+    "type": "決策模型 / 偵測門檻",
+    "domain": "量測、告警與分類判斷",
+    "focus": "Sensitivity vs. decision criterion",
+    "thesis": "偵測好壞不只看系統多敏感，還要看你把門檻放在哪裡，以及願意承擔哪種錯誤。",
+    "tags": [
+      "signal-detection",
+      "threshold",
+      "false-positive",
+      "false-negative",
+      "ROC",
+      "testing"
+    ]
+  },
+  {
+    "id": "signal-to-noise-ratio",
+    "title": "訊噪比",
+    "subtitle": "Signal-to-Noise Ratio",
+    "href": "./topics/signal-to-noise-ratio.html",
+    "order": 266,
+    "type": "量測概念 / 訊號品質",
+    "domain": "感測、通訊與判讀",
+    "focus": "Useful signal against background noise",
+    "thesis": "訊號是否能被可靠判讀，不只看訊號有多大，也看背景雜訊如何吃掉你的判斷餘裕。",
+    "tags": [
+      "SNR",
+      "noise",
+      "measurement",
+      "ADC",
+      "signal-processing",
+      "debug"
+    ]
+  },
+  {
+    "id": "hamming-distance",
+    "title": "漢明距離",
+    "subtitle": "Hamming Distance",
+    "href": "./topics/hamming-distance.html",
+    "order": 267,
+    "type": "編碼概念 / 錯誤距離",
+    "domain": "資料表示、通訊與容錯",
+    "focus": "How many positions differ",
+    "thesis": "兩個碼字差幾位，不只是相似度問題；它決定錯誤能不能被偵測、校正，或被誤認成另一個合法狀態。",
+    "tags": [
+      "hamming-distance",
+      "error-correction",
+      "encoding",
+      "ECC",
+      "protocol",
+      "firmware"
+    ]
+  },
+  {
+    "id": "end-to-end-principle",
+    "title": "端到端原則",
+    "subtitle": "End-to-End Principle",
+    "href": "./topics/end-to-end-principle.html",
+    "order": 268,
+    "type": "系統原則 / 分層設計",
+    "domain": "網路、協定與系統架構",
+    "focus": "Correctness belongs at the endpoints",
+    "thesis": "有些正確性只有端點知道；中間層可以幫忙，但不該假裝自己能完整替端點完成語意判斷。",
+    "tags": [
+      "end-to-end",
+      "systems",
+      "protocol",
+      "layering",
+      "architecture",
+      "networking"
+    ]
+  },
+  {
+    "id": "flp-impossibility",
+    "title": "FLP 不可能性",
+    "subtitle": "FLP Impossibility",
+    "href": "./topics/flp-impossibility.html",
+    "order": 269,
+    "type": "分散式定理 / 共識邊界",
+    "domain": "分散式系統、容錯與協調",
+    "focus": "Consensus under asynchrony and one crash",
+    "thesis": "在完全非同步系統裡，只要允許一個程序可能 crash，確定性共識就無法同時保證安全與終止。",
+    "tags": [
+      "FLP",
+      "consensus",
+      "distributed-systems",
+      "asynchrony",
+      "fault-tolerance",
+      "availability"
+    ]
+  },
+  {
+    "id": "lamport-clocks",
+    "title": "Lamport 邏輯時鐘",
+    "subtitle": "Lamport Clocks",
+    "href": "./topics/lamport-clocks.html",
+    "order": 270,
+    "type": "分散式概念 / 邏輯時間",
+    "domain": "分散式系統、事件排序與除錯",
+    "focus": "Happened-before without a global clock",
+    "thesis": "在沒有共享時鐘的系統裡，事件順序不該先問幾點發生，而要先問誰可能影響了誰。",
+    "tags": [
+      "lamport-clock",
+      "logical-clock",
+      "distributed-systems",
+      "causality",
+      "ordering",
+      "debugging"
+    ]
+  },
+  {
+    "id": "aba-problem",
+    "title": "ABA 問題",
+    "subtitle": "ABA Problem",
+    "href": "./topics/aba-problem.html",
+    "order": 271,
+    "type": "併發陷阱 / 狀態身分",
+    "domain": "lock-free、atomic 與共享資料結構",
+    "focus": "Same value, different history",
+    "thesis": "值從 A 變成 B 又變回 A，看起來沒變；但對併發演算法來說，歷史已經改變了。",
+    "tags": [
+      "ABA",
+      "CAS",
+      "lock-free",
+      "concurrency",
+      "atomic",
+      "memory-reclamation"
+    ]
+  },
+  {
+    "id": "memory-consistency-model",
+    "title": "記憶體一致性模型",
+    "subtitle": "Memory Consistency Model",
+    "href": "./topics/memory-consistency-model.html",
+    "order": 272,
+    "type": "併發模型 / 順序契約",
+    "domain": "CPU、compiler、cache 與共享記憶體",
+    "focus": "What order other agents may observe",
+    "thesis": "多核心系統裡，程式寫下的順序不必然就是其他核心、DMA 或中斷看見的順序；一致性模型定義了這份契約。",
+    "tags": [
+      "memory-model",
+      "consistency",
+      "barrier",
+      "atomic",
+      "cache",
+      "firmware",
+      "concurrency"
+    ]
+  },
+  {
+    "id": "token-bucket",
+    "title": "令牌桶",
+    "subtitle": "Token Bucket",
+    "href": "./topics/token-bucket.html",
+    "order": 273,
+    "type": "流量控制 / 速率限制",
+    "domain": "網路、排程與資源保護",
+    "focus": "Average rate with bounded burst",
+    "thesis": "令牌桶讓系統允許短暫爆發，但把長期平均速率鎖住；它管的不是每一秒都一樣，而是爆發不能無限借未來。",
+    "tags": [
+      "token-bucket",
+      "rate-limit",
+      "traffic-shaping",
+      "flow-control",
+      "scheduling",
+      "firmware"
+    ]
+  },
+  {
+    "id": "error-budget",
+    "title": "錯誤預算",
+    "subtitle": "Error Budget",
+    "href": "./topics/error-budget.html",
+    "order": 274,
+    "type": "可靠性治理 / 風險預算",
+    "domain": "SRE、服務等級與交付節奏",
+    "focus": "Reliability target as spendable risk",
+    "thesis": "可靠性目標不是越接近 100% 越好；錯誤預算把允許的失敗量變成產品速度與穩定性的共同語言。",
+    "tags": [
+      "error-budget",
+      "SRE",
+      "SLO",
+      "reliability",
+      "release",
+      "risk"
+    ]
+  },
+  {
+    "id": "blast-radius",
+    "title": "故障半徑",
+    "subtitle": "Blast Radius",
+    "href": "./topics/blast-radius.html",
+    "order": 275,
+    "type": "可靠性原則 / 失效隔離",
+    "domain": "系統韌性、部署與故障控制",
+    "focus": "How far a failure can spread",
+    "thesis": "同樣的錯誤，差別在於它能炸到多遠；故障半徑設計就是讓壞事停在可承受的邊界內。",
+    "tags": [
+      "blast-radius",
+      "fault-isolation",
+      "resilience",
+      "deployment",
+      "rollback",
+      "reliability"
+    ]
+  },
+  {
+    "id": "exploration-exploitation-tradeoff",
+    "title": "探索與利用權衡",
+    "subtitle": "Exploration-Exploitation Tradeoff",
+    "href": "./topics/exploration-exploitation-tradeoff.html",
+    "order": 276,
+    "type": "決策權衡 / 學習與收益",
+    "domain": "實驗、產品與資源分配",
+    "focus": "Learn more vs. use what works",
+    "thesis": "你可以把資源用在目前看來最好的選項，也可以用來了解未知選項；困難在於每一次學習都會花掉當下收益。",
+    "tags": [
+      "exploration-exploitation",
+      "decision-making",
+      "experimentation",
+      "bandit",
+      "learning",
+      "product"
+    ]
+  },
+  {
+    "id": "multi-armed-bandit",
+    "title": "多臂拉霸問題",
+    "subtitle": "Multi-Armed Bandit",
+    "href": "./topics/multi-armed-bandit.html",
+    "order": 277,
+    "type": "序列決策 / 學習模型",
+    "domain": "實驗分配、推薦與策略調校",
+    "focus": "Allocate trials while learning rewards",
+    "thesis": "每一次選擇都同時是收益和實驗；多臂拉霸問題研究的是如何在不完全知道報酬分布時，逐步分配嘗試。",
+    "tags": [
+      "multi-armed-bandit",
+      "regret",
+      "experimentation",
+      "A/B-testing",
+      "reinforcement-learning"
+    ]
+  },
+  {
+    "id": "secretary-problem",
+    "title": "秘書問題",
+    "subtitle": "Secretary Problem",
+    "href": "./topics/secretary-problem.html",
+    "order": 278,
+    "type": "最佳停止 / 序列選擇",
+    "domain": "決策、招募與時機判斷",
+    "focus": "When to stop searching",
+    "thesis": "當選項依序出現且拒絕後不能回頭，最難的不是評估當前選項，而是決定何時停止比較。",
+    "tags": [
+      "secretary-problem",
+      "optimal-stopping",
+      "decision-making",
+      "search",
+      "irreversibility"
+    ]
+  },
+  {
+    "id": "kelly-criterion",
+    "title": "Kelly 準則",
+    "subtitle": "Kelly Criterion",
+    "href": "./topics/kelly-criterion.html",
+    "order": 279,
+    "type": "風險配置 / 成長準則",
+    "domain": "決策、投資與資源投注",
+    "focus": "Size bets for long-run logarithmic growth",
+    "thesis": "有優勢不代表該押滿；Kelly 準則問的是在不確定且可重複的賭局裡，該投入多少比例才不會讓成長被波動毀掉。",
+    "tags": [
+      "kelly-criterion",
+      "risk",
+      "bet-sizing",
+      "portfolio",
+      "decision-making",
+      "uncertainty"
+    ]
+  },
+  {
+    "id": "pid-control",
+    "title": "PID 控制",
+    "subtitle": "PID Control",
+    "href": "./topics/pid-control.html",
+    "order": 280,
+    "type": "控制理論 / 回饋調校",
+    "domain": "控制系統、馬達、溫度與韌體迴路",
+    "focus": "Proportional, integral, derivative correction",
+    "thesis": "PID 控制把誤差分成現在有多遠、過去累積多少、變化速度多快；調得好是穩定修正，調不好就是震盪、延遲或過衝。",
+    "tags": [
+      "PID",
+      "control",
+      "feedback",
+      "tuning",
+      "embedded",
+      "motor",
+      "thermal"
+    ]
+  },
+  {
+    "id": "fitts-law",
+    "title": "費茲定律",
+    "subtitle": "Fitts's Law",
+    "href": "./topics/fitts-law.html",
+    "order": 281,
+    "type": "人機互動 / 速度精度權衡",
+    "domain": "介面設計、觸控操作與韌體工具",
+    "focus": "Target size, distance, and movement time",
+    "thesis": "越遠、越小的目標越難快速命中；介面不是只看功能位置，也要看手、眼與游標抵達它的成本。",
+    "tags": [
+      "Fitts",
+      "HCI",
+      "UX",
+      "target-size",
+      "touch",
+      "firmware-tools"
+    ]
+  },
+  {
+    "id": "precision-and-recall",
+    "title": "精確率與召回率",
+    "subtitle": "Precision and Recall",
+    "href": "./topics/precision-and-recall.html",
+    "order": 282,
+    "type": "評估指標 / 分類取捨",
+    "domain": "測試判讀、搜尋、告警與模型評估",
+    "focus": "False positives vs. false negatives",
+    "thesis": "同一套偵測系統可以少誤報，也可以少漏報；精確率與召回率迫使你說清楚哪種錯比較貴。",
+    "tags": [
+      "precision",
+      "recall",
+      "classification",
+      "metrics",
+      "alerts",
+      "validation"
+    ]
+  },
+  {
+    "id": "calibration",
+    "title": "機率校準",
+    "subtitle": "Calibration",
+    "href": "./topics/calibration.html",
+    "order": 283,
+    "type": "機率評估 / 信心可靠度",
+    "domain": "預測模型、風險評估與決策門檻",
+    "focus": "Do predicted probabilities match outcomes?",
+    "thesis": "一個模型說 80% 時，長期是否真的約有八成會發生？校準關心的不是排序漂亮，而是信心能不能被拿來決策。",
+    "tags": [
+      "calibration",
+      "probability",
+      "forecasting",
+      "Brier-score",
+      "risk",
+      "ML"
+    ]
+  },
+  {
+    "id": "bloom-filter",
+    "title": "布隆過濾器",
+    "subtitle": "Bloom Filter",
+    "href": "./topics/bloom-filter.html",
+    "order": 284,
+    "type": "機率資料結構 / 集合查詢",
+    "domain": "快取、儲存、網路與資源受限系統",
+    "focus": "Possibly present, definitely absent",
+    "thesis": "布隆過濾器用極少記憶體回答集合成員問題；它允許 false positive，但不允許 false negative。",
+    "tags": [
+      "Bloom-filter",
+      "probabilistic-data-structure",
+      "hashing",
+      "cache",
+      "storage"
+    ]
+  },
+  {
+    "id": "cyclic-redundancy-check",
+    "title": "循環冗餘校驗",
+    "subtitle": "Cyclic Redundancy Check",
+    "href": "./topics/cyclic-redundancy-check.html",
+    "order": 285,
+    "type": "錯誤偵測碼 / 資料完整性",
+    "domain": "通訊、儲存、封包與韌體協定",
+    "focus": "Detect accidental corruption with polynomial remainders",
+    "thesis": "CRC 用 GF(2) 多項式除法替資料加上一小段檢查值；它擅長抓偶發錯誤，但不是防竄改的安全機制。",
+    "tags": [
+      "CRC",
+      "checksum",
+      "error-detection",
+      "protocol",
+      "firmware",
+      "storage"
+    ]
+  },
+  {
+    "id": "exponential-backoff",
+    "title": "指數退避與抖動",
+    "subtitle": "Exponential Backoff and Jitter",
+    "href": "./topics/exponential-backoff.html",
+    "order": 286,
+    "type": "可靠性策略 / 重試控制",
+    "domain": "網路、雲端 API、韌體通訊與資源競爭",
+    "focus": "Retry later, spread retry timing",
+    "thesis": "重試不是越快越可靠；指數退避降低壓力，抖動避免所有 client 在同一秒再次撞上去。",
+    "tags": [
+      "retry",
+      "backoff",
+      "jitter",
+      "resilience",
+      "network",
+      "firmware"
+    ]
+  },
+  {
+    "id": "leaky-bucket",
+    "title": "漏桶演算法",
+    "subtitle": "Leaky Bucket",
+    "href": "./topics/leaky-bucket.html",
+    "order": 287,
+    "type": "流量整形 / 速率限制",
+    "domain": "網路、API、事件處理與韌體佇列",
+    "focus": "Smooth bursts into a controlled rate",
+    "thesis": "漏桶把突發輸入轉成受控輸出；它不是讓流量消失，而是決定何時排隊、何時丟棄、何時平滑。",
+    "tags": [
+      "leaky-bucket",
+      "rate-limiting",
+      "traffic-shaping",
+      "queue",
+      "networking"
+    ]
+  },
+  {
+    "id": "bulkhead-pattern",
+    "title": "隔艙模式",
+    "subtitle": "Bulkhead Pattern",
+    "href": "./topics/bulkhead-pattern.html",
+    "order": 288,
+    "type": "韌性模式 / 資源隔離",
+    "domain": "分散式系統、韌體任務與服務資源池",
+    "focus": "Partition resources to contain failure",
+    "thesis": "隔艙模式把資源切成可控區塊，讓一個區塊卡死時，不會拖垮整艘系統。",
+    "tags": [
+      "bulkhead",
+      "resilience",
+      "isolation",
+      "thread-pool",
+      "fault-containment"
+    ]
+  },
+  {
+    "id": "canary-release",
+    "title": "金絲雀釋出",
+    "subtitle": "Canary Release",
+    "href": "./topics/canary-release.html",
+    "order": 289,
+    "type": "釋出策略 / 風險漸進暴露",
+    "domain": "部署、OTA、功能旗標與營運監控",
+    "focus": "Expose change to a small monitored slice first",
+    "thesis": "金絲雀釋出不是慢慢推而已；它把新版本先交給小範圍真流量，讓監控和回退在全量前發揮作用。",
+    "tags": [
+      "canary-release",
+      "deployment",
+      "feature-flags",
+      "rollback",
+      "OTA"
+    ]
+  },
+  {
+    "id": "strangler-fig-pattern",
+    "title": "絞殺榕模式",
+    "subtitle": "Strangler Fig Pattern",
+    "href": "./topics/strangler-fig-pattern.html",
+    "order": 290,
+    "type": "現代化策略 / 漸進替換",
+    "domain": "Legacy 系統、重構、服務拆分與韌體遷移",
+    "focus": "Replace old behavior incrementally around the edges",
+    "thesis": "絞殺榕模式不主張一次重寫；它在舊系統周圍建立新路徑，逐步移走行為，直到舊核心可以安全退休。",
+    "tags": [
+      "legacy",
+      "modernization",
+      "migration",
+      "refactoring",
+      "architecture"
+    ]
+  },
+  {
+    "id": "watchdog-timer",
+    "title": "看門狗計時器",
+    "subtitle": "Watchdog Timer",
+    "href": "./topics/watchdog-timer.html",
+    "order": 291,
+    "type": "嵌入式可靠性 / 故障恢復",
+    "domain": "韌體、RTOS、遠端設備與安全狀態",
+    "focus": "Reset or recover when software stops proving liveness",
+    "thesis": "看門狗計時器不是定時重開機；它要求軟體持續證明自己仍健康，否則把系統拉回可恢復狀態。",
+    "tags": [
+      "watchdog",
+      "firmware",
+      "liveness",
+      "reset",
+      "fault-recovery",
+      "RTOS"
+    ]
+  },
+  {
+    "id": "debounce",
+    "title": "按鍵去彈跳",
+    "subtitle": "Debounce",
+    "href": "./topics/debounce.html",
+    "order": 292,
+    "type": "訊號處理 / 接點雜訊",
+    "domain": "按鍵、GPIO、中斷與人機介面韌體",
+    "focus": "Turn noisy transitions into one intended event",
+    "thesis": "機械接點不會乾淨地從 0 跳到 1；debounce 的任務是把一串抖動訊號判成一次人類意圖。",
+    "tags": [
+      "debounce",
+      "switch",
+      "GPIO",
+      "firmware",
+      "interrupt",
+      "HMI"
+    ]
+  },
+  {
+    "id": "metastability",
+    "title": "亞穩態",
+    "subtitle": "Metastability",
+    "href": "./topics/metastability.html",
+    "order": 293,
+    "type": "數位電路 / 時序風險",
+    "domain": "Clock domain crossing、同步器與硬體可靠性",
+    "focus": "Signals near decision boundaries may not settle in time",
+    "thesis": "亞穩態不是少見怪事，而是非同步訊號進入雙穩態元件時無法完全消除的機率風險。",
+    "tags": [
+      "metastability",
+      "CDC",
+      "synchronizer",
+      "digital-logic",
+      "timing"
+    ]
+  },
+  {
+    "id": "schmitt-trigger",
+    "title": "施密特觸發器",
+    "subtitle": "Schmitt Trigger",
+    "href": "./topics/schmitt-trigger.html",
+    "order": 294,
+    "type": "類比數位邊界 / 遲滯比較器",
+    "domain": "訊號調理、GPIO、感測器與雜訊免疫",
+    "focus": "Use hysteresis to avoid chatter near a threshold",
+    "thesis": "施密特觸發器用兩個不同門檻加上遲滯，讓 noisy input 不會在單一閾值附近來回抖動。",
+    "tags": [
+      "Schmitt-trigger",
+      "hysteresis",
+      "comparator",
+      "signal-conditioning",
+      "GPIO"
+    ]
+  },
+  {
+    "id": "phase-margin",
+    "title": "相位裕度",
+    "subtitle": "Phase Margin",
+    "href": "./topics/phase-margin.html",
+    "order": 295,
+    "type": "控制穩定性 / 頻域判準",
+    "domain": "電源迴路、放大器、馬達與控制系統",
+    "focus": "How close feedback is to oscillation",
+    "thesis": "相位裕度量的是回饋系統離震盪還有多少餘地；反應越快不一定越好，穩定餘度太小會帶來 ringing 或失穩。",
+    "tags": [
+      "phase-margin",
+      "control",
+      "feedback",
+      "stability",
+      "Bode",
+      "power"
+    ]
+  },
+  {
+    "id": "happens-before",
+    "title": "Happens-Before 關係",
+    "subtitle": "Happens-Before Relation",
+    "href": "./topics/happens-before.html",
+    "order": 296,
+    "type": "並行語意 / 可見性順序",
+    "domain": "多執行緒、記憶體模型與同步原語",
+    "focus": "A partial order that defines visibility and ordering",
+    "thesis": "Happens-before 不是時間先後的直覺描述，而是語言與記憶體模型用來保證可見性與順序的偏序關係。",
+    "tags": [
+      "happens-before",
+      "concurrency",
+      "memory-model",
+      "synchronization",
+      "visibility"
+    ]
+  },
+  {
+    "id": "linearizability",
+    "title": "線性化一致性",
+    "subtitle": "Linearizability",
+    "href": "./topics/linearizability.html",
+    "order": 297,
+    "type": "並行正確性 / 強一致模型",
+    "domain": "分散式系統、資料結構與共享服務",
+    "focus": "Concurrent operations appear to occur atomically in real-time order",
+    "thesis": "線性化一致性要求每個操作看起來都在呼叫與回應之間的某一瞬間生效，並尊重真實時間順序。",
+    "tags": [
+      "linearizability",
+      "consistency",
+      "concurrency",
+      "distributed-systems",
+      "atomicity"
+    ]
+  },
+  {
+    "id": "backward-induction",
+    "title": "逆向歸納",
+    "subtitle": "Backward Induction",
+    "href": "./topics/backward-induction.html",
+    "order": 298,
+    "type": "賽局推理 / 序列決策",
+    "domain": "談判、策略、產品路線與工程決策",
+    "focus": "Reason backward from future choices",
+    "thesis": "逆向歸納從最後一個選擇往前推，讓你看清楚今天的承諾是否會在未來節點上站得住。",
+    "tags": [
+      "backward-induction",
+      "game-theory",
+      "strategy",
+      "decision-tree",
+      "commitment"
+    ]
+  },
+  {
+    "id": "schelling-segregation-model",
+    "title": "謝林隔離模型",
+    "subtitle": "Schelling Segregation Model",
+    "href": "./topics/schelling-segregation-model.html",
+    "order": 299,
+    "type": "代理模型 / 微動機與宏觀結果",
+    "domain": "系統思考、組織設計、產品社群與模擬",
+    "focus": "Mild local preferences can produce strong global patterns",
+    "thesis": "謝林隔離模型展示：每個個體只要有溫和的局部偏好，整體也可能走向高度分隔。",
+    "tags": [
+      "Schelling",
+      "agent-based-model",
+      "segregation",
+      "emergence",
+      "systems"
+    ]
+  },
+  {
+    "id": "stigmergy",
+    "title": "跡化協作",
+    "subtitle": "Stigmergy",
+    "href": "./topics/stigmergy.html",
+    "order": 300,
+    "type": "自組織機制 / 間接協調",
+    "domain": "分散式協作、工具設計、知識庫與工作流",
+    "focus": "Coordinate through traces left in the environment",
+    "thesis": "跡化協作描述個體不必直接溝通，也能透過環境中留下的痕跡引導後續行動。",
+    "tags": [
+      "stigmergy",
+      "coordination",
+      "self-organization",
+      "workflow",
+      "knowledge-management"
+    ]
+  },
+  {
+    "id": "read-copy-update",
+    "title": "讀取複製更新",
+    "subtitle": "Read-Copy-Update (RCU)",
+    "href": "./topics/read-copy-update.html",
+    "order": 301,
+    "type": "併發同步 / 讀多寫少結構",
+    "domain": "Kernel、驅動與共享資料結構",
+    "focus": "Fast readers with deferred reclamation",
+    "thesis": "RCU 讓讀者幾乎不用停下來，但更新者必須把替換、可見性與舊物件回收分成不同階段處理。",
+    "tags": [
+      "RCU",
+      "concurrency",
+      "kernel",
+      "lock-free",
+      "memory-reclamation",
+      "firmware"
+    ]
+  },
+  {
+    "id": "vector-clock",
+    "title": "向量時鐘",
+    "subtitle": "Vector Clock",
+    "href": "./topics/vector-clock.html",
+    "order": 302,
+    "type": "分散式時間 / 因果排序",
+    "domain": "分散式系統、同步、離線合併與除錯",
+    "focus": "Detect causality without one global clock",
+    "thesis": "向量時鐘不追求全域幾點幾分，而是記錄每個節點知道哪些事件已經發生，藉此區分因果先後與真正並發。",
+    "tags": [
+      "vector-clock",
+      "logical-clock",
+      "causality",
+      "distributed-systems",
+      "sync",
+      "debugging"
+    ]
+  },
+  {
+    "id": "crdt",
+    "title": "無衝突複製資料型別",
+    "subtitle": "Conflict-free Replicated Data Type (CRDT)",
+    "href": "./topics/crdt.html",
+    "order": 303,
+    "type": "分散式資料型別 / 最終收斂",
+    "domain": "Local-first、協作編輯與多副本狀態",
+    "focus": "Merge concurrent updates deterministically",
+    "thesis": "CRDT 讓副本可以各自接受更新，但收斂不是靠運氣，而是靠資料型別本身限定哪些操作能被安全合併。",
+    "tags": [
+      "CRDT",
+      "replication",
+      "eventual-consistency",
+      "local-first",
+      "merge",
+      "distributed-systems"
+    ]
+  },
+  {
+    "id": "raft-consensus",
+    "title": "Raft 共識演算法",
+    "subtitle": "Raft Consensus",
+    "href": "./topics/raft-consensus.html",
+    "order": 304,
+    "type": "分散式共識 / Leader-based replication",
+    "domain": "叢集、metadata store、控制面與 replicated log",
+    "focus": "Leader election and replicated log agreement",
+    "thesis": "Raft 用 leader、term 與 replicated log 把共識拆得較容易理解，但它仍要求多數派、穩定日誌與非拜占庭假設。",
+    "tags": [
+      "Raft",
+      "consensus",
+      "replicated-log",
+      "leader-election",
+      "distributed-systems",
+      "quorum"
+    ]
+  },
+  {
+    "id": "side-channel-attack",
+    "title": "側信道攻擊",
+    "subtitle": "Side-Channel Attack",
+    "href": "./topics/side-channel-attack.html",
+    "order": 305,
+    "type": "安全攻擊 / 實作洩漏",
+    "domain": "密碼實作、硬體、韌體與微架構安全",
+    "focus": "Secrets leaking through implementation behavior",
+    "thesis": "演算法可以在數學上正確，實作仍可能透過時間、功耗、快取或電磁訊號把秘密漏出去。",
+    "tags": [
+      "side-channel",
+      "security",
+      "timing",
+      "power-analysis",
+      "cache",
+      "firmware"
+    ]
+  },
+  {
+    "id": "brown-out-reset",
+    "title": "欠壓重置",
+    "subtitle": "Brown-Out Reset (BOR)",
+    "href": "./topics/brown-out-reset.html",
+    "order": 306,
+    "type": "嵌入式可靠性 / 電源監控",
+    "domain": "MCU、電源啟動、馬達負載與低功耗設備",
+    "focus": "Reset when supply voltage is unsafe",
+    "thesis": "欠壓重置不是多一道保守開關，而是把電壓落在不可靠區間時的混亂執行，轉成可預期的重置或保持狀態。",
+    "tags": [
+      "brown-out",
+      "BOR",
+      "power",
+      "MCU",
+      "reset",
+      "firmware",
+      "voltage-supervisor"
+    ]
+  },
+  {
+    "id": "wear-leveling",
+    "title": "磨耗平均",
+    "subtitle": "Wear Leveling",
+    "href": "./topics/wear-leveling.html",
+    "order": 307,
+    "type": "儲存可靠性 / Flash 壽命管理",
+    "domain": "NAND、EEPROM、SSD、檔案系統與嵌入式資料保存",
+    "focus": "Spread erase cycles across physical blocks",
+    "thesis": "Flash 位址看起來固定，底下的實體區塊卻有擦寫壽命；磨耗平均把寫入分散開，避免最常改的邏輯資料先把某幾格用死。",
+    "tags": [
+      "wear-leveling",
+      "flash",
+      "EEPROM",
+      "NAND",
+      "storage",
+      "firmware",
+      "FTL"
+    ]
+  },
+  {
+    "id": "gray-code",
+    "title": "格雷碼",
+    "subtitle": "Gray Code",
+    "href": "./topics/gray-code.html",
+    "order": 308,
+    "type": "編碼設計 / 單位距離碼",
+    "domain": "位置編碼器、ADC、通訊調變與數位邊界",
+    "focus": "Adjacent values differ by one bit",
+    "thesis": "格雷碼讓相鄰數值只改變一個 bit，降低多位元同時翻轉被取樣成錯誤中間值的風險。",
+    "tags": [
+      "Gray-code",
+      "encoding",
+      "rotary-encoder",
+      "ADC",
+      "digital-design",
+      "Hamming-distance"
+    ]
+  },
+  {
+    "id": "priority-ceiling-protocol",
+    "title": "優先權天花板協議",
+    "subtitle": "Priority Ceiling Protocol",
+    "href": "./topics/priority-ceiling-protocol.html",
+    "order": 309,
+    "type": "即時系統同步 / 資源鎖定協議",
+    "domain": "RTOS、排程分析、共享匯流排與即時任務",
+    "focus": "Bound blocking and prevent deadlock with ceilings",
+    "thesis": "優先權天花板協議不是等高優先權任務被擋住才補救，而是預先用資源天花板限制誰能進入臨界區。",
+    "tags": [
+      "priority-ceiling",
+      "RTOS",
+      "real-time",
+      "priority-inversion",
+      "mutex",
+      "scheduling"
+    ]
+  },
+  {
+    "id": "capability-based-security",
+    "title": "能力式安全",
+    "subtitle": "Capability-Based Security",
+    "href": "./topics/capability-based-security.html",
+    "order": 310,
+    "type": "安全模型 / 權限委派",
+    "domain": "作業系統、沙箱、IPC、物件能力與最小權限",
+    "focus": "Authority carried by unforgeable references",
+    "thesis": "能力式安全把權限附在不可偽造的參照上；能碰什麼，不靠全域身份臨時判斷，而靠你實際持有哪個 capability。",
+    "tags": [
+      "capability-security",
+      "least-privilege",
+      "sandbox",
+      "IPC",
+      "confused-deputy",
+      "object-capability"
+    ]
   }
 ];
 

@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "fitts-law",
+    "outputPath": "topics/fitts-law.html"
+  },
+  "indexEntry": {
+    "id": "fitts-law",
+    "title": "費茲定律",
+    "subtitle": "Fitts's Law",
+    "href": "./topics/fitts-law.html",
+    "order": 281,
+    "type": "人機互動 / 速度精度權衡",
+    "domain": "介面設計、觸控操作與韌體工具",
+    "focus": "Target size, distance, and movement time",
+    "thesis": "越遠、越小的目標越難快速命中；介面不是只看功能位置，也要看手、眼與游標抵達它的成本。",
+    "tags": [
+      "Fitts",
+      "HCI",
+      "UX",
+      "target-size",
+      "touch",
+      "firmware-tools"
+    ]
+  },
+  "contentBrief": {
+    "pressurePoint": "一個功能明明存在，卻因為目標太小或太遠，讓使用者每次操作都在支付瞄準成本。",
+    "smallestScenario": "產線工具的 Reflash 按鈕貼在小角落，旁邊又有 Reset；工程師趕時間時點錯，裝置進入錯誤流程。",
+    "sourcePlan": [
+      "主概念：Fitts's law 條目整理目標距離、寬度與 movement time 的基本模型。",
+      "HCI 研究：MacKenzie 1992 文章是把 Fitts 定律作為 HCI 設計與評估工具的經典整理。",
+      "相鄰概念：Hick's law 可補上選項數量與反應時間，避免把互動成本只歸因於按鈕大小。"
+    ],
+    "transferTargets": [
+      "觸控韌體設定頁",
+      "factory utility",
+      "debug dashboard"
+    ],
+    "commonMisreading": "費茲定律不是說所有按鈕都要變大；低頻、危險或需要確認的操作反而不該跟高頻動作一樣順手。",
+    "readerQuestions": [
+      "最常用的動作是否也最容易抵達，還是被放在滑鼠路徑最長的位置？",
+      "哪些危險操作需要刻意增加確認成本，而不是用同樣大小與距離呈現？"
+    ],
+    "sectionIntents": {
+      "core": "說明目標大小與距離如何一起決定操作難度，而不是只用視覺美感評估 UI。",
+      "setup": "把問題縮到一個產線工具按鈕，讓點錯與延遲變成可觀察的成本。",
+      "lenses": "用距離、寬度、頻率與錯誤代價拆解互動設計判準。",
+      "psychology": "解釋人手操作不是像素級穩定，壓力與重複動作會放大幾何缺陷。",
+      "applications": "映射到觸控螢幕、內部工具與硬體按鍵旁的軟體操作。",
+      "misreadings": "校正把定律誤用成一律放大或一律塞近的設計反射。",
+      "questions": "迫使讀者按操作頻率與風險重排介面優先順序。",
+      "sources": "以 Fitts's law 與 HCI 研究整理公式背景，工程段落聚焦工具介面設計。"
+    }
+  },
+  "page": {
+    "documentTitle": "費茲定律 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-fitts-law",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / HCI / motor control / tooling</p>\n    <h1>費茲定律</h1>\n    <p class=\"topic-subtitle\">Fitts's Law</p>\n    <p class=\"thesis\">越遠、越小的目標越難快速命中；介面不是只看功能位置，也要看手、眼與游標抵達它的成本。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>適合檢查 touch panel、factory tool、debug console 與任何需要頻繁點選的 UI：它把「不好按」翻成可以討論的幾何條件。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>人機互動 / 速度精度權衡</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Target size, distance, and movement time</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>距離、目標寬度、錯誤率、操作頻率</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能檢查按鈕、熱區與工具列是否讓高頻動作付出過多瞄準成本</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>距離</span>\n      <span>寬度</span>\n      <span>時間</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>好按不是感覺，是距離與目標寬度的合約</h2>\n      <p class=\"section-lede\">費茲定律把指向動作看成速度與精度的交換：目標越小、離起點越遠，抵達時間與錯誤機率都會上升。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>介面設計常把所有命令排成整齊格子，但使用者的手不會平均使用每個格子；高頻、低風險的動作若放在難命中的位置，整潔版面會變成日常摩擦。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先看操作頻率</strong>\n        <p>每天點上百次的命令，應該比季度設定更容易抵達。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再看目標容錯</strong>\n        <p>寬一點的熱區、清楚的邊界與安全間距，能降低點錯成本。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後處理危險動作</strong>\n        <p>破壞性命令不一定要難找，但不該與高頻安全動作共享同一條手勢路徑。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>從一顆太小的 Reflash 按鈕開始</h2>\n      <p class=\"section-lede\">想像一個內部燒錄工具，主要流程需要反覆點 Reflash、Read log、Reset device；最常用的按鈕卻小、遠、靠近危險命令。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小場景</strong>\n        <p>游標每次從 log 區移到右上角小按鈕，旁邊就是清除設定。長時間測試後，手一偏就觸發錯誤命令。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>這不是單純 UI 醜，而是把高頻操作設計成高精度任務，讓疲勞與趕時間直接變成操作風險。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">常用動作離手太遠</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">目標又小又靠近危險項</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">速度一上來就產生錯點</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>費茲定律提醒你：可用性不只在功能有沒有做，而在使用者能否以合理成本穩定命中。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>四個幾何判準</h2>\n      <p class=\"section-lede\">同一顆按鈕在規格書裡只是命令，在人手裡會變成移動距離、目標寬度與鄰近風險。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>移動距離</strong>\n        <p>游標、手指或視線從目前工作區移到目標的距離越長，動作越慢也越容易被中斷。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>有效寬度</strong>\n        <p>真正可點的不只是視覺按鈕，而是使用者敢快速命中的安全區域。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>操作頻率</strong>\n        <p>高頻命令的幾何成本會被乘上次數，低頻命令則可以保留更多確認步驟。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>鄰近後果</strong>\n        <p>小目標旁如果是 destructive action，錯點代價會比單純多花一秒嚴重很多。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr><th>介面選擇</th><th>會改善什麼</th><th>要小心什麼</th></tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>放大高頻按鈕</td>\n            <td>降低瞄準時間與失誤</td>\n            <td>不要讓危險命令也一起變順手</td>\n          </tr>\n          <tr>\n            <td>把常用命令貼近工作區</td>\n            <td>縮短滑鼠或手指路徑</td>\n            <td>避免遮住需要觀察的狀態資訊</td>\n          </tr>\n          <tr>\n            <td>增加危險命令間距</td>\n            <td>降低誤觸與連點事故</td>\n            <td>間距不是替代權限控管</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>手會疲勞，注意力也會省力</h2>\n      <p class=\"section-lede\">人不是每次都慢慢瞄準；高壓、重複與時間壓力會讓操作越來越依賴肌肉記憶。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>熟練帶來快，也帶來偏移</strong>\n        <p>熟手會加速，於是小熱區和相鄰危險區的問題更容易露出來。</p>\n      </article>\n      <article class=\"example\">\n        <strong>視覺整齊會遮住手感</strong>\n        <p>平均排列看起來公平，卻忽略不同命令的使用密度。</p>\n      </article>\n      <article class=\"example\">\n        <strong>錯誤常被怪到人身上</strong>\n        <p>若多數人都在同一個角落點錯，問題多半不是訓練不足，而是目標設計不誠實。</p>\n      </article>\n    </div>\n    <p class=\"micro-note\">費茲定律不是替使用者找藉口，而是要求設計者把人體限制放進規格。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>用在觸控、工具列與硬體旁的軟 UI</h2>\n      <p class=\"section-lede\">韌體工程常會做內部工具、量產面板、touch HMI 或測試 fixture UI；這些地方的操作錯誤很容易被誤認成流程紀律問題。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>產線工具</strong>\n        <p>把燒錄、讀狀態、收 log 等高頻安全動作放進大熱區，並讓清除資料與 reset 分離。</p>\n      </article>\n      <article class=\"example\">\n        <strong>觸控產品</strong>\n        <p>戴手套、震動、濕手與小螢幕都會縮小實際可命中的有效寬度。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Debug dashboard</strong>\n        <p>高頻 filter、pause、copy log 應貼近觀察區，不要每次都要求工程師跨越整個畫面。</p>\n      </article>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>把操作頻率、錯點代價與起始位置一起標在 UI review 裡，比只討論顏色更有用。</li>\n      <li>危險命令可以用間距、二次確認與不同手勢處理，而不是只靠紅色文字提醒。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>大按鈕不是萬用解</h2>\n      <p class=\"section-lede\">把所有元素都放大，只會把畫面擠壞；費茲定律要求的是按使用情境分配操作成本。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所有東西越大越好</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>高頻安全動作需要大熱區；低頻設定與危險命令需要清楚但不必搶手。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只適用滑鼠，不適用觸控</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>手指、觸控筆、旋鈕游標與遙控器焦點移動都會遇到距離與寬度問題。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>套公式就能設計 UI</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>公式能提醒方向，實際仍要測量錯誤率、操作路徑與使用環境。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>先算哪個動作被迫花最多手感</h2>\n    </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>如果只改一個熱區</strong>\n        <p>哪個高頻動作的距離、寬度與錯點代價乘起來最不合理？</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果要保護危險命令</strong>\n        <p>它需要遠離、變小、二次確認，還是改成不同模式下才可見？</p>\n      </article>\n    </div>\n    <div class=\"template-note\">\n      <strong>延伸路線</strong>\n      <p>延伸可讀 Hick's Law、principle of least astonishment 與 affordance，把選項數量、預期與命中成本一起看。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">來源卡以 Fitts's law 的 HCI 定義為主，並把工具與觸控案例標為工程設計轉譯。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>Fitts's law 條目整理目標距離、寬度與 movement time 的基本模型。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Fitts%27s_law\" target=\"_blank\" rel=\"noreferrer\">Fitts's law</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>HCI 研究</strong>\n        <p>MacKenzie 1992 文章是把 Fitts 定律作為 HCI 設計與評估工具的經典整理。</p>\n        <a href=\"https://www.yorku.ca/mack/hci1992.html\" target=\"_blank\" rel=\"noreferrer\">Fitts' law as a research and design tool</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰概念</strong>\n        <p>Hick's law 可補上選項數量與反應時間，避免把互動成本只歸因於按鈕大小。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Hick%27s_law\" target=\"_blank\" rel=\"noreferrer\">Hick's law</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>延伸可讀 Hick's Law、principle of least astonishment 與 affordance，把選項數量、預期與命中成本一起看。</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  }
+}

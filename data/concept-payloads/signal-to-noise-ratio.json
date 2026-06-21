@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "signal-to-noise-ratio",
+    "outputPath": "topics/signal-to-noise-ratio.html"
+  },
+  "indexEntry": {
+    "id": "signal-to-noise-ratio",
+    "title": "訊噪比",
+    "subtitle": "Signal-to-Noise Ratio",
+    "href": "./topics/signal-to-noise-ratio.html",
+    "order": 266,
+    "type": "量測概念 / 訊號品質",
+    "domain": "感測、通訊與判讀",
+    "focus": "Useful signal against background noise",
+    "thesis": "訊號是否能被可靠判讀，不只看訊號有多大，也看背景雜訊如何吃掉你的判斷餘裕。",
+    "tags": [
+      "SNR",
+      "noise",
+      "measurement",
+      "ADC",
+      "signal-processing",
+      "debug"
+    ]
+  },
+  "contentBrief": {
+    "pressurePoint": "當團隊只看 nominal value 是否達標時，訊噪比會提醒你：判斷可靠度藏在訊號與噪聲之間的距離。",
+    "smallestScenario": "平均值看起來接近門檻，但量測噪聲、ground bounce 與 ADC 量化誤差讓單次讀值不可靠；狀態機沒有 hysteresis，也沒有濾波策略。",
+    "sourcePlan": [
+      "概念基礎：Signal-to-noise ratio 條目整理有用訊號與背景噪聲的比值，以及它在工程量測中的使用。",
+      "噪聲背景：Noise in electronics 條目提供電子系統裡常見噪聲來源與量測脈絡。",
+      "量化對照：Quantization in signal processing 可用來理解 ADC 量化誤差如何影響可分辨訊號。"
+    ],
+    "transferTargets": [
+      "感測、通訊與判讀",
+      "用在 sensor、ADC 與狀態機設計",
+      "firmware review"
+    ],
+    "commonMisreading": "多平均幾次就好：平均可壓低某些隨機噪聲，但會增加延遲，也對漂移與尖峰不一定有效。",
+    "readerQuestions": [
+      "這個跨越比 noise floor 大多少？在溫度、負載與不同板子上仍然成立嗎？",
+      "你願意用多少反應延遲換多少噪聲下降？哪些 fault 會被濾波拖慢或抹掉？"
+    ],
+    "sectionIntents": {
+      "core": "訊噪比描述的是有用訊號相對於背景噪聲的強度；它決定你能不能穩定分辨狀態、事件或趨勢。",
+      "setup": "如果只調門檻，會在誤觸發與漏保護之間來回；真正要先估的是訊號變化相對於噪聲的距離。",
+      "lenses": "SNR 不是單點公式而已；它會穿過 sensor、analog front-end、ADC、佈線、韌體濾波與判定邏輯。",
+      "psychology": "Debug 時看到一個數字超過門檻，很容易立刻下結論；SNR 逼你把數字放回雜訊分布裡。",
+      "applications": "Firmware 常要把連續且帶噪的世界轉成離散決策；SNR 決定這個轉換是否穩。",
+      "misreadings": "SNR 低時，後端邏輯會把量測問題放大成產品問題。",
+      "questions": "這個跨越比 noise floor 大多少？在溫度、負載與不同板子上仍然成立嗎？",
+      "sources": "這頁以 SNR 的量測意義為核心，並把噪聲來源、ADC 量化與 firmware 判定串在一起。"
+    }
+  },
+  "page": {
+    "documentTitle": "訊噪比 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-signal-to-noise-ratio",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / measurement / noise / reliability</p>\n    <h1>訊噪比</h1>\n    <p class=\"topic-subtitle\">Signal-to-Noise Ratio</p>\n    <p class=\"thesis\">訊號是否能被可靠判讀，不只看訊號有多大，也看背景雜訊如何吃掉你的判斷餘裕。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>讀這頁時，把 SNR 當作量測鏈的健康檢查：你要知道自己是在看真變化，還是在看噪聲底上的抖動。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>量測概念 / 訊號品質</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Useful signal against background noise</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>訊號幅度、噪聲底、濾波、動態範圍</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在 sensor、ADC、通訊與 log 判讀時，先估量測餘裕，而不是只追單點數值</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>訊號</span>\n      <span>雜訊</span>\n      <span>餘裕</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>有訊號不等於能判斷</h2>\n      <p class=\"section-lede\">訊噪比描述的是有用訊號相對於背景噪聲的強度；它決定你能不能穩定分辨狀態、事件或趨勢。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>訊號可以存在，但若它只比噪聲高一點，門檻、濾波與重複量測就會開始主宰結論，而不是物理現象本身。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先量噪聲底</strong>\n        <p>沒有 noise floor，就無法知道 observed delta 是否有意義。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再看動態範圍</strong>\n        <p>ADC resolution、front-end gain 與 saturation 會決定小訊號能不能被保留下來。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後設計判定餘裕</strong>\n        <p>threshold 應該離噪聲有足夠 margin，並考慮溫度、供電與製程差異。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>一個看似跳動的 sensor 值</h2>\n      <p class=\"section-lede\">把問題縮到電池電壓或電流感測：數值在門檻附近上下跳，狀態機因此頻繁進出保護模式。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小場景</strong>\n        <p>平均值看起來接近門檻，但量測噪聲、ground bounce 與 ADC 量化誤差讓單次讀值不可靠；狀態機沒有 hysteresis，也沒有濾波策略。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>如果只調門檻，會在誤觸發與漏保護之間來回；真正要先估的是訊號變化相對於噪聲的距離。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">真訊號接近門檻</div>\n      <div class=\"flow-arrow\">→</div>\n<div class=\"flow-step\">雜訊造成讀值跳動</div>\n      <div class=\"flow-arrow\">→</div>\n<div class=\"flow-step\">狀態判定變得不穩</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>SNR 低時，問題不只是讀值不漂亮，而是整個判定流程缺少足夠的決策餘裕。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>從量測鏈找噪聲從哪裡進來</h2>\n      <p class=\"section-lede\">SNR 不是單點公式而已；它會穿過 sensor、analog front-end、ADC、佈線、韌體濾波與判定邏輯。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>物理噪聲</strong>\n        <p>熱噪聲、供電紋波、EMI 與機械震動會把真訊號淹在背景裡。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>量化噪聲</strong>\n        <p>ADC 位元數、參考電壓與取樣策略會限制可分辨的最小變化。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>處理噪聲</strong>\n        <p>平均、濾波與 decimation 能改善可讀性，也可能延遲事件或抹掉尖峰。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>判定噪聲</strong>\n        <p>沒有 hysteresis 或 debounce 的狀態機，會把小幅抖動放大成頻繁狀態切換。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>現象</th>\n            <th>可能來源</th>\n            <th>先查什麼</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>門檻附近來回跳</td>\n            <td>噪聲幅度接近判定餘裕</td>\n            <td>noise floor、hysteresis、濾波延遲。</td>\n          </tr>\n          <tr>\n            <td>不同板子差很多</td>\n            <td>layout、零件公差或接地路徑</td>\n            <td>跨板分布與參考量測。</td>\n          </tr>\n          <tr>\n            <td>平均後仍不穩</td>\n            <td>低頻漂移或真事件混入</td>\n            <td>頻譜、溫度與負載條件。</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>人會被單次讀值說服</h2>\n      <p class=\"section-lede\">Debug 時看到一個數字超過門檻，很容易立刻下結論；SNR 逼你把數字放回雜訊分布裡。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>門檻讓判斷看似二元</strong>\n        <p>一旦有 pass/fail，團隊容易忘記門檻附近其實是一段不確定區。</p>\n      </article>\n      <article class=\"example\">\n        <strong>漂亮平均掩蓋尖峰</strong>\n        <p>平均值穩不代表瞬態安全；尖峰也可能才是保護邏輯真正需要看到的訊號。</p>\n      </article>\n      <article class=\"example\">\n        <strong>調參比找噪聲容易</strong>\n        <p>改 threshold 很快，找 ground path、coupling 或 ADC 設定比較痛，但後者才會改善根因。</p>\n      </article>\n    </div>\n    <p class=\"micro-note\">SNR 的思考方式能降低單點讀值帶來的過度自信。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>用在 sensor、ADC 與狀態機設計</h2>\n      <p class=\"section-lede\">Firmware 常要把連續且帶噪的世界轉成離散決策；SNR 決定這個轉換是否穩。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>ADC 讀值</strong>\n        <p>選擇 oversampling、reference、gain 與 filter 時，先定義需要分辨的最小實際變化。</p>\n      </article>\n      <article class=\"example\">\n        <strong>保護門檻</strong>\n        <p>過溫、過流、欠壓保護應有 hysteresis、debounce 與故障前後快照，避免噪聲驅動狀態。</p>\n      </article>\n      <article class=\"example\">\n        <strong>通訊品質</strong>\n        <p>RSSI 或 link metric 不該單獨使用；要同時看 noise、重試率、封包錯誤與環境變化。</p>\n      </article>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>每個 threshold 旁邊最好有 noise margin 與跨條件測試資料。</li>\n      <li>若 SNR 不足，先改善量測鏈，再討論演算法門檻。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>別把噪聲當成可以最後處理的小事</h2>\n      <p class=\"section-lede\">SNR 低時，後端邏輯會把量測問題放大成產品問題。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>多平均幾次就好</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>平均可壓低某些隨機噪聲，但會增加延遲，也對漂移與尖峰不一定有效。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>訊號大就安全</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>若噪聲也一起變大，絕對幅度沒有保證；要看相對距離。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>軟體濾波能補所有硬體問題</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>ADC 前端、layout 與 reference 的問題常會限制軟體能救的範圍。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>判斷前先估噪聲餘裕</h2>\n    </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>如果讀值剛好跨過門檻</strong>\n        <p>這個跨越比 noise floor 大多少？在溫度、負載與不同板子上仍然成立嗎？</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果要加濾波</strong>\n        <p>你願意用多少反應延遲換多少噪聲下降？哪些 fault 會被濾波拖慢或抹掉？</p>\n      </article>\n    </div>\n    <div class=\"template-note\">\n      <strong>延伸路線</strong>\n      <p>可搭配訊號偵測理論，把量測品質與門檻成本放在同一張調校表裡。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">這頁以 SNR 的量測意義為核心，並把噪聲來源、ADC 量化與 firmware 判定串在一起。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>概念基礎</strong>\n        <p>Signal-to-noise ratio 條目整理有用訊號與背景噪聲的比值，以及它在工程量測中的使用。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Signal-to-noise_ratio\" target=\"_blank\" rel=\"noreferrer\">Signal-to-noise ratio</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>噪聲背景</strong>\n        <p>Noise in electronics 條目提供電子系統裡常見噪聲來源與量測脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Noise_%28electronics%29\" target=\"_blank\" rel=\"noreferrer\">Noise (electronics)</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>量化對照</strong>\n        <p>Quantization in signal processing 可用來理解 ADC 量化誤差如何影響可分辨訊號。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Quantization_%28signal_processing%29\" target=\"_blank\" rel=\"noreferrer\">Quantization</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>可搭配訊號偵測理論，把量測品質與門檻成本放在同一張調校表裡。</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  }
+}

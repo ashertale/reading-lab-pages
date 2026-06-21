@@ -1,0 +1,61 @@
+{
+  "target": {
+    "slug": "brown-out-reset",
+    "outputPath": "topics/brown-out-reset.html"
+  },
+  "indexEntry": {
+    "id": "brown-out-reset",
+    "title": "欠壓重置",
+    "subtitle": "Brown-Out Reset (BOR)",
+    "href": "./topics/brown-out-reset.html",
+    "order": 306,
+    "type": "嵌入式可靠性 / 電源監控",
+    "domain": "MCU、電源啟動、馬達負載與低功耗設備",
+    "focus": "Reset when supply voltage is unsafe",
+    "thesis": "欠壓重置不是多一道保守開關，而是把電壓落在不可靠區間時的混亂執行，轉成可預期的重置或保持狀態。",
+    "tags": [
+      "brown-out",
+      "BOR",
+      "power",
+      "MCU",
+      "reset",
+      "firmware",
+      "voltage-supervisor"
+    ]
+  },
+  "contentBrief": {
+    "pressurePoint": "供電低於安全操作範圍時，CPU、flash 與外設可能仍部分運作，造成比直接關機更難追的錯誤。",
+    "smallestScenario": "馬達啟動瞬間拉低 Vcc，MCU 沒有立刻 reset，正在寫入 NVM 的韌體把設定頁寫壞。",
+    "sourcePlan": [
+      "Supply voltage supervisor 條目支撐 undervoltage 監控與 brown-out reset 定義。",
+      "Low-voltage detect 條目補上 MCU peripheral 在 Vcc 低於 Vref 時產生 reset 的概念。",
+      "MSP430 條目中的 BOR 描述可作為 MCU 整合 BOR 的實例背景。"
+    ],
+    "transferTargets": [
+      "battery device",
+      "motor startup",
+      "NVM write protection"
+    ],
+    "commonMisreading": "BOR 不是用來修復電源設計；它只是在電源已不安全時阻止韌體繼續亂跑。",
+    "readerQuestions": [
+      "Vcc 掉到哪個區間時，CPU、flash、clock 與外設規格已經不再保證？",
+      "reset release 是否等到電源、clock 與外部 rail 都穩定，還是太早放行？"
+    ],
+    "sectionIntents": {
+      "core": "說明 BOR 把欠壓混亂轉成受控 reset 的角色。",
+      "setup": "用馬達啟動與 NVM 寫入展示欠壓未重置的危險。",
+      "lenses": "拆成 threshold、hysteresis、reset timing、NVM 與 supervisors。",
+      "psychology": "指出工程師常把 brown-out 症狀誤判成純軟體 bug。",
+      "applications": "映射到電池設備、motor load、flash write 與 field diagnostics。",
+      "misreadings": "校正 BOR 等於電源品質、閾值越高越好、只需軟體偵測的誤讀。",
+      "questions": "要求讀者檢查電壓規格、reset release 與資料寫入窗口。",
+      "sources": "以 supply voltage supervisor 與 low-voltage detect 為來源。"
+    }
+  },
+  "page": {
+    "documentTitle": "欠壓重置 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-brown-out-reset",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / firmware / power integrity / reset</p>\n    <h1>欠壓重置</h1>\n    <p class=\"topic-subtitle\">Brown-Out Reset (BOR)</p>\n    <p class=\"thesis\">欠壓重置不是多一道保守開關，而是把電壓落在不可靠區間時的混亂執行，轉成可預期的重置或保持狀態。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>適合看 MCU 上電、電池設備、馬達啟動、flash write、低功耗喚醒與 field 中偶發重開或狀態毀損問題。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>嵌入式可靠性 / 電源監控</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Reset when supply voltage is unsafe</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>閾值、遲滯、啟動時間、reset release、flash 安全</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能把電源下陷與韌體異常行為連起來檢查，而不是只追軟體 stack trace</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>電壓</span>\n      <span>門檻</span>\n      <span>重置</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>低電壓時最危險的是半醒著執行</h2>\n      <p class=\"section-lede\">Brown-out reset 偵測供電低於門檻後讓 MCU reset 或保持 reset，避免核心與外設在未保證區域繼續操作。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>系統想撐過短暫電壓下陷，但若電壓已低到規格不保，繼續跑可能比停止更糟。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先查安全電壓</strong>\n        <p>CPU frequency、flash programming、ADC 與 oscillator 各有不同最低條件。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再設 reset 門檻</strong>\n        <p>BOR threshold 要高於真正失控區，並考慮容差與溫度。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後控制釋放</strong>\n        <p>電壓回升後仍需等待 clock、rail 與外設狀態穩定。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>馬達一啟動，設定頁就偶發毀損</h2>\n      <p class=\"section-lede\">產品在 field 偶爾丟設定。log 看不到 crash，重現時發現馬達 inrush 讓 Vcc 短暫掉到 flash programming 規格以下。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小場景</strong>\n        <p>韌體剛寫入 calibration page，電壓下陷讓 flash controller 行為不再保證，CPU 卻還沒 reset。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>軟體看到的是下一次開機 checksum 錯；真正事件發生在前一次欠壓窗口。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">負載拉低 Vcc</div>\n      <div class=\"flow-arrow\">→</div>\n<div class=\"flow-step\">MCU 落入未保證區</div>\n      <div class=\"flow-arrow\">→</div>\n<div class=\"flow-step\">BOR 介入或資料被寫壞</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>BOR 是把模糊的低電壓行為切成明確的停與放行。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>欠壓保護要同時看類比門檻與重置語意</h2>\n      <p class=\"section-lede\">只知道有 BOR 不夠；門檻、遲滯、反應時間與 reset release 都會影響結果。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>Threshold</strong>\n        <p>門檻要對齊 MCU 速度、flash 寫入與外設最低操作電壓。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Hysteresis</strong>\n        <p>進出門檻差距避免供電在邊界附近反覆 reset chatter。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Reset delay</strong>\n        <p>電壓剛回升時，clock、regulator 與外部感測器可能尚未穩定。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Supervisor choice</strong>\n        <p>內建 BOR 方便，外部 supervisor 可提供更精準門檻或多 rail 監控。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr><th>症狀</th><th>可能電源線索</th><th>檢查方法</th></tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>偶發設定毀損</td>\n            <td>NVM 寫入遇到 Vcc sag</td>\n            <td>示波器觸發 flash write 與 Vcc</td>\n          </tr>\n          <tr>\n            <td>啟動循環</td>\n            <td>reset release 太早或遲滯不足</td>\n            <td>量 reset pin、rail ramp 與 clock ready</td>\n          </tr>\n          <tr>\n            <td>高負載才重開</td>\n            <td>inrush 或 regulator transient</td>\n            <td>加電子負載與 motor start profile</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>Brown-out 很像軟體鬼影</h2>\n      <p class=\"section-lede\">欠壓常留下的是下一次開機才看見的狀態異常，因此 debug 直覺會先追 firmware flow。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>Log 斷在錯地方</strong>\n        <p>電壓掉下去時 log 也可能寫不完，留下錯誤時間線。</p>\n      </article>\n      <article class=\"example\">\n        <strong>實驗室電源太乾淨</strong>\n        <p>bench supply 不會重現電池內阻、線材、馬達 inrush 與溫度條件。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Reset 被當成功能</strong>\n        <p>反覆重啟看似恢復，實際可能掩蓋資料一致性問題。</p>\n      </article>\n    </div>\n    <p class=\"micro-note\">遇到 field-only 的隨機重啟或資料毀損時，把電源波形放進第一輪證據。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>把電源安全條件寫進韌體狀態機</h2>\n      <p class=\"section-lede\">BOR 是硬體保護，但韌體仍要配合處理寫入、恢復與診斷。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>NVM write gate</strong>\n        <p>寫 flash/EEPROM 前確認 supply margin，寫入中避免進入高負載動作。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Battery products</strong>\n        <p>低電量時降頻、停馬達或延後 radio burst，讓 BOR 不只是最後防線。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Field diagnostics</strong>\n        <p>保存 reset reason、brown-out count 與最近一次 high-current action，幫助回推現場條件。</p>\n      </article>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>用示波器同時量 Vcc、reset、clock ready 與 high-current enable，才看得到事件順序。</li>\n      <li>若有多個 rail，確認 BOR 監的是哪一條，其他 rail 掉電是否也會破壞外設狀態。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>BOR 不是電源設計的替身</h2>\n      <p class=\"section-lede\">它能避免未定義執行，卻不能補足太小的 bulk capacitor、差的 layout 或不合理的負載階躍。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>有 BOR 就安全</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>門檻錯、反應慢或 reset release 太早，一樣會留下不可靠窗口。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>閾值越高越好</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>太高會造成正常 transient 被誤判，讓產品頻繁重啟。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>軟體 ADC 監控足夠</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>當 CPU 或 ADC 自身已不可靠時，軟體偵測可能太晚。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>你的 MCU 在哪段電壓裡還被允許執行</h2>\n    </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>如果 Vcc 慢慢下滑</strong>\n        <p>CPU、flash、clock、SRAM 與外部 sensor 的保證失效順序是什麼？</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果 reset 放得太早</strong>\n        <p>電源 rail、clock source、外部 reset IC 和韌體初始化是否會互相踩到？</p>\n      </article>\n    </div>\n    <div class=\"template-note\">\n      <strong>延伸路線</strong>\n      <p>可以接 power-on reset、watchdog timer、Schmitt trigger、hysteresis 與 flash data integrity，補齊啟動可靠性語彙。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">來源使用電源監控與低壓偵測的通用定義；馬達與 NVM 寫入段落是嵌入式可靠性整理。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>電源監控</strong>\n        <p>Supply voltage supervisor 條目說明 undervoltage 偵測與 brown-out reset 的基本角色。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Supply_voltage_supervisor\" target=\"_blank\" rel=\"noreferrer\">Supply voltage supervisor</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>MCU 偵測</strong>\n        <p>Low-voltage detect 條目補上 Vcc 低於參考電壓時觸發 reset 的 peripheral 角度。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Low-voltage_detect\" target=\"_blank\" rel=\"noreferrer\">Low-voltage detect</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>MCU 實例</strong>\n        <p>MSP430 條目中的 BOR 描述可作為 MCU 內建 brown-out reset 的背景例子。</p>\n        <a href=\"https://en.wikipedia.org/wiki/TI_MSP430\" target=\"_blank\" rel=\"noreferrer\">TI MSP430</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>下次遇到 field-only reset，先在測試計畫中加入 Vcc transient、reset reason 與 NVM 寫入窗口三個觀測點。</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  }
+}

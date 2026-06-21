@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>多臂拉霸問題 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-multi-armed-bandit">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / sequential decisions / regret / learning</p>
+        <h1>多臂拉霸問題</h1>
+        <p class="topic-subtitle">Multi-Armed Bandit</p>
+        <p class="thesis">每一次選擇都同時是收益和實驗；多臂拉霸問題研究的是如何在不完全知道報酬分布時，逐步分配嘗試。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁適合用在 feature experiment、參數調校、推薦策略與測試時間分配：它會讓你把每一次嘗試都視為會更新信念的資料點。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>序列決策 / 學習模型</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Allocate trials while learning rewards</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>arm、reward、regret、策略更新</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能把多個候選策略的實驗分配，從固定比例改成依回饋調整的學習流程</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>選臂</span>
+          <span>回饋</span>
+          <span>後悔</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>每一輪都要在賺取與學習間分配</h2>
+          <p class="section-lede">多臂拉霸問題把每個選項看成一台未知報酬的機器；你每次只能拉一臂，得到回饋後再決定下一輪。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>早期看起來好的 arm 可能只是運氣；看起來差的 arm 也可能需要更多樣本才顯露價值。太早收斂與太久探索都會造成 regret。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先定 reward</strong>
+            <p>回饋要反映真正目標，不然演算法會很有效率地學錯東西。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再選策略</strong>
+            <p>epsilon-greedy、UCB、Thompson sampling 等策略對探索成本與不確定性的處理不同。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後監控漂移</strong>
+            <p>若報酬分布會變，舊資料的權重與再探索策略就很重要。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>三個 power policy 同時上線學習</h2>
+          <p class="section-lede">你有三個候選功耗策略，每個在不同使用者環境下可能有不同電池收益與體感代價。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>固定 A/B/C 各 1/3 能收集公平資料，但如果某策略明顯較差，仍會讓大量裝置繼續承擔代價；bandit 策略可逐步把流量移向較好方案。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>回饋本身有噪聲，且不同客群、溫度與硬體版本可能讓報酬分布改變；不能只看第一天平均。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">選一個 arm</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">觀察 reward</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">依不確定性調整下一輪</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>Bandit 思維不是只找贏家，而是設計一個在學習過程中少付冤枉成本的分配規則。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>讀 bandit 策略的四個問題</h2>
+          <p class="section-lede">多臂拉霸不是單一演算法，而是一族面對未知報酬的序列決策模型。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>Reward 定義</strong>
+            <p>若 reward 只看短期點擊或短期省電，策略可能犧牲長期可靠性或使用者體感。</p>
+          </article>
+          <article class="lens-card">
+            <strong>探索規則</strong>
+            <p>固定小比例探索簡單易懂；信心上界或貝葉斯抽樣則更重視不確定性。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Regret 度量</strong>
+            <p>你要最小化的是相對最佳 arm 的累積損失，而不是每輪都選當下平均最高。</p>
+          </article>
+          <article class="lens-card">
+            <strong>非平穩環境</strong>
+            <p>季節、版本、硬體批次或使用習慣變化時，歷史最佳 arm 可能不再最佳。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>策略直覺</th>
+                <th>優點</th>
+                <th>風險</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>epsilon-greedy</td>
+                <td>簡單，保留固定探索</td>
+                <td>探索比例不隨信心自動下降。</td>
+              </tr>
+              <tr>
+                <td>UCB</td>
+                <td>偏向嘗試不確定但可能好的 arm</td>
+                <td>reward 設計錯時會自信地學錯。</td>
+              </tr>
+              <tr>
+                <td>Thompson sampling</td>
+                <td>用機率信念自然分配探索</td>
+                <td>需要合適先驗與更新模型。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>早期贏家很容易被神化</h2>
+          <p class="section-lede">人看到某個方案前幾輪表現好，會急著宣布勝利；bandit 問題讓你把運氣與信心分開。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>小樣本帶來故事</strong>
+            <p>少量成功案例很容易被包裝成策略優勢，尤其在回饋噪聲高時。</p>
+          </article>
+          <article class="example">
+            <strong>輸家被過早淘汰</strong>
+            <p>某個 arm 可能只在特定族群表現好；平均早期落後不代表沒有局部價值。</p>
+          </article>
+          <article class="example">
+            <strong>實驗成本被隱形化</strong>
+            <p>探索不是免費；每次把流量給未知選項，都可能讓使用者承擔較差體驗。</p>
+          </article>
+        </div>
+        <p class="micro-note">Bandit 模型的冷靜之處在於：每個決定都帶著不確定性估計，而不是只看目前平均。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>用在產品實驗與測試資源</h2>
+          <p class="section-lede">只要候選策略多、回饋會逐步到來，而且每次選擇都有成本，就可以用 bandit 方式思考。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>Feature rollout</strong>
+            <p>多個 UI 或 policy 版本可以依成功率與不確定性動態分配流量。</p>
+          </article>
+          <article class="example">
+            <strong>測試時間分配</strong>
+            <p>Fuzzing 或壓測可把更多時間給近期找到更多 bug 的區域，同時保留探索未知區。</p>
+          </article>
+          <article class="example">
+            <strong>參數自動調校</strong>
+            <p>充電、功耗或網路重試策略可在 guardrail 下逐步學習較佳配置。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>Bandit 前先定義 guardrail，避免 reward 最大化犧牲可靠性、安全或公平性。</li>
+          <li>若環境會變，使用滑動窗口或再探索，避免永久相信舊贏家。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>Bandit 不是萬能 A/B test 替代品</h2>
+          <p class="section-lede">它適合累積決策與動態分配，但不一定適合所有需要乾淨因果估計的實驗。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>流量動態分配一定更好</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>若目標是嚴格估計差異而非最大化當下收益，固定設計可能更清楚。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>演算法會自動找真目標</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>它只會優化你給的 reward；reward 失真時，結果也會失真。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>找到最佳 arm 就結束</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>非平穩環境需要持續監控與再探索。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>設計會學習的分配規則</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果某策略早期表現最好</strong>
+            <p>你有多少信心它不是運氣或客群偏差？還需要保留多少探索？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果 reward 很慢才回來</strong>
+            <p>分配策略要如何避免用短期 proxy 取代真正結果？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>可搭配探索與利用權衡、Goodhart&#x27;s Law 與 base-rate neglect，檢查 reward 與樣本問題。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這頁以 multi-armed bandit 的 reward、regret 與探索策略為核心，工程轉用到實驗分配與測試資源。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>問題模型</strong>
+            <p>Multi-armed bandit 條目整理 arm、reward、exploration/exploitation 與 regret 的基本形式。</p>
+            <a href="https://en.wikipedia.org/wiki/Multi-armed_bandit" target="_blank" rel="noreferrer">Multi-armed bandit</a>
+          </article>
+          <article class="source-card">
+            <strong>權衡背景</strong>
+            <p>Exploration-exploitation dilemma 條目補充這類 sequential decision 的核心張力。</p>
+            <a href="https://en.wikipedia.org/wiki/Exploration-exploitation_dilemma" target="_blank" rel="noreferrer">Exploration-exploitation dilemma</a>
+          </article>
+          <article class="source-card">
+            <strong>研究綜述</strong>
+            <p>Bubeck 與 Cesa-Bianchi 的 bandit regret survey 可用來延伸理解 stochastic 與 adversarial bandit。</p>
+            <a href="https://arxiv.org/abs/1204.5721" target="_blank" rel="noreferrer">Bandit regret survey</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>可搭配探索與利用權衡、Goodhart&#x27;s Law 與 base-rate neglect，檢查 reward 與樣本問題。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

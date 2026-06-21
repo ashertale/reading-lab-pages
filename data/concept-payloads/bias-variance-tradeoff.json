@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "bias-variance-tradeoff",
+    "outputPath": "topics/bias-variance-tradeoff.html"
+  },
+  "indexEntry": {
+    "id": "bias-variance-tradeoff",
+    "title": "偏差與變異權衡",
+    "subtitle": "Bias-Variance Tradeoff",
+    "href": "./topics/bias-variance-tradeoff.html",
+    "order": 259,
+    "type": "模型判準 / 泛化取捨",
+    "domain": "學習、校準與預測",
+    "focus": "Rigidity vs. overreaction to noise",
+    "thesis": "模型錯誤不只來自學不夠，也來自學太用力；抓太緊會把噪音當規律，抓太鬆又會把真正結構一起抹平。",
+    "tags": [
+      "bias",
+      "variance",
+      "overfitting",
+      "underfitting",
+      "modeling",
+      "generalization"
+    ]
+  },
+  "page": {
+    "documentTitle": "偏差與變異權衡 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-bias-variance-tradeoff",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / modeling / prediction / generalization</p>\n    <h1>偏差與變異權衡</h1>\n    <p class=\"topic-subtitle\">Bias-Variance Tradeoff</p>\n    <p class=\"thesis\">模型錯誤不只來自學不夠，也來自學太用力；抓太緊會把噪音當規律，抓太鬆又會把真正結構一起抹平。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>這頁不是要你背一張 U 形圖，而是學會問：現在的誤差是因為模型看不見結構，還是因為它把結構以外的東西也學走了？</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>模型判準 / 泛化取捨</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Rigidity vs. overreaction to noise</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>模型彈性、樣本量、噪音、驗證誤差</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能判斷一個模型錯在太僵硬還是太容易被資料情緒帶著跑</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>剛性</span>\n      <span>噪音</span>\n      <span>泛化</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n\n<section class=\"chapter\" id=\"core\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Orientation</p>\n  <h2>模型可以錯得太少，也可以錯得太用力</h2>\n  <p class=\"section-lede\">偏差與變異權衡最容易被誤解成一條漂亮曲線；它真正有用的地方，是逼你把『學不到』和『學過頭』當成兩種完全不同的失敗。</p>\n</div>\n<div class=\"core-card\">\n  <p class=\"section-label\">Core Tension</p>\n  <p>模型越剛硬，越容易穩定地忽略真實結構；模型越靈活，越容易把資料裡的偶然起伏當成規律帶走。泛化誤差就在這兩邊拉扯。</p>\n</div>\n<div class=\"principle-strip\" aria-label=\"本頁讀法\">\n  <div>\n    <span>01</span>\n    <strong>先問模型有沒有能力看見該看的東西</strong>\n    <p>若表示能力太弱、假設太死，再多資料也只是更穩定地錯過真正的訊號。</p>\n  </div>\n  <div>\n    <span>02</span>\n    <strong>再問它有沒有把不該學的也學進去</strong>\n    <p>當模型對樣本細節太敏感，訓練集表現會很好，換資料卻容易崩。</p>\n  </div>\n  <div>\n    <span>03</span>\n    <strong>最後用泛化而不是訓練成績做裁判</strong>\n    <p>偏差與變異誰在主導，不能只看訓練誤差；得看新的資料上它會不會失手。</p>\n  </div>\n</div>\n</section>\n\n<section class=\"chapter\" id=\"setup\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Setup</p>\n  <h2>從感測器校準兩種失敗開始</h2>\n  <p class=\"section-lede\">同一份資料，太簡單和太複雜都可能做出錯的模型，只是錯法不同。</p>\n</div>\n<div class=\"definition-grid\">\n  <div class=\"tile\">\n    <strong>最小場景</strong>\n    <p>你拿兩百筆溫度補償資料做校準。線性模型太硬，明顯看不到溫區轉折；高次多項式卻把幾個偶然離群點也跟著穿過，訓練誤差漂亮得不像真的。</p>\n  </div>\n  <div class=\"tile\">\n    <strong>真正難點</strong>\n    <p>這兩種模型都可能在訓練集上給你信心，但一個對真結構視而不見，另一個對偶然細節過度認真，最後都會在新板子上出事。</p>\n  </div>\n</div>\n<div class=\"concept-flow\" aria-label=\"問題展開\">\n  <div class=\"flow-step\">模型太剛硬時看不見真結構</div>\n  <div class=\"flow-arrow\">→</div>\n  <div class=\"flow-step\">模型太靈活時連噪音都一起追</div>\n  <div class=\"flow-arrow\">→</div>\n  <div class=\"flow-step\">真正要緊的是換資料後能不能站住</div>\n</div>\n<div class=\"paradox-frame\">\n  <strong>Key Point</strong>\n  <p>偏差與變異權衡不是在鼓勵折中主義，而是在提醒你用對症下藥的方式診斷泛化失敗。</p>\n</div>\n</section>\n\n<section class=\"chapter\" id=\"lenses\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Lenses</p>\n  <h2>四個透鏡，找出模型現在是往哪邊偏</h2>\n  <p class=\"section-lede\">你要修的是哪一種錯，決定了你該加資料、換表示、做正則化，還是乾脆重想問題邊界。</p>\n</div>\n<div class=\"lens-grid\">\n  <article class=\"lens-card\">\n    <strong>偏差主導</strong>\n    <p>模型假設太強或特徵太弱時，會穩定犯同一類錯，對資料裡明顯存在的彎曲或交互作用視而不見。</p>\n  </article>\n  <article class=\"lens-card\">\n    <strong>變異主導</strong>\n    <p>模型過度敏感時，不同訓練切片會長出很不一樣的結果，代表它對樣本情緒反應過大。</p>\n  </article>\n  <article class=\"lens-card\">\n    <strong>資料量與噪音</strong>\n    <p>高噪音、小樣本會讓高彈性模型更危險；低噪音、資料充足時，較高複雜度才比較站得住。</p>\n  </article>\n  <article class=\"lens-card\">\n    <strong>驗證視角</strong>\n    <p>validation gap 往往比訓練表現更能告訴你問題在哪邊，因為它真正測的是跨資料集的穩定性。</p>\n  </article>\n</div>\n<div class=\"table-wrap\">\n  <table>\n    <thead>\n      <tr>\n        <th>你看到的症狀</th>\n        <th>比較像哪一側</th>\n        <th>較合理的反應</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td>訓練誤差和驗證誤差都高</td>\n        <td>偏差偏大</td>\n        <td>提升表示能力、換特徵或放鬆模型假設</td>\n      </tr>\n      <tr>\n        <td>訓練誤差很低但驗證誤差高</td>\n        <td>變異偏大</td>\n        <td>加正則化、收斂複雜度或增加資料</td>\n      </tr>\n      <tr>\n        <td>不同 fold 結果差很多</td>\n        <td>對樣本過敏</td>\n        <td>檢查資料量、離群點與模型彈性是否失衡</td>\n      </tr>\n      <tr>\n        <td>換資料域就掉得很快</td>\n        <td>可能同時有高變異與錯誤假設</td>\n        <td>重看資料分布、特徵定義與泛化目標</td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n</section>\n\n<section class=\"chapter\" id=\"psychology\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Psychology</p>\n  <h2>人為什麼容易愛上錯的那一邊</h2>\n  <p class=\"section-lede\">模型表現不佳時，人不是害怕太簡單，就是迷戀太精準；偏差與變異的麻煩在於這兩種直覺都會自帶說服力。</p>\n</div>\n<div class=\"example-grid\">\n  <div class=\"example\">\n    <strong>完美擬合的誘惑</strong>\n    <p>看到訓練誤差幾乎歸零時，大腦很難不產生征服感，即使那個征服其實只是把噪音也背下來。</p>\n  </div>\n  <div class=\"example\">\n    <strong>簡單模型的道德光環</strong>\n    <p>我們也常把簡單等同於乾淨與可解釋，結果忽略它可能只是系統性漏掉重要結構。</p>\n  </div>\n  <div class=\"example\">\n    <strong>單一分數焦慮</strong>\n    <p>一旦團隊只盯著單一 leaderboard，大家就更容易追逐短期分數，而不是穩定的泛化能力。</p>\n  </div>\n</div>\n<p class=\"micro-note\">這一節想保留的是診斷感：不要把模型壞掉都歸成同一類，否則修法只會愈修愈亂。</p>\n</section>\n\n<section class=\"chapter\" id=\"applications\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Applications</p>\n  <h2>把它帶回校準、閾值與預測工具</h2>\n  <p class=\"section-lede\">偏差與變異權衡不只屬於機器學習競賽，它每天都在各種工程判斷裡重演。</p>\n</div>\n<div class=\"example-grid\">\n  <div class=\"example\">\n    <strong>感測器補償模型</strong>\n    <p>太簡單的模型會錯過溫區轉折，太複雜的模型則容易把測試夾具噪音、批次偶然差異也學進去。</p>\n  </div>\n  <div class=\"example\">\n    <strong>異常偵測閾值</strong>\n    <p>閾值太鈍時抓不到真正異常，太敏感時又會被正常波動狂觸發；這其實也是偏差與變異的另一種語言。</p>\n  </div>\n  <div class=\"example\">\n    <strong>維護性預測工具</strong>\n    <p>若一個預測模型在歷史資料上很神，但換客戶、換機種就掉，通常不是魔法失靈，而是它對樣本故事學得太深了。</p>\n  </div>\n</div>\n<ul class=\"bullet-list\">\n  <li>診斷模型時，不要只問『準不準』，要問『它是穩定地錯，還是情緒化地對資料過度反應』。</li>\n  <li>validation、cross-validation 與 out-of-domain 測試，本質上都是在查變異側有沒有開始主導。</li>\n</ul>\n</section>\n\n<section class=\"chapter\" id=\"misreadings\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Misreadings</p>\n  <h2>三種常把團隊帶歪的說法</h2>\n  <p class=\"section-lede\">若把偏差與變異權衡讀成『複雜模型不好』或『訓練分數越高越好』，等於直接錯過它的主要價值。</p>\n</div>\n<div class=\"collocation-list\" aria-label=\"常見誤讀\">\n  <article class=\"collocation-card\">\n    <div>\n      <strong>訓練誤差越低就代表模型越好</strong>\n      <span class=\"register-tag\">校正</span>\n    </div>\n    <p>訓練誤差只告訴你模型多會背眼前資料，沒有告訴你它換到新資料後是否還能站住。</p>\n  </article>\n  <article class=\"collocation-card\">\n    <div>\n      <strong>偏差就是主觀偏見</strong>\n      <span class=\"register-tag\">校正</span>\n    </div>\n    <p>在這裡，bias 談的是模型系統性偏離真結構，不是道德或政治語境裡的偏見。</p>\n  </article>\n  <article class=\"collocation-card\">\n    <div>\n      <strong>只要找一個最佳複雜度，之後都照用就好</strong>\n      <span class=\"register-tag\">校正</span>\n    </div>\n    <p>資料量、噪音、任務邊界一變，平衡點也會跟著變，沒有一個固定旋鈕可以永久通吃。</p>\n  </article>\n</div>\n</section>\n\n<section class=\"chapter\" id=\"questions\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Questions</p>\n  <h2>每次模型表現不對勁時，先問這兩題</h2>\n</div>\n<div class=\"prompt-grid\">\n  <article class=\"prompt-card\">\n    <strong>我們現在錯在看不見結構，還是錯在把噪音也當成結構？</strong>\n    <p>若連這個都沒分清楚，就很容易把提高複雜度和降低複雜度交替當成迷信操作。</p>\n  </article>\n  <article class=\"prompt-card\">\n    <strong>換資料、換批次、換場域後，這個模型還是不是同一種表現？</strong>\n    <p>只有跨資料保持穩定，才算真的把規律學到了，而不是把當下資料的情緒背起來。</p>\n  </article>\n</div>\n<div class=\"template-note\">\n  <strong>延伸路線</strong>\n  <p>若想沿著這條線再讀，可接 regularization、cross-validation、underfitting and overfitting，把不同修法和症狀一一對起來。</p>\n</div>\n</section>\n\n<section class=\"chapter\" id=\"sources\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Sources</p>\n  <h2>來源與整理方式</h2>\n  <p class=\"section-lede\">本頁以偏差與變異權衡的標準統計讀法為主，再用 scikit-learn 的例子與 ESL 作為更工程化的對照。</p>\n</div>\n<div class=\"source-grid\">\n  <article class=\"source-card\">\n    <strong>主條目</strong>\n    <p>Bias-variance tradeoff 條目整理了誤差分解、過擬合與欠擬合的核心關係，是本頁的骨架。</p>\n    <a href=\"https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff\" target=\"_blank\" rel=\"noreferrer\">Bias-variance tradeoff</a>\n  </article>\n  <article class=\"source-card\">\n    <strong>工程例子</strong>\n    <p>scikit-learn 的 underfitting/overfitting 範例很適合用來對照偏差與變異兩種錯法在實作上的樣子。</p>\n    <a href=\"https://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting_overfitting.html\" target=\"_blank\" rel=\"noreferrer\">Underfitting vs. Overfitting</a>\n  </article>\n  <article class=\"source-card\">\n    <strong>教科書脈絡</strong>\n    <p>The Elements of Statistical Learning 提供更系統的統計學背景，方便把這個權衡放回一般化誤差與模型複雜度討論中。</p>\n    <a href=\"https://hastie.su.domains/ElemStatLearn/\" target=\"_blank\" rel=\"noreferrer\">The Elements of Statistical Learning</a>\n  </article>\n</div>\n</section>\n\n<section class=\"chapter\">\n  <div class=\"reference-box\">\n    <div>\n      <p class=\"section-label\">Reference</p>\n      <h2>下一步</h2>\n      <p>如果之後想補一頁跟它互相照應的主題，cross-validation 會很合適，因為它就是工程上最常拿來看變異是否失控的鏡子。</p>\n    </div>\n    <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n  </div>\n</section>\n\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "模型錯誤不只來自學不夠，也來自學太用力；抓太緊會把噪音當規律，抓太鬆又會把真正結構一起抹平。",
+    "smallestScenario": "用兩百筆溫度補償資料做校準時，線性模型看不見轉折，高次多項式卻把幾個偶然離群點也跟著穿過，兩邊都會在新板子上翻車。",
+    "sourcePlan": [
+      "用 bias-variance tradeoff 條目支撐誤差分解與過擬合／欠擬合的主線。",
+      "用 scikit-learn 的例子支撐工程上偏差與變異兩種錯法如何具體出現。",
+      "用 ESL 補上更完整的統計脈絡，避免頁面只停在口號。"
+    ],
+    "transferTargets": [
+      "感測器補償模型",
+      "異常偵測閾值設定",
+      "維護性預測工具"
+    ],
+    "commonMisreading": "把偏差與變異權衡讀成『複雜模型不好』或『訓練分數越高越好』，都會把真正診斷能力丟掉。",
+    "readerQuestions": [
+      "我們現在的錯比較像看不見結構，還是更像把噪音也當成結構背走了？",
+      "換資料、換批次或換場域後，這個模型還是不是同一種表現？"
+    ],
+    "sectionIntents": {
+      "core": "先把偏差與變異框成兩種不同錯法，而不是一條抽象曲線。",
+      "setup": "用感測器校準的雙重失敗情境，讓 underfit 與 overfit 都能被工程讀者立即看見。",
+      "lenses": "拆成偏差主導、變異主導、資料噪音與驗證視角四條分析線。",
+      "psychology": "說明為什麼人會同時被完美擬合與簡單模型的道德光環吸走。",
+      "applications": "把概念落在校準、異常閾值與預測工具，讓讀者能直接帶回工作。",
+      "misreadings": "校正訓練誤差迷信、詞義混淆與固定最佳複雜度等常見誤讀。",
+      "questions": "把頁面收成兩個能直接診斷模型錯法的追問。",
+      "sources": "交代條目、工程例子與教科書脈絡各自支撐哪一層內容。"
+    }
+  }
+}

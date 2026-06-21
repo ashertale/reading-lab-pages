@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PID 控制 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-pid-control">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / feedback / control systems / tuning</p>
+        <h1>PID 控制</h1>
+        <p class="topic-subtitle">PID Control</p>
+        <p class="thesis">PID 控制把誤差分成現在有多遠、過去累積多少、變化速度多快；調得好是穩定修正，調不好就是震盪、延遲或過衝。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁適合用在 fan control、motor loop、thermal policy、charger 與任何閉迴路 firmware：它會幫你把調參問題拆成三種誤差回應。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>控制理論 / 回饋調校</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Proportional, integral, derivative correction</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>P/I/D、穩定性、過衝、積分飽和</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能把控制迴路問題拆成比例反應、偏差消除、阻尼與實作限制</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>誤差</span>
+          <span>回饋</span>
+          <span>穩定</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>回饋不是越用力越好</h2>
+          <p class="section-lede">PID 控制器根據誤差的現在值、累積值與變化率產生控制輸出，讓系統逼近 setpoint。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>P 讓反應快，I 消除長期偏差，D 增加阻尼；但每一項都可能引入噪聲放大、過衝、延遲或飽和問題。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先理解 plant</strong>
+            <p>被控對象的延遲、慣性、飽和與噪聲決定 PID 參數能多激進。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再分三項角色</strong>
+            <p>P 管現在，I 補累積偏差，D 看變化趨勢；不要把所有問題都用單一 gain 解。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後保護實作</strong>
+            <p>anti-windup、輸出限幅、取樣時間與濾波會決定迴路在現場是否穩。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>風扇忽快忽慢的溫控迴路</h2>
+          <p class="section-lede">想像裝置用 PID 控 fan speed；溫度超過 setpoint 後風扇猛轉，溫度下降又立刻降速，整機噪音和溫度都在震盪。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>P 太大造成過衝，I 在風扇飽和時持續累積，D 又直接吃到 noisy temperature reading；使用者聽到週期性拉轉。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>看起來是風扇策略差，其實是控制迴路沒有把 plant delay、量測噪聲與輸出限制一起處理。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">量測誤差</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">PID 產生修正</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">plant 延遲與限制影響回饋</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>PID 調校的難點是讓反應夠快，同時不把系統推進震盪。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>把 P、I、D 各自拆開看</h2>
+          <p class="section-lede">三個項目不是魔法旋鈕；它們各自處理不同形狀的誤差，也各自帶來副作用。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>比例 P</strong>
+            <p>誤差越大輸出越大，反應直接；太高會造成過衝與震盪。</p>
+          </article>
+          <article class="lens-card">
+            <strong>積分 I</strong>
+            <p>累積偏差可消除 steady-state error；飽和時可能 windup，解除後過度修正。</p>
+          </article>
+          <article class="lens-card">
+            <strong>微分 D</strong>
+            <p>對誤差變化率反應，提供阻尼；對量測噪聲敏感，常需要濾波。</p>
+          </article>
+          <article class="lens-card">
+            <strong>取樣與延遲</strong>
+            <p>取樣時間、計算延遲與 actuator response 會改變穩定性，不能只看連續公式。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>現象</th>
+                <th>可能原因</th>
+                <th>先試方向</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>過衝大</td>
+                <td>P 太高、I windup、延遲大</td>
+                <td>降 P、加 anti-windup、檢查 plant delay。</td>
+              </tr>
+              <tr>
+                <td>長期偏差</td>
+                <td>I 不足或輸出受限</td>
+                <td>調 I 並確認 actuator 有能力達標。</td>
+              </tr>
+              <tr>
+                <td>輸出抖動</td>
+                <td>D 放大量測噪聲</td>
+                <td>濾波、調低 D 或改量測位置。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>調參最容易變成追著症狀跑</h2>
+          <p class="section-lede">看到反應慢就加 gain，看到過衝就降 gain；沒有 plant 模型與測試步階，很容易來回補洞。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>單一旋鈕迷思</strong>
+            <p>把 P 加大能短期改善慢反應，但可能把延遲與飽和問題暴露成震盪。</p>
+          </article>
+          <article class="example">
+            <strong>穩定被誤認成保守</strong>
+            <p>穩定不是慢，而是能在擾動後可預期地回到目標。</p>
+          </article>
+          <article class="example">
+            <strong>現場條件被低估</strong>
+            <p>溫度、負載、磨耗、供電與 sensor placement 會讓 lab 參數在 field 變得不穩。</p>
+          </article>
+        </div>
+        <p class="micro-note">PID 調校需要實驗記錄：step response、overshoot、settling time、steady-state error，而不是只靠手感。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>用在馬達、溫度與充電控制</h2>
+          <p class="section-lede">Embedded PID 的挑戰常在實作細節：整數運算、取樣 jitter、輸出飽和、sensor noise 與安全限制。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>Thermal control</strong>
+            <p>Fan 或 power limit 迴路要平衡溫度、噪音與性能，避免使用者感知到週期性 oscillation。</p>
+          </article>
+          <article class="example">
+            <strong>Motor control</strong>
+            <p>位置或速度迴路需要考慮負載變化、摩擦、PWM resolution 與量測回授。</p>
+          </article>
+          <article class="example">
+            <strong>Charger loop</strong>
+            <p>電壓/電流控制要處理限流、溫升與保護狀態，不能讓積分項在飽和時失控。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>在韌體裡實作 PID 時，明確處理 saturation、anti-windup、取樣週期與輸出限幅。</li>
+          <li>用 step response 和 disturbance test 記錄參數效果，不要只看單一穩態點。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>PID 不保證任何迴路都會穩</h2>
+          <p class="section-lede">PID 很通用，但 plant delay、非線性、飽和與噪聲會讓它需要額外保護與調校。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>加 D 一定更穩</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>D 可能增加阻尼，也可能把 sensor noise 放大成輸出抖動。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>I 越大越快消除偏差</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>I 太大會造成 windup 與過衝，特別是在 actuator 飽和時。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>一組參數跑所有條件</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不同負載、溫度與老化狀態可能需要 gain scheduling 或限制策略。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>調參前先看迴路形狀</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果系統震盪</strong>
+            <p>震盪週期是否對應 plant delay、取樣時間或 actuator 飽和？P/I/D 哪一項最可能在放大它？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果穩態有偏差</strong>
+            <p>是 I 不足，還是 actuator 已經到限制、sensor 有 offset、setpoint 本身不可達？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>可接著看 feedback loop、hysteresis 與 control theory，把 PID 放回更完整的控制系統設計。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這頁以 PID controller 與 control theory 為核心，工程段落聚焦 embedded control loop 的取樣、飽和與噪聲。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>PID 概要</strong>
+            <p>PID controller 條目整理 proportional、integral、derivative 三項與控制迴路基本公式。</p>
+            <a href="https://en.wikipedia.org/wiki/PID_controller" target="_blank" rel="noreferrer">PID controller</a>
+          </article>
+          <article class="source-card">
+            <strong>控制理論</strong>
+            <p>Control theory 條目提供回饋控制、穩定性與系統模型的 broader context。</p>
+            <a href="https://en.wikipedia.org/wiki/Control_theory" target="_blank" rel="noreferrer">Control theory</a>
+          </article>
+          <article class="source-card">
+            <strong>經典控制</strong>
+            <p>Classical control theory 條目可用來對照 PID、頻域方法與傳統控制設計語彙。</p>
+            <a href="https://en.wikipedia.org/wiki/Classical_control_theory" target="_blank" rel="noreferrer">Classical control theory</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>可接著看 feedback loop、hysteresis 與 control theory，把 PID 放回更完整的控制系統設計。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

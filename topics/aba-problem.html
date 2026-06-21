@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ABA 問題 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-aba-problem">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / concurrency / identity / lock-free</p>
+        <h1>ABA 問題</h1>
+        <p class="topic-subtitle">ABA Problem</p>
+        <p class="thesis">值從 A 變成 B 又變回 A，看起來沒變；但對併發演算法來說，歷史已經改變了。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁適合用在 lock-free stack、ring buffer、free list 與 interrupt/shared context：它會讓你檢查指標或狀態值背後的版本資訊。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>併發陷阱 / 狀態身分</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Same value, different history</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>CAS、版本戳、指標身分、記憶體回收</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能辨識 lock-free code 裡 value equality 與 object history 被混淆的風險</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>相同</span>
+          <span>歷史</span>
+          <span>戳記</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>看起來一樣，不代表從未變過</h2>
+          <p class="section-lede">ABA 問題出現在併發場景：某個位置原本是 A，其他執行緒改成 B 又改回 A，第一個執行緒只比較值，誤以為世界沒變。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>CAS 的成功條件可能只證明目前值相同，卻不能證明中間沒有發生 pop、free、reuse 或語意變更。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先分值與歷史</strong>
+            <p>相同位元模式不代表同一個物件生命週期，也不代表資料結構拓撲沒變。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再加版本資訊</strong>
+            <p>tagged pointer、counter 或 stamp 能讓第二個 A 與第一個 A 可區分。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後處理回收</strong>
+            <p>memory reclamation、hazard pointer 或 epoch scheme 常是 ABA 修補的一部分。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>Lock-free stack 的舊 head 回來了</h2>
+          <p class="section-lede">想像一個 thread 讀到 stack head 指向節點 A，準備 CAS 把 head 改到 A.next。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>另 一個 thread 先 pop A，再 pop B，之後把 A 重新 push 回來；第一個 thread 看到 head 仍是 A，CAS 成功，但 A.next 的意義已經不是原本那個結構。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>單純比較指標值會漏掉節點生命週期與 next pointer 的歷史變化；資料結構可能被悄悄破壞。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">讀到 A</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">別人改成 B 又回 A</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">CAS 誤認世界未變</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>ABA 問題的核心是：相等比較缺少時間資訊。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>三個地方最容易藏 ABA</h2>
+          <p class="section-lede">ABA 不只發生在教科書 stack；任何把狀態值拿來代表完整歷史的 lock-free 設計都要小心。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>指標重用</strong>
+            <p>allocator 釋放又重用同一地址，讓 pointer value 看起來回到原點。</p>
+          </article>
+          <article class="lens-card">
+            <strong>狀態編碼</strong>
+            <p>有限狀態機在 A/B 間切換，觀察者只看到現在值，漏掉中間 transition。</p>
+          </article>
+          <article class="lens-card">
+            <strong>free list</strong>
+            <p>節點快速回收與重掛載時，CAS 成功可能建立在過期的 next 上。</p>
+          </article>
+          <article class="lens-card">
+            <strong>版本 wraparound</strong>
+            <p>加 tag 也要考慮 counter 何時回捲，以及回捲是否足以在系統壽命內發生。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>防法</th>
+                <th>能解什麼</th>
+                <th>注意事項</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Tagged pointer</td>
+                <td>區分第一個 A 與第二個 A</td>
+                <td>需要位元空間或 double-width CAS。</td>
+              </tr>
+              <tr>
+                <td>Hazard pointer</td>
+                <td>避免仍被使用的節點回收</td>
+                <td>實作與掃描成本較高。</td>
+              </tr>
+              <tr>
+                <td>鎖或 critical section</td>
+                <td>簡化歷史一致性</td>
+                <td>犧牲 lock-free 的進度性質。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>相等比較讓人放心太快</h2>
+          <p class="section-lede">人看到 expected value 仍然相等，很容易把它解讀成沒有競爭；ABA 正好利用這個直覺漏洞。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>現在值遮住歷史</strong>
+            <p>Debug print 通常只顯示當前 pointer 或 enum，沒有顯示它來回變過幾次。</p>
+          </article>
+          <article class="example">
+            <strong>低機率讓測試沉默</strong>
+            <p>ABA 需要特定 interleaving，壓測不一定容易重現；一旦發生又很難留下完整證據。</p>
+          </article>
+          <article class="example">
+            <strong>效能誘惑</strong>
+            <p>Lock-free code 追求快速路徑，容易把版本與回收的複雜度推遲到出事後。</p>
+          </article>
+        </div>
+        <p class="micro-note">面對 ABA，問『它現在是不是 A』不夠，還要問『它是不是同一個 A』。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>用在 ISR、atomic 與 lock-free queue</h2>
+          <p class="section-lede">Firmware 裡雖然不一定大量使用無鎖資料結構，但 ISR/main loop、DMA descriptor 與多核心共享 queue 都可能碰到相似問題。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>ISR 與 main loop</strong>
+            <p>共享狀態若可能在兩次讀取間來回變化，單一 flag 可能不足以表示事件歷史。</p>
+          </article>
+          <article class="example">
+            <strong>Descriptor ring</strong>
+            <p>slot index 重用時，consumer 需要 generation 或 sequence，避免把舊 descriptor 當新資料。</p>
+          </article>
+          <article class="example">
+            <strong>Free list allocator</strong>
+            <p>中斷或多核心回收節點時，要確認 pointer value 不會獨自代表節點生命週期。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>對 lock-free 結構做 interleaving review：值回到原點時，哪些隱含欄位已經不同？</li>
+          <li>若資源會重用，給 slot 或 pointer 加 generation，比只看地址更安全。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>ABA 不只是 compare-and-swap 的小缺點</h2>
+          <p class="section-lede">它揭露的是 value equality 與 object identity 被混用的問題。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>只要 CAS 成功就安全</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>CAS 只證明當前值符合 expected；它不證明中間沒有被改過。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>加 counter 永遠解決</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>counter 若會回捲，或沒有跟 pointer 一起原子更新，仍可能留下洞。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只有高階 OS 會遇到</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>任何共享 slot、ring index 或 generation 重用的 embedded 設計都可能有同類風險。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>檢查相同值背後的生命週期</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果值回到原本的 A</strong>
+            <p>你的演算法需要知道中間曾經變成 B 嗎？如果需要，版本資訊放在哪裡？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果 slot 或 pointer 會重用</strong>
+            <p>consumer 如何分辨新一輪資料與上一輪殘留？generation 會不會回捲到危險範圍？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>可延伸到 memory reclamation、linearizability 與 memory consistency model，補齊 lock-free 正確性條件。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這頁以 ABA problem 與 CAS 為核心，工程映射放在 lock-free 結構、slot generation 與 embedded shared state。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>概念基礎</strong>
+            <p>ABA problem 條目整理 value A-B-A 造成 compare-and-swap 誤判的典型場景與 workaround。</p>
+            <a href="https://en.wikipedia.org/wiki/ABA_problem" target="_blank" rel="noreferrer">ABA problem</a>
+          </article>
+          <article class="source-card">
+            <strong>原子操作</strong>
+            <p>Compare-and-swap 條目說明 CAS 的語義與 lock-free 演算法中常見使用方式。</p>
+            <a href="https://en.wikipedia.org/wiki/Compare-and-swap" target="_blank" rel="noreferrer">Compare-and-swap</a>
+          </article>
+          <article class="source-card">
+            <strong>正確性對照</strong>
+            <p>Linearizability 條目可用來理解併發物件操作看似瞬間生效的正確性要求。</p>
+            <a href="https://en.wikipedia.org/wiki/Linearizability" target="_blank" rel="noreferrer">Linearizability</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>可延伸到 memory reclamation、linearizability 與 memory consistency model，補齊 lock-free 正確性條件。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "teletransportation-paradox",
+    "outputPath": "topics/teletransportation-paradox.html"
+  },
+  "indexEntry": {
+    "id": "teletransportation-paradox",
+    "title": "傳送悖論",
+    "subtitle": "Teletransportation Paradox",
+    "href": "./topics/teletransportation-paradox.html",
+    "order": 254,
+    "type": "身份悖論 / 思想實驗",
+    "domain": "自我、連續性與複製",
+    "focus": "Copying vs. bodily continuity",
+    "thesis": "若一個裝置能把你的結構完整重建、記憶與性格也延續，真正分裂的不是資料，而是我們對『同一個人』到底靠什麼延續的判準。",
+    "tags": [
+      "identity",
+      "teletransportation",
+      "parfit",
+      "continuity",
+      "duplication",
+      "philosophy"
+    ]
+  },
+  "page": {
+    "documentTitle": "傳送悖論 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-teletransportation-paradox",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / identity / continuity / thought experiment</p>\n    <h1>傳送悖論</h1>\n    <p class=\"topic-subtitle\">Teletransportation Paradox</p>\n    <p class=\"thesis\">若一個裝置能把你的結構完整重建、記憶與性格也延續，真正分裂的不是資料，而是我們對『同一個人』到底靠什麼延續的判準。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>這頁不是替傳送機投同意票，而是讓你看清：我們平常把 identity、記憶、身體和『我會不會繼續經驗到』其實塞進了同一個句子裡。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>身份悖論 / 思想實驗</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Copying vs. bodily continuity</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>記憶連續、身體延續、分支可能、第一人稱經驗</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能分開討論心理連續、身體延續與唯一性，不再把它們混成同一句『還是同一個人嗎』</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>複製</span>\n      <span>連續</span>\n      <span>分支</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n\n<section class=\"chapter\" id=\"core\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Orientation</p>\n  <h2>一旦完美複製變得可能，『同一個人』就不再只剩一種意思</h2>\n  <p class=\"section-lede\">傳送悖論的張力來自一個很簡單的改動：若新身體真的和你一模一樣，記憶、性格、說話方式全都接上，為什麼直覺還是會卡住？</p>\n</div>\n<div class=\"core-card\">\n  <p class=\"section-label\">Core Tension</p>\n  <p>心理連續看起來被保住了，身體連續卻被打斷；若原體不銷毀，還會出現兩個都自稱承接同一過去的人，迫使我們重寫『同一個人』的條件。</p>\n</div>\n<div class=\"principle-strip\" aria-label=\"本頁讀法\">\n  <div>\n    <span>01</span>\n    <strong>先把傳送當成複製再重建</strong>\n    <p>悖論不是靠炫技，而是靠一個樸素問題：若結果體保留你的所有心理結構，這是否足以構成存活？</p>\n  </div>\n  <div>\n    <span>02</span>\n    <strong>再把銷毀與不銷毀分開</strong>\n    <p>原體被摧毀和原體留下兩種版本，會把直覺從『也許算』立刻推向『等等，兩個都算嗎』。</p>\n  </div>\n  <div>\n    <span>03</span>\n    <strong>最後拆出 identity 和 survival</strong>\n    <p>Parfit 最強的地方正是在這裡：也許「是否同一人」不是唯一要問的，心理延續本身可能才是我們平常在乎的大部分東西。</p>\n  </div>\n</div>\n</section>\n\n<section class=\"chapter\" id=\"setup\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Setup</p>\n  <h2>先把機器規格說清楚</h2>\n  <p class=\"section-lede\">只要條件定得夠明白，這個思想實驗其實沒有想像中花俏。</p>\n</div>\n<div class=\"definition-grid\">\n  <div class=\"tile\">\n    <strong>最小場景</strong>\n    <p>你走進一台傳送機。它掃描你、摧毀原體，然後在火星用新原料重建一個在分子排列、記憶、口音與專案待辦都和你完全一致的人。</p>\n  </div>\n  <div class=\"tile\">\n    <strong>真正難點</strong>\n    <p>若某次機器故障，掃描與重建成功了，原體卻沒有被摧毀，地球與火星就同時出現兩個都記得剛走進機器的人。此時『同一個』還能怎麼理解？</p>\n  </div>\n</div>\n<div class=\"concept-flow\" aria-label=\"問題展開\">\n  <div class=\"flow-step\">複製出完整的心理與結構延續</div>\n  <div class=\"flow-arrow\">→</div>\n  <div class=\"flow-step\">身體材料與時空位置被重置</div>\n  <div class=\"flow-arrow\">→</div>\n  <div class=\"flow-step\">一旦允許分支，單一身份條件就開始撐不住</div>\n</div>\n<div class=\"paradox-frame\">\n  <strong>Key Point</strong>\n  <p>這個悖論真正施壓的不是未來科技，而是我們對身份、存活與第一人稱連續性的既有包裝。</p>\n</div>\n</section>\n\n<section class=\"chapter\" id=\"lenses\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Lenses</p>\n  <h2>四種常見判準，看看它們各自保什麼</h2>\n  <p class=\"section-lede\">沒有人是在真空中回答這題；每個答案背後都偷偷優先了某種連續性。</p>\n</div>\n<div class=\"lens-grid\">\n  <article class=\"lens-card\">\n    <strong>心理連續</strong>\n    <p>若重點是記憶、性格、計畫與自我敘事接得上，火星上的結果體就很像是你的延續。</p>\n  </article>\n  <article class=\"lens-card\">\n    <strong>身體連續</strong>\n    <p>若重點是同一個生物體一路活下去，那傳送更像是死亡加上複製，而不是真正旅行。</p>\n  </article>\n  <article class=\"lens-card\">\n    <strong>唯一性條件</strong>\n    <p>很多身份理論默默要求一對一延續；一旦有兩個同樣合格的承接者，原本看似清楚的標準就會扭曲。</p>\n  </article>\n  <article class=\"lens-card\">\n    <strong>Parfit 式減量觀</strong>\n    <p>Parfit 會說，也許我們要放鬆對數值同一性的執著，承認心理關聯與連續性才是更重要的部分。</p>\n  </article>\n</div>\n<div class=\"table-wrap\">\n  <table>\n    <thead>\n      <tr>\n        <th>你優先保的東西</th>\n        <th>火星版本得到什麼位置</th>\n        <th>代價是什麼</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td>記憶與人格延續</td>\n        <td>比較像原人的存活</td>\n        <td>很難解釋雙分支時誰才是唯一延續</td>\n      </tr>\n      <tr>\n        <td>生物體連續</td>\n        <td>比較像精確複製品</td>\n        <td>直覺上又很難否認結果體確實承接了你的心理生活</td>\n      </tr>\n      <tr>\n        <td>唯一身份</td>\n        <td>逼你在兩個版本間選一個</td>\n        <td>選擇基礎往往顯得任意或外掛</td>\n      </tr>\n      <tr>\n        <td>身份退到次要</td>\n        <td>重點轉成關聯與連續程度</td>\n        <td>會讓很多人覺得失去『我是不是還在』的核心答案</td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n</section>\n\n<section class=\"chapter\" id=\"psychology\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Psychology</p>\n  <h2>為什麼這題一碰到『我』就突然變尖</h2>\n  <p class=\"section-lede\">我們平常談物件身份時，還能容忍脈絡差異；一旦牽涉第一人稱，自我直覺會變得極度敏感。</p>\n</div>\n<div class=\"example-grid\">\n  <div class=\"example\">\n    <strong>身體本質感</strong>\n    <p>很多人會自然把『我』綁在特定身體的延續上，所以只要材料與時空連續被切斷，警報就會響起來。</p>\n  </div>\n  <div class=\"example\">\n    <strong>記憶同一性誘惑</strong>\n    <p>另一股直覺又會說：如果他完全記得我的昨天、懂我的工作、接著過我的日程，怎麼能說他完全不是我？</p>\n  </div>\n  <div class=\"example\">\n    <strong>分支讓直覺露底</strong>\n    <p>一旦有兩個版本同時存在，我們原先把不同判準混在一起的習慣就會被迫攤開。</p>\n  </div>\n</div>\n<p class=\"micro-note\">這一節的任務不是替某派宣判勝負，而是讓『我們到底把哪些條件混在 identity 裡』變得可見。</p>\n</section>\n\n<section class=\"chapter\" id=\"applications\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Applications</p>\n  <h2>把它帶回帳號遷移、數位分身與狀態複製</h2>\n  <p class=\"section-lede\">即使沒有傳送機，工程系統裡也常出現『看起來像延續，其實靠的是哪種連續性』的版本問題。</p>\n</div>\n<div class=\"example-grid\">\n  <div class=\"example\">\n    <strong>帳號與權限遷移</strong>\n    <p>當你把一個使用者的設定、歷史、憑證與會話搬到另一個系統，制度上到底是在延續原身份，還是在建立一個合法複製品？</p>\n  </div>\n  <div class=\"example\">\n    <strong>狀態 checkpoint 與回放</strong>\n    <p>服務從 checkpoint 恢復時，我們常說它『接著活下去』；但如果同一 checkpoint 同時被啟動成兩個實例，語言就開始不穩。</p>\n  </div>\n  <div class=\"example\">\n    <strong>數位分身與記憶外包</strong>\n    <p>越多個人判斷、寫作和排程交給外部系統承接，越需要分清楚：哪些只是工具延伸，哪些開始碰到身份與責任邊界。</p>\n  </div>\n</div>\n<ul class=\"bullet-list\">\n  <li>面對這類問題時，先問制度在乎的是哪種連續性：法律責任、心理連續、權限可追溯，還是生物體本身。</li>\n  <li>一旦允許複製與分支，『唯一原件』不再能當成偷渡預設，很多權限與責任設計都得重新明講。</li>\n</ul>\n</section>\n\n<section class=\"chapter\" id=\"misreadings\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Misreadings</p>\n  <h2>不要把它簡化成科幻冷知識</h2>\n  <p class=\"section-lede\">這個思想實驗最有價值的地方，是它逼你把幾種平常黏在一起的條件拆開。</p>\n</div>\n<div class=\"collocation-list\" aria-label=\"常見誤讀\">\n  <article class=\"collocation-card\">\n    <div>\n      <strong>記憶一樣，所以當然是同一人</strong>\n      <span class=\"register-tag\">校正</span>\n    </div>\n    <p>這會忽略身體連續和分支問題；一到雙版本場景，這種直覺就不再夠用。</p>\n  </article>\n  <article class=\"collocation-card\">\n    <div>\n      <strong>材料不同，所以肯定不是</strong>\n      <span class=\"register-tag\">校正</span>\n    </div>\n    <p>這又太快地把心理延續整包排除掉，而日常生活裡我們並不總是這樣理解身份。</p>\n  </article>\n  <article class=\"collocation-card\">\n    <div>\n      <strong>只是科幻才需要想</strong>\n      <span class=\"register-tag\">校正</span>\n    </div>\n    <p>帳號承接、checkpoint 恢復、代理分身與數位遺產都在不同程度上重演了同一種結構。</p>\n  </article>\n</div>\n</section>\n\n<section class=\"chapter\" id=\"questions\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Questions</p>\n  <h2>碰到『延續』這個字時，先追這兩個問題</h2>\n</div>\n<div class=\"prompt-grid\">\n  <article class=\"prompt-card\">\n    <strong>這裡被保住的到底是哪一種連續性？</strong>\n    <p>是記憶和任務上下文、是同一具身體、是法律責任鏈，還是某種可以追蹤的身份標記？先分清楚，討論才不會一開始就打結。</p>\n  </article>\n  <article class=\"prompt-card\">\n    <strong>如果同一份過去可以分支成兩個未來，我們還想把哪個條件保成唯一？</strong>\n    <p>很多制度設計的隱藏前提會在這一問裡露出來，特別是權限、責任與『誰算正式版本』的規則。</p>\n  </article>\n</div>\n<div class=\"template-note\">\n  <strong>延伸路線</strong>\n  <p>若想沿著這條線繼續，可以接 personal identity、ship of Theseus、mind uploading，把不同身份判準拉到更多案例對照。</p>\n</div>\n</section>\n\n<section class=\"chapter\" id=\"sources\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Sources</p>\n  <h2>來源與整理方式</h2>\n  <p class=\"section-lede\">本頁以 Parfit 的傳送思想實驗為主，搭配 personal identity 條目說明不同理論如何處理心理連續、身體連續與分支。</p>\n</div>\n<div class=\"source-grid\">\n  <article class=\"source-card\">\n    <strong>思想實驗本身</strong>\n    <p>Teletransportation paradox 條目整理了傳送、重建與雙分支版本的核心設置，適合作為故事骨架。</p>\n    <a href=\"https://en.wikipedia.org/wiki/Teletransportation_paradox\" target=\"_blank\" rel=\"noreferrer\">Teletransportation paradox</a>\n  </article>\n  <article class=\"source-card\">\n    <strong>理論脈絡</strong>\n    <p>SEP 的 Personal Identity 條目提供身體連續、心理連續與其他身份理論的主要對照框架。</p>\n    <a href=\"https://plato.stanford.edu/entries/identity-personal/\" target=\"_blank\" rel=\"noreferrer\">Personal Identity</a>\n  </article>\n  <article class=\"source-card\">\n    <strong>Parfit 的背景</strong>\n    <p>《Reasons and Persons》條目能補上這個思想實驗在 Parfit 更大論證中的位置，避免把它只當成孤立趣題。</p>\n    <a href=\"https://en.wikipedia.org/wiki/Reasons_and_Persons\" target=\"_blank\" rel=\"noreferrer\">Reasons and Persons</a>\n  </article>\n</div>\n</section>\n\n<section class=\"chapter\">\n  <div class=\"reference-box\">\n    <div>\n      <p class=\"section-label\">Reference</p>\n      <h2>下一步</h2>\n      <p>若這頁後續要再擴寫，一個自然方向是補『人格與責任的承接』，把身份悖論拉到法律與制度層面。</p>\n    </div>\n    <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n  </div>\n</section>\n\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "若一個裝置能把你的結構完整重建、記憶與性格也延續，真正分裂的不是資料，而是我們對『同一個人』到底靠什麼延續的判準。",
+    "smallestScenario": "傳送機摧毀原體並在火星重建完整複本；若某次故障讓原體沒被摧毀，地球與火星就同時出現兩個都承接同一過去的人。",
+    "sourcePlan": [
+      "用 teletransportation paradox 條目支撐思想實驗的基本設置與分支版本。",
+      "用 SEP 的 personal identity 條目支撐身體連續、心理連續與其他身份理論對照。",
+      "用 Reasons and Persons 條目把傳送案例放回 Parfit 關於心理連續與存活的更大論證脈絡。"
+    ],
+    "transferTargets": [
+      "帳號與權限遷移",
+      "checkpoint 恢復與狀態複製",
+      "數位分身與責任邊界"
+    ],
+    "commonMisreading": "把這題簡化成『記憶一樣就一定是同一人』或『材料不同就一定不是』，都太快地把其他判準排掉了。",
+    "readerQuestions": [
+      "我們眼前被保住的究竟是哪一種連續性：記憶、身體、責任鏈，還是可追蹤身份標記？",
+      "若同一份過去真的可以分支成兩個未來，我們還希望把哪個條件保成唯一？"
+    ],
+    "sectionIntents": {
+      "core": "讓讀者在一開始就看到傳送悖論真正拆開的是 identity、survival 與第一人稱連續性。",
+      "setup": "用摧毀原體與未摧毀原體兩個版本，快速把分支問題推到台前。",
+      "lenses": "沿著心理連續、身體連續、唯一性與 Parfit 式減量觀四條線比較答案。",
+      "psychology": "說明身體本質感、記憶同一性誘惑與分支場景如何讓直覺互相衝突。",
+      "applications": "把思想實驗映回帳號遷移、checkpoint 與數位分身，讓它不只停在科幻。",
+      "misreadings": "校正最常見的單一判準快答，保留問題的真正鋒利度。",
+      "questions": "把頁面收成兩個能逼出制度隱含身份假設的追問。",
+      "sources": "交代思想實驗、理論框架與 Parfit 脈絡各自支撐哪一層內容。"
+    }
+  }
+}

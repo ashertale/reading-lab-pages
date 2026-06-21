@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>端到端原則 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-end-to-end-principle">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / systems / layering / responsibility</p>
+        <h1>端到端原則</h1>
+        <p class="topic-subtitle">End-to-End Principle</p>
+        <p class="thesis">有些正確性只有端點知道；中間層可以幫忙，但不該假裝自己能完整替端點完成語意判斷。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁適合用在 protocol stack、driver、boot/update flow 與資料完整性設計：它會幫你分辨低層協助與端點責任。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>系統原則 / 分層設計</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Correctness belongs at the endpoints</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>語意位置、分層責任、重複保護、性能成本</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能判斷某個功能該放在底層、端點，還是兩邊各自承擔不同層次</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>端點</span>
+          <span>語意</span>
+          <span>分層</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>中間層能協助，端點才知道完成</h2>
+          <p class="section-lede">端到端原則指出，某些功能若要完全正確，必須由通訊端點依自身語意檢查；底層最多提供不完整但有用的支援。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>把可靠性全塞到底層會增加成本與複雜度，但完全不在底層防護又會讓端點承擔過多重試、偵錯與性能損失。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先找語意歸屬</strong>
+            <p>只有應用端知道檔案是否完整、firmware image 是否可開機、交易是否真的完成。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再決定底層幫忙</strong>
+            <p>link retry、CRC、flow control 可以降低常見錯誤，但不能取代端點的最終驗證。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後避免重複錯位</strong>
+            <p>同一功能在多層重複實作時，要說清楚每層負責哪種失效。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>傳輸成功不等於更新成功</h2>
+          <p class="section-lede">把問題縮到 OTA：傳輸層說封包都收到了，flash driver 也寫入成功，但裝置能不能 boot 到新版本是另一件事。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>中間層做了重試與 CRC，卻沒有端點層的 image manifest、簽章、版本與 boot validation；最後一次 power loss 讓資料看似完整但語意上不可用。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>每一層都可能說自己成功，卻沒有任何一層負責應用真正要的成功定義。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">底層確認片段</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">端點理解整體語意</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">最終成功由端點驗證</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>端到端原則不是否定底層可靠性，而是防止底層成功被誤認成整體語意成功。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>功能應該放在哪一層</h2>
+          <p class="section-lede">分層設計的難題不是把功能往上或往下推，而是看哪一層具備足夠資訊與合適成本來處理它。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>語意可見性</strong>
+            <p>若某層看不到完整物件或使用者意圖，它就不能做最終正確性判斷。</p>
+          </article>
+          <article class="lens-card">
+            <strong>性能與局部修復</strong>
+            <p>底層重試能快速修復常見短暫錯誤，避免每次都讓端點付出昂貴代價。</p>
+          </article>
+          <article class="lens-card">
+            <strong>失效隔離</strong>
+            <p>底層保護應限制局部錯誤擴散；端點保護則確認全局結果。</p>
+          </article>
+          <article class="lens-card">
+            <strong>複雜度分配</strong>
+            <p>功能下放會讓所有使用者共同付成本；上放則讓需要者按語意自行承擔。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>功能</th>
+                <th>底層可做</th>
+                <th>端點仍要做</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>資料傳輸</td>
+                <td>CRC、重試、順序控制</td>
+                <td>檔案 hash、版本與完整語意檢查。</td>
+              </tr>
+              <tr>
+                <td>韌體更新</td>
+                <td>flash write verify</td>
+                <td>image signature、rollback 與 boot 成功判定。</td>
+              </tr>
+              <tr>
+                <td>通訊可靠性</td>
+                <td>link-level retransmission</td>
+                <td>request idempotency 與交易結果確認。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>人喜歡把成功切在最近的一層</h2>
+          <p class="section-lede">工程分工會讓每層都想定義自己的 done；端到端原則提醒你，局部 done 不一定等於使用者目標完成。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>局部指標比較好量</strong>
+            <p>封包成功率、write success 或 checksum pass 都容易量，端點語意成功反而跨模組。</p>
+          </article>
+          <article class="example">
+            <strong>責任邊界會漂移</strong>
+            <p>當事故發生，底層、協定層與應用層可能各自說自己沒錯，因為沒人定義端到端成功。</p>
+          </article>
+          <article class="example">
+            <strong>過度通用化的誘惑</strong>
+            <p>底層想替所有情境做好，但越通用越難掌握各應用真正需要的語意。</p>
+          </article>
+        </div>
+        <p class="micro-note">這個原則最能幫你問清楚 ownership：誰能看見真正的完成條件？</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>放進協定、driver 與更新流程</h2>
+          <p class="section-lede">Firmware 系統有很多中間層成功：DMA complete、flash write ok、packet ack、driver init done。端到端原則要求再問一次使用者語意。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>OTA 與 boot chain</strong>
+            <p>傳輸層和 flash 層可以保護片段，bootloader 與 application 仍要驗簽、切換與回滾。</p>
+          </article>
+          <article class="example">
+            <strong>Driver API</strong>
+            <p>driver 可確認 register write 完成，但上層仍要確認 peripheral 進入預期模式並可提供服務。</p>
+          </article>
+          <article class="example">
+            <strong>資料同步</strong>
+            <p>ack 只代表對方收到了某層訊息；業務語意可能還需要 commit record 或 idempotent token。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>替每個流程寫出低層成功、中層成功與端點成功三種定義。</li>
+          <li>底層保護用來降低常見錯誤成本，端點驗證用來確認語意真的成立。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>不是所有功能都只能放端點</h2>
+          <p class="section-lede">端到端原則常被過度簡化成『底層不要做事』，這會錯過局部保護的價值。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>底層可靠性都沒用</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>錯。底層重試、CRC 與流控能降低錯誤率，只是不能取代端點語意檢查。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>端點檢查可以省略底層保護</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>也不對。沒有底層協助，端點可能付出太高延遲、頻寬或能源成本。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>原則給出唯一答案</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>它給的是追問順序：哪一層看得到語意，哪一層能便宜處理常見錯誤。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>替每一層寫清楚成功定義</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果底層回報 success</strong>
+            <p>端點真正需要的物件、狀態或交易是否已被驗證？誰負責最後確認？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果要把功能下放</strong>
+            <p>所有上層都需要這個功能嗎？下放後增加的成本與語意限制是否值得？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>可接著看 law of leaky abstractions 與 idempotency，把分層邊界和重試語意一起檢查。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這頁以 Saltzer、Reed、Clark 的端到端論文為核心，工程段落轉到 firmware update、driver 與協定成功定義。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>原始論文</strong>
+            <p>End-to-End Arguments in System Design 是這個原則的經典來源，討論功能放置與端點語意。</p>
+            <a href="https://groups.csail.mit.edu/ana/Publications/PubPDFs/End-to-End%20Arguments%20in%20System%20Design.pdf" target="_blank" rel="noreferrer">End-to-End Arguments</a>
+          </article>
+          <article class="source-card">
+            <strong>概念整理</strong>
+            <p>End-to-end principle 條目整理原則背景，以及它在網路與系統設計中的常見詮釋。</p>
+            <a href="https://en.wikipedia.org/wiki/End-to-end_principle" target="_blank" rel="noreferrer">End-to-end principle</a>
+          </article>
+          <article class="source-card">
+            <strong>分層對照</strong>
+            <p>Layering 條目可用來補充分層抽象與責任分配的基本語彙。</p>
+            <a href="https://en.wikipedia.org/wiki/Abstraction_layer" target="_blank" rel="noreferrer">Abstraction layer</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>可接著看 law of leaky abstractions 與 idempotency，把分層邊界和重試語意一起檢查。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

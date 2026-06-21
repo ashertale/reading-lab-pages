@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>香農熵 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-shannon-entropy">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / information / uncertainty / compression</p>
+        <h1>香農熵</h1>
+        <p class="topic-subtitle">Shannon Entropy</p>
+        <p class="thesis">一串資料真正佔多少資訊，不看它表面有多長，而看接收者在看見前有多少不確定性被消掉。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁適合用在 log 設計、compression、telemetry 與 debug trace：它會讓你先問資料來源的分布，而不是只看 bytes 數。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>資訊理論 / 不確定性度量</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Average surprise in a source</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>機率分布、平均驚訝、可壓縮性、通道限制</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能分辨資料量、資訊量與可預測性，避免把大量重複 log 當成大量知識</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>不確定</span>
+          <span>編碼</span>
+          <span>壓縮</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>資訊量來自不確定性被消除</h2>
+          <p class="section-lede">香農熵衡量的是一個訊息來源的平均不確定性；越難猜、越平均分散，看到結果後消除的疑問就越多。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>工程現場常把資料量當資訊量，但一百萬筆幾乎相同的 log 可能比一小段罕見 fault trace 含有更少決策資訊。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先看分布</strong>
+            <p>若某個值 99.9% 都相同，它每次出現帶來的新資訊很低；罕見分支才可能改變理解。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再談編碼</strong>
+            <p>好的壓縮能利用可預測性；接近隨機的資料則很難再被無損壓縮。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後連到通道</strong>
+            <p>有限 bandwidth 下，應優先送能降低不確定性的欄位，而不是最容易取得的欄位。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>兩份同樣大的 log，價值可能差很多</h2>
+          <p class="section-lede">把情境縮到 field telemetry：裝置每秒回傳 200 個欄位，其中大部分長期不變，真正能定位問題的是少數狀態轉移。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>一份 50 MB log 幾乎全是正常 heartbeat；另一份 5 MB log 包含 power mode、error counter 與 reset reason 的罕見變化。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>如果只用容量衡量資料價值，團隊會花成本傳輸與保存大量可預測訊號，卻漏掉真正降低 debug 不確定性的欄位。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">來源有機率分布</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">訊息消除不確定</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">熵限制可壓縮下限</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>香農熵讓你把資料設計從「多收一點」改成「哪些欄位最能減少下一次判斷的不確定」。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>從資訊量看資料，而不是只看容量</h2>
+          <p class="section-lede">同一筆資料可以在儲存、通訊、觀測與決策上有不同價值；熵提供一個共同語言來討論可預測性。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>平均驚訝</strong>
+            <p>越意外的事件帶來越多資訊；高機率事件帶來的新增資訊較少。</p>
+          </article>
+          <article class="lens-card">
+            <strong>冗餘</strong>
+            <p>重複欄位、固定格式與高度相關訊號能幫助壓縮，也表示原始資料量高估了資訊量。</p>
+          </article>
+          <article class="lens-card">
+            <strong>編碼下限</strong>
+            <p>無損壓縮不可能永遠突破來源熵；若資料近似隨機，檔案縮不下來是正常結果。</p>
+          </article>
+          <article class="lens-card">
+            <strong>決策資訊</strong>
+            <p>對工程判斷有用的不是最大熵，而是能區分狀態、故障與假設的資訊。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>資料現象</th>
+                <th>熵的讀法</th>
+                <th>工程動作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>大量相同 heartbeat</td>
+                <td>可預測性高，資訊密度低</td>
+                <td>改成事件式或摘要式回報。</td>
+              </tr>
+              <tr>
+                <td>少見錯誤碼</td>
+                <td>出現機率低但診斷價值高</td>
+                <td>保留上下文與前後狀態。</td>
+              </tr>
+              <tr>
+                <td>壓縮效果差</td>
+                <td>來源可能接近隨機或已壓縮</td>
+                <td>檢查是否仍值得逐筆傳輸。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>資料越多越安心的錯覺</h2>
+          <p class="section-lede">人面對不確定時，很容易用收集更多資料取代設計更好的觀測；香農熵把這個習慣拉回資訊密度。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>容量有可見重量</strong>
+            <p>檔案越大、欄位越多，越像做了完整監控；但它們可能只是重複同一個已知狀態。</p>
+          </article>
+          <article class="example">
+            <strong>罕見事件被低估</strong>
+            <p>少見 fault trace 平常看不到，容易被產品化 telemetry 排除，直到事故後才發現缺它。</p>
+          </article>
+          <article class="example">
+            <strong>壓縮被誤讀成魔法</strong>
+            <p>壓縮率不是工具好壞的唯一指標，它也反映來源本身的可預測性。</p>
+          </article>
+        </div>
+        <p class="micro-note">熵不是要你追求資料越亂越好，而是提醒你用不確定性下降來評估觀測價值。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>改寫 log、trace 與 telemetry 設計</h2>
+          <p class="section-lede">Firmware 常受限於 flash、RAM、上傳頻寬與隱私；香農熵能幫你挑出最該留下的訊號。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>事件式 logging</strong>
+            <p>固定週期 heartbeat 可轉成狀態變化、counter delta 與 anomaly snapshot，讓低熵資料少佔通道。</p>
+          </article>
+          <article class="example">
+            <strong>壓縮策略</strong>
+            <p>若欄位高度相關，delta encoding、run-length 或 dictionary 可能比通用壓縮更可控。</p>
+          </article>
+          <article class="example">
+            <strong>debug trace</strong>
+            <p>trace buffer 應保留能區分假設的狀態，例如 transition、timestamp、error context，而不是只堆重複訊息。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>設計 telemetry 時，替每個欄位寫一句：它會消除哪個 debug 不確定性？</li>
+          <li>資料保留政策不要只看大小，也要看罕見事件是否被低頻摘要抹掉。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>別把熵直接等同混亂</h2>
+          <p class="section-lede">香農熵的語境是訊息來源與機率分布，不是日常口語裡的凌亂程度。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>熵高代表資料品質高</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不一定。純隨機 noise 熵高，卻未必對診斷有用。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>檔案越大資訊越多</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>檔案大小包含冗餘、格式與重複；資訊量要看不確定性被消除多少。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>壓縮率就是唯一目標</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>高壓縮率可能表示資料重複，也可能表示你收了太多沒有決策價值的訊號。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>把資料量換成資訊量來問</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果只能保留 10% telemetry</strong>
+            <p>哪些欄位最能分辨正常、退化與故障？哪些欄位只是重複已知狀態？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果壓縮率突然變差</strong>
+            <p>是來源變得更隨機、格式改變、加密已經發生，還是系統進入更複雜的狀態？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>可接著讀訊噪比與 Nyquist-Shannon 取樣定理，把資訊量與量測鏈一起檢查。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這頁以 Shannon 的資訊理論為核心，把 entropy 轉用到 firmware log 與 telemetry 的資料價值判斷。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>概念背景</strong>
+            <p>Entropy in information theory 條目整理 Shannon entropy、平均資訊量與壓縮下限。</p>
+            <a href="https://en.wikipedia.org/wiki/Entropy_%28information_theory%29" target="_blank" rel="noreferrer">Entropy (information theory)</a>
+          </article>
+          <article class="source-card">
+            <strong>原始文本</strong>
+            <p>Shannon 的 A Mathematical Theory of Communication 是資訊理論與 entropy 討論的經典來源。</p>
+            <a href="https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf" target="_blank" rel="noreferrer">A Mathematical Theory of Communication</a>
+          </article>
+          <article class="source-card">
+            <strong>壓縮對照</strong>
+            <p>Data compression 條目可用來對照冗餘、可預測性與無損壓縮的限制。</p>
+            <a href="https://en.wikipedia.org/wiki/Data_compression" target="_blank" rel="noreferrer">Data compression</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>可接著讀訊噪比與 Nyquist-Shannon 取樣定理，把資訊量與量測鏈一起檢查。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

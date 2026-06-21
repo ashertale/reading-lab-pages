@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "exponential-backoff",
+    "outputPath": "topics/exponential-backoff.html"
+  },
+  "indexEntry": {
+    "id": "exponential-backoff",
+    "title": "指數退避與抖動",
+    "subtitle": "Exponential Backoff and Jitter",
+    "href": "./topics/exponential-backoff.html",
+    "order": 286,
+    "type": "可靠性策略 / 重試控制",
+    "domain": "網路、雲端 API、韌體通訊與資源競爭",
+    "focus": "Retry later, spread retry timing",
+    "thesis": "重試不是越快越可靠；指數退避降低壓力，抖動避免所有 client 在同一秒再次撞上去。",
+    "tags": [
+      "retry",
+      "backoff",
+      "jitter",
+      "resilience",
+      "network",
+      "firmware"
+    ]
+  },
+  "contentBrief": {
+    "pressurePoint": "失敗後立即重試看似積極，卻可能把暫時故障推成自我放大的過載。",
+    "smallestScenario": "一批裝置同時掉線後每 100 ms 重連，AP 或 server 尚未恢復就被同步重試流量再次打滿。",
+    "sourcePlan": [
+      "AWS 實務：Marc Brooker 的文章說明 exponential backoff 加 jitter 如何降低競爭與總工作量。",
+      "模式背景：Retry pattern 文件整理何時重試、何時失敗回報，以及暫時性故障處理。",
+      "相鄰問題：Thundering herd problem 條目補上大量等待者同時醒來造成的負載尖峰。"
+    ],
+    "transferTargets": [
+      "連線重試",
+      "OTA 下載",
+      "雲端 API client"
+    ],
+    "commonMisreading": "只做 exponential backoff 還不夠；沒有 jitter，大量 client 仍可能在相同時間點重試。",
+    "readerQuestions": [
+      "這個錯誤是暫時性、永久性、還是需要人介入，是否真的適合重試？",
+      "多個 client 同時失敗時，重試時間是否會被 jitter 打散？"
+    ],
+    "sectionIntents": {
+      "core": "說明 retry policy 會影響系統負載，不是單一 client 的小細節。",
+      "setup": "用大量裝置同步重連展示沒有 jitter 的退避問題。",
+      "lenses": "拆成錯誤分類、退避成長、上限、jitter 與冪等性。",
+      "psychology": "指出人會把快速重試誤認成負責任。",
+      "applications": "映射到無線、OTA、API client 與 bus retry。",
+      "misreadings": "校正無限重試、固定延遲與不分錯誤類型的誤用。",
+      "questions": "要求讀者先界定錯誤和重試是否會造成副作用。",
+      "sources": "以 AWS backoff jitter、retry pattern 與網路重試實務為來源。"
+    }
+  },
+  "page": {
+    "documentTitle": "指數退避與抖動 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-exponential-backoff",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / retries / overload / resilience</p>\n    <h1>指數退避與抖動</h1>\n    <p class=\"topic-subtitle\">Exponential Backoff and Jitter</p>\n    <p class=\"thesis\">重試不是越快越可靠；指數退避降低壓力，抖動避免所有 client 在同一秒再次撞上去。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>適合處理 cloud API、BLE/Wi-Fi reconnect、bus arbitration、OTA download 與任何大量 client 同時重試的系統。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>可靠性策略 / 重試控制</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Retry later, spread retry timing</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>退避上限、隨機化、錯誤類型、冪等性</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能設計不會放大故障的 retry policy</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>失敗</span>\n      <span>等待</span>\n      <span>分散</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>重試也會成為負載</h2>\n      <p class=\"section-lede\">Exponential backoff 讓每次失敗後等待時間逐步增加；jitter 則把等待時間隨機化，避免群體同步。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>單一 client 快速重試看起來合理，但上萬個 client 同時這樣做，故障中的服務會被重試洪峰壓得更久。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先分錯誤類型</strong>\n        <p>永久錯誤不該重試；暫時錯誤才適合 backoff。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再增加等待</strong>\n        <p>連續失敗代表環境可能仍未恢復，下一次嘗試應更謹慎。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後加入 jitter</strong>\n        <p>隨機化能讓重試分散，減少 synchronized retry storm。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>一批裝置同時醒來搶連線</h2>\n      <p class=\"section-lede\">停電後網路恢復，幾千台設備同時重新連線；若每台都用固定間隔重試，AP 和後端會看到週期性尖峰。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小場景</strong>\n        <p>第一次連線失敗後，所有裝置都在 1 秒、2 秒、4 秒重試，尖峰仍然對齊。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>每台裝置都遵守同一個看似溫和的策略，整體卻形成同步攻擊般的負載形狀。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">請求失敗</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">等待時間拉長</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">jitter 打散下一次嘗試</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>好的 retry policy 要保護被呼叫端，也要保護 client 自己的電量、排程與狀態機。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>重試策略要同時管時間與副作用</h2>\n      <p class=\"section-lede\">退避只是其中一個旋鈕；還要看請求是否安全、是否冪等、以及失敗訊號是否可信。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>錯誤分類</strong>\n        <p>timeout、429、bus busy、auth failed 代表的處理方式不同。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>退避上限</strong>\n        <p>等待不能無限長；需要 max interval、max attempts 或 deadline。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Jitter 形狀</strong>\n        <p>full jitter、equal jitter、decorrelated jitter 會產生不同重試分布。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>冪等性</strong>\n        <p>非冪等操作重試前要有 request id 或去重機制，否則可能重複扣款或重複寫入。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr><th>錯誤</th><th>適合重試嗎</th><th>策略</th></tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>暫時 timeout</td>\n            <td>通常適合</td>\n            <td>退避、jitter、deadline</td>\n          </tr>\n          <tr>\n            <td>權限錯誤</td>\n            <td>通常不適合</td>\n            <td>刷新憑證或回報配置問題</td>\n          </tr>\n          <tr>\n            <td>server 429/503</td>\n            <td>看回應提示</td>\n            <td>尊重 Retry-After 並加入 jitter</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>快點再試很像負責任</h2>\n      <p class=\"section-lede\">重試讓人感覺系統沒有放棄，但它也可能把局部等待變成全域塞車。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>行動偏誤</strong>\n        <p>工程師不喜歡失敗後什麼都不做，於是寫出太積極的 retry loop。</p>\n      </article>\n      <article class=\"example\">\n        <strong>單機視角</strong>\n        <p>在一台設備上測試很正常，上量後才出現同步尖峰。</p>\n      </article>\n      <article class=\"example\">\n        <strong>成功案例遮蔽</strong>\n        <p>短期重試成功會讓人忽略它在事故時放大了負載。</p>\n      </article>\n    </div>\n    <p class=\"micro-note\">Retry review 要問的是整群 client 的時間分布，而不是單次 request 的勇敢程度。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>從雲端 API 到韌體重連</h2>\n      <p class=\"section-lede\">重試策略跨越軟體層與硬體層；只要共享資源會短暫不可用，就需要管制重試節奏。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>OTA download</strong>\n        <p>下載失敗後分散重試，避免 CDN 或 server 在版本發布後承受同步尖峰。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Wi-Fi/BLE reconnect</strong>\n        <p>掉線後加入 jitter，降低同區域設備同時掃描或連線造成的碰撞。</p>\n      </article>\n      <article class=\"example\">\n        <strong>I2C/SPI 周邊忙碌</strong>\n        <p>短退避可處理暫時 busy，但要設 deadline，避免狀態機卡死。</p>\n      </article>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>把 retry budget 當成規格：最多幾次、多久放棄、如何回報給上層。</li>\n      <li>在壓測中模擬同時失敗，而不是只測單一 client 的 happy retry。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>退避不是把錯誤藏起來</h2>\n      <p class=\"section-lede\">重試可以吸收暫時性失敗，但不能修復永久配置、資料不一致或非冪等副作用。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>失敗就一直 retry</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>無限重試會消耗電力、頻寬與 server capacity，還會延後真正的錯誤處理。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>固定 delay 夠簡單</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>固定 delay 容易讓大量 client 對齊，形成週期性尖峰。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所有請求都能重試</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>寫入、付款、狀態轉移需要 idempotency key 或去重設計。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>這次重試會幫系統恢復，還是讓它更慢</h2>\n    </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>如果一萬台一起失敗</strong>\n        <p>下一分鐘的重試分布長什麼樣子，尖峰是否會再次打滿同一個瓶頸？</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果請求其實成功了但回應遺失</strong>\n        <p>第二次送出會不會造成重複寫入、重複扣款或狀態倒退？</p>\n      </article>\n    </div>\n    <div class=\"template-note\">\n      <strong>延伸路線</strong>\n      <p>可對照 circuit breaker、token bucket、idempotency 與 thundering herd problem，把重試放進整體韌性設計。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">來源卡以 retry 與 jitter 的可靠性文章為主，韌體與無線場景是工程應用整理。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>AWS 實務</strong>\n        <p>Marc Brooker 的文章說明 exponential backoff 加 jitter 如何降低競爭與總工作量。</p>\n        <a href=\"https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/\" target=\"_blank\" rel=\"noreferrer\">Exponential Backoff And Jitter</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>模式背景</strong>\n        <p>Retry pattern 文件整理何時重試、何時失敗回報，以及暫時性故障處理。</p>\n        <a href=\"https://learn.microsoft.com/en-us/azure/architecture/patterns/retry\" target=\"_blank\" rel=\"noreferrer\">Retry pattern</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰問題</strong>\n        <p>Thundering herd problem 條目補上大量等待者同時醒來造成的負載尖峰。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Thundering_herd_problem\" target=\"_blank\" rel=\"noreferrer\">Thundering herd problem</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>可對照 circuit breaker、token bucket、idempotency 與 thundering herd problem，把重試放進整體韌性設計。</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  }
+}

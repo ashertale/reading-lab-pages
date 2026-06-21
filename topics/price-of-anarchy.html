@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>無政府代價 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-price-of-anarchy">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / routing / incentives / system costs</p>
+        <h1>無政府代價</h1>
+        <p class="topic-subtitle">Price of Anarchy</p>
+        <p class="thesis">每個參與者都照自己的局部成本行動，並不保證系統只是『沒那麼理想』；在某些網路裡，全員理性甚至會把整體成本明顯推高。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁想修正一個很常見的工程直覺：只要每個 agent 都在做對自己最好的選擇，整體結果應該不會差太多。無政府代價告訴你，這個保證根本不存在。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>系統誘因 / 分散最佳化</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Local equilibrium vs. global cost</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>均衡、外部性、共享資源、機制設計</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能量化局部合理與整體代價之間的落差，不再把平衡狀態誤認成好狀態</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>局部</span>
+          <span>均衡</span>
+          <span>浪費</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+
+    <section class="chapter" id="core">
+    <div class="section-heading">
+      <p class="section-label">Orientation</p>
+      <h2>每個人都走自己眼中最便宜的路，系統總帳仍可能更貴</h2>
+      <p class="section-lede">無政府代價的尖銳之處，在於它不靠惡意角色。所有參與者都只是正常地追求自己的成本最小，整體卻還是能被擠到很差的位置。</p>
+    </div>
+    <div class="core-card">
+      <p class="section-label">Core Tension</p>
+      <p>局部最佳回應會形成均衡，但均衡只保證沒有個體想單獨改路，不保證整個系統已經接近最好的全域配置。</p>
+    </div>
+    <div class="principle-strip" aria-label="本頁讀法">
+      <div>
+        <span>01</span>
+        <strong>先分開均衡與最適</strong>
+        <p>一個狀態可以很穩，因為沒人想單獨離開；但這種穩定和系統總成本低不一定是同一回事。</p>
+      </div>
+      <div>
+        <span>02</span>
+        <strong>再找外部性去哪裡了</strong>
+        <p>每個人做選擇時若沒有把自己加給別人的擁塞、等待或搶占成本算進去，整體就會偏離全局最適。</p>
+      </div>
+      <div>
+        <span>03</span>
+        <strong>最後問能否改規則而不是罵參與者</strong>
+        <p>很多時候問題不在『大家太自私』，而在協議、路由或獎勵設計沒有讓局部決策看見全局代價。</p>
+      </div>
+    </div>
+    </section>
+
+    <section class="chapter" id="setup">
+    <div class="section-heading">
+      <p class="section-label">Setup</p>
+      <h2>從同一條快車道塞爆開始</h2>
+      <p class="section-lede">你不需要大型交通網才能理解它；一個共享佇列就很夠用。</p>
+    </div>
+    <div class="definition-grid">
+      <div class="tile">
+        <strong>最小場景</strong>
+        <p>多個工作執行緒都會把任務丟到看起來回應最快的同一條 queue。短時間內每個執行緒都做了對自己最合理的事，結果那條 queue 因為被擠爆而變成全體最慢的路。</p>
+      </div>
+      <div class="tile">
+        <strong>真正難點</strong>
+        <p>沒有人故意做壞決策，也沒有人能靠單獨換路立刻改善自己很多；於是大家一起停在一個穩定但昂貴的均衡裡。</p>
+      </div>
+    </div>
+    <div class="concept-flow" aria-label="問題展開">
+      <div class="flow-step">個體依局部成本選最便宜路徑</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">共享資源承受擁塞外部性</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">系統停在穩定但不划算的均衡</div>
+    </div>
+    <div class="paradox-frame">
+      <strong>Key Point</strong>
+      <p>無政府代價不是在說分散系統一定差，而是在說『穩定』本身不足以證明『好』。</p>
+    </div>
+    </section>
+
+    <section class="chapter" id="lenses">
+    <div class="section-heading">
+      <p class="section-label">Lenses</p>
+      <h2>四個透鏡，拆開局部理性怎麼變成全局浪費</h2>
+      <p class="section-lede">只要把外部性和均衡條件畫清楚，很多表面上像協作失敗的問題，其實是機制設計問題。</p>
+    </div>
+    <div class="lens-grid">
+      <article class="lens-card">
+        <strong>自利路由</strong>
+        <p>每個 agent 根據自己眼前成本換路，未必會替系統做出成本最小的流量分配。</p>
+      </article>
+      <article class="lens-card">
+        <strong>擁塞外部性</strong>
+        <p>你加入某條熱門路時，不只是為自己省事，也把等待成本加給後來的人；這個帳若沒被計入，均衡就會偏掉。</p>
+      </article>
+      <article class="lens-card">
+        <strong>均衡黏著</strong>
+        <p>當所有人都停在互相擠壓的狀態時，單一參與者往往沒有足夠誘因先改，於是壞結果反而穩。</p>
+      </article>
+      <article class="lens-card">
+        <strong>機制修正</strong>
+        <p>排程器、價格、背壓或路由限制能把個體看到的局部成本調整得更接近全局成本。</p>
+      </article>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>你看到的狀態</th>
+            <th>局部看起來為何合理</th>
+            <th>全域為何變糟</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>大家都選同一條低延遲路</td>
+            <td>目前看起來最快</td>
+            <td>共同擁塞後把總等待時間推高</td>
+          </tr>
+          <tr>
+            <td>熱門 cache 被一窩蜂搶</td>
+            <td>命中率短期較高</td>
+            <td>回源壓力與鎖競爭被一起放大</td>
+          </tr>
+          <tr>
+            <td>任務都挑同一種機器型別</td>
+            <td>單機成本最低</td>
+            <td>整體利用率與尾端等待反而惡化</td>
+          </tr>
+          <tr>
+            <td>服務實例都把流量導向相同下游</td>
+            <td>健康檢查分數最好看</td>
+            <td>單一熱點成為整體瓶頸</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </section>
+
+    <section class="chapter" id="psychology">
+    <div class="section-heading">
+      <p class="section-label">Psychology</p>
+      <h2>為什麼均衡很容易被誤認成合理終點</h2>
+      <p class="section-lede">只要系統暫時不再劇烈移動，人就會把它看成『大概就這樣了』，忘記穩定也可能只是壞結果卡住了。</p>
+    </div>
+    <div class="example-grid">
+      <div class="example">
+        <strong>局部 dashboard 視角</strong>
+        <p>每個人通常只看得到自己的 queue time、自己的 latency、自己的 throughput，很難自然感覺到自己對別人的外部性。</p>
+      </div>
+      <div class="example">
+        <strong>無人惡意的安心感</strong>
+        <p>因為沒有明顯壞人，大家更容易低估系統性浪費，誤以為只要每個人都照規則做事就夠了。</p>
+      </div>
+      <div class="example">
+        <strong>均衡看起來像結論</strong>
+        <p>當沒有人想單獨偏離時，我們很容易把『無人偏離』偷換成『已經夠好』。</p>
+      </div>
+    </div>
+    <p class="micro-note">這頁真正要校正的是一種判斷習慣：把穩定狀態誤當成設計已完成，而不是繼續追問它是否把外部性算進去了。</p>
+    </section>
+
+    <section class="chapter" id="applications">
+    <div class="section-heading">
+      <p class="section-label">Applications</p>
+      <h2>把它帶回排程、路由與共享資源</h2>
+      <p class="section-lede">凡是多個 agent 共同搶一組資源，無政府代價都可能以不同名字出現。</p>
+    </div>
+    <div class="example-grid">
+      <div class="example">
+        <strong>多佇列排程</strong>
+        <p>若任務只按眼前最短路徑自選 queue，常會形成熱門 queue 更熱門、冷門 queue 更閒的擁塞不對稱。</p>
+      </div>
+      <div class="example">
+        <strong>網路與服務路由</strong>
+        <p>健康分數、短期 RTT 或局部快取命中率若被過度依賴，流量可能被共同推向同一熱點。</p>
+      </div>
+      <div class="example">
+        <strong>共享治具與驗證資源</strong>
+        <p>每個團隊都想把工作丟到最熟、最快借到的治具上，長期卻會讓整體等待時間比集中排程更差。</p>
+      </div>
+    </div>
+    <ul class="bullet-list">
+      <li>看到均衡時別急著滿意，先估一下它和全局最適之間的差距是否大到值得重新設計規則。</li>
+      <li>真正有效的修法常不是要求大家更無私，而是把局部成本改寫得更接近真實全局成本。</li>
+    </ul>
+    </section>
+
+    <section class="chapter" id="misreadings">
+    <div class="section-heading">
+      <p class="section-label">Misreadings</p>
+      <h2>三種很常見的過度延伸</h2>
+      <p class="section-lede">無政府代價不是一句『分散就不好』，也不是中央控制的自動授權書。</p>
+    </div>
+    <div class="collocation-list" aria-label="常見誤讀">
+      <article class="collocation-card">
+        <div>
+          <strong>所有分散系統都注定糟</strong>
+          <span class="register-tag">校正</span>
+        </div>
+        <p>不是。很多分散系統的 PoA 很小；概念的價值在於量化差距，而不是先替任何架構宣判。</p>
+      </article>
+      <article class="collocation-card">
+        <div>
+          <strong>只要中央排程就一定更好</strong>
+          <span class="register-tag">校正</span>
+        </div>
+        <p>中央也可能看不全、反應慢或成本太高。問題是怎樣的機制能縮小差距，而不是盲目崇拜集中。</p>
+      </article>
+      <article class="collocation-card">
+        <div>
+          <strong>這只跟交通路網有關</strong>
+          <span class="register-tag">校正</span>
+        </div>
+        <p>只要存在共享資源、局部回應與外部性，queue、cache、路由、排程都會重演相同結構。</p>
+      </article>
+    </div>
+    </section>
+
+    <section class="chapter" id="questions">
+    <div class="section-heading">
+      <p class="section-label">Questions</p>
+      <h2>懷疑局部理性正在拖垮整體時，先問這兩題</h2>
+    </div>
+    <div class="prompt-grid">
+      <article class="prompt-card">
+        <strong>每個參與者在做決策時，漏算了哪些加給別人的成本？</strong>
+        <p>只要那個成本沒有回到局部視角裡，均衡就可能天然偏向擁塞與浪費。</p>
+      </article>
+      <article class="prompt-card">
+        <strong>如果不改人，只改規則、價格或排程，均衡會不會移到更好的位置？</strong>
+        <p>這一問能把討論從責怪參與者，拉回真正可設計的機制層。</p>
+      </article>
+    </div>
+    <div class="template-note">
+      <strong>延伸路線</strong>
+      <p>若想再往外讀，可接 Braess paradox、mechanism design、load balancing，看看不同系統如何處理擁塞與外部性。</p>
+    </div>
+    </section>
+
+    <section class="chapter" id="sources">
+    <div class="section-heading">
+      <p class="section-label">Sources</p>
+      <h2>來源與整理方式</h2>
+      <p class="section-lede">本頁以 price of anarchy 的經典定義與自利路由脈絡為主，並用 Roughgarden 的理論整理支撐工程映射。</p>
+    </div>
+    <div class="source-grid">
+      <article class="source-card">
+        <strong>主條目</strong>
+        <p>Price of anarchy 條目整理了這個概念如何比較均衡成本與全局最適成本，是本頁的基本骨架。</p>
+        <a href="https://en.wikipedia.org/wiki/Price_of_anarchy" target="_blank" rel="noreferrer">Price of anarchy</a>
+      </article>
+      <article class="source-card">
+        <strong>理論整理</strong>
+        <p>Roughgarden 的 thesis 系統性整理了自利路由、均衡分析與 price of anarchy 的理論框架。</p>
+        <a href="https://theory.stanford.edu/~tim/papers/thesis.pdf" target="_blank" rel="noreferrer">Selfish Routing and the Price of Anarchy</a>
+      </article>
+      <article class="source-card">
+        <strong>實務延伸</strong>
+        <p>How bad is selfish routing in practice? 補上這個理論在實際網路與量測中的比較與邊界感。</p>
+        <a href="https://arxiv.org/abs/1703.01599" target="_blank" rel="noreferrer">How bad is selfish routing in practice?</a>
+      </article>
+    </div>
+    </section>
+
+    <section class="chapter">
+      <div class="reference-box">
+        <div>
+          <p class="section-label">Reference</p>
+          <h2>下一步</h2>
+          <p>若這頁後續要補姊妹篇，price of stability 會很合適，因為它正好對照『最差均衡』之外，協調後最好均衡能有多好。</p>
+        </div>
+        <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+      </div>
+    </section>
+
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>漢明距離 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-hamming-distance">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / codes / errors / representation</p>
+        <h1>漢明距離</h1>
+        <p class="topic-subtitle">Hamming Distance</p>
+        <p class="thesis">兩個碼字差幾位，不只是相似度問題；它決定錯誤能不能被偵測、校正，或被誤認成另一個合法狀態。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁適合用在狀態碼、命令碼、NVM metadata、通訊封包與 ECC 討論：它把錯誤風險變成碼字之間的距離。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>編碼概念 / 錯誤距離</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>How many positions differ</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>碼距、錯誤偵測、錯誤校正、合法狀態設計</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能用距離思考狀態碼、協定欄位與錯誤校正的安全餘裕</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>碼字</span>
+          <span>距離</span>
+          <span>校正</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>表示法本身也能提供保護</h2>
+          <p class="section-lede">漢明距離計算兩個等長字串在多少位置不同；在二進位碼裡，它直接對應需要翻轉多少 bit 才能把一個碼字變成另一個。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>若合法碼字彼此距離太近，少量 bit error 就可能把錯誤資料變成看似合理的另一個狀態；距離拉開後，錯誤才有機會被發現或修正。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先看最小距離</strong>
+            <p>整組合法碼字中最近的一對，決定了系統能偵測或校正錯誤的下限。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再分偵測與校正</strong>
+            <p>距離足夠大可以發現錯誤；要自動修正則需要更大的間隔，避免猜錯目標碼字。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後設計非法區</strong>
+            <p>不是所有 bit pattern 都該合法；保留無效碼可讓硬體或韌體更早發現資料毀損。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>一個 bit flip 變成合法命令</h2>
+          <p class="section-lede">想像 bootloader 的 command byte 只用連續整數表示：0x01 erase、0x02 write、0x03 verify。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>傳輸或 NVM 讀取時翻了一個 bit，原本非法或低風險的值可能剛好變成 erase；若沒有 CRC、magic pattern 或距離設計，錯誤會被當成正常命令。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>很多協定欄位被當成語意問題處理，卻忽略 bit-level 距離；錯誤不是只會產生亂碼，也可能產生有意義但危險的碼。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">合法碼字距離太近</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">少量位元錯誤</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">誤認成另一個合法狀態</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>漢明距離讓你在設計表示法時先留下錯誤緩衝區，而不是事後只靠例外處理。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>用距離檢查狀態與封包</h2>
+          <p class="section-lede">同樣是幾個 bit，安排方式不同，錯誤偵測能力就會不同；表示法是可靠性設計的一部分。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>最小碼距</strong>
+            <p>若任何兩個合法值只差一位，單 bit error 就可能無聲變成另一個合法值。</p>
+          </article>
+          <article class="lens-card">
+            <strong>校驗碼</strong>
+            <p>parity、checksum、CRC 與 ECC 都是在資料旁邊加入能揭露或修正錯誤的結構。</p>
+          </article>
+          <article class="lens-card">
+            <strong>保留碼</strong>
+            <p>故意不用滿整個編碼空間，可以讓錯誤落入 invalid state，而不是落入危險指令。</p>
+          </article>
+          <article class="lens-card">
+            <strong>語意距離</strong>
+            <p>高風險命令不應與常見命令碼距太近；bit-level 距離應配合操作風險。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>設計選擇</th>
+                <th>風險</th>
+                <th>距離思考</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>連續枚舉命令</td>
+                <td>bit flip 仍可能合法</td>
+                <td>替高風險命令選更遠的 pattern。</td>
+              </tr>
+              <tr>
+                <td>只用 parity</td>
+                <td>可偵測奇數錯誤，無法定位</td>
+                <td>依失效模型決定是否需要 CRC/ECC。</td>
+              </tr>
+              <tr>
+                <td>狀態值全用滿</td>
+                <td>沒有 invalid 緩衝</td>
+                <td>保留非法碼讓資料毀損更早暴露。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>人習慣把編號當成無害細節</h2>
+          <p class="section-lede">狀態碼常在實作尾端被快速分配；漢明距離提醒你，編號方式會影響錯誤後的行為。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>語意遮住位元</strong>
+            <p>工程師討論 erase/write/verify 的語意，卻少看它們在 bit pattern 上是否貼得太近。</p>
+          </article>
+          <article class="example">
+            <strong>測試少碰資料毀損</strong>
+            <p>正常流程測試很少隨機翻 bit，所以錯誤距離問題常到 field 才被看見。</p>
+          </article>
+          <article class="example">
+            <strong>校驗被當成額外成本</strong>
+            <p>CRC 或 ECC 需要空間與時間，但它們買的是錯誤不被默默合理化的能力。</p>
+          </article>
+        </div>
+        <p class="micro-note">距離設計的價值通常表現在壞事發生時：錯誤變成可見失敗，而不是安靜地做錯事。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>用在 NVM、協定與安全命令</h2>
+          <p class="section-lede">Firmware 常處理 raw bytes；漢明距離能把資料表示、錯誤校驗與危險操作一起納入設計。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>NVM metadata</strong>
+            <p>magic number、version、length 與 CRC 應共同防止半寫入或 bit rot 被當成有效資料。</p>
+          </article>
+          <article class="example">
+            <strong>Bootloader command</strong>
+            <p>erase、unlock、mass update 這類高風險命令可使用多 byte magic 或 challenge，避免單點翻轉觸發。</p>
+          </article>
+          <article class="example">
+            <strong>狀態機編碼</strong>
+            <p>安全狀態與危險狀態不要只差一個 bit；必要時加入冗餘欄位與交叉檢查。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>替高風險碼字做 bit-flip audit：翻 1 到 2 位後會變成什麼？</li>
+          <li>別把所有 pattern 都用滿；非法狀態是錯誤偵測的一部分。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>它不是只給通訊理論用</h2>
+          <p class="section-lede">漢明距離也能幫你設計狀態、命令與持久化資料，而不只是考試裡的編碼題。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>只要有 checksum 就不用管碼距</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>checksum 很重要，但核心命令與狀態碼本身仍應避免危險接近。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>距離越大永遠越好</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>距離需要空間與成本；要依錯誤模型與操作風險分配。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>錯誤只會讓資料無效</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>若合法碼字太密，錯誤可能產生另一個有效狀態，這比直接 fail 更危險。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>檢查你的合法碼字彼此多近</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果任一 bit 被翻轉</strong>
+            <p>高風險命令、狀態或 NVM header 會落到 invalid，還是變成另一個可執行動作？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果只能加少量冗餘</strong>
+            <p>你會把冗餘優先放在命令碼、長度、版本、payload，還是 commit marker？理由是什麼？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>可延伸到 ECC、CRC 與防呆設計，思考表示法如何讓錯誤更早變成可見。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這頁以 Hamming distance 與 Hamming code 為核心，工程轉用聚焦於碼字安排、錯誤偵測與 firmware 危險命令。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>距離定義</strong>
+            <p>Hamming distance 條目整理等長字串之間的差異位數，以及它在編碼理論中的角色。</p>
+            <a href="https://en.wikipedia.org/wiki/Hamming_distance" target="_blank" rel="noreferrer">Hamming distance</a>
+          </article>
+          <article class="source-card">
+            <strong>校正碼</strong>
+            <p>Hamming code 條目提供用冗餘位元進行錯誤偵測與校正的經典例子。</p>
+            <a href="https://en.wikipedia.org/wiki/Hamming_code" target="_blank" rel="noreferrer">Hamming code</a>
+          </article>
+          <article class="source-card">
+            <strong>錯誤處理</strong>
+            <p>Error detection and correction 條目可用來對照 parity、checksum、CRC 與 ECC 的功能差異。</p>
+            <a href="https://en.wikipedia.org/wiki/Error_detection_and_correction" target="_blank" rel="noreferrer">Error detection and correction</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>可延伸到 ECC、CRC 與防呆設計，思考表示法如何讓錯誤更早變成可見。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "blast-radius",
+    "outputPath": "topics/blast-radius.html"
+  },
+  "indexEntry": {
+    "id": "blast-radius",
+    "title": "故障半徑",
+    "subtitle": "Blast Radius",
+    "href": "./topics/blast-radius.html",
+    "order": 275,
+    "type": "可靠性原則 / 失效隔離",
+    "domain": "系統韌性、部署與故障控制",
+    "focus": "How far a failure can spread",
+    "thesis": "同樣的錯誤，差別在於它能炸到多遠；故障半徑設計就是讓壞事停在可承受的邊界內。",
+    "tags": [
+      "blast-radius",
+      "fault-isolation",
+      "resilience",
+      "deployment",
+      "rollback",
+      "reliability"
+    ]
+  },
+  "contentBrief": {
+    "pressurePoint": "當團隊只問錯誤發生機率時，故障半徑會追問：一旦發生，它會影響多少使用者、裝置與相依系統？",
+    "smallestScenario": "同一個配置服務、同一把權限與同一個 rollout 開關讓錯誤跨越全部 SKU；support、伺服器與使用者體驗一起被拖進事故。",
+    "sourcePlan": [
+      "級聯故障：Google SRE 的 Addressing Cascading Failures 說明局部故障如何因正回饋擴散成系統性事故。",
+      "隔離背景：Fault tolerance 條目提供容錯系統、失效處理與維持服務的基本概念。",
+      "部署對照：Canary release 條目可用來對照分批曝光如何限制新版本風險。"
+    ],
+    "transferTargets": [
+      "系統韌性、部署與故障控制",
+      "用在 rollout、配置與權限",
+      "firmware review"
+    ],
+    "commonMisreading": "有 canary 就不用驗證：錯。Canary 是最後一道現場觀測，不是取代設計與測試。",
+    "readerQuestions": [
+      "最多會影響哪些 SKU、地區、使用者與相依服務？多久能停止擴散？",
+      "哪些重要工作會一起受影響？是否有隔離 queue、quota 或降級路徑？"
+    ],
+    "sectionIntents": {
+      "core": "故障半徑描述一個錯誤能影響的範圍；好的系統承認錯誤會發生，並預先讓它難以跨越邊界。",
+      "setup": "錯誤本身也許很小，真正昂貴的是它沒有被限制在 canary 或單一失效域內。",
+      "lenses": "故障擴散通常沿著共享資源、共用設定、過大權限與無分階段部署流動。",
+      "psychology": "人常按錯誤本身大小評估風險，卻忘記傳播路徑決定事故規模。",
+      "applications": "Firmware 與 device fleet 管理特別需要 blast radius：裝置數量大、環境分散、回收成本高。",
+      "misreadings": "故障隔離不代表可以少測；它承認測試不能窮盡，讓未知風險有邊界。",
+      "questions": "最多會影響哪些 SKU、地區、使用者與相依服務？多久能停止擴散？",
+      "sources": "這頁用 SRE cascading failure 與 fault isolation 的思想整理 blast radius，工程段落轉到 device rollout 與配置治理。"
+    }
+  },
+  "page": {
+    "documentTitle": "故障半徑 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-blast-radius",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / resilience / isolation / failure domains</p>\n    <h1>故障半徑</h1>\n    <p class=\"topic-subtitle\">Blast Radius</p>\n    <p class=\"thesis\">同樣的錯誤，差別在於它能炸到多遠；故障半徑設計就是讓壞事停在可承受的邊界內。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>這頁適合用在 phased rollout、權限設計、feature flag 與基礎設施相依：它會讓你把故障限制在小範圍內。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>可靠性原則 / 失效隔離</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>How far a failure can spread</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>失效域、隔離、限流、回滾與降級</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能在部署、權限、資源與相依關係上預先畫出錯誤擴散邊界</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>故障</span>\n      <span>隔離</span>\n      <span>邊界</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>可靠性不只是在防錯，也是在限制錯</h2>\n      <p class=\"section-lede\">故障半徑描述一個錯誤能影響的範圍；好的系統承認錯誤會發生，並預先讓它難以跨越邊界。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>追求效率常會共享資源、共用權限與一次性大規模部署；這些選擇會降低成本，也會放大單一錯誤的影響範圍。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先畫失效域</strong>\n        <p>按使用者、地區、SKU、版本、資料、權限或硬體資源切出錯誤可停住的邊界。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再限制擴散路徑</strong>\n        <p>限流、隔離、fallback、circuit breaker 與 feature flag 都是在縮小錯誤傳播。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後演練恢復</strong>\n        <p>邊界若沒有回滾、觀測與操作手冊，事故時很容易被人工跨過。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>一個壞設定推到所有裝置</h2>\n      <p class=\"section-lede\">想像雲端下發新的 power policy，設定本身有 bug；若沒有分批、版本門檻與快速回滾，所有在線裝置會同時受影響。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小場景</strong>\n        <p>同一個配置服務、同一把權限與同一個 rollout 開關讓錯誤跨越全部 SKU；support、伺服器與使用者體驗一起被拖進事故。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>錯誤本身也許很小，真正昂貴的是它沒有被限制在 canary 或單一失效域內。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">單點錯誤</div>\n      <div class=\"flow-arrow\">→</div>\n<div class=\"flow-step\">共享通道放大</div>\n      <div class=\"flow-arrow\">→</div>\n<div class=\"flow-step\">缺少隔離導致全面影響</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>故障半徑的設計目標是：即使判斷錯了，也只讓一小群系統付學費。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>從哪些邊界縮小半徑</h2>\n      <p class=\"section-lede\">故障擴散通常沿著共享資源、共用設定、過大權限與無分階段部署流動。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>部署半徑</strong>\n        <p>canary、staged rollout 與自動暫停能避免新版本一次碰到所有使用者。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>資料半徑</strong>\n        <p>多租戶資料、共享 cache 與全域 migration 需要隔離與回復計畫。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>權限半徑</strong>\n        <p>一把過大的 token 或 admin path 會讓單一憑證失誤影響整個系統。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>資源半徑</strong>\n        <p>共享 queue、thread pool 或 rate limit 若未隔離，局部 overload 會拖垮其他流量。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr>\n            <th>半徑來源</th>\n            <th>縮小方式</th>\n            <th>代價</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>一次性 rollout</td>\n            <td>canary、分批、health gate</td>\n            <td>發布較慢、操作較複雜。</td>\n          </tr>\n          <tr>\n            <td>共享資源池</td>\n            <td>tenant/class isolation</td>\n            <td>資源利用率可能下降。</td>\n          </tr>\n          <tr>\n            <td>全域權限</td>\n            <td>least privilege、scoped token</td>\n            <td>權限管理成本增加。</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>小錯讓人忽略大範圍</h2>\n      <p class=\"section-lede\">人常按錯誤本身大小評估風險，卻忘記傳播路徑決定事故規模。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>一次推完比較省事</strong>\n        <p>大批次部署讓流程乾淨，卻把所有未知風險集中在同一刻。</p>\n      </article>\n      <article class=\"example\">\n        <strong>共享資源看起來有效率</strong>\n        <p>高利用率常以降低隔離為代價；平常省下的資源可能在事故時放大成本。</p>\n      </article>\n      <article class=\"example\">\n        <strong>手動回滾被高估</strong>\n        <p>事故時資訊不足、壓力高，若回滾不是預先演練的路徑，很容易慢半拍。</p>\n      </article>\n    </div>\n    <p class=\"micro-note\">故障半徑思考會把『出錯機率』補上一句：出錯後最遠會到哪裡？</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>用在 rollout、配置與權限</h2>\n      <p class=\"section-lede\">Firmware 與 device fleet 管理特別需要 blast radius：裝置數量大、環境分散、回收成本高。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>Phased rollout</strong>\n        <p>先用 canary 裝置、內部群組、低風險 SKU 或單一地區承接未知風險。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Remote config</strong>\n        <p>設定下發要有 schema validation、scope、kill switch 與版本相容檢查。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Feature flag</strong>\n        <p>flag 不只是開關，也要有目標群組、依賴條件與自動停用規則。</p>\n      </article>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>每個高風險變更都寫出最大影響範圍與最短回滾路徑。</li>\n      <li>把共享資源按重要性或租戶隔離，避免低優先流量吃掉高優先服務。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>縮小半徑不是降低品質要求</h2>\n      <p class=\"section-lede\">故障隔離不代表可以少測；它承認測試不能窮盡，讓未知風險有邊界。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>有 canary 就不用驗證</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>錯。Canary 是最後一道現場觀測，不是取代設計與測試。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>半徑越小越好</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>半徑太小會讓發布很慢；要按風險、回滾能力與觀測品質設定。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>隔離只屬於雲端</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>Device fleet、工廠測試、bootloader 更新與配置下發都需要失效域。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>每個變更都問最遠會炸到哪</h2>\n    </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>如果這個版本有致命 bug</strong>\n        <p>最多會影響哪些 SKU、地區、使用者與相依服務？多久能停止擴散？</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果共享資源被打滿</strong>\n        <p>哪些重要工作會一起受影響？是否有隔離 queue、quota 或降級路徑？</p>\n      </article>\n    </div>\n    <div class=\"template-note\">\n      <strong>延伸路線</strong>\n      <p>可接著讀 circuit breaker、bulkhead pattern 與 error budget，把半徑、隔離與治理接在一起。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">這頁用 SRE cascading failure 與 fault isolation 的思想整理 blast radius，工程段落轉到 device rollout 與配置治理。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>級聯故障</strong>\n        <p>Google SRE 的 Addressing Cascading Failures 說明局部故障如何因正回饋擴散成系統性事故。</p>\n        <a href=\"https://sre.google/sre-book/addressing-cascading-failures/\" target=\"_blank\" rel=\"noreferrer\">Google SRE: Cascading Failures</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>隔離背景</strong>\n        <p>Fault tolerance 條目提供容錯系統、失效處理與維持服務的基本概念。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Fault_tolerance\" target=\"_blank\" rel=\"noreferrer\">Fault tolerance</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>部署對照</strong>\n        <p>Canary release 條目可用來對照分批曝光如何限制新版本風險。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Feature_toggle\" target=\"_blank\" rel=\"noreferrer\">Feature toggle</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>可接著讀 circuit breaker、bulkhead pattern 與 error budget，把半徑、隔離與治理接在一起。</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  }
+}

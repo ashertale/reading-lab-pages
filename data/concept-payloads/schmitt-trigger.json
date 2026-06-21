@@ -1,0 +1,59 @@
+{
+  "target": {
+    "slug": "schmitt-trigger",
+    "outputPath": "topics/schmitt-trigger.html"
+  },
+  "indexEntry": {
+    "id": "schmitt-trigger",
+    "title": "施密特觸發器",
+    "subtitle": "Schmitt Trigger",
+    "href": "./topics/schmitt-trigger.html",
+    "order": 294,
+    "type": "類比數位邊界 / 遲滯比較器",
+    "domain": "訊號調理、GPIO、感測器與雜訊免疫",
+    "focus": "Use hysteresis to avoid chatter near a threshold",
+    "thesis": "施密特觸發器用兩個不同門檻加上遲滯，讓 noisy input 不會在單一閾值附近來回抖動。",
+    "tags": [
+      "Schmitt-trigger",
+      "hysteresis",
+      "comparator",
+      "signal-conditioning",
+      "GPIO"
+    ]
+  },
+  "contentBrief": {
+    "pressurePoint": "單一門檻在 noisy 或慢速邊緣前會反覆切換，讓下游以為發生多次事件。",
+    "smallestScenario": "電池電壓接近 low-battery threshold 時有 ripple，普通 comparator 輸出不停翻轉，UI 警示反覆閃爍。",
+    "sourcePlan": [
+      "主概念：Schmitt trigger 條目說明 positive feedback、hysteresis 與 noise immunity。",
+      "遲滯背景：Hysteresis 條目補充系統狀態取決於歷史的通用概念。",
+      "按鍵對照：Ganssle 的 debounce 文章可補上 mechanical contact bounce 與硬體/軟體處理。"
+    ],
+    "transferTargets": [
+      "GPIO input conditioning",
+      "battery threshold",
+      "button front-end"
+    ],
+    "commonMisreading": "遲滯不是隱藏錯誤；它要根據雜訊幅度與可接受延遲設計上下門檻。",
+    "readerQuestions": [
+      "輸入雜訊峰對峰值是否小於 hysteresis band，還是仍可能穿越兩個門檻？",
+      "上升與下降門檻分離後，產品語意是否接受這段記憶效應？"
+    ],
+    "sectionIntents": {
+      "core": "說明雙門檻與正回授如何抑制 threshold chatter。",
+      "setup": "用 low-battery ripple 展示單門檻比較器問題。",
+      "lenses": "拆成上下門檻、雜訊、慢速邊緣與記憶效應。",
+      "psychology": "指出工程師容易把反覆翻轉當軟體 bug。",
+      "applications": "映射到電源偵測、GPIO、按鍵與 sensor threshold。",
+      "misreadings": "校正把遲滯當任意 deadband 或忽略門檻精度的誤用。",
+      "questions": "要求讀者量測雜訊並定義上下門檻語意。",
+      "sources": "以 Schmitt trigger 與 hysteresis 條目為來源。"
+    }
+  },
+  "page": {
+    "documentTitle": "施密特觸發器 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-schmitt-trigger",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / analog boundary / hysteresis / input conditioning</p>\n    <h1>施密特觸發器</h1>\n    <p class=\"topic-subtitle\">Schmitt Trigger</p>\n    <p class=\"thesis\">施密特觸發器用兩個不同門檻加上遲滯，讓 noisy input 不會在單一閾值附近來回抖動。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>適合 noisy GPIO、慢速 analog edge、按鍵接點、感測器比較器與任何單一 threshold 會 chatter 的輸入。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>類比數位邊界 / 遲滯比較器</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Use hysteresis to avoid chatter near a threshold</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>上門檻、下門檻、雜訊幅度、延遲</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能判斷何時用遲滯把類比雜訊轉成穩定數位事件</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>門檻</span>\n      <span>遲滯</span>\n      <span>穩定</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>用記憶換穩定</h2>\n      <p class=\"section-lede\">施密特觸發器有上升與下降兩個不同切換門檻；輸入在兩者之間時，輸出保持原狀。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>單一門檻反應直接，卻容易在雜訊附近 chatter；遲滯讓切換穩定，但也加入一段狀態記憶與門檻差。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先量雜訊</strong>\n        <p>hysteresis band 應大於正常雜訊擺幅，否則仍會抖。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再設門檻語意</strong>\n        <p>上升觸發與下降釋放代表不同產品狀態，不能任意選。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後檢查延遲</strong>\n        <p>慢速訊號穿過 band 需要時間，可能影響反應速度。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>低電量警示一直閃</h2>\n      <p class=\"section-lede\">電池電壓接近閾值時疊上負載 ripple；普通 comparator 在臨界點附近反覆翻轉。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小場景</strong>\n        <p>3.30 V 是警示門檻，負載切換造成數十 mV 擺動，輸出在 low/high 間來回。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>系統需要的是穩定狀態轉換，不是每一次微小雜訊都被解讀成新事件。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">輸入接近門檻</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">雜訊造成反覆 crossing</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">遲滯要求穿越另一個門檻才翻回</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>Schmitt trigger 把切換從單點改成一個帶寬。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>設計遲滯時要看四個量</h2>\n      <p class=\"section-lede\">遲滯不是越大越好；它要匹配訊號、雜訊與產品語意。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>Upper threshold</strong>\n        <p>輸入上升到此值才切換到 high，避免小幅上抖造成誤觸。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Lower threshold</strong>\n        <p>輸入下降到此值才切回 low，形成穩定區間。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Noise margin</strong>\n        <p>hysteresis band 必須覆蓋正常 noise，否則 chatter 仍存在。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>State memory</strong>\n        <p>介於兩門檻之間時，輸出取決於上一個狀態；這是功能也是限制。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr><th>情境</th><th>Schmitt 幫助</th><th>仍要注意</th></tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>慢速 analog edge</td>\n            <td>減少 threshold 附近多次翻轉</td>\n            <td>門檻延遲與精度</td>\n          </tr>\n          <tr>\n            <td>按鍵輸入</td>\n            <td>提升雜訊免疫</td>\n            <td>接點 bounce 仍可能需要 debounce</td>\n          </tr>\n          <tr>\n            <td>電源監測</td>\n            <td>避免低電量指示閃爍</td>\n            <td>上下門檻需符合產品規格</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>軟體常替硬體門檻背鍋</h2>\n      <p class=\"section-lede\">當 UI 或狀態機反覆跳動時，第一反應常是找軟體 bug；其實輸入可能一直在門檻附近抖。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>看見的是事件，不是波形</strong>\n        <p>韌體 log 只記錄 high/low，容易漏掉背後的 analog ripple。</p>\n      </article>\n      <article class=\"example\">\n        <strong>單一閾值直覺</strong>\n        <p>大家喜歡明確界線，但物理訊號不會配合乾淨切換。</p>\n      </article>\n      <article class=\"example\">\n        <strong>過度濾波</strong>\n        <p>為了止抖而加大軟體 delay，可能不如在硬體前端給合理 hysteresis。</p>\n      </article>\n    </div>\n    <p class=\"micro-note\">介面邊界若跨越類比與數位，review 應同時看波形、門檻和事件語意。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>把不乾淨的邊緣變成可用訊號</h2>\n      <p class=\"section-lede\">Schmitt trigger 常出現在輸入調理，特別是訊號慢、雜訊高或來源阻抗較大時。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>GPIO front-end</strong>\n        <p>對慢速或 noisy digital input 加 hysteresis，減少 MCU 看到的 spurious edge。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Battery threshold</strong>\n        <p>用不同進出門檻避免低電量狀態在邊界附近反覆切換。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Button circuitry</strong>\n        <p>搭配 RC 或 software debounce，讓按鍵訊號進入更穩定的 digital domain。</p>\n      </article>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>在規格中寫出 V_T+、V_T-、noise assumption 與輸出狀態語意。</li>\n      <li>用示波器同時看輸入波形與輸出跳變，確認 hysteresis band 足夠。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>遲滯不是把問題掃到地毯下</h2>\n      <p class=\"section-lede\">它是一種明確設計的記憶效應；門檻差距必須服務產品語意。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>越大越穩</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>過大 hysteresis 會造成遲鈍或錯過合理小變化。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>用了 Schmitt 就不用 debounce</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>Schmitt 可抑制電氣雜訊，但機械 bounce 仍可能需要事件層處理。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只看典型值</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>製程、溫度與供電會影響門檻；要看 datasheet min/max。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>門檻帶寬是否真的包住雜訊</h2>\n    </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>如果輸入停在兩門檻之間</strong>\n        <p>產品希望它保持上一狀態，還是需要用其他條件重新判斷？</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果雜訊變大</strong>\n        <p>它會跨越整個 hysteresis band，還是只在 band 內被吸收？</p>\n      </article>\n    </div>\n    <div class=\"template-note\">\n      <strong>延伸路線</strong>\n      <p>可對照 hysteresis、debounce、signal detection theory 與 ADC thresholding，補上邊界判斷語彙。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">來源卡以 Schmitt trigger 的電路與遲滯定義為主，韌體例子是輸入調理映射。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>Schmitt trigger 條目說明 positive feedback、hysteresis 與 noise immunity。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Schmitt_trigger\" target=\"_blank\" rel=\"noreferrer\">Schmitt trigger</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>遲滯背景</strong>\n        <p>Hysteresis 條目補充系統狀態取決於歷史的通用概念。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Hysteresis\" target=\"_blank\" rel=\"noreferrer\">Hysteresis</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>按鍵對照</strong>\n        <p>Ganssle 的 debounce 文章可補上 mechanical contact bounce 與硬體/軟體處理。</p>\n        <a href=\"https://www.ganssle.com/debouncing.htm\" target=\"_blank\" rel=\"noreferrer\">Debouncing Contacts and Switches</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>可對照 hysteresis、debounce、signal detection theory 與 ADC thresholding，補上邊界判斷語彙。</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  }
+}

@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>能力式安全 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-capability-based-security">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / security model / authority / delegation</p>
+        <h1>能力式安全</h1>
+        <p class="topic-subtitle">Capability-Based Security</p>
+        <p class="thesis">能力式安全把權限附在不可偽造的參照上；能碰什麼，不靠全域身份臨時判斷，而靠你實際持有哪個 capability。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>適合看 sandbox API、IPC handle、file descriptor delegation、plugin 權限、confused deputy 與最小權限設計。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>安全模型 / 權限委派</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Authority carried by unforgeable references</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>不可偽造、可委派、權限衰減、ambient authority</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能分辨傳遞路徑名稱和傳遞已授權 handle 的安全差異</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>參照</span>
+          <span>權限</span>
+          <span>委派</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>權限跟著 handle 走，而不是跟著全域名字走</h2>
+          <p class="section-lede">Capability 通常是一個不可偽造的參照，既指向物件，也攜帶允許的操作集合。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>傳路徑或名字很方便，但接收者用誰的權限解析名字，常在系統變複雜後變得不清楚。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先移除全域查找</strong>
+            <p>被隔離的元件不應任意從全域 namespace 找資源。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再傳遞已授權參照</strong>
+            <p>caller 把自己願意授權的 handle 交給 callee。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後衰減權限</strong>
+            <p>只需要讀取就傳 read-only capability，不給完整控制權。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>Helper 以自己的權限替 plugin 開檔</h2>
+          <p class="section-lede">Plugin 沒有敏感檔案權限，卻能要求 helper 處理一個路徑。若 helper 不檢查授權主體，就成了 confused deputy。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>plugin 傳入 /secure/calibration.key，helper 用 service account 成功 open，然後把內容送回 plugin。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>helper 的行為看似只是服務請求，但 authority 其實被 plugin 借走了。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">caller 持有 capability</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">委派有限 handle</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">callee 只能在授權範圍內操作</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>能力式設計讓授權從『請你幫我找這個名字』改成『我把這個已授權物件交給你』。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>能力要不可偽造，也要能縮小</h2>
+          <p class="section-lede">Capability 的安全性不只在 handle 形式，還在系統能否阻止偽造、限制傳遞並支持權限衰減。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>Unforgeability</strong>
+            <p>程式不能靠猜數字或組字串取得 capability；必須由系統或持有人授予。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Delegation</strong>
+            <p>持有人可以把 capability 交給另一個元件，形成明確授權鏈。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Attenuation</strong>
+            <p>權限可以被包成較小集合，例如 read-only、限速或一次性。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Revocation</strong>
+            <p>撤銷通常需要額外設計，例如 indirection、lease 或 wrapper object。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>設計</th><th>權限來源</th><th>主要風險</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>路徑字串</td>
+                <td>接收者解析 namespace 時的 ambient authority</td>
+                <td>confused deputy、TOCTOU</td>
+              </tr>
+              <tr>
+                <td>檔案描述符</td>
+                <td>open 時已檢查，之後傳 handle</td>
+                <td>生命週期與過度授權</td>
+              </tr>
+              <tr>
+                <td>Object capability</td>
+                <td>不可偽造 reference 加 message</td>
+                <td>revocation 與權限衰減設計</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>名字比權限好想，卻也更容易搞錯主體</h2>
+          <p class="section-lede">人習慣說『打開這個檔案』，而不是說『用我授予你的只讀 handle 讀這個物件』。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>Ambient authority 太順手</strong>
+            <p>process 一啟動就擁有大量全域權限，短期開發很方便。</p>
+          </article>
+          <article class="example">
+            <strong>字串 API 的誘惑</strong>
+            <p>路徑、URL、device id 容易傳遞，但常把查找和授權綁在一起。</p>
+          </article>
+          <article class="example">
+            <strong>最小權限被延後</strong>
+            <p>先給完整權限最快，等插件或自動化增加後才發現權限面積過大。</p>
+          </article>
+        </div>
+        <p class="micro-note">安全 API review 應刻意追問：這個操作的 authority 是從哪個參照來的？</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>IPC 和沙箱最能看見 capability 的差別</h2>
+          <p class="section-lede">當系統開始讓插件、子程序或遠端元件替彼此工作，權限委派方式就會決定隔離邊界是否清楚。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>File descriptor passing</strong>
+            <p>父程序先 open 需要的檔案，再把受限 fd 傳給 sandbox 子程序。</p>
+          </article>
+          <article class="example">
+            <strong>Plugin API</strong>
+            <p>插件只拿到特定 project、device 或 build artifact 的 handle，而不是整個工作目錄權限。</p>
+          </article>
+          <article class="example">
+            <strong>Firmware command token</strong>
+            <p>診斷命令可用短效 token 限定目標設備、操作集合與有效時間。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>避免讓低權限元件傳字串要求高權限元件代為解析全域資源。</li>
+          <li>設計 capability 時同步設計衰減、過期、審計與撤銷路徑。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>Capability 不是任何 token 都算</h2>
+          <p class="section-lede">真正重要的是不可偽造、攜帶權限、可受系統保護地傳遞，而不是名稱叫 token 或 handle。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>等同 POSIX capabilities</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>Linux/POSIX capabilities 多是 process privilege bit，不是物件參照權限模型。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>有 UUID 就不可偽造</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>若 token 可猜、可重放或未綁定權限範圍，就不是可靠 capability。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>ACL 就完全相反</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>實務系統可混用；關鍵是哪些操作靠查全域表，哪些靠持有參照。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>這個權限是誰交給誰的</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果收到的是名字</strong>
+            <p>接收者用誰的權限解析它，caller 是否能誘導 deputy 碰到不該碰的物件？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果收到的是 capability</strong>
+            <p>它能否被複製、轉交、縮小、過期或撤銷，審計能否追到授權鏈？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>接著看 confused deputy、principle of least privilege、object-capability model、Capsicum 與 WASI capability design。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">來源聚焦 capability security 的權限模型；IPC、plugin 與 firmware token 段落是最小權限設計映射。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Capability-based security 條目整理 capability 作為不可偽造權限參照的定義。</p>
+            <a href="https://en.wikipedia.org/wiki/Capability-based_security" target="_blank" rel="noreferrer">Capability-based security</a>
+          </article>
+          <article class="source-card">
+            <strong>經典問題</strong>
+            <p>Confused deputy problem 說明 ambient authority 如何讓代理者被誘導使用錯誤權限。</p>
+            <a href="https://en.wikipedia.org/wiki/Confused_deputy_problem" target="_blank" rel="noreferrer">Confused deputy problem</a>
+          </article>
+          <article class="source-card">
+            <strong>物件模型</strong>
+            <p>Object-capability model 條目補上以 reference 和 message 建構最小權限互動的語彙。</p>
+            <a href="https://en.wikipedia.org/wiki/Object-capability_model" target="_blank" rel="noreferrer">Object-capability model</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>檢查一個 helper API：把所有字串型資源參數標出來，思考哪些可以改成由 caller 傳入受限 handle。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

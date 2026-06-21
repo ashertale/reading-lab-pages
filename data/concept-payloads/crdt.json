@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "crdt",
+    "outputPath": "topics/crdt.html"
+  },
+  "indexEntry": {
+    "id": "crdt",
+    "title": "無衝突複製資料型別",
+    "subtitle": "Conflict-free Replicated Data Type (CRDT)",
+    "href": "./topics/crdt.html",
+    "order": 303,
+    "type": "分散式資料型別 / 最終收斂",
+    "domain": "Local-first、協作編輯與多副本狀態",
+    "focus": "Merge concurrent updates deterministically",
+    "thesis": "CRDT 讓副本可以各自接受更新，但收斂不是靠運氣，而是靠資料型別本身限定哪些操作能被安全合併。",
+    "tags": [
+      "CRDT",
+      "replication",
+      "eventual-consistency",
+      "local-first",
+      "merge",
+      "distributed-systems"
+    ]
+  },
+  "contentBrief": {
+    "pressurePoint": "多副本都能離線寫入時，系統必須把衝突處理寫進資料型別，而不是交給最後寫入覆蓋。",
+    "smallestScenario": "兩位工程師在不同地點離線更新同一份檢查清單，一人新增項目，一人勾選既有項目。",
+    "sourcePlan": [
+      "CRDT 條目支撐獨立更新、非同步傳播與最終收斂的基本定義。",
+      "Shapiro 等人的 CRDT 論文脈絡支撐 state-based 與 operation-based 的分類。",
+      "crdt.tech papers 頁面提供研究資源與近年應用脈絡。"
+    ],
+    "transferTargets": [
+      "local-first app",
+      "edge replicated state",
+      "collaborative checklist"
+    ],
+    "commonMisreading": "CRDT 不是任何資料都能自動合併；它要求操作與狀態符合可收斂的數學結構。",
+    "readerQuestions": [
+      "這個資料型別的 merge 是否交換、結合且冪等？",
+      "若兩個使用者同時改同一欄位，產品語意是否允許保留多值或需要人工決策？"
+    ],
+    "sectionIntents": {
+      "core": "說明 CRDT 把衝突策略內建到資料型別。",
+      "setup": "用離線檢查清單展示合併語意的必要性。",
+      "lenses": "拆成 state-based、operation-based、metadata 與 invariant 限制。",
+      "psychology": "指出 local-first 容易讓人低估 merge 規則設計。",
+      "applications": "映射到協作文件、edge cache、設定同步與工業現場工具。",
+      "misreadings": "校正自動解決所有衝突、等同 eventual consistency 與無需 schema 的誤讀。",
+      "questions": "要求讀者檢查 merge law 與不可合併 invariant。",
+      "sources": "以 CRDT 定義、研究綜述與 paper catalog 為來源。"
+    }
+  },
+  "page": {
+    "documentTitle": "無衝突複製資料型別 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-crdt",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / replication / local-first / merge semantics</p>\n    <h1>無衝突複製資料型別</h1>\n    <p class=\"topic-subtitle\">Conflict-free Replicated Data Type (CRDT)</p>\n    <p class=\"thesis\">CRDT 讓副本可以各自接受更新，但收斂不是靠運氣，而是靠資料型別本身限定哪些操作能被安全合併。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>適合看離線可用 app、協作文件、edge cache、同步資料結構與想避免每次寫入都找中央 leader 的系統。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>分散式資料型別 / 最終收斂</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Merge concurrent updates deterministically</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>交換律、冪等、單調狀態、收斂語意</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能判斷某個資料型別是否真的能無協調合併，而不是只把衝突藏起來</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>本地</span>\n      <span>合併</span>\n      <span>收斂</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>讓合併規則成為資料型別的一部分</h2>\n      <p class=\"section-lede\">CRDT 的設計目標是讓副本在沒有同步協調的情況下各自更新，之後仍能用確定規則收斂到同一狀態。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>離線寫入提高可用性，卻把衝突推到合併階段；若資料型別沒有明確語意，收斂只會變成任意覆蓋。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先限制操作語意</strong>\n        <p>不是所有業務動作都能無損並發；可合併性要在型別裡設計。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再保留因果資訊</strong>\n        <p>副本需要足夠 metadata 辨認已看過的更新與尚未合併的分岔。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後驗證不變量</strong>\n        <p>有些 invariant 例如餘額不能為負，單靠無協調 merge 未必保得住。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>一份檢查清單在兩台筆電上分岔</h2>\n      <p class=\"section-lede\">A 離線新增「量測 boot current」，B 離線把「驗證 rollback」標成完成；同步時兩個副本都不能被粗暴覆蓋。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小場景</strong>\n        <p>新增項目可用 grow-only set 合併；完成狀態可能需要 observed-remove set 或更細的操作記錄。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>使用者想要的是語意正確，不只是兩邊 bytes 最後一樣。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">副本各自接受操作</div>\n      <div class=\"flow-arrow\">→</div>\n<div class=\"flow-step\">交換狀態或操作</div>\n      <div class=\"flow-arrow\">→</div>\n<div class=\"flow-step\">依資料型別規則收斂</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>CRDT 把「怎麼合」從事後例外處理，搬進資料模型本身。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>看它靠狀態合，還是靠操作合</h2>\n      <p class=\"section-lede\">CRDT 家族有多種設計；選哪種會影響 metadata、網路傳輸、刪除語意與除錯方式。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>State-based</strong>\n        <p>副本交換完整或增量狀態，merge 通常像 join semilattice。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Operation-based</strong>\n        <p>傳播可交換操作，要求可靠廣播與去重語意。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Tombstone cost</strong>\n        <p>刪除常需要留下痕跡，否則舊新增可能在合併時復活。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Invariant boundary</strong>\n        <p>可收斂不等於可保所有商業限制；需要 escrow、協調或補償策略。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr><th>資料型別</th><th>容易合併的部分</th><th>危險邊界</th></tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Counter</td>\n            <td>遞增可按副本分量相加或取最大</td>\n            <td>遞減與下限約束需要額外設計</td>\n          </tr>\n          <tr>\n            <td>Set</td>\n            <td>新增可用 union</td>\n            <td>刪除需處理 add/remove 並發</td>\n          </tr>\n          <tr>\n            <td>Text</td>\n            <td>插入位置要穩定識別</td>\n            <td>metadata 成長與使用者意圖可能分離</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>離線可用會讓合併成本晚一點才出現</h2>\n      <p class=\"section-lede\">Local-first 的手感很好，因為每個人都能立刻動；真正的設計壓力在幾個副本重新見面時才浮出來。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>Demo 偏向順路案例</strong>\n        <p>兩人改不同欄位很漂亮，同一欄位或刪除新增競賽才暴露語意。</p>\n      </article>\n      <article class=\"example\">\n        <strong>把衝突當 UI 問題</strong>\n        <p>合併不是只做提示框；資料型別若錯，UI 只能顯示錯誤結果。</p>\n      </article>\n      <article class=\"example\">\n        <strong>忽略 metadata 生命週期</strong>\n        <p>向量、tombstone、actor id 會跟著資料長大，需要壓縮策略。</p>\n      </article>\n    </div>\n    <p class=\"micro-note\">評估 CRDT 時，請用最尷尬的並發操作測試，而不是只跑新增與同步成功案例。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>無協調不是免費，適合用在能接受收斂語意的地方</h2>\n      <p class=\"section-lede\">CRDT 很適合多端局部自治，但不適合把所有強一致問題都包成 eventually consistent。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>協作筆記</strong>\n        <p>多端插入、刪除與格式變更需要穩定 position id 與明確衝突語意。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Edge 狀態</strong>\n        <p>邊緣節點可先接收 local updates，回雲端時用 CRDT 合併非關鍵狀態。</p>\n      </article>\n      <article class=\"example\">\n        <strong>現場檢查表</strong>\n        <p>離線填寫、補照片、加註記通常比唯一數值覆蓋更適合 CRDT 化。</p>\n      </article>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>先列出不可違反的 invariant；若無協調無法保住，就不要硬包成 CRDT。</li>\n      <li>把 actor identity、clock、tombstone 清理與資料遷移納入設計文件。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>CRDT 不會替產品做價值判斷</h2>\n      <p class=\"section-lede\">它能讓特定操作安全收斂，但不會告訴你兩個人同時改價格時哪個才是商業上正確。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所有衝突都消失</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>衝突只是被資料型別語意吸收；吸收方式若不合產品，結果仍然錯。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>等同 last-write-wins</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>LWW 是一種簡化策略，常會丟掉並發更新，不是 CRDT 的核心精神。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>不用測試合併</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>merge law、重放、亂序、重複傳送與 schema upgrade 都需要測。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>你的 merge 是數學保證，還是希望它剛好沒撞</h2>\n    </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>如果操作重複送達</strong>\n        <p>merge 是否仍保持冪等，還是 counter、列表或狀態會被重複套用？</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果刪除和新增並發</strong>\n        <p>產品希望 add-wins、remove-wins、保留兩份，還是要求人選？</p>\n      </article>\n    </div>\n    <div class=\"template-note\">\n      <strong>延伸路線</strong>\n      <p>接著看 vector clock、causal consistency、operational transformation 與 CALM theorem，能把合併語意放到更大的分散式脈絡。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">CRDT 的定義與分類來自分散式資料型別研究；工程案例聚焦 local-first 與 edge sync 的設計取捨。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>Conflict-free replicated data type 條目整理獨立更新、非同步傳播與最終收斂。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type\" target=\"_blank\" rel=\"noreferrer\">Conflict-free replicated data type</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>研究綜述</strong>\n        <p>Preguiça、Baquero、Shapiro 的 CRDT overview 可補上應用開發、系統開發與資料型別設計角度。</p>\n        <a href=\"https://arxiv.org/abs/1805.06358\" target=\"_blank\" rel=\"noreferrer\">Conflict-free Replicated Data Types</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>Paper catalog</strong>\n        <p>crdt.tech 維護 CRDT 論文與實作資源，適合追蹤 state-based、operation-based 與 text CRDT。</p>\n        <a href=\"https://crdt.tech/papers.html\" target=\"_blank\" rel=\"noreferrer\">CRDT Papers</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>把一個想離線同步的欄位拆成操作集合，逐一標出哪些操作可交換、哪些操作需要協調。</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  }
+}

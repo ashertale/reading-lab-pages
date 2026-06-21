@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>漏桶演算法 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-leaky-bucket">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / rate limits / queues / traffic</p>
+        <h1>漏桶演算法</h1>
+        <p class="topic-subtitle">Leaky Bucket</p>
+        <p class="thesis">漏桶把突發輸入轉成受控輸出；它不是讓流量消失，而是決定何時排隊、何時丟棄、何時平滑。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>適合設計 API rate limit、log upload、sensor event drain、interrupt storm 保護與任何需要削峰的流程。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>流量整形 / 速率限制</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Smooth bursts into a controlled rate</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>漏出速率、桶容量、排隊延遲、丟棄策略</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能用漏桶思考 burst、平均速率與延遲之間的交換</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>突發</span>
+          <span>桶量</span>
+          <span>平滑</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>平均能處理，不代表尖峰能吞下</h2>
+          <p class="section-lede">漏桶用固定或受控速率排出工作，將短時間湧入的 burst 存進有限容量的桶裡。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>如果桶夠大，burst 可以被延後處理；如果桶滿了，系統必須明確選擇丟棄、降級或把壓力推回上游。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先設 leak rate</strong>
+            <p>漏出速率應對齊 downstream 真正可持續處理能力。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再設 bucket size</strong>
+            <p>容量越大越能吸收 burst，但也會增加 worst-case latency。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後定 overflow</strong>
+            <p>滿桶時的行為比正常路徑更重要，因為事故通常從那裡開始。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>事件突然湧入，處理緒平均夠快仍然爆 queue</h2>
+          <p class="section-lede">一個 sensor hub 平常每秒幾十筆 event，干擾時瞬間跳到數千筆；平均處理能力看起來足夠，queue 卻先被尖峰塞滿。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>上游 burst 在 200 ms 內灌入，consumer 每秒只能穩定處理固定數量。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>若不限制進桶或出桶速率，短暫尖峰會變成記憶體壓力、延遲尾巴與 watchdog 風險。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">突發輸入進桶</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">以固定節奏漏出</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">滿桶時觸發丟棄或 backpressure</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>漏桶的價值在於把不可預測尖峰轉成可規劃的速率與明確的 overflow 決策。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>桶容量和漏速會共同塑造延遲</h2>
+          <p class="section-lede">漏桶不是一個單純 limiter；它同時是 queue、meter 與 policy boundary。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>Leak rate</strong>
+            <p>控制下游每單位時間看到多少工作，保護 CPU、網路或 API。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Bucket depth</strong>
+            <p>吸收 burst 的緩衝量，直接影響最大排隊延遲。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Drop policy</strong>
+            <p>tail drop、priority drop 或 sampling 會保留不同類型的工作。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Token bucket 對照</strong>
+            <p>Token bucket 常允許累積 token 後短暫 burst；leaky bucket queue 更強調平滑輸出。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>設計選擇</th><th>好處</th><th>代價</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>大桶</td>
+                <td>吸收較大 burst</td>
+                <td>延遲尾巴變長</td>
+              </tr>
+              <tr>
+                <td>小桶</td>
+                <td>快速暴露過載</td>
+                <td>容易丟掉短暫尖峰</td>
+              </tr>
+              <tr>
+                <td>低 leak rate</td>
+                <td>保護 downstream</td>
+                <td>使用者等待或資料堆積</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>平均值讓尖峰看起來不存在</h2>
+          <p class="section-lede">很多容量規劃只看平均 QPS 或平均 event rate，卻忽略所有壞事都集中在短時間內。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>平均吞吐幻覺</strong>
+            <p>一分鐘 600 筆不等於每秒穩定 10 筆；它可能是第一秒 600 筆。</p>
+          </article>
+          <article class="example">
+            <strong>Buffer 安慰感</strong>
+            <p>加大 queue 會讓丟包變少，但也可能把延遲推到使用者無法接受。</p>
+          </article>
+          <article class="example">
+            <strong>丟棄羞恥</strong>
+            <p>工程師常不想承認需要 drop policy，結果讓系統在滿載時隨機壞。</p>
+          </article>
+        </div>
+        <p class="micro-note">漏桶設計應該把 overflow 當正常規格，而不是等事故時才補 if statement。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>從 API 到 interrupt storm 都能削峰</h2>
+          <p class="section-lede">只要上游可能比下游快，漏桶就能把 burst 變成可觀察、可控制的壓力。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>API rate limit</strong>
+            <p>限制客戶端請求進入服務的速率，必要時回傳 429 或排隊。</p>
+          </article>
+          <article class="example">
+            <strong>Log upload</strong>
+            <p>設備重連後不要一次上傳所有 log，可用漏桶平滑對 server 的壓力。</p>
+          </article>
+          <article class="example">
+            <strong>Firmware event queue</strong>
+            <p>對非關鍵事件做 sampling 或 drop，保留 critical fault path 的資源。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>把 bucket occupancy 當作健康訊號；長期高水位代表 leak rate 或上游行為不匹配。</li>
+          <li>重要事件和低價值 telemetry 不要共用同一個桶，否則低價值 burst 會吃掉關鍵容量。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>桶不是無限水庫</h2>
+          <p class="section-lede">漏桶能塑造流量，但不能創造處理能力；滿桶時的選擇會暴露真實優先順序。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>有 bucket 就不會掉資料</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>容量有限；超過時必須 drop、delay 或 backpressure。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>漏速越低越安全</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>過低會累積延遲，甚至讓使用者看到過期資料。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>和 token bucket 沒差</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>兩者常可對照，但 burst allowance 與輸出平滑語意不同。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>滿桶時誰要被犧牲</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果 queue 已滿</strong>
+            <p>哪些事件可以丟、哪些必須保留、哪些要通知上游慢下來？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果延遲變長</strong>
+            <p>資料晚到是否仍有價值，還是應該改成取最新值而不是排完整歷史？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>可與 token bucket、backpressure、tail latency 和 circuit breaker 對照，補完整流量治理語彙。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">來源卡用 leaky bucket 與 traffic shaping 定義建立模型，嵌入式事件情境是工程映射。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Leaky bucket 條目整理 meter 與 queue 兩種用法，以及平均速率與 burst 的關係。</p>
+            <a href="https://en.wikipedia.org/wiki/Leaky_bucket" target="_blank" rel="noreferrer">Leaky bucket</a>
+          </article>
+          <article class="source-card">
+            <strong>網路背景</strong>
+            <p>Traffic shaping 條目補上延遲、policing 與 bandwidth profile 的系統脈絡。</p>
+            <a href="https://en.wikipedia.org/wiki/Traffic_shaping" target="_blank" rel="noreferrer">Traffic shaping</a>
+          </article>
+          <article class="source-card">
+            <strong>對照模型</strong>
+            <p>Token bucket 條目可對照 burst allowance 與 rate limiting 的另一種語意。</p>
+            <a href="https://en.wikipedia.org/wiki/Token_bucket" target="_blank" rel="noreferrer">Token bucket</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>可與 token bucket、backpressure、tail latency 和 circuit breaker 對照，補完整流量治理語彙。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

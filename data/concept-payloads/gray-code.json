@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "gray-code",
+    "outputPath": "topics/gray-code.html"
+  },
+  "indexEntry": {
+    "id": "gray-code",
+    "title": "格雷碼",
+    "subtitle": "Gray Code",
+    "href": "./topics/gray-code.html",
+    "order": 308,
+    "type": "編碼設計 / 單位距離碼",
+    "domain": "位置編碼器、ADC、通訊調變與數位邊界",
+    "focus": "Adjacent values differ by one bit",
+    "thesis": "格雷碼讓相鄰數值只改變一個 bit，降低多位元同時翻轉被取樣成錯誤中間值的風險。",
+    "tags": [
+      "Gray-code",
+      "encoding",
+      "rotary-encoder",
+      "ADC",
+      "digital-design",
+      "Hamming-distance"
+    ]
+  },
+  "contentBrief": {
+    "pressurePoint": "自然二進位相鄰數字可能同時翻多個 bit；若接收端在轉換中途取樣，就會讀到不存在的位置。",
+    "smallestScenario": "旋轉編碼器從 7 到 8 時，二進位 0111 到 1000 四個 bit 都變，機械接點不會同時完成。",
+    "sourcePlan": [
+      "Gray code 條目支撐相鄰值一個 bit 差異與 reflected binary code 背景。",
+      "Frank Gray 條目補上命名與 Bell Labs 研究背景。",
+      "Hamming distance 條目作為單位距離與位元差異的相鄰度量對照。"
+    ],
+    "transferTargets": [
+      "rotary encoder",
+      "asynchronous FIFO pointer",
+      "QAM symbol mapping"
+    ],
+    "commonMisreading": "格雷碼不是壓縮或加密；它是在相鄰轉換時降低錯讀位元數。",
+    "readerQuestions": [
+      "接收端是否可能在多個 bit 尚未穩定時取樣？",
+      "錯到相鄰值可接受，還是任何單步錯位都會造成安全問題？"
+    ],
+    "sectionIntents": {
+      "core": "說明 Gray code 用一位差異降低轉換中間態風險。",
+      "setup": "用二進位 7 到 8 的多位翻轉展示錯讀。",
+      "lenses": "拆成 Hamming distance、cyclic property、encoder 與 CDC pointer。",
+      "psychology": "指出人容易把數值順序和硬體轉換同步性混為一談。",
+      "applications": "映射到旋轉編碼器、asynchronous FIFO、ADC 與 modulation。",
+      "misreadings": "校正加密、錯誤校正全能與轉回 binary 無成本的誤讀。",
+      "questions": "要求讀者檢查相鄰轉換與取樣窗口。",
+      "sources": "以 Gray code、Frank Gray 與 Hamming distance 為來源。"
+    }
+  },
+  "page": {
+    "documentTitle": "格雷碼 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-gray-code",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / encoding / hardware boundary / error reduction</p>\n    <h1>格雷碼</h1>\n    <p class=\"topic-subtitle\">Gray Code</p>\n    <p class=\"thesis\">格雷碼讓相鄰數值只改變一個 bit，降低多位元同時翻轉被取樣成錯誤中間值的風險。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>適合看旋轉編碼器、位置感測、ADC 輸出、跨時鐘 domain 計數器與 QAM constellation mapping。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>編碼設計 / 單位距離碼</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Adjacent values differ by one bit</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>單 bit 轉換、Hamming distance、取樣瞬間、相鄰誤差</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能分辨二進位計數在硬體邊界的多 bit 翻轉風險，並知道何時用 Gray code</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>相鄰</span>\n      <span>一位</span>\n      <span>安全</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>相鄰位置只讓一個 bit 動</h2>\n      <p class=\"section-lede\">Gray code 的典型形式是 binary reflected Gray code；相鄰碼字的 Hamming distance 為一。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>數學上 7 接 8 很自然，但硬體接點、光學讀頭或跨 clock sampling 不會保證多個 bit 同時翻轉。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先看相鄰差異</strong>\n        <p>如果相鄰狀態會同時改多個 bit，取樣窗口就會變危險。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再看錯誤後果</strong>\n        <p>Gray code 把中途錯讀限制在相鄰碼字附近，而不是跳到遠處。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後轉回內部格式</strong>\n        <p>系統常在邊界用 Gray code，內部運算再轉回 binary。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>0111 到 1000 不會在物理世界同時完成</h2>\n      <p class=\"section-lede\">自然二進位從 7 到 8 要四個 bit 同時翻轉；若其中兩個接點先動，讀值可能短暫變成完全錯的位置。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小場景</strong>\n        <p>旋轉編碼盤跨過邊界時，讀頭看到 0111、0101、0000、1000 之類的中間組合。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>錯誤不是來自解碼器算錯，而是來自物理轉換需要時間。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">相鄰位置改變</div>\n      <div class=\"flow-arrow\">→</div>\n<div class=\"flow-step\">只有一個 bit 翻轉</div>\n      <div class=\"flow-arrow\">→</div>\n<div class=\"flow-step\">取樣錯誤被限制在鄰近值</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>格雷碼用編碼順序吸收硬體不同步，而不是要求硬體完美同步。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>一位差異如何改變邊界風險</h2>\n      <p class=\"section-lede\">Gray code 的價值通常出現在數位邏輯與類比、機械或非同步邊界交會處。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>Hamming distance</strong>\n        <p>相鄰碼字距離一，代表一次轉換只需一位翻轉。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Cyclic adjacency</strong>\n        <p>某些 Gray code 首尾也只差一位，適合環狀位置。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Conversion cost</strong>\n        <p>內部要比較大小或加減時，通常要轉成 binary。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>Sampling window</strong>\n        <p>若接收端可能在轉換中取樣，Gray code 能降低不合法中間態。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr><th>場景</th><th>二進位風險</th><th>Gray code 幫助</th></tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Rotary encoder</td>\n            <td>多接點不同步造成大跳值</td>\n            <td>相鄰位置最多一位不同</td>\n          </tr>\n          <tr>\n            <td>Async FIFO pointer</td>\n            <td>跨 clock domain 同時取樣多 bit</td>\n            <td>同步指標時降低錯誤組合</td>\n          </tr>\n          <tr>\n            <td>QAM mapping</td>\n            <td>鄰近星座點誤判造成多 bit error</td>\n            <td>鄰近 symbol 通常只差一 bit</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>人腦喜歡十進位順序，硬體在乎轉換路徑</h2>\n      <p class=\"section-lede\">工程師若只看數值表，會覺得 binary 最直接；但硬體真正經歷的是一段從舊碼到新碼的過程。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>忽略過渡瞬間</strong>\n        <p>規格表只列穩態碼字，卻沒描述接點切換的順序差。</p>\n      </article>\n      <article class=\"example\">\n        <strong>把解碼錯當雜訊</strong>\n        <p>大跳值可能不是訊號太吵，而是編碼在邊界不適合。</p>\n      </article>\n      <article class=\"example\">\n        <strong>同步器信心過高</strong>\n        <p>多 bit bus 跨時鐘時，單顆 synchronizer 不能保證整個數字一致。</p>\n      </article>\n    </div>\n    <p class=\"micro-note\">遇到跨域或位置取樣問題時，先問相鄰狀態有幾個 bit 會同時改變。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>在邊界用 Gray，在內部再做運算</h2>\n      <p class=\"section-lede\">Gray code 常是介面編碼，而不是整個系統的算術格式。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>位置編碼器</strong>\n        <p>絕對式旋轉編碼盤可降低接點邊界的非同步讀值跳動。</p>\n      </article>\n      <article class=\"example\">\n        <strong>Asynchronous FIFO</strong>\n        <p>write/read pointer 以 Gray code 跨 clock domain，降低多 bit sampling mismatch。</p>\n      </article>\n      <article class=\"example\">\n        <strong>通訊調變</strong>\n        <p>星座圖相鄰點使用 Gray mapping，可讓鄰近誤判造成較少 bit error。</p>\n      </article>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>若使用 Gray counter，文件要標出邊界格式與內部 binary 格式的轉換點。</li>\n      <li>Gray code 降低相鄰轉換錯讀，不取代 debouncing、filtering 或 synchronizer chain。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>格雷碼不是更神秘的二進位</h2>\n      <p class=\"section-lede\">它解的是相鄰轉換錯讀，不是資料壓縮、加密或一般錯誤修正。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>可以防所有讀值錯誤</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>若訊號品質太差或跳過多個位置，Gray code 也無法保證正確。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>內部運算也更方便</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>Gray code 對相鄰轉換友善，但算術運算通常不如 binary 直接。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>用了就不用同步</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>跨 clock domain 仍需要 synchronizer；Gray 只是降低多 bit 同時變的危害。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>取樣那一刻，會有幾個 bit 正在變</h2>\n    </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>如果接收端讀到轉換中間態</strong>\n        <p>錯誤會落在相鄰值，還是可能跳到很遠的數字？</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果指標跨 clock domain</strong>\n        <p>是否只有一個 bit 可能變化，且每個 bit 都經過足夠同步級？</p>\n      </article>\n    </div>\n    <div class=\"template-note\">\n      <strong>延伸路線</strong>\n      <p>再讀 Hamming distance、metastability、CDC synchronizer 與 rotary encoder debounce，能把邊界錯讀問題看完整。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">來源以 Gray code 的單位距離特性為主；CDC 與位置編碼器段落是硬體介面應用整理。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>Gray code 條目整理 reflected binary code、相鄰值一位差異與常見應用。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Gray_code\" target=\"_blank\" rel=\"noreferrer\">Gray code</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>命名背景</strong>\n        <p>Frank Gray 條目補上 Bell Labs 與 reflected binary code 的歷史脈絡。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Frank_Gray_(researcher)\" target=\"_blank\" rel=\"noreferrer\">Frank Gray</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>距離語彙</strong>\n        <p>Hamming distance 可用來描述兩個碼字之間有多少 bit 不同。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Hamming_distance\" target=\"_blank\" rel=\"noreferrer\">Hamming distance</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>檢查任何跨域傳遞的多 bit counter：若它用 binary，請畫出相鄰值翻轉時最壞的中間碼字。</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  }
+}

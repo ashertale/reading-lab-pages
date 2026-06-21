@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>磨耗平均 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-wear-leveling">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / flash / endurance / storage reliability</p>
+        <h1>磨耗平均</h1>
+        <p class="topic-subtitle">Wear Leveling</p>
+        <p class="thesis">Flash 位址看起來固定，底下的實體區塊卻有擦寫壽命；磨耗平均把寫入分散開，避免最常改的邏輯資料先把某幾格用死。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>適合看 boot counter、config storage、log ring、SSD/SD 卡壽命、EEPROM emulation 與現場設備長期資料保存。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>儲存可靠性 / Flash 壽命管理</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Spread erase cycles across physical blocks</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>erase cycle、logical-to-physical map、static data、garbage collection</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能估算高頻寫入會打在哪些實體區塊，並設計分散寫入與恢復策略</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>擦寫</span>
+          <span>映射</span>
+          <span>壽命</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>同一筆設定不該永遠磨同一格 flash</h2>
+          <p class="section-lede">Wear leveling 透過映射、搬移與輪替，讓邏輯上的熱資料不要集中消耗少數實體 block。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>應用程式想要簡單地更新同一個檔案或變數；儲存介質需要把擦寫成本分散到更大的實體空間。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先估寫入熱點</strong>
+            <p>counter、log header、allocation table 和設定頁常比資料本體更熱。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再抽象實體位置</strong>
+            <p>logical address 不應永久綁定同一個 physical erase block。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後保掉電恢復</strong>
+            <p>mapping、valid bit、CRC 與 commit marker 必須能在斷電後重建。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>Boot counter 每天寫，十年後先壞的是那一頁</h2>
+          <p class="section-lede">一個看似無害的 uint32 counter，如果每次開機都覆寫同一 EEPROM page，壽命會由最熱的那幾個 cell 決定。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>產品每天重啟 50 次，boot_count、last_error 與 config checksum 都寫在同一頁。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>平均寫入量看似很低，但 erase granularity、metadata 寫入與掉電重試會放大局部磨耗。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">邏輯位址反覆更新</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">FTL 或韌體搬到新實體區</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">舊區塊擦除回收</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>Flash 壽命不是看資料有多大，而是看哪些 erase block 被反覆消耗。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>分散磨耗時要看熱資料和冷資料</h2>
+          <p class="section-lede">只搬動一直更新的資料是 dynamic wear leveling；若冷資料永遠占著新 block，壽命仍可能不平均。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>Dynamic leveling</strong>
+            <p>熱資料每次更新改寫到不同 block，避免同一位置被快速用完。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Static leveling</strong>
+            <p>偶爾搬動長期不變的冷資料，讓低磨耗 block 也加入輪替。</p>
+          </article>
+          <article class="lens-card">
+            <strong>FTL mapping</strong>
+            <p>Flash translation layer 把 logical block 對應到 physical block，並維護有效/無效資料。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Garbage collection</strong>
+            <p>回收含少量有效資料的 block 時，搬移成本與寫放大會出現。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>設計選項</th><th>得到什麼</th><th>代價</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>簡單 ring buffer</td>
+                <td>容易實作、適合小型 EEPROM emulation</td>
+                <td>容量利用率與搜尋恢復成本上升</td>
+              </tr>
+              <tr>
+                <td>FTL mapping</td>
+                <td>邏輯介面穩定、分散寫入</td>
+                <td>mapping table 與掉電一致性複雜</td>
+              </tr>
+              <tr>
+                <td>Static leveling</td>
+                <td>讓冷資料所在 block 也被輪替</td>
+                <td>背景搬移造成額外寫放大</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>小小一筆設定最容易被當成沒成本</h2>
+          <p class="section-lede">工程師會警覺大量 log，卻常忽略 counter、flag、last state 這種每次事件都寫的小資料。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>容量錯覺</strong>
+            <p>資料只有 16 bytes，不代表它對 erase block 的消耗也只有 16 bytes。</p>
+          </article>
+          <article class="example">
+            <strong>測試時間太短</strong>
+            <p>開發板跑一週沒壞，無法代表 field 十年的擦寫分布。</p>
+          </article>
+          <article class="example">
+            <strong>把 SD 卡當硬碟</strong>
+            <p>消費級卡的內部 wear leveling 與掉電保護常不可見，不能替工業需求背書。</p>
+          </article>
+        </div>
+        <p class="micro-note">可靠性 review 要把寫入頻率換算成 erase cycles，並把 metadata 寫放大一起算進去。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>從 EEPROM emulation 到產品事件紀錄都會碰到</h2>
+          <p class="section-lede">只要資料需要長期保存且會反覆更新，就該設計磨耗與斷電恢復，而不是等 field 壞頁出現。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>EEPROM emulation</strong>
+            <p>用多個 flash page 輪替保存 key-value，靠 sequence number 與 CRC 找最新有效版本。</p>
+          </article>
+          <article class="example">
+            <strong>Event log</strong>
+            <p>以 circular log 寫入事件，保留 erase block 對齊與壞塊處理策略。</p>
+          </article>
+          <article class="example">
+            <strong>Config storage</strong>
+            <p>低頻但關鍵的設定更新要有雙分區、commit marker 與回滾版本。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>把最大寫入頻率、最小保固年限、erase cycle spec 與可用 block 數放進同一個計算表。</li>
+          <li>斷電測試要在 erase、program、mapping update、commit marker 寫入各階段觸發。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>平均磨耗不是壽命無限</h2>
+          <p class="section-lede">它只能改善分布；資料保持、壞塊、寫放大與掉電恢復仍會限制可靠性。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>控制器會全部搞定</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>裸 NOR/NAND、MCU flash、EEPROM 和 SD 卡的保護層級差異很大。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>Ring buffer 就完整</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>ring buffer 分散寫入，但仍要處理有效版本搜尋、GC 與斷電中間態。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只看平均寫入量</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>最熱 metadata 或 allocation table 可能比 payload 早到壽命上限。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>哪個 erase block 會最先老</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果事件暴增十倍</strong>
+            <p>寫放大後的 erase cycle 是否仍低於介質規格與產品壽命要求？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果 program 中途斷電</strong>
+            <p>開機時如何分辨最新有效資料、半寫入資料與需要回收的舊資料？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>可往 flash translation layer、log-structured file system、copy-on-write 與 checksum design 延伸。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">來源採儲存介質與 flash controller 的基本資料；嵌入式 counter 與斷電恢復是韌體可靠性應用整理。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Wear leveling 條目整理動態、靜態與全域磨耗平均。</p>
+            <a href="https://en.wikipedia.org/wiki/Wear_leveling" target="_blank" rel="noreferrer">Wear leveling</a>
+          </article>
+          <article class="source-card">
+            <strong>控制器背景</strong>
+            <p>Flash memory controller 條目補上 FTL mapping 與 block picking 的角色。</p>
+            <a href="https://en.wikipedia.org/wiki/Flash_memory_controller" target="_blank" rel="noreferrer">Flash memory controller</a>
+          </article>
+          <article class="source-card">
+            <strong>儲存介質</strong>
+            <p>Flash memory 條目補上 erase-before-write、有限 program/erase cycle 與儲存介質限制。</p>
+            <a href="https://en.wikipedia.org/wiki/Flash_memory" target="_blank" rel="noreferrer">Flash memory</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>把產品中所有持久化寫入列成表，對每列填入觸發頻率、erase granularity、輪替範圍與斷電恢復方式。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

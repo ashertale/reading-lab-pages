@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lamport 邏輯時鐘 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-lamport-clocks">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / distributed time / causality / ordering</p>
+        <h1>Lamport 邏輯時鐘</h1>
+        <p class="topic-subtitle">Lamport Clocks</p>
+        <p class="thesis">在沒有共享時鐘的系統裡，事件順序不該先問幾點發生，而要先問誰可能影響了誰。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁適合用在 distributed logging、message ordering、cluster debugging 與多 MCU 協調：它會讓你先追 happened-before，而不是被 wall-clock drift 帶走。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>分散式概念 / 邏輯時間</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Happened-before without a global clock</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>happened-before、訊息傳遞、邏輯時間、並發事件</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能用因果順序分析分散式 log、同步協定與跨節點狀態變化</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>事件</span>
+          <span>因果</span>
+          <span>順序</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>沒有全局現在，也能談先後</h2>
+          <p class="section-lede">Lamport 邏輯時鐘用遞增計數與訊息傳遞規則，捕捉事件之間的 happened-before 關係。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>邏輯時鐘能保證因果先後被排序，但反過來不成立：時間戳較小不一定代表物理上較早，也不能分辨所有並發細節。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先定義 happened-before</strong>
+            <p>同一 process 內的順序與訊息送收關係，構成分散式事件的因果骨架。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再傳遞邏輯時間</strong>
+            <p>發送訊息時帶上 clock，接收方把本地 clock 推到更大，讓因果關係反映在數字上。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後承認並發</strong>
+            <p>沒有因果路徑的事件可能只是並發；不要硬把牆上時間當成真正順序。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>兩個 log 說自己先發生</h2>
+          <p class="section-lede">想像 gateway 和 device 都有本地 clock，兩邊 log 顯示彼此都比對方早送出狀態更新。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>NTP 漂移、RTC 校準與低功耗喚醒造成 timestamp 不一致；若只用 wall-clock 排序，debug 會把結果讀成不可能的倒因為果。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>真正需要的是知道哪個事件可能影響另一個事件，而不是誰的本地時間數字比較小。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">本地時鐘不一致</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">訊息帶出因果線索</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">邏輯時間維持可分析順序</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>Lamport clocks 讓你在不信任全局時間時，仍能保留足夠的因果排序。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>三種時間不要混在一起</h2>
+          <p class="section-lede">分散式除錯常失敗在把物理時間、邏輯時間與因果關係混成一種順序。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>物理時間</strong>
+            <p>牆上時鐘用來觀察延遲與使用者時間，但會受 drift、sync interval 與 suspend 影響。</p>
+          </article>
+          <article class="lens-card">
+            <strong>邏輯時間</strong>
+            <p>Lamport clock 只保證如果 A happened-before B，clock(A) 會小於 clock(B)。</p>
+          </article>
+          <article class="lens-card">
+            <strong>並發事件</strong>
+            <p>沒有訊息或因果路徑的事件不能靠 Lamport clock 判定真實先後。</p>
+          </article>
+          <article class="lens-card">
+            <strong>更強表示</strong>
+            <p>若要辨識並發與因果細節，可以看 vector clock 等更豐富的表示。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>需求</th>
+                <th>Lamport clock 適合嗎</th>
+                <th>理由</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>保持因果順序</td>
+                <td>適合</td>
+                <td>訊息送收會推進接收方 clock。</td>
+              </tr>
+              <tr>
+                <td>量測真實延遲</td>
+                <td>不適合單獨使用</td>
+                <td>邏輯數字不是秒數。</td>
+              </tr>
+              <tr>
+                <td>分辨兩事件是否並發</td>
+                <td>不足</td>
+                <td>需要 vector clock 或額外資訊。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>人太相信 timestamp</h2>
+          <p class="section-lede">Timestamp 看起來客觀，卻常只是某台機器對時間的局部看法；分散式系統裡尤其危險。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>數字排序很方便</strong>
+            <p>把 log 依 timestamp 排列很自然，但 clock drift 會把故事排錯。</p>
+          </article>
+          <article class="example">
+            <strong>物理直覺太強</strong>
+            <p>人習慣世界有共同現在；系統節點卻可能只共享訊息，不共享精準時間。</p>
+          </article>
+          <article class="example">
+            <strong>因果線索被忽略</strong>
+            <p>request id、sequence、ack 與 message payload 往往比 wall-clock 更能說明事件關係。</p>
+          </article>
+        </div>
+        <p class="micro-note">Lamport clocks 的心智轉換是：先找訊息路徑，再談事件故事。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>用在跨節點 log 與協定排序</h2>
+          <p class="section-lede">Firmware 與邊緣系統越來越常跨 MCU、gateway、cloud 與測試基礎設施；邏輯時間能讓除錯資料更可讀。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>Distributed logging</strong>
+            <p>在跨節點訊息裡帶 sequence 或 logical clock，可以重建 happened-before，而不是只靠本地 timestamp。</p>
+          </article>
+          <article class="example">
+            <strong>狀態同步</strong>
+            <p>多控制器交換狀態時，邏輯時間可避免舊訊息覆蓋新狀態的部分情境。</p>
+          </article>
+          <article class="example">
+            <strong>測試框架</strong>
+            <p>runner、fixture 與 DUT 之間的事件若有邏輯序號，failure triage 會少很多時間排序爭議。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>跨節點訊息至少帶 request id、sequence 與本地事件序號，讓因果關係能被重建。</li>
+          <li>不要用 Lamport clock 量延遲；它能排序因果，不是替代精準時鐘。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>邏輯時鐘不是比較準的時鐘</h2>
+          <p class="section-lede">Lamport clocks 的價值是因果排序，不是校準物理時間。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>clock 數字大代表真實較晚</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不一定。它代表邏輯上吸收了更多事件或訊息關係。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>可以判斷所有事件先後</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不能。並發事件沒有因果路徑時，Lamport clock 只能給出某種總排序輔助。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>不需要 wall-clock</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>仍需要。物理時間對 timeout、latency 與使用者時間很重要，只是它不該獨自承擔因果分析。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>從 timestamp 退一步看因果</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果兩份 log 順序衝突</strong>
+            <p>哪些訊息、ack、sequence 或 request id 能證明一個事件 happened-before 另一個？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果要設計新協定</strong>
+            <p>你需要的是物理時間、因果順序、並發偵測，還是三者都要？各自用什麼欄位承擔？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>可接著讀 vector clock、FLP impossibility 與 eventual consistency，補上分散式時間與一致性的其他面向。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這頁以 Lamport 1978 年論文的 happened-before 與 logical clock 為主軸，工程段落轉用到 log 與協定設計。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>原始論文</strong>
+            <p>Time, Clocks, and the Ordering of Events in a Distributed System 是 Lamport clocks 的經典來源。</p>
+            <a href="https://lamport.azurewebsites.net/pubs/time-clocks.pdf" target="_blank" rel="noreferrer">Time, Clocks, and Ordering</a>
+          </article>
+          <article class="source-card">
+            <strong>概念整理</strong>
+            <p>Lamport timestamp 條目整理演算法規則與它能保證的因果排序。</p>
+            <a href="https://en.wikipedia.org/wiki/Lamport_timestamp" target="_blank" rel="noreferrer">Lamport timestamp</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰表示</strong>
+            <p>Vector clock 條目可用來對照 Lamport clock 無法完整辨識並發的限制。</p>
+            <a href="https://en.wikipedia.org/wiki/Vector_clock" target="_blank" rel="noreferrer">Vector clock</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>可接著讀 vector clock、FLP impossibility 與 eventual consistency，補上分散式時間與一致性的其他面向。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

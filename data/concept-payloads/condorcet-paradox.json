@@ -1,0 +1,60 @@
+{
+  "target": {
+    "slug": "condorcet-paradox",
+    "outputPath": "topics/condorcet-paradox.html"
+  },
+  "indexEntry": {
+    "id": "condorcet-paradox",
+    "title": "孔多塞悖論",
+    "subtitle": "Condorcet Paradox",
+    "href": "./topics/condorcet-paradox.html",
+    "order": 253,
+    "type": "集體決策 / 多數悖論",
+    "domain": "投票、排序與議程設定",
+    "focus": "Majority cycles without a stable winner",
+    "thesis": "把每一對選項都交給多數決，並不保證整體會得到一致排序；群體可以同時偏好 A 勝 B、B 勝 C，卻又讓 C 勝 A。",
+    "tags": [
+      "condorcet",
+      "voting",
+      "majority-rule",
+      "social-choice",
+      "agenda",
+      "ranking"
+    ]
+  },
+  "page": {
+    "documentTitle": "孔多塞悖論 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-condorcet-paradox",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / voting / aggregation / social choice</p>\n    <h1>孔多塞悖論</h1>\n    <p class=\"topic-subtitle\">Condorcet Paradox</p>\n    <p class=\"thesis\">把每一對選項都交給多數決，並不保證整體會得到一致排序；群體可以同時偏好 A 勝 B、B 勝 C，卻又讓 C 勝 A。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>這頁不是要你放棄多數決，而是讓你看到：當群體偏好被壓成簡單票數時，順序、 framing 和選項組合會比直覺裡更有力量。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>集體決策 / 多數悖論</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Majority cycles without a stable winner</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>成對多數、議程順序、偏好結構、資訊損失</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能辨認『多數想要什麼』何時其實還沒被說清楚</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>多數</span>\n      <span>循環</span>\n      <span>議程</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n\n<section class=\"chapter\" id=\"core\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Orientation</p>\n  <h2>每一場對決都能有贏家，整體卻不一定有穩定冠軍</h2>\n  <p class=\"section-lede\">孔多塞悖論最難接受的地方，是它打破了一個很深的直覺：如果每個人都能好好排序，群體排序應該也會跟著好好排。</p>\n</div>\n<div class=\"core-card\">\n  <p class=\"section-label\">Core Tension</p>\n  <p>多數決在局部比較裡看起來很乾脆，但一旦把多個選項放成整體排序，局部勝利可以彼此打架，讓『群體真正偏好什麼』變得不再唯一。</p>\n</div>\n<div class=\"principle-strip\" aria-label=\"本頁讀法\">\n  <div>\n    <span>01</span>\n    <strong>先看成對比較</strong>\n    <p>A 對 B、B 對 C、C 對 A 的每一次投票都可能有清楚多數，但這些局部結果未必能拼成一條不矛盾的總排序。</p>\n  </div>\n  <div>\n    <span>02</span>\n    <strong>再看議程如何介入</strong>\n    <p>若群體偏好形成循環，最後通過的選項常受投票順序影響，而不只是受『多數本身』影響。</p>\n  </div>\n  <div>\n    <span>03</span>\n    <strong>最後承認聚合會丟資訊</strong>\n    <p>只保留排名或單輪勝負時，偏好強度、妥協空間與次佳結構都可能被一起壓扁。</p>\n  </div>\n</div>\n</section>\n\n<section class=\"chapter\" id=\"setup\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Setup</p>\n  <h2>把它縮成一次架構評選</h2>\n  <p class=\"section-lede\">三個理性小組、三個理性目標，就足以把循環偏好做出來。</p>\n</div>\n<div class=\"definition-grid\">\n  <div class=\"tile\">\n    <strong>最小場景</strong>\n    <p>一個產品評審會要在『電池續航優先』『低延遲優先』『安全強化優先』三個方案中排序。韌體組偏好安全勝電池、電池勝延遲；產品組偏好電池勝延遲、延遲勝安全；現場支援組偏好延遲勝安全、安全勝電池。</p>\n  </div>\n  <div class=\"tile\">\n    <strong>真正難點</strong>\n    <p>每一組自己的排序都很一致，但把三組票湊起來後，群體偏好會形成 A 勝 B、B 勝 C、C 勝 A 的圈。</p>\n  </div>\n</div>\n<div class=\"concept-flow\" aria-label=\"問題展開\">\n  <div class=\"flow-step\">個體偏好各自一致</div>\n  <div class=\"flow-arrow\">→</div>\n  <div class=\"flow-step\">成對多數比較產生清楚勝負</div>\n  <div class=\"flow-arrow\">→</div>\n  <div class=\"flow-step\">整體卻沒有一個能穩定壓過所有人的選項</div>\n</div>\n<div class=\"paradox-frame\">\n  <strong>Key Point</strong>\n  <p>孔多塞悖論不是在說選民不理性，而是在說理性的個體偏好不會自動保證理性的群體排序。</p>\n</div>\n</section>\n\n<section class=\"chapter\" id=\"lenses\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Lenses</p>\n  <h2>四條分析線，讀懂『多數』到底哪裡開始鬆動</h2>\n  <p class=\"section-lede\">你越早知道自己在處理的是排序問題、議程問題，還是強度資訊被吃掉的問題，就越不會把流程錯誤怪到人身上。</p>\n</div>\n<div class=\"lens-grid\">\n  <article class=\"lens-card\">\n    <strong>成對多數的侷限</strong>\n    <p>成對勝利只保證局部比較成立，不保證這些比較能無縫拼成一個全局次序。</p>\n  </article>\n  <article class=\"lens-card\">\n    <strong>議程設定權</strong>\n    <p>當偏好形成循環時，安排先比哪一對、後比哪一對的人，對結果往往有實質影響力。</p>\n  </article>\n  <article class=\"lens-card\">\n    <strong>偏好強度流失</strong>\n    <p>投票只留下順序時，某些『弱偏好』和『強偏好』在制度裡可能被當成同樣重量。</p>\n  </article>\n  <article class=\"lens-card\">\n    <strong>偏好結構限制</strong>\n    <p>若選項或群體偏好具有單峰等特殊結構，循環可能被避免；若沒有，制度就得學會處理它。</p>\n  </article>\n</div>\n<div class=\"table-wrap\">\n  <table>\n    <thead>\n      <tr>\n        <th>決策方式</th>\n        <th>你得到的清楚感</th>\n        <th>可能漏掉的東西</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td>單次成對表決</td>\n        <td>每一步都有贏家</td>\n        <td>整體排序可能繞成圈</td>\n      </tr>\n      <tr>\n        <td>先定議程再投票</td>\n        <td>流程簡單、可執行</td>\n        <td>議程設計者的影響被放大</td>\n      </tr>\n      <tr>\n        <td>只看最高票單點選擇</td>\n        <td>結果快速</td>\n        <td>看不到次佳關係與成對勝負結構</td>\n      </tr>\n      <tr>\n        <td>要求更完整偏好資料</td>\n        <td>比較能察覺循環</td>\n        <td>流程成本與解釋成本都會變高</td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n</section>\n\n<section class=\"chapter\" id=\"psychology\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Psychology</p>\n  <h2>為什麼人很難接受群體也會『自己打自己』</h2>\n  <p class=\"section-lede\">我們太習慣把『多數』想成一個像個人一樣、能說出固定排序的主體，因此特別容易忽略聚合之後可能出現的邏輯打結。</p>\n</div>\n<div class=\"example-grid\">\n  <div class=\"example\">\n    <strong>群體人格化</strong>\n    <p>人直覺上會把委員會、社群或市場想成單一主體，於是理所當然地期待它能有穩定偏好。</p>\n  </div>\n  <div class=\"example\">\n    <strong>局部贏很像整體贏</strong>\n    <p>一場對決裡的清楚勝利會帶來強烈確定感，讓人忘記還有其他對決可能把這個確定感推翻。</p>\n  </div>\n  <div class=\"example\">\n    <strong>順序效應很難被視覺化</strong>\n    <p>議程設定常以流程細節的樣子出現，不像利益衝突那麼顯眼，因此最容易被低估。</p>\n  </div>\n</div>\n<p class=\"micro-note\">這不是在羞辱多數決，而是在提醒你：制度的輸入和輸出之間，真的存在不可忽略的聚合變形。</p>\n</section>\n\n<section class=\"chapter\" id=\"applications\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Applications</p>\n  <h2>把它帶進 roadmap、triage 與架構會議</h2>\n  <p class=\"section-lede\">很多工程決策不是沒有共識，而是大家對不同比較對象各自有共識，合起來卻沒有唯一的總冠軍。</p>\n</div>\n<div class=\"example-grid\">\n  <div class=\"example\">\n    <strong>roadmap 排序</strong>\n    <p>性能、穩定性、體積、成本之間常會出現循環偏好；如果流程不承認這件事，團隊就會以為自己只是『一直改來改去』。</p>\n  </div>\n  <div class=\"example\">\n    <strong>bug triage</strong>\n    <p>某些 bug 對現場支援比對平台架構更重要，另一些正好相反；多數規則若沒配合清楚的分類，排序會反覆擺動。</p>\n  </div>\n  <div class=\"example\">\n    <strong>提案審查</strong>\n    <p>當議程設計者決定先淘汰誰、先對比誰時，他其實已經在影響最終贏家，而不只是主持流程。</p>\n  </div>\n</div>\n<ul class=\"bullet-list\">\n  <li>若你懷疑群體偏好有循環，最先要做的不是爭辯誰才是真多數，而是把成對比較結構畫出來。</li>\n  <li>在高成本決策裡，承認議程權與偏好結構本身就是決策變數，通常比假裝它們不存在更誠實。</li>\n</ul>\n</section>\n\n<section class=\"chapter\" id=\"misreadings\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Misreadings</p>\n  <h2>三種常見但危險的誤會</h2>\n  <p class=\"section-lede\">孔多塞悖論容易被誤讀成反民主或制度虛無，但它真正提醒的是聚合條件，而不是投票本身的無意義。</p>\n</div>\n<div class=\"collocation-list\" aria-label=\"常見誤讀\">\n  <article class=\"collocation-card\">\n    <div>\n      <strong>所以多數決沒用了</strong>\n      <span class=\"register-tag\">校正</span>\n    </div>\n    <p>不是。它依然非常有力，只是當選項超過兩個時，你得承認成對多數未必足以生成穩定總排序。</p>\n  </article>\n  <article class=\"collocation-card\">\n    <div>\n      <strong>只要選民理性就不會有循環</strong>\n      <span class=\"register-tag\">校正</span>\n    </div>\n    <p>錯。悖論恰恰說明：個體理性並不自動推出群體排序理性。</p>\n  </article>\n  <article class=\"collocation-card\">\n    <div>\n      <strong>換一套投票規則就能徹底消失</strong>\n      <span class=\"register-tag\">校正</span>\n    </div>\n    <p>不同規則會改變循環暴露或處理的方式，但沒有哪套制度能把所有聚合張力都免費消掉。</p>\n  </article>\n</div>\n</section>\n\n<section class=\"chapter\" id=\"questions\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Questions</p>\n  <h2>下次看見會議反覆翻案時，先問這兩題</h2>\n</div>\n<div class=\"prompt-grid\">\n  <article class=\"prompt-card\">\n    <strong>我們現在看到的是偏好真的改變，還是只是議程順序換了？</strong>\n    <p>如果順序一換結果就翻，問題常不在某個人出爾反爾，而在群體偏好本來就沒有單一穩定排序。</p>\n  </article>\n  <article class=\"prompt-card\">\n    <strong>這個決策流程留下了哪些資訊，又刪掉了哪些資訊？</strong>\n    <p>若只看單輪勝負而不看完整排名、偏好強度或分類條件，你可能會把結構性循環誤判成執行不力。</p>\n  </article>\n</div>\n<div class=\"template-note\">\n  <strong>延伸路線</strong>\n  <p>若想沿著這條線繼續讀，可接 Arrow's impossibility theorem、social choice theory、agenda setting，去看更多聚合規則如何交換不同代價。</p>\n</div>\n</section>\n\n<section class=\"chapter\" id=\"sources\">\n<div class=\"section-heading\">\n  <p class=\"section-label\">Sources</p>\n  <h2>來源與整理方式</h2>\n  <p class=\"section-lede\">本頁用 Condorcet paradox 的條目說明循環本身，再以 Condorcet method 與 social choice theory 補上制度與理論脈絡。</p>\n</div>\n<div class=\"source-grid\">\n  <article class=\"source-card\">\n    <strong>主概念</strong>\n    <p>Condorcet paradox 條目整理了三選項循環的經典形式，以及為何理性個體偏好仍可能導出不穩定的群體排序。</p>\n    <a href=\"https://en.wikipedia.org/wiki/Condorcet_paradox\" target=\"_blank\" rel=\"noreferrer\">Condorcet paradox</a>\n  </article>\n  <article class=\"source-card\">\n    <strong>制度脈絡</strong>\n    <p>Condorcet method 的條目補上成對比較制度如何面對沒有 Condorcet winner 時的後續處理。</p>\n    <a href=\"https://en.wikipedia.org/wiki/Condorcet_method\" target=\"_blank\" rel=\"noreferrer\">Condorcet method</a>\n  </article>\n  <article class=\"source-card\">\n    <strong>理論鄰居</strong>\n    <p>Social choice theory 條目把這個悖論放回更大的聚合問題裡，方便對照 Arrow 與其他不可能結果。</p>\n    <a href=\"https://en.wikipedia.org/wiki/Social_choice_theory\" target=\"_blank\" rel=\"noreferrer\">Social choice theory</a>\n  </article>\n</div>\n</section>\n\n<section class=\"chapter\">\n  <div class=\"reference-box\">\n    <div>\n      <p class=\"section-label\">Reference</p>\n      <h2>下一步</h2>\n      <p>這頁如果之後要再往前推，可以考慮補 single-peaked preferences，讓讀者看到哪些偏好結構能避免循環，哪些不能。</p>\n    </div>\n    <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n  </div>\n</section>\n\n</article>"
+  },
+  "contentBrief": {
+    "pressurePoint": "把每一對選項都交給多數決，並不保證整體會得到一致排序；群體可以同時偏好 A 勝 B、B 勝 C，卻又讓 C 勝 A。",
+    "smallestScenario": "評審會在續航、低延遲與安全強化三案中排序，每一組人的偏好都各自一致，但成對多數比較最後形成循環。",
+    "sourcePlan": [
+      "用 Condorcet paradox 條目支撐三選項循環與其最基本的成對多數結構。",
+      "用 Condorcet method 條目支撐制度面如何在沒有 Condorcet winner 時繼續選擇。",
+      "用 social choice theory 條目補上聚合問題的大脈絡，避免把悖論讀成單一投票梗。"
+    ],
+    "transferTargets": [
+      "roadmap 排序",
+      "bug triage",
+      "架構提案審查"
+    ],
+    "commonMisreading": "把孔多塞悖論當成『多數決沒用』，會錯過它真正是在揭露聚合條件與議程權的作用。",
+    "readerQuestions": [
+      "這次翻案是因為大家真的改變偏好，還是因為議程順序一換，原本的循環就暴露出來了？",
+      "我們目前的投票流程保留了哪些偏好資訊，又刪掉了哪些可能影響判斷的結構？"
+    ],
+    "sectionIntents": {
+      "core": "先讓讀者感受到『局部都有贏家、整體卻沒有穩定冠軍』這個最反直覺的核心張力。",
+      "setup": "用工程評審三案排序的情境，把循環偏好從政治學名詞拉回熟悉場景。",
+      "lenses": "把問題拆成成對多數侷限、議程設定權、偏好強度流失與結構限制四條線。",
+      "psychology": "說明為什麼人會自然期待群體像單一個體那樣擁有穩定偏好。",
+      "applications": "把悖論映到 roadmap、triage 與提案審查，讓概念可直接帶回工作。",
+      "misreadings": "校正反民主式的虛無讀法，保留這個概念真正的制度分析價值。",
+      "questions": "把本頁收斂成兩個能幫讀者區分議程效應與資訊損失的追問。",
+      "sources": "交代循環本身、制度處理與社會選擇理論各自對本頁提供的支撐。"
+    }
+  }
+}

@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>金絲雀釋出 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-canary-release">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / release engineering / rollout / monitoring</p>
+        <h1>金絲雀釋出</h1>
+        <p class="topic-subtitle">Canary Release</p>
+        <p class="thesis">金絲雀釋出不是慢慢推而已；它把新版本先交給小範圍真流量，讓監控和回退在全量前發揮作用。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>適合 OTA、server rollout、driver update、feature flag 與任何不能一次把風險推給全部使用者的變更。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>釋出策略 / 風險漸進暴露</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Expose change to a small monitored slice first</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>分群、監控、回退、相容性</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能設計小範圍暴露、明確判斷與安全回退的釋出流程</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>小量</span>
+          <span>觀測</span>
+          <span>擴大</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>先讓小範圍真實世界替你暴露風險</h2>
+          <p class="section-lede">金絲雀釋出把新版本先導向一小部分使用者、設備、區域或服務實例，並用監控決定是否擴大。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>測試環境能抓很多錯，但抓不到所有資料分布、硬體批次、網路條件與使用者行為；一次全量釋出把未知直接放大。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先選暴露切片</strong>
+            <p>切片要小到可承受，又要足以代表關鍵風險。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再設 guardrails</strong>
+            <p>crash、latency、error rate、rollback rate 與 business metrics 要有停止門檻。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後確保回退</strong>
+            <p>沒有可用 rollback 的 canary，只是慢一點的冒險。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>OTA 先推 1% 裝置</h2>
+          <p class="section-lede">新 firmware 通過 lab 測試，但 field 裝置有不同電池老化、網路品質、sensor revision 與使用模式。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>第一批只選 1% 裝置，觀察 boot success、crash loop、功耗與特定錯誤碼。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>小批次若沒有明確觀測與停止條件，只是把全量風險分批延後。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">部署小切片</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">監控 guardrails</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">擴大或回退</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>Canary 的關鍵不是比例小，而是每一步都有能否繼續的證據。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>四個讓 canary 有牙齒的條件</h2>
+          <p class="section-lede">漸進釋出要能真的降低風險，必須把分群、觀測與回退一起設計。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>切片策略</strong>
+            <p>可以按內部使用者、地區、硬體 revision、客戶群或 service instance 分批。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Guardrail metrics</strong>
+            <p>指標要接近使用者傷害，不只看 server 還活著。</p>
+          </article>
+          <article class="lens-card">
+            <strong>相容性窗口</strong>
+            <p>前後端、資料庫、protocol 與 mobile/firmware 版本需要能共存。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Rollback path</strong>
+            <p>回退是否會遇到資料格式降級、設定不相容或設備不可遠端恢復。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Canary 訊號</th><th>可能代表</th><th>動作</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>error rate 上升</td>
+                <td>新版本行為回歸</td>
+                <td>暫停擴大並切回舊版</td>
+              </tr>
+              <tr>
+                <td>功耗上升</td>
+                <td>field 條件下 loop 或重試異常</td>
+                <td>縮小範圍並抓取診斷資料</td>
+              </tr>
+              <tr>
+                <td>rollback 成功率低</td>
+                <td>恢復路徑不可靠</td>
+                <td>停止 rollout，先修 recovery</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>通過測試後最容易過度自信</h2>
+          <p class="section-lede">release pressure 會讓團隊把 staging green 誤認成 production safe。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>綠燈偏誤</strong>
+            <p>CI 全綠是必要條件，不是 field 風險已消失的證明。</p>
+          </article>
+          <article class="example">
+            <strong>小比例安慰</strong>
+            <p>1% 聽起來小，但若使用者基數很大，影響仍可能很可觀。</p>
+          </article>
+          <article class="example">
+            <strong>不想按停止鍵</strong>
+            <p>指標稍微變差時，團隊常希望再等等；停損規則應在釋出前定義。</p>
+          </article>
+        </div>
+        <p class="micro-note">Canary review 要把停止 rollout 視為成功防護，而不是釋出失敗。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>OTA、後端與功能旗標都需要分階段證據</h2>
+          <p class="section-lede">任何能被遠端開啟或更新的功能，都可以把全量風險拆成多個可觀測步驟。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>Firmware OTA</strong>
+            <p>按硬體 revision、地區或電池狀態分批，避免同一種 field 條件一次全中。</p>
+          </article>
+          <article class="example">
+            <strong>Backend rollout</strong>
+            <p>先導一部分 traffic 到新版本，觀察 latency、error budget 與 downstream 壓力。</p>
+          </article>
+          <article class="example">
+            <strong>Feature flags</strong>
+            <p>先對內部或小群開啟，並確保 flag 可以快速關閉且不留下資料不相容。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>把 rollout plan 寫成階段表：比例、觀察時間、指標門檻、負責人與回退指令。</li>
+          <li>定期演練 rollback；沒有演練過的 rollback 在事故中常只是願望。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>Canary 不是產品實驗的同義詞</h2>
+          <p class="section-lede">它可以共享技術機制，但目標和 A/B test 不同：一個看安全，一個看假設。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>等同 A/B test</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>Canary 關心 regression 與營運風險，A/B test 關心使用者行為差異。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>比例小就安全</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>如果第一批選錯或監控不足，小比例也抓不到真正風險。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>回退一定簡單</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>資料 migration、protocol change 或 firmware downgrade 都可能讓 rollback 變難。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>誰先承受風險，誰決定停止</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果第一批出事</strong>
+            <p>影響範圍是否可承受，診斷資料是否足夠，回退是否能在目標時間內完成？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果指標有小幅惡化</strong>
+            <p>哪個門檻會自動暫停 rollout，誰有權覆寫，理由如何留下紀錄？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸可讀 feature flags、parallel change、error budget 與 release engineering，補上組織流程面。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">來源卡以 Fowler bliki 與 SRE release engineering 為主，OTA 與韌體推送段落是工程情境整理。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Martin Fowler 的 Canary Release 文章整理小範圍導流、監控、擴大與 rollback。</p>
+            <a href="https://martinfowler.com/bliki/CanaryRelease.html" target="_blank" rel="noreferrer">Canary Release</a>
+          </article>
+          <article class="source-card">
+            <strong>釋出工程</strong>
+            <p>Google SRE Release Engineering 章節提供大型系統 release process 的背景。</p>
+            <a href="https://sre.google/sre-book/release-engineering/" target="_blank" rel="noreferrer">Release Engineering</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰技術</strong>
+            <p>Feature toggles 可與 canary 搭配，用來控制功能暴露與快速關閉。</p>
+            <a href="https://martinfowler.com/articles/feature-toggles.html" target="_blank" rel="noreferrer">Feature Toggles</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>延伸可讀 feature flags、parallel change、error budget 與 release engineering，補上組織流程面。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

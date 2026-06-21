@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Happens-Before 關係 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-happens-before">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / concurrency / memory model / ordering</p>
+        <h1>Happens-Before 關係</h1>
+        <p class="topic-subtitle">Happens-Before Relation</p>
+        <p class="thesis">Happens-before 不是時間先後的直覺描述，而是語言與記憶體模型用來保證可見性與順序的偏序關係。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>適合 review C/C++ atomics、Java concurrency、RTOS shared state 與 ISR/main loop 資料交握。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>並行語意 / 可見性順序</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>A partial order that defines visibility and ordering</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>偏序、同步、可見性、data race</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能判斷兩段程式之間是否真的有同步保證，而不是只靠執行順序看起來合理</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>事件</span>
+          <span>同步</span>
+          <span>可見</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>先發生，要先由規則保證</h2>
+          <p class="section-lede">Happens-before 定義事件間的偏序；若寫入 happens-before 讀取，語言模型才保證讀取能看見那個寫入或其後續一致結果。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>你在 source code 裡先寫 data 再寫 flag，不代表另一個 thread 會照同樣順序看見；compiler、CPU 與 cache 都可能重排或延遲可見性。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先找同步邊</strong>
+            <p>lock/unlock、release/acquire、thread start/join 等才會建立明確關係。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再用傳遞性</strong>
+            <p>A happens-before B，B happens-before C，才能推 A 對 C 可見。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後排除 data race</strong>
+            <p>沒有同步的共享讀寫，常讓程式落入未定義或不可靠語意。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>Ready flag 不等於資料已安全可見</h2>
+          <p class="section-lede">Producer 寫入 buffer 後把 ready 設成 true；consumer 看到 ready 就讀 buffer。單次測試都對，不代表模型保證它永遠對。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>ready 不是 atomic，也沒有 memory barrier；consumer 可能看見 flag 卻讀到舊 buffer。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>人用牆上時間理解先後，CPU 和語言模型要求你用同步原語建立可見性。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">writer 更新資料</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">同步原語發布狀態</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">reader acquire 後讀取資料</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>Happens-before 是多執行緒程式可推理的地基。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>把順序拆成偏序，而不是時間線</h2>
+          <p class="section-lede">並行程式裡有些事件有順序，有些事件彼此並發；happens-before 幫你分清楚哪一種。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>Program order</strong>
+            <p>同一 thread 內的語句順序通常提供基本排序，但不自動跨 thread。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Synchronizes-with</strong>
+            <p>release/acquire、mutex 或 condition variable 可建立跨 thread 邊。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Transitivity</strong>
+            <p>同步關係可以串起來，形成更長的可見性保證。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Race freedom</strong>
+            <p>若衝突存取沒有被 happens-before 排序，就要檢查 data race。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>做法</th><th>是否建立關係</th><th>原因</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>mutex unlock/lock</td>
+                <td>是</td>
+                <td>unlock synchronizes-with 後續 lock</td>
+              </tr>
+              <tr>
+                <td>sleep 10 ms</td>
+                <td>否</td>
+                <td>等待時間不是同步語意</td>
+              </tr>
+              <tr>
+                <td>atomic release/acquire flag</td>
+                <td>是</td>
+                <td>可發布並取得先前寫入</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>多執行緒最會欺騙單執行緒直覺</h2>
+          <p class="section-lede">人讀程式會自然想像一條時間線；memory model 要你證明可見性路徑。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>測試通過的陷阱</strong>
+            <p>race condition 可能只在特定 CPU、最佳化或負載下出現。</p>
+          </article>
+          <article class="example">
+            <strong>Delay 安慰感</strong>
+            <p>等待讓 bug 機率下降，卻沒有建立語言保證。</p>
+          </article>
+          <article class="example">
+            <strong>volatile 語意混淆</strong>
+            <p>不同語言的 volatile 承諾不同，不能把它當萬用同步。</p>
+          </article>
+        </div>
+        <p class="micro-note">Concurrency review 的好問題是：請指出哪一行建立 happens-before，而不是問跑起來有沒有錯。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>從 ISR 到 C++ atomics 都需要可見性語意</h2>
+          <p class="section-lede">嵌入式程式也會遇到記憶體模型問題，只是常包在 ISR、DMA、RTOS 與 compiler optimization 裡。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>ISR/main loop</strong>
+            <p>ISR 設 flag、main 讀資料時，要考慮 volatile、atomic、critical section 與 barrier。</p>
+          </article>
+          <article class="example">
+            <strong>C++ atomics</strong>
+            <p>release store 搭配 acquire load 可以發布資料；relaxed 則不提供同樣排序。</p>
+          </article>
+          <article class="example">
+            <strong>RTOS primitives</strong>
+            <p>queue、semaphore、mutex 通常同時提供同步與可見性，不只是排程。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>把 shared state 的 writer、reader 與同步原語畫成小圖，確認每條讀取路徑都有邊。</li>
+          <li>對 lock-free code 特別保守；沒有註解說明 memory order 理由時，很難維護。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>看起來先，不等於保證先</h2>
+          <p class="section-lede">Happens-before 是規範語意，不是 log timestamp 的直覺排序。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>加 delay 就安全</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>Delay 改變時機，不建立同步關係。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>volatile 就是 thread-safe</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>volatile 不等於 atomic，也不一定提供跨 thread ordering。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>x86 上沒壞就通用</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>較強硬體順序不等於語言層保證；compiler 仍有優化空間。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>哪一條邊讓 reader 看見 writer</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果 compiler 開最佳化</strong>
+            <p>這段共享資料讀寫仍有語言規範保證，還是只靠目前組譯長相？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果換到另一顆 CPU</strong>
+            <p>memory ordering、cache coherence 與 barrier 假設是否仍成立？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>可接 memory consistency model、linearizability、Lamport clocks 與 data race，建立並行推理工具箱。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">來源卡以 happened-before、Java 與 C++ 記憶體模型文件為主，韌體例子是同步語意轉譯。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Happened-before 條目整理偏序、傳遞性與分散/並行系統中的因果順序。</p>
+            <a href="https://en.wikipedia.org/wiki/Happened-before" target="_blank" rel="noreferrer">Happened-before</a>
+          </article>
+          <article class="source-card">
+            <strong>Java 規範</strong>
+            <p>Java Language Specification 17.4.5 定義 happens-before order 與 synchronization order。</p>
+            <a href="https://docs.oracle.com/javase/specs/jls/se22/html/jls-17.html#jls-17.4.5" target="_blank" rel="noreferrer">JLS 17.4.5</a>
+          </article>
+          <article class="source-card">
+            <strong>C++ 對照</strong>
+            <p>cppreference memory_order 頁面整理 acquire/release、relaxed 與 happens-before 語意。</p>
+            <a href="https://en.cppreference.com/w/cpp/atomic/memory_order" target="_blank" rel="noreferrer">std::memory_order</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>可接 memory consistency model、linearizability、Lamport clocks 與 data race，建立並行推理工具箱。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

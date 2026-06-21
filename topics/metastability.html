@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>亞穩態 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-metastability">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / digital logic / CDC / timing</p>
+        <h1>亞穩態</h1>
+        <p class="topic-subtitle">Metastability</p>
+        <p class="thesis">亞穩態不是少見怪事，而是非同步訊號進入雙穩態元件時無法完全消除的機率風險。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>適合 clock domain crossing、GPIO async input、FPGA/ASIC synchronizer 與高可靠硬體 review。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>數位電路 / 時序風險</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Signals near decision boundaries may not settle in time</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>setup/hold、MTBF、同步級數、clock domain</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能用機率與架構降低 CDC failure，而不是追求不存在的完全消除</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>邊界</span>
+          <span>延遲</span>
+          <span>機率</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>數位電路也有無法立刻決定的瞬間</h2>
+          <p class="section-lede">當輸入在 setup/hold window 附近變化，雙穩態元件可能短暫停在不穩定的中間狀態，輸出延遲才 settle。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>同步器不能讓亞穩態不發生；它只能提供更多時間讓狀態收斂，把錯誤傳到下游的機率降到可接受。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先承認非同步邊界</strong>
+            <p>GPIO、reset、跨 clock domain 訊號都可能觸發亞穩態。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再給收斂時間</strong>
+            <p>多級 synchronizer 增加 resolve time，改善 MTBF。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後處理語意</strong>
+            <p>單 bit、pulse、多 bit bus、counter 都需要不同 crossing 策略。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>外部 interrupt 剛好撞上 clock edge</h2>
+          <p class="section-lede">一條外部 ready 訊號沒有同步就進入 CPU domain；在某次邊界條件下，狀態機收到半拍脈衝。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>第一級 flip-flop 輸出延遲 settle，第二級在錯誤時間取樣，形成偶發且難重現的控制脈衝。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>測試台 clock 相位固定時可能永遠看不到；field 中獨立時脈會慢慢掃過所有相位。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">非同步變化</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">踩進 setup/hold 邊界</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">同步器降低但不消除失敗機率</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>CDC bug 常不是邏輯錯，而是時間邊界被架構忽略。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>把亞穩態當機率工程處理</h2>
+          <p class="section-lede">正確問題不是會不會發生，而是失敗率是否低於產品壽命與安全需求。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>Setup/Hold</strong>
+            <p>違反取樣窗口會讓 flip-flop 無法在預期時間輸出穩定 0 或 1。</p>
+          </article>
+          <article class="lens-card">
+            <strong>MTBF</strong>
+            <p>用 clock rate、data rate 與器件參數估算平均故障間隔。</p>
+          </article>
+          <article class="lens-card">
+            <strong>同步級數</strong>
+            <p>多一級增加 latency，也增加亞穩態收斂時間。</p>
+          </article>
+          <article class="lens-card">
+            <strong>多 bit crossing</strong>
+            <p>多位元不可用獨立兩級同步器直接搬，否則位元可能來自不同時間。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>訊號類型</th><th>常見策略</th><th>注意</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>單 bit level</td>
+                <td>兩級或多級 synchronizer</td>
+                <td>確認 MTBF 與 latency</td>
+              </tr>
+              <tr>
+                <td>Pulse</td>
+                <td>toggle 或 handshake</td>
+                <td>避免脈衝太窄被漏掉</td>
+              </tr>
+              <tr>
+                <td>多 bit data</td>
+                <td>FIFO、gray code、valid handshake</td>
+                <td>避免 bit skew 造成混合值</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>最難說服的是它沒在模擬裡出現</h2>
+          <p class="section-lede">亞穩態事件稀有、相位敏感、又常被 digital simulation 抽象掉，因此容易被低估。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>可重現性低</strong>
+            <p>錯誤可能幾天一次或特定溫壓下出現，很像隨機 field issue。</p>
+          </article>
+          <article class="example">
+            <strong>二值思維</strong>
+            <p>工程師習慣 0/1 邏輯，卻忽略物理電路需要時間決定。</p>
+          </article>
+          <article class="example">
+            <strong>固定相位測試</strong>
+            <p>tester clock 若和 DUT 固定相位，可能剛好避開最危險區域。</p>
+          </article>
+        </div>
+        <p class="micro-note">CDC review 的價值在設計階段最大，因為等 field issue 出現時通常已很難定位。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>每個跨時脈邊界都要有名字</h2>
+          <p class="section-lede">實務上要把 CDC path 清單化：來源 domain、目的 domain、訊號語意、同步策略與驗證方法。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>GPIO async input</strong>
+            <p>外部按鍵、interrupt 或 sensor ready 進入 system clock 前要同步與去彈跳。</p>
+          </article>
+          <article class="example">
+            <strong>FPGA domain crossing</strong>
+            <p>不同 PLL domain 間使用 async FIFO 或 handshake，不要直接接 bus。</p>
+          </article>
+          <article class="example">
+            <strong>Reset crossing</strong>
+            <p>reset deassertion 也需要同步，避免不同 flop 在不同 clock edge 脫離 reset。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>CDC lint、design review 與 waiver 要一起看；waiver 應說明為何安全。</li>
+          <li>對 pulse crossing 設計最小寬度或 toggle protocol，避免快 domain 到慢 domain 被吃掉。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>同步器是降低機率，不是魔法消除</h2>
+          <p class="section-lede">亞穩態的教訓是謙虛：物理層沒有承諾在有限時間內永遠完成判斷。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>兩級同步器保證安全</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>它只是讓 failure probability 很低；高頻或高 data rate 可能需要更多分析。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>模擬通過就沒問題</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>一般 RTL simulation 不會自然呈現亞穩態收斂時間。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>多 bit 各自同步即可</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>各 bit 可能在不同 cycle 被取樣，組成從未存在過的值。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>每條跨域訊號是否都有策略</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果訊號是 pulse</strong>
+            <p>目的 clock domain 是否保證看得到它，還是需要 toggle、stretch 或 handshake？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果資料是多 bit</strong>
+            <p>接收端如何知道所有位元屬於同一筆資料，而不是跨 cycle 混合？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>可延伸到 memory consistency model、Lamport clocks、reset domain crossing 與 formal CDC checking。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">來源卡以電子亞穩態與 synchronizer 教學為主，CDC checklist 是硬體設計整理。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Metastability in electronics 條目說明 forbidden intermediate range、synchronizer 與故障模式。</p>
+            <a href="https://en.wikipedia.org/wiki/Metastability_%28electronics%29" target="_blank" rel="noreferrer">Metastability (electronics)</a>
+          </article>
+          <article class="source-card">
+            <strong>教學文章</strong>
+            <p>Ran Ginosar 的 Metastability and Synchronizers tutorial 是 CDC 設計常引用的入門資料。</p>
+            <a href="https://webee.technion.ac.il/~ran/papers/Metastability-and-Synchronizers.IEEEDToct2011.pdf" target="_blank" rel="noreferrer">Metastability and Synchronizers</a>
+          </article>
+          <article class="source-card">
+            <strong>相鄰原理</strong>
+            <p>Lamport 的 Buridan's Principle 從判斷邊界角度討論無法瞬間決定的限制。</p>
+            <a href="https://lamport.azurewebsites.net/pubs/buridan.pdf" target="_blank" rel="noreferrer">Buridan's Principle</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>可延伸到 memory consistency model、Lamport clocks、reset domain crossing 與 formal CDC checking。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

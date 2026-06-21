@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>線性化一致性 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-linearizability">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / consistency / concurrency / distributed systems</p>
+        <h1>線性化一致性</h1>
+        <p class="topic-subtitle">Linearizability</p>
+        <p class="thesis">線性化一致性要求每個操作看起來都在呼叫與回應之間的某一瞬間生效，並尊重真實時間順序。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>適合 review lock-free data structure、distributed KV store、leader-based service 與讀寫 API 的一致性承諾。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>並行正確性 / 強一致模型</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Concurrent operations appear to occur atomically in real-time order</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>線性化點、real-time order、atomic object、history</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能檢查一個並行物件或服務是否能被當成單一原子物件推理</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>並行</span>
+          <span>瞬間</span>
+          <span>順序</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>並行世界裡的原子瞬間</h2>
+          <p class="section-lede">如果一個物件是 linearizable，每個操作都可以被放在呼叫與回應之間的某個點上，使整體結果符合合法的 sequential history。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>線性化讓使用者推理簡單，代價是實作要處理同步、複製、延遲與故障；弱一致模型則把部分負擔交給 caller。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先找 linearization point</strong>
+            <p>每個操作何時正式生效，必須能被指出。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再尊重 real-time order</strong>
+            <p>一個操作完成後才開始的另一個操作，順序不能被顛倒。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後看重疊操作</strong>
+            <p>時間上重疊的操作可以用任一合法順序解釋。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>寫入成功後，下一個讀取仍看到舊值</h2>
+          <p class="section-lede">設定服務回覆 write OK；另一個 client 隨後讀取同一 key，讀到舊設定。這是 bug 還是允許行為，取決於服務承諾。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>A 的 write response 已返回，B 的 read invocation 之後才開始；linearizable store 應讓 B 看見 A 或其後更新。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>分散式系統常為延遲與可用性放鬆一致性；API 若沒說清楚，使用者會用強一致直覺寫錯流程。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">操作呼叫</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">某瞬間生效</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">回應後形成可推理順序</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>Linearizability 是使用者可把服務當成單一原子物件的強承諾。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>檢查 history，而不是只看最後狀態</h2>
+          <p class="section-lede">同樣最終資料可能一致，但過程中的讀寫順序已經違反 API 承諾。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>History</strong>
+            <p>記錄每個 invocation、response、參數與回傳值，才能檢查一致性。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Linearization point</strong>
+            <p>可能在 CAS 成功、lock 內寫入、leader commit 或 quorum commit 時發生。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Overlapping operations</strong>
+            <p>重疊的 read/write 可有多種合法排序；非重疊操作要尊重真實時間。</p>
+          </article>
+          <article class="lens-card">
+            <strong>Composability</strong>
+            <p>多個 linearizable object 各自正確，不一定讓跨物件 transaction 自動正確。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>模型</th><th>使用者感受</th><th>代價</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Linearizable</td>
+                <td>像單一即時物件</td>
+                <td>延遲、同步與可用性成本高</td>
+              </tr>
+              <tr>
+                <td>Sequential consistency</td>
+                <td>有單一順序但不保證真實時間</td>
+                <td>較弱但仍可推理</td>
+              </tr>
+              <tr>
+                <td>Eventual consistency</td>
+                <td>最後可能收斂</td>
+                <td>caller 要處理暫時舊值</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>人會自然假設讀到最新</h2>
+          <p class="section-lede">大多數使用者不會在每次讀取前想 consistency model；他們用本機變數的直覺理解遠端服務。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>API 沉默</strong>
+            <p>文件沒寫一致性時，caller 會自行補上最方便的假設。</p>
+          </article>
+          <article class="example">
+            <strong>測試太短</strong>
+            <p>單機或低延遲測試常看不見舊讀、重排與 failover 時的歷史。</p>
+          </article>
+          <article class="example">
+            <strong>成功回應的重量</strong>
+            <p>write OK 讓人以為全世界都已看見，實際可能只代表某個節點接受。</p>
+          </article>
+        </div>
+        <p class="micro-note">強一致不是道德優勢；它是一個需要明確承諾與成本支付的 API 合約。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>哪裡需要像單一物件一樣可靠</h2>
+          <p class="section-lede">不是每個資料都需要 linearizability，但控制面、鎖、租約與設定常需要更強承諾。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>Configuration service</strong>
+            <p>若更新 feature flag 後仍讀到舊值，部署流程可能做出錯誤判斷。</p>
+          </article>
+          <article class="example">
+            <strong>Concurrent queue</strong>
+            <p>enqueue/dequeue 必須能對應到合法順序，否則工作可能遺失或重複。</p>
+          </article>
+          <article class="example">
+            <strong>Distributed lock</strong>
+            <p>鎖若不 linearizable，兩個 client 可能同時以為自己獲得排他權。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>在 API 文件中明確說明 read-after-write、monotonic read 與 failover 期間的承諾。</li>
+          <li>使用 history checker 或 Jepsen 類測試思路檢查重疊操作，而不是只看最後資料。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>最後一致，不等於當下可當真</h2>
+          <p class="section-lede">不同一致性模型各有用途；混用名詞會讓 caller 寫出錯誤假設。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>Eventual 就夠接近</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>如果流程需要 write OK 後立即可見，eventual consistency 不提供這個保證。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>單 leader 一定 linearizable</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>還要看 commit、read path、lease、failover 與 clock assumptions。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>Serializable 等於 linearizable</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>transaction ordering 與 real-time ordering 是不同維度。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>這個 API 是否允許讀舊</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果寫入已回應成功</strong>
+            <p>之後開始的讀取是否必須看見它，文件和測試是否都這樣要求？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果操作重疊</strong>
+            <p>是否能為每個回傳結果找到一個合法 sequential order，而不違反真實時間？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>可接 eventual consistency、CAP theorem、Lamport clocks 與 happens-before，建立一致性模型分層。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">來源卡以 Herlihy/Wing 的 linearizability 定義為核心，分散式服務應用是教學轉譯。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>主概念</strong>
+            <p>Linearizability 條目整理 atomic object、history 與 real-time order 的正確性條件。</p>
+            <a href="https://en.wikipedia.org/wiki/Linearizability" target="_blank" rel="noreferrer">Linearizability</a>
+          </article>
+          <article class="source-card">
+            <strong>原始論文</strong>
+            <p>Herlihy 與 Wing 的 1990 論文定義 linearizability 作為 concurrent objects 的正確性條件。</p>
+            <a href="https://www.microsoft.com/en-us/research/publication/linearizability-a-correctness-condition-for-concurrent-objects/" target="_blank" rel="noreferrer">Linearizability paper</a>
+          </article>
+          <article class="source-card">
+            <strong>一致性背景</strong>
+            <p>Consistency model 條目可對照 sequential、linearizable 與其他記憶體/分散式一致性。</p>
+            <a href="https://en.wikipedia.org/wiki/Consistency_model" target="_blank" rel="noreferrer">Consistency model</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>可接 eventual consistency、CAP theorem、Lamport clocks 與 happens-before，建立一致性模型分層。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

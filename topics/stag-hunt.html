@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>鹿獵博弈 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-stag-hunt">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / coordination / trust / game theory</p>
+        <h1>鹿獵博弈</h1>
+        <p class="topic-subtitle">Stag Hunt</p>
+        <p class="thesis">大家都知道一起追大獵物比較好，但只要懷疑別人會先轉去抓兔子，保守選項就會重新變得合理。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁最值得學的，不是 payoff matrix 本身，而是如何看出一個群體其實不是利益衝突，而是缺少『我敢不敢相信別人也會到場』的保證。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>博弈情境 / 協作判準</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Assurance vs. safe fallback</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>共同承諾、失敗代價、可觀察性、先行者風險</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能分辨一個團隊缺的是誘因、能力，還是對彼此承諾的把握</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>承諾</span>
+          <span>風險</span>
+          <span>協調</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+
+    <section class="chapter" id="core">
+    <div class="section-heading">
+      <p class="section-label">Orientation</p>
+      <h2>高報酬合作最怕的不是自私，而是不想當最後一個還在等的人</h2>
+      <p class="section-lede">鹿獵博弈不是在講所有人都自利到不合作，而是在講：合作雖然共同更好，但落單的代價太痛，保守退路因此一直有吸引力。</p>
+    </div>
+    <div class="core-card">
+      <p class="section-label">Core Tension</p>
+      <p>群體一起投入時能得到最大收益；可是一旦有人先轉向低風險退路，留下來的人就會承擔幾乎全部成本，於是安全選項重新變得有理。</p>
+    </div>
+    <div class="principle-strip" aria-label="本頁讀法">
+      <div>
+        <span>01</span>
+        <strong>先分辨它不是囚徒困境</strong>
+        <p>在鹿獵博弈裡，合作不是傻；真正困難的是你無法確定別人會不會也選同一條高收益路線。</p>
+      </div>
+      <div>
+        <span>02</span>
+        <strong>再找保守退路多安全</strong>
+        <p>退路越能保證自己不至於最慘，群體就越容易回到低效但穩妥的均衡。</p>
+      </div>
+      <div>
+        <span>03</span>
+        <strong>最後想辦法把承諾做成可見</strong>
+        <p>很多協作問題不是缺價值宣示，而是缺少讓人相信『大家真的會一起來』的信號與機制。</p>
+      </div>
+    </div>
+    </section>
+
+    <section class="chapter" id="setup">
+    <div class="section-heading">
+      <p class="section-label">Setup</p>
+      <h2>從一次跨團隊切換看懂它</h2>
+      <p class="section-lede">只要把共同升級與個別退路放進同一個場景，這個博弈的手感會非常清楚。</p>
+    </div>
+    <div class="definition-grid">
+      <div class="tile">
+        <strong>最小場景</strong>
+        <p>三個 firmware 子團隊打算在同一個 release 週期全面改用新的測試介面。若大家一起改，後續自動化腳本、報表與追蹤流程都會簡單很多；若只有一組先跳，整合成本會先落在它身上。</p>
+      </div>
+      <div class="tile">
+        <strong>真正難點</strong>
+        <p>每個人都知道一起切換是比較好的長期解，但誰都不想先把自己的穩定工作流賭在別人的進度和承諾上。</p>
+      </div>
+    </div>
+    <div class="concept-flow" aria-label="問題展開">
+      <div class="flow-step">共同投入會得到更高總收益</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">任何一方單獨投入都可能成為吃虧者</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">安全退路於是反覆把群體拉回低效均衡</div>
+    </div>
+    <div class="paradox-frame">
+      <strong>Key Point</strong>
+      <p>鹿獵博弈的核心不是『有人壞』，而是『沒有人敢在承諾不明時先暴露自己』。</p>
+    </div>
+    </section>
+
+    <section class="chapter" id="lenses">
+    <div class="section-heading">
+      <p class="section-label">Lenses</p>
+      <h2>四個透鏡，看協作失敗到底是卡在哪裡</h2>
+      <p class="section-lede">只說『大家沒有合作』太粗了。你得知道問題是出在 payoff、信號、節奏，還是對失敗後果的想像。</p>
+    </div>
+    <div class="lens-grid">
+      <article class="lens-card">
+        <strong>報酬優勢</strong>
+        <p>大家一起追鹿時，總收益明顯高於各自抓兔子；這讓協作具有真實吸引力，而不是道德要求。</p>
+      </article>
+      <article class="lens-card">
+        <strong>風險優勢</strong>
+        <p>抓兔子雖然總收益低，卻比較不會讓自己成為唯一受傷者。低風險不是高價值，但它很穩。</p>
+      </article>
+      <article class="lens-card">
+        <strong>可觀察承諾</strong>
+        <p>若彼此準備狀態、投入程度和切換時點難以觀察，大家就會傾向用最保守的方式解讀他人的決心。</p>
+      </article>
+      <article class="lens-card">
+        <strong>先行者代價</strong>
+        <p>最先投入的人若要承擔更多整合與回滾成本，群體就會反覆等待別人先動。</p>
+      </article>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>情境</th>
+            <th>一起追鹿時得到什麼</th>
+            <th>退回抓兔子的理由</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>介面升級</td>
+            <td>之後維護與工具鏈統一起來</td>
+            <td>若只有一組先改，短期整合負擔全壓在它身上</td>
+          </tr>
+          <tr>
+            <td>共同測試基礎建設</td>
+            <td>覆蓋率與除錯效率一起提升</td>
+            <td>沒人想先投入大量時間卻換不到群體效益</td>
+          </tr>
+          <tr>
+            <td>跨部門 incident drill</td>
+            <td>真事故時溝通路徑變清楚</td>
+            <td>演練本身會消耗當前排程與人力</td>
+          </tr>
+          <tr>
+            <td>標準化資料格式</td>
+            <td>下游分析與追蹤都更穩</td>
+            <td>若只有部分系統跟進，轉換層反而增加工作</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </section>
+
+    <section class="chapter" id="psychology">
+    <div class="section-heading">
+      <p class="section-label">Psychology</p>
+      <h2>人為什麼明知合作較好，還是會回頭抓兔子</h2>
+      <p class="section-lede">鹿獵博弈的心理拉力很日常：不是看不見好處，而是太清楚自己若獨自留下會有多尷尬。</p>
+    </div>
+    <div class="example-grid">
+      <div class="example">
+        <strong>不想當唯一的傻子</strong>
+        <p>人對『只有我照約定做、別人沒有』的損失特別敏感，這種害怕常比共同收益更有行動力。</p>
+      </div>
+      <div class="example">
+        <strong>模糊訊號會被往壞處解讀</strong>
+        <p>當承諾只能從含糊會議紀錄或口頭表態判斷時，大多數人會先假設別人可能臨時抽手。</p>
+      </div>
+      <div class="example">
+        <strong>曾經被放鳥會改寫均衡</strong>
+        <p>一次失敗的共同升級就足以把團隊帶回長期保守，因為集體記憶會讓退路看起來更理性。</p>
+      </div>
+    </div>
+    <p class="micro-note">這裡的重點不是替膽怯開脫，而是說明協作為何需要『保證機制』，不能只靠口號。</p>
+    </section>
+
+    <section class="chapter" id="applications">
+    <div class="section-heading">
+      <p class="section-label">Applications</p>
+      <h2>把博弈結構帶回工程現場</h2>
+      <p class="section-lede">只要看到高價值合作加上明顯落單代價，鹿獵博弈就已經在場了。</p>
+    </div>
+    <div class="example-grid">
+      <div class="example">
+        <strong>平台遷移</strong>
+        <p>從舊 toolchain 移到新 toolchain 時，若沒有同步切換窗口與支援計畫，大家就會傾向繼續待在舊環境裡各自求穩。</p>
+      </div>
+      <div class="example">
+        <strong>共用測試治具</strong>
+        <p>共同建置治具的報酬很高，但若先投入的人要獨自維護、別人卻可繼續搭便車，協作就不會自然出現。</p>
+      </div>
+      <div class="example">
+        <strong>安全事件回報</strong>
+        <p>若團隊相信別人也會坦白揭露與修補，大家更容易共同維持標準；若怕只有自己暴露弱點，通報就會退縮。</p>
+      </div>
+    </div>
+    <ul class="bullet-list">
+      <li>遇到鹿獵結構時，先降低先行者代價，比空泛喊合作更有用。</li>
+      <li>把承諾轉成可觀察里程碑、共享時窗與回滾保護，往往比加大獎勵更能把群體推向高收益均衡。</li>
+    </ul>
+    </section>
+
+    <section class="chapter" id="misreadings">
+    <div class="section-heading">
+      <p class="section-label">Misreadings</p>
+      <h2>別把所有合作失敗都叫做鹿獵博弈</h2>
+      <p class="section-lede">這個概念好用，但也很容易被濫用；一旦誤分類，解法就會跟著跑偏。</p>
+    </div>
+    <div class="collocation-list" aria-label="常見誤讀">
+      <article class="collocation-card">
+        <div>
+          <strong>只要沒合作，肯定就是鹿獵</strong>
+          <span class="register-tag">校正</span>
+        </div>
+        <p>不一定。若個別背叛本身就比較賺，那比較像囚徒困境；鹿獵的前提是共同合作其實比較好。</p>
+      </article>
+      <article class="collocation-card">
+        <div>
+          <strong>提高獎勵就能解決</strong>
+          <span class="register-tag">校正</span>
+        </div>
+        <p>若落單代價仍然很高、承諾仍然不透明，單純加碼獎勵未必足以把人從兔子拉回鹿。</p>
+      </article>
+      <article class="collocation-card">
+        <div>
+          <strong>保守選擇表示團隊沒企圖心</strong>
+          <span class="register-tag">校正</span>
+        </div>
+        <p>很多時候那只是對承諾品質的理性回應。真正該修的是協調機制，而不是先責怪意志。</p>
+      </article>
+    </div>
+    </section>
+
+    <section class="chapter" id="questions">
+    <div class="section-heading">
+      <p class="section-label">Questions</p>
+      <h2>看到群體卡住時，先拿這兩題去對照</h2>
+    </div>
+    <div class="prompt-grid">
+      <article class="prompt-card">
+        <strong>若我先投入，最壞會獨自吞下哪些代價？</strong>
+        <p>把那個清單寫出來，你就知道該設計的是保險、回滾，還是更清楚的共同切換條件。</p>
+      </article>
+      <article class="prompt-card">
+        <strong>團隊目前有哪些訊號足以讓我相信別人真的會一起來？</strong>
+        <p>如果答案只有口頭支持，通常還不夠；承諾需要被做成可驗證的排程、資源或交付物。</p>
+      </article>
+    </div>
+    <div class="template-note">
+      <strong>延伸路線</strong>
+      <p>下一步可連到 prisoners' dilemma、collective action problem、pluralistic ignorance，一起分辨不同的合作失敗其實需要不同手術刀。</p>
+    </div>
+    </section>
+
+    <section class="chapter" id="sources">
+    <div class="section-heading">
+      <p class="section-label">Sources</p>
+      <h2>來源與整理方式</h2>
+      <p class="section-lede">本頁用 Rousseau 的原始故事、現代博弈條目與 GameTheory.net 的形式化說明來整理 assurance 與 risk dominance 這條分析線。</p>
+    </div>
+    <div class="source-grid">
+      <article class="source-card">
+        <strong>故事與基本結構</strong>
+        <p>Stag hunt 條目整理了原始故事、兩個純策略均衡，以及它和囚徒困境最常被混淆的差別。</p>
+        <a href="https://en.wikipedia.org/wiki/Stag_hunt" target="_blank" rel="noreferrer">Stag hunt</a>
+      </article>
+      <article class="source-card">
+        <strong>形式化補充</strong>
+        <p>GameTheory.net 的字典頁把 assurance game 的 payoff 結構講得很清楚，適合拿來對照 payoff-dominant 與 risk-dominant 兩種讀法。</p>
+        <a href="https://www.gametheory.net/dictionary/Games/StagHunt.html" target="_blank" rel="noreferrer">The stag hunt at GameTheory.net</a>
+      </article>
+      <article class="source-card">
+        <strong>故事來源</strong>
+        <p>Rousseau 的《Discourse on Inequality》是鹿獵故事的哲學出處，有助於避免把它讀成只剩數學表格的模型。</p>
+        <a href="https://en.wikipedia.org/wiki/Discourse_on_Inequality" target="_blank" rel="noreferrer">Discourse on Inequality</a>
+      </article>
+    </div>
+    </section>
+
+    <section class="chapter">
+      <div class="reference-box">
+        <div>
+          <p class="section-label">Reference</p>
+          <h2>下一步</h2>
+          <p>若你想把這頁往工程管理再推一步，可以之後補一頁 credible commitment，讓『承諾如何被做成制度』有更細的工具面。</p>
+        </div>
+        <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+      </div>
+    </section>
+
+    </article>
+  </main>
+</body>
+</html>

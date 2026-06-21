@@ -1,0 +1,59 @@
+{
+  "target": {
+    "slug": "schelling-segregation-model",
+    "outputPath": "topics/schelling-segregation-model.html"
+  },
+  "indexEntry": {
+    "id": "schelling-segregation-model",
+    "title": "謝林隔離模型",
+    "subtitle": "Schelling Segregation Model",
+    "href": "./topics/schelling-segregation-model.html",
+    "order": 299,
+    "type": "代理模型 / 微動機與宏觀結果",
+    "domain": "系統思考、組織設計、產品社群與模擬",
+    "focus": "Mild local preferences can produce strong global patterns",
+    "thesis": "謝林隔離模型展示：每個個體只要有溫和的局部偏好，整體也可能走向高度分隔。",
+    "tags": [
+      "Schelling",
+      "agent-based-model",
+      "segregation",
+      "emergence",
+      "systems"
+    ]
+  },
+  "contentBrief": {
+    "pressurePoint": "沒有人明確追求極端分隔，整體仍可能因局部偏好與移動規則走向分隔。",
+    "smallestScenario": "平台推薦只把使用者推向稍微相似的人，久了之後社群互相看不見，跨群互動成本越來越高。",
+    "sourcePlan": [
+      "主概念：Schelling's model of segregation 條目整理 grid、局部偏好與宏觀分隔結果。",
+      "模型家族：Agent-based model 條目提供以個體規則觀察 emergent outcome 的背景。",
+      "相鄰模型：Threshold model 條目補上個體門檻如何塑造群體行為。"
+    ],
+    "transferTargets": [
+      "推薦系統",
+      "組織分組",
+      "agent-based simulation"
+    ],
+    "commonMisreading": "模型不是說現實隔離只由個人偏好造成；制度、歷史與資源限制同樣重要。",
+    "readerQuestions": [
+      "系統裡有哪些局部選擇規則，可能在整體上累積成比個體意圖更強的分隔？",
+      "是否有摩擦、配額、混合機制或重新配置規則能改變長期 pattern？"
+    ],
+    "sectionIntents": {
+      "core": "說明微小局部偏好如何產生宏觀分隔。",
+      "setup": "用推薦系統或座位選擇展示個體意圖與整體結果落差。",
+      "lenses": "拆成閾值、空位、動態過程與模型限制。",
+      "psychology": "指出人容易只看個體態度，忽略互動規則。",
+      "applications": "映射到產品社群、組織分組與模擬實驗。",
+      "misreadings": "校正把模型當完整社會解釋或道德免責的誤用。",
+      "questions": "要求讀者找出局部規則與宏觀模式的連結。",
+      "sources": "以 Schelling model、agent-based model 與 threshold model 為來源。"
+    }
+  },
+  "page": {
+    "documentTitle": "謝林隔離模型 | Concept Reading Lab",
+    "bodyClass": "knowledge-page knowledge-schelling-segregation-model",
+    "heroHtml": "<div class=\"hero-inner\">\n  <div>\n    <p class=\"kicker\">Knowledge Study / agent-based modeling / emergence / social systems</p>\n    <h1>謝林隔離模型</h1>\n    <p class=\"topic-subtitle\">Schelling Segregation Model</p>\n    <p class=\"thesis\">謝林隔離模型展示：每個個體只要有溫和的局部偏好，整體也可能走向高度分隔。</p>\n    <div class=\"hero-prompt\">\n      <strong>Read For</strong>\n      <p>適合思考 team formation、社群分流、推薦系統、辦公座位與產品內分群造成的 emergent pattern。</p>\n    </div>\n  </div>\n  <aside class=\"hero-note\" aria-label=\"主題資訊\">\n    <dl class=\"lexical-meta lexical-meta--knowledge\" aria-label=\"主題摘要\">\n      <div>\n        <dt>主題類型</dt>\n        <dd>代理模型 / 微動機與宏觀結果</dd>\n      </div>\n      <div>\n        <dt>核心問題</dt>\n        <dd>Mild local preferences can produce strong global patterns</dd>\n      </div>\n      <div>\n        <dt>主要判準</dt>\n        <dd>局部偏好、閾值、空位、聚集程度</dd>\n      </div>\n      <div>\n        <dt>讀完產出</dt>\n        <dd>能分辨個體意圖與整體模式之間的非線性落差</dd>\n      </div>\n    </dl>\n    <div class=\"knowledge-map\" aria-label=\"閱讀結構示意\">\n      <span>偏好</span>\n      <span>移動</span>\n      <span>分隔</span>\n    </div>\n  </aside>\n</div>",
+    "mainHtml": "<aside class=\"compass\" aria-label=\"頁內導覽\">\n  <span>Reading Path</span>\n  <a href=\"#core\">讀法總覽</a>\n  <a href=\"#setup\">問題設定</a>\n  <a href=\"#lenses\">判準透鏡</a>\n  <a href=\"#psychology\">心理連結</a>\n  <a href=\"#applications\">現實映射</a>\n  <a href=\"#misreadings\">誤讀校正</a>\n  <a href=\"#questions\">延伸提問</a>\n  <a href=\"#sources\">來源</a>\n</aside>\n\n<article class=\"article\">\n  <section class=\"chapter\" id=\"core\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Orientation</p>\n      <h2>溫和偏好也能堆出強烈分隔</h2>\n      <p class=\"section-lede\">Schelling 模型把個體放在格子上，讓他們依鄰居組成決定是否移動；簡單規則能產生出乎意料的整體格局。</p>\n    </div>\n    <div class=\"core-card\">\n      <p class=\"section-label\">Core Tension</p>\n      <p>個體可能只想要少量熟悉感，最後卻形成高度同質群聚；宏觀結果不能直接從單一個體意圖讀出。</p>\n    </div>\n    <div class=\"principle-strip\" aria-label=\"本頁讀法\">\n      <div>\n        <span>01</span>\n        <strong>先看局部規則</strong>\n        <p>每個代理人只根據附近狀態做決定。</p>\n      </div>\n      <div>\n        <span>02</span>\n        <strong>再看迭代過程</strong>\n        <p>一次小移動會改變別人的鄰域，觸發下一輪移動。</p>\n      </div>\n      <div>\n        <span>03</span>\n        <strong>最後看整體 pattern</strong>\n        <p>系統層級可能出現個體沒有明說追求的結果。</p>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"setup\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Setup</p>\n      <h2>每個人只想稍微相似，社群卻越來越分開</h2>\n      <p class=\"section-lede\">一個平台推薦規則偏好相似興趣；使用者只要覺得 feed 稍微舒服就留下，久了之後跨群內容越來越少。</p>\n    </div>\n    <div class=\"definition-grid\">\n      <div class=\"tile\">\n        <strong>最小場景</strong>\n        <p>每次推薦只多給一點同溫內容，使用者也只多互動一點；整體網路逐步變成分隔社群。</p>\n      </div>\n      <div class=\"tile\">\n        <strong>真正難點</strong>\n        <p>沒有單一 actor 下令隔離，pattern 卻從局部規則和反覆互動中長出來。</p>\n      </div>\n    </div>\n    <div class=\"concept-flow\" aria-label=\"問題展開\">\n      <div class=\"flow-step\">局部偏好設定</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">代理人移動或互動</div>\n      <div class=\"flow-arrow\">→</div>\n      <div class=\"flow-step\">宏觀群聚浮現</div>\n    </div>\n    <div class=\"paradox-frame\">\n      <strong>Key Point</strong>\n      <p>模型價值在提醒你：系統結果可能比個體偏好更極端。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"lenses\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Lenses</p>\n      <h2>讀這個模型要同時看規則與限制</h2>\n      <p class=\"section-lede\">簡化模型能提供洞見，也會省略現實中的權力、制度與歷史。</p>\n    </div>\n    <div class=\"lens-grid\">\n      <article class=\"lens-card\">\n        <strong>偏好閾值</strong>\n        <p>每個代理人能接受多少異質鄰居，會影響分隔速度與程度。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>空位與移動</strong>\n        <p>能否移動、移動成本與可選位置會改變結果。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>局部到全局</strong>\n        <p>局部滿意不等於全局整合；每個人都滿意時，整體可能很分隔。</p>\n      </article>\n      <article class=\"lens-card\">\n        <strong>模型邊界</strong>\n        <p>現實隔離還包含政策、經濟、歧視與歷史因素，不能被格子模型取代。</p>\n      </article>\n    </div>\n    <div class=\"table-wrap\">\n      <table>\n        <thead>\n          <tr><th>模型元素</th><th>系統對照</th><th>設計問題</th></tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>鄰居偏好</td>\n            <td>推薦相似度、team fit</td>\n            <td>是否過度放大同質性</td>\n          </tr>\n          <tr>\n            <td>空位</td>\n            <td>可加入社群或職缺</td>\n            <td>是否限制跨群流動</td>\n          </tr>\n          <tr>\n            <td>移動成本</td>\n            <td>轉組、轉社群、換工具</td>\n            <td>摩擦如何改變長期格局</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"psychology\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Psychology</p>\n      <h2>人會把系統結果簡化成個人態度</h2>\n      <p class=\"section-lede\">看到分隔結果時，我們容易直接推回個體意圖，而忽略規則、摩擦與迭代效果。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>意圖歸因</strong>\n        <p>宏觀分隔可能被解讀成大家都強烈排斥，其實模型顯示溫和偏好也足以放大。</p>\n      </article>\n      <article class=\"example\">\n        <strong>均衡錯覺</strong>\n        <p>每個人局部滿意，不代表系統整體健康。</p>\n      </article>\n      <article class=\"example\">\n        <strong>模型過度延伸</strong>\n        <p>漂亮模擬會讓人忘記它省略了制度與資源不平等。</p>\n      </article>\n    </div>\n    <p class=\"micro-note\">這個模型最有用的地方，是訓練你在個體理由之外看互動規則。</p>\n  </section>\n\n  <section class=\"chapter\" id=\"applications\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Applications</p>\n      <h2>產品與組織都會長出分群</h2>\n      <p class=\"section-lede\">只要系統有局部偏好、移動選擇與反覆互動，就可能出現 emergent segregation。</p>\n    </div>\n    <div class=\"example-grid\">\n      <article class=\"example\">\n        <strong>推薦系統</strong>\n        <p>稍微偏好相似內容，可能逐步降低跨群曝光。</p>\n      </article>\n      <article class=\"example\">\n        <strong>組織分組</strong>\n        <p>大家都想和熟悉技術或熟人合作，久了會形成知識孤島。</p>\n      </article>\n      <article class=\"example\">\n        <strong>社群設計</strong>\n        <p>若新手只能看見同類新手，學習路徑可能被早期分群鎖住。</p>\n      </article>\n    </div>\n    <ul class=\"bullet-list\">\n      <li>用 agent-based simulation 試探局部規則的長期 pattern，而不是只看單次 A/B 指標。</li>\n      <li>設計跨群橋接機制時，同時降低移動成本並提供安全的混合情境。</li>\n    </ul>\n  </section>\n\n  <section class=\"chapter\" id=\"misreadings\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Misreadings</p>\n      <h2>模型不是現實的全部原因</h2>\n      <p class=\"section-lede\">謝林模型能說明局部規則如何放大分隔，但不能替制度、歷史與權力因素消失責任。</p>\n    </div>\n    <div class=\"collocation-list\" aria-label=\"常見誤讀\">\n      <article class=\"collocation-card\">\n        <div>\n          <strong>所以都是個人偏好造成</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>現實分隔常有政策、資源與歧視結構，模型只展示一種機制。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>個體沒有惡意就沒問題</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>沒有惡意仍可能產生壞的整體結果。</p>\n      </article>\n      <article class=\"collocation-card\">\n        <div>\n          <strong>只要改個人態度</strong>\n          <span class=\"register-tag\">校正</span>\n        </div>\n        <p>若規則和摩擦不變，系統可能繼續產生同樣 pattern。</p>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"questions\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Questions</p>\n      <h2>局部舒服感會不會累積成整體孤島</h2>\n    </div>\n    <div class=\"prompt-grid\">\n      <article class=\"prompt-card\">\n        <strong>如果每個人只做小幅偏好選擇</strong>\n        <p>十輪、一百輪後，整體網路或組織圖會變成什麼樣子？</p>\n      </article>\n      <article class=\"prompt-card\">\n        <strong>如果要避免分隔</strong>\n        <p>要改變偏好、降低移動成本、增加橋接，還是調整推薦/分組規則？</p>\n      </article>\n    </div>\n    <div class=\"template-note\">\n      <strong>延伸路線</strong>\n      <p>可延伸到 information cascade、network effects、threshold model 與 agent-based modeling。</p>\n    </div>\n  </section>\n\n  <section class=\"chapter\" id=\"sources\">\n    <div class=\"section-heading\">\n      <p class=\"section-label\">Sources</p>\n      <h2>來源與整理方式</h2>\n      <p class=\"section-lede\">來源卡以 Schelling 模型與 agent-based modeling 條目為主，產品與組織應用是系統思考轉譯。</p>\n    </div>\n    <div class=\"source-grid\">\n      <article class=\"source-card\">\n        <strong>主概念</strong>\n        <p>Schelling's model of segregation 條目整理 grid、局部偏好與宏觀分隔結果。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Schelling%27s_model_of_segregation\" target=\"_blank\" rel=\"noreferrer\">Schelling's model of segregation</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>模型家族</strong>\n        <p>Agent-based model 條目提供以個體規則觀察 emergent outcome 的背景。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Agent-based_model\" target=\"_blank\" rel=\"noreferrer\">Agent-based model</a>\n      </article>\n      <article class=\"source-card\">\n        <strong>相鄰模型</strong>\n        <p>Threshold model 條目補上個體門檻如何塑造群體行為。</p>\n        <a href=\"https://en.wikipedia.org/wiki/Threshold_model\" target=\"_blank\" rel=\"noreferrer\">Threshold model</a>\n      </article>\n    </div>\n  </section>\n\n  <section class=\"chapter\">\n    <div class=\"reference-box\">\n      <div>\n        <p class=\"section-label\">Reference</p>\n        <h2>下一步</h2>\n        <p>可延伸到 information cascade、network effects、threshold model 與 agent-based modeling。</p>\n      </div>\n      <a class=\"reference-link\" href=\"../knowledge-topic-template.html\">打開模板</a>\n    </div>\n  </section>\n</article>"
+  }
+}

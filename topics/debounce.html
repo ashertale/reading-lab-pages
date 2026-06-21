@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>按鍵去彈跳 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-debounce">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / GPIO / signal conditioning / firmware</p>
+        <h1>按鍵去彈跳</h1>
+        <p class="topic-subtitle">Debounce</p>
+        <p class="thesis">機械接點不會乾淨地從 0 跳到 1；debounce 的任務是把一串抖動訊號判成一次人類意圖。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>適合處理按鍵、旋鈕、limit switch、GPIO interrupt 與任何 mechanical contact 進入數位邏輯的地方。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>訊號處理 / 接點雜訊</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Turn noisy transitions into one intended event</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>取樣窗、穩定時間、延遲、誤觸</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能設計不會把一次按壓變成多次事件的輸入處理</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>接點</span>
+          <span>抖動</span>
+          <span>事件</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>數位事件背後常是一團類比抖動</h2>
+          <p class="section-lede">機械開關接觸時會在短時間內反覆導通與斷開；若直接把每個 edge 當事件，軟體會看到不存在的多次按壓。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>Debounce 越保守越能壓住抖動，但也增加輸入延遲；越靈敏越快，越容易把雜訊當意圖。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先量 bounce</strong>
+            <p>用示波器或高頻取樣看實際接點行為，而不是猜。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再定事件語意</strong>
+            <p>press、release、long press、repeat 都需要清楚狀態機。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後保護中斷</strong>
+            <p>GPIO interrupt 應喚醒判讀流程，不該直接觸發產品動作。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>按一次，狀態機收到三次</h2>
+          <p class="section-lede">Power key 接到 GPIO interrupt，韌體在 rising edge 切換狀態；使用者只按一次，裝置卻先開機又關機。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>接點 bounce 在 5 ms 內產生多個 edge，ISR 每次都送出 press event。</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>人類意圖是一次按壓，但硬體訊號不是乾淨方波；軟體必須明確定義何時接受事件。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">接點產生抖動</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">取樣或等待穩定</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">輸出單一產品事件</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>Debounce 是把物理訊號翻譯成產品語意的邊界層。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>去彈跳可以在硬體或軟體做</h2>
+          <p class="section-lede">沒有唯一正解；不同功耗、成本、延遲與安全要求會推向不同實作。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>RC / Schmitt</strong>
+            <p>硬體先濾掉高頻抖動，提高進入 MCU 前的訊號品質。</p>
+          </article>
+          <article class="lens-card">
+            <strong>固定穩定窗</strong>
+            <p>偵測變化後等待一段時間，確認狀態穩定再發事件。</p>
+          </article>
+          <article class="lens-card">
+            <strong>積分取樣</strong>
+            <p>連續多次取樣累積信心，比單純 sleep 更能處理雜訊。</p>
+          </article>
+          <article class="lens-card">
+            <strong>狀態機</strong>
+            <p>press、release、hold、repeat 和 cancel 應分開建模，避免補丁式 if。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>方法</th><th>優點</th><th>代價</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>硬體濾波</td>
+                <td>減少 MCU 負擔與 interrupt storm</td>
+                <td>增加 BOM 與板級限制</td>
+              </tr>
+              <tr>
+                <td>固定 delay</td>
+                <td>實作簡單</td>
+                <td>延遲固定且可能不適合所有開關</td>
+              </tr>
+              <tr>
+                <td>取樣狀態機</td>
+                <td>可調、可測、可表達產品語意</td>
+                <td>需要 timer 與清楚規格</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>偶發多按很容易被歸咎於手殘</h2>
+          <p class="section-lede">按鍵 bug 的難處在於它常和操作手感、機構、公差與 firmware 時序混在一起。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>不可重現</strong>
+            <p>不同力道、角度、溫度與老化會改變 bounce，單次 lab 測試不代表量產。</p>
+          </article>
+          <article class="example">
+            <strong>ISR 崇拜</strong>
+            <p>看到 edge 就立刻反應很有工程快感，但產品事件未必該在 ISR 裡決定。</p>
+          </article>
+          <article class="example">
+            <strong>延遲恐懼</strong>
+            <p>為了手感快把 window 設太短，結果讓少數雜訊變成 field issue。</p>
+          </article>
+        </div>
+        <p class="micro-note">按鍵手感不是 debounce 的反面；好的狀態機會同時處理延遲與誤觸。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>按鍵、旋鈕與限位開關都需要事件語意</h2>
+          <p class="section-lede">Debounce 不只在人手按鍵；所有 mechanical contact 都可能讓數位輸入看到多次轉換。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>Power key</strong>
+            <p>需要區分短按、長按與卡鍵，並避免開關機狀態被 bounce 來回切換。</p>
+          </article>
+          <article class="example">
+            <strong>Rotary encoder</strong>
+            <p>需要處理相位、抖動與轉速，否則旋轉方向或步數會錯。</p>
+          </article>
+          <article class="example">
+            <strong>Limit switch</strong>
+            <p>機械震動會讓到位訊號抖動，控制系統要避免反覆進出狀態。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>把 debounce 參數放進可測試配置，並記錄它對最短按壓、最大連點速度與功耗的影響。</li>
+          <li>用量產樣品與不同溫度/老化條件量測 bounce profile，再定 window。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>Delay 不是設計，只是最粗的實作</h2>
+          <p class="section-lede">固定延遲可能足夠，但它需要被量測與產品需求支持。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>睡 20 ms 一定好</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>不同開關 bounce 差異很大；固定值要靠量測證明。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>只 debounce press</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>release bounce 也會影響 long press、repeat 與狀態切換。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>ISR 裡處理全部</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>ISR 應短小；複雜事件判讀最好交給 timer/state machine。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>先決定一個按壓何時算成立</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果使用者快速連點</strong>
+            <p>debounce window 會不會吞掉合法第二次按壓，產品是否接受？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果接點老化或震動</strong>
+            <p>目前演算法會輸出多次事件、延遲變長，還是進入故障判斷？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>延伸可讀 Schmitt trigger、hysteresis、finite state machine 與 signal detection，把類比雜訊與數位事件接起來。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">來源卡以 Jack Ganssle 的實測文章與 switch bounce 背景為主，狀態機策略是韌體設計整理。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>實測指南</strong>
+            <p>Jack Ganssle 的 Debouncing Contacts and Switches 以實測資料說明接點 bounce 與處理方法。</p>
+            <a href="https://www.ganssle.com/debouncing.htm" target="_blank" rel="noreferrer">Debouncing Contacts and Switches</a>
+          </article>
+          <article class="source-card">
+            <strong>現象背景</strong>
+            <p>Switch 條目補充 mechanical contact 與 bounce 的基本脈絡。</p>
+            <a href="https://en.wikipedia.org/wiki/Switch#Contact_bounce" target="_blank" rel="noreferrer">Contact bounce</a>
+          </article>
+          <article class="source-card">
+            <strong>硬體對照</strong>
+            <p>Schmitt trigger 條目說明 hysteresis 如何提升 noisy input 的切換穩定性。</p>
+            <a href="https://en.wikipedia.org/wiki/Schmitt_trigger" target="_blank" rel="noreferrer">Schmitt trigger</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>延伸可讀 Schmitt trigger、hysteresis、finite state machine 與 signal detection，把類比雜訊與數位事件接起來。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

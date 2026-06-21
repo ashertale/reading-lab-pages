@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>錯誤預算 | Concept Reading Lab</title>
+  <link rel="stylesheet" href="../knowledge-page.css">
+</head>
+<body class="knowledge-page knowledge-error-budget">
+  <nav class="topbar" aria-label="知識主題頁導覽">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">Concept Reading Lab</a>
+      <div class="topbar-links">
+        <a href="../index.html">首頁</a>
+        <a href="../backlog.html">待生成</a>
+        <a href="../knowledge-topic-template.html">模板</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <p class="kicker">Knowledge Study / SRE / reliability / product velocity</p>
+        <h1>錯誤預算</h1>
+        <p class="topic-subtitle">Error Budget</p>
+        <p class="thesis">可靠性目標不是越接近 100% 越好；錯誤預算把允許的失敗量變成產品速度與穩定性的共同語言。</p>
+        <div class="hero-prompt">
+          <strong>Read For</strong>
+          <p>這頁適合用在 release gate、field reliability、服務 SLO 與 firmware rollout：它會把可靠性討論從情緒拉回可消耗風險。</p>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="主題資訊">
+        <dl class="lexical-meta lexical-meta--knowledge" aria-label="主題摘要">
+          <div>
+            <dt>主題類型</dt>
+            <dd>可靠性治理 / 風險預算</dd>
+          </div>
+          <div>
+            <dt>核心問題</dt>
+            <dd>Reliability target as spendable risk</dd>
+          </div>
+          <div>
+            <dt>主要判準</dt>
+            <dd>SLO、可用性、消耗率、發布治理</dd>
+          </div>
+          <div>
+            <dt>讀完產出</dt>
+            <dd>能用 SLO 與剩餘預算討論是否該加速發布、暫停變更或投資穩定性</dd>
+          </div>
+        </dl>
+        <div class="knowledge-map" aria-label="閱讀結構示意">
+          <span>目標</span>
+          <span>消耗</span>
+          <span>治理</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <aside class="compass" aria-label="頁內導覽">
+      <span>Reading Path</span>
+      <a href="#core">讀法總覽</a>
+      <a href="#setup">問題設定</a>
+      <a href="#lenses">判準透鏡</a>
+      <a href="#psychology">心理連結</a>
+      <a href="#applications">現實映射</a>
+      <a href="#misreadings">誤讀校正</a>
+      <a href="#questions">延伸提問</a>
+      <a href="#sources">來源</a>
+    </aside>
+
+    <article class="article">
+      <section class="chapter" id="core">
+        <div class="section-heading">
+          <p class="section-label">Orientation</p>
+          <h2>可靠性也有可花用的邊界</h2>
+          <p class="section-lede">錯誤預算把 SLO 留下的不可用空間視為可管理風險：服務可以失敗一點，但不能超過使用者可接受的範圍。</p>
+        </div>
+        <div class="core-card">
+          <p class="section-label">Core Tension</p>
+          <p>過度追求可靠會犧牲功能速度與成本；過度消耗預算則代表使用者已承受太多失敗，接下來應該優先穩定性。</p>
+        </div>
+        <div class="principle-strip" aria-label="本頁讀法">
+          <div>
+            <span>01</span>
+            <strong>先定 SLO</strong>
+            <p>沒有明確服務目標，錯誤預算就只是事後找藉口。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>再追 burn rate</strong>
+            <p>預算消耗速度比月底剩多少更早揭露風險。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>最後連到決策</strong>
+            <p>預算充足時可承擔變更；預算耗盡時應調整發布、修復或降風險。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="setup">
+        <div class="section-heading">
+          <p class="section-label">Setup</p>
+          <h2>是否停止本週 rollout</h2>
+          <p class="section-lede">想像 firmware 分階段推送後，crash rate 和 reconnect error 開始上升，但產品團隊仍希望擴到更多裝置。</p>
+        </div>
+        <div class="definition-grid">
+          <div class="tile">
+            <strong>最小場景</strong>
+            <p>若已有明確 SLO 與錯誤預算，討論可以變成：目前 burn rate 是否會在觀測窗口內耗盡預算？繼續 rollout 會不會越界？</p>
+          </div>
+          <div class="tile">
+            <strong>真正難點</strong>
+            <p>沒有預算語言時，可靠性團隊只會說太危險，產品團隊只會說不能停；雙方缺少共同判準。</p>
+          </div>
+        </div>
+        <div class="concept-flow" aria-label="問題展開">
+          <div class="flow-step">定義可接受失敗</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">追蹤預算消耗</div>
+          <div class="flow-arrow">→</div>
+    <div class="flow-step">用剩餘預算治理變更</div>
+        </div>
+        <div class="paradox-frame">
+          <strong>Key Point</strong>
+          <p>錯誤預算的用途不是允許亂壞，而是讓速度與穩定性在同一份約束下談判。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="lenses">
+        <div class="section-heading">
+          <p class="section-label">Lenses</p>
+          <h2>把 reliability 變成可操作治理</h2>
+          <p class="section-lede">Error budget 只有在接上 SLO、觀測窗口、burn-rate alert 與發布政策後，才會真正改變團隊行為。</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens-card">
+            <strong>SLO 選擇</strong>
+            <p>目標要反映使用者體驗與業務成本；不是每個系統都需要 99.999%。</p>
+          </article>
+          <article class="lens-card">
+            <strong>預算消耗</strong>
+            <p>短時間快速消耗比長期緩慢消耗更需要 immediate response。</p>
+          </article>
+          <article class="lens-card">
+            <strong>發布政策</strong>
+            <p>預算低時可以暫停高風險變更、縮小 rollout 或提高驗證門檻。</p>
+          </article>
+          <article class="lens-card">
+            <strong>投資回饋</strong>
+            <p>長期預算不足表示 reliability work 不是額外項，而是交付能力的一部分。</p>
+          </article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>預算狀態</th>
+                <th>合理動作</th>
+                <th>避免</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>預算充足</td>
+                <td>允許正常發布與實驗</td>
+                <td>把可靠性目標當成永遠不能碰的牆。</td>
+              </tr>
+              <tr>
+                <td>快速燃燒</td>
+                <td>縮小 rollout、啟動 incident review</td>
+                <td>等到月底才結算。</td>
+              </tr>
+              <tr>
+                <td>預算耗盡</td>
+                <td>暫停高風險變更、優先修復</td>
+                <td>繼續把所有失敗視為個別例外。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chapter" id="psychology">
+        <div class="section-heading">
+          <p class="section-label">Psychology</p>
+          <h2>100% 可靠聽起來道德正確</h2>
+          <p class="section-lede">沒有人想公開支持失敗；錯誤預算的價值是承認零失敗通常昂貴且不一定對使用者最有利。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>穩定性被當成否決權</strong>
+            <p>沒有預算時，可靠性常變成誰能喊停；有預算後，喊停需要對照消耗率。</p>
+          </article>
+          <article class="example">
+            <strong>速度被當成冒進</strong>
+            <p>產品變更會消耗風險，但只要仍在預算內，速度本身不是錯。</p>
+          </article>
+          <article class="example">
+            <strong>指標讓責任共享</strong>
+            <p>同一份 budget 讓 product、dev、SRE 與 support 共同面對 tradeoff。</p>
+          </article>
+        </div>
+        <p class="micro-note">錯誤預算把『該不該冒風險』換成『我們還有多少可承擔風險』。</p>
+      </section>
+
+      <section class="chapter" id="applications">
+        <div class="section-heading">
+          <p class="section-label">Applications</p>
+          <h2>用在 firmware rollout 與 field reliability</h2>
+          <p class="section-lede">Firmware 雖不一定是雲服務，也能用 error budget 管理分批推送、crash-free rate、連線成功率與恢復時間。</p>
+        </div>
+        <div class="example-grid">
+          <article class="example">
+            <strong>分階段發布</strong>
+            <p>每個 rollout stage 可綁定 crash rate、rollback rate 與 support ticket 的預算門檻。</p>
+          </article>
+          <article class="example">
+            <strong>Field diagnostics</strong>
+            <p>若某版本快速燃燒錯誤預算，自動縮小曝光並保留更多診斷資料。</p>
+          </article>
+          <article class="example">
+            <strong>Release gate</strong>
+            <p>預算耗盡期間可以只允許修復與低風險變更，避免把不穩定疊上新功能。</p>
+          </article>
+        </div>
+        <ul class="bullet-list">
+          <li>替產品化指標選一個使用者感知的 SLO，例如成功連線率、crash-free sessions 或更新成功率。</li>
+          <li>把 burn rate 接到 rollout 控制，而不是只在週報裡回顧。</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="misreadings">
+        <div class="section-heading">
+          <p class="section-label">Misreadings</p>
+          <h2>錯誤預算不是出事額度</h2>
+          <p class="section-lede">它不是讓團隊故意花掉失敗，而是讓可靠性風險被提前量化與治理。</p>
+        </div>
+        <div class="collocation-list" aria-label="常見誤讀">
+          <article class="collocation-card">
+            <div>
+              <strong>有預算就可以亂發</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>錯。預算是風險邊界，發布仍要有監控、回滾與分階段控制。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>SLO 越高越好</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>過高 SLO 可能浪費成本與速度；目標要對齊使用者實際感知。</p>
+          </article>
+          <article class="collocation-card">
+            <div>
+              <strong>月底看一次就夠</strong>
+              <span class="register-tag">校正</span>
+            </div>
+            <p>burn rate 的斜率才是早期警訊；等結算常太晚。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="questions">
+        <div class="section-heading">
+          <p class="section-label">Questions</p>
+          <h2>用剩餘預算決定下一步</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card">
+            <strong>如果本週要擴大 rollout</strong>
+            <p>目前錯誤預算剩多少？以現在 burn rate，擴大後會在多久內越界？</p>
+          </article>
+          <article class="prompt-card">
+            <strong>如果預算已經耗盡</strong>
+            <p>哪些變更應暫停？哪些可靠性工作能最快降低 burn rate？</p>
+          </article>
+        </div>
+        <div class="template-note">
+          <strong>延伸路線</strong>
+          <p>可接著看 Goodhart&#x27;s Law 與 circuit breaker，避免 SLO 本身被錯誤誘因或局部保護誤用。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="sources">
+        <div class="section-heading">
+          <p class="section-label">Sources</p>
+          <h2>來源與整理方式</h2>
+          <p class="section-lede">這頁以 Google SRE 的 error budget 與 SLO 實務為核心，工程段落轉用到 firmware rollout governance。</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>風險與預算</strong>
+            <p>Google SRE 的 Embracing Risk 章節說明可靠性、風險容忍與 error budget 的動機。</p>
+            <a href="https://sre.google/sre-book/embracing-risk/" target="_blank" rel="noreferrer">Google SRE: Embracing Risk</a>
+          </article>
+          <article class="source-card">
+            <strong>SLO 基礎</strong>
+            <p>Service Level Objectives 章節提供 SLO、SLI 與服務目標設定的實務背景。</p>
+            <a href="https://sre.google/sre-book/service-level-objectives/" target="_blank" rel="noreferrer">Google SRE: Service Level Objectives</a>
+          </article>
+          <article class="source-card">
+            <strong>實作手冊</strong>
+            <p>Implementing SLOs 章節可用來對照 burn rate、告警與 SLO 落地方式。</p>
+            <a href="https://sre.google/workbook/implementing-slos/" target="_blank" rel="noreferrer">Google SRE Workbook: Implementing SLOs</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="reference-box">
+          <div>
+            <p class="section-label">Reference</p>
+            <h2>下一步</h2>
+            <p>可接著看 Goodhart&#x27;s Law 與 circuit breaker，避免 SLO 本身被錯誤誘因或局部保護誤用。</p>
+          </div>
+          <a class="reference-link" href="../knowledge-topic-template.html">打開模板</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>
